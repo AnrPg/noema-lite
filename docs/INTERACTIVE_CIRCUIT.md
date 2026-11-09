@@ -90,16 +90,16 @@ the learner checks the diagnosis on the bench and can take **another device**.
 - Each measurement runs in the engine's Worker, in order (the latest run of the outputs wins; measurements are first in, first
   out); the noise is seeded by the exercise's seed, so the same device always reads the same numbers.
 
-## 3. The engine — `window.NoemaCircuit`
+## 3. The engine — `src/engines/circuit/`
 
-`engine/src/36_engine_circuit.js` → `window.NoemaCircuit` (also `globalThis` in node); `engine/src/36_engine_circuit_sim.js`
-registers it with `ACT.registerEngine` (`bench: true`, a `prepare` that evaluates the expressions on the main thread, and a
-`workerSource` made of the engine's own source and the adapter). Pure JS, deterministic, no DOM, no learner text: results are
-numbers and codes; the activity words them. Schema: `tools/schemas/noema.circuit.v1.schema.json`. Tests: `node tests/circuit.js`;
-JS and Python (`tools/circuit.py`, the validators' twin) give the same findings for `check` / `checkFaults` (`tests/activities.js`).
+`src/engines/circuit/circuit.ts` is the engine (an ES module, its default export below); `src/engines/circuit/sim.ts` adds the
+sim-spec engine `circuit-mna@1` (`bench: true`, a `prepare` that evaluates the expressions on the main thread), a plugin of the engine
+library (`NoemaCore.engines.engine('circuit-mna@1')`, whose `workerSource` is its Worker bundle (the text a Worker runs), built by esbuild from the module and the kernel pieces it imports (`noemaWorkers` in `tools/esbuild.mjs`)). Pure JS, deterministic, no DOM, no learner text: results are
+numbers and codes; the activity words them. Schema: `src/contracts/schemas/noema.circuit.v1.schema.json`. Tests: `node tests/circuit.js`;
+`check` / `checkFaults` give the golden findings of their former Python twin (`tests/activities.js`, `tests/fixtures/parity/`); the validators everywhere call them.
 
 ```js
-NoemaCircuit = { id: 'circuit-mna@1', format: 'noema.circuit/v1', limits: {nodes: 60, elements: 200, steps: 200000}, FAULT_KINDS, check, checkFaults, create, num, source }
+circuit = { id: 'circuit-mna@1', format: 'noema.circuit/v1', limits: {nodes: 60, elements: 200, steps: 200000}, FAULT_KINDS, check, checkFaults, create, num }
 check(netlist)                    → [] | [{code, path, msg, level: 'error'|'warning'}]     (msg is for authors, never shown to learners)
 checkFaults(netlist, faults)      → [] | [{code: 'fault', path: 'faults[i].x', msg, level: 'error'}]   (what create() would throw, as a list)
 create(netlist, {faults, noise: {rel, abs, seed}, seed}) → sim                             (throws code 'invalid' with .problems)
@@ -151,7 +151,7 @@ same stamp, a linear circuit factored once per (h, θ). Before each step the eng
 a step that holds a source breakpoint, trapezoidal otherwise — and sets the lines' waves from td ago; the junction limiting (pnjlim)
 stays in the stamp and a limited iterate forces another Newton iteration (`limit`). A step the kernel cannot solve, even halved, is
 taken by the own step with gmin stepping, then the kernel goes on. Against the own companion models: ≤ 3e-9 relative over the
-transients of tests/circuit.js and circuit2.js. FALLBACK without the kernel (marked): the own companion-model transient. It is
+transients of tests/circuit.js and circuit2.js. It is
 resumable (`tranStart` / `tranAdvance` / `tranAdvanceK`): `runTransient()` and the new
 **stepper** of `circuit-mna@1` (`stepper: true`; the instance's `stepInit` / `stepTo`, `docs/INTERACTIVE_LIBRARY.md` §1.6) share it.
 The stepper holds the transient open on the grid `transient.dt`; a node / branch / power series gives its value now, `stat` and `at`
@@ -169,7 +169,7 @@ read every internal step so far, DC outputs as in `run()`, AC and probes NaN. It
 | `{element, kind: 'reverse', pins?}` | the part is soldered the other way round: two of its pins swap places (default the two pins of a two-terminal part; a three-terminal part names `pins`, e.g. `[0, 2]`). Applied before an open trace, so a pin reference follows the leg |
 
 An unknown element, node, pin or kind throws code `fault`; `checkFaults` lists the same problems without throwing (the validators
-use it, and its Python twin in `tools/circuit.py`). Results never name a fault.
+use it, and the content checks). Results never name a fault.
 
 ## 5. Instruments — `sim.measure(probe)`
 
@@ -185,7 +185,7 @@ open trace it is on the far side). `b` / `ref` default to `gnd`.
 | `{kind:'bode', node, ref?, source, fStart, fStop, points?}` | `{kind:'bode', f, db, phase, stats:{dcDb, peakDb, fPeak, f3db, fLow3db, fUnity, pm}}` — the AC analysis (§9.6) |
 | `{kind:'logic', nodes, threshold = 1.5, tEnd, dt?, tStart?, zin?}` | `{t, traces:{node:[0/1]}, edges:{node:[{t, to}]}, stats:{node:{freq, duty, edges}}, threshold}` — edge times interpolated between samples; noise is not applied |
 
-**Noise** `{noise: {rel, abs = 0, seed}}` (or `opts.seed`): reading · (1 + rel·u) + abs·u′, u uniform in [−1, 1] from mulberry32 seeded
+**Noise** `{noise: {rel, abs = 0, seed}}` (or `opts.seed`): reading · (1 + rel·u) + abs·u′, u uniform in [−1, 1] from the kernel's MRG32k3a stream seeded
 by the seed and the probe itself. The same probe on the same sim always reads the same; same seed ⇒ identical numbers everywhere.
 
 ## 6. Analysis

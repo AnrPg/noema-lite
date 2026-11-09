@@ -1,5 +1,8 @@
 /* ---------- P9 — listening and speaking (98_speech.js) ---------- */
-.lx-spk { border: 0; background: transparent; cursor: pointer; font-size: .9em; padding: 0 .25em; margin-inline-start: .15em; border-radius: 6px; line-height: 1.2; vertical-align: middle; opacity: .75; }
+/* 🔊 is a 24x24 CSS px target (WCAG 2.2 2.5.8) with the glyph small inside; the negative block margin keeps the line as tall as before */
+.lx-spk { display: inline-grid; place-items: center; box-sizing: border-box; min-width: 24px; min-height: 24px; border: 0; background: transparent; cursor: pointer; font-size: .9em; padding: 0 .15em; margin-block: -4px; margin-inline-start: .15em; border-radius: 6px; line-height: 1; vertical-align: middle; opacity: .75; }
+/* a word or a short phrase and its 🔊 in one span that does not wrap (98_speech.js): 🔊 never ends up alone on the next line */
+.lx-spkglue { white-space: nowrap; }
 .lx-spk:hover, .lx-spk:focus-visible { opacity: 1; background: var(--chip, rgba(127,127,127,.15)); }
 .lx-spk::before { content: '🔊'; }
 .lx-spk.lx-mute::before { content: '🔇'; }

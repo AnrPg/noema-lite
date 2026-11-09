@@ -5,7 +5,7 @@
    plus per section its key terms and a short preview in that language. The pack itself never changes.
      · where bridges come from: the library (tools/build.py → library/subjects/<id>/bridge.<native>.js, listed in the
        registry as bridgeLocales) or the learner's account (a file imported with 📥, or saved by Claude through the
-       connector: noema-private/<uid>/bridges/<pack>.<pair>.json + the synced index a:bridges) — attached any time
+       connector: noema-private/<uid>/bridges/<pack>.<pair>.json + one row per pack × pair in noema_bridges, cached in a:bridges) — attached any time
        after the pack was made or published
      · direction: from the language the learner READS — the pack's own (subject.language) or the translation shown
        (docs/i18n.md §10) — to the learner's native language (a:settings.native, shared with the language courses, D19),
@@ -51,7 +51,7 @@ window.NoemaBridge = (() => {
   const endonym = code => { try { const n = new Intl.DisplayNames([code], { type: 'language' }).of(code); return n ? n.charAt(0).toLocaleUpperCase(code) + n.slice(1) : code; } catch (e) { return code; } };
   const langName = code => I()?.fmt?.langName ? I().fmt.langName(code) : endonym(code);
   const pct = r => I()?.fmt?.percent ? I().fmt.percent(r) : Math.round(r * 100) + '%';
-  const hash36 = s => window.NoemaCatalog ? NoemaCatalog.hash36(s) : String(s.length);
+  const hash36 = s => NoemaCore.catalog.hash36(s);   // the version stamp of a bridge's content (src/features/catalog)
 
   /* ---------- settings: a:settings.bridge { on, level, cefr, asked } and the native language a:settings.native ---------- */
   const accSettings = acc => jget(aKey(acc, 'settings'), {}) || {};
@@ -85,9 +85,10 @@ window.NoemaBridge = (() => {
   }
 
   /* ---------- where the bridges are ---------- */
-  /** The key of one pair: "<native>" from the pack's own language, "<source>.<native>" from one of its translations. */
-  const pairKey = (src, nat, own) => !src || base(src) === base(own || src) ? base(nat) : `${base(src)}.${base(nat)}`;
-  const pairOf = (key, own) => { const [a, b] = String(key).split('.'); return b ? { src: base(a), nat: base(b) } : { src: base(own || 'en'), nat: base(a) }; };
+  /** The key of one pair: "<native>" from the pack's own language, "<source>.<native>" from one of its translations
+      (the bridges' lookup, src/features/bridges/domain/lookup.ts: NoemaCore.bridges). */
+  const BL = () => window.NoemaCore.bridges;
+  const pairKey = (src, nat, own) => BL().pairKey(src, nat, own);
   /** The language the subject is written in, and the one the learner reads now (a translation, or the same). */
   /** The language a subject is written in, and the one the learner reads: the open subject (Noema.subject with the pack)
       shows a translation when it has sourceLanguage; a card in a list (no pack) will show its contentLang. */
@@ -113,20 +114,18 @@ window.NoemaBridge = (() => {
   };
   /** The account's own bridges (synced index): { packId: { native: { v, status, coverage, chapters, of, previews, entries, at } } } */
   const index = acc => jget(aKey(accNow(acc), 'bridges'), {}) || {};
+  /** signed in as this account: the entry's row (noema_bridges, cloud/supabase.sql §17) follows the cache (engine/cloud.js sends it) */
+  const rowsOn = acc => !!(window.NoemaCloud?.session?.() && NoemaCloud.rows && acc === 'u_' + NoemaCloud.session().user.id);
   const regEntry = id => (window.NOEMA_REGISTRY?.subjects || []).find(s => s.id === id) || null;
   const summary = b => ({ v: hash36(JSON.stringify(b.entries || []) + JSON.stringify(b.sections || {}) + JSON.stringify(b.anchors || [])), status: b.status, coverage: typeof b.coverage === 'number' ? b.coverage : null, everyday: typeof b.everyday === 'number' ? b.everyday : null,
     chapters: (b.chapters || []).length || null, of: b.of || null, previews: Object.values(b.sections || {}).filter(s => s?.preview).length, entries: (b.entries || []).length, at: Date.now() });
   /** Every native language with a bridge for this pack FROM the language src (default: the pack's own, own) →
       { code: { status, coverage, chapters, of, previews, own, key } } (the account's own wins). */
   function available(acc, packId, subj, src, own) {
-    const out = {}, reg = subj?.bridgeLocales || regEntry(packId)?.bridgeLocales || {};
+    const reg = subj?.bridgeLocales || regEntry(packId)?.bridgeLocales || {};
     own = own || subj?.sourceLanguage || subj?.language || regEntry(packId)?.language || src || null;
     // no language given: the bridges from the pack's own language (keys without a source), whatever that language is
-    const add = (key, m, mine) => { if (!src) { if (!String(key).includes('.')) out[base(key)] = { ...m, own: mine, key: base(key) }; return; }
-      const p = pairOf(key, own); if (p.src === base(src) && p.nat !== base(src)) out[p.nat] = { ...m, own: mine, key: pairKey(p.src, p.nat, own) }; };
-    for (const [c, m] of Object.entries(reg)) add(c, m, false);
-    for (const [c, m] of Object.entries(index(acc)[packId] || {})) add(c, m, true);
-    return out;
+    return BL().available(reg, index(acc)[packId] || {}, src || null, own);
   }
   const loadScript = src => new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = () => rej(new Error(src)); document.head.append(s); });
   /** The bridge of one pack for one pair (from src — default the pack's own language — into nat), or null. */
@@ -168,7 +167,7 @@ window.NoemaBridge = (() => {
       listed in the synced index so every device finds it. → { pack, native, title } */
   async function attach(acc, b) {
     acc = accNow(acc);
-    const C = window.NoemaPackCheck?.checkBridge;
+    const C = window.NoemaCore?.content?.checkBridge;
     const subs = N().subjectsFor ? await N().subjectsFor(acc) : [];
     const meta = subs.find(s => s.id === b?.pack);
     let pack = null; try { pack = meta && N().loadSubject ? await N().loadSubject(acc, b.pack) : null; } catch (e) { }
@@ -178,7 +177,9 @@ window.NoemaBridge = (() => {
     const own = pack?.subject?.language || meta.language || 'en', nat = base(b.native), pk = pairKey(b.source, nat, own), key = `${acc}|${b.pack}|${pk}`;
     await DB.put(key, b).catch(() => { });
     if (window.NoemaCloud?.session?.() && acc === 'u_' + NoemaCloud.session().user.id) await NoemaCloud.uploadObject(`bridges/${b.pack}.${pk}.json`, new Blob([JSON.stringify(b)], { type: 'application/json' }), 'application/json').catch(e => console.warn('[bridge] upload', e));   // i18n-ignore (a log)
-    const all = index(acc); all[b.pack] = { ...(all[b.pack] || {}), [pk]: { ...summary(b), source: base(b.source || own) } }; put(aKey(acc, 'bridges'), all);
+    const entry = { ...summary(b), source: base(b.source || own) };
+    const all = index(acc); all[b.pack] = { ...(all[b.pack] || {}), [pk]: entry }; put(aKey(acc, 'bridges'), all);
+    if (rowsOn(acc)) NoemaCloud.rows.put(acc, 'bridges', b.pack, pk, entry);
     mem.delete(key);
     return { pack: b.pack, native: nat, source: base(b.source || own), title: meta.title || b.pack };
   }
@@ -186,6 +187,7 @@ window.NoemaBridge = (() => {
     acc = accNow(acc); const pk = pairKey(src, nat, own);
     await DB.del(`${acc}|${packId}|${pk}`).catch(() => { });
     const all = index(acc); if (all[packId]) { delete all[packId][pk]; if (!Object.keys(all[packId]).length) delete all[packId]; put(aKey(acc, 'bridges'), all); }
+    if (rowsOn(acc)) NoemaCloud.rows.del(acc, 'bridges', packId, pk);
     mem.delete(`${acc}|${packId}|${pk}`);
   }
 
@@ -261,7 +263,7 @@ window.NoemaBridge = (() => {
     WL().decorate(body, b._idx, { pick: picker(acc, b, sid, st.level), skip: '.nb-prep, .nb-ask, .newtag, .xbtn' });   // i18n-ignore (selectors)
     body.classList.toggle('nb-glossed', !!body.querySelector('.nw-g'));   // room under the lines for the glosses
     // a word whose gloss was shown in this section counts once per section and day (help that fades)
-    const day = new Date().toISOString().slice(0, 10);
+    const day = NoemaCore.clock.today();
     for (const k of cur.glossedIn) { const once = `${sid}|${k}|${day}`; if (cur.seenOnce.has(once)) continue; cur.seenOnce.add(once); touchWord(acc, b.source, k, { seen: n => (n || 0) + 1 }); }
   }
   function clear(body) { if (!body) return; WL()?.undecorate(body); body.classList.remove('nb-root', 'nb-glossed'); body.querySelector(':scope > .nb-prep')?.remove(); }

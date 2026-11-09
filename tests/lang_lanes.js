@@ -2,6 +2,7 @@
    one language alone fills the gap beside the others; the view in a browser (classic screens) with a tap on a step.
    Usage: node tests/lang_lanes.js <prepared-repo-dir> */
 const path = require('path'), fs = require('fs');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const N = require(path.join(ROOT, 'engine', 'langcore.js'));
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
@@ -32,7 +33,7 @@ ok(secs[0] === 'foundations' && secs.includes('core') && secs.some(s => s.starts
   const b = await chromium.launch(), E = [];
   for (const [w, hh] of [[1280, 900], [390, 844]]) {
     const ctx = await b.newContext({ viewport: { width: w, height: hh } }); await ctx.route(/fonts\.(googleapis|gstatic)\.com/, r => r.fulfill({ status: 200, body: '' }));
-    const p = await ctx.newPage(); p.on('pageerror', e => E.push(e.message)); const url = 'file://' + ROOT + '/index.html';
+    const p = await ctx.newPage(); p.on('pageerror', e => E.push(e.message)); const url = await appUrl(ROOT);
     await p.goto(url); await p.evaluate(() => localStorage.clear());
     await p.goto(url + '?account=anr&subject=lang:polyglot-semitic-zh-de'); await p.waitForFunction(() => window.NoemaLangUI?.UI?.C && document.querySelector('.lx-view'), null, { timeout: 60000 }); await wait(400);
     const btn = p.locator('.lx-tolanes:visible'); ok(await btn.count() === 1, `${w}px: ⫴ Parallel lanes next to the map`);
@@ -46,19 +47,19 @@ ok(secs[0] === 'foundations' && secs.includes('core') && secs.some(s => s.starts
     const info = await p.evaluate(() => (document.querySelector('.lx-linfo') || document.querySelector('.ns-sheet') || {}).innerText || '');
     ok(/Chinese/.test(info) && /Also in/.test(info) && /Open/.test(info), `${w}px: a tap on a step tells what it is there and where else it is`);
     // dots: chosen, or automatic when the lanes are too narrow for tiles; hover / focus tells more, a tap opens the step
-    await p.evaluate(() => document.querySelector('.lx-pop')?.remove()); await p.click('.lx-lviewpick button:has-text("Dots")'); await wait(300);
+    await p.keyboard.press('Escape'); await wait(200); /* the step's card is a dialog: Escape closes it */ await p.click('.lx-lviewpick button:has-text("Dots")'); await wait(300);
     ok(await p.locator('.lx-ldot').count() > 200 && await p.locator('.lx-lnode').count() === 0 && /^S\d+$/.test(await p.locator('.lx-ldot').first().innerText()), `${w}px: Dots — small round steps with their code (S0, S1 …)`);
     await p.locator('.lx-ldot[data-lang="he"]').nth(3).hover(); await wait(200);
     ok(/Hebrew/.test(await p.locator('.lx-lhover').innerText().catch(() => '')), `${w}px: pointing at a dot tells what it is`);
     await p.locator('.lx-ldot[data-lang="he"]').nth(3).click(); await wait(300);
     ok(/Also in/.test(await p.evaluate(() => (document.querySelector('.lx-linfo') || document.querySelector('.ns-sheet') || {}).innerText || '')), `${w}px: a tap on a dot opens its card`);
-    await p.evaluate(() => document.querySelector('.lx-pop')?.remove());
+    await p.keyboard.press('Escape'); await wait(200);
     await p.click('.lx-lviewpick button:has-text("Auto")'); await wait(300);
     await ctx.close();
   }
   { // Auto: dots when a lane would be narrower than a tile
     const ctx = await b.newContext({ viewport: { width: 320, height: 700 } }); await ctx.route(/fonts\.(googleapis|gstatic)\.com/, r => r.fulfill({ status: 200, body: '' }));
-    const p = await ctx.newPage(); p.on('pageerror', e => E.push(e.message)); const url = 'file://' + ROOT + '/index.html';
+    const p = await ctx.newPage(); p.on('pageerror', e => E.push(e.message)); const url = await appUrl(ROOT);
     await p.goto(url); await p.evaluate(() => localStorage.clear());
     await p.goto(url + '?account=anr&subject=lang:polyglot-semitic-zh-de#/lanes'); await p.waitForSelector('.lx-lanes2', { timeout: 60000 }); await wait(300);
     ok(await p.locator('.lx-lanes2.lx-ldots').count() === 1 && await p.evaluate(() => document.documentElement.scrollWidth - innerWidth) <= 1, '320px, Auto: four lanes do not fit as tiles → dots, nothing scrolls sideways');

@@ -1,6 +1,7 @@
 /* Visual exercises (docs/VISUAL.md): every type, mouse + touch + keyboard, desktop + phone.
    Usage: node tests/visual.js <prepared-repo-dir>   (needs the demo-physics fixture, see tests/run_e2e.sh) */
 const { chromium } = require(process.env.PW || 'playwright');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const path = require('path');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const SHOTS = '/tmp/noema_shots'; require('fs').mkdirSync(SHOTS, { recursive: true });
@@ -10,13 +11,13 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 async function open(browser, viewport, opts = {}) {
   const ctx = await browser.newContext({ viewport, hasTouch: !!opts.touch, isMobile: !!opts.touch });
   const p = await ctx.newPage(); const E = []; p.on('pageerror', e => E.push(e.message)); p.on('console', m => { if (m.type() === 'error' && !/Failed to load resource/.test(m.text())) E.push(m.text()); });   // (config.local.js is absent in test copies)
-  await p.goto('file://' + ROOT + '/index.html'); await p.evaluate(() => localStorage.clear()); await p.reload(); await wait(700);
+  await p.goto(await appUrl(ROOT)); await p.evaluate(() => localStorage.clear()); await p.reload(); await wait(700);
   await p.click('.noema-chip:has-text("Demo Physics")'); await wait(1300);
   return { p, E, ctx };
 }
 /** Render one exercise card alone in <main>; returns a locator. */
 async function card(p, id) {
-  await p.evaluate(id => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX[id]); c.id = 'T'; m.append(c); window.scrollTo(0, 0); }, id);
+  await p.evaluate(id => { const m = document.querySelector('main'); m.innerHTML = ''; const c = NoemaCore.studyUi.current().exerciseCard(EX[id]); c.id = 'T'; m.append(c); window.scrollTo(0, 0); }, id);
   await wait(250); return p.locator('#T');
 }
 /** Page coordinates of an image point (image units). */
@@ -204,7 +205,7 @@ const C = { fuel: [95, 125], boiler: [290, 125], turbine: [490, 125], generator:
   await p.evaluate(() => { location.hash = '#/ch/ch01/filters'; }); await wait(500);
   ok(/Drag the labels/.test(await p.locator('main').innerText()), 'practice filters show the visual types');
   // tutor context
-  ok(await p.evaluate(() => /Labeled parts: .*Boiler/.test(exerciseAsText(EX['ch01-e104'])) && /Correct order: Fuel → Boiler/.test(exerciseAsText(EX['ch01-e103']))), 'the tutor gets a text version of the picture and the answers');
+  ok(await p.evaluate(() => /Labeled parts: .*Boiler/.test(NoemaCore.studyUi.current().exerciseText(EX['ch01-e104'])) && /Correct order: Fuel → Boiler/.test(NoemaCore.studyUi.current().exerciseText(EX['ch01-e103']))), 'the tutor gets a text version of the picture and the answers');
   ok(!E.length, 'desktop: no page errors ' + JSON.stringify(E.slice(0, 3)));
 
   /* ======================= phone, touch ======================= */

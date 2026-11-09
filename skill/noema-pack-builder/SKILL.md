@@ -42,6 +42,15 @@ Decide the shape the material calls for, the same way the app's **📚 From your
   (`prepare: false` makes only the map). Then go on as in *Curricula* below: `noema_curriculum_task` hands you the chapter
   plans, then the steps one by one — each from its files and pages in this chat. Without the connector, point the learner to
   📚 From your sources in the app (choose *My Claude app*, paste the task here, paste your JSON answer back).
+- **🪜 Levels** — only when the material has them (a school syllabus by grade, a degree by semester or year, a course in
+  tiers): give the Roadmap `"levels"` — a preset `"grade:5-9"`, `"semester:6"`, `"year:4"`, `"difficulty"` (introductory ·
+  intermediate · advanced) or the course's own list `[{ "id": "basics", "names": { "<lang>": "…" } }, …]`, lowest first —
+  and each step its `"level"` (`"s2"`, or `{ "from": "s2", "to": "s3" }` for a step that spans two). A prerequisite never
+  sits at a higher level than the step that builds on it. `level_test: true` only when the learner wants a test before
+  moving up (moving up is otherwise automatic once a level's steps are mastered). Never invent levels the material lacks.
+  To prepare one level's work: `noema_curriculum_task(curriculum_id, level)` — its tasks say what the level means:
+  **difficulty is relative to the level** (difficulty 3 = the hardest that is still that level's material), the 20 / 25 /
+  55 % mix holds within the level, and the pack gets `"levels": ["<id>"]`.
 Say your choice and its reason in one line and carry on with it unless the learner wants the other shape.
 When the message already carries **“The learner confirmed this chapter plan”** (sent by the app), do not decide again:
 write exactly those chapters, in that order, each from the pages it names.
@@ -114,11 +123,10 @@ python3 scripts/activity_new.py work/<id> <activity-id> --from rc-transient     
 python3 scripts/activity_new.py work/<id> <activity-id> --from led-bench        # a fault-finding bench: a hidden fault, multimeter/scope/logic, a diagnosis graded by checks
 python3 scripts/activity_new.py work/<id> <activity-id> --from py-filter        # Python (py-module@1, numpy): main.py step() feeds a spec's controls and plots — only when numbers need real numerics (17–37 MB download, website only)
 python3 scripts/activity_new.py work/<id> <activity-id> --from heatsink        # or pid-tune, lora-link, sensor-node: heat (thermal@1), a control loop (pid@1), a radio link (rf@1), an IoT node twin (twin@1)
-python3 scripts/activity_new.py work/<id> <activity-id> --from wasm-oscillator # rarely: a spec whose model is a WebAssembly module (wasm-module@1); check it with scripts/wasm_check.py
+python3 scripts/activity_new.py work/<id> <activity-id> --from wasm-oscillator # rarely: a spec whose model is a WebAssembly module (wasm-module@1); activity_lint checks the module
 python3 scripts/activity_new.py work/<id> <activity-id>    # a mini-app (alias-lab, html-app@1): app.html, strings.en/el/ru.json, tests.json — only what a spec cannot say
 python3 scripts/activity_new.py work/<id> <activity-id> --runtime h5p@1 --from item.h5p   # an existing H5P package (drag and drop, blanks…), unchanged; translate its content.json
-python3 scripts/h5p_check.py item.h5p                      # what an H5P package may contain (content types, no outside links); activity_lint runs it too
-python3 scripts/activity_lint.py work/<id>                 # the same rules as make_pack.py
+python3 scripts/activity_lint.py work/<id>                 # the same rules as make_pack.py (also what an H5P package, a WebAssembly module or an outside page may be)
 python3 scripts/activity_test.py work/<id>                 # in a real browser with the app's runtime: every language, tests.json cases (right AND tempting wrong)
 python3 scripts/activity_preview.py work/<id> <activity-id>  # light, dark, 360 px, fallback screenshots: look at each one
 ```
@@ -130,7 +138,7 @@ the values itself, also on Python's outputs — or `{"mode": "reported"}` on a m
 the pack (an H5P item instead: `activities/<id>/content.<locale>.json`, its content.json translated, one per language of the pack;
 its `item.h5p` travels beside the pack and `noema_finish_upload` asks for it — INTERACTIVE_AUTHORING.md "When to use H5P"); a
 fallback picture + text that teaches the same An outside page (`external-embed@1`: PhET, GeoGebra, Desmos — only
-the providers in `scripts/embed_allow.json` with status allowed; `scripts/embed_check.py`) goes only in a theory block, never a
+the providers in `scripts/embed_allow.json` with status allowed; `activity_lint.py` checks the URL) goes only in a theory block, never a
 `sim`; the theory must stand without it (it is off unless the site enables it, and needs the network) — INTERACTIVE_EMBED.md.
 
 ## 3b. Sources: one entry per file or link, every chapter mapped to ALL its sources
@@ -169,7 +177,7 @@ For every chapter, before any theory or exercise, write `work/<id>/map/chNN.json
 > one idea per block, a concrete example or analogy for every abstract idea, lists and tables over prose, a `reveal`
 > "think first" before the key point, a `hook` per section, short question stems, no block over ~60 words.
 
-**Every chapter, checked by `make_pack.py` (`pack_rules.json`, the rules in `references/PIPELINES.md` §4): every
+**Every chapter, checked by `make_pack.py` (the rules in `references/CONTENT_SPEC.md` and `references/PIPELINES.md` §4): every
 exercise type and focus tag that fits the chapter ≥ 3 times** (its map's `fits`; every other value has a reason in
 `unfit`; `spotbug write` need code, `calc` math, the picture types a picture), every paradigm that fits ≥ 2 times,
 **difficulty ≈ 20 / 25 / 55 %, recall ≤ 25 %, apply or higher ≥ 40 %**, every learnable ≥ 2 exercises in ≥ 2 types.
@@ -230,6 +238,8 @@ python3 scripts/make_pack.py work/<id>
 #  → /mnt/user-data/outputs/<id>.noema.zip   THE PACKAGE: pack.json + sources/<every source file>
 #  → work/<id>/build/<id>.json               the pack alone (for the connector upload)
 ```
+The checks are the app's own code, run in node (`scripts/noema-tools.cjs`, which `validate.py`, `make_pack.py`,
+`activity_lint.py` and `pipeline.py` call): without node they stop with an error, never pass.
 Fix every error and run again (also look at the WARN lines: a citation outside a part's pages means a wrong
 `firstPage` or page). Never deliver a pack that fails. The package lists every source file it contains — check
 that every file the user gave you (or each of its parts) is there.
@@ -280,6 +290,17 @@ message) **grows that Roadmap by a new part — never a second Roadmap** (flow 9
    another): `noema_link_roadmap_steps(curriculum_id, links_json)` with `{ "links": [{ "from": "@prerequisite", "to":
    "@dependent", "why": "…" }], "remove": [{ "from": "@a", "to": "@b" }] }` (`remove` optional, for a wrong link). Prepared
    steps may be the `to` side: only the map changes (order, arrows), never a subject or the learner's progress.
+7. **🪜 Levels.** A part may bring the next level (`"levels": "semester:3"` adds `s3` at the top; the ladder keeps its kind)
+   and each new step its `"level"` (`noema_roadmap_map` lists the ladder and every step's level). When the levels of what is
+   already there should change — the learner's syllabus moves a topic to another semester, a step spans two levels, two
+   small steps of one level belong together, or a Roadmap without levels should get them — propose it with
+   `noema_restructure_levels(curriculum_id, plan_json)`: `{ "why": "one or two sentences for the learner", "levels"?,
+   "steps": [{ "step": "@id", "level": "s3" }], "chapters": [{ "step": "@id", "chapter": "c4", "level": "s3" }],
+   "split": [{ "step": "@id", "parts": [{ "title": "…", "level": "s1", "chapters": ["c1", "c2"] }, { "title": "…", "level":
+   "s2", "chapters": ["c3"] }] }], "merge": [{ "into": "@id", "steps": ["@other"] }], "links"?, "unlink"? }` — only what
+   changes. It is a **proposal**: nothing changes until the learner (in a shared Roadmap its owner) approves it in the app;
+   say so, and that `action: "status"` shows the decision. Ids are kept, so the learner's progress, translations and
+   bridges follow the material; the learner's own subjects are never rewritten.
 
 ## Curricula: steps, maps and chapter plans (noema-lite connector)
 A noema-lite **curriculum** is a map of steps; every step becomes a subject pack. When the learner asks you to work on one
@@ -357,7 +378,7 @@ by them). Add new chapters (next `chNN`) or `patches/*.json` with `appendBlocks`
 
 ## Translations — every pack in English, Greek, Russian, German and French (flow step `translate`)
 A pack is written in one language (`subject.language`). **Every new pack also gets full translations into English, Greek,
-Russian, German and French — each of them that is not its own language** (the learner's rule; `pack_rules.json` "languages",
+Russian, German and French — each of them that is not its own language** (the learner's rule; the pack rules' `languages`,
 `references/PIPELINES.md` §4b). A learner whose app speaks one of them sees it, everyone else sees the original with a
 small language tag. Other languages only when the user asks. `pipeline.py check work/<id> translate` says which chapters
 — and which names — are still missing. **Translate everything the learner sees of the pack**: the chapters (terms in
@@ -371,7 +392,7 @@ brackets too), its name and tagline, and in a Roadmap everything its step's pane
   SAME ids, sections, blocks, exercises, cards, playbooks, pitfalls and answers — only the words change. Translate
   naturally for learners of that language, keep `$…$` math and code unchanged. A chapter you do not translate stays in
   the original language. Updating a translated pack: add the new items to every translation too.
-- `make_pack.py` validates both (same ids/structure/answers/code) and builds the pack with `"v": 2`; each translation is
+- `make_pack.py` validates both (same ids/structure/answers/code) and builds the pack with `"v": 3`; each translation is
   its own file, `build/<id>.tr.<locale>.json` (and `translations/<locale>.json` in the package). `noema_finish_upload`
   asks for each one with ready `curl` commands; `noema_save_translation` adds one later. `unpack.py` gives the
   translations back in `translations/`. Contract: `references/CONTENT_SPEC.md` → "Packs in several languages".

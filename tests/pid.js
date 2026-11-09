@@ -1,15 +1,17 @@
-/* The control-loop engine pid@1 (engine/src/40_engine_pid.js, docs/INTERACTIVE_ENGINES.md §3) against analytic results:
+/* The control-loop engine pid@1 (src/engines/pid/pid.ts, docs/INTERACTIVE_ENGINES.md §3) against analytic results:
    1. metrics on known curves (first order, second order: rise, overshoot, peak time, settling 2 %);
    2. plants in open loop: first order (+ dead time), second order overshoot vs ζ, integrator, DC motor, thermal, tank;
    3. closed loop: P control ess = 1/(1 + K), PI removes it, IAE / ISE analytic, an integrator follows a ramp with ess = slope/(K·Kp),
       anti-windup reduces the overshoot after saturation, setpoint weighting and derivative on the measurement, the sample time;
    4. seeded noise (determinism), check() / checkSpec() codes, the step budget, the speed of 20000 steps, the sim-spec adapter;
-   5. JS ↔ Python (tools/pid.py) parity of check / check_spec on more than 30 models and specs.
+   5. the golden outputs of the former Python twin (tools/pid.py, tests/fixtures/parity) of check / check_spec on more than 30 models and specs.
    Usage: node tests/pid.js */
 const path = require('path'), fs = require('fs'), cp = require('child_process'), os = require('os');
+const want = require('./golden.cjs')('pid');   // the golden outputs of the former Python twin (tests/golden.cjs)
 const ROOT = path.resolve(__dirname, '..');
-require(path.join(ROOT, 'engine', 'src', '40_engine_pid.js'));
-const P = globalThis.NoemaPID;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaPID = ENGINES.mod('pid@1');
+const P = NoemaPID;
 let n = 0, fails = 0;
 const ok = (c, m) => { n++; if (!c) { fails++; console.log('✗ ' + m); } else console.log('✓ ' + m); };
 const rel = (a, b) => Math.abs(a - b) / Math.abs(b);
@@ -167,7 +169,7 @@ const spec = () => ({ format: 'noema.sim-spec/v1', engine: 'pid@1',
   ok(!miss.length, `checkSpec() finds the code of ${sc.length} bad specs ${miss.length ? String(miss[0][0]) : ''}`);
 }
 
-// ---------- 5. JS ↔ Python parity ----------
+// ---------- 5. the golden outputs of the former Python twin ----------
 {
   const pl = { type: 'fopdt', K: 1, tau: 1 };
   const models = [null, 5, [], {}, { plant: [] }, { plant: { type: 3 } }, { plant: { type: 'motor', J: 0, output: 'angle', zz: 1 }, mode: 'open', controller: { Kp: 1 } },
@@ -189,13 +191,11 @@ const spec = () => ({ format: 'noema.sim-spec/v1', engine: 'pid@1',
       s => { s.outputs = [5, { kind: 'x' }, { id: 'a', kind: 'scalar' }, { id: 'b', kind: 'series', time: 1 }, { id: 'c', kind: 'scalar', time: true }, { id: 'd', kind: 'scalar', signal: 'q' }, { id: 'e', kind: 'series', metric: 'ess' }, { id: 'f', kind: 'scalar', metric: 'x', at: 1 }, { id: 'g', kind: 'scalar', signal: 'y', at: -1, stat: 'median' }, { id: 'h', kind: 'scalar', signal: 'u', at: 'T', zz: 1 }, { id: 'i', kind: 'scalar', signal: ['y'] }]; },
       s => { s.model.controller = 5; s.model.transient = { tEnd: 'T' }; }, s => { s.model.bindings.push({ element: 'disturbance', expr: 'd' }); },
     ].map(f => { const s = spec(); f(s); return s; })];
-  const tmp = path.join(os.tmpdir(), 'noema-pid-parity.json'); fs.writeFileSync(tmp, JSON.stringify({ models, specs }));
-  const py = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import pid as P; d = json.load(open(sys.argv[1], encoding='utf-8'))
-print(json.dumps({'m': [P.check(x) for x in d['models']], 's': [P.check_spec(x) for x in d['specs']]}, ensure_ascii=False))`, tmp], { encoding: 'utf8' }));
   const js = { m: models.map(x => P.check(x)), s: specs.map(x => P.checkSpec(x)) };
+  const py = want('check', { models, specs }, js);   // the golden outputs of the former twin tools/pid.py
   const diff = ['m', 's'].flatMap(k => js[k].map((r, i) => JSON.stringify(r) === JSON.stringify(py[k][i]) ? null : [k, i, r, py[k][i]]).filter(Boolean));
   const total = models.length + specs.length, findings = js.m.flat().length + js.s.flat().length;
-  ok(!diff.length && total >= 30, `parity: JS and Python agree on ${models.length} models and ${specs.length} specs (${total} cases, ${findings} findings) ${diff.length ? JSON.stringify(diff[0]).slice(0, 700) : ''}`);
+  ok(!diff.length && total >= 30, `parity: the JS gives the golden outputs of the former Python twin on ${models.length} models and ${specs.length} specs (${total} cases, ${findings} findings) ${diff.length ? JSON.stringify(diff[0]).slice(0, 700) : ''}`);
 }
 
 console.log(`\npid: metrics on 1 − e^−t rise ${pct(acc.rise1)} / settling ${pct(acc.settle1)}; RK4 first order ${acc.fo.toExponential(1)}; overshoot vs ζ ≤ ${acc.os.toFixed(4)} pp; ess vs 1/(1+K) ≤ ${acc.ess.toExponential(1)}; IAE ${pct(acc.iae)}; anti-windup overshoot ${acc.aw.map(x => x.toFixed(2)).join(' / ')} %; 20000 steps ${acc.ms.toFixed(1)} ms`);

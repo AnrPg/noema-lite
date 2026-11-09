@@ -6,12 +6,14 @@ a screenshot and enough data to find **exactly one place to change**, for a pers
 | Part | Where |
 |---|---|
 | The button | foot of the side rail from 760 px wide (speech bubble with "!"); on phones Me › Report a problem |
-| The dialog, the locator, the admins' page | `engine/report.js` (`window.NoemaReport`), styles `engine/src/96_report.css` |
+| The kinds and statuses, the brief, the repository's files, the row as sent | `src/features/reports/domain/report.ts` (pure TypeScript; the connector imports it) |
+| Sending (and the outbox while offline), the admins' check, list, answer, delete | `src/features/reports/application/reports.ts` over the port `ReportServer` (`src/ports/reports.ts`; Supabase: `src/adapters/supabase/reports.ts`); the page reads it as `NoemaCore.reports` |
+| The dialog, the locator, the admins' page | `src/features/reports/ui/` (`dialog.ts` the dialog, `locate.ts` `collect`, `shot.ts` `shoot` and `pointAt`, `admin.ts` the page `#/admin`, `styles.ts`); ⚑ calls `NoemaCore.community.report.open()`; the rail button's own style is `engine/src/96_report.css` |
 | The engine's half of the locator | `engine/src/85_locate.js` (`locateItem`, handed to the shell as `engine.locate`) |
 | The table | `cloud/supabase.sql` §15 `noema_error_reports` |
-| Claude through the connector | `noema_reports`, `noema_report`, `noema_report_update` (`cloud/mcp/server.mjs`) |
+| Claude through the connector | `noema_reports`, `noema_report`, `noema_report_update` (`src/connector/tools/reports.ts`, `report.ts`, `report_update.ts`) |
 | Words | `i18n/report/` |
-| Tests | `tests/reports.js` (browser, connector, unit), `tests/sql_policies.py` (the rules in PostgreSQL) |
+| Tests | `src/features/reports/application/reports.test.ts` (`npm run test:unit`), the port's contract `src/ports/contract/reports.contract.ts` (run on the Supabase adapter against `tests/mock_supabase.js`), `tests/reports.js` (browser, connector), `tests/sql_policies.py` (the rules in PostgreSQL) |
 
 ## 1. Sending a report
 1. The button takes a screenshot of the window as it is (modern-screenshot, MIT, `engine/vendor/`, loaded on the first
@@ -20,11 +22,13 @@ a screenshot and enough data to find **exactly one place to change**, for a pers
 2. **Point at it** lets the learner tap the exact thing that is wrong. That element is framed in the screenshot (taken again)
    and becomes the report's target; without it the target is the element the page was focused on, or nothing.
 3. **Send** writes one row to `noema_error_reports`. It needs a cloud account; a local profile can download the report as
-   JSON instead. A report that cannot be sent (offline) waits in `localStorage` `noema1:report:outbox` and is retried.
+   JSON instead. A report that cannot be sent (a network failure: `cloud.network`) waits on this device (`noema1:report:outbox`,
+   the last three; without their screenshots when the storage is full) and is retried when the app is back; a report the
+   server refuses is never kept.
 4. "What is sent" in the dialog shows the whole locator before sending.
 
 ## 2. The locator (v1): finding the one place to change
-`NoemaReport.collect(target)` builds it from four sources, strongest first:
+`collect(target)` (`src/features/reports/ui/locate.ts`) builds it from four sources, strongest first:
 
 * **The data chain**: the `data-*` attributes from the target up to the page (`data-ex` exercise, `data-ch` chapter,
   `data-bid` block, `data-card` flashcard, `data-pid` drill, `data-nf` the field inside the item, such as `options.2`,
@@ -44,10 +48,10 @@ a screenshot and enough data to find **exactly one place to change**, for a pers
 `itemRef` sums it up in one string: `ex:<id>`, `card:<key>`, `blk:<section>/<bid>`, `trap:<id>`, `drill:<id>`,
 `sec:<id>`, `ch:<id>`, `ui:<key>`, `lang:<course>/<view>/<node>` or `page:<page>`.
 
-`NoemaReport.repoFiles(locator)` lists the files to open, best first: the translation file when a translation was shown,
+`repoFiles(locator)` (`NoemaCore.reports.repoFiles`) lists the files to open, best first: the translation file when a translation was shown,
 then `chapters/<ch>.json`, `patches/`, the bridges, `subject.json` (or the private/cloud pack's path), the language course
 folder, the `.arb` files of the matched keys, and for "looks wrong" / "does not work" the code file of the screen.
-`NoemaReport.brief(report)` writes an English markdown brief from all of it for Claude.
+`reportBrief(report)` (`NoemaCore.reports.brief`, and the connector's `noema_report`) writes an English markdown brief from all of it for Claude.
 
 ## 3. The admins' page `#/admin/reports`
 For the people in `noema_admins` (same table as the vault's review). Me › Problem reports (with the number of new ones,

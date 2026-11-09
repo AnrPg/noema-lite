@@ -140,7 +140,7 @@ library/languages/_phenomena/facades/<locale>/<L>.json · _typology/facades/<loc
 * **Addresses** are ids + a JSON-pointer tail: `c:<concept>/gloss`, `n:<node>/title`, `f:<fn>/title`, `fr:<frame>/meaning`,
   `s:<sentence>/gloss`, `x:<lexId>/profile/pitfalls/0`, `g:<L>:<fn>/blocks/3/text`, `g:<L>:<fn>/notes/<i>/text`,
   `p:<phenomenon>/what`, `t:<feature>/learnerNote`, `a:<L>:<concept>/use` … (the full registry:
-  `tools/schemas/noema.langfacade.fields.json`).
+  `src/contracts/schemas/noema.langfacade.fields.json`).
 * A locale facade carries the master texts and **every note** (R1: the folded third section “From other languages” is
   in the explanation language too). Its own notes (`for` = its language, every `type:` / `branch:` / `family:` note)
   are Tier 1; the notes for other languages are Tier 3. Notes keep their R2 markup exactly.

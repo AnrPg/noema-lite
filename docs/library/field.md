@@ -1,4 +1,4 @@
-# `field@1` — fields on grids and cellular automata (`engine/src/47_lib_field.js`, `NoemaLibField`)
+# `field@1` — fields on grids and cellular automata (`src/engines/field/field.ts`, `NoemaLibField`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`): how a quantity **spreads** (heat, diffusion), **travels**
 (advection), **waves**, **reacts** (reaction–diffusion, Turing patterns, travelling fronts) or **settles** (Poisson, Laplace) on a
@@ -6,9 +6,7 @@ uniform 1-D or 2-D grid, and the classic **cellular automata**. It is built on `
 ghost-node boundary conditions, stencils, von Neumann analysis, scenes) and `NoemaSimKit` (`docs/library/simkit.md`: the event
 calendar of interrupts, seeded streams, codes, the stepper).
 
-Python twin: `tools/lib_field.py` (`ID`, `check_spec`, `exprs`, `keys`, the lists `CODES`, `SERIES`, `SCALARS`, `SCENES`,
-`EQUATIONS`, `METHODS`, `CA_RULES`, `KINETICS`): the same problems (code, path, message, level) as the JS `checkSpec`; it does not
-compute. Tests: `node tests/lib_field.js` (77 assertions, §7), JS ↔ Python parity on `tests/fixtures/enginelib/field.json`
+Tests: `node tests/lib_field.js` (77 assertions, §7), the golden outputs of the former Python twin on `tests/fixtures/enginelib/field.json`
 (30 specs: 16 good, 14 bad). Reference activity: `tools/activities_examples/heat-stability` (the FTCS stability limit r ≤ ½).
 
 Pure, deterministic per seed, bounded (≤ 200 × 200 nodes in 2-D, ≤ 2000 in 1-D, ≤ 10⁸ node-steps, ≤ 3·10⁶ formula evaluations

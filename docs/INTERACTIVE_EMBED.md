@@ -5,8 +5,8 @@ It is **opt-in, needs the network, and is explore only**: a theory block, never 
 activity is `docs/INTERACTIVE.md`; the decision is the ADR's D12 (P6), as built in its §13.
 
 Files: the allow-list `tools/embed_allow.json` (in the toolkit as `embed_allow.json`), the runtime
-`engine/src/45_activity_embed.js` (+ `45_activity_embed.css`), the checks `embed_check.py` (= `NoemaEmbed.check` /
-`checkPack` in JS; `tools/activities.py` and `engine/packcheck.js` call them), tests `tests/activities_embed.js`.
+`src/runtimes/external-embed/` (a typed runtime: `check.ts` the rules, `runtime.ts` the frames, `embed.css`), the checks `check` /
+`checkPack` (the content checks call them: the app, the connector and the toolkit's `activity_lint.py` / `make_pack.py`), tests `tests/activities_embed.js`.
 
 **Use it rarely.** A pack is meant to work offline and on its own. Prefer a `sim-spec@1` activity of your own; embed an outside
 page only when it is clearly better than anything you could build (a famous PhET simulation), and always write the theory so
@@ -41,8 +41,8 @@ origin) — a later decision, not this runtime.
 
 `{format: "noema.embed-allow/v1", providers: [{ id, name, status: "allowed"|"pending", origins: ["https://exact.host"],
 path, query|null, hash|null, sandbox: [tokens], licenses: [...], creditMust, credit (template), terms, supportsResult, notes }]}`.
-`path` / `query` / `hash` are regexes matched against the **whole** part (anchored; a subset JS and Python read alike);
-`query: null` = no query allowed. The runtime carries an exact copy (`/*@providers*/ … /*@end*/`); the test fails when they
+`path` / `query` / `hash` are regexes matched against the **whole** part (anchored; a portable subset of regex syntax);
+`query: null` = no query allowed. The runtime imports this file as it is (`check.ts`: one copy, no copy to keep equal); the test checks they
 differ. Adding a provider: research its terms, add it as `pending`, switch to `allowed` only when embedding is clearly permitted.
 
 ## 3. The item (in `activities/activities.json`)
@@ -59,7 +59,7 @@ with `activities/<id>/strings.<lang>.json` holding `title` (what opens, required
 (optional, one line) — the consent card's own words. **No `entry`**, `html`, `spec` or `capabilities` (the page does not speak
 the activity protocol); `make_pack.py` and `unpack.py` keep an item without a file.
 
-**Rules** (codes; JS and Python identical, `tests/activities_embed.js` and `tests/activities.js` compare them):
+**Rules** (codes; `tests/activities_embed.js` and `tests/activities.js` check them):
 `runtime`, `provider-unknown`, `provider-pending`, `provider-sandbox`; the URL: `url-missing`, `url-long` (> 2048),
 `url-scheme` (`https://` exactly: no `http:`, `javascript:`, `data:`, `//`), `url-chars` (spaces, controls, `\`, quotes,
 `<>`, non-ASCII), `url-userinfo`, `url-host` (lower-case, dotted), `url-origin` (exact origin incl. port), `url-path` (also
@@ -68,8 +68,7 @@ the activity protocol); `make_pack.py` and `unpack.py` keep an item without a fi
 `height`. In a pack: `sim-embed` (a sim exercise on an outside page: use it in a theory block). Warning `license-nc`. The
 runtime also refuses a URL that is not in `new URL()`'s normal form.
 
-Check them with `python3 embed_check.py <subject-dir>/activities/activities.json` (or a built `pack.json`); `make_pack.py` and
-`activity_lint.py` run the same rules.
+Check them with `python3 activity_lint.py <subject-dir>`; `make_pack.py` runs the same rules.
 
 ## 4. What the learner sees
 
@@ -81,7 +80,7 @@ Check them with `python3 embed_check.py <subject-dir>/activities/activities.json
    and `ctx.onLive()`, `engine/src/32_activities.js`), and then the oldest explorer is parked to make room.
 2. **Remembered per provider.** Open stores `S.settings.embedOk[<provider>] = time` (an account setting, synced); next time the
    frame opens without the card. **Me › Data and sync** shows one quiet line, *"Outside activities that open without asking:
-   PhET, …"* with an ⓘ and **Ask again** (`NoemaEmbed.consent.list()` / `forget(id)`); the line is absent when nothing was opened.
+   PhET, …"* with an ⓘ and **Ask again** (the account setting `embedOk`, `consentOf` in `runtime.ts`); the line is absent when nothing was opened.
 3. **The frame.** Two frames as in `html-app@1`: the app's frame is a wrapper without scripts (CSP `script-src 'none';
    frame-src <provider origins>`); the provider's page runs in the wrapper's frame and can navigate only within its provider.
    Both: `sandbox` = the provider's tokens (`allow-scripts allow-same-origin` — the provider's own origin, for its storage;
@@ -120,8 +119,8 @@ The site has **no Content-Security-Policy today** (no `_headers`, no meta in `in
 
 ## 7. Tests
 
-`node tests/activities_embed.js` (node): the copy equals the allow-list; URL and item cases give the same codes in JS and
-Python; `checkPack` refuses a sim; opt-in registration; no HTML from strings. `--browser` (Chromium, Firefox, WebKit): a stub
+`node tests/activities_embed.js` (node): the copy equals the allow-list; URL and item cases give their expected
+codes; `checkPack` refuses a sim; opt-in registration; no HTML from strings. `--browser` (Chromium, Firefox, WebKit): a stub
 host and a **local fake provider** (self-signed HTTPS), a beacon server: card first and 0 provider requests before Open; Open →
 exact sandbox tokens, no Referer, only the allowed origin; the choice remembered, per provider; refused URLs → fallback with 0
 requests; a hostile page (top navigation, `window.open`, a `_blank` link, a form to `_top`, `parent.location`, a forged result)

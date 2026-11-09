@@ -2,7 +2,7 @@
 
 ## 1. Which sources a chapter uses
 A chapter often draws on several sources (a textbook chapter, a second book, a lecture, a web article).
-The app finds **all** of them, strongest signal first (`engine/src/50_sources.js`, `chapterRefs`):
+The app finds **all** of them, strongest signal first (`src/features/study/domain/course.ts`, `chapterRefs`):
 
 1. `chapter.sources: [{ "id": "ecb", "pages": "σ. 23–42" }, …]` — written by the skill (CONTENT_SPEC);
 2. the chapter's main source (`sources.json → chapters`);
@@ -31,7 +31,7 @@ From each part the app also reads a **page** ("σ.", "σελ.", "p.", "pp.", "pa
 |---|---|
 | this device | IndexedDB `noema-files` (instant, offline) |
 | your cloud account | private storage `<user>/sources/<subject>/<source>/file.<ext>` — any size: files over 45 MB are stored in parts `file.<ext>.p000, .p001…` (Supabase takes ≤ 50 MB per object) and joined again when opened |
-| every device | the synced index `a:srcfiles:<subject>` (original name, type, size) — a device without the file downloads it on first preview |
+| every device | one row per file in `noema_source_files` (original name, type, size; cloud/supabase.sql §17), cached on each device in `a:srcfiles:<subject>` — a device without the file downloads it on first preview |
 
 How files get there:
 * **In the package.** Claude's skill builds `<id>.noema.zip` = `pack.json` + `sources/<file>` for every file-based source —

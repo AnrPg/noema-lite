@@ -1,9 +1,12 @@
 /* R3 (strengthens D14): the word card shows the word's distinctive parameters right under the word, before the senses —
    langcore wordParams over the pilot course, then the card in a real browser (Arabic plurals with their meanings, German
-   der/die/das + plural, a German strong verb with Präteritum, Partizip II with hat / ist and the vowel change; phone width, dark).
+   der/die/das + plural, a German strong verb with Präteritum, Partizip II with hat / ist and the vowel change; phone width, dark);
+   and "In other languages" open at 320 px (LTR and RTL) and desktop: no word broken in the middle, 🔊 beside its word, no overflow.
    Usage: node tests/lang_wordcard.js [prepared-repo-dir]   (the browser part needs a built repo: python3 tools/build.py) */
 const fs = require('fs'), path = require('path');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
+require('./built').ensureBuilt(ROOT);   // the generated files it reads (never committed): built first, unless tests/run_e2e.sh did
 const N = require(path.join(ROOT, 'engine', 'langcore.js'));
 const PILOT = path.join(ROOT, 'library', 'languages', 'polyglot-semitic-zh-de');
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
@@ -55,7 +58,7 @@ ok(!bad.length, `every word of the pilot course gets its parameters (${bad.slice
   let chromium; try { ({ chromium } = require(process.env.PW || 'playwright')); } catch (e) { console.log('  (playwright not installed — the browser part is skipped)'); return done(); }
   if (!fs.existsSync(path.join(PILOT, 'course.pack.js')) || !fs.existsSync(path.join(ROOT, 'engine', 'langui.js'))) { console.log('  (not built — run python3 tools/build.py; the browser part is skipped)'); return done(); }
   console.log('— the card');
-  const SUBJ = 'lang:polyglot-semitic-zh-de', url = 'file://' + ROOT + '/index.html';
+  const SUBJ = 'lang:polyglot-semitic-zh-de', url = await appUrl(ROOT);
   const browser = await chromium.launch(), ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
   await ctx.route(/fonts\.(googleapis|gstatic)\.com/, r => r.fulfill({ status: 200, body: '' }));
   const page = await ctx.newPage(), E = []; page.on('pageerror', e => E.push(e.message));
@@ -98,6 +101,50 @@ ok(!bad.length, `every word of the pilot course gets its parameters (${bad.slice
   const lum = s => { const [r, g, b] = (s.match(/\d+/g) || [255, 255, 255]).map(Number); return (r + g + b) / 3; };
   ok(m.over <= 1 && m.right <= 361, `phone width: no horizontal scroll (${m.over}px), the block fits`);
   ok(lum(m.bg) < 128 && lum(m.ink) > 128, `dark theme: dark background, light text (${m.bg} / ${m.ink})`);
+  // "In other languages" open, in the app's frame: never a word or a language's name broken in the middle, 🔊 on the line of
+  // its word, nothing sideways (docs/UI_MAP.md "Small screens") — at 320 px (left to right and, in Arabic, right to left) and desktop
+  for (const [width, lang] of [[320, 'en'], [320, 'ar-XB'], [1280, 'en'], [1280, 'ar-XB']]) {
+    const c2 = await browser.newContext({ viewport: { width, height: 800 } });
+    await c2.addInitScript(() => { let c; Object.defineProperty(window, 'NOEMA_CONFIG', { configurable: true, get: () => c, set: v => { c = v; if (c) c.pseudoLocales = true; } }); });   // ar-XB, as tests/i18n_rtl.js
+    await c2.route(/fonts\.(googleapis|gstatic)\.com/, r => r.fulfill({ status: 200, body: '' }));
+    const pg = await c2.newPage(); pg.on('pageerror', e => E.push(e.message));
+    // the learner's settings before the app starts (the interface language is read once, at start)
+    await pg.goto(url); await pg.evaluate(l => { localStorage.clear(); localStorage.setItem('noema-test:newUI', '1'); localStorage.setItem('noema1:current', JSON.stringify({ acc: 'anr' }));
+      localStorage.setItem('noema1:anr:a:settings', JSON.stringify({ lang: l, world: 'both', character: 'robot', onboarded: Date.now(), studyLangs: ['ar', 'he', 'zh', 'de'] })); }, lang);
+    await pg.goto(url + '?account=anr#/lang/he/c/person.teacher');
+    const shown = await pg.waitForSelector('details.lx-others', { timeout: 30000 }).then(() => true, () => false); await wait(800);
+    if (shown) { await pg.evaluate(() => { const d = document.querySelector('details.lx-others'); if (!d.open) d.querySelector('summary').click(); }); await wait(600); }
+    const r = shown ? await pg.evaluate(() => {
+      const t = document.querySelector('details.lx-others[open] .lx-wordtable'); if (!t) return null;
+      const lines = rs => new Set([...rs].filter(x => x.width > 0).map(x => Math.round(x.top + x.height / 2))).size;
+      const broken = [], apart = [];
+      const walk = document.createTreeWalker(t, NodeFilter.SHOW_TEXT);
+      for (let n = walk.nextNode(); n; n = walk.nextNode()) {
+        if (n.parentElement.closest('rt, .lx-spk')) continue;
+        for (const m of n.textContent.matchAll(/\S+/g)) {
+          const rg = document.createRange(); rg.setStart(n, m.index); rg.setEnd(n, m.index + m[0].length);
+          const rects = [...rg.getClientRects()].filter(x => x.width > 0);
+          if (rects.length > 1 && lines(rects) > 1 && rects.some(x => Math.abs(x.top - rects[0].top) > x.height / 2)) broken.push(m[0]);
+        }
+      }
+      for (const b of t.querySelectorAll('.lx-spkglue > .lx-spk')) {   // a word or a short phrase (a sentence wraps, 98_speech.js)
+        const w = b.previousElementSibling; if (!w) continue;
+        const ww = getComputedStyle(w).display === 'contents' ? w.firstElementChild || w : w;   // noema-lang-word draws no box (display: contents): its .lx-w
+        const wr = [...ww.getClientRects()].pop(), br = b.getBoundingClientRect();
+        if (!wr || br.top > wr.bottom || br.bottom < wr.top) apart.push(b.dataset.text);
+      }
+      return { broken, apart, words: t.querySelectorAll('.lx-tok').length, over: document.scrollingElement.scrollWidth - innerWidth, inside: t.scrollWidth - t.clientWidth, dir: document.documentElement.dir || 'ltr', cards: getComputedStyle(t.querySelector('tr')).display !== 'table-row' };
+    }) : null;
+    const tag = `${width} px${lang === 'ar-XB' ? ', right to left (ar-XB)' : ''}`;
+    ok(!!r && r.words >= 5 && (lang === 'en' || r.dir === 'rtl'), `“In other languages” open at ${tag}: the table with its words (${r?.words})${r ? (r.cards ? ', a card per language' : ', a table') : ''}${r?.dir ? ', dir ' + r.dir : ''}`);
+    if (r) {
+      ok(!r.broken.length, `${tag}: no word and no language name broken in the middle${r.broken.length ? ' — ' + r.broken.slice(0, 6).join(' · ') : ''}`);
+      ok(!r.apart.length, `${tag}: every 🔊 on the line of its word${r.apart.length ? ' — not: ' + r.apart.slice(0, 6).join(' · ') : ''}`);
+      ok(r.over <= 1 && r.inside <= 1, `${tag}: nothing sideways (page ${r.over}px, table ${r.inside}px)`);
+    }
+    if (width === 320) await pg.locator('details.lx-others').screenshot({ path: path.join(ROOT, `lx_wordcard_others_${lang}.png`) }).catch(() => { });
+    await c2.close();
+  }
   ok(!E.length, 'no page errors ' + JSON.stringify(E.slice(0, 3)));
   await browser.close();
   done();

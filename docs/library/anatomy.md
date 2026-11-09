@@ -1,4 +1,4 @@
-# `anatomy@1` — computable anatomy: lesions, relations, paths, ranges of motion, biomechanics, regions, the visual pathway, the cord (`engine/src/48_lib_anatomy.js`, `NoemaLibAnatomy`)
+# `anatomy@1` — computable anatomy: lesions, relations, paths, ranges of motion, biomechanics, regions, the visual pathway, the cord (`src/engines/anatomy/anatomy.ts`, `NoemaLibAnatomy`)
 
 An engine of the library (`docs/INTERACTIVE_LIBRARY.md`) that turns anatomy from lists into a **model the learner can question**.
 Cut a nerve at a level, and it says which muscles are paralysed or weak, which movements, reflexes, skin areas and functions are
@@ -7,9 +7,7 @@ structure to another, around a block if need be. It also scores a range of motio
 single-leg stance or a NIOSH lift, grades a click on a picture, and maps a lesion of the visual pathway or of the spinal cord. It is
 pure, bounded and deterministic, uses no network and runs in the Worker.
 
-- **Python twin:** `tools/lib_anatomy.py` (`ID`, `INDEX`, `check_spec`, `exprs`, `keys`). It checks specs but does not compute.
-  It gives the same problems (code, path, message, level) as the JS `checkSpec`.
-- **Tests:** `node tests/lib_anatomy.js` (90 assertions) and `node tests/enginelib.js` (JS ↔ Python parity on
+- **Tests:** `node tests/lib_anatomy.js` (90 assertions) and `node tests/enginelib.js` (the golden outputs of the former Python twin on
   `tests/fixtures/enginelib/anatomy.json`, 36 good and bad specs).
 - **Reference activity:** `tools/activities_examples/brachial-lesion`.
 - **Research:** the project's `engine-library/research/med.md`, part C, has the research behind this chapter.
@@ -407,7 +405,7 @@ working. So a distal ulnar lesion claws more (1) than a proximal one (0.5), wher
 - `discriminators` and `differs.*` show what tells two lesions apart.
 - `bestFinding` picks the examination whose result splits the candidates into the most groups.
 
-## 5. Issue codes (run time) and checker codes (`checkSpec`, the same in `tools/lib_anatomy.py`)
+## 5. Issue codes (run time) and checker codes (`checkSpec`)
 
 **Run time** (each gives `issue.<code>` = 1):
 
@@ -516,7 +514,7 @@ The tests also cover:
 - every variant, uncurated facts, quizzes and regions
 - every checker code, and the adapter
 - the Worker source in a fresh `vm` context, which gives the same outputs
-- speed, and the twin index (the Python `INDEX` equals the JS `index()`)
+- speed, and the index (the JS `index()` equals the golden `INDEX` of the former Python twin)
 - the 10 cases of the reference activity's `tests.json`
 
 ## 9. Simplifications and limits

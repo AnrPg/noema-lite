@@ -1,5 +1,5 @@
 /* P8 — language courses through Claude (docs/LANGUAGES.md §7.4, §10.1): engine/langcore.js (tasks, checks, merges),
-   tools/lang_course.py + tools/validate_lang.py (the checks Claude runs), the connector (cloud/mcp/server.mjs, run
+   tools/lang_course.py + tools/validate_lang.py (the checks Claude runs), the connector (src/connector, run
    in-process) and the app (engine/lang/95_claude.js + the loader hooks) in a browser against the Supabase emulator.
      A. langcore over the mini course: a new account course, the core (D13 against a library course, cycles, missing
         declarations), nodes / functions / comparisons / refills — refused with their problems, accepted and merged
@@ -160,18 +160,17 @@ const sentencesFor = (data, code, fns) => mini.langs[code].bank.filter(s => (s.f
   /* ======================= B + C. the connector and the app ======================= */
   const { chromium } = require(process.env.PW || 'playwright');
   const { start } = require('./mock_supabase');
+const { connectorHandler, removeConnector } = require('./connector_fn');
   // the mini course as a library course of the website (a built pack + a registry that lists it)
   const TF = path.join(ROOT, 'dist/site/testfiles/lang-mini'); fs.mkdirSync(TF, { recursive: true });
   fs.writeFileSync(path.join(TF, 'course.pack.js'), `(window.NOEMA_LANGPACKS = window.NOEMA_LANGPACKS || {})["lang-mini"] = ${JSON.stringify(mini).replace(/<\//g, '<\\/')};\n`);
   const libMeta = { id: 'lang-mini', title: mini.course.title, emoji: '🌍', languages: mini.course.languages, explainLang: 'en', path: 'testfiles/lang-mini/course.pack.js', words: {} };
   const regTxt = fs.readFileSync(path.join(ROOT, 'dist/site/library/registry.js'), 'utf8'); const w0 = {}; new Function('window', regTxt)(w0);
   const REG = { ...w0.NOEMA_REGISTRY, languages: [libMeta] };
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true, shell: false };   // the older screens, like main's suites (tests/lang_frame.js tests the frame)`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true, onboarding: false, shell: false };   // the older screens, like main's suites (tests/lang_frame.js tests the frame)`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   const CFG = { siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [], languages: [{ id: 'lang-mini', title: libMeta.title, languages: libMeta.languages, path: libMeta.path }] };
-  const fn = path.join(os.tmpdir(), `noema-mcp-lang-${process.pid}.mjs`);
-  fs.writeFileSync(fn, `const CFG = ${JSON.stringify(CFG)};\nconst DOCS = ${JSON.stringify({ workflow: 'SKILL', content: 'C', visual: 'V', languages: 'RULES' })};\nglobalThis.window = globalThis;\n` + ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));
-  const { default: handler } = await import(fn);
+  const handler = await connectorHandler(ROOT, { config: CFG, docs: { workflow: 'SKILL', content: 'C', visual: 'V', languages: 'RULES' } });
   let T = null, rpc = 0;
   const tool = async (name, args = {}) => { const r = await handler(new Request(BASE + '/mcp', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + T }, body: JSON.stringify({ jsonrpc: '2.0', id: ++rpc, method: 'tools/call', params: { name, arguments: args } }) })); const j = await r.json(); return { text: j.result?.content?.[0]?.text || j.error?.message || '', error: !!j.result?.isError || !!j.error }; };
   const browser = await chromium.launch();
@@ -333,6 +332,6 @@ const sentencesFor = (data, code, fns) => mini.langs[code].bank.filter(s => (s.f
     ok(await ph.evaluate(() => document.documentElement.scrollWidth <= 392 && document.querySelector('.lj-box').scrollWidth <= document.querySelector('.lj-box').clientWidth + 1), '390 px: the ✨ dialog fits');
     await ph.screenshot({ path: SHOTS + '/lj2_phone.png' });
     ok(!E.length && !E2.length, 'no page errors ' + JSON.stringify([...E, ...E2].slice(0, 3)));
-  } finally { await browser.close(); srv.close(); fs.unlinkSync(fn); fs.rmSync(TF, { recursive: true, force: true }); }
+  } finally { await browser.close(); srv.close(); removeConnector(handler); fs.rmSync(TF, { recursive: true, force: true }); }
   console.log(fails ? `\n${fails} FAILED` : '\nALL PASSED'); process.exit(fails ? 1 : 0);
 })().catch(e => { console.error(e); process.exit(1); });

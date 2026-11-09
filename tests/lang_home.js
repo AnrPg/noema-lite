@@ -2,12 +2,13 @@
    a word shows the other languages folded under it, grammar cards carry their aspect, the library lists the sides by aspect.
    Usage: node tests/lang_home.js [prepared-repo-dir]   (needs a built repo: python3 tools/build.py) */
 const path = require('path');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
 const wait = ms => new Promise(r => setTimeout(r, ms));
 (async () => {
   let chromium; try { ({ chromium } = require(process.env.PW || 'playwright')); } catch (e) { console.log('  (playwright not installed — skipped)'); return; }
-  const url = 'file://' + ROOT + '/index.html', COURSE = 'polyglot-semitic-zh-de';
+  const url = await appUrl(ROOT), COURSE = 'polyglot-semitic-zh-de';
   const b = await chromium.launch(), ctx = await b.newContext({ viewport: { width: 1280, height: 900 }, locale: 'en-GB' });
   await ctx.route(/fonts\.(googleapis|gstatic)\.com/, r => r.fulfill({ status: 200, body: '' }));
   const p = await ctx.newPage(), E = []; p.on('pageerror', e => E.push(e.message));

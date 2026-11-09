@@ -18,7 +18,7 @@ parity     a locale facade against the master: every address present, nothing st
            folded “From other languages” section is in the explanation language too); the locale's own notes and the
            type / branch / family notes are Tier 1, the notes for other languages Tier 3.
            Writes facades/<loc>/PARITY.md.
-lint       the D19 rules: every text field is registered (tools/schemas/noema.langfacade.fields.json); general texts name
+lint       the D19 rules: every text field is registered (src/contracts/schemas/noema.langfacade.fields.json); general texts name
            no language outside the course (CLDR names: babel, else tools/i18n/langnames/<locale>.json) — provenance cues
            cues (from / borrowed / via / Proto- / Old …), older stages, varieties of the course languages (Egyptian,
            Cantonese, Swiss German), cuisine / plant / people adjectives (Welsh onion) and quoted glosses are exempt in every
@@ -40,8 +40,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
 def _first(*ps):
     return next((p for p in ps if os.path.exists(p)), ps[0])
-# the repository (tools/schemas, tools/i18n) or the skill toolkit (schemas/ next to scripts/, scripts/i18n)
-REG_PATH = _first(os.path.join(HERE, 'schemas', 'noema.langfacade.fields.json'), os.path.join(REPO, 'schemas', 'noema.langfacade.fields.json'))
+# the repository (src/contracts/schemas, tools/i18n) or the skill toolkit (schemas/ next to scripts/, scripts/i18n)
+REG_PATH = _first(os.path.join(REPO, 'src', 'contracts', 'schemas', 'noema.langfacade.fields.json'), os.path.join(REPO, 'schemas', 'noema.langfacade.fields.json'))
 NAMES_DIR = _first(os.path.join(HERE, 'i18n', 'langnames'), os.path.join(REPO, 'i18n', 'langnames'))
 GLOSSARY_DIR = os.path.join(REPO, 'i18n', 'glossary')
 
@@ -797,7 +797,7 @@ def lint(course, loc=None, texts=None, unreg=None, reg=None, langs=None):
     langs = langs or course_langs(course)
     out = []
     F = lambda sev, cat, where, msg: out.append(Finding(sev, cat, where, msg))
-    for rel, ptr in unreg or []: F('error', 'registry', rel, f'{ptr}: a text field not in tools/schemas/noema.langfacade.fields.json — register it with its kind')
+    for rel, ptr in unreg or []: F('error', 'registry', rel, f'{ptr}: a text field not in src/contracts/schemas/noema.langfacade.fields.json — register it with its kind')
     for a in dup: F('error', 'registry', a, 'two texts with one address')
     profiles, families, branches = typology_world(course)
     en = NameMatcher('en', langs)

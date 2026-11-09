@@ -6,7 +6,7 @@ Both shapes are first-class: **one subject** (a concise treatise, on the 📚 Sh
 of a Roadmap; the Shelf itself stays as it is (docs/CURRICULUM.md §9).
 
 **Where:** Discover › From your sources · Shelf ⋮ › From your sources · 🧭 Roadmaps (classic screens) › 📚 From your sources.
-Code: `engine/sourceplan.js` (`NoemaSourcePlan`: the logic, runs without a browser) and `fromSources()` in `engine/curmap.js`
+Code: `engine/sourceplan.js` (`NoemaSourcePlan`: the logic, runs without a browser) and the screen `noema-roadmap-from-sources` (`src/features/roadmaps/ui/from-sources.ts`, opened by `Noema.fromSources()` in `engine/app/roadmaps.js`)
 (the wizard). Words: `roadmap.map.src.*` (i18n/roadmaps-map), `roadmap.src.*` (i18n/roadmaps), `sh.fromSources*` (i18n/shell).
 
 ## 1. Your material
@@ -50,9 +50,10 @@ and chosen — the name (from the proposal unless the learner typed one), and th
 ## 5. In Claude — the connector makes the Roadmap itself
 When the learner gives the material to their own Claude (skill §0b), Claude decides the shape by the same rule. One subject:
 it builds the pack as usual. A Roadmap: `noema_create_roadmap(plan_json, language, learner)` with `{ title, summary, steps:
-[{ ref, title, summary, role, prerequisites, files }], files: [{ path, pages }] }`. `fromClaude()` checks it like the app's own
-proposal (only the Roadmap shape: every listed file used, pages inside their file, unique refs, known prerequisites, no
-cycle), `NoemaCurImport.record()` builds the curriculum (provider `claudeapp`, `fromSources.via = 'connector'`) and the
+[{ ref, title, summary, role, prerequisites, level?, files }], files: [{ path, pages }], levels? }`. `fromClaude()` checks it
+like the app's own proposal (only the Roadmap shape: every listed file used, pages inside their file, unique refs, known
+prerequisites, no cycle; 🪜 the ladder and each step's level by the level rules, docs/CURRICULUM.md §11 — a new part may add
+levels at the top, `extendFromClaude()`), `NoemaCurImport.record()` builds the curriculum (provider `claudeapp`, `fromSources.via = 'connector'`) and the
 connector stores it as `a:curriculum:<id>`; the app takes it on its next sync. Unless `prepare: false`, every step is
 queued for the Claude app in study order (reviewed), so `noema_curriculum_task` hands out the chapter plans, then each step. The files stay in that Claude chat: each step
 keeps `chatFiles` (`"file pp. a–b"`), and the chapter-plan and step tasks of `noema_curriculum_task` list them as THE sources

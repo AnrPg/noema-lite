@@ -1,4 +1,4 @@
-/* ===================== ⚑ where a problem is: the place of a report, in the pack's own terms (engine/report.js) ===================== */
+/* ===================== ⚑ where a problem is: the place of a report, in the pack's own terms (src/features/reports/ui/locate.ts) ===================== */
 /* The report button knows the address and the element pointed at (its data-* chain: data-ex, data-bid, data-card, data-pid,
    data-nf …); the engine knows what they are. locateItem() turns them into the chapter, section, block, exercise, card,
    drill or trap of the pack — with its type, its text as shown, and its text in the pack's own language when a
@@ -48,11 +48,11 @@ function locateItem(p = {}) {
     if (!out.chapter) chap(s._ch);
     out.section = { id: s.id, title: clip(s.title, 200), index: s._j };
     if (p.block) {
-      const bids = s._bids || (window.NoemaCatalog ? NoemaCatalog.blockIds(s.blocks) : s.blocks.map((b, i) => 'b' + i)), i = bids.indexOf(p.block), b = s.blocks[i];
+      const bids = s._bids || NoemaCore.catalog.blockIds(s.blocks), i = bids.indexOf(p.block), b = s.blocks[i];
       if (b) {
-        out.block = { id: p.block, index: i, t: b.t, text: clip(window.NoemaCatalog ? NoemaCatalog.blockText(b) : b.text, 400) };
+        out.block = { id: p.block, index: i, t: b.t, text: clip(NoemaCore.catalog.blockText(b), 400) };
         const os = shownLoc ? (ownCh(s._ch.id)?.sections || []).find(x => x.id === s.id) : null, ob = os?.blocks?.[i];
-        if (ob) out.block.textOwn = clip(window.NoemaCatalog ? NoemaCatalog.blockText(ob) : ob.text, 400);
+        if (ob) out.block.textOwn = clip(NoemaCore.catalog.blockText(ob), 400);
         if (!ex) field(b, ob);
       } else out.block = { id: p.block, notFound: true };
     }
@@ -61,7 +61,7 @@ function locateItem(p = {}) {
     const c = CH[p.chapter] || (out.chapter && CH[out.chapter.id]) || null;
     if (c && !out.chapter) chap(c);
     if (p.trap && c) {
-      const i = c.pitfalls.findIndex(x => window.NoemaCatalog && NoemaCatalog.trapId(x) === p.trap), x = c.pitfalls[i];
+      const i = c.pitfalls.findIndex(x => NoemaCore.catalog.trapId(x) === p.trap), x = c.pitfalls[i];
       if (x) { out.trap = { id: p.trap, index: i, title: clip(x.title, 200), text: clip(x.text, 300) }; const o = shownLoc ? (ownCh(c.id)?.pitfalls || [])[i] : null; if (o) out.trap.titleOwn = clip(o.title, 200); }
     }
   }

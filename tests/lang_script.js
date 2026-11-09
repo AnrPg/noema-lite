@@ -7,6 +7,7 @@
        and wrong (mouse and keyboard), keyboards, pinyin input, umlaut buttons, fading, the session step, RTL, no sideways scrolling.
    Usage: node tests/lang_script.js [<prepared-repo-dir>]   (built with tools/build.py; no network: fonts are stubbed) */
 const path = require('path'), fs = require('fs'), os = require('os'), { execFileSync } = require('child_process');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const N = require(path.join(ROOT, 'engine', 'langcore.js'));
 let fails = 0, n = 0; const ok = (c, m) => { n++; console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
@@ -218,7 +219,7 @@ console.log('— 3 · the app');
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
   await ctx.route(/fonts\.(googleapis|gstatic)\.com/, r2 => r2.fulfill({ status: 200, body: '' }));
   const page = await ctx.newPage(); const E = []; page.on('pageerror', e => E.push(e.message));
-  const url = 'file://' + ROOT + '/index.html';
+  const url = await appUrl(ROOT);
   await page.goto(url); await page.evaluate(() => localStorage.clear());
   const open = async hash => { await page.goto(url + '?account=anr&subject=' + SUBJ + hash); await page.waitForSelector('.lx-main .lx-view', { timeout: 10000 }).catch(() => { }); await wait(300); };
   const hashTo = async hash => { await page.evaluate(h2 => { location.hash = '#/x'; location.hash = h2; }, hash); await wait(350); };

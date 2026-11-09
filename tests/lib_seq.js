@@ -1,18 +1,19 @@
-/* seq@1 (engine/src/48_lib_seq.js, docs/library/seq.md) against published values and Biopython 1.88 (Cock et al. 2009), the test
+/* seq@1 (src/engines/seq/seq.ts, docs/library/seq.md) against published values and Biopython 1.88 (Cock et al. 2009), the test
    oracle the values were generated with (Biopython is not needed to run this file):
    1. alphabets, cleaning, reverse complement, GC (three conventions), masses; 2. the NCBI genetic codes, ambiguous codons, starts,
    context-dependent and incomplete stops; 3. ORFs in six frames, codon usage (RSCU, ENC, CAI); 4. mutations and HGVS names;
    5. divergence (JC69, K2P, Nei–Gojobori); 6. melting temperature (Wallace, Marmur–Doty, SantaLucia 1998 / 2004, the salt corrections
    of Schildkraut, SantaLucia, Owczarzy 2004 and 2008), primer checks, in-silico PCR; 7. alignment (Needleman–Wunsch, Smith–Waterman,
    Gotoh, semi-global, banding, Karlin–Altschul, shuffles); 8. dot plots; 9. restriction digests, methylation, gels; 10. proteins (mass,
-   pI with five pK sets, ε280, GRAVY, instability); 11. CRISPR guides; 12. checks, the Python twin's SPEC, adapter, Worker, speed;
+   pI with five pK sets, ε280, GRAVY, instability); 11. CRISPR guides; 12. checks, the golden SPEC of the former Python twin, adapter, Worker, speed;
    13. the reference activity sickle-codon.   Usage: node tests/lib_seq.js */
 'use strict';
 const path = require('path'), fs = require('fs'), vm = require('vm');
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
 globalThis.window = globalThis;
-require(path.join(SRC, '35_simexpr.js')); require(path.join(SRC, '46_lib_core.js')); require(path.join(SRC, '48_lib_seq.js'));
-const Q = globalThis.NoemaLibSeq;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaExpr = ENGINES.kernel('expr'), NoemaLibSeq = ENGINES.mod('seq@1');
+const Q = NoemaLibSeq;
 let n = 0, fails = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 const near = (a, b, tol) => Math.abs(a - b) <= tol;
@@ -272,8 +273,7 @@ ok(Q.clean('>seq1 a header\nacg t12\n  >another\nTTA 3') === 'ACGTTTA', 'cleanin
   const ex = Q.exprs(spec({ mode: 'digest', seq: 'ACGT', enzymes: ['EcoRI'], agarose: 'k / 10', features: [{ start: 1, end: 'k', key: 'ori' }] }, []));
   ok(JSON.stringify(ex) === '[["k / 10","model.agarose",[]],["k","model.features[0].end",[]]]', 'exprs lists every expression of the model with its path');
   ok(JSON.stringify(Q.keys(spec({ mode: 'digest', seq: 'ACGT', enzymes: ['EcoRI'], features: [{ start: 1, end: 2, key: 'oriLabel' }] }, []))) === '[["oriLabel","model.features[0].key"]]', 'keys lists the labels of the map\'s features');
-  const pySrc = fs.readFileSync(path.join(ROOT, 'tools', 'lib_seq.py'), 'utf8'), mt = pySrc.match(/SPEC = json\.loads\(r'''(.*?)'''\)/s);
-  ok(mt && JSON.stringify(JSON.parse(mt[1])) === JSON.stringify(Q.SPEC), 'tools/lib_seq.py holds the same SPEC (tables, sequences, outputs, enzymes) as the JS module');
+  ok(JSON.stringify(require('./golden.cjs')('lib_seq')('spec')) === JSON.stringify(Q.SPEC), 'the SPEC (tables, sequences, outputs, enzymes) is the golden one of the former Python twin (tools/lib_seq.py)');
   ok(Q.SPEC.enzymes.length === Object.keys(Q.ENZ).length && Q.SPEC.enzymes.every(k => Q.ENZ[k]), `the enzyme list of the checker = the ${Object.keys(Q.ENZ).length} enzymes the engine knows`);
   ok(Object.keys(Q.ENZ).every(k => { const [s, c1, c2] = Q.ENZ[k]; return Q.revcomp(s) !== s || c1 + c2 === s.length; }), 'every palindromic enzyme cuts both strands symmetrically (c1 + c2 = the site\'s length)');
   const s = spec({ mode: 'protein', seq: 'MKWVTFISLLFLFSSAYS', ph: 'k' }, [['c', 'scalar', 'charge'], ['h', 'series', 'hydropathy'], ['w', 'scene', 'wheel']]);
@@ -303,15 +303,13 @@ ok(Q.clean('>seq1 a header\nacg t12\n  >another\nTTA 3') === 'ACGTTTA', 'cleanin
   ok(typ < 50 && worst < 2000, `speed: a mutation and a primer pair ${typ} ms (< 50); the worst allowed runs (20 kb ORFs in 6 frames, 250 000-cell alignments with shuffles and a 2 kb band, a 2 kb × 2 kb dot plot, a 20 kb digest with 10 enzymes, 20 kb of NG PAMs, PCR with 5 mismatches) ${worst} ms (< 2 s)`);
 }
 
-// ---------- 13. the reference activity sickle-codon (its exercise's checks and tests.json; packcheck and activities.py agree) ----------
+// ---------- 13. the reference activity sickle-codon (its exercise's checks and tests.json; the content checks pass it) ----------
 {
   const AD = path.join(ROOT, 'tools', 'activities_examples', 'sickle-codon'), rd = f => JSON.parse(fs.readFileSync(path.join(AD, f), 'utf8'));
   const ex = rd('spec.json'), sim = Q.engine.create(ex, { seed: 1 });
   const LOC = ['en', 'el', 'ru', 'de', 'fr'], tables = Object.fromEntries(LOC.map(l => [l, rd(`strings.${l}.json`)]));
-  require(path.join(SRC, '49_lib_catalog.js')); require(path.join(ROOT, 'engine', 'packcheck.js'));
-  const js = globalThis.NoemaPackCheck.checkSimSpec(ex, tables);
-  const py = JSON.parse(require('child_process').execFileSync('python3', ['-c', 'import json, sys, activities as A; d = json.loads(sys.stdin.read()); print(json.dumps(A.check_spec(d[0], tables=d[1])))'], { cwd: path.join(ROOT, 'tools'), input: JSON.stringify([ex, tables]), encoding: 'utf8' }));
-  ok(js.length === 0 && py.length === 0, `sickle-codon: the spec passes packcheck (JS) and activities.check_spec (Python) with its five string tables${js.length + py.length ? ': ' + js.concat(py).join('; ') : ''}`);
+  const js = ENGINES.content().checkSimSpec(ex, tables);
+  ok(js.length === 0, `sickle-codon: the spec passes the content checks (checkSimSpec) with its five string tables${js.length ? ': ' + js.join('; ') : ''}`);
   ok(LOC.every(l => JSON.stringify(Object.keys(tables[l]).sort()) === JSON.stringify(Object.keys(tables.en).sort())), 'sickle-codon: the five string tables have the same keys');
   const act = rd('activity.json'); ok(act.id === 'sickle-codon' && act.runtime === 'sim-spec@1' && fs.readFileSync(path.join(AD, 'fallback.svg'), 'utf8').startsWith('<svg'), 'sickle-codon: activity.json and fallback.svg');
   const prot = Q.translate(Q.clean(ex.model.cds), 0, 1, {});

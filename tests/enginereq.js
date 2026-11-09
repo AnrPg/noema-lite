@@ -1,5 +1,5 @@
-/* ⚙ Requests for new engines of interactive activities (engine/enginereq.js, engine/src/49_lib_view.js, docs/INTERACTIVE_LIBRARY.md §3)
-   against the Supabase emulator (rules of cloud/supabase.sql §16) and the connector (cloud/mcp/server.mjs: noema_request_engine,
+/* ⚙ Requests for new engines of interactive activities (src/features/reports: NoemaCore.engineRequests, src/features/reports/ui/engines.ts, docs/INTERACTIVE_LIBRARY.md §3)
+   against the Supabase emulator (rules of cloud/supabase.sql §16) and the connector (src/connector: noema_request_engine,
    noema_engine_requests, noema_engine_request_update).
    Without a browser: normalize (required fields, limits, accuracy, the catalogue's suggestions), cleanPatch, the brief, the local store.
    In the browser: the subject's ⋮ › Engines of activities opens #/engines (only engines this app has, grouped; nothing scrolls sideways
@@ -9,6 +9,7 @@
 const { chromium } = require(process.env.PW || 'playwright');
 const path = require('path'), fs = require('fs'), os = require('os'), vm = require('vm');
 const { start } = require('./mock_supabase');
+const { connectorHandler, removeConnector } = require('./connector_fn');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const SHOTS = '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
@@ -20,9 +21,10 @@ const WHAT = 'Chemical equilibrium of a reversible reaction: the learner changes
 async function unit() {
   console.log('— the domain, without a browser');
   const ls = new Map(); const ctx = { console, localStorage: { getItem: k => ls.has(k) ? ls.get(k) : null, setItem: (k, v) => ls.set(k, String(v)) } }; ctx.window = ctx; vm.createContext(ctx);
-  for (const f of ['engine/enginereq.js', 'engine/src/49_lib_catalog.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx);
-  const R = ctx.NoemaEngineRequests;
-  ok(R && typeof R.normalize === 'function' && typeof R.store === 'function', 'engine/enginereq.js loads without a page (as in the connector)');
+  Object.assign(ctx, { URL, URLSearchParams, TextEncoder, TextDecoder, crypto: require('crypto').webcrypto });
+  vm.runInContext(fs.readFileSync(path.join(ROOT, 'build/app.js'), 'utf8'), ctx);   // window.NoemaCore (npm run build)
+  const R = ctx.NoemaCore.engineRequests;
+  ok(R && typeof R.normalize === 'function' && typeof R.store === 'function', 'NoemaCore.engineRequests (src/features/reports): the domain and the stores');
   let n = R.normalize({});
   ok(n.problems.map(p => p.field + ':' + p.code).join() === 'title:missing,what:missing', 'a name and what to simulate are required: ' + n.problems.map(p => p.field + ':' + p.code).join());
   n = R.normalize({ title: 'abc', what: 'too short', accuracy: 'exact' });
@@ -68,7 +70,7 @@ async function unit() {
     await p.evaluate(() => Noema.switchTo(Noema.account.id, 'demo-physics', '#/engines')); await wait(2500);
     ok(await until(() => p.locator('.eng-head h2').count()), '#/engines opens');
     const ids = await p.$$eval('.eng-row', l => l.map(e => e.dataset.engine));
-    const reg = await p.evaluate(() => NoemaEngineCatalog.CATALOG.filter(e => e.runtime ? ACT.runtime(typeof e.runtime === 'string' ? e.runtime : e.id) : ACT.engine(e.id)).map(e => e.id));
+    const reg = await p.evaluate(() => NoemaCore.engines.catalog.CATALOG.filter(e => e.runtime ? ACT.hasRuntime(typeof e.runtime === 'string' ? e.runtime : e.id) : ACT.engines().includes(e.id)).map(e => e.id));
     ok(ids.includes('formula@1') && ids.includes('html-app@1') && ids.includes('circuit-mna@1') && ids.length === reg.length && ids.every(i => reg.includes(i)), `only the engines this app has (${ids.length}): ` + ids.join(', '));
     ok(await p.locator('.eng-row[data-engine="formula@1"] b').innerText() === 'Formulas' && !(await p.$$eval('.eng-row', l => l.some(e => /engine\.engines\./.test(e.innerText)))), 'every engine with its name and one line (no missing words)');
     await p.screenshot({ path: SHOTS + '/engines_page.png', fullPage: true });
@@ -77,10 +79,10 @@ async function unit() {
     ok(await until(() => p.locator('#engreq-title').count()), 'Request a new engine opens the form, the name first');
     ok(!(await p.locator('#engreq-field').isVisible()) && await p.locator('details.eng-more').count() === 1, 'the optional details are folded');
     await p.click('[data-act="send"]'); await wait(200);
-    ok(/Name/.test(await p.locator('.modal .bad, .tiny.bad').first().innerText()) && !srv.state.ereqs.length, 'a name is required (nothing sent)');
+    ok(/Name/.test(await p.locator('.eng-err').first().innerText()) && !srv.state.ereqs.length, 'a name is required (nothing sent)');
     await p.fill('#engreq-title', 'Electronic filter with a resistor'); await p.fill('#engreq-what', 'short');
     await p.click('[data-act="send"]'); await wait(200);
-    ok(/40/.test(await p.locator('.tiny.bad').first().innerText()), 'what to simulate needs 40 characters: ' + await p.locator('.tiny.bad').first().innerText());
+    ok(/40/.test(await p.locator('.eng-err').first().innerText()), 'what to simulate needs 40 characters: ' + await p.locator('.eng-err').first().innerText());
     await p.fill('#engreq-what', 'An RC low-pass filter with a resistor and a capacitor: the learner changes R and C and sees the cutoff frequency and the voltage.');
     ok(await until(() => p.locator('.eng-sug .eng-row[data-engine="circuit-mna@1"]').count()), 'while writing, the engines that may already do it are shown');
     await p.click('details.eng-more summary'); await p.fill('#engreq-field', 'Electronics'); await p.selectOption('#engreq-accuracy', 'quantitative');
@@ -106,16 +108,14 @@ async function unit() {
     ok(await until(() => a.locator('.eng-req').count().then(n => n === 1)) && /1 request/.test(await a.locator('.eng-mine h3').innerText()), 'the admin sees every request');
     await a.click('.eng-admin summary'); await a.selectOption('.eng-admin select', 'available');
     await a.fill('.eng-admin input[aria-label="Engine that does it"]', 'circuit-mna@1'); await a.fill('.eng-admin input[aria-label="Note for the requester"]', 'The circuit plugin already does this.');
-    await a.click('.eng-admin button:has-text("Save")');
+    await a.click('.eng-admin noema-button:has-text("Save")');
     ok(await until(() => q.status === 'available' && q.engine_id === 'circuit-mna@1' && q.answer === 'The circuit plugin already does this.'), 'the admin answers it in place');
     await p.setViewportSize({ width: 1280, height: 900 }); await p.reload(); await wait(2000);
     ok(await until(() => p.locator('.eng-req .eng-st').innerText().then(t => /Available/.test(t))) && /circuit-mna@1/.test(await p.locator('.eng-req').innerText()) && /already does/.test(await p.locator('.eng-answer').innerText()), 'the requester sees the answer');
 
     console.log('— Claude through the connector');
     const CFG = { siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [] };
-    const fn = path.join(os.tmpdir(), `noema-mcp-ereq-${process.pid}.mjs`);
-    fs.writeFileSync(fn, `const CFG = ${JSON.stringify(CFG)};\nconst DOCS = {};\nglobalThis.window = globalThis;\n` + ['engine/report.js', 'engine/enginereq.js', 'engine/src/49_lib_catalog.js', 'engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));
-    const { default: handler } = await import(fn);
+    const handler = await connectorHandler(ROOT, { config: CFG, docs: {} });
     const tok = async email => (await (await fetch(BASE + '/auth/v1/token?grant_type=password', { method: 'POST', headers: { apikey: 'k', 'content-type': 'application/json' }, body: JSON.stringify({ email, password: 'secret123' }) })).json()).access_token;
     const tool = async (t, name, args) => (await (await handler(new Request(BASE + '/mcp', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + t }, body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/call', params: { name, arguments: args } }) }))).json()).result;
     const AT = await tok('anr@example.com');
@@ -137,7 +137,7 @@ async function unit() {
     ok((await tool(AT, 'noema_engine_request_update', { id: srv.state.ereqs[1].id, engine_id: 'Chem!' })).isError, 'a wrong engine id is refused');
     r = await tool(AT, 'noema_engine_request_update', { id: srv.state.ereqs[1].id, status: 'planned', answer: 'Planned as chem@1.' });
     ok(/planned/.test(r.content[0].text) && srv.state.ereqs[1].status === 'planned' && srv.state.ereqs[1].what === WHAT, 'the admin answers it; what was asked never changes');
-    fs.unlinkSync(fn);
+    removeConnector(handler);
     ok(!E.length, 'no page errors' + (E.length ? ': ' + E.slice(0, 3).join(' | ') : ''));
   } catch (e) { console.error(e); fails++; }
   await browser.close(); srv.close();

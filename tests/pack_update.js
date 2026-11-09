@@ -12,7 +12,7 @@ const until = async (fn, ms = 15000) => { const t = Date.now(); while (Date.now(
 const PORT = 54351, BASE = `http://localhost:${PORT}`;
 
 (async () => {
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true, shell: false };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true, onboarding: false, shell: false };`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   const browser = await chromium.launch();
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } }); const p = await ctx.newPage(); p.setDefaultTimeout(15000);
@@ -44,7 +44,7 @@ const PORT = 54351, BASE = `http://localhost:${PORT}`;
   ok(await chip.count() === 1 && /✨/.test(await chip.innerText()), 'the subject chip shows ✨ (a new version is ready)');
   await chip.click();
   ok(await until(() => p.evaluate(() => typeof SUBJ !== 'undefined' && SUBJ.id === 'cellbio' && COURSE.length === 2)), 'it opens the NEW version (2 chapters) — no manual cleanup');
-  ok(await p.evaluate(async () => (await new Promise(r => { const q = indexedDB.open('noema-lite', 1); q.onsuccess = () => { const g = q.result.transaction('packs').objectStore('packs').get(Noema.account.id + '|cellbio'); g.onsuccess = () => r(g.result?.version); }; })) === 'v2'), 'the copy saved on this device is now version 2');
+  ok(await p.evaluate(async () => (await new Promise(r => { const q = indexedDB.open('noema-lite'); q.onsuccess = () => { const g = q.result.transaction('packs').objectStore('packs').get(Noema.account.id + '|cellbio'); g.onsuccess = () => r(g.result?.version); }; })) === 'v2'), 'the copy saved on this device is now version 2');
   await p.goto(BASE + '/'); await wait(1200);
   ok(!/✨/.test(await p.locator('.noema-chip:has-text("Cell Biology")').innerText()), 'afterwards no ✨ (up to date)');
   await p.click('.noema-chip:has-text("Cell Biology")'); await wait(1500);

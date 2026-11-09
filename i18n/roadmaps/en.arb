@@ -1099,5 +1099,337 @@
         "example": "8"
       }
     }
+  },
+  "roadmap.jobs.proposed": "Claude proposed a new arrangement of the levels: it waits for your decision",
+  "@roadmap.jobs.proposed": {
+    "description": "Roadmap log line: the learner's Claude proposed a new arrangement of this Roadmap's levels (steps moved, split or joined). Nothing changes until the learner approves it."
+  },
+  "roadmap.jobs.restructured": "The new arrangement of the levels is applied; your progress moved with the material",
+  "@roadmap.jobs.restructured": {
+    "description": "Roadmap log line: the learner approved Claude's new arrangement of the levels and it was applied. Every step, chapter and exercise kept its id, so progress, translations and language bridges followed."
+  },
+  "roadmap.levels.proposal.notice": "“{title}”: Claude proposes a new arrangement of its levels. Open the map to review it",
+  "@roadmap.levels.proposal.notice": {
+    "description": "Notification: the learner's Claude proposed a new arrangement of the levels of the Roadmap {title}; the learner reviews it on the map.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Physics I–IV"
+      }
+    }
+  },
+  "roadmap.levels.proposal.ownerOnly": "Only the owner of this shared Roadmap can decide on a new arrangement",
+  "@roadmap.levels.proposal.ownerOnly": {
+    "description": "Error: a member of a shared Roadmap tried to approve or decline a new arrangement of its levels; only the owner decides."
+  },
+  "roadmap.levels.proposal.banner": "Claude proposes a new arrangement of the levels",
+  "@roadmap.levels.proposal.banner": {
+    "description": "Roadmap map: a bar above the map when a proposal from the learner's Claude waits for a decision."
+  },
+  "roadmap.levels.proposal.review": "Review",
+  "@roadmap.levels.proposal.review": {
+    "description": "Roadmap map: button in the proposal bar that opens the list of proposed changes."
+  },
+  "roadmap.levels.proposal.title": "A new arrangement of the levels",
+  "@roadmap.levels.proposal.title": {
+    "description": "Roadmap map: title of the dialog listing the changes Claude proposes to the levels."
+  },
+  "roadmap.levels.proposal.keep": "Nothing is lost: every step, chapter and exercise keeps its id, so your progress, translations and language bridges move with the material.",
+  "@roadmap.levels.proposal.keep": {
+    "description": "Roadmap map: reassurance in the proposal dialog, under the list of changes."
+  },
+  "roadmap.levels.proposal.approve": "Apply it",
+  "@roadmap.levels.proposal.approve": {
+    "description": "Roadmap map: button in the proposal dialog that applies the new arrangement."
+  },
+  "roadmap.levels.proposal.decline": "Keep it as it is",
+  "@roadmap.levels.proposal.decline": {
+    "description": "Roadmap map: button in the proposal dialog that declines the new arrangement."
+  },
+  "roadmap.levels.proposal.declined": "The arrangement stays as it was",
+  "@roadmap.levels.proposal.declined": {
+    "description": "Toast: the learner declined Claude's new arrangement of the levels."
+  },
+  "roadmap.levels.change.ladder": "New levels: {levels}",
+  "@roadmap.levels.change.ladder": {
+    "description": "Roadmap proposal dialog, one change: the Roadmap gets this ladder of levels. {levels} is a list of level names.",
+    "placeholders": {
+      "levels": {
+        "type": "String",
+        "example": "Semester 1 · Semester 2"
+      }
+    }
+  },
+  "roadmap.levels.change.level": "“{step}”: {from} → {to}",
+  "@roadmap.levels.change.level": {
+    "description": "Roadmap proposal dialog, one change: a step moves from one level to another. {from} and {to} are level names (or the word for no level).",
+    "placeholders": {
+      "step": {
+        "type": "String",
+        "example": "Thermodynamics"
+      },
+      "from": {
+        "type": "String",
+        "example": "Semester 1"
+      },
+      "to": {
+        "type": "String",
+        "example": "Semester 2"
+      }
+    }
+  },
+  "roadmap.levels.change.chapter": "“{step}”, chapter “{chapter}”: {level}",
+  "@roadmap.levels.change.chapter": {
+    "description": "Roadmap proposal dialog, one change: one chapter of a step sits at another level. {level} is a level name.",
+    "placeholders": {
+      "step": {
+        "type": "String",
+        "example": "Mechanics"
+      },
+      "chapter": {
+        "type": "String",
+        "example": "Rigid bodies"
+      },
+      "level": {
+        "type": "String",
+        "example": "Semester 2"
+      }
+    }
+  },
+  "roadmap.levels.change.split": "“{step}” is split into: {parts}",
+  "@roadmap.levels.change.split": {
+    "description": "Roadmap proposal dialog, one change: a step (and its subject) is cut into several steps. {parts} is a list of the new steps' titles.",
+    "placeholders": {
+      "step": {
+        "type": "String",
+        "example": "Mechanics"
+      },
+      "parts": {
+        "type": "String",
+        "example": "Mechanics I · Mechanics II"
+      }
+    }
+  },
+  "roadmap.levels.change.merge": "Joined into “{step}”: {steps}",
+  "@roadmap.levels.change.merge": {
+    "description": "Roadmap proposal dialog, one change: several steps (and their subjects) are joined into one. {steps} is a list of step titles.",
+    "placeholders": {
+      "step": {
+        "type": "String",
+        "example": "Optics"
+      },
+      "steps": {
+        "type": "String",
+        "example": "Lenses · Mirrors"
+      }
+    }
+  },
+  "roadmap.levels.change.link": "“{to}” now comes after “{from}”",
+  "@roadmap.levels.change.link": {
+    "description": "Roadmap proposal dialog, one change: a new prerequisite link between two steps.",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "Vectors"
+      },
+      "to": {
+        "type": "String",
+        "example": "Mechanics"
+      }
+    }
+  },
+  "roadmap.levels.change.unlink": "“{to}” no longer needs “{from}” first",
+  "@roadmap.levels.change.unlink": {
+    "description": "Roadmap proposal dialog, one change: a prerequisite link between two steps is removed.",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "Vectors"
+      },
+      "to": {
+        "type": "String",
+        "example": "Optics"
+      }
+    }
+  },
+  "roadmap.levels.none": "no level",
+  "@roadmap.levels.none": {
+    "description": "Roadmap: shown in place of a level name when a step has no level."
+  },
+  "roadmap.levels.current": "Level: {level}",
+  "@roadmap.levels.current": {
+    "description": "Roadmap map: the learner's current level on the Roadmap's ladder.",
+    "placeholders": {
+      "level": {
+        "type": "String",
+        "example": "Semester 2"
+      }
+    }
+  },
+  "roadmap.levels.top": "Every level reached",
+  "@roadmap.levels.top": {
+    "description": "Roadmap map: the learner has reached the top of the Roadmap's ladder of levels."
+  },
+  "roadmap.levels.reached": "Level reached: {level}",
+  "@roadmap.levels.reached": {
+    "description": "Notification: every step of a level of the Roadmap is mastered (or its level test passed), so the learner moved up.",
+    "placeholders": {
+      "level": {
+        "type": "String",
+        "example": "Semester 1"
+      }
+    }
+  },
+  "roadmap.levels.test.due": "{level} is done: take the level test to move up",
+  "@roadmap.levels.test.due": {
+    "description": "Roadmap map: every step of a level is mastered and this Roadmap asks for a final level test before the learner moves up.",
+    "placeholders": {
+      "level": {
+        "type": "String",
+        "example": "Semester 1"
+      }
+    }
+  },
+  "roadmap.levels.test.take": "Take the level test",
+  "@roadmap.levels.test.take": {
+    "description": "Roadmap map: button that starts the final test of a level."
+  },
+  "roadmap.levels.test.title": "Level test: {level}",
+  "@roadmap.levels.test.title": {
+    "description": "Roadmap: title of the final test of a level.",
+    "placeholders": {
+      "level": {
+        "type": "String",
+        "example": "Semester 1"
+      }
+    }
+  },
+  "roadmap.levels.test.intro": "{n, plural, one {# question} other {# questions}} from the subjects of this level. Answer at least 80 % right to move up.",
+  "@roadmap.levels.test.intro": {
+    "description": "Roadmap: what the level test is, before it starts. The questions come from the level's own subjects (no AI is asked).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "roadmap.levels.test.notReady": "The subjects of this level do not have enough questions for a test yet.",
+  "@roadmap.levels.test.notReady": {
+    "description": "Roadmap: the level test cannot start because the level's prepared subjects have fewer than 8 multiple-choice or true/false exercises."
+  },
+  "roadmap.levels.test.passed": "Passed: {right} of {total}. You moved up a level.",
+  "@roadmap.levels.test.passed": {
+    "description": "Roadmap: result of a passed level test.",
+    "placeholders": {
+      "right": {
+        "type": "int",
+        "example": "11"
+      },
+      "total": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "roadmap.levels.test.failed": "{right} of {total}: not 80 % yet. Practise this level's steps and try again.",
+  "@roadmap.levels.test.failed": {
+    "description": "Roadmap: result of a level test that was not passed.",
+    "placeholders": {
+      "right": {
+        "type": "int",
+        "example": "7"
+      },
+      "total": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "roadmap.levels.kind.grade": "Grade {n}",
+  "@roadmap.levels.kind.grade": {
+    "description": "Roadmap: the name of a level of a school-grade ladder.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "7"
+      }
+    }
+  },
+  "roadmap.levels.kind.semester": "Semester {n}",
+  "@roadmap.levels.kind.semester": {
+    "description": "Roadmap: the name of a level of a semester ladder.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "roadmap.levels.kind.year": "Year {n}",
+  "@roadmap.levels.kind.year": {
+    "description": "Roadmap: the name of a level of a ladder by year of study.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "roadmap.levels.difficulty.introductory": "Introductory",
+  "@roadmap.levels.difficulty.introductory": {
+    "description": "Roadmap: the first level of the difficulty ladder."
+  },
+  "roadmap.levels.difficulty.intermediate": "Intermediate",
+  "@roadmap.levels.difficulty.intermediate": {
+    "description": "Roadmap: the second level of the difficulty ladder."
+  },
+  "roadmap.levels.difficulty.advanced": "Advanced",
+  "@roadmap.levels.difficulty.advanced": {
+    "description": "Roadmap: the third level of the difficulty ladder."
+  },
+  "roadmap.levels.title": "Levels",
+  "@roadmap.levels.title": {
+    "description": "The name of the box with a Roadmap’s levels on its map (for screen readers)."
+  },
+  "roadmap.levels.ladder": "The levels of this Roadmap",
+  "@roadmap.levels.ladder": {
+    "description": "The list of a Roadmap’s levels (each done, current or ahead), for screen readers."
+  },
+  "roadmap.levels.progress": "Steps of {level} mastered",
+  "@roadmap.levels.progress": {
+    "description": "The progress bar of the learner’s current level: how many of its steps are mastered. {level}: the level’s name, e.g. “Year 2”."
+  },
+  "roadmap.levels.moment.title": "A new level",
+  "@roadmap.levels.moment.title": {
+    "description": "The title of the moment the learner moves up a level."
+  },
+  "roadmap.levels.moment.next": "Next: {level}",
+  "@roadmap.levels.moment.next": {
+    "description": "Under “Level reached”: the level that comes next. {level}: its name."
+  },
+  "roadmap.levels.moment.go": "Continue",
+  "@roadmap.levels.moment.go": {
+    "description": "The button that closes the level-reached moment and goes back to the map."
+  },
+  "roadmap.levels.test.loading": "Gathering the questions…",
+  "@roadmap.levels.test.loading": {
+    "description": "While the questions of a level test are gathered from the level’s subjects."
+  },
+  "roadmap.levels.proposal.gone": "This proposal has already been decided.",
+  "@roadmap.levels.proposal.gone": {
+    "description": "Shown when the learner opens a restructuring proposal that was applied or declined meanwhile."
+  },
+  "roadmap.quiz.answers": "Answers",
+  "@roadmap.quiz.answers": {
+    "description": "The group of answer buttons of a test question, for screen readers."
+  },
+  "roadmap.quiz.right": "Right.",
+  "@roadmap.quiz.right": {
+    "description": "After an answer in a test: it was right (the explanation follows)."
+  },
+  "roadmap.quiz.wrong": "Not right.",
+  "@roadmap.quiz.wrong": {
+    "description": "After an answer in a test: it was wrong (the explanation follows; the right answer is marked)."
   }
 }

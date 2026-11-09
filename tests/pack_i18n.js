@@ -3,9 +3,10 @@
      A. classic picker: en → the English title, no language tag; el → the Greek title + an “EN” tag (the content stays English);
         fr → the French title and the French chapter (same ids, the tutor answers in French); ru → English title + tag
      B. the new frame in el: the Shelf, Explore and the subject's home show the Greek title with the tag
-     C. the pack itself: schema v2, translations travel with the pack, packcheck accepts it and refuses a broken translation
+     C. the pack itself: format v3, translations travel with the pack, the content checks accept it and refuses a broken translation
    Usage: node tests/pack_i18n.js <prepared-repo-dir> */
 const { chromium } = require(process.env.PW || 'playwright');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const path = require('path'), fs = require('fs');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
@@ -15,7 +16,7 @@ const EL = 'Φυσική (δοκιμή)', FR = 'Physique (démo)';
 
 (async () => {
   const browser = await chromium.launch();
-  const url = 'file://' + ROOT + '/index.html';
+  const url = await appUrl(ROOT);
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
   const page = await ctx.newPage(); const E = []; page.on('pageerror', e => E.push(e.message));
   const as = async (lang, extra = {}) => {   // leave the page first: an open subject saves its settings when it unloads
@@ -61,29 +62,29 @@ const EL = 'Φυσική (δοκιμή)', FR = 'Physique (démo)';
   await page.evaluate(() => { location.hash = '#/shelf'; }); await until(() => page.$('[data-subject="demo-physics"]'));
   const row = await page.evaluate(() => { const r = document.querySelector('[data-subject="demo-physics"]'); return { t: r?.querySelector('b')?.textContent || '', tag: r?.querySelector('.noema-langtag')?.textContent || '' }; });
   ok(row.t.startsWith(EL) && row.tag === 'EN', 'the Shelf shows the Greek title with the tag: ' + JSON.stringify(row));
-  await page.evaluate(() => { location.hash = '#/explore/subjects'; }); await until(() => page.$('.ns-pubitem[data-id="demo-physics"]'));
-  const ex = await page.evaluate(() => { const r = document.querySelector('.ns-pubitem[data-id="demo-physics"]'); return { t: r?.querySelector('b')?.textContent || '', d: r?.querySelector('small')?.textContent || '', tag: r?.querySelector('.noema-langtag')?.textContent || '' }; });
+  await page.evaluate(() => { location.hash = '#/explore/subjects'; }); await until(() => page.$('.ex-item[data-id="demo-physics"]'));
+  const ex = await page.evaluate(() => { const r = document.querySelector('.ex-item[data-id="demo-physics"]'); return { t: r?.querySelector('b')?.textContent || '', d: r?.querySelector('small')?.textContent || '', tag: r?.querySelector('.noema-langtag')?.textContent || '' }; });
   ok(ex.t.startsWith(EL) && ex.d === 'Δοκιμαστικό πακέτο με μαθηματικά.' && ex.tag === 'EN', 'Explore shows the Greek title and description with the tag: ' + JSON.stringify(ex));
   await page.evaluate(() => { location.hash = '#/shelf'; }); await until(() => page.$('[data-subject="demo-physics"]'));
   await page.click('[data-subject="demo-physics"]'); await until(() => page.$('.herohead'));
   ok(await until(() => page.evaluate(n => (document.querySelector('.herohead')?.textContent || '').startsWith(n) && !!document.querySelector('.herohead .noema-langtag'), EL)), 'the subject’s home in the frame: the Greek title with the tag');
 
-  console.log('C. the pack: schema v2, packcheck');
+  console.log('C. the pack: format v3, the content checks');
   const pack = JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/pack.json'), 'utf8'));
   const tr = JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/tr.fr.json'), 'utf8'));
-  ok(pack.v === 2 && pack.subject.i18n?.el?.title === EL && pack.translations?.fr?.file === true && pack.translations.fr.chapters === 1 && !pack.translations.fr.chapters?.length, 'pack.json: v 2, subject.i18n, translations.fr only a stub (the chapters live in their own file)');
+  ok(pack.v === 3 && pack.subject.i18n?.el?.title === EL && pack.translations?.fr?.file === true && pack.translations.fr.chapters === 1 && !pack.translations.fr.chapters?.length, 'pack.json: v 3, subject.i18n, translations.fr only a stub (the chapters live in their own file)');
   ok(tr.format === 'noema-translation' && tr.pack === 'demo-physics' && tr.locale === 'fr' && tr.chapters?.[0]?.title === 'Énergie' && tr.chapters[0].src === 's1' && fs.existsSync(path.join(ROOT, 'library/subjects/demo-physics/tr.fr.js')), 'tr.fr.json (and tr.fr.js): the French chapters with the source mapping, downloaded only by French learners');
   const reg = fs.readFileSync(path.join(ROOT, 'library/registry.js'), 'utf8');
   ok(reg.includes('"contentLocales"') && reg.includes(EL) && reg.includes('"trLocales"'), 'the registry carries the metadata translations, the content languages and where each translation file is');
   const pc = await page.evaluate(([p, t]) => {
-    const a = NoemaPackCheck.checkPack(p), at = NoemaPackCheck.checkTranslation(t, p);
+    const a = NoemaCore.content.checkPack(p), at = NoemaCore.content.checkTranslation(t, p);
     const inl = JSON.parse(JSON.stringify(p)); inl.translations.fr = { chapters: t.chapters };
     const b = JSON.parse(JSON.stringify(inl)); b.translations.fr.chapters[0].exercises[2].answer = 2; b.translations.fr.chapters[0].exercises.pop(); b.subject.i18n.xx_1 = { title: 'x' }; b.subject.i18n.el.colour = 'x';
     const bt = JSON.parse(JSON.stringify(t)); bt.chapters[0].exercises[2].answer = 2; bt.locale = 'en';
-    return { a: a.errors.concat(at.errors), inl: NoemaPackCheck.checkPack(inl).errors, c: NoemaPackCheck.checkPack(b).errors, ct: NoemaPackCheck.checkTranslation(bt, p).errors, req: NoemaPackCheck.requiredLocales('el') };
+    return { a: a.errors.concat(at.errors), inl: NoemaCore.content.checkPack(inl).errors, c: NoemaCore.content.checkPack(b).errors, ct: NoemaCore.content.checkTranslation(bt, p).errors, req: NoemaCore.content.requiredLocales('el') };
   }, [pack, tr]).catch(e => ({ err: e.message }));
-  ok(pc.a && !pc.a.length && pc.inl && !pc.inl.length, 'packcheck accepts the fixture pack, its translation file, and the same translation inline (older packs): ' + JSON.stringify(pc.a || pc.err));
-  ok(pc.c && ['answer differs', 'exercises missing', 'not a locale code', 'unknown field'].every(w => pc.c.some(x => x.includes(w))), 'packcheck refuses a broken inline translation: ' + JSON.stringify(pc.c));
+  ok(pc.a && !pc.a.length && pc.inl && !pc.inl.length, 'checkPack accepts the fixture pack, its translation file, and the same translation inline (older packs): ' + JSON.stringify(pc.a || pc.err));
+  ok(pc.c && ['answer differs', 'exercises missing', 'not a locale code', 'unknown field'].every(w => pc.c.some(x => x.includes(w))), 'checkPack refuses a broken inline translation: ' + JSON.stringify(pc.c));
   ok(pc.ct && pc.ct.some(x => x.includes('answer differs')) && pc.ct.some(x => /locale/.test(x)), 'checkTranslation refuses a broken translation file (changed answer, wrong locale): ' + JSON.stringify(pc.ct));
   ok(JSON.stringify({ translations: pc.req.translations, bridges: pc.req.bridges }) === JSON.stringify({ translations: ['en', 'ru', 'de', 'fr'], bridges: ['en', 'ru', 'ar', 'de', 'fr'] }) && pc.req.bridgePairs.length === 25 && pc.req.bridgePairs.slice(0, 5).map(x => x.source + '>' + x.native).join() === 'el>en,el>ru,el>ar,el>de,el>fr' && pc.req.bridgePairs.slice(20).map(x => x.source + '>' + x.native).join() === 'fr>en,fr>el,fr>ru,fr>ar,fr>de', 'a Greek pack needs translations into en, ru, de, fr and bridges from el, en, ru, de and fr into the others: ' + JSON.stringify(pc.req));
 

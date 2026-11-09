@@ -7,8 +7,7 @@
 Writes (after `python3 tools/build.py site`, which empties dist/site):
     <site>/vendor/pyodide/0.27.7/…        the Pyodide core files and the wheels of numpy, scipy, micropip (+ their dependencies)
     <site>/vendor/pywheels/…              the allow-listed extra wheels (tools/pywheels_allow.json)
-    <site>/vendor/pyodide/manifest.json   what the app and its service worker check every file against (sha256 + bytes)
-    <site>/engine/pyodide-sw.js           the service worker (a copy of engine/pyodide-sw.js)
+    <site>/vendor/pyodide/manifest.json   what the app and the site's service worker (/sw.js, written by build.py site) check every file against (sha256 + bytes)
 Every file is checked against the pinned sha256 before it is written; a mismatch stops the run (nothing half-written stays).
 Downloads come from cdn.jsdelivr.net (Pyodide) and files.pythonhosted.org (extras), never from anything not pinned here.
 """
@@ -145,8 +144,6 @@ def main():
         'wheels': {n: {'file': w['file'], 'sha256': w['sha256'], 'bytes': w['bytes'], 'license': w.get('license', '')} for n, w in allow.items()},
     }
     with open(os.path.join(site, 'vendor', 'pyodide', 'manifest.json'), 'w', encoding='utf-8') as f: json.dump(runtime, f, indent=1); f.write('\n')
-    os.makedirs(os.path.join(site, 'engine'), exist_ok=True)
-    shutil.copy(os.path.join(ROOT, 'engine', 'pyodide-sw.js'), os.path.join(site, 'engine', 'pyodide-sw.js'))
     total = sum(v['bytes'] for v in got.values()) + sum(w['bytes'] for w in allow.values())
     print(f'pyodide {man["version"]}: {len(got)} files + {len(allow)} extra wheel(s), {total / 1e6:.1f} MB → {os.path.relpath(site, os.getcwd())}/vendor/')
 

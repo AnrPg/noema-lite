@@ -1,4 +1,4 @@
-/* geom@1 (engine/src/47_lib_geom.js, docs/library/geom.md) against published values (research math.md §4, table E1–E17):
+/* geom@1 (src/engines/geom/geom.ts, docs/library/geom.md) against published values (research math.md §4, table E1–E17):
    triangle centres (Kimberling, Encyclopedia of Triangle Centers; Coxeter & Greitzer 1967), the Euler line and Feuerbach's
    theorem, circle and line intersections with their classes, conics through five points, inversion, Apollonius' problem,
    the shoelace formula and Pick's theorem, the atan2 angle, the exact predicates (Shewchuk 1997; robust-predicates 3.0.3 —
@@ -8,8 +8,9 @@
 const path = require('path'), fs = require('fs'), vm = require('vm');
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
 globalThis.window = globalThis;
-require(path.join(SRC, '35_simexpr.js')); require(path.join(SRC, '46_lib_core.js')); require(path.join(SRC, '47_lib_geom.js'));
-const G = globalThis.NoemaLibGeom;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaExpr = ENGINES.kernel('expr'), NoemaLibGeom = ENGINES.mod('geom@1');
+const G = NoemaLibGeom;
 let n = 0, fails = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 const near = (a, b, t) => Math.abs(a - b) <= t;
@@ -101,7 +102,7 @@ ok(G.id === 'geom@1' && Object.isFrozen(G) && G.engine.id === 'geom@1' && G.engi
   ok(bad === 0, 'E10 Kettner et al. 2008: orient2d (Shewchuk 1997, robust-predicates 3.0.3) gives sign(l − k) for all 65 536 points — 0 wrong (exact)');
   ok(naive > 1000, `E10 the naive float formula gets ${naive} of them wrong (the noisy picture of the paper)`);
   ok(G.incircle(0, 0, 1, 0, 0, 1, 0.5, 0.5) > 0 && G.incircle(0, 0, 1, 0, 0, 1, 2, 2) < 0 && G.incircle(0, 0, 1, 0, 0, 1, 1, 1) === 0, 'incircle: inside > 0, outside < 0, on the circle exactly 0 (ccw a, b, c)');
-  const src = fs.readFileSync(path.join(SRC, '47_lib_geom.js'), 'utf8'), V = path.join(ROOT, 'engine', 'vendor', 'robust-predicates@3.0.3');
+  const src = fs.readFileSync(path.join(ROOT, 'src', 'engines', 'geom', 'vendor', 'robust-predicates.cjs'), 'utf8'), V = path.join(ROOT, 'engine', 'vendor', 'robust-predicates@3.0.3');
   const same = ['orient2d.min.js', 'incircle.min.js'].every(f => src.includes(fs.readFileSync(path.join(V, f), 'utf8').trim()));
   ok(same && fs.existsSync(path.join(V, 'LICENSE')), 'the embedded predicates are the vendored robust-predicates@3.0.3 files byte for byte (Unlicense)');
 }
@@ -244,15 +245,13 @@ function r_nothrow(r) { return r && Array.isArray(r.diag); }
   ok(t1 < 50, `speed: a typical run (a triangle, its centres, the Euler line, the scene) ${t1} ms < 50 ms`);
   ok(wc === 0 && wr.out.r.length === 960 && t3 < 2000, `speed: the worst allowed (200 moving points: their minimum enclosing circle's centre traced and the hull's area over 960 samples — samples × objects at the budget 200 000 — plus Delaunay and Voronoi) ${t3} ms < 2 s`);
 }
-// ---------- the reference activity euler-line (its exercise's checks and tests.json; packcheck and activities.py agree) ----------
+// ---------- the reference activity euler-line (its exercise's checks and tests.json; the content checks pass it) ----------
 {
   const AD = path.join(ROOT, 'tools', 'activities_examples', 'euler-line'), rd = f => JSON.parse(fs.readFileSync(path.join(AD, f), 'utf8'));
   const ex = rd('spec.json'), sim = G.engine.create(ex, { seed: 1 });
   const LOC = ['en', 'el', 'ru', 'de', 'fr'], tables = Object.fromEntries(LOC.map(l => [l, rd(`strings.${l}.json`)]));
-  require(path.join(SRC, '49_lib_catalog.js')); require(path.join(ROOT, 'engine', 'packcheck.js'));
-  const js = globalThis.NoemaPackCheck.checkSimSpec(ex, tables);
-  const py = JSON.parse(require('child_process').execFileSync('python3', ['-c', 'import json, sys, activities as A; d = json.loads(sys.stdin.read()); print(json.dumps(A.check_spec(d[0], tables=d[1])))'], { cwd: path.join(ROOT, 'tools'), input: JSON.stringify([ex, tables]), encoding: 'utf8' }));
-  ok(js.length === 0 && py.length === 0, `euler-line: the spec passes packcheck (JS) and activities.check_spec (Python) with its five string tables${js.length + py.length ? ': ' + js.concat(py).join('; ') : ''}`);
+  const js = ENGINES.content().checkSimSpec(ex, tables);
+  ok(js.length === 0, `euler-line: the spec passes the content checks (checkSimSpec) with its five string tables${js.length ? ': ' + js.join('; ') : ''}`);
   ok(LOC.every(l => JSON.stringify(Object.keys(tables[l]).sort()) === JSON.stringify(Object.keys(tables.en).sort())), 'euler-line: the five string tables have the same keys');
   const act = rd('activity.json'); ok(act.id === 'euler-line' && act.runtime === 'sim-spec@1' && fs.readFileSync(path.join(AD, 'fallback.svg'), 'utf8').startsWith('<svg'), 'euler-line: activity.json and fallback.svg');
   const checks = ['onC == 1', 'hIn == 1', 'line == 1'].map(e => NoemaExpr.compile(e));

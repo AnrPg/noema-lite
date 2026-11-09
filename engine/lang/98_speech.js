@@ -95,6 +95,8 @@ document.addEventListener('click', e => {
 }
 const SPK_SKIP = 'button, .lx-opts, .lx-opt, select, option, label, .lx-tile, .lx-tile1, .lx-slot, .lx-tiles, .lx-kbd, .lx-cands, .lx-tutor, [data-nospeak], .lx-hidecol, .lx-input, header, .lx-tmsg, .lx-diff, .lx-roman';   // i18n-ignore (selectors)
 const SPK_IN_STAGE = '.lx-fb, .lx-ref, .lx-intro, .lx-readtext, .lx-gram, .lx-typology, .lx-overview';   // inside an exercise: never on a prompt it would give away   // i18n-ignore (selectors)
+/** a word or a short phrase (up to this many characters) stays on one line with its 🔊; a longer text (a sentence) wraps between its words, and its 🔊 may start the next line */
+const SPK_GLUE_MAX = 24;
 function decorate(root) {
   if (!UI.C) return;
   if (!SP.capsSet) pushCaps();
@@ -106,7 +108,9 @@ function decorate(root) {
     const l = el.dataset.sayl || el.getAttribute('lang') || ''; if (!l || /-latn/i.test(l)) continue;
     const c = UI.C.lang[l] ? l : l.split('-')[0]; if (!UI.C.lang[c] && !N.SPEECH_TAGS[c]) continue;
     const text = el.dataset.say || el.textContent; if (!text || !text.trim()) continue;
-    el.after(speakerBtn(c, text));
+    // a word or a short phrase and its 🔊 in one span that does not wrap (98_speech.css): 🔊 never ends up alone on the next line
+    if (text.trim().length > SPK_GLUE_MAX) { el.after(speakerBtn(c, text)); continue; }
+    const glue = h('span', { class: 'lx-spkglue' }); el.replaceWith(glue); glue.append(el, speakerBtn(c, text));
   }
 }
 {
@@ -251,7 +255,7 @@ WIDGETS.speak = (it, done) => {
     box.append(fbBoxSp(ok, spText(it), ' — ', it.gloss || '', h('div', { class: 'tiny' }, LT('lang.speech.checkedHeard')))); done(ok); };
   const heardView = r => {
     const tokens = s ? (s.tokens || []).filter(k => !k.p) : [{ t: lx.lemma }];
-    return h('div', { class: 'lx-heard' }, h('span', { class: 'tiny' }, LT('lang.speech.heard') + ' '), h('span', { class: 'lx-w', lang: c, dir: X.language.dir || 'ltr' }, '“' + (r.heard || '…') + '”'),
+    return h('div', { class: 'lx-heard' }, h('span', { class: 'tiny' }, LT('lang.speech.heard') + ' '), ['“', word(c, r.heard || '…', { sub: false }), '”'],
       h('div', { class: 'lx-heardwords', lang: c, dir: X.language.dir || 'ltr' }, ...tokens.map((k, i) => h('span', { class: 'lx-hw ' + (r.matched[i] ? 'ok' : 'miss') }, k.t))));
   };
   const listen = async () => {
@@ -287,7 +291,8 @@ WIDGETS.speak = (it, done) => {
 async function readAloud(btn, c) {
   if (SP.reading) { SP.reading.stop = true; try { speechSynthesis.cancel(); } catch (e) { } SP.reading = null; btn.textContent = '🔊 ' + LT('lang.speech.wholeText'); return; }
   const job = SP.reading = { stop: false }; btn.textContent = '⏹ ' + LT('lang.sess.stop');
-  for (const el of document.querySelectorAll('.lx-reader .lx-rsent > [data-say]')) {
+  // each sentence once, in order: the sentence itself, or inside the span that glues a short one to its 🔊 (decorate)
+  for (const el of document.querySelectorAll('.lx-reader .lx-rsent > [data-say], .lx-reader .lx-rsent > .lx-spkglue > [data-say]')) {
     if (job.stop || !btn.isConnected) break;
     el.classList.add('lx-reading'); const ok = await say(c, el.dataset.say); el.classList.remove('lx-reading');
     if (!ok) break;

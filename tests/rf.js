@@ -1,15 +1,17 @@
-/* The radio engine rf@1 (engine/src/41_engine_rf.js, docs/INTERACTIVE_ENGINES.md §4) against known values:
+/* The radio engine rf@1 (src/engines/rf/rf.ts, docs/INTERACTIVE_ENGINES.md §4) against known values:
    1. path loss: Friis (2.4 GHz, 100 m = 80.05 dB), two-ray crossover, log-distance, Okumura–Hata (hand-worked example),
       ITU-R P.1238 indoor, walls; Fresnel radius and knife-edge;
    2. the receiver: kTB + NF, LoRa sensitivity, link margin, the maximum range (bisection against the closed form);
    3. error rates (BPSK 1e-5 at 9.6 dB, FSK, LoRa) and airtimes (Semtech calculator values, BLE, Wi-Fi), duty cycle;
    4. seeded shadowing (determinism, its spread), the sim-spec adapter, the worker source, prepare;
-   5. check() / checkSpec() codes, speed, and JS ↔ Python (tools/rf.py) parity on 40+ specs.
+   5. check() / checkSpec() codes, speed, and the golden outputs of the former Python twin (tools/rf.py, tests/fixtures/parity) on 40+ specs.
    Usage: node tests/rf.js */
 const path = require('path'), fs = require('fs'), cp = require('child_process'), os = require('os');
+const want = require('./golden.cjs')('rf');   // the golden outputs of the former Python twin (tests/golden.cjs)
 const ROOT = path.resolve(__dirname, '..');
-require(path.join(ROOT, 'engine', 'src', '41_engine_rf.js'));
-const R = globalThis.NoemaRF;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaRF = ENGINES.mod('rf@1');
+const R = NoemaRF;
 let n = 0, fails = 0;
 const ok = (c, m) => { n++; if (!c) { fails++; console.log('✗ ' + m); } else console.log('✓ ' + m); };
 const codes = (x, level) => R.check(x).filter(p => !level || p.level === level).map(p => p.code);
@@ -128,7 +130,7 @@ const lora = sf => ({ f: 868e6, d: 2000, tx: { power: 14, gain: 2.15, cable: 0.5
   ok(Math.abs(o2.air - R.loraAirtime({ sf: 10, payload: 20 }).airtime) < 1e-12, 'prepare: the expressions are evaluated on the main thread ($bind)');
   const self = {}; (new Function('self', R.engine.workerSource))(self);
   const w = self.noemaEngine.create(spec, { seed: 1 }).run({ dist: 3000, sf: 10 });
-  ok(JSON.stringify(w) === JSON.stringify(o) && self.NoemaRF.id === 'rf@1', 'workerSource: the same engine in a fresh global gives the same outputs');
+  ok(JSON.stringify(w) === JSON.stringify(o) && !('NoemaRF' in self), 'workerSource (its Worker bundle, no global but self.noemaEngine): the same engine in a fresh global gives the same outputs');
   ok(typeof R.engine.create === 'function' && /^[a-z][a-z0-9-]*@\d+$/.test(R.engine.id), 'engine has the registerEngine shape (id, check, prepare, create, workerSource)');
 }
 
@@ -173,14 +175,12 @@ const lora = sf => ({ f: 868e6, d: 2000, tx: { power: 14, gain: 2.15, cable: 0.5
     { model: { link: { f: 1 } }, outputs: [] }, { model: { link: ok1, bindings: Array(25).fill({ field: 'd', expr: 'd' }) }, outputs: [] },
   ];
   ok(links.length + specs.length >= 30, `parity corpus: ${links.length} links + ${specs.length} specs`);
-  const tmp = path.join(os.tmpdir(), 'noema-rf-parity.json'); fs.writeFileSync(tmp, JSON.stringify({ links, specs }));
-  const py = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import rf
-d = json.load(open(sys.argv[1], encoding='utf-8')); print(json.dumps({'links': [rf.check(x) for x in d['links']], 'specs': [rf.check_spec(x) for x in d['specs']]}))`, tmp], { encoding: 'utf8' }));
   const js = { links: links.map(x => R.check(JSON.parse(JSON.stringify(x)))), specs: specs.map(x => R.checkSpec(JSON.parse(JSON.stringify(x)))) };
+  const py = want('check', { links, specs }, js);   // the golden outputs of the former twin tools/rf.py
   let same = 0, total = 0;
   for (const k of ['links', 'specs']) js[k].forEach((r, i) => { total++; if (JSON.stringify(r) === JSON.stringify(py[k][i])) same++; else console.log('  ≠ ' + k + '[' + i + ']\n    js ' + JSON.stringify(r) + '\n    py ' + JSON.stringify(py[k][i])); });
   const found = js.links.concat(js.specs).reduce((s, r) => s + r.length, 0);
-  ok(same === total && found > 40, `JS ↔ Python check()/checkSpec(): ${same}/${total} identical (${found} findings)`);
+  ok(same === total && found > 40, `the golden outputs of the former Python twin = check()/checkSpec(): ${same}/${total} identical (${found} findings)`);
 }
 
 console.log(`\naccuracy: FSPL ${acc.fspl.toFixed(4)} dB · Hata ${acc.hata.toFixed(4)} dB · Fresnel ${acc.fresnel.toExponential(1)} m · range rel ${acc.range.toExponential(1)} · BPSK 1e-5 ${(100 * acc.bpsk).toFixed(2)} % · LoRa airtime ${acc.air.toExponential(1)} ms · σ ${(100 * acc.sigma).toFixed(1)} % · run ${acc.ms.toFixed(2)} ms`);

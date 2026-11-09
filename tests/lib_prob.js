@@ -1,10 +1,11 @@
 /* prob@1 — probability and statistics (docs/library/prob.md): published reference values (the source in each message: the AS
    algorithms' test values, R, scipy 1.x / statsmodels, mpmath at 50 digits where scipy itself is off, the classic data sets), the
    edge cases and their codes, the checker's codes, the sim adapter, the Worker source in a fresh context, speed, the seeded
-   coverage of the Monte Carlo interval, and the twin data of tools/lib_prob.py.
+   coverage of the Monte Carlo interval, and the golden data of the former twin tools/lib_prob.py.
    Run: node tests/lib_prob.js */
 'use strict';
-const path = require('path'), fs = require('fs'), vm = require('vm'), { execFileSync } = require('child_process');
+const path = require('path'), fs = require('fs'), vm = require('vm');
+const want = require('./golden.cjs')('lib_prob');   // the golden outputs of the former Python twin (tests/golden.cjs)
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
 let fails = 0, n = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
@@ -12,11 +13,9 @@ const rel = (a, b, tol) => Number.isFinite(a) && (a === b || Math.abs(a - b) <= 
 const near = (a, b, tol) => Number.isFinite(a) && Math.abs(a - b) <= tol;
 const allRel = (a, b, tol) => a.length === b.length && a.every((v, i) => rel(v, b[i], tol));
 globalThis.window = globalThis;
-require(path.join(SRC, '35_simexpr.js'));
-require(path.join(SRC, '46_lib_core.js'));
-require(path.join(SRC, '46_lib_simkit.js'));   // the streams of the later modes (mcmc, multivar draws, rand)
-require(path.join(SRC, '47_lib_prob.js'));
-const M = globalThis.NoemaLibProb;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaLibProb = ENGINES.mod('prob@1');
+const M = NoemaLibProb;
 const X = (model, seed) => M.compute(model, {}, null, { seed: seed === undefined ? 1 : seed });
 const S = (model, keys, seed) => { const r = X(model, seed); return keys.map(k => r.scalar(k)); };
 const s1 = (model, key) => X(model).scalar(key);
@@ -229,7 +228,7 @@ const dist = (d, extra, key) => s1(Object.assign({ mode: 'dist', dist: d }, extr
   ok(JSON.stringify(M.keys({ model: { mode: 'markov', states: ['a', 'b'], labels: ['sun', 'rain'], P: [[1, 0], [0, 1]] } })) === JSON.stringify([['sun', 'model.labels[0]'], ['rain', 'model.labels[1]']]), 'keys: the state labels are string keys');
 }
 
-// ===== the adapter, the Worker, speed, the Python twin's data =====
+// ===== the adapter, the Worker, speed, the golden data of the former Python twin =====
 {
   const spec = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'activities_examples', 'ci-coverage', 'spec.json'), 'utf8'));
   ok(M.checkSpec(spec).filter(p => p.level === 'error').length === 0, 'the reference activity ci-coverage has a valid spec');
@@ -257,8 +256,8 @@ const dist = (d, extra, key) => s1(Object.assign({ mode: 'dist', dist: d }, extr
   ok(times.every(t => t < 2000) && outs.every(o => Object.values(o).every(v => Array.isArray(v) ? v.length > 0 : Number.isFinite(v))), `the worst allowed runs (coverage at n = 2000, 2e5 draws, 1e4 samples of 100, 2000 bootstrap medians of 2000 with BCa, a 200-generation branching process, a 100-state chain) each < 2 s (${times.map(t => t.toFixed(0)).join(', ')} ms)`);
   ok(Number.isNaN(M.engine.create(sp({ mode: 'sampling', parent: { family: 'normal' }, size: 1000, reps: 10000 }, [{ id: 'e', kind: 'scalar', of: 'statSd' }])).run({}).e) && iss({ mode: 'sampling', parent: { family: 'normal' }, size: 1000, reps: 10000 }, 'budget', 'statSd') === 1 && iss({ mode: 'bootstrap', x: Array.from({ length: 2000 }, (_, i) => i), B: 20000 }, 'budget', 'se') === 1, 'work over the budget (1e7 draws, 4e7 resampled values) is refused up front with budget, never run for seconds');
   ok(Number.isNaN(M.engine.create(sp({ mode: 'dist', dist: { family: 'normal', sigma: 'q' } }, [{ id: 'm', kind: 'scalar', of: 'mean' }])).run({}).m), 'a number that does not compute gives NaN, never throws');
-  const pyData = JSON.parse(execFileSync('python3', ['-c', 'import json,lib_prob as M; print(json.dumps(M.DATA))'], { cwd: path.join(ROOT, 'tools'), encoding: 'utf8' }));
-  ok(JSON.stringify(pyData) === JSON.stringify(M.DATA), 'tools/lib_prob.py carries the same DATA (schema, outputs, names) as the JS module');
+  const pyData = want('data', undefined, M.DATA);
+  ok(JSON.stringify(pyData) === JSON.stringify(M.DATA), 'the golden tables of the former twin tools/lib_prob.py hold the same DATA (schema, outputs, names) as the JS module');
 }
 
 // ===================================================================================================================
@@ -331,9 +330,6 @@ const dist = (d, extra, key) => s1(Object.assign({ mode: 'dist', dist: d }, extr
   const far = X({ mode: 'mcmc', kind: 'metropolis', logdens: '-a^2/2', params: ['a'], init: [0], scale: [0.05], iters: 400, chains: 4, spread: 50 });
   ok(far.scalar('rhat.a') > 1.1 && far.issues['not-converged'] === 1, 'chains started far apart with tiny steps: R̂ > 1.1, not-converged');
   ok(iss({ mode: 'mcmc', kind: 'metropolis', logdens: '-a^2/2', params: ['a'], init: [0], iters: 200000, chains: 8 }, 'budget', 'accept') === 1, '8 chains of 2e5 density evaluations exceed the budget');
-  const SK = globalThis.NoemaSimKit; delete globalThis.NoemaSimKit;
-  const nk = X({ mode: 'mcmc', kind: 'gibbs-bivnormal', rho: 0.5 }); const nkv = nk.scalar('mean.x'); globalThis.NoemaSimKit = SK;
-  ok(nkv === undefined || Number.isNaN(nkv), 'without NoemaSimKit the samplers give no numbers and say no-kit') ; ok(nk.issues['no-kit'] >= 1, 'no-kit is counted');
 }
 // ===== multivar (NIST StRD Longley certified values; statsmodels 0.15 Logit on Spector & Mazzeo 1980; scipy; mpmath) =====
 {

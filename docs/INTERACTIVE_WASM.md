@@ -5,7 +5,7 @@ microcontroller emulator, a DSP kernel, a physics step function). The page aroun
 renderer (sliders, readouts, plots, the checks grader: `docs/INTERACTIVE.md` §12); the module only computes numbers.
 The contract of every activity is `docs/INTERACTIVE.md`; the decision is the ADR's D12 (P6), as built in its §13.
 
-Code: `engine/src/44_activity_wasm.js` (`window.NoemaWasm`) · check tool: `wasm_check.py` (in the toolkit; `tools/wasm_check.py`)
+Code: `src/runtimes/wasm-module/` (a typed runtime: `check.ts` the rules, `worker.ts` the Worker's code, `runtime.ts` the runtime, its engine `wasm@1` and `load`; docs/ARCHITECTURE.md §6.4) · checked by the content checks (`activity_lint.py` and `make_pack.py` in the toolkit, through `noema-tools.cjs`)
 · the reference activity: `wasm-oscillator` · tests: `tests/activities_wasm.js`, `tests/activities.js`, `tests/activities_pack.py`
 · fixtures: `tests/fixtures/wasm/`.
 
@@ -80,7 +80,7 @@ pack item (base64 + sha256 + abi) → page: decode, sha256, inspect() (our binar
    each call: inputs (f64) written at ptr_in → step(ptr_in, n_in, ptr_out, n_out) → outputs (f64) read at ptr_out
 ```
 
-## 4. The rules (the same in `NoemaWasm.inspect()` and `wasm_check.py`, the same messages)
+## 4. The rules (`inspect()` of `src/runtimes/wasm-module/check.ts`: the app, the connector and the toolkit run the same code)
 
 | code | refused when |
 |---|---|
@@ -91,9 +91,9 @@ pack item (base64 + sha256 + abi) → page: decode, sha256, inspect() (our binar
 | `export` | no `step` with the step signature; `init` / `alloc` with the wrong signature; a defined memory not exported as `memory` |
 
 The item check adds: base64, `sha256` (must match), `bytes`, `abi` keys and ranges, `scratch` when there is no `alloc`. A
-wasm@1 spec is checked against the module it names (`check_model`: the module exists and is a `wasm-module@1` item, the
+wasm@1 spec is checked against the module it names (`checkModel`: the module exists and is a `wasm-module@1` item, the
 function names, the input expressions use declared names, every model output is in `spec.outputs` and the other way round). The pack
-validators (`tools/activities.py` = `engine/packcheck.js`, `tests/activities.js` compares their messages on every case) add:
+validators (the content checks, `src/features/content`; `tests/activities.js` holds their messages to the golden ones) add:
 a module without a spec in a block or a sim exercise, a spec whose `engine` / `model.module` is not the item's, and — since
 the module reports nothing itself — a sim exercise on it needs `checks` (the "reported" rule of sim-spec@1).
 
@@ -116,7 +116,7 @@ The test probes each of them inside the worker against a beacon server and expec
 * Failures reuse the core's codes, so the runtime adds **no UI words**: a refused module (`import`, `memory`, `spec`, `size`,
   `format`) → the fallback, no Restart; `runaway` (a run over budget, an endless loop) → "stopped responding" with Restart;
   `unsupported` (no WebAssembly, the one-file bundle without workers) → the fallback.
-* **`window.NoemaWasm.load(item, {budgetMs, seed})`** → a handle for host code (a future emulator UI, the tests):
+* **`(await NoemaCore.runtimes.load('wasm-module@1')).api.load(item, {budgetMs, seed})`** → a handle for host code (a future emulator UI, the tests):
   `call(fn, inputs, nOut) → {out: Float64Array, log, ms, pages}`, `raw(fn, …i32) → {value}`, `restart()`, `close()`,
   `state()`. Each call has `budgetMs` (50–5000, default 1000; loading max(1 s, budget)): over it the worker is terminated, the
   call rejects with code `runaway`, later calls with `stopped`, `restart()` starts a fresh worker from the same checked bytes.
@@ -130,8 +130,8 @@ The test probes each of them inside the worker against a beacon server and expec
    activity: `module.wasm`, a spec, strings in en/el/ru/fr, a fallback picture and `tests.json`.
 2. Build your module (`clang --target=wasm32 -nostdlib -Wl,--no-entry -Wl,--export=step -Wl,--max-memory=…`, `wasm-pack`,
    AssemblyScript `--runtime stub`, or `wat2wasm`) and replace `module.wasm`. Import only the host ABI; give the memory a maximum.
-3. `python3 wasm_check.py activities/<id>/module.wasm [--max-pages N] [--step NAME] [--json]` — the imports, exports with their
-   types, memory, sha256 and the errors; `--item item.json` checks a whole item.
+3. `python3 activity_lint.py <subject-dir>` — the module's imports, exports and memory against the host ABI, its sha256 and
+   bytes, and the whole item, with the errors.
 4. Write the spec as for any `sim-spec@1` activity (controls, readouts, plots, marks) with `model.inputs` / `model.outputs`.
 5. `tests.json`: cases that pin the module's numbers (`values` ranges), the right and the tempting wrong attempts of each sim
    exercise — `python3 activity_test.py <subject-dir>` runs them in the harness with the real module in a worker.
@@ -147,8 +147,8 @@ at most 5 % of the energy after 2.5 s (`checks`: `E <= share * E0`, the spring u
   log in `init`), `imem` (imported memory without a maximum), `forbidden` (`env.fetch_url`), `badsig`, `bigmem` (max 65536
   pages), `nomax`. No toolchain needed: `watasm.py` assembles the flat-syntax subset (`python3 tests/fixtures/wasm/watasm.py
   --all`); `wat2wasm` accepts the same files.
-* `node tests/activities_wasm.js --node` — parity with `wasm_check.py`, sha256, the ABI mapping (the worker code run in node).
+* `node tests/activities_wasm.js --node` — the golden reports of the former Python twin, sha256, the ABI mapping (the worker code run in node).
   Without `--node`: the browser part (Chromium, Firefox, WebKit, no network in the worker); `--app <dir>`: also in the built app.
-* `tests/activities.js` — the pack rules in JS = Python with the same messages; `tests/activities_pack.py` — the module round
+* `tests/activities.js` — the pack rules and their golden messages; `tests/activities_pack.py` — the module round
   trips through `make_pack.py` / `unpack.py`, the refusals; `tests/activities_app.js` — the reference activity in the app
   (readouts, state, the exercise, a forbidden import → fallback, an endless loop → Restart).

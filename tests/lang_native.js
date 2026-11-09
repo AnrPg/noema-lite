@@ -8,8 +8,10 @@
    in a copy of the prepared repo (with two test notes added to that copy).
    Usage: node tests/lang_native.js <prepared-repo-dir>   (built with tools/build.py) */
 const { chromium } = require(process.env.PW || 'playwright');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const path = require('path'), fs = require('fs'), os = require('os'), { execFileSync } = require('child_process');
 const SRC = path.resolve(process.argv[2] || path.join(__dirname, '..'));
+const { linkNodeModules } = require('./built');
 const SHOTS = process.env.SHOTS || '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
 const wait = ms => new Promise(r => setTimeout(r, ms));
@@ -21,6 +23,7 @@ const MD_DE = 'TEST-MD · Two points:\n- **Gender** decides the article\n- the a
 function prepared() {
   const dst = fs.mkdtempSync(path.join(os.tmpdir(), 'noema-native-'));
   fs.cpSync(SRC, dst, { recursive: true, filter: p => !/[\\/](\.git|dist|data|node_modules)([\\/]|$)/.test('/' + path.relative(SRC, p)) });
+  linkNodeModules(SRC, dst);   // tools/build.py runs the TypeScript build with the repo's own tools
   const cdir = path.join(dst, 'library', 'languages', COURSE);
   fs.cpSync(path.join(__dirname, 'fixtures', 'lang-facade', 'el'), path.join(cdir, 'facades', 'el'), { recursive: true });
   const gf = path.join(cdir, 'lang', 'de', 'grammar', FN + '.json'), g = JSON.parse(fs.readFileSync(gf, 'utf8'));
@@ -48,6 +51,7 @@ function prepared() {
 function preparedReal() {
   const dst = fs.mkdtempSync(path.join(os.tmpdir(), 'noema-native-el-'));
   fs.cpSync(SRC, dst, { recursive: true, filter: p => !/[\\/](\.git|dist|data|node_modules)([\\/]|$)/.test('/' + path.relative(SRC, p)) });
+  linkNodeModules(SRC, dst);   // tools/build.py runs the TypeScript build with the repo's own tools
   const fdir = path.join(dst, 'library', 'languages', COURSE, 'facades', 'el'), hf = path.join(fdir, 'facade.json');
   if (!fs.existsSync(hf)) return { dst, none: true };
   const head = JSON.parse(fs.readFileSync(hf, 'utf8')), N = require(path.join(SRC, 'engine', 'langcore.js'));
@@ -73,7 +77,7 @@ function preparedReal() {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
   await ctx.route(/fonts\.(googleapis|gstatic)\.com/, r => r.fulfill({ status: 200, body: '' }));
   const page = await ctx.newPage(); const E = []; page.on('pageerror', e => E.push(e.message));
-  const url = 'file://' + ROOT + '/index.html';
+  const url = await appUrl(ROOT);
   const open = async (hash = '') => { await page.goto('about:blank'); await page.goto(url + '?account=anr&subject=' + SUBJ + hash);   // a fresh start each time (a hash alone would not reload)
     await page.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(900); };
   const setNative = n => page.evaluate(n => { const k = 'noema1:anr:a:settings'; const s = JSON.parse(localStorage.getItem(k) || '{}'); if (n) s.native = n; else delete s.native; localStorage.setItem(k, JSON.stringify(s)); }, n);
@@ -176,7 +180,7 @@ function preparedReal() {
     const ctx2 = await browser.newContext({ viewport: { width: 1280, height: 900 } });
     await ctx2.route(/fonts\.(googleapis|gstatic)\.com/, r => r.fulfill({ status: 200, body: '' }));
     const p2 = await ctx2.newPage(); const E2 = []; p2.on('pageerror', e => E2.push(e.message));
-    const url2 = 'file://' + RE.dst + '/index.html';
+    const url2 = await appUrl(RE.dst);
     const open2 = async (hash = '') => { await p2.goto('about:blank'); await p2.goto(url2 + '?account=anr&subject=' + SUBJ + hash); await p2.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(900); };
     await p2.goto(url2); await p2.evaluate(() => { localStorage.clear(); localStorage.setItem('noema1:anr:a:settings', JSON.stringify({ native: { code: 'el' } })); });
     const plain = t => String(t || '').split('\n')[0].replace(/[*→]/g, '').replace(/^\s*-\s+/, '').trim().slice(0, 28);

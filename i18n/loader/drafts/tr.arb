@@ -1,4 +1,9 @@
 {
   "@@locale": "tr",
-  "loader.export.missingActivities": "{n, plural, one {# etkileşimli öge} other {# etkileşimli öge}} pakete eklenemedi: .h5p dosyası bu cihazda yok ({items}). Dersi bir kez çevrim içiyken açın, ardından yeniden dışa aktarın."
+  "loader.export.missingActivities": "{n, plural, one {# etkileşimli öge} other {# etkileşimli öge}} pakete eklenemedi: .h5p dosyası bu cihazda yok ({items}). Dersi bir kez çevrim içiyken açın, ardından yeniden dışa aktarın.",
+  "loader.storage.full": "Bu cihazın depolama alanı dolu, bu yüzden son ilerlemen burada kaydedilmedi. Bir yedek al (Ben › Veriler ve eşitleme), sonra artık gerekmeyen dersleri kaldır.",
+  "loader.storage.low": "Bu cihazın depolama alanı neredeyse dolu (%{pct} kullanılıyor). Bir yedek al (Ben › Veriler ve eşitleme), ardından artık ihtiyacın olmayan dersleri kaldır.",
+  "loader.pwa.updateReady": "Yeni bir sürüm hazır.",
+  "loader.pwa.reload": "Yeniden yükle",
+  "loader.pwa.later": "Daha sonra"
 }

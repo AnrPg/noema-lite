@@ -22,7 +22,7 @@ function boot({ languages = ['en'], files = [], route = () => J(404, {}) } = {})
   w.window = w; w.NOEMA_CONFIG = {}; w.store = store; w.sent = sent;
   w.fetch = async (url, init = {}) => { sent.push({ url: String(url), init }); const r = await route(String(url), init); if (r instanceof Error) throw r; return r; };
   vm.createContext(w);
-  for (const f of ['engine/vendor/intl-messageformat.iife.js', 'engine/i18n/en.js', 'engine/i18n/el.js', 'engine/i18n/ru.js', 'engine/i18n/fr.js', 'engine/i18n.js', ...files]) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), w, { filename: f });
+  for (const f of ['engine/vendor/intl-messageformat.iife.js', 'build/app.js', 'engine/i18n/en.js', 'engine/i18n/el.js', 'engine/i18n/ru.js', 'engine/i18n/fr.js', 'engine/i18n.js', ...files]) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), w, { filename: f });
   return w;
 }
 const J = (status, body, headers = {}) => new Response(body === undefined ? null : typeof body === 'string' ? body : JSON.stringify(body), { status, headers: { 'content-type': 'application/json', ...headers } });

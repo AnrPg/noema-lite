@@ -8,6 +8,7 @@
      D. the CJK subsets cover every Han character of the zh-Hans / zh-Hant / ja catalogs (a warning: re-run tools/fonts_subset.py)
    Usage: node tests/i18n_rtl.js <prepared-repo-dir> */
 const { chromium } = require(process.env.PW || 'playwright');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const path = require('path'), fs = require('fs'), glob = d => fs.readdirSync(d, { recursive: true }).map(f => path.join(d, f));
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
@@ -29,7 +30,7 @@ const seedRoadmap = page => page.evaluate(() => {   // a Roadmap whose steps' ti
 
 (async () => {
   const browser = await chromium.launch();
-  const url = 'file://' + ROOT + '/index.html';
+  const url = await appUrl(ROOT);
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
   const asked = []; await ctx.route(/fonts\.(googleapis|gstatic)\.com/, r => { asked.push(r.request().url()); r.fulfill({ status: 200, body: '' }); });
   await ctx.addInitScript(() => {   // the pseudo-locales on, whatever config.js says
@@ -76,8 +77,8 @@ const seedRoadmap = page => page.evaluate(() => {   // a Roadmap whose steps' ti
 
   console.log('E. a pack’s text keeps its own direction; arrows written into texts and the wide frame mirror');
   await boot('ar-XB'); await seedRoadmap(page);
-  await page.evaluate(() => { location.hash = '#/learn'; }); await until(() => page.$('.ns-rmcard')); await page.click('.ns-rmcard'); await until(() => page.$('.cm-node[data-id="a"]'));
-  ok(await endsRight(page, '.cm-title b') === true, 'a Roadmap’s title “Data engineer?” reads left to right (the ? at its end)');
+  await page.evaluate(() => { location.hash = '#/learn'; }); await until(() => page.$('noema-roadmap-library .cm-card')); await page.click('noema-roadmap-library .cm-card'); await until(() => page.$('.cm-node[data-id="a"]'));
+  ok(await endsRight(page, '.cm-title strong') === true, 'a Roadmap’s title “Data engineer?” reads left to right (the ? at its end)');
   await page.click('.cm-node[data-id="a"]'); await until(() => page.$('.cm-ptitle h3'));
   ok(await endsRight(page, '.cm-ptitle h3') === true && await bidi(page, '.cm-pre>.cm-names') === 'plaintext', 'a step’s title in its panel and the names of the steps it opens keep their direction');
   await page.click('.cm-vbtn[data-list="true"]').catch(() => {}); await until(() => page.$('.cm-listnode'));

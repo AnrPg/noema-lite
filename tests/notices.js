@@ -1,5 +1,5 @@
 /* 🔔 News that arrives (a step ready, a subject attached, a new part, links added — engine/curjobs.js through Noema.notice,
-   engine/loader.js Notices): at most 2 short toasts on screen at once; a 3rd moves them all to the bell, where they wait
+   src/composition/shell/kv.ts NoticeStore): at most 2 short toasts on screen at once; a 3rd moves them all to the bell, where they wait
    (on this device) until cleared one by one or with “Clear all”. The toasts never stack up over the page.
    Driven through the real inbox (NoemaCurJobs.App.poll) with 4 “links added” answers, the cloud calls stubbed.
      A. the new frame (shell.js): 2 toasts, then 0 toasts and 4 in the bell; ✕ one, reload keeps the rest, Clear all
@@ -8,6 +8,7 @@
      D. deleting a profile deletes its news
    Usage: node tests/notices.js <prepared-repo-dir> */
 const { chromium } = require(process.env.PW || 'playwright');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const path = require('path'), fs = require('fs');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const SHOTS = process.env.SHOTS || '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
@@ -28,7 +29,7 @@ const badge = (page, sel) => page.$eval(sel, b => b.style.display === 'none' ? 0
 
 (async () => {
   const browser = await chromium.launch();
-  const url = 'file://' + ROOT + '/index.html';
+  const url = await appUrl(ROOT);
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
   const page = await ctx.newPage(); const E = [];
   page.on('pageerror', e => E.push('PAGEERROR ' + e.message));
@@ -39,7 +40,9 @@ const badge = (page, sel) => page.$eval(sel, b => b.style.display === 'none' ? 0
   ok(await until(() => page.$('#bellbtn')), 'the frame and its 🔔 are up');
   const sent = [];
   await page.exposeFunction('seen', t => sent.push(t));
-  const watch = () => page.evaluate(() => new MutationObserver(ms => ms.forEach(m => m.addedNodes.forEach(x => x.classList?.contains('toast') && window.seen(x.textContent)))).observe(document.body, { childList: true, subtree: true }));
+  // the toasts are drawn in the kit's toaster (its shadow root): watch the page and every toaster in it
+  const watch = () => page.evaluate(() => { const mo = new MutationObserver(ms => ms.forEach(m => m.addedNodes.forEach(x => x.classList?.contains('toast') && window.seen(x.querySelector?.('.msg')?.textContent ?? x.textContent))));
+    for (const r of [document.body, ...[...document.querySelectorAll('noema-toaster')].map(t => t.shadowRoot).filter(Boolean)]) mo.observe(r, { childList: true, subtree: true }); });
   await watch();
   ok(await arrive(page, 4, 'cn-four') === 4, 'the inbox applies 4 answers (links added) in one check');
   await wait(300);

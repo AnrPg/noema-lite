@@ -1,6 +1,31 @@
 # never commit secrets
 config.local.js
 .env
+# generated: written by `npm run build` (tools/esbuild.mjs) and `python3 tools/build.py` from their sources, never committed;
+# every consumer (npm run dev, the tests, CI, Netlify, the skill build, tools/db_sync.py) builds first
+/build/
+/engine/engine.js
+/engine/engine.css
+/engine/tokens.css
+/engine/langui.js
+/engine/langui.css
+/engine/authoring.js
+/engine/activity_author_schemas.js
+/engine/i18n/
+/library/registry.js
+/library/subjects/*/pack.js
+/library/subjects/*/pack.json
+/library/subjects/*/tr.*.js
+/library/subjects/*/tr.*.json
+/library/subjects/*/bridge.*.js
+/library/languages/*/course.pack.js
+/library/languages/*/course.profiles.js
+/library/languages/*/course.expl.*.js
+/accounts/*/packs/*/pack.js
+/accounts/*/packs/*/pack.json
+/accounts/*/packs/*/tr.*.js
+/accounts/*/packs/*/tr.*.json
+/accounts/*/packs/*/bridge.*.js
 # generated / large / machine-specific
 dist/
 data/*.db
@@ -22,3 +47,7 @@ library/languages/*/facades/*/tasks/
 # local note: what was left to check (not shared)
 PENDING_CHECKS.md
 tools/vault_fields/.cache/
+# generated from src/contracts/schemas by npm run contracts (tools/contracts.mjs)
+src/contracts/generated/
+src/contracts/validate.ts
+src/contracts/validate-start.ts

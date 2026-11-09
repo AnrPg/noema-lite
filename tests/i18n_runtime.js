@@ -214,7 +214,7 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
   async function classic(page, subj, { pictures = false, light = false } = {}) {
     const S = subj + ' · ';
     const info = await page.evaluate(() => { const types = {}; for (const e of ALL_EX) if (!types[e.type]) types[e.type] = e.id;
-      return { chs: COURSE.map(c => c.id), sec: COURSE[0].sections.map(s => s.id), types, drill: Object.keys(PB)[0] || null, src: (SOURCES[0] || {}).id }; });
+      return { chs: COURSE.map(c => c.id), sec: COURSE[0].sections.map(s => s.id), types, drill: Object.keys(PB)[0] || null, src: (NoemaCore.studyUi.current().app.course.sources[0] || {}).id }; });
     await go(page, '#/', 800);
     const ch = info.chs[0];
     await go(page, '#/ch/' + ch, 700);
@@ -232,30 +232,30 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
     await visit(page, S + 'flashcards', async () => { await page.evaluate(() => { location.hash = '#/cards'; }); await wait(500); await page.evaluate(() => { document.querySelector('main .fcard, main .flash, main .card')?.click(); }); }, 500);
     await visit(page, S + 'flashcards rated', () => page.evaluate(() => [...document.querySelectorAll('main .rate button, main .fcrate button')][0]?.click()), 400);
     if (info.drill) { await go(page, '#/drill/' + info.drill, 700); await visit(page, S + 'drill checked', () => page.evaluate(() => [...document.querySelectorAll('main .btn.primary')].pop()?.click()), 500); }
-    await visit(page, S + 'mistakes gym (with mistakes)', async () => { await page.evaluate(() => { const e = ALL_EX.slice(0, 3); e.forEach(x => S.res[x.id] = { n: 1, ok: 0, last: false }); save(); location.hash = '#/x'; location.hash = '#/mistakes'; }); }, 700);
-    await visit(page, S + 'a run to its summary', async () => { await page.evaluate(() => startRun(ALL_EX.filter(e => ['mcq', 'tf', 'cloze'].includes(e.type)).slice(0, 3), { title: '🎯' }));
+    await visit(page, S + 'mistakes gym (with mistakes)', async () => { await page.evaluate(() => { ALL_EX.slice(0, 3).forEach(x => NoemaCore.studyUi.current().app.record(x, false)); location.hash = '#/x'; location.hash = '#/mistakes'; }); }, 700);
+    await visit(page, S + 'a run to its summary', async () => { await page.evaluate(() => NoemaCore.studyUi.current().app.startRound(ALL_EX.filter(e => ['mcq', 'tf', 'cloze'].includes(e.type)).slice(0, 3), { title: '🎯' }));
       for (let i = 0; i < 7; i++) { await wait(300); await grab(page); await page.evaluate(() => { const c = document.querySelector('main .ex'); if (c && !c._locked?.()) c._check?.(); else [...document.querySelectorAll('main .btn.primary')].filter(b => b.offsetParent).pop()?.click(); }); } }, 800);
     await visit(page, S + 'boss exam', async () => { await page.evaluate(c => { location.hash = '#/boss/' + c; }, ch); await wait(600); await page.evaluate(() => [...document.querySelectorAll('main .btn.primary')].filter(b => b.offsetParent)[0]?.click());
       for (let i = 0; i < 6; i++) { await wait(300); await grab(page); await page.evaluate(() => { const c = document.querySelector('main .ex'); if (c && !c._locked?.()) c._check?.(); else [...document.querySelectorAll('main .btn.primary')].filter(b => b.offsetParent).pop()?.click(); }); } }, 800);
-    await visit(page, S + 'search', async () => { await page.evaluate(() => openSearch()); await wait(300); await page.fill('.modal input', 'a'); await page.keyboard.type('xyzqq'); await wait(300); await page.fill('.modal input', 'the'); }, 600);
-    await visit(page, S + 'sources deck', () => page.evaluate(() => { document.querySelector('.modal')?.remove(); toggleSourcesDeck(true); }), 600);
-    await visit(page, S + 'a source', () => page.evaluate(id => { toggleSourcesDeck(false); return openSource(id); }, info.src), 1200);
-    await visit(page, S + 'notifications', () => page.evaluate(() => { document.querySelectorAll('.modal').forEach(m => m.remove()); document.querySelector('.viewer, .srcviewer')?.remove(); openNotes(); }), 500);
-    await visit(page, S + 'tutor', () => page.evaluate(sid => { document.querySelectorAll('.modal').forEach(m => m.remove()); openTutor({ kind: 'section', id: sid }, 'socratic'); }, info.sec[0]), 600);
-    await visit(page, S + 'tutor history', () => page.evaluate(() => { T.showHistory = true; renderTutor(); }), 500);
-    await visit(page, S + 'tutor modes', () => page.evaluate(() => { T.showHistory = false; renderTutor(); [...document.querySelectorAll('.drawer select, .drawer .modechips button')].forEach(x => x.click?.()); }), 400);
-    await visit(page, S + 'focus sprint', () => page.evaluate(() => { closeTutor(); focusSprint(document.querySelector('.timer')); }), 500);
-    for (const tab of ['profile', 'settings', 'subjects', 'backup', 'cloud', 'help']) await visit(page, S + 'account menu: ' + tab, () => page.evaluate(t => { document.querySelectorAll('.modal').forEach(m => m.remove()); openAccountMenu(t); document.querySelectorAll('.modal details').forEach(d => d.open = true); }, tab), 700);
+    await visit(page, S + 'search', async () => { await page.evaluate(() => NoemaCore.studyUi.current().inspect.search()); await wait(300); await page.fill('#ns-layer .ns-sheet input', 'a'); await page.keyboard.type('xyzqq'); await wait(300); await page.fill('#ns-layer .ns-sheet input', 'the'); }, 600);
+    await visit(page, S + 'sources deck', () => page.evaluate(() => { document.querySelector('.modal')?.remove(); NoemaShell.closePops(); document.querySelector('#ns-layer .ns-sheet')?.remove(); NoemaCore.studyUi.current().app.sourcesUi.toggleDeck(true); }), 600);
+    await visit(page, S + 'a source', () => page.evaluate(id => { NoemaCore.studyUi.current().app.sourcesUi.toggleDeck(false); NoemaCore.studyUi.current().app.sourcesUi.open(id); }, info.src), 1200);
+    await visit(page, S + 'notifications', () => page.evaluate(() => { document.querySelectorAll('.modal').forEach(m => m.remove()); document.querySelector('.viewer, .srcviewer')?.remove(); document.querySelector('noema-shell-frame').dispatchEvent(new CustomEvent('shell-bell')); }), 500);
+    await visit(page, S + 'tutor', () => page.evaluate(sid => { document.querySelectorAll('.modal').forEach(m => m.remove()); NoemaTutor.current().session.openTutor({ kind: 'section', id: sid }, 'socratic'); }, info.sec[0]), 600);
+    await visit(page, S + 'tutor modes', () => page.evaluate(async () => { [...document.querySelectorAll('.drawer select, .drawer .modechips button')].forEach(x => x.click?.()); }), 400);
+    await visit(page, S + 'focus sprint', () => page.evaluate(() => { NoemaTutor.current().session.close(); NoemaCore.studyUi.current().app.toggleSprint(); }), 500);
+    for (const tab of ['profile', 'settings', 'subjects', 'backup', 'cloud', 'help']) await visit(page, S + 'account menu: ' + tab, () => page.evaluate(t => { document.querySelectorAll('.modal').forEach(m => m.remove()); openAccountMenu(t); setTimeout(() => document.querySelectorAll('main details').forEach(d => d.open = true), 300); }, tab), 900);
     await visit(page, S + 'guides', async () => { for (const g of ['gemini', 'backupFolder', 'restore', 'cloudUser', 'cloudOwner', 'github', 'claude', 'curricula', 'friends']) { await page.evaluate(g => { document.querySelectorAll('.modal').forEach(m => m.remove()); openGuide(g); }, g); await wait(150); await grab(page); } }, 200);
     const bad = { name: 'notes.json', mimeType: 'application/json', buffer: Buffer.from('{ not json') };
-    await visit(page, S + 'restore: a broken file', async () => { await page.evaluate(() => { document.querySelectorAll('.modal').forEach(m => m.remove()); openAccountMenu('backup'); document.querySelectorAll('.modal details').forEach(d => d.open = true); }); await wait(400); await page.setInputFiles('.modal input[type=file][accept=".json"]', bad); }, 1200);
-    await visit(page, S + 'import a pack: a broken file', async () => { await page.evaluate(() => { document.querySelectorAll('.modal').forEach(m => m.remove()); openAccountMenu('subjects'); document.querySelectorAll('.modal details').forEach(d => d.open = true); }); await wait(400); await page.setInputFiles('.modal input[type=file][accept=".json,.noemapack"]', bad); }, 1200);
+    await visit(page, S + 'restore: a broken file', async () => { await page.evaluate(() => { document.querySelectorAll('.modal').forEach(m => m.remove()); openAccountMenu('backup'); }); await wait(600); await page.evaluate(() => document.querySelectorAll('main details').forEach(d => d.open = true)); await page.setInputFiles('main input[type=file][accept=".json"]', bad); }, 1200);
+    await visit(page, S + 'import a pack: a broken file', async () => { await page.evaluate(() => { document.querySelectorAll('.modal').forEach(m => m.remove()); Noema.openSubjectPicker(); }); await page.waitForSelector('.noema-ovbox input[type=file]', { state: 'attached' }); await page.setInputFiles('.noema-ovbox input[type=file][accept=".zip,.json,.noemapack"]', bad); }, 1200);
+    await page.evaluate(() => document.querySelectorAll('.noema-overlay').forEach(o => o.remove()));   // the picker the import ran in
     for (const [n, o] of [['unreachable', { url: 'https://unreachable.invalid/book.pdf' }], ['text', { blob: 'Hello', name: 'a.txt' }], ['csv', { blob: 'a,b\n1,2', name: 'a.csv' }], ['unknown', { blob: '\u0000\u0001binary', name: 'a.bin' }]])
       await visit(page, S + 'viewer: ' + n, () => page.evaluate(o => { document.querySelectorAll('.modal').forEach(m => m.remove()); if (o.blob) o.blob = new Blob([o.blob]); NoemaViewer.open(o); }, o), 1500);
     await page.evaluate(() => document.querySelector('.vw-ov')?.remove());
     await visit(page, S + 'subject menu', () => page.evaluate(() => { document.querySelectorAll('.modal').forEach(m => m.remove()); location.hash = '#/'; }), 600);
     await visit(page, S + 'home buttons', () => page.evaluate(() => [...document.querySelectorAll('main .subjmenu, main .menubtn, main [aria-haspopup]')].forEach(b => b.click())), 400);
-    await visit(page, S + 'reset progress (confirm)', () => page.evaluate(() => resetProgress(() => { })), 400);
+    await visit(page, S + 'reset progress (confirm)', () => page.evaluate(() => NoemaCore.studyUi.current().inspect.reset()), 400);
     await visit(page, S + 'what is new', () => page.evaluate(() => { document.querySelectorAll('.modal').forEach(m => m.remove()); location.hash = '#/new'; }), 500);
   }
   /** The AI helpers when the provider fails: a wrong key, quota, a server error, no network. */
@@ -264,9 +264,9 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
     for (const [name, res] of [['401', { status: 401, body: '{"error":{"code":401,"message":"API key not valid. Please pass a valid API key.","status":"UNAUTHENTICATED"}}' }], ['429', { status: 429, body: '{"error":{"code":429,"message":"Resource has been exhausted","status":"RESOURCE_EXHAUSTED"}}' }], ['500', { status: 500, body: '{"error":{"code":500,"message":"Internal error","status":"INTERNAL"}}' }], ['offline', null]]) {
       await ctx.unroute('**/generativelanguage.googleapis.com/**').catch(() => { });
       await ctx.route('**/generativelanguage.googleapis.com/**', r => res ? r.fulfill({ status: res.status, contentType: 'application/json', body: res.body }) : r.abort('internetdisconnected'));
-      await visit(page, 'AI error ' + name + ': tutor', () => page.evaluate(async () => { S.settings.apiKey = 'TESTKEY'; S.settings.model = 'gemini-3-flash-preview'; S.settings.models = ['gemini-3-flash-preview']; openTutor({ kind: 'section', id: COURSE[0].sections[0].id }, 'socratic'); await sendTutor('hi').catch(() => { }); }), 1500);
-      await visit(page, 'AI error ' + name + ': grading', () => page.evaluate(async () => { closeTutor(); const ex = ALL_EX.find(e => e.type === 'free') || ALL_EX[0]; location.hash = '#/ex/' + ex.id; await new Promise(r => setTimeout(r, 400)); const ta = document.querySelector('main .ex textarea'); if (ta) { ta.value = 'my answer'; ta.dispatchEvent(new Event('input', { bubbles: true })); } document.querySelector('main .ex')?._check?.(); }), 1500);
-      await visit(page, 'AI error ' + name + ': settings test', () => page.evaluate(() => { openAccountMenu('settings'); document.querySelectorAll('.modal details').forEach(d => d.open = true); [...document.querySelectorAll('.modal button')].filter(b => /🔍|🧪/.test(b.textContent)).forEach(b => b.click()); }), 1500);
+      await visit(page, 'AI error ' + name + ': tutor', () => page.evaluate(async () => { S.settings.apiKey = 'TESTKEY'; S.settings.model = 'gemini-3-flash-preview'; S.settings.models = ['gemini-3-flash-preview']; const T = NoemaTutor.current().session; T.openTutor({ kind: 'section', id: COURSE[0].sections[0].id }, 'socratic'); await T.send('hi').catch(() => { }); }), 1500);
+      await visit(page, 'AI error ' + name + ': grading', () => page.evaluate(async () => { NoemaTutor.current().session.close(); const ex = ALL_EX.find(e => e.type === 'free') || ALL_EX[0]; location.hash = '#/ex/' + ex.id; await new Promise(r => setTimeout(r, 400)); const ta = document.querySelector('main .ex textarea'); if (ta) { ta.value = 'my answer'; ta.dispatchEvent(new Event('input', { bubbles: true })); } document.querySelector('main .ex')?._check?.(); }), 1500);
+      await visit(page, 'AI error ' + name + ': settings test', () => page.evaluate(() => { openAccountMenu('settings'); setTimeout(() => { document.querySelectorAll('main details').forEach(d => d.open = true); [...document.querySelectorAll('main button')].filter(b => /🔍|🧪/.test(b.textContent)).forEach(b => b.click()); }, 400); }), 1500);
       await page.evaluate(() => document.querySelectorAll('.modal').forEach(m => m.remove()));
     }
     await ctx.unroute('**/generativelanguage.googleapis.com/**').catch(() => { });
@@ -322,8 +322,8 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
     await page.evaluate(() => document.querySelectorAll('.noema-overlay').forEach(o => o.remove()));
     await visit(page, 'attach dialog', () => page.evaluate(id => NoemaCurMap.attachDialog(Noema.account.id, { cid: id, nid: 'a' }), cid), 1000);
     await page.evaluate(() => document.querySelectorAll('.noema-overlay').forEach(o => o.remove()));
-    await visit(page, 'review changes', () => page.evaluate(id => NoemaCurMap.reviewChanges(Noema.account.id, id), cid), 800);
-    await page.evaluate(() => document.querySelectorAll('.noema-overlay').forEach(o => o.remove()));
+    await visit(page, 'review changes', () => page.evaluate(id => Noema.app.reviewChanges(Noema.account.id, id), cid), 800);
+    await page.evaluate(() => document.querySelectorAll('.noema-overlay, noema-roadmap-review').forEach(o => o.remove()));
     await visit(page, 'new Roadmap', () => page.evaluate(() => NoemaCurMap.create(Noema.account.id, {})), 1000);
     await openDetails(page, 'new Roadmap');
     await clickAll(page, 'new Roadmap: choices', '.noema-ovbox .cm-prov, .noema-ovbox [data-prov], .noema-ovbox .seg button');
@@ -386,7 +386,7 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
     for (const hsh of ['#/ch/' + ch, '#/ch/' + ch + '/practice', '#/ch/' + ch + '/traps', '#/ch/' + ch + '/practice/filters', '#/s/' + sec, '#/cards', '#/mistakes', '#/lightning', '#/drills']) { await go(page, hsh, 800); await menus(page, hsh); }
     await visit(page, 'tutor (frame)', () => page.click('#ns-fab'), 700);
     await menus(page, 'tutor (frame)', '.drawer .ns-menubtn, .drawer .ns-modesel');
-    await visit(page, 'conversations', async () => { await page.evaluate(() => closeTutor()); await page.evaluate(async () => { const t = new Date().toISOString(); await Noema.convos.put(Noema.account.id, Noema.convos.normalize({ kind: 'tutor', mode: 'socratic', title: 'Old Chat', context: { type: 'course' }, messages: [{ role: 'user', content: 'hi', createdAt: t }, { role: 'assistant', content: 'hello', createdAt: t }] }, { account: { id: Noema.account.id, kind: 'local' }, subject: { id: SUBJ.id, title: SUBJ.title } })); NoemaShell.convos(); }); }, 900);
+    await visit(page, 'conversations', async () => { await page.evaluate(() => NoemaTutor.current().session.close()); await page.evaluate(async () => { const t = new Date().toISOString(); await Noema.convos.put(Noema.account.id, Noema.convos.normalize({ kind: 'tutor', mode: 'socratic', title: 'Old Chat', context: { type: 'course' }, messages: [{ role: 'user', content: 'hi', createdAt: t }, { role: 'assistant', content: 'hello', createdAt: t }] }, { account: { id: Noema.account.id, kind: 'local' }, subject: { id: SUBJ.id, title: SUBJ.title } })); NoemaShell.convos(); }); }, 900);
     await visit(page, 'a conversation', () => page.click('.ns-cvmain'), 500);
     await page.keyboard.press('Escape');
     // a Roadmap (as tests/shell.js makes one)
@@ -449,7 +449,7 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
   /* ======================= D. cloud: sign-in and its errors, sharing, invitations, the OAuth consent page ======================= */
   if (only('D')) {
     console.log('D. cloud (en-XA)');
-    const page = await newPage({ config: { askSubjectOnStart: true, shell: false } });
+    const page = await newPage({ config: { askSubjectOnStart: true, onboarding: false, shell: false } });
     await page.goto(BASE + '/index.html'); await page.evaluate(() => localStorage.clear()); await page.reload(); await wait(1000);
     extra.push('authorization not found', 'back in Claude');   // the emulator's own words (a server's detail; its callback page)
     extra.push('Anna', 'anna@example.com', 'Bob', 'bob@example.com', 'nobody@example.com', 'a@example.com', 'not-an-address', 'upstream unavailable', 'Heart test', 'Data engineering', 'Data engineer', 'Python basics');
@@ -473,50 +473,50 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
     await wait(1500); await page.evaluate(() => document.querySelectorAll('.noema-overlay').forEach(o => o.remove()));
     await visit(page, 'cloud: picker', () => page.evaluate(() => { Noema.openSubjectPicker(); }), 800);
     await visit(page, 'cloud: Databricks', () => page.click('.noema-chip:has-text("Databricks")'), 2500);
-    for (const tab of ['profile', 'backup', 'cloud']) await visit(page, 'cloud account menu: ' + tab, () => page.evaluate(t => { document.querySelectorAll('.modal').forEach(m => m.remove()); openAccountMenu(t); document.querySelectorAll('.modal details').forEach(d => d.open = true); }, tab), 1200);
-    await visit(page, 'cloud self-test', () => page.evaluate(() => [...document.querySelectorAll('.modal button')].find(b => b.textContent.includes('🩺'))?.click()), 3500);
-    await visit(page, 'snapshot', () => page.evaluate(() => [...document.querySelectorAll('.modal button')].find(b => b.textContent.includes('📸'))?.click()), 1500);
-    await visit(page, 'sync now', () => page.evaluate(() => [...document.querySelectorAll('.modal button')].find(b => /🔄|⇅/.test(b.textContent))?.click()), 1500);
+    for (const tab of ['profile', 'backup', 'cloud']) await visit(page, 'cloud account menu: ' + tab, () => page.evaluate(t => { document.querySelectorAll('.modal').forEach(m => m.remove()); openAccountMenu(t); setTimeout(() => document.querySelectorAll('main details').forEach(d => d.open = true), 400); }, tab), 1200);
+    await visit(page, 'cloud self-test', () => page.evaluate(() => [...document.querySelectorAll('main button, .modal button')].find(b => b.textContent.includes('🩺'))?.click()), 3500);
+    await visit(page, 'snapshot', () => page.evaluate(() => [...document.querySelectorAll('main button, .modal button')].find(b => b.textContent.includes('📸'))?.click()), 1500);
+    await visit(page, 'sync now', () => page.evaluate(() => [...document.querySelectorAll('main button, .modal button')].find(b => /🔄|⇅/.test(b.textContent))?.click()), 1500);
     await page.evaluate(() => document.querySelectorAll('.modal').forEach(m => m.remove()));
     const fx = JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/pack.json'), 'utf8'));
     await page.evaluate(async p => { p.subject = { ...p.subject, id: 'heart-test', title: 'Heart test', owner: null }; p.version = 'h1'; Object.values(p.media)[0].restricted = true; await Noema.importPack(ACCOUNT.id, p); }, fx);
     await visit(page, 'share dialog', () => page.evaluate(() => { Noema.share({ id: 'heart-test', title: 'Heart test', origin: 'imported' }); }), 1200);
-    const send = async addr => { await page.fill('.noema-ovbox input[type=email]', addr); await page.click('.noema-ovbox button:has-text("📨")'); };
+    const send = async addr => { await page.fill('.nx-share .nx-email', addr); await page.click('.nx-share .nx-send'); };
     await visit(page, 'share: bad e-mail', () => send('not-an-address'), 900);
     await visit(page, 'share: own e-mail', () => send('anna@example.com'), 900);
     await visit(page, 'share: sent', () => send('bob@example.com'), 1500);
-    await visit(page, 'share: public (warning)', () => page.click('.noema-ovbox button:has-text("🌍")'), 800);
-    await visit(page, 'share: public', async () => { await page.check('.nx-warn input'); await page.click('.noema-ovbox button:has-text("🌍")'); }, 1500);
-    await page.evaluate(() => document.querySelectorAll('.noema-overlay').forEach(o => o.remove()));
+    await visit(page, 'share: public (warning)', () => page.click('.nx-share .nx-publish'), 800);
+    await visit(page, 'share: public', async () => { await page.check('.nx-warn input'); await page.click('.nx-share .nx-publish'); }, 1500);
+    await page.evaluate(() => document.querySelectorAll('noema-dialog').forEach(d => d.close()));
     await visit(page, 'explore', () => page.evaluate(() => { Noema.explore(); }), 1500);
-    await clickAll(page, 'explore', '.noema-ovbox .seg button, .noema-ovbox [role=tab]');
-    await page.evaluate(() => document.querySelectorAll('.noema-overlay').forEach(o => o.remove()));
+    await clickAll(page, 'explore', '.ex-dlg .ex-doms details.ex-dom > summary');
+    await page.evaluate(() => document.querySelectorAll('noema-dialog').forEach(d => d.close()));
     const cid2 = await page.evaluate(() => { const C = NoemaCurriculum, acc = Noema.account.id; const c = C.blank({ goal: 'Data engineering', language: 'en', provider: 'auto', prefetch: 0 });
       c.nodes = { a: { id: 'a', title: 'Python basics', summary: 'Python basics', role: 'foundation', part: C.PART.foundation, learningGoals: [], chapters: [] } }; c.edges = []; c.goalId = 'a'; c.paths = { minimal: [], deep: ['a'] }; c.title = 'Data engineer'; c.status = 'ready'; C.save(acc, c); return c.id; });
-    await visit(page, 'Roadmap share dialog', () => page.evaluate(id => { NoemaCurMap.shareCurriculum(Noema.account.id, id); }, cid2), 1200);
-    await visit(page, 'Roadmap share: with people', () => page.click('.noema-ovbox .cm-sharepeople'), 2500);
-    await visit(page, 'Roadmap share: invite', async () => { await page.fill('.noema-ovbox input[type=email]', 'bob@example.com'); await page.keyboard.press('Enter'); await wait(300); await page.evaluate(() => [...document.querySelectorAll('.noema-ovbox input[type=email]')].pop()?.closest('div')?.querySelector('button')?.click()); }, 2000);
-    await visit(page, 'Roadmap share: bad invite', async () => { await page.fill('.noema-ovbox input[type=email]', 'not-an-address'); await page.keyboard.press('Enter'); await wait(300); await page.evaluate(() => [...document.querySelectorAll('.noema-ovbox input[type=email]')].pop()?.closest('div')?.querySelector('button')?.click()); }, 1200);
-    await visit(page, 'Roadmap share: public', () => page.click('.noema-ovbox .cm-publictoggle'), 2000);
+    await visit(page, 'Roadmap share dialog', () => page.evaluate(id => { customElements.get('noema-roadmap-share').open({ account: Noema.account.id, roadmapId: id }); }, cid2), 1200);
+    await visit(page, 'Roadmap share: with people', () => page.click('noema-roadmap-share .cm-sharepeople'), 2500);
+    await visit(page, 'Roadmap share: invite', async () => { await page.fill('noema-roadmap-share .cm-email input', 'bob@example.com'); await page.click('noema-roadmap-share .cm-invitebtn'); }, 2000);
+    await visit(page, 'Roadmap share: bad invite', async () => { await page.fill('noema-roadmap-share .cm-email input', 'not-an-address'); await page.click('noema-roadmap-share .cm-invitebtn'); }, 1200);
+    await visit(page, 'Roadmap share: public', () => page.click('noema-roadmap-share .cm-publictoggle'), 2000);
     await openDetails(page, 'Roadmap share');
+    await page.evaluate(() => document.querySelectorAll('.noema-overlay, noema-roadmap-share').forEach(o => o.remove()));
+    await visit(page, 'Roadmaps library (shared)', () => page.evaluate(() => { Noema.curricula(); }), 1500);
     await page.evaluate(() => document.querySelectorAll('.noema-overlay').forEach(o => o.remove()));
-    await visit(page, 'Roadmaps library (shared)', () => page.evaluate(() => { NoemaCurMap.library(Noema.account.id); }), 1500);
-    await page.evaluate(() => document.querySelectorAll('.noema-overlay').forEach(o => o.remove()));
-    await visit(page, 'Roadmaps others share', () => page.evaluate(() => { NoemaCurMap.exploreCurricula(Noema.account.id); }), 1500);
-    await page.evaluate(() => document.querySelectorAll('.noema-overlay').forEach(o => o.remove()));
-    await visit(page, 'the shared map', () => page.evaluate(id => NoemaCurMap.map(Noema.account.id, id), cid2), 1500);
+    await visit(page, 'Roadmaps others share', () => page.evaluate(() => { customElements.get('noema-roadmap-public').open({ account: Noema.account.id }); }), 1500);
+    await page.evaluate(() => document.querySelectorAll('.noema-overlay, noema-roadmap-public').forEach(o => o.remove()));
+    await visit(page, 'the shared map', () => page.evaluate(id => Noema.curriculumMap(id), cid2), 1500);
     await page.context().close();
     // Bob: the requests, the banner, the bell, the invitation
-    const bob = await newPage({ config: { askSubjectOnStart: true, shell: false } });
+    const bob = await newPage({ config: { askSubjectOnStart: true, onboarding: false, shell: false } });
     await bob.goto(BASE + '/index.html'); await bob.evaluate(() => localStorage.clear()); await bob.reload(); await wait(900);
     await form(bob, 'Bob signs up', signUp(bob, 'Bob', 'bob@example.com', 'secret123'));
     await wait(1500); await grab(bob, 'Bob: picker with requests');
     await visit(bob, 'Bob: Databricks', async () => { await bob.evaluate(() => { document.querySelectorAll('.noema-overlay').forEach(o => o.remove()); Noema.openSubjectPicker(); }); await wait(600); await bob.click('.noema-chip:has-text("Databricks")'); }, 2500);
-    await visit(bob, 'Bob: notifications', () => bob.evaluate(() => openNotes()), 1000);
-    await visit(bob, 'Bob: banner later', () => bob.evaluate(() => { document.querySelectorAll('.modal').forEach(m => m.remove()); [...document.querySelectorAll('.sharebar button')].pop()?.click(); }), 800);
-    await visit(bob, 'Bob: accept from the bell', () => bob.evaluate(() => { openNotes(); setTimeout(() => document.querySelector('.modal button.primary')?.click(), 300); }), 3000);
-    await visit(bob, 'Bob: Roadmaps (invitation)', () => bob.evaluate(() => { document.querySelectorAll('.modal').forEach(m => m.remove()); NoemaCurMap.library(Noema.account.id); }), 2000);
-    await visit(bob, 'Bob: join', () => bob.evaluate(() => [...document.querySelectorAll('.noema-ovbox button.primary')].find(b => b.closest('.cm-invite, .cm-inv, li, .row'))?.click()), 2500);
+    await visit(bob, 'Bob: notifications', () => bob.evaluate(() => document.querySelector('noema-shell-frame').dispatchEvent(new CustomEvent('shell-bell'))), 1000);
+    await visit(bob, 'Bob: banner later', () => bob.evaluate(() => { document.querySelectorAll('.modal').forEach(m => m.remove()); document.querySelector('.sharebar .nx-later')?.click(); }), 800);
+    await visit(bob, 'Bob: accept from the bell', () => bob.evaluate(() => { document.querySelector('noema-shell-frame').dispatchEvent(new CustomEvent('shell-bell')); setTimeout(() => document.querySelector('#ns-layer button.primary, .modal button.primary')?.click(), 300); }), 3000);
+    await visit(bob, 'Bob: Roadmaps (invitation)', () => bob.evaluate(() => { document.querySelectorAll('.modal').forEach(m => m.remove()); Noema.curricula(); }), 2000);
+    await visit(bob, 'Bob: join', () => bob.click('noema-roadmap-library .cm-join'), 2500);
     await bob.context().close();
     // the OAuth consent page of the Claude connector
     const oa = await newPage();
@@ -589,7 +589,7 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
       await shot('exercise', () => page.evaluate(() => { location.hash = '#/ex/' + ALL_EX.find(e => e.type === 'mcq').id; }));
       await shot('picture_exercise', () => page.evaluate(() => { location.hash = '#/ex/' + ALL_EX.find(e => e.type === 'img_drag').id; }));
       await shot('tutor', () => page.click('#ns-fab'));
-      await page.evaluate(() => closeTutor());
+      await page.evaluate(() => NoemaTutor.current().session.close());
       await shot('lang_home', () => page.evaluate(c => { location.hash = '#/lang/' + c; }, COURSE), 3000);
       await shot('lang_word', () => page.evaluate(c => { const { C } = NoemaLangUI.UI; location.hash = '#/lang/' + c + '/w/de/' + encodeURIComponent(Object.keys(C.lang.de.lex)[40]); }, COURSE), 1200);
       await shot('lang_grammar', () => page.evaluate(c => { location.hash = '#/lang/' + c + '/fn/fn.plural.noun/ar'; }, COURSE), 1200);

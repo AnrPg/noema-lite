@@ -55,7 +55,7 @@ beside the pack. Every copy is checked against `sha256` and kept on the device, 
 does (when the device cannot keep it, storage full, the checked copy still plays). Export takes the file from what the app holds
 (the one-file bundle's inline copy, the loader) or from beside the library pack, and names any item whose file it cannot get. **The host page reads the file; the frame never fetches anything.**
 
-`act.h5p` (what `NoemaH5P.load` accepts) may be a base64 string or `{data}`, an `ArrayBuffer` / `Uint8Array` / `Blob`, a function
+`act.h5p` (what the runtime's `load` accepts, `src/runtimes/h5p/runtime.ts`) may be a base64 string or `{data}`, an `ArrayBuffer` / `Uint8Array` / `Blob`, a function
 returning one of these (or a promise of one), or `{url, sha256}` (fetched by the host page with `credentials: 'same-origin'`).
 `act.sha256` is checked whenever it is given.
 
@@ -64,7 +64,7 @@ returning one of these (or a promise of one), or `{url, sha256}` (fetched by the
 The H5P player and the content-type libraries run in the same two frames as `html-app@1`: a wrapper document without scripts whose
 CSP says `frame-src 'none'` (it blocks self-navigation), and inside it the item, in a frame with `sandbox="allow-scripts"` (opaque
 origin `null`) and a CSP with `connect-src 'none'` and **scripts only by hash**. **No `'unsafe-inline'`, no `'unsafe-eval'`.** Every
-library script also gets the loop guard (`33_activity_guard.js`).
+library script also gets the loop guard (`src/runtimes/loop-guard.ts`, the same as html-app@1's).
 
 The host page unzips the file (`DecompressionStream('deflate-raw')`; Chrome 80+, Firefox 113+, Safari 16.4+), checks it (§5) and
 builds the frame's document: the core plus the libraries actually used (about 700 KB for MultiChoice). The content's pictures,
@@ -75,13 +75,14 @@ The last 3 packages are cached in memory by sha256, so Restart is quick.
 **The player** is h5p-standalone **3.8.2** (`engine/vendor/h5p/3.8.2/`, rebuilt and checked by `tools/fetch_h5p.py [--check]`):
 only its `frame.bundle.js` (jQuery 3 + the H5P core) and `styles/h5p.css` with the two icon fonts. Its loader is not used (it
 fetches by URL); the runtime does the loader's work in the host. `player.js` (generated) defines
-`window.NoemaH5PPlayer = {version, js, css}`; the runtime loads it with a `<script>` tag from `<engine dir>/vendor/h5p/3.8.2/`
-(`NOEMA_CONFIG.h5pPlayer` sets another URL; the one-file bundle defines it inline).
+`window.NoemaH5PPlayer = {version, js, css}`; the runtime loads it with a `<script>` tag from `host.asset('vendor/h5p/3.8.2/player.js')` (the activity core answers with the
+engine folder the page loaded `engine.js` from, or `NOEMA_ENGINE_BASE`; `NOEMA_CONFIG.h5pPlayer` sets another URL; the one-file bundle
+and the activity harness define it inline).
 
-**On by default.** The runtime registers itself whenever it is in the engine, so `ACT.caps()` names `runtime:h5p@1`, and a pack
+**On by default.** Its manifest (`src/runtimes/manifests.ts`, switch `on`) is known at start, so `ACT.caps()` names `runtime:h5p@1` before its code is loaded (when an item starts), and a pack
 whose `requires` lists it opens. `NOEMA_CONFIG.activities['h5p@1'] = false` turns it off (its items then show their fallback).
 
-### Protocol mapping (frame side, `bootstrap()` in `38_activity_h5p.js`)
+### Protocol mapping (frame side, `src/runtimes/h5p/bootstrap.ts`)
 
 | H5P | protocol |
 |---|---|
@@ -118,13 +119,13 @@ Each key must be a language the pack is read in (its own or a translation's), an
 
 ## 5. Validation
 
-The pack rules (`tools/activities.py` and `engine/packcheck.js`, same messages, compared by `tests/activities.js`): `entry` is
+The pack rules (the content checks, `src/features/content`; `tests/activities.js` holds them to their golden messages): `entry` is
 `activities/<id>/item.h5p`; `sha256`, `bytes` (≤ 100 MB) and `fallback` are required; no `html`; `h5pByLocale` keys are the pack's
 languages; then the **package rules** on the file itself (`check_h5p_packages` / `checkActivityPackages`: the file is there, sha256
 and bytes match, it is a zip, the rules below), in `make_pack.py`, `activity_lint.py`, `build.py` and the connector.
 
-The package rules: `python3 tools/h5p_check.py ITEM.h5p [--json]` (pure stdlib) and `NoemaH5P.check(files)` in the app apply **the
-same rules with the same messages** against **one allow-list**, `tools/h5p_allow.json` (the engine's copy is checked against it).
+The package rules: `check(files)` of `src/runtimes/h5p/check.ts` (`RUNTIME_CHECKS.h5p`; in the app; `activity_lint.py` and `make_pack.py` run it through `build/noema-tools.cjs`) applies **one set of
+rules and messages** against **one allow-list**, `tools/h5p_allow.json` (the engine's copy is checked against it).
 
 * Errors: no/invalid `h5p.json` or no title; the main library not an allowed **content type**; any library (transitively) missing,
   off the allow-list (machine name + major.minor), or on the refuse list (`H5P.MathDisplay` loads MathJax from a CDN,
@@ -198,7 +199,7 @@ that the fixtures start without a CSP violation and that every attack gets 0 req
 ## 9. Open items
 
 * InteractiveVideo, CoursePresentation, BranchingScenario, QuestionSet: run once with a sample with a clear licence
-  (`EXTRA_H5P=<dir> node tests/activities_h5p.js`), then mark them `tested` in `tools/h5p_allow.json` and the engine copy. For
+  (`EXTRA_H5P=<dir> node tests/activities_h5p.js`), then mark them `tested` in `tools/h5p_allow.json` (the one copy). For
   QuestionSet only the top-level `answered`/`completed` counts as the result.
 * Library assets that JavaScript asks for by URL do not load (SingleChoiceSet's sounds: 4 CSP reports, no request; the item plays
   silently). A `fetch`/XHR shim in the frame answering from the library files would fix it.

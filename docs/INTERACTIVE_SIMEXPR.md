@@ -3,9 +3,10 @@
 Formulas in a declarative simulation (`v0 * t - 0.5 * g * t^2`, `abs(err) < tol && t > 1`) are written in this small language.
 In a spec (docs/INTERACTIVE.md §12) an expression may name the spec's `consts`, its `params`, the `derived` values defined before it
 and the engine's scalar `outputs`; a function plot adds its `x.var`. The validators check every expression against exactly those names.
-Two twins agree exactly: `engine/src/35_simexpr.js` (`window.NoemaExpr`, the app and the replay worker) and
-`tools/simexpr.py` (the validator, the replay harness). They agree on the grammar, the tree, the error codes and messages,
-and on every double, bit for bit. No `eval`, no `new Function`, no third-party evaluator: a hand-written lexer and
+One implementation: `src/engines/kernel/simexpr.ts` (`NoemaCore.engines.expr`, the app, the replay worker and the
+validators: the content checks, which the connector and the Python tools run too, through `build/noema-tools.cjs`). It is held
+to the golden outputs of its former Python twin (the grammar, the tree, the error codes and messages, every double bit for bit:
+`tests/fixtures/parity/simexpr.json`). No `eval`, no `new Function`, no third-party evaluator: a hand-written lexer and
 precedence-climbing parser build a JSON-able tree, a validator checks it, and `compile` turns it into a tree of closures.
 There are no loops, so one evaluation visits each node at most once (≤ 2000 nodes, the step budget).
 ## Grammar (EBNF; whitespace is space, tab, CR, LF; anything else, including non-ASCII, is `E_CHAR`)
@@ -41,10 +42,10 @@ zero result (`round(-2.5) = -3`, `round(-0.3) = -0`). `min`/`max` give NaN if an
 last bit between browsers and C libraries. sqrt, floor, ceil, trunc, abs and % are exact in IEEE 754, so they are the same everywhere.
 
 ## Limits (`LIMITS`)
-Source ≤ 2000 characters (UTF-16 units, in both twins). Tree ≤ 2000 nodes. Depth ≤ 64: the tree's depth, counted in nodes, and the
+Source ≤ 2000 characters (UTF-16 units). Tree ≤ 2000 nodes. Depth ≤ 64: the tree's depth, counted in nodes, and the
 parser's nesting (each bracket, call argument, `?:` branch, unary operator and `^` exponent opens a level). Calls ≤ 16 arguments.
 
-## Error codes (`Error` with `.code`, `.pos` (0-based offset or −1) and the message; Python `ExprError(code, pos, msg)`)
+## Error codes (`Error` with `.code`, `.pos` (0-based offset or −1) and the message)
 | code | when |
 |---|---|
 | `E_SOURCE` / `E_TOO_LONG` / `E_EMPTY` | not a string / over 2000 characters / nothing but whitespace |
@@ -60,22 +61,21 @@ parser's nesting (each bracket, call argument, `?:` branch, unary operator and `
 
 The order is fixed: length; then lexing, left to right; then syntax and limits; then meaning (functions, arity, variables, in source order).
 
-## The tree (JSON; the same dicts in Python)
+## The tree (JSON)
 `{t:'num', v ≥ 0 finite}` · `{t:'bool', v}` · `{t:'var', name}` · `{t:'const', name:'pi'|'e'}` · `{t:'un', op:'-'|'+'|'!', a}` ·
 `{t:'bin', op, a, b}` (op: `+ - * / % ^ < <= > >= == != && ||`) · `{t:'cond', c, a, b}` · `{t:'call', fn, args:[…]}`. Every node also
 has `pos`, which is optional in a tree given from outside. A literal is never negative: `-2` is `un(-, num 2)`.
 
 ## API
-| JS (`NoemaExpr`) | Python (`tools/simexpr.py`) |
+| `NoemaExpr` | |
 |---|---|
-| `parse(src, {fns?: [names]})` → tree, throws | `parse(src, fns=None)` → dict, raises `ExprError` |
-| `check(src, {vars?: [names], fns?: [names], finite?})` → `[]` or `[{code, pos, msg}]` | `check(src, vars=None, fns=None, finite=False)` |
-| `compile(src or tree, {fns?: {name: fn}})` → `(env) => number \| boolean` | `compile(src_or_tree, fns=None)` → `callable(env)` |
-| `evaluate(src or tree, env, opts?)` | `evaluate(src_or_tree, env=None, fns=None)` → `float \| bool` |
-| `print(tree)` → canonical source, only the brackets it needs | `print_ast(tree)` |
-| `FUNCS` (frozen `{name: {fn, min, max}}`), `CONSTS`, `LIMITS` | `FUNCS` (`{name: (min, max, fn)}`), `CONSTS`, `LIMITS` |
+| `parse(src, {fns?: [names]})` | → tree, throws |
+| `check(src, {vars?: [names], fns?: [names], finite?})` | → `[]` or `[{code, pos, msg}]` |
+| `compile(src or tree, {fns?: {name: fn}})` | → `(env) => number \| boolean` |
+| `evaluate(src or tree, env, opts?)` | → `number \| boolean` |
+| `print(tree)` | → canonical source, only the brackets it needs |
+| `FUNCS` (frozen `{name: {fn, min, max}}`), `CONSTS`, `LIMITS` | |
 
 `vars` left out = names not checked; `finite` is documentation only; host functions (`fns`) are the runtime's trusted code, never
 the pack's, and the built-ins win over a host function of the same name. `parse(print(t))` is `t`; `print(parse(s))` is `s` for a
-canonical `s`. CLI: `python3 tools/simexpr.py "2*x+1" x=3` (`--batch`: JSON jobs on stdin, for the test). Tests: `node
-tests/simexpr.js [seed]`: the shared corpus `tests/fixtures/simexpr/corpus.json`, a seeded fuzz, every function, JSON trees, refusals.
+canonical `s`. Tests: `node tests/simexpr.js [seed]`: the shared corpus `tests/fixtures/simexpr/corpus.json`, a seeded fuzz, every function, JSON trees, refusals.

@@ -1,11 +1,10 @@
-# `seq@1` — DNA, RNA and protein sequences (`engine/src/48_lib_seq.js`, `NoemaLibSeq`)
+# `seq@1` — DNA, RNA and protein sequences (`src/engines/seq/seq.ts`, `NoemaLibSeq`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`) for molecular sequences, from base pairing to the tools of a
 molecular-biology bench. There is one engine with 9 **modes** (`model.mode`): `translate`, `mutate`, `divergence`, `tm`, `align`,
-`dotplot`, `digest`, `protein`, `crispr`. The Python twin is `tools/lib_seq.py` (`ID`, `check_spec`, `exprs`, `keys`). It checks and
-does not compute, and it gives the same problems (code, path, message, level) as the JS `checkSpec`. The two share one JSON constant
-`SPEC` (the tables, the sequence fields, the outputs, the enzyme names, the genetic-code ids), and the tests check that the two copies
-are identical. The tests are `node tests/lib_seq.js` (132 assertions) and `node tests/enginelib.js` (JS ↔ Python parity on
+`dotplot`, `digest`, `protein`, `crispr`. Its JSON constant
+`SPEC` (the tables, the sequence fields, the outputs, the enzyme names, the genetic-code ids) is held to the golden one of the former
+Python twin. The tests are `node tests/lib_seq.js` (132 assertions) and `node tests/enginelib.js` (the golden outputs of the former Python twin on
 `tests/fixtures/enginelib/seq.json`, 27 specs). The reference activity is `tools/activities_examples/sickle-codon`: the learner
 changes one base of the human β-globin coding sequence and looks for the sickle-cell mutation. The research behind this chapter is in
 the project's `engine-library/research/life.md` (§ seq@1).
@@ -57,7 +56,7 @@ shipped and is not needed to run the tests.
   windows. ≤ 5000 ORFs, ≤ 5000 CRISPR guides, ≤ 1000 primer binding sites. Every series ≤ 2000 values and every scene ≤ 2000 items
   (a large dot plot is pooled). The worst allowed runs take ~0.7 s together (the speed test).
 
-### 1.1 Checker codes (`checkSpec`, the same in `tools/lib_seq.py`)
+### 1.1 Checker codes (`checkSpec`)
 
 | code | when |
 |---|---|

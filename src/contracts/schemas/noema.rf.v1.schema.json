@@ -1,0 +1,383 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noema-lite.netlify.app/schemas/noema.rf.v1.schema.json",
+  "title": "noema-lite radio link (noema.rf/v1)",
+  "description": "The link run by the radio engine rf@1 (src/engines/rf/rf.ts). Units: f Hz, d and heights m, powers dBm, gains and losses dB or dBi, bandwidths Hz, bitrate b/s, times s. Human-readable spec: docs/INTERACTIVE_ENGINES.md §4. The engine's check() (twin: tools/rf.py) also tests what a schema cannot: the validity ranges of Okumura-Hata and ITU-R P.1238 (code 'range'), an obstacle beyond the receiver, walls without type or loss, LoRa bandwidths, Wi-Fi rates, sweeps whose from >= to. In a sim-spec the model is {link, bindings: [$defs.binding]} and each output ($defs.output) names a scalar or series of rf@1.",
+  "type": "object",
+  "required": ["f", "d"],
+  "properties": {
+    "format": {
+      "const": "noema.rf/v1"
+    },
+    "f": {
+      "$ref": "#/$defs/quantity",
+      "description": "> 0"
+    },
+    "d": {
+      "$ref": "#/$defs/quantity",
+      "description": "> 0"
+    },
+    "fadeMargin": {
+      "$ref": "#/$defs/quantity",
+      "description": "any finite number"
+    },
+    "tx": {
+      "type": "object",
+      "properties": {
+        "power": {
+          "$ref": "#/$defs/quantity",
+          "description": "any finite number"
+        },
+        "gain": {
+          "$ref": "#/$defs/quantity",
+          "description": "any finite number"
+        },
+        "cable": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0"
+        }
+      },
+      "additionalProperties": false
+    },
+    "rx": {
+      "type": "object",
+      "properties": {
+        "gain": {
+          "$ref": "#/$defs/quantity",
+          "description": "any finite number"
+        },
+        "cable": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0"
+        },
+        "nf": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0"
+        },
+        "bw": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0"
+        },
+        "snr": {
+          "$ref": "#/$defs/quantity",
+          "description": "any finite number"
+        },
+        "sensitivity": {
+          "$ref": "#/$defs/quantity",
+          "description": "any finite number"
+        }
+      },
+      "additionalProperties": false
+    },
+    "path": {
+      "type": "object",
+      "properties": {
+        "model": {
+          "enum": ["fspl", "two-ray", "log-distance", "hata", "indoor"]
+        },
+        "ht": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0"
+        },
+        "hr": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0"
+        },
+        "n": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0"
+        },
+        "d0": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0"
+        },
+        "sigma": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0"
+        },
+        "env": {
+          "enum": ["urban", "urban-large", "suburban", "open", "residential", "office", "commercial"]
+        },
+        "floors": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "N": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0"
+        },
+        "lf": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0"
+        },
+        "extra": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0"
+        },
+        "walls": {
+          "type": "array",
+          "maxItems": 32,
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "enum": ["drywall", "wood", "glass", "brick", "concrete", "metal"]
+              },
+              "loss": {
+                "$ref": "#/$defs/quantity",
+                "description": ">= 0"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 50
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "obstacle": {
+          "type": "object",
+          "required": ["d1", "h"],
+          "properties": {
+            "d1": {
+              "$ref": "#/$defs/quantity",
+              "description": "> 0"
+            },
+            "h": {
+              "$ref": "#/$defs/quantity",
+              "description": "any finite number"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "radio": {
+      "type": "object",
+      "properties": {
+        "mod": {
+          "enum": ["bpsk", "qpsk", "fsk", "lora", "ble", "wifi"]
+        },
+        "bitrate": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0"
+        },
+        "bw": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0"
+        },
+        "sf": {
+          "type": "integer",
+          "minimum": 7,
+          "maximum": 12
+        },
+        "cr": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "preamble": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "header": {
+          "type": "boolean"
+        },
+        "crc": {
+          "type": "boolean"
+        },
+        "ldro": {
+          "type": "boolean"
+        },
+        "payload": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "phy": {
+          "enum": ["1M", "2M"]
+        },
+        "rate": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0"
+        },
+        "interval": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0"
+        },
+        "dutyLimit": {
+          "$ref": "#/$defs/quantity",
+          "description": "0 to 1"
+        }
+      },
+      "additionalProperties": false
+    },
+    "sweep": {
+      "type": "object",
+      "required": ["from", "to"],
+      "properties": {
+        "from": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0"
+        },
+        "to": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0"
+        },
+        "points": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 2000
+        },
+        "scale": {
+          "enum": ["log", "lin"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "snrSweep": {
+      "type": "object",
+      "required": ["from", "to"],
+      "properties": {
+        "from": {
+          "$ref": "#/$defs/quantity",
+          "description": "any finite number"
+        },
+        "to": {
+          "$ref": "#/$defs/quantity",
+          "description": "any finite number"
+        },
+        "points": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 2000
+        }
+      },
+      "additionalProperties": false
+    },
+    "meta": {
+      "type": "object",
+      "description": "free notes for authors; ignored"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "quantity": {
+      "description": "a number, or a string with an SI prefix: f p n u µ m k K M meg G (\"868M\", \"125k\")",
+      "oneOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "pattern": "^\\s*[-+]?(\\d+\\.?\\d*|\\.\\d+)([eE][-+]?\\d+)?\\s*(meg|[fpnuµmkKMG])?\\s*$"
+        }
+      ]
+    },
+    "binding": {
+      "type": "object",
+      "required": ["field", "expr"],
+      "properties": {
+        "field": {
+          "enum": [
+            "f",
+            "d",
+            "fadeMargin",
+            "tx.power",
+            "tx.gain",
+            "tx.cable",
+            "rx.gain",
+            "rx.cable",
+            "rx.nf",
+            "rx.bw",
+            "rx.snr",
+            "rx.sensitivity",
+            "path.ht",
+            "path.hr",
+            "path.n",
+            "path.d0",
+            "path.sigma",
+            "path.floors",
+            "path.N",
+            "path.lf",
+            "path.extra",
+            "path.obstacle.d1",
+            "path.obstacle.h",
+            "radio.bitrate",
+            "radio.bw",
+            "radio.sf",
+            "radio.cr",
+            "radio.preamble",
+            "radio.payload",
+            "radio.rate",
+            "radio.interval",
+            "radio.dutyLimit",
+            "sweep.from",
+            "sweep.to",
+            "sweep.points",
+            "snrSweep.from",
+            "snrSweep.to",
+            "snrSweep.points"
+          ]
+        },
+        "expr": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "output": {
+      "type": "object",
+      "required": ["id", "kind"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": ["scalar", "series"]
+        },
+        "of": {
+          "enum": [
+            "airtime",
+            "ber",
+            "bitrate",
+            "clearance",
+            "crossover",
+            "d",
+            "diffraction",
+            "dutyCycle",
+            "ebn0",
+            "eirp",
+            "floorLoss",
+            "fresnel",
+            "lambda",
+            "margin",
+            "minInterval",
+            "noiseFloor",
+            "per",
+            "pl",
+            "plMedian",
+            "prx",
+            "prxMedian",
+            "range",
+            "rssi",
+            "sensitivity",
+            "shadow",
+            "snr",
+            "snrAxis",
+            "snrReq",
+            "symbolTime",
+            "valid",
+            "wallLoss"
+          ],
+          "description": "default: the id"
+        }
+      }
+    }
+  }
+}

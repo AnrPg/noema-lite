@@ -8,6 +8,7 @@
      C. the frame: the Languages tab asks first, then lists the chosen languages (each opens its course) and the courses with only them
    Usage: node tests/lang_select.js <prepared-repo-dir>   (built with tools/build.py; without playwright only part A runs) */
 const path = require('path'), fs = require('fs');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const N = require(path.join(ROOT, 'engine', 'langcore.js'));
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
@@ -51,7 +52,7 @@ console.log('A. the chosen languages in langcore');
 
 (async () => {
   let chromium; try { ({ chromium } = require(process.env.PW || 'playwright')); } catch (e) { console.log('  (playwright not installed — the browser part is skipped)'); return end(); }
-  const b = await chromium.launch(), E = [], url = 'file://' + ROOT + '/index.html';
+  const b = await chromium.launch(), E = [], url = await appUrl(ROOT);
   const ctx = await b.newContext({ viewport: { width: 1100, height: 900 } }); await ctx.route(/fonts\.(googleapis|gstatic)\.com/, r => r.fulfill({ status: 200, body: '' }));
   const p = await ctx.newPage(); p.on('pageerror', e => E.push(e.message));
   const open = async (hash = '') => { await p.goto('about:blank'); await p.goto(url + '?account=anr&subject=lang:' + COURSE + hash);
@@ -138,8 +139,8 @@ console.log('A. the chosen languages in langcore');
   await p.click('.ns-tab[data-tab="today"]'); await until(() => p.$('.ns-langgo'));
   ok(/🇸🇦 🇩🇪/.test(await p.innerText('.ns-langgo')) && !/🇨🇳/.test(await p.innerText('.ns-langgo')), 'Today: the course’s card with the chosen languages');
   await p.goto(url + '?account=anr#/lang'); await until(() => p.$('.ns-studychange'));
-  await p.click('.ns-studychange'); await until(() => p.$('.ns-sheet .noema-study'));
-  await p.click('.ns-sheet .noema-study-lang[data-lang="ar"]'); await p.click('.ns-sheet .noema-study-ok'); await until(async () => (await p.$$('.ns-studylang')).length === 1);
+  await p.click('.ns-studychange'); await until(() => p.$('.ns-studysheet .noema-study'));
+  await p.click('.ns-studysheet .noema-study-lang[data-lang="ar"]'); await p.click('.ns-studysheet .noema-study-ok'); await until(async () => (await p.$$('.ns-studylang')).length === 1);
   ok((await p.$$eval('.ns-studylang', l => l.map(x => x.dataset.lang))).join() === 'de', 'changed on the tab: German only');
   await p.click(`.ns-langitem[data-course="${COURSE}"]`); await p.waitForSelector('.lx-host .lx-main .lx-view', { timeout: 30000 }); await wait(600);
   ok(await U(() => NoemaLangUI.UI.C.languages.join()) === 'de' && await p.locator('.lx-flagchip[data-lang]').count() === 1 && await p.locator('.lx-fhome .ns-item[data-act="across"]').count() === 0,

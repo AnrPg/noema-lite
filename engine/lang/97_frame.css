@@ -18,7 +18,7 @@ body.ns-on .lx-host .lx-card{border-radius:var(--r);box-shadow:none}
 body.ns-on .lx-host .lx-progress{background:var(--line)}
 body.ns-on .lx-host .lx-progress i{background:var(--acc)}
 body.ns-on .lx-host .lx-step{color:var(--t1i)}
-body.ns-on .lx-host a{color:var(--acc)}
+body.ns-on .lx-host a{color:var(--acc-text)}
 body.ns-on .lx-host .lx-h2{font-family:var(--display)}
 /* what lies over the frame: the word card, the tutor drawer, toasts (above the tabs on phones) */
 body.ns-on .lx-pop{z-index:60;background:color-mix(in srgb,var(--ink) 35%,transparent)}
@@ -121,6 +121,8 @@ body.ns-on .lx-host :is(.lx-cmprow .tiny,.lx-textcard .tiny,.lx-lanen){display:n
 body.ns-on .lx-host .lx-fpanel :is(label.lx-check,.lx-check){display:flex;align-items:flex-start;gap:10px;margin:4px 0}
 body.ns-on .lx-host .lx-fpanel .lx-check>input{margin-top:5px;flex:none}
 body.ns-on .lx-host .lx-fpanel select{max-width:100%}
+/* a select is painted by the character, never the browser's own grey (dark: the ink would sit on it at about 2:1) */
+body.ns-on .lx-host select{background-color:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:var(--br)}
 body.ns-on .lx-host p.lx-fseg{display:inline-flex;gap:4px;padding:3px;border-radius:calc(var(--br) + 4px);background:var(--line);margin:0 0 8px}
 body.ns-on .lx-host p.lx-fseg .btn.small{background:transparent}
 body.ns-on .lx-host .lx-fpanel label.lx-check:not(:has(select)){flex-wrap:nowrap}

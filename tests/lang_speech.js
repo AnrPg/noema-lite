@@ -9,8 +9,10 @@
    “I can't listen now”, phone width, keyboard, no page errors.
    Usage: node tests/lang_speech.js [prepared-repo-dir]   (built with tools/build.py) */
 const fs = require('fs'), path = require('path'), cp = require('child_process');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const N = require(path.join(__dirname, '..', 'engine', 'langcore.js'));
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
+require('./built').ensureBuilt(ROOT);   // the generated files it reads (never committed): built first, unless tests/run_e2e.sh did
 let fails = 0, checks = 0; const ok = (c, m) => { checks++; console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
 const wait = ms => new Promise(r => setTimeout(r, ms));
 const SHOTS = process.env.SHOTS || '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
@@ -207,10 +209,10 @@ let BROWSER = null;
   if (!fs.existsSync(path.join(ROOT, 'engine', 'langui.js'))) { console.log('  (not built: run tools/build.py)'); fails++; return finish(); }
   console.log('— the browser (speech services mocked)');
   const browser = BROWSER = await chromium.launch();
-  const newCtx = async (opts, mock) => { const ctx = await browser.newContext(opts); await ctx.route(/^https?:\/\//, r => r.fulfill({ status: 200, body: '' })); await ctx.addInitScript(mockSpeech, mock); return ctx; };
+  const newCtx = async (opts, mock) => { const ctx = await browser.newContext(opts); await ctx.route(/^https?:\/\/(?!127\.0\.0\.1[:/])/, r => r.fulfill({ status: 200, body: '' })); await ctx.addInitScript(mockSpeech, mock); return ctx; };
   const ctx = await newCtx({ viewport: { width: 1280, height: 900 } }, { voices: VOICES, sr: true });
   const page = await ctx.newPage(); const E = []; page.on('pageerror', e => E.push(e.message));
-  const url = 'file://' + ROOT + '/index.html', open = async (hash, ms = 700) => { await page.goto(url + '?account=anr&subject=' + SUBJ + hash); await wait(ms); };
+  const url = await appUrl(ROOT), open = async (hash, ms = 700) => { await page.goto(url + '?account=anr&subject=' + SUBJ + hash); await wait(ms); };
   const spoken = () => page.evaluate(() => window.__spoken.slice());
   await page.goto(url); await page.evaluate(() => localStorage.clear());
   await open('', 1200);

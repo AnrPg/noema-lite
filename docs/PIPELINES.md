@@ -9,8 +9,8 @@ the same way by Claude (the skill), the connector and the tests:
 | `tools/pipelines/steps.json` | every step: title, what to do, `needs`, what it `produces`, its `check`, its `doc`, its `gate` |
 | `tools/pipelines/<id>.json` | one flow (`noema.pipeline/v1`): its steps in order and when it applies |
 | `tools/pipeline.py` | detect the flow, record a run (`run.json`), say the next step, run a step's check |
-| `tools/pack_rules.json` → `quality` | the quality rules the `map`, `write`, `blind_solve`, `review` and `checks` steps enforce (§4) |
-| `tools/pack_quality.py`, `engine/packcheck.js` | the same quality checker in Python (skill, build) and JS (app, connector); `tests/pack_rules.js` compares them |
+| `src/features/content/domain/rules.ts` → `QUALITY` | the quality rules the `map`, `write`, `blind_solve`, `review` and `checks` steps enforce (§4) |
+| `src/features/content/domain/quality.ts` | the quality checker: one source for the app (`NoemaCore.content`), the connector and — through `build/noema-tools.cjs` (`tools/noema_core.py`) — the skill and the build; `tests/pack_rules.js` holds it to its golden issues |
 | MCP `noema_pipeline` | the same flows and steps through the connector (detect / steps / flows), for Claude without the skill |
 
 The skill ships `scripts/pipeline.py`, `scripts/pipelines/*.json` and this file as `references/PIPELINES.md`.
@@ -140,7 +140,7 @@ core, think about splitting the node.
 
 ## 4b. Languages: translations and 文A bridges (every new pack)
 
-`tools/pack_rules.json` → `languages` (copied into `engine/packcheck.js` as `LANGS`). Every pack with
+`src/features/content/domain/rules.ts` → `LANGUAGES` (`NoemaCore.content.LANGS`; the Python tools read it through the bridge: `noema_core.rules()`). Every pack with
 `subject.authoring.rules` ≥ 2 ends its flow with:
 
 | Pack language | Full translations | 文A bridges (every pair: language read → native) |
@@ -159,7 +159,7 @@ The order matters: **translations first, then the bridges** — a translation's 
 - **A translation** is the whole pack in that language — every chapter with only the words changed (terms in brackets
   too): same ids, sections, blocks, exercises, cards, playbooks, answers and code — **and the subject's name**: its title,
   app title, description, search examples, hero and tutor (`subject.i18n.<locale>`; the translation file carries it as
-  `"subject"`, so the pack's card, title and tagline are in that language) (`checkTranslation` in `engine/packcheck.js`, `validate.py --source`). Each is its own file
+  `"subject"`, so the pack's card, title and tagline are in that language) (`checkTranslation` of the content checks, `validate.py --source`). Each is its own file
   (`noema-translation`, `<id>.tr.<locale>.json`; docs/i18n.md §10), so a learner downloads only their language. The
   connector stores it beside the pack (`packs/<id>.tr.<locale>.json`), the library as `tr.<locale>.js`; shared and
   public copies carry their translations inline.
@@ -176,7 +176,7 @@ The order matters: **translations first, then the bridges** — a translation's 
 
 ## 5. Tests
 
-- `tests/pack_rules.js`: the Python and JS checkers give the same messages on the same chapters; strictness; the
+- `tests/pack_rules.js`: the checker gives the golden messages on the same chapters; `validate.py` through the bridge; strictness; the
   connector's refusal.
 - `tests/pipelines.py`: every flow and step is consistent, every command exists, `detect`, flow 4 end to end in a
   temporary folder with the scripts as the skill ships them, and a blocked upload (`defer`, `next`, `pending`).

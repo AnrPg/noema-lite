@@ -82,7 +82,7 @@ function run() {
     }
   }
   // keys no code uses (warning): the key, or its part after the component prefix, must appear as a string somewhere
-  const src = ['engine', 'cloud'].flatMap(d => walk(path.join(ROOT, d))).filter(f => /\.(m?js|html)$/.test(f) && !/engine\/(i18n|vendor)\//.test(f) && !/engine\/(engine|langui|authoring)\.js$/.test(f)).map(f => fs.readFileSync(f, 'utf8')).join('\n');
+  const src = ['engine', 'cloud', 'src'].flatMap(d => walk(path.join(ROOT, d))).filter(f => /\.(m?js|html|ts)$/.test(f) && !/engine\/(i18n|vendor)\//.test(f) && !/engine\/(engine|langui|authoring)\.js$/.test(f)).map(f => fs.readFileSync(f, 'utf8')).join('\n');
   // keys built at run time ('sh.dom_' + id …) are listed per component in i18n/<component>/dynamic_keys.txt (one key or prefix* per line)
   const dyn = Object.keys(cats).flatMap(c => { try { return fs.readFileSync(path.join(ROOT, 'i18n', c, 'dynamic_keys.txt'), 'utf8').split('\n').map(s => s.replace(/#.*/, '').trim()).filter(Boolean); } catch (e) { return []; } });
   for (const k of Object.keys(enAll)) {

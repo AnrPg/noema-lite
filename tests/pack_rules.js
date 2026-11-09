@@ -1,16 +1,17 @@
-// The pack rules (tools/pack_rules.json): one file for Python (validate.py + pack_quality.py / make_pack.py / build.py) and JS
-// (engine/packcheck.js RULES + QUALITY: app, Gemini generator, connector). 'rules': every exercise type, difficulty and focus tag
-// >= 3 per chapter (authoring.minPerKind). 'quality': the full rules of packs with authoring.rules >= 2 — both checkers must give
-// exactly the same issues on the same chapters (docs/PIPELINES.md §4).
+// The pack rules (src/features/content/domain/rules.ts, CONTENT_SPEC.md): one source for the app, the Gemini generator, the
+// connector and the Python tools (validate.py, make_pack.py, build.py through build/noema-tools.cjs). 'rules': every exercise type,
+// difficulty and focus tag >= 3 per chapter (authoring.minPerKind). 'quality': the full rules of packs with authoring.rules >= 2 —
+// the checker gives the golden issues of the former Python twin (tools/pack_quality.py, tests/fixtures/parity/pack_rules.json) on
+// the same chapters (docs/PIPELINES.md §4).
 //   node tests/pack_rules.js
 const fs = require('fs'), path = require('path'), os = require('os'), { execFileSync } = require('child_process');
 const ROOT = path.join(__dirname, '..');
-require(path.join(ROOT, 'engine', 'packcheck.js'));
-const P = globalThis.NoemaPackCheck;
+const P = require('./engines.cjs').content();   // the content checks (build/noema-tools.cjs), as the app's NoemaCore.content
+const GOLDEN = require('./golden.cjs')('pack_rules')('quality');
 let n = 0; const ok = (c, m) => { if (!c) { console.error('✗ ' + m); process.exit(1); } n++; console.log('✓ ' + m); };
 
-const file = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'pack_rules.json'), 'utf8'));
-ok(JSON.stringify(file.rules) === JSON.stringify(P.RULES), 'engine/packcheck.js RULES is exactly tools/pack_rules.json "rules"');
+const file = P.PACK_RULES;
+ok(file.rules === P.RULES && file.quality === P.QUALITY && file.languages === P.LANGS, 'PACK_RULES is the one table of RULES, QUALITY and LANGS');
 ok(P.RULES.every(r => /^[a-z]+\.[a-z]+$/.test(r.id) && r.min >= 1 && ['type', 'difficulty', 'tags'].includes(r.field)), 'every rule has an id, a field and a minimum');
 const pics = P.RULES.find(r => r.id === 'balance.type').features.pictures;
 ok(pics.length === 7 && pics.every(t => P.TYPES.has(t)), 'the 7 picture types are required only when the chapter has a picture');
@@ -38,7 +39,7 @@ ok(!P.checkPack(pack(null)).errors.some(e => e.includes('[balance')) && P.checkP
 ok(!P.checkPack(pack(0)).warnings.some(w => w.includes('[balance')), 'checkPack: minPerKind 0 turns the rules off');
 ok(P.checkPack(pack(null), null, { balance: 3 }).errors.some(e => e.includes('[balance')), 'checkPack: { balance } forces errors (Gemini generator, curriculum steps in the connector)');
 
-// validate.py reads the same file: --balance → errors, --balance-warn → warnings, --features
+// validate.py (the bridge) gives the same rules: --balance → errors, --balance-warn → warnings, --features
 const td = fs.mkdtempSync(path.join(os.tmpdir(), 'rules-'));
 const ch = { id: 'ch01', num: 1, title: 'T', subtitle: 'S', emoji: '📘', sourcePages: 'x', mantra: 'm', objectives: ['o'], sections: [{ id: 'ch01-s01', title: 'S', blocks: [{ t: 'p', text: 'a' }, { t: 'p', text: 'b' }, { t: 'p', text: 'c' }] }], debug: [], pitfalls: [], flashcards: [],
   exercises: short.exercises.map(e => ({ ...e, q: 'Q?', explain: 'Because.', ...({ mcq: { options: ['a', 'b'], answer: 0 }, odd: { options: ['a', 'b', 'c', 'd'], answer: 0 }, tf: { answer: true }, order: { items: ['a', 'b', 'c'] }, match: { pairs: [['a', '1'], ['b', '2'], ['c', '3']] }, bucket: { buckets: ['x', 'y'], items: [0, 1, 0, 1].map((b, i) => ({ text: 't' + i, bucket: b })) }, cloze: { text: 'a [[b]] c' }, scenario: { steps: [{ prompt: 'p', options: [{ text: 'a', ok: true, fb: 'f' }, { text: 'b', ok: false, fb: 'g' }] }] }, free: { model: 'm', rubric: ['r'] } })[e.type] })) };
@@ -54,8 +55,7 @@ r = V();
 ok(r.code === 0 && !/balance/.test(r.out), 'validate.py without --balance: no balance check (library packs made before the rule)');
 
 // ---------- quality (authoring.rules >= 2) ----------
-ok(JSON.stringify(file.quality) === JSON.stringify(P.QUALITY), 'engine/packcheck.js QUALITY is exactly tools/pack_rules.json "quality"');
-ok(JSON.stringify(file.quality.vocab.types) === JSON.stringify([...P.TYPES].sort()), 'quality.vocab.types are the exercise types the engine knows (packcheck.js TYPES)');
+ok(JSON.stringify(file.quality.vocab.types) === JSON.stringify([...P.TYPES].sort()), 'quality.vocab.types are the exercise types the engine knows (TYPES)');
 const QV = file.quality.vocab, T9 = ['mcq', 'tf', 'odd', 'order', 'match', 'bucket', 'cloze', 'scenario', 'free'], TG6 = ['concept', 'pitfall', 'debug', 'exam', 'interview', 'compare'];
 const M6 = QV.modes.slice(0, 6), why = o => o.map((x, i) => `Option ${i + 1} is ${i ? 'wrong because it mixes up the cause' : 'right because it follows from the rule'}.`);
 const EXPL = 'The rule holds because the force falls with the square of the distance. The tempting answer forgets the square and halves it.';
@@ -82,11 +82,9 @@ function goodQ() {
     review: { format: 'noema.review/v1', chapter: 'ch01', rubric: learnables.slice(0, 15).map(l => ({ lr: l.id, ok: true })), blind: { solved: 40, mismatches: [{ id: 'ch01-e003', fixed: true }] } } };
 }
 const qd = fs.mkdtempSync(path.join(os.tmpdir(), 'quality-'));
-const PY = ch => { const f = path.join(qd, 'c.json'); fs.writeFileSync(f, JSON.stringify(ch));
-  return JSON.parse(execFileSync('python3', ['-c', `import json,sys; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); from pack_quality import check_quality
-print(json.dumps([[l, r, m] for l, r, m in check_quality(json.load(open(sys.argv[1], encoding="utf-8")), set())]))`, f], { encoding: 'utf8', env: { ...process.env, PYTHONPATH: path.join(ROOT, 'tools') } })); };
-const same = (name, ch) => { const js = P.checkQuality(ch, {}).map(i => [i.level, i.rule, i.msg]), py = PY(ch);
-  ok(JSON.stringify(js) === JSON.stringify(py), `${name}: Python and JS give the same issues (${js.length})${JSON.stringify(js) === JSON.stringify(py) ? '' : '\n   JS ' + JSON.stringify(js) + '\n   PY ' + JSON.stringify(py)}`); return js; };
+let qi = 0;   // the golden answers, one per call of same() in this order
+const same = (name, ch) => { const js = P.checkQuality(ch, {}).map(i => [i.level, i.rule, i.msg]), py = GOLDEN[qi++];
+  ok(JSON.stringify(js) === JSON.stringify(py), `${name}: the golden issues (${js.length})${JSON.stringify(js) === JSON.stringify(py) ? '' : '\n   JS     ' + JSON.stringify(js) + '\n   golden ' + JSON.stringify(py)}`); return js; };
 const g = goodQ();
 ok(same('a chapter that meets every quality rule', g).length === 0, 'a chapter that meets every quality rule has no issues');
 const mut = f => { const c = JSON.parse(JSON.stringify(g)); f(c); return c; };
@@ -146,14 +144,13 @@ ok(r.code === 1 && /ERROR: \[self\.contained\] ch01-e005: “Q14”/.test(r.out)
 r = VQ('--quality', 'warn');
 ok(r.code === 0 && /WARN: \[self\.contained\]/.test(r.out), 'validate.py --quality warn: a warning only');
 fs.rmSync(qd, { recursive: true, force: true });
-// the languages every new pack gets (pack_rules.json "languages", docs/PIPELINES.md §4b) and the translation files
-ok(JSON.stringify(file.languages) === JSON.stringify(P.LANGS), 'engine/packcheck.js LANGS is exactly tools/pack_rules.json "languages"');
+// the languages every new pack gets (PACK_RULES.languages, docs/PIPELINES.md §4b) and the translation files
 const RL = P.requiredLocales;
 ok(JSON.stringify({ translations: RL('en').translations, bridges: RL('en').bridges }) === JSON.stringify({ translations: ['el', 'ru', 'de', 'fr'], bridges: ['el', 'ru', 'ar', 'de', 'fr'] }) && JSON.stringify(RL('el-GR').translations) === '["en","ru","de","fr"]' && JSON.stringify(RL('ar').translations) === '["en","el","ru","de","fr"]' && JSON.stringify(RL('de-AT').translations) === '["en","el","ru","fr"]' && RL('fr').bridges.length === 5 && RL('it').translations.length === 5 && RL('it').bridges.length === 6,
   'requiredLocales: en, el, ru, de, fr translations and en, el, ru, ar, de, fr bridges, minus the pack\'s own language');
 const pairs = RL('en').bridgePairs.map(x => x.source + '>' + x.native);
 ok(pairs.length === 25 && new Set(pairs).size === 25 && pairs.slice(0, 5).join() === 'en>el,en>ru,en>ar,en>de,en>fr' && ['de>fr', 'fr>de', 'de>ar', 'fr>el', 'ru>fr'].every(x => pairs.includes(x)) && !pairs.some(x => x.split('>')[0] === x.split('>')[1] || x.startsWith('ar>')) && RL('el').bridgePairs.length === 25 && RL('ar').bridgePairs.length === 30 && RL('it').bridgePairs.length === 31,
-  'bridge pairs: from the pack\'s own language and from each translation, into every bridge language but the one read (pack_rules.json "bridgesFrom")');
+  'bridge pairs: from the pack\'s own language and from each translation, into every bridge language but the one read (PACK_RULES.languages.bridgesFrom)');
 {
   const src = { id: 'ch01', sections: [{ id: 'ch01-s01', blocks: [{ t: 'p', text: 'Hello' }, { t: 'code', lang: 'python', code: 'print(1)' }] }], exercises: [{ id: 'ch01-e001', type: 'mcq', section: 'ch01-s01', options: ['a', 'b'], answer: 0 }], flashcards: [], debug: [] };
   const pk = { subject: { id: 'tiny', language: 'en' }, version: 'v1', chapters: [src, { id: 'ch02', sections: [], exercises: [] }] };
@@ -176,4 +173,5 @@ ok(pairs.length === 25 && new Set(pairs).size === 25 && pairs.slice(0, 5).join()
   fs.rmSync(tdir, { recursive: true, force: true });
 }
 fs.rmSync(td, { recursive: true, force: true });
+ok(qi === GOLDEN.length, `a golden answer for each of the ${GOLDEN.length} quality cases`);
 console.log(`\n${n} checks passed`);

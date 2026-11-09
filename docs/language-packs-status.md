@@ -1,7 +1,7 @@
 # D19 — the English master as a facade: parity and lint (status 2026-10-11)
 
 Course `library/languages/polyglot-semitic-zh-de` (with the shared `_phenomena/` and `_typology/`), after the content
-agents' rewrite (D19 + R1–R3). Contract: `docs/language-packs.md`; registry: `tools/schemas/noema.langfacade.fields.json`; tool:
+agents' rewrite (D19 + R1–R3). Contract: `docs/language-packs.md`; registry: `src/contracts/schemas/noema.langfacade.fields.json`; tool:
 `tools/lang_facade.py`. Regenerate everything below with
 
 ```

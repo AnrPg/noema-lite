@@ -1,4 +1,4 @@
-/* field@1 (engine/src/47_lib_field.js, docs/library/field.md) against exact and published values:
+/* field@1 (src/engines/field/field.ts, docs/library/field.md) against exact and published values:
    1. heat: the Gaussian kernel (Crank–Nicolson, FTCS at the auto step, BTCS, ADI in 2-D), the decaying sine mode, conservation
       under Neumann walls, the FTCS instability beyond r = ½ (von Neumann), Robin cooling to its steady profile, sources, obstacles,
       the 9-point Laplacian;
@@ -9,15 +9,17 @@
    4. Laplace in a square (the centre is ¼ by superposition), SOR / Gauss–Seidel / Jacobi iteration counts;
    5. cellular automata: rule 90 (Sierpiński: population 2^popcount(t)), rule 30 (Wolfram 1983, OEIS A070952), the Life glider,
       the abelian sandpile (Bak, Tang & Wiesenfeld 1987; Dhar 1990: sync = async), forest fire, Greenberg–Hastings;
-   6. events, interrupts, probes, codes, the checker (and its Python twin), the sim adapter, the stepper, the Worker source, speed,
+   6. events, interrupts, probes, codes, the checker (and the golden outputs of its former Python twin), the sim adapter, the stepper, the Worker source, speed,
       and the reference activity heat-stability (its tests.json).
    Usage: node tests/lib_field.js */
 'use strict';
-const path = require('path'), fs = require('fs'), vm = require('vm'), { execFileSync } = require('child_process');
+const path = require('path'), fs = require('fs'), vm = require('vm');
+const want = require('./golden.cjs')('lib_field');   // the golden outputs of the former Python twin (tests/golden.cjs)
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
 globalThis.window = globalThis;
-for (const f of ['35_simexpr.js', '46_lib_core.js', '46_lib_simkit.js', '46_lib_space.js', '47_lib_field.js']) require(path.join(SRC, f));
-const F = globalThis.NoemaLibField, C = globalThis.NoemaLibCore;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaExpr = ENGINES.kernel('expr'), NoemaLibCore = ENGINES.kernel('core'), NoemaLibField = ENGINES.mod('field@1');
+const F = NoemaLibField, C = NoemaLibCore;
 let n = 0, fails = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 const near = (a, b, tol) => Number.isFinite(a) && Math.abs(a - b) <= tol;
@@ -167,6 +169,15 @@ const KERN = 'sqrt(0.0025/(0.0025+2*0.1*t))*exp(-x^2/(2*(0.0025+2*0.1*t)))';
   ok(near(e2.out.th, lo, 2e-3) && e2.out.fl === 1, `the time the middle of a rod heated at one end reaches ¼: ${e2.out.th.toFixed(4)} (the Fourier series ${lo.toFixed(4)}), the run stops there (code stopped)`);
   const pr = run({ dim: 2, equation: 'heat', grid: { nx: 21, ny: 21 }, D: 1, init: 'x', bc: { all: { type: 'neumann', value: 0 } }, probes: [{ id: 'a', at: 'area', x0: 0, x1: 0.5, y0: 0, y1: 1, stat: 'mean' }, { id: 'l', at: 'line', x0: 0, x1: 1, y0: 0.5, y1: 0.5, stat: 'max' }], tEnd: 0.001 }, [S('a', 'probe', { probe: 'a', t: 0 }), S('l', 'probe', { probe: 'l', t: 0 })]);
   ok(near(pr.out.a, 0.25, 0.02) && near(pr.out.l, 1, 1e-9), `probes: an area mean of u = x over the left half ≈ ¼ (${pr.out.a.toFixed(4)}), a line max 1`);
+  // the prepared model is shared by every run of an instance (makeEngine prepares once): a run must not change it
+  {
+    const ps = spec({ equation: 'heat', grid: { nx: 41 }, D: 1, init: 'sin(pi*x)', tEnd: 0.05, bc: { all: { type: 'dirichlet', value: 0 } },
+      probes: [{ id: 'mid', at: 'line', x0: 0.4, x1: 0.6, stat: 'mean' }, { id: 'pt', at: 'point', x: 0.5 }, { id: 'ar', at: 'area', x0: 0.2, x1: 0.8 }] },
+      [S('l', 'probe', { probe: 'mid' }), S('p', 'probe', { probe: 'pt' }), S('a', 'probe', { probe: 'ar' })]);
+    const M = F.prepare(ps), r1 = F.run(ps, {}, { seed: 1, prepared: M }), r2 = F.run(ps, {}, { seed: 1, prepared: M }), r3 = F.run(ps, {}, { seed: 1 });
+    ok(['l', 'p', 'a'].every(k => Number.isFinite(r1.out[k]) && r2.out[k] === r1.out[k] && r3.out[k] === r1.out[k]),
+      `the same prepared model run twice: the line, point and area probes give the same values (${r1.out.l.toFixed(6)}, ${r1.out.p.toFixed(6)}, ${r1.out.a.toFixed(6)}) as a run that prepares its own`);
+  }
   const bud = run({ dim: 2, equation: 'heat', grid: { nx: 200, ny: 200 }, D: 1, init: '0', tEnd: 10 }, [S('f', 'final', { stat: 'max' }), S('fl', 'flag', { code: 'budget' })]);
   ok(codes(bud).includes('budget') && Number.isNaN(bud.out.f), 'a run beyond the work budget (10⁸ node-steps): code budget, NaN — never a hang');
   const nan = run({ equation: 'heat', grid: { nx: 20 }, D: 1, init: 'sqrt(-1)', tEnd: 0.01 }, [S('f', 'final', { stat: 'max' })]);
@@ -175,7 +186,7 @@ const KERN = 'sqrt(0.0025/(0.0025+2*0.1*t))*exp(-x^2/(2*(0.0025+2*0.1*t)))';
   ok(cfl.out.c > 1 && codes(cfl).some(c => c === 'cfl' || c === 'unstable') && Number.isNaN(cfl.out.f), `C = ${cfl.out.c.toFixed(2)} > 1: the CFL condition is broken (code cfl/unstable)`);
 }
 
-// ---------- 7. the checker and its Python twin ----------
+// ---------- 7. the checker and the golden outputs of its former Python twin ----------
 {
   const P = s => F.checkSpec(s).filter(p => p.level === 'error').map(p => p.code + ' ' + p.path);
   ok(P(spec({ equation: 'heat', grid: { nx: 20 } }, [S('x', 'r')])).includes('value model.D') && P(spec({ equation: 'heat', grid: { nx: 20 }, D: 1 }, [S('x', 'r')])).includes('value model.tEnd'), 'heat needs D and tEnd');
@@ -186,16 +197,11 @@ const KERN = 'sqrt(0.0025/(0.0025+2*0.1*t))*exp(-x^2/(2*(0.0025+2*0.1*t)))';
   ok(P(spec({ equation: 'wave', grid: { nx: 20 }, c: 1, tEnd: 1 }, [S('a', 'turing'), Sc('h', 'heatmap')])).length === 2, 'outputs of another equation: Turing on a wave, a heat map on a line');
   const fx = JSON.parse(fs.readFileSync(path.join(ROOT, 'tests', 'fixtures', 'enginelib', 'field.json'), 'utf8')).specs;
   const js = fx.map(s => { const p = F.checkSpec(s), bad = p.some(q => q.level === 'error'); return { p, x: bad ? null : F.exprs(s), k: bad ? null : F.keys(s) }; });
-  const py = JSON.parse(execFileSync('python3', ['-c', `import json,sys,lib_field as M
-out=[]
-for s in json.loads(sys.stdin.read()):
-    p=M.check_spec(s); bad=any(q['level']=='error' for q in p)
-    out.append({'p':p,'x':None if bad else [list(t) for t in M.exprs(s)],'k':None if bad else [list(t) for t in M.keys(s)]})
-print(json.dumps(out))`], { cwd: path.join(ROOT, 'tools'), input: JSON.stringify(fx), encoding: 'utf8' }));
+  const py = want('check', fx, js);
   const same = js.filter((r, i) => JSON.stringify(r) === JSON.stringify(py[i])).length;
-  ok(fx.length >= 20 && same === fx.length && js.some(r => r.x) && js.some(r => !r.x), `tools/lib_field.py agrees with the JS checker on ${same}/${fx.length} fixture specs (problems, expressions, keys; good and bad)`);
-  const pyc = JSON.parse(execFileSync('python3', ['-c', 'import json,lib_field as M; print(json.dumps([M.CODES,M.SERIES,M.SCALARS,M.SCENES,M.EQUATIONS,M.METHODS,M.CA_RULES,M.KINETICS]))'], { cwd: path.join(ROOT, 'tools'), encoding: 'utf8' }));
-  ok(JSON.stringify(pyc) === JSON.stringify([F.CODES, F.SERIES, F.SCALARS, F.SCENES, F.EQUATIONS, F.METHODS, F.CA_RULES, F.KINETICS]), 'the Python twin has the same codes, outputs, equations, methods, rules and kinetics');
+  ok(fx.length >= 20 && same === fx.length && js.some(r => r.x) && js.some(r => !r.x), `the JS checker gives the golden outputs of the former twin tools/lib_field.py on ${same}/${fx.length} fixture specs (problems, expressions, keys; good and bad)`);
+  const pyc = want('tables', undefined, [F.CODES, F.SERIES, F.SCALARS, F.SCENES, F.EQUATIONS, F.METHODS, F.CA_RULES, F.KINETICS]);
+  ok(JSON.stringify(pyc) === JSON.stringify([F.CODES, F.SERIES, F.SCALARS, F.SCENES, F.EQUATIONS, F.METHODS, F.CA_RULES, F.KINETICS]), 'the same, as the golden tables of the former Python twin: codes, outputs, equations, methods, rules and kinetics');
   // every good fixture runs, fast enough, with outputs of the declared kinds
   let allOk = true, worst = 0;
   fx.forEach(s => { if (F.checkSpec(s).some(p => p.level === 'error')) return; const env = {}; for (const p of s.params || []) env[p.id] = p.default; const [r, t] = ms(() => F.run(s, env, { seed: 1 })); worst = Math.max(worst, t); for (const o of s.outputs) { const v = r.out[o.id]; if (o.kind === 'series' ? !Array.isArray(v) || v.length > 2000 : o.kind === 'scene' ? !v || !Array.isArray(v.items) || v.items.length > 2000 || !v.items.every(it => C.ROLES.includes(it.c || 'base')) : typeof v !== 'number') allOk = false; } });

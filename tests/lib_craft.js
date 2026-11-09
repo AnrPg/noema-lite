@@ -1,17 +1,17 @@
 /* craft@1 — handcrafts (docs/library/craft.md): published reference values (source in each message), the edge cases and their
-   codes, the checker's codes, the sim adapter, the Worker source in a fresh context, speed, and the twin data of tools/lib_craft.py.
+   codes, the checker's codes, the sim adapter, the Worker source in a fresh context, speed, and the golden data of the former twin tools/lib_craft.py.
    Run: node tests/lib_craft.js */
 'use strict';
-const path = require('path'), fs = require('fs'), vm = require('vm'), { execFileSync } = require('child_process');
+const path = require('path'), fs = require('fs'), vm = require('vm');
+const want = require('./golden.cjs')('lib_craft');   // the golden outputs of the former Python twin (tests/golden.cjs)
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
 let fails = 0, n = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 const near = (a, b, tol) => Number.isFinite(a) && Math.abs(a - b) <= tol;
 globalThis.window = globalThis;
-require(path.join(SRC, '35_simexpr.js'));
-require(path.join(SRC, '46_lib_core.js'));
-require(path.join(SRC, '48_lib_craft.js'));
-const M = globalThis.NoemaLibCraft;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaLibCraft = ENGINES.mod('craft@1');
+const M = NoemaLibCraft;
 const X = (model, env) => M.compute(model, env || {}, null);   // → {scalars, series, scenes, issues}
 const S = (model, env) => X(model, env).scalars;
 const iss = (model, code) => X(model).issues[code] || 0;
@@ -331,7 +331,7 @@ const eqA = (a, b) => JSON.stringify(a) === JSON.stringify(b);
   ok(eqA(M.keys({}), []), 'craft@1 names no string keys');
 }
 
-// ===== the adapter, the Worker, speed, the Python twin's data =====
+// ===== the adapter, the Worker, speed, the golden data of the former Python twin =====
 {
   const spec = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'activities_examples', 'satin-move', 'spec.json'), 'utf8'));
   ok(M.checkSpec(spec).filter(p => p.level === 'error').length === 0, 'the reference activity satin-move has a valid spec');
@@ -354,8 +354,8 @@ const eqA = (a, b) => JSON.stringify(a) === JSON.stringify(b);
   const worst = Number(process.hrtime.bigint() - t0) / 1e6;
   ok(worst < 2000 && rb.f === 31 && rb.d.items.length <= 2000, `the worst allowed runs (400 × 400 drawdown, 16-piece exact cut list, 6 × 6 p6m) < 2 s (${worst.toFixed(0)} ms)`);
   ok(Number.isNaN(M.engine.create({ ...big, model: { mode: 'weave', structure: { type: 'twill', up: 'q', down: 2 } } }).run({}).f), 'a number that does not compute gives NaN, never throws');
-  const pyData = JSON.parse(execFileSync('python3', ['-c', 'import json,lib_craft as M; print(json.dumps(M.DATA))'], { cwd: path.join(ROOT, 'tools'), encoding: 'utf8' }));
-  ok(JSON.stringify(pyData) === JSON.stringify(M.DATA), 'tools/lib_craft.py carries the same DATA (schema, outputs, names) as the JS module');
+  const pyData = want('data', undefined, M.DATA);
+  ok(JSON.stringify(pyData) === JSON.stringify(M.DATA), 'the golden tables of the former twin tools/lib_craft.py hold the same DATA (schema, outputs, names) as the JS module');
 }
 
 console.log(`\n${n - fails}/${n} passed`);

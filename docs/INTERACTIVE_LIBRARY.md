@@ -24,37 +24,38 @@ the limits and edge cases, the reference values its tests assert).
 
 | file | what |
 |---|---|
-| `engine/src/46_lib_core.js` | `NoemaLibCore`: the model checker (a table walked with fixed codes and messages), `numx` numbers, seeded randomness, statistics, thinning, scenes, the adapter `makeEngine`, the Worker source |
-| `engine/src/47_lib_<name>.js`, `48_lib_<name>.js` | one engine each: `window.NoemaLib<Name>` |
-| `engine/src/46_lib_schema.js` | `NoemaLibSchema`: turns an engine's `table` into the JSON Schema of its activities, from which the activity author (`#/author`) builds the form (§1.5) |
-| `engine/src/49_lib_catalog.js` | `NoemaEngineCatalog`: every engine with its layer and search words; `suggest(text)`; registers the loaded library engines (`ACT.registerEngine`) |
-| `tools/enginelib.py` | the Python twin of the core's checker (`walk`, `problems`, `check_outputs`) |
-| `tools/lib_<name>.py` | the Python twin of one engine's checks: `ID`, `check_spec(spec)`, `exprs(spec)`, `keys(spec)` — the same codes, paths and messages |
+| `src/engines/kernel/core.ts` | `NoemaLibCore`: the model checker (a table walked with fixed codes and messages), `numx` numbers, seeded randomness, statistics, thinning, scenes, the adapter `makeEngine` |
+| `src/engines/<name>/<name>.ts` | one engine each: an ES module in strict TypeScript whose default export is the engine's API; it types its model and calls the kernels through their own exported types (`Rec`, `Table`, `Emit`, `CheckedOutput`, `SceneData`, `RunOpts`, `StepCtx` of `kernel/core.ts`; `Stream`, `StepperDef` of `kernel/simkit.ts`; `Grid` of `kernel/space.ts`) |
+| `src/engines/plugins.ts` | one line per engine: its manifest (`engine:<id>`), how to load its module and its Worker bundle |
+| `src/engines/library.ts` | the engine library on `NoemaCore.engines`: `ids()`, `load(ids)`, `loaded(id)`, `engine(id)`, `catalog`, `expr`, `schema()` |
+| `src/engines/kernel/schema.ts` | `NoemaLibSchema`: turns an engine's `table` into the JSON Schema of its activities, from which the activity author (`#/author`) builds the form (§1.5) |
+| `src/engines/catalog.ts` | `NoemaCore.engines.catalog`: every engine with its layer and search words; `suggest(text)` |
 | `docs/library/<name>.md` | the engine's chapter |
-| `tests/lib_<name>.js` | its tests: reference values from the literature (with the source in the test's message), the edge cases, the codes, speed, the Worker source; and `tests/fixtures/enginelib/<name>.json` (good and bad specs) for the JS ↔ Python parity run by `tests/enginelib.js` |
+| `tests/lib_<name>.js` | its tests: reference values from the literature (with the source in the test's message), the edge cases, the codes, speed, the Worker source; and `tests/fixtures/enginelib/<name>.json` (good and bad specs), whose checks `tests/enginelib.js` holds to the golden outputs of the former Python twins (`tests/fixtures/parity/enginelib.json`; a new engine's checks are recorded there with `NOEMA_GOLDEN_UPDATE=1`, tests/golden.cjs) |
 | `tools/activities_examples/<example>/` | at least one reference activity per engine (spec.json, strings.en/el/ru/de/fr.json, the registry entry), started with `activity_new.py --from <example>` |
 
-Nothing else needs to change to add an engine: `tools/build.py` finds `47–48_lib_*.js` and `tools/lib_*.py` by name (the shell, the
-site, the one-file bundle, the connector and the skill load them beside `packcheck.js`); `index.html` lists them; `packcheck.js`
-(`ACT.LIB`) and `tools/activities.py` (`LIB`) list the ids; the catalogue lists its search words (en, el, ru, de, fr) and the UI
+To add an engine: its module, its line in `src/engines/plugins.ts` and in `src/engines/node.ts` (`tools/esbuild.mjs` bundles
+them into `build/app.js`, the app's `NoemaCore.engines` in the site and the one-file bundle, into `build/harness.js`, the skill's
+activity host, and into the connector, `src/composition/connector.ts`); the content checks
+(`LIB` in `src/features/content/domain/activities/rules.ts`; the app's activity core reads it as `ACT.LIB`) list the ids; the catalogue lists its search words (en, el, ru, de, fr) and the UI
 catalogue its one-line description (`engine.engines.<slug>.what`, every UI locale).
 
-### 1.2 The module (JS)
+### 1.2 The module (TypeScript, strict)
 
-```js
-(function noemaLibOdeModule(root) {            // a NAMED function: the Worker source is its toString()
-  'use strict';
-  const C = root.NoemaLibCore;
-  function checkSpec(spec) { const { P, E, W } = C.problems(); C.walk(spec.model, TABLE, 'model', E, W); …; C.checkOutputs(spec, ID, ['scalar', 'series'], out, E, W); return P; }
-  function exprs(spec) { return [['x0 * exp(-k*t)', 'model.eq.x', ['x', 't']], …]; }   // every expression of the model: [source, path, local names]
-  function keys(spec) { return [['labelA', 'model.nodes[0].label'], …]; }               // every string key the model names
-  function run(spec, env, { seed, prepared }) { return { out: { t: [...], x: [...], xEnd: 0.1, drawing: { view, items } } }; }
+```ts
+import NoemaLibCore from '../kernel/core.ts';     // the kernel pieces it needs, imported (the Worker bundle carries them too)
+import type { CheckedOutput, Emit, Env, RunOpts, Table } from '../kernel/core.ts';
+import type { Problem, Spec } from '../types.ts';
+  const C = NoemaLibCore;
+  function checkSpec(spec: Spec): Problem[] { const { P, E, W } = C.problems(); C.walk(spec.model, TABLE, 'model', E, W); …; C.checkOutputs(spec, ID, ['scalar', 'series'], out, E, W); return P; }
+  function exprs(spec: Spec) { return [['x0 * exp(-k*t)', 'model.eq.x', ['x', 't']], …]; }   // every expression of the model: [source, path, local names]
+  function keys(spec: Spec) { return [['labelA', 'model.nodes[0].label'], …]; }               // every string key the model names
+  function run(spec: Spec, env: Env, { seed, prepared }: RunOpts<Prepared>) { return { out: { t: [...], x: [...], xEnd: 0.1, drawing: { view, items } } }; }
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true });
-  engine.workerSource = C.workerSource(noemaLibOdeModule, 'NoemaLibODE');
-  root.NoemaLibODE = Object.freeze({ id: ID, checkSpec, exprs, keys, run, engine: Object.freeze(engine), simEngine,
+  const API = Object.freeze({ id: ID, checkSpec, exprs, keys, run, engine: Object.freeze(engine), simEngine,
     table: { model: TABLE, outputs: { scalar: SCALARS, series: SERIES, scene: SCENES } },   // the form of the activity author (§1.5)
     /* the engine's own functions, for tests */ });
-})(typeof window !== 'undefined' ? window : globalThis);
+  export default API;            // the library adds the Worker bundle (engine.workerSource) when it loads the module
 ```
 
 - **Pure, bounded, deterministic.** No DOM, no network, no clock; seeded randomness only (`C.mulberry32(C.hash32(name, seed))`);
@@ -75,12 +76,11 @@ catalogue its one-line description (`engine.engines.<slug>.what`, every UI local
   and in a comment beside the code; validity ranges are checked and reported as codes (never a silent wrong number); the tests assert
   published reference values.
 
-### 1.3 The Python twin
+### 1.3 The checks
 
-`tools/lib_<name>.py` does not simulate: `check_spec(spec)` returns the same problems as the JS `checkSpec` (code, path, message,
-level) on every spec of `tests/fixtures/enginelib/<name>.json`, `exprs(spec)` and `keys(spec)` the same lists. It uses
-`tools/enginelib.py` (`walk`, `problems`, `check_outputs`). `tools/activities.py check_lib` and `engine/packcheck.js checkLib` then
-check every expression and key with the spec's names: the messages a pack's author sees are the same in the skill
+The module's `checkSpec(spec)` gives the problems (code, path, message, level), `exprs(spec)` and `keys(spec)` the lists of
+the model's expressions and string keys; `checkLib` of the content checks (`src/features/content/domain/activities/simspec.ts`)
+then checks every expression and key with the spec's names: the messages a pack's author sees are the same in the skill
 (`activity_lint.py`, `make_pack.py`), the connector and the app.
 
 ### 1.4 What the app draws: `scene` and `sound` plots, line styles
@@ -106,7 +106,7 @@ check every expression and key with the spec's names: the messages a pack's auth
 
 The activity author (`#/author`, a subject's ⋮ › *Create an activity*) offers every library engine the app has, grouped like the
 catalogue. It builds the engine's form from one more export of the module, `table`, turned into a JSON Schema by
-`engine/src/46_lib_schema.js` (`NoemaLibSchema.specSchema(id, table, simSchema)`); an engine without `table` is simply not offered.
+`src/engines/kernel/schema.ts` (`NoemaCore.engines.schema().specSchema(id, table, simSchema)`); an engine without `table` is simply not offered.
 
 ```js
 table: {
@@ -126,7 +126,7 @@ table: {
 - **Labels.** A field's label is `engine.author.f.lib.<field>` (`i18n/engine/en.arb`, a description for translators, drafts in every
   UI locale); a symbol (one or two letters, a name with a digit or a capital, a Greek letter) is its own label. A new word field
   needs its key, or `tests/activity_author.js` says which one is missing.
-- **Parts.** The same tables give the forms of the parts of a spec with several engines (`NoemaLibSchema.partsSchema`, the
+- **Parts.** The same tables give the forms of the parts of a spec with several engines (`schema().partsSchema`, the
   author's kind *Several engines*): nothing more to export.
 - **The reference activity.** The author offers *Start from the reference activity* (the engine's `tools/activities_examples/<example>/`,
   shipped in `engine/activity_author_schemas.js` as `NoemaActivityRefs`) or *Blank*.
@@ -134,7 +134,7 @@ table: {
 ### 1.6 The stepper: an engine in time (parts, `docs/INTERACTIVE.md` §12.8)
 
 An engine whose model evolves in time can be **co-simulated** with others: it gives `makeEngine` an optional `stepper`
-(46_lib_core.js), the same signature as `NoemaSimKit.stepper` / `cosim` (46_lib_simkit.js):
+(src/engines/kernel/core.ts), the same signature as `NoemaSimKit.stepper` / `cosim` (src/engines/kernel/simkit.ts):
 
 ```js
 const stepper = {
@@ -152,7 +152,7 @@ const { engine, simEngine } = C.makeEngine({ id, checkSpec, run, prepare, steppe
   one sample per step), an array (kept whole), a scene or a sound; only declared outputs pass (`pickStep`).
 - The instance gets `stepInit(inputs, t0) → {out}`, `stepTo(inputs, t, dt, inbox) → {out, dt, events, fail?}` (the inbox's events
   go to `onEvent` first), `snapshot() → slot` (−1: cannot; one slot, a new snapshot replaces it) and `restore(slot) → true/false`.
-  The Worker answers the messages `sinit`, `step`, `snap` and `restore` (35_activity_sim.js `engineRunner(...).step(kind, …)`).
+  The Worker answers the messages `sinit`, `step`, `snap` and `restore` (src/runtimes/sim-spec/runner.ts `engineRunner(...).step(kind, …)`).
   Without `stepper` nothing changes: `run` is as before (a part's series inputs arrive as `opts.series`).
 - Steppers now: `ode@1` (a flow or a map: events and crossings inside the step, `final` / `stat` running), `med@1` (the
   pharmacokinetic compartments, RK4 split at the doses; other items run as before), `clinic@1` (the virtual patient, the same
@@ -162,10 +162,10 @@ const { engine, simEngine } = C.makeEngine({ id, checkSpec, run, prepare, steppe
   `circuit-mna@1` transient (no snapshot; its own grid a divisor of the first macro step, a step off the grid reported at the
   asked time by interpolation, a changed binding taken into the running transient with its capacitor and inductor state, its
   time counted from the part's t0): their instances answer `stepInit` / `stepTo` / `snapshot` / `restore` themselves
-  (docs/INTERACTIVE_ENGINES.md, docs/INTERACTIVE_CIRCUIT.md). The validators list them (`STEPPERS` in `engine/packcheck.js` and
-  `tools/activities.py`): add an engine there when it gains a stepper. Pure, bounded, never throws.
+  (docs/INTERACTIVE_ENGINES.md, docs/INTERACTIVE_CIRCUIT.md). The validators list them (`STEPPERS` in
+  `src/features/content/domain/activities/rules.ts`): add an engine there when it gains a stepper. Pure, bounded, never throws.
 
-## 2. The catalogue (`NoemaEngineCatalog`)
+## 2. The catalogue (`NoemaCore.engines.catalog`)
 
 `CATALOG` lists every engine and runtime with its `layer` (`library`, `free`, `plugin`), its window global and file, the slug of its
 UI words (`engine.engines.<slug>.name` / `.what`) and search words in the five pack languages. `suggest(text)` ranks the catalogue
@@ -178,15 +178,15 @@ When neither the library nor the free way fits, anyone asks for a new engine fro
 
 | layer | where | what |
 |---|---|---|
-| domain | `engine/enginereq.js` (`NoemaEngineRequests`; no DOM, no network; the connector runs the same file) | `FIELDS` and their limits, `normalize(input) → {row, problems}`, `ACCURACY` (`teaching`, `quantitative`, `research`), `STATUSES` (`new`, `seen`, `planned`, `building`, `available`, `declined`, `duplicate`; `OPEN` = the first four), `cleanPatch(patch)` (what an admin may change), `brief(row)` (the English markdown to build the engine from) |
-| port | `store = {kind, submit(row), mine(), all(status), update(id, patch), isAdmin()}` | |
-| adapters | `cloudStore` (Supabase REST, table `noema_engine_requests`, `cloud/supabase.sql` §16) · `localStore` (a profile without a cloud account: `localStorage noema1:<profile>:enginereq`, at most 100, downloadable as JSON) | `store(ACCOUNT)` picks one |
+| domain | `src/features/reports/domain/engine-requests.ts` (pure TypeScript; the app reads it as `NoemaCore.engineRequests`, the connector imports it) | `REQUEST_FIELDS` and their limits, `normalizeRequest(input, suggest) → {row, problems}`, `ACCURACY` (`teaching`, `quantitative`, `research`), `STATUSES` (`new`, `seen`, `planned`, `building`, `available`, `declined`, `duplicate`; `OPEN` = the first four), `cleanRequestPatch(patch)` (what an admin may change), `requestBrief(row)` (the English markdown to build the engine from) |
+| port | `EngineRequestServer` (`src/ports/reports.ts`); the use case `src/features/reports/application/engine-requests.ts` gives `store(account) = {kind, submit(row), mine(), all(status), update(id, patch), isAdmin()}` | |
+| adapters | the cloud (`src/adapters/supabase/reports.ts`, table `noema_engine_requests`, `cloud/supabase.sql` §16) · this device (a profile without a cloud account: the key-value store, `noema1:<profile>:enginereq`, at most 100, downloadable as JSON) | `store(ACCOUNT)` picks one |
 | UI | `engine/src/49_lib_view.js` + `49_lib_view.css`, the route `#/engines` (`#/engines/new` opens the form), the subject's ⋮ › *Engines of activities* | the catalogue (only the engines this app has), *Request a new engine*, *Your requests*; admins see every request and answer it in place |
-| connector | `cloud/mcp/server.mjs` | `noema_request_engine` (with `check_only` it only ranks the catalogue), `noema_engine_requests` (own; admins all, with a status filter; `id` → the brief), `noema_engine_request_update` (admins) |
+| connector | `src/connector/tools/request_engine.ts`, `engine_requests.ts`, `engine_request_update.ts` | `noema_request_engine` (with `check_only` it only ranks the catalogue), `noema_engine_requests` (own; admins all, with a status filter; `id` → the brief), `noema_engine_request_update` (admins) |
 
 The form asks for one thing first, **what should be simulated** (40–4000 characters) and a name (4–120); the field, what the learner
 changes and sees, what is measured, the accuracy, sources and example exercises are folded under *More details*. While the person
-writes, `NoemaEngineCatalog.suggest` shows up to three engines of this app that may already do it; the ids it found are stored with the
+writes, `NoemaCore.engines.catalog.suggest` shows up to three engines of this app that may already do it; the ids it found are stored with the
 request (`suggested`) so whoever answers checks them first.
 
 The table's trigger owns everything that is not the person's words: on insert the requester, their shown name, `status = new` and the
@@ -209,11 +209,11 @@ in its own way.
 
 | | where | what |
 |---|---|---|
-| the API | `engine/src/34_activity_html.js` (the bootstrap) | `noema.engines()`, `noema.engine(id).check(spec)`, `.run(spec, inputs, {seed})` |
-| the host | `34_activity_html.js` `engineBridge` | declared ∩ `NoemaEngineCatalog.LIBRARY` ∩ registered; every field checked; the engine's `check`; one run at a time + one waiting; ≤ 30 requests/s; outputs ≤ 512 KB; codes, never a crash |
-| the Worker | `35_activity_sim.js` `ACT.engineRunner` (the sim runner; `respec` gives the same Worker another model) | one per mini-app and engine, lazy, reused, 5 s per run, ended on unmount |
-| the rules | `tools/activities.py check_app_engines` = `engine/packcheck.js checkAppEngines`; `need_requires` / `needRequires` add `engine:<id>` | |
-| the tests | `tests/activities.js` (rules JS = Python, the protocol, the bridge with a fake runner), `tests/activities_app.js` (in the app), `activity_test.py` | |
+| the API | `src/runtimes/html-app/bootstrap.ts` (the bootstrap) | `noema.engines()`, `noema.engine(id).check(spec)`, `.run(spec, inputs, {seed})` |
+| the host | `src/runtimes/html-app/bridge.ts` `engineBridge` | declared ∩ `NoemaCore.engines.catalog.LIBRARY` ∩ registered; every field checked; the engine's `check`; one run at a time + one waiting; ≤ 30 requests/s; outputs ≤ 512 KB; codes, never a crash |
+| the Worker | `src/runtimes/sim-spec/runner.ts` `engineRunner` (the sim runner; `respec` gives the same Worker another model) | one per mini-app and engine, lazy, reused, 5 s per run, ended on unmount |
+| the rules | `checkAppEngines` of the content checks (`src/features/content/domain/activities/registry.ts`); `needRequires` adds `engine:<id>` | |
+| the tests | `tests/activities.js` (the rules and their golden messages, the protocol, the bridge with a fake runner), `tests/activities_app.js` (in the app), `activity_test.py` | |
 | the reference | `tools/activities_examples/cheapest-route/` | a route game on `graph@1`: the learner picks roads, Dijkstra finds the cheapest route; keyboard, 320 px, five languages |
 
 Only library engines: pure, bounded, deterministic, with no hidden state (no fault bench, no learner data); the frame keeps its

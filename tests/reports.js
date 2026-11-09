@@ -1,5 +1,5 @@
-/* ⚑ Problem reports (engine/report.js, engine/src/85_locate.js, docs/REPORTS.md) against the Supabase emulator (rules of
-   cloud/supabase.sql §15) and the connector (cloud/mcp/server.mjs: noema_reports, noema_report, noema_report_update).
+/* ⚑ Problem reports (src/features/reports/ui, engine/src/85_locate.js, docs/REPORTS.md) against the Supabase emulator (rules of
+   cloud/supabase.sql §15) and the connector (src/connector: noema_reports, noema_report, noema_report_update).
    Without a browser: the brief and the repository paths from a locator.
    In the browser: the button at the foot of the side bar (a line icon, no emoji), the dialog with a screenshot of the
    window as it is (also scrolled), a kind is required, 🎯 pointing at an exercise's question → the report names the
@@ -11,6 +11,7 @@
 const { chromium } = require(process.env.PW || 'playwright');
 const path = require('path'), fs = require('fs'), os = require('os'), vm = require('vm');
 const { start } = require('./mock_supabase');
+const { connectorHandler, removeConnector } = require('./connector_fn');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const SHOTS = '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
@@ -20,10 +21,10 @@ const PORT = 54383, BASE = `http://localhost:${PORT}`;
 
 function unit() {
   console.log('— the brief and the files, without a browser');
-  const ctx = { console }; ctx.window = ctx; vm.createContext(ctx);
-  vm.runInContext(fs.readFileSync(path.join(ROOT, 'engine/report.js'), 'utf8'), ctx);
-  const R = ctx.NoemaReport;
-  ok(R && typeof R.brief === 'function' && !R.open, 'engine/report.js loads without a page (as in the connector): only the pure part');
+  const ctx = { console, URL, URLSearchParams, TextEncoder, TextDecoder }; ctx.window = ctx; vm.createContext(ctx);
+  vm.runInContext(fs.readFileSync(path.join(ROOT, 'build/app.js'), 'utf8'), ctx);   // window.NoemaCore (npm run build)
+  const R = ctx.NoemaCore.reports;
+  ok(R && typeof R.brief === 'function' && typeof R.send === 'function', 'NoemaCore.reports: the brief, the files, sending (src/features/reports; the connector imports the same domain)');
   const loc = { route: { hash: '#/s/ch01-s01', page: 's', args: ['ch01-s01'] }, app: { version: '1.0.0', commit: 'abc123', url: 'https://noema-lite.netlify.app/' },
     subject: { id: 'demo-physics', title: 'Demo Physics', origin: 'library', version: 'v1', translation: 'fr', packLanguage: 'en', shown: 'fr' },
     item: { chapter: { id: 'ch01', num: 1, title: 'Énergie' }, section: { id: 'ch01-s01', title: 'Énergie cinétique' }, exercise: { id: 'ch01-e003', type: 'mcq', q: 'Quelle…', qOwn: 'Which…' }, field: { path: 'options.2', shown: '8 J', own: '8 J' }, content: { packLanguage: 'en', shown: 'fr', translation: 'fr' } },
@@ -58,7 +59,7 @@ function unit() {
   };
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, permissions: ['clipboard-read', 'clipboard-write'] }); const p = await ctx.newPage(); p.setDefaultTimeout(15000);
   const E = []; p.on('pageerror', e => E.push(e.message));
-  const openReport = async () => { await p.click('#ns-report'); return until(() => p.locator('.nr-modal .nr-send, .nr-modal .nr-actions .btn.primary').count()); };
+  const openReport = async () => { await p.click('#ns-report'); return until(() => p.locator('.nr-modal .nr-send, .nr-modal .nr-download').count()); };
   try {
     console.log('— the button and the dialog');
     await signUp(p, 'Iro', 'iro@example.com');
@@ -108,7 +109,7 @@ function unit() {
     await p.click('.nr-send'); await until(() => srv.state.ereps.length === 2);
     const L2 = srv.state.ereps[1].locator;
     ok(L2.subject.translation === 'fr' && L2.item.content.translation === 'fr' && /^blk:ch01-s01\//.test(srv.state.ereps[1].item) && L2.item.block.id && L2.item.block.text !== L2.item.block.textOwn && L2.item.block.textOwn, 'the block, with its text as shown (French) and in the pack’s own language: ' + srv.state.ereps[1].item);
-    const f2 = (await p.evaluate(l => NoemaReport.repoFiles(l), L2)).map(f => f.path);
+    const f2 = (await p.evaluate(l => NoemaCore.reports.repoFiles(l), L2)).map(f => f.path);
     ok(f2[0] === 'library/subjects/demo-physics/translations/fr/ch01.json', 'the place to fix it is the French translation file');
 
     console.log('— an interface word');
@@ -128,7 +129,7 @@ function unit() {
     ok(await p.locator('.ns-mepop .ns-reportitem').isVisible() && !(await p.locator('.ns-mepop button:has-text("Problem reports")').count()), 'Me ▾ has Report a problem; no Problem reports for someone who is not an admin');
     await p.keyboard.press('Escape'); await p.setViewportSize({ width: 1280, height: 900 });
     await p.goto(BASE + '/#/admin/reports'); await wait(1200);
-    ok(await until(() => p.locator('.nr-admin .ns-panel').count()) && !(await p.locator('.nr-item').count()) && await p.evaluate(() => document.querySelector('.nr-admin').innerText === NoemaI18n.t('report.notAdmin')), 'the reports page refuses an account that is not an admin');
+    ok(await until(() => p.locator('.nr-admin .nc-panel').count()) && !(await p.locator('.nr-item').count()) && await p.evaluate(() => document.querySelector('.nr-admin').innerText === NoemaI18n.t('report.notAdmin')), 'the reports page refuses an account that is not an admin');
     const iroT = (await (await fetch(BASE + '/auth/v1/token?grant_type=password', { method: 'POST', headers: { apikey: 'k', 'content-type': 'application/json' }, body: JSON.stringify({ email: 'iro@example.com', password: 'secret123' }) })).json()).access_token;
     const mine = await (await fetch(BASE + '/rest/v1/noema_error_reports?select=id,status', { headers: { apikey: 'k', authorization: 'Bearer ' + iroT } })).json();
     const patch = await fetch(BASE + `/rest/v1/noema_error_reports?id=eq.${mine[0].id}`, { method: 'PATCH', headers: { apikey: 'k', authorization: 'Bearer ' + iroT, 'content-type': 'application/json', prefer: 'return=representation' }, body: JSON.stringify({ status: 'fixed' }) });
@@ -160,9 +161,7 @@ function unit() {
 
     console.log('— Claude reads the same reports through the connector');
     const CFG = { siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [] };
-    const fn = path.join(os.tmpdir(), `noema-mcp-rep-${process.pid}.mjs`);
-    fs.writeFileSync(fn, `const CFG = ${JSON.stringify(CFG)};\nconst DOCS = {};\nglobalThis.window = globalThis;\n` + ['engine/report.js', 'engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));
-    const { default: handler } = await import(fn);
+    const handler = await connectorHandler(ROOT, { config: CFG, docs: {} });
     const tok = async email => (await (await fetch(BASE + '/auth/v1/token?grant_type=password', { method: 'POST', headers: { apikey: 'k', 'content-type': 'application/json' }, body: JSON.stringify({ email, password: 'secret123' }) })).json()).access_token;
     const tool = async (t, name, args) => (await (await handler(new Request(BASE + '/mcp', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + t }, body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/call', params: { name, arguments: args } }) }))).json()).result;
     const AT = await tok('anr@example.com');
@@ -173,7 +172,7 @@ function unit() {
     ok(/translations\/fr\/ch01\.json/.test(one.content[0].text) && one.content.some(c => c.type === 'image' && c.mimeType === 'image/jpeg' && c.data.length > 1000), 'noema_report: the brief (the French translation file to fix) and the screenshot as an image');
     const up = await tool(AT, 'noema_report_update', { id: srv.state.ereps[1].id, status: 'fixing', note: 'on it' });
     ok(/fixing/.test(up.content[0].text) && srv.state.ereps[1].status === 'fixing' && srv.state.ereps[1].admin_note === 'on it', 'noema_report_update answers it');
-    fs.unlinkSync(fn);
+    removeConnector(handler);
     ok(!E.length, 'no page errors' + (E.length ? ': ' + E.slice(0, 3).join(' | ') : ''));
   } catch (e) { console.error(e); fails++; }
   await browser.close(); srv.close();

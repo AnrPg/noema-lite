@@ -1,12 +1,14 @@
-/* med@1 (engine/src/48_lib_med.js, docs/library/med.md): published reference values (the source in each message, with its tolerance),
+/* med@1 (src/engines/med/med.ts, docs/library/med.md): published reference values (the source in each message, with its tolerance),
    the edge cases and their codes, the checker's codes, the sim adapter, the Worker source in a fresh global, speed, and the SIG table
-   being the same in JS and in the Python twin (tools/lib_med.py).  Run: node tests/lib_med.js */
+   being the golden one of the former Python twin (tools/lib_med.py).  Run: node tests/lib_med.js */
 'use strict';
-const path = require('path'), { execFileSync } = require('child_process'), vm = require('vm');
+const path = require('path'), vm = require('vm');
+const want = require('./golden.cjs')('lib_med');   // the golden outputs of the former Python twin (tests/golden.cjs)
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
 globalThis.window = globalThis;
-require(path.join(SRC, '35_simexpr.js')); require(path.join(SRC, '46_lib_core.js')); require(path.join(SRC, '48_lib_med.js'));
-const M = globalThis.NoemaLibMed;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaLibMed = ENGINES.mod('med@1');
+const M = NoemaLibMed;
 let fails = 0, n = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 const near = (a, b, tol) => Number.isFinite(a) && Math.abs(a - b) <= tol;
@@ -109,7 +111,7 @@ ok(F('score.wellspe', { dvt: 2 }, 'impossible'), 'a yes/no item given 2 → impo
 ok(F('epi.bayes', { pre: 0, lr: 5 }, 'validity'), 'pre-test probability 0 → validity (no evidence moves it)');
 ok(R('renal.ckdepi', { scr: 1 }, {}).v['flag.incomplete'] === 1, 'missing required inputs → incomplete, NaN');
 
-// ---- 3. the checker's codes (the same in Python: tests/enginelib.js) ----
+// ---- 3. the checker's codes (the golden outputs: tests/enginelib.js) ----
 const FX = require(path.join(ROOT, 'tests', 'fixtures', 'enginelib', 'med.json')).specs;
 const codes = new Set(FX.flatMap(s => M.checkSpec(s).map(p => p.code)));
 for (const c of ['fn', 'input', 'unknown-input', 'units', 'output', 'id', 'enum', 'unknown-field', 'value', 'size', 'format']) ok(codes.has(c), `checker code ${c} appears in the fixtures`);
@@ -132,7 +134,7 @@ ok(near(s5.post, 0.5, 1e-9) && s5.fag.items.length > 30, 'Fagan spec: pre 0.2 ×
 ok(Object.keys(M.SIG.fns).every(f => typeof f === 'string') && Object.keys(M.SIG.fns).length >= 100, `the table holds ${Object.keys(M.SIG.fns).length} functions`);
 { const bad = []; for (const f of Object.keys(M.SIG.fns)) { const ins = {}; for (const t of M.SIG.fns[f].in.split(' ').filter(Boolean)) ins[t.replace('!', '')] = 1; let r; try { r = M.compute(f, ins, f === 'epi.km' ? { times: [1], events: [1] } : {}); } catch (e) { bad.push(f); } if (!r) bad.push(f); }
   ok(!bad.length, 'every function runs on arbitrary inputs without throwing' + (bad.length ? ': ' + bad.join(', ') : '')); }
-const py = execFileSync('python3', ['-c', 'import json,lib_med as M; print(json.dumps(M.SIG))'], { cwd: path.join(ROOT, 'tools'), encoding: 'utf8' });
-ok(JSON.stringify(JSON.parse(py)) === JSON.stringify(M.SIG), 'SIG is the same table in JS and in tools/lib_med.py');
+const py = want('sig', undefined, M.SIG);
+ok(JSON.stringify(py) === JSON.stringify(M.SIG), 'SIG is the same table as the golden one of the former twin tools/lib_med.py');
 console.log(`\n${n - fails}/${n} passed`);
 process.exit(fails ? 1 : 0);

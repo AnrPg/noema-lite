@@ -1,31 +1,31 @@
 /* Parts: several engines in one sim-spec@1 activity (docs/INTERACTIVE.md §12.8, docs/INTERACTIVE_LIBRARY.md §1.6).
-   1. the plan (NoemaPackCheck.partsPlan): the order of derived values and parts, loops and the co-simulation as units;
+   1. the plan (NoemaCore.content.partsPlan): the order of derived values and parts, loops and the co-simulation as units;
    2. the steppers of the library engines (makeEngine's optional `stepper`): ode@1 against exp decay, med@1 against the closed form,
       clinic@1 bit for bit against run(), snapshot / restore;
-   3. the orchestrator (35_activity_sim.js partsRunner) with inline engine runners: chain, series inputs, a fixed point (and one that
+   3. the orchestrator (src/runtimes/sim-spec/parts.ts partsRunner, build/runtimes-node.cjs) with inline engine runners: chain, series inputs, a fixed point (and one that
       does not settle), a co-simulation (with iterate), the latest inputs win, a failing part;
-   4. the reference activities (tools/activities_examples/pk-ode, genetics-prob, ancient-voyage): their spec passes both validators and
+   4. the reference activities (tools/activities_examples/pk-ode, genetics-prob, ancient-voyage): their spec passes the content checks and
       every case of their tests.json holds under the orchestrator.
    Run: node tests/parts.js */
 'use strict';
-const path = require('path'), fs = require('fs'), { execFileSync } = require('child_process');
+const path = require('path'), fs = require('fs');
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
 let fails = 0, n = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 const near = (a, b, tol) => Math.abs(a - b) <= tol * Math.max(1, Math.abs(b));
 globalThis.window = globalThis;
 const ENG = {};
-globalThis.ACT = { PARTS: {}, registerEngine: d => { ENG[d.id] = d; }, registerRuntime() { }, engine: id => ENG[id] || null, engines: () => Object.keys(ENG) };
-require(path.join(SRC, '35_simexpr.js'));
-for (const f of ['36_engine_circuit.js', '39_engine_thermal.js', '40_engine_pid.js', '41_engine_rf.js', '42_engine_twin.js']) require(path.join(SRC, f));
-require(path.join(SRC, '46_lib_core.js'));
-for (const f of fs.readdirSync(SRC).filter(f => /^46_lib_[a-z_]+\.js$/.test(f) && f !== '46_lib_core.js').sort()) require(path.join(SRC, f));
-for (const f of fs.readdirSync(SRC).filter(f => /^4[78]_lib_[a-z_]+\.js$/.test(f)).sort()) require(path.join(SRC, f));
-require(path.join(SRC, '49_lib_catalog.js'));
-require(path.join(ROOT, 'engine', 'packcheck.js'));
-require(path.join(SRC, '35_activity_sim.js'));
-const PC = globalThis.NoemaPackCheck, A = globalThis.ACT;
-const py = (code, input) => execFileSync('python3', ['-c', code], { cwd: path.join(ROOT, 'tools'), input, encoding: 'utf8', maxBuffer: 1 << 26 });
+globalThis.ACT = { PARTS: {}, registerEngine: d => { ENG[d.id] = d; }, registerRuntime() { }, engine: id => ENG[id] || NoemaCore.engines.engine(id), engines: () => [...Object.keys(ENG), ...NoemaCore.engines.ids()] };   // = ACT of engine/src/32_activities.js: its own engines, then the library's
+ENG['formula@1'] = { id: 'formula@1', check: () => [], create: () => ({ run: () => ({}) }) };   // built into the activity core (engine/src/32_activities.js)
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaExpr = ENGINES.kernel('expr'), NoemaLibCore = ENGINES.kernel('core'), NoemaEngineCatalog = ENGINES.lib.catalog, NoemaLibODE = ENGINES.mod('ode@1');
+const RTN = require(path.join(ROOT, 'build', 'runtimes-node.cjs'));   // the typed runtimes (npm run build): sim-spec@1's orchestrator and runner
+const PC = NoemaCore.content, A = globalThis.ACT;
+// what the activity core hands the sim runtime (src/runtimes/compute.ts ComputeHost, engine/src/32_activities.js HOST.compute)
+const CX = { compute: { engine: id => A.engine(id), engines: () => A.engines(), library: () => [...NoemaCore.engines.catalog.LIBRARY], compile: s => NoemaExpr.compile(s), content: () => PC, parts: () => A.PARTS }, warn: (...w) => console.warn(...w) };
+A.partsRunner = (spec, opts, onFail, deps) => RTN.partsRunner(CX, spec, opts, onFail, deps);
+A.engineRunner = (E, spec, opts, onFail) => RTN.engineRunner(E, spec, opts, onFail);
+const want = require('./golden.cjs')('parts');   // the golden outputs of the former Python twin (tests/golden.cjs)
 
 const base = o => ({ format: 'noema.sim-spec/v1', params: [{ id: 'D', kind: 'slider', label: 'dLabel', min: 1, max: 10, default: 5 }], ...o });
 const pk = () => ({ id: 'pk', engine: 'med@1', model: { items: [{ id: 'o', fn: 'pk.oral', in: { dose: 'dose', v: 40, clear: 5, ka: 1 } }] }, inputs: { dose: 'D * 100' },
@@ -50,21 +50,21 @@ const errs = (spec, lib) => PC.checkSimSpec(spec, null, null, { parts: lib || {}
   ok(R[1].p.engine === 'ode@1' && R[0].p.engine === 'med@1' && R[0].p.inputs.dose === 'D * 50' && R[0].p.id === 'pk' && !errs(u, lib).length, 'use / with: a part of activities/_parts, changed by with');
 }
 
-{ // the validators' twins: the same messages on every case of tests/fixtures/parts_cases.json
+{ // the content checks: the golden messages (of the former Python twin) on every case of tests/fixtures/parts_cases.json
   const F = JSON.parse(fs.readFileSync(path.join(__dirname, 'fixtures', 'parts_cases.json'), 'utf8')), names = Object.keys(F.cases);
   const js = names.map(k => PC.checkSimSpec(F.cases[k], null, null, { parts: F.lib }));
-  const pyr = JSON.parse(py('import json,sys,activities as A; d=json.loads(sys.stdin.read()); print(json.dumps([A.check_spec(s, parts=d["lib"]) for s in d["cases"].values()]))', JSON.stringify(F)));
-  const norm = l => l.map(m => m.replace(/'/g, '"'));   // (Python's repr quotes with ', the JS twin with ")
+  const pyr = want('cases', JSON.stringify(F), js);   // the golden outputs of the former Python twin (tools/activities.py check_spec)
+  const norm = l => l.map(m => m.replace(/'/g, '"'));   // (the Python twin's repr quoted with ', the JS with ")
   names.forEach((k, i) => {
     const same = JSON.stringify(norm(js[i])) === JSON.stringify(norm(pyr[i])), good = k.startsWith('parts good') ? !js[i].length : js[i].length > 0;
-    ok(same && good, `${k}: ${js[i].length} error(s) in both twins${js[i].length ? ' — ' + js[i][0].slice(0, 120) : ''}${same ? '' : ' | PY: ' + (pyr[i][0] || '')}`);
+    ok(same && good, `${k}: ${js[i].length} error(s), as the golden outputs${js[i].length ? ' — ' + js[i][0].slice(0, 120) : ''}${same ? '' : ' | GOLDEN: ' + (pyr[i][0] || '')}`);
   });
   const noParts = names.length >= 30 && PC.checkSimSpec(base({ derived: [{ id: 'q', expr: 'D * 2' }] }), null, null, { parts: F.lib }).length === 0;
   ok(noParts, 'a spec without parts is checked as before');
 }
 
 // ---------- 2. steppers ----------
-const C = globalThis.NoemaLibCore;
+const C = NoemaLibCore;
 function stepAll(E, spec, inp, tEnd, dt) {
   const i = E.create(spec, { seed: 1 }), r0 = i.stepInit(inp, 0), outs = [r0.out];
   for (let t = 0; t < tEnd - 1e-12; t += dt) outs.push(i.stepTo(inp, t, Math.min(dt, tEnd - t), []).out);
@@ -72,7 +72,7 @@ function stepAll(E, spec, inp, tEnd, dt) {
 }
 {
   const E = A.engine('ode@1');
-  ok(!!E && E.stepper === true && typeof globalThis.NoemaLibODE.simEngine.stepper === 'object', 'ode@1 declares a stepper (engine.stepper, simEngine.stepper)');
+  ok(!!E && E.stepper === true && typeof NoemaLibODE.simEngine.stepper === 'object', 'ode@1 declares a stepper (engine.stepper, simEngine.stepper)');
   const spec = { format: 'noema.sim-spec/v1', engine: 'ode@1', consts: { k: 0.3 }, model: { rhs: { y: '-k * y' }, states: [{ id: 'y', init: 1 }], solve: { tEnd: 10 } }, outputs: [{ id: 'yy', kind: 'series', of: 'state', var: 'y' }, { id: 'yf', kind: 'scalar', of: 'final', var: 'y' }] };
   const { i, outs } = stepAll(E, spec, { k: 0.3 }, 5, 0.5);
   ok(near(outs[outs.length - 1].yf, Math.exp(-1.5), 1e-5), 'ode@1 stepper: y′ = −k y over 10 macro steps = e^{−kt}');
@@ -105,7 +105,7 @@ function runParts(spec, env, o) {
   });
 }
 (async () => {
-  ok(typeof A.partsRunner === 'function', 'ACT.partsRunner is exported (35_activity_sim.js)');
+  ok(typeof RTN.partsRunner === 'function' && typeof RTN.engineRunner === 'function', 'the parts orchestrator and the engine runner are exported (src/runtimes/sim-spec, build/runtimes-node.cjs)');
   const chain = await runParts(base({ parts: [pk(), od()] }));
   const single = A.engine('med@1').create({ ...PC.partSpec(base({}), pk()) }, { seed: 1 }).run({ D: 5, dose: 500 });
   ok(chain.outputs && near(chain.outputs.cmax, single.cmax, 1e-12) && chain.outputs.c.length > 10 && near(chain.outputs.eEnd, single.cmax, 1e-4) && !chain.codes.length, 'chain: med@1 → ode@1 (the ODE relaxes to the c_max it is given)');
@@ -142,19 +142,16 @@ function runParts(spec, env, o) {
   const r5 = await new Promise(res => { const r = A.partsRunner(base({ parts: [{ id: 'b', engine: 'boom@1', outputs: [{ id: 'q', kind: 'scalar' }] }] }), { seed: 1 }, w => res({ failed: w }), { lib: {}, plan: s => ({ parts: s.parts, order: [{ k: 'part', id: 'b' }], errors: [], cycles: [] }) }); r.run({ D: 1 }, res); });
   ok(Number.isNaN(r5.outputs.q) && r5.codes.some(c => c.code === 'part-failed' && c.part === 'b'), 'a failing part: NaN and the code part-failed, the rest goes on');
   delete ENG['boom@1'];
-  // Python twin: the same plan
-  const pyPlan = JSON.parse(py('import json,sys,activities as A; s=json.loads(sys.stdin.read()); p=A.parts_plan(s, None); print(json.dumps(p["order"]))', JSON.stringify(fp)));
-  ok(JSON.stringify(pyPlan) === JSON.stringify(PC.partsPlan(fp, null).order), 'activities.py parts_plan = packcheck.js partsPlan');
+  // the golden plan (of the former Python twin, tools/activities.py parts_plan)
+  const pyPlan = want('plan', JSON.stringify(fp), PC.partsPlan(fp, null).order);
+  ok(JSON.stringify(pyPlan) === JSON.stringify(PC.partsPlan(fp, null).order), 'partsPlan = the golden plan');
 
-  // the mini-apps' noema.sim(spec).run(inputs) (34_activity_html.js engineBridge): declared engines only, the spec checks, the orchestrator
+  // the mini-apps' noema.sim(spec).run(inputs) (src/runtimes/html-app/bridge.ts engineBridge): declared engines only, the spec checks, the orchestrator
   {
-    const vm = require('vm'), h34 = fs.readFileSync(path.join(SRC, '34_activity_html.js'), 'utf8'), s32 = fs.readFileSync(path.join(SRC, '32_activities.js'), 'utf8');
+    const vm = require('vm'), s32 = fs.readFileSync(path.join(SRC, '32_activities.js'), 'utf8');
     const ACTP = vm.runInNewContext(s32.slice(s32.indexOf('const ACTP = '), s32.indexOf('const ACT = (')) + '; ACTP', { TextEncoder, JSON, Object, Array, Number, String, Math });
     ok(ACTP.check({ p: 'noema.activity', v: 1, type: 'sim:run', id: 's1', payload: { spec: { parts: [] }, inputs: { D: 1 }, seed: 3 } }).ok && !ACTP.check({ p: 'noema.activity', v: 1, type: 'sim:run', payload: { spec: 'x' } }).ok, 'ACTP: sim:run {spec, inputs?, seed?}');
-    const ctx = { console, Promise, Date, JSON, Object, Array, Set, Map, String, Number, Math, Error, isFinite, setTimeout, clearTimeout, ACTP, Worker: function () { } };
-    ctx.window = ctx; ctx.NoemaEngineCatalog = globalThis.NoemaEngineCatalog; ctx.NoemaPackCheck = PC;
-    ctx.ACT = { registerRuntime() { }, engine: id => ENG[id] || null, engines: () => Object.keys(ENG), engineRunner: A.engineRunner, partsRunner: A.partsRunner };
-    vm.createContext(ctx); vm.runInContext(h34.replace('ACT.registerRuntime({', 'globalThis.__bridge = engineBridge; ACT.registerRuntime({'), ctx);
+    const ctx = { __bridge: (act, seed, reply) => RTN.engineBridge(CX, act, seed, reply, { workers: true }) };   // (Node has no Worker: the parts run inline)
     const got = [], B = ctx.__bridge({ engines: ['med@1', 'ode@1'] }, 5, (type, payload, extra) => got.push({ type, payload, re: extra.re }));
     const sp = { consts: { D: 5 }, parts: [pk(), od()] }, wait = re => new Promise(res => { const t = setInterval(() => { const m = got.find(g => g.re === re); if (m) { clearInterval(t); res(m.payload); } }, 5); });
     B.handle({ type: 'sim:run', id: 'a', payload: { spec: sp, inputs: { D: 5 } } });
@@ -172,7 +169,6 @@ function runParts(spec, env, o) {
 
   // ---------- 3b. the old plugins as parts: thermal@1, pid@1, twin@1, circuit-mna@1 (transient) have steppers ----------
   {
-    require(path.join(SRC, '43_engines_p6.js')); require(path.join(SRC, '36_engine_circuit_sim.js'));
     const exSpec = id => JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'activities_examples', id, 'spec.json'), 'utf8'));
     const envOf = sp => { const e = { ...(sp.consts || {}) }; for (const q of sp.params || []) e[q.id] = q.default; return e; };
     /** step a plugin's instance from 0 to tEnd by macro steps dt; → [the last outputs, run()'s outputs] */
@@ -233,9 +229,7 @@ function runParts(spec, env, o) {
     const spec = JSON.parse(fs.readFileSync(path.join(dir, 'spec.json'), 'utf8')), strings = {};
     for (const f of fs.readdirSync(dir)) { const m = f.match(/^strings\.(.+)\.json$/); if (m) strings[m[1]] = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')); }
     const e1 = PC.checkSimSpec(spec, strings, null, { parts: {} });
-    ok(!e1.length && ['en', 'el', 'fr', 'ru', 'de'].every(l => strings[l]), `${id}: the spec passes packcheck.js, with strings in en, el, fr, ru and de ${e1.slice(0, 2).join(' | ')}`);
-    const e2 = JSON.parse(py('import json,sys,activities as A; d=json.loads(sys.stdin.read()); print(json.dumps(A.check_spec(d["s"], d["t"], parts={})))', JSON.stringify({ s: spec, t: strings })));
-    ok(JSON.stringify(e2) === JSON.stringify(e1), `${id}: activities.py agrees`);
+    ok(!e1.length && ['en', 'el', 'fr', 'ru', 'de'].every(l => strings[l]), `${id}: the spec passes the content checks, with strings in en, el, fr, ru and de ${e1.slice(0, 2).join(' | ')}`);
     const tests = JSON.parse(fs.readFileSync(path.join(dir, 'tests.json'), 'utf8'));
     for (const [k, tc] of (tests.cases || []).entries()) {
       const env = {}; for (const p of spec.params || []) env[p.id] = p.kind === 'toggle' ? !!p.default : p.kind === 'choice' ? (p.default ?? p.options[0].value) : p.default;

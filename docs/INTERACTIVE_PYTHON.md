@@ -115,15 +115,16 @@ A sim exercise on a py-module@1 activity is graded like a sim-spec@1 one:
 ## 6. Design — how it runs
 
 Page (trusted: reads and checks the files) → `py:boot` with the bytes over a MessagePort → a hidden sandboxed runner frame (our script
-only) → a blob: Worker with Pyodide, whose `fetch`/`importScripts` only look up those bytes. The app side is
-`engine/src/37_activity_py_ui.js`: it mounts the sim-spec view of `35_activity_sim.js` (`ACT.simView`) with a host whose runner is
-Python's `step()`; the runner itself is `engine/src/37_activity_py.js` (`NoemaPy.mountRunner`).
+only) → a blob: Worker with Pyodide, whose `fetch`/`importScripts` only look up those bytes. py-module@1 is a typed
+runtime of the registry (`src/runtimes/py-module`, loaded only when an activity needs it: `ACT.runtime('py-module@1')`). The app side
+is `runtime.ts`: it mounts the sim-spec view (`host.simView`: the view of `src/runtimes/sim-spec`) with a host whose runner is Python's `step()`; the
+runner itself is `runner.ts` (the runtime's Python service `py`: `py.mountRunner`).
 
 * **The runner has no network at all** (`connect-src 'none'`). A service worker never controls an opaque-origin (sandboxed) client, so
   the trusted page reads the pinned files and hands their bytes over the port; in the worker `fetch()` and `importScripts()` are
   replaced by a lookup in those bytes, which is emptied once Python has started.
-* **Service worker** `engine/pyodide-sw.js`, scope `/vendor/pyodide/` (needs `Service-Worker-Allowed: /vendor/`). It controls only a
-  script-less loader page it serves itself; the page calls that frame's `fetch()`, so the requests go through the worker: cache-first
+* **Service worker:** the app's one service worker (`src/composition/sw.ts`, served as `/sw.js`, scope `/`; it also keeps the app shell
+  for offline use) handles the Python files. It serves a script-less loader page itself (`/vendor/pyodide/__loader.html`); the page calls that frame's `fetch()`, so the requests go through the worker: cache-first
   for files the manifest pins (`/vendor/pyodide/0.27.7/…`, `/vendor/pywheels/…`), a network copy is cached only if its sha256 matches
   (else 502 `x-noema-error: integrity`, never cached), unpinned paths are refused (404), the manifest is network-first. Without a
   service worker (refused, unsupported, `NOEMA_CONFIG.py.sw = false`) the page uses the same Cache Storage (`noema-py-v1`) itself, with
@@ -132,8 +133,9 @@ Python's `step()`; the runner itself is `engine/src/37_activity_py.js` (`NoemaPy
 * **Budget:** each `py:step` has `stepMs` (3 s); the top-level code + `init()` 20 s. Over budget → the runner terminates the worker,
   sends `error {code: 'runaway'}` (the core shows Restart) and `py:status {phase: 'stopped'}`; Restart starts a fresh worker with the
   last saved state.
-* **Not in the one-file bundle / `file://`:** `NoemaPy.available()` is false there (`window.NOEMA_BUNDLE`, no secure http(s) origin, no
-  Cache Storage); the core shows the fallback with the reason. The code is inert in `engine.js`.
+* **Not in the one-file bundle / `file://`:** the runtime's descriptor says so before its code is
+  loaded (`available: { where: 'website', note }` in `src/runtimes/manifests.ts`, `availableHere`: `window.NOEMA_BUNDLE`, no secure
+  http(s) origin, no Cache Storage, Worker or WebAssembly → not available); the core shows the fallback with the descriptor's note.
 
 ### Security model
 
@@ -149,20 +151,21 @@ Python's `step()`; the runner itself is `engine/src/37_activity_py.js` (`NoemaPy
    with `deps=False`, then its index is set to an address that does not exist: `micropip.install('six')` at run time fails without a
    request. **Never open PyPI.** An extra is added to the allow-list by review only (a pure-Python wheel, its sha256, its licence).
 4. `python` ≤ 256 KB and must match its `sha256`. Every message the runner relays goes through `ACTP.check` in the core (`py:out` and
-   `py:status` are known there and read by the view); `py:*` from the runner through `NoemaPy.protocol.check`.
+   `py:status` are known there and read by the view); `py:*` from the runner through the service's `protocol.check`.
 
 ### Messages and API (for the integrator)
 
-* `NoemaPy.mountRunner(box, {act, init, title, onMessage, onFail})` → `{send(type, payload, extra), close(), step(inputs) →
+* The service is `(await ACT.runtime('py-module@1')).py` (Settings › Data and sync uses it, `engine/src/70_account.js`).
+* `py.mountRunner(box, {act, init, title, onMessage, onFail})` → `{send(type, payload, extra), close(), step(inputs) →
   Promise<{outputs} | {error: {code, message}}>, restart(), on(type, f) → off, ready}`. `act`: `{id, python, packages?,
   requiresNetwork?, stepMs?, sha256?}`.
 * Messages (envelope `noema.activity/v1`): app → runner `py:boot`, `py:step {inputs}`, `py:restart`; runner → app
   `py:out {outputs | error, ms, init?}`, `py:status {phase: loading | starting | ready | stopped | failed, code?, bytes?, totalBytes?}`.
   `onFail` codes: `packages`, `integrity`, `offline`, `fetch`, `timeout`, `py-start`, `python`, `navigated`, `unavailable`, `empty`,
   `size`.
-* `NoemaPy.need(packages)` → `{files, bytes, missing, missingBytes, extras, extrasMissing}` (what the first use would download).
-* `NoemaPy.prepareOffline({include, onProgress, force})` → `{ok, files, bytes, persisted, failed}`; refuses on Save-Data unless `force`.
-  `NoemaPy.status()` → `{supported, sw, via, persisted, version, cachedBytes, groups: {core, numpy, scipy, micropip, <extra>: {files,
+* `py.need(packages)` → `{files, bytes, missing, missingBytes, extras, extrasMissing}` (what the first use would download).
+* `py.prepareOffline({include, onProgress, force})` → `{ok, files, bytes, persisted, failed}`; refuses on Save-Data unless `force`.
+  `py.status()` → `{supported, sw, via, persisted, version, cachedBytes, groups: {core, numpy, scipy, micropip, <extra>: {files,
   cached, bytes, ready}}}`.
 * Config `NOEMA_CONFIG.py`: `base`, `manifest`, `sw` (URL or `false`), `swScope`, `loader`, `stepMs`, `initMs`, `startMs`.
 
@@ -176,11 +179,12 @@ python3 tools/fetch_pyodide.py --site dist/site [--cache DIR]
 
 downloads the pinned files from cdn.jsdelivr.net (Pyodide) and files.pythonhosted.org (the extras), checks each against its sha256,
 and writes `dist/site/vendor/pyodide/0.27.7/…`, `dist/site/vendor/pywheels/…` and `dist/site/vendor/pyodide/manifest.json`.
-`build_site` copies the service worker to `dist/site/engine/pyodide-sw.js` and writes its headers into `dist/site/_headers`:
+`build_site` writes the service worker `dist/site/sw.js` (its precache list and build version, then the bundle `build/sw.js`) and the
+headers into `dist/site/_headers`:
 
 | path | headers |
 |---|---|
-| `/engine/pyodide-sw.js` | `Service-Worker-Allowed: /vendor/`, `Cache-Control: no-cache` |
+| `/sw.js` | `Cache-Control: no-cache` |
 | `/vendor/pyodide/manifest.json` | `Cache-Control: no-cache` |
 | `/vendor/pyodide/*`, `/vendor/pywheels/*` | `Cache-Control: public, max-age=31536000, immutable` (+ ACAO, CORP for a direct load) |
 | `/vendor/pyodide/*.wasm` | `Content-Type: application/wasm` |
@@ -188,7 +192,7 @@ and writes `dist/site/vendor/pyodide/0.27.7/…`, `dist/site/vendor/pywheels/…
 On Netlify (`netlify.toml`) the build runs `fetch_pyodide.py` after `build.py site` with the downloads kept in the build cache. If
 the fetch fails the deploy still goes out (a warning in the log): Python activities then show their fallback (with "Python is not on this
 device yet…") on that deploy, and the Settings line says Python cannot be reached. Updating Pyodide: `python3 tools/fetch_pyodide.py --pin` (maintainers; it rewrites
-`tools/pyodide_manifest.json`), a new version folder, a new cache name in `pyodide-sw.js`.
+`tools/pyodide_manifest.json`), a new version folder, a new cache name (`PY` in `src/composition/sw.ts` and `CACHE` in `src/runtimes/py-module/runner.ts`).
 
 ## 8. Sizes and measurements
 
@@ -215,14 +219,15 @@ shows meanwhile).
 
 | file | what |
 |---|---|
-| `engine/src/37_activity_py.js` | the runner: `window.NoemaPy`, the sandboxed frame, the worker, the Python `noema` module |
-| `engine/src/37_activity_py_ui.js` | the runtime the app mounts: the sim-spec view with Python's `step()`, the quiet line, the Settings section |
-| `engine/pyodide-sw.js` | the service worker |
+| `src/runtimes/py-module/runner.ts` | the runner (the runtime's Python service `py`): the sandboxed frame, the worker, the Python `noema` module |
+| `src/runtimes/py-module/runtime.ts` | the runtime the app mounts: the sim-spec view with Python's `step()`, the quiet line |
+| `engine/src/70_account.js` | the Settings section "Prepare Python for offline" (on the runtime's service) |
+| `src/composition/sw.ts` | the app's service worker (the Python files among the rest) |
 | `tools/fetch_pyodide.py` | fetches and checks the files into the site (`--pin` rewrites the pin) |
 | `tools/pyodide_manifest.json` | the pin: the files with sha256 and bytes, the packages with their dependencies |
 | `tools/pywheels_allow.json` | the allow-list of extras (`quantiphy` 2.23, MIT, 43.6 KB) |
 | `tests/activities_py.js` | the runner in Chromium, Firefox and WebKit (numpy, scipy, the budget, no way out, extras, offline) |
-| `tests/activities.js`, `tests/activities_pack.py` | the validators (JS = Python), the pack round trip with main.py |
+| `tests/activities.js`, `tests/activities_pack.py` | the validators (their golden messages), the pack round trip with main.py |
 | `tests/activities_app.js` | the app over http: the first-use note, the view, the checks grader, Settings, offline, Greek, the fallbacks |
 
 The harness (`activity_test.py`, `activity_preview.py`) runs Python activities over a local http server when the files are there:

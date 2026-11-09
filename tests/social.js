@@ -1,4 +1,4 @@
-/* 👥 People, study buddies, conversations and study groups (engine/social.js, docs/SOCIAL.md) against the Supabase
+/* 👥 People, study buddies, conversations and study groups (src/features/social, docs/SOCIAL.md) against the Supabase
    emulator (tests/mock_social.js: the rules of cloud/supabase.sql §12).
    Without a browser: the name as searched (Greek in plain and scholarly Latin letters), the server's refusals in words.
    In the browser, three people: Iro finds Νίκος by typing “nikos”, cannot message him before they are buddies (his
@@ -21,12 +21,12 @@ const PORT = 54391, BASE = `http://localhost:${PORT}`;
 function unit() {
   console.log('— the name as searched, and the refusals, without a browser');
   const EN = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n/social/en.arb'), 'utf8'));
-  const NoemaI18n = { t: (k, p = {}) => String(EN[k] ?? k).replace(/\{(\w+)\}/g, (m, x) => p[x] != null ? String(p[x]) : m), err: e => String(e?.message || e), fmt: { number: n => String(n) } };
-  const ctx = { window: {}, crypto: require('crypto').webcrypto, console, URLSearchParams, NoemaI18n, document: { addEventListener() { } } }; ctx.window = ctx; vm.createContext(ctx);
-  for (const f of ['engine/catalog.js', 'engine/vault.js', 'engine/social.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx);
-  const s = ctx.NoemaSocial.searchOf('Νίκος Παπαδάκης');
+  const NoemaI18n = { t: (k, p = {}) => String(EN[k] ?? k).replace(/\{(\w+)\}/g, (m, x) => p[x] != null ? String(p[x]) : m), err: e => String(e?.message || e), fmt: { number: n => String(n) }, onChange() { } };   // (the I18n port listens for a change of language)
+  const ctx = { window: {}, crypto: require('crypto').webcrypto, console, URL, URLSearchParams, TextEncoder, TextDecoder, NoemaI18n, document: { addEventListener() { } } }; ctx.window = ctx; vm.createContext(ctx);
+  vm.runInContext(fs.readFileSync(path.join(ROOT, 'build/app.js'), 'utf8'), ctx);   // build/app.js: NoemaCore.social and NoemaCore.community.social (npm run build)
+  const s = ctx.NoemaCore.social.nameSearch('Νίκος Παπαδάκης');
   ok(/νικο[σς]/.test(s) && /nikos/.test(s) && /papadakis/.test(s), 'Νίκος Παπαδάκης is searched as written (no accents) and in Latin letters: ' + s);
-  ok(/only from their study buddies/.test(ctx.NoemaSocial.why(new Error('they do not take messages from you'))) && /50 MB are full/.test(ctx.NoemaSocial.why(new Error('storage quota: 1 of 52428800 bytes used'))), 'the server’s refusals are said in the learner’s words');
+  ok(/only from their study buddies/.test(ctx.NoemaCore.community.social.why(new Error('they do not take messages from you'))) && /50 MB are full/.test(ctx.NoemaCore.community.social.why(new Error('storage quota: 1 of 52428800 bytes used'))), 'the server’s refusals are said in the learner’s words');
 }
 
 (async () => {
@@ -79,7 +79,7 @@ c = canvas.Canvas(sys.argv[1]); c.drawString(72, 720, 'Genetics summary'); c.sho
     ok(S.buddies.length === 1 && S.buddies[0].status === 'pending' && S.buddies[0].asked_by === uidOf('iro@example.com'), 'she asks to be study buddies');
     await iro.screenshot({ path: SHOTS + '/so1_find.png', fullPage: true });
 
-    await nikos.evaluate(() => NoemaSocial.refresh()); await wait(300);
+    await nikos.evaluate(() => NoemaCore.community.social.refresh()); await wait(300);
     ok(await nikos.locator('#ns-people .bellbadge').innerText() === '1', 'Nikos sees 1 on the People button');
     await nikos.click('.so-tabs [data-tab="buddies"]'); await wait(300);
     ok(/Asked to be your study buddy/i.test(await nikos.locator('.so-buddies').innerText()), 'Buddies tab: Iro asked');
@@ -87,24 +87,24 @@ c = canvas.Canvas(sys.argv[1]); c.drawString(72, 720, 'Genetics summary'); c.sho
     ok(S.buddies[0].status === 'buddies' && /Study buddy/.test(await nikos.locator('.so-buddies').innerText()), 'he accepts: they are study buddies');
 
     console.log('— a conversation: text, a file, a subject, edit, delete');
-    await iro.evaluate(() => NoemaSocial.refresh()); await iro.click('.so-tabs [data-tab="buddies"]'); await wait(300);
+    await iro.evaluate(() => NoemaCore.community.social.refresh()); await iro.click('.so-tabs [data-tab="buddies"]'); await wait(300);
     await iro.click('.so-buddies .so-act'); await wait(1000);
     ok(/#\/chat\//.test(iro.url()) && await iro.locator('.so-box').count() === 1, 'Message opens their conversation');
     await iro.fill('.so-box', 'Hi Nikos! Shall we study genetics together?'); await iro.keyboard.press('Enter');
     ok(await until(() => iro.locator('.so-msg.mine').count().then(n => n === 1)), 'Enter sends');
-    const [fc] = await Promise.all([iro.waitForEvent('filechooser'), (async () => { await iro.click('.so-composer .ns-menubtn'); await iro.click('.ns-pop button:has-text("File")'); })()]);
+    const [fc] = await Promise.all([iro.waitForEvent('filechooser'), (async () => { await iro.click('.so-composer .ns-menubtn'); await iro.click('noema-menu-item:visible:has-text("File")'); })()]);
     await fc.setFiles(PDF);
     ok(await until(() => iro.locator('.so-att-file').count().then(n => n === 1), 15000) && S.chatFiles.length === 1 && S.chatFiles[0].status === 'ok' && S.chatObj[S.chatFiles[0].path]?.data.length === S.chatFiles[0].size, 'a PDF is sent: its row, the file whole, checked by the server');
-    const [fc2] = await Promise.all([iro.waitForEvent('filechooser'), (async () => { await iro.click('.so-composer .ns-menubtn'); await iro.click('.ns-pop button:has-text("File")'); })()]);
+    const [fc2] = await Promise.all([iro.waitForEvent('filechooser'), (async () => { await iro.click('.so-composer .ns-menubtn'); await iro.click('noema-menu-item:visible:has-text("File")'); })()]);
     const EXE = path.join(TF, 'notes.pdf'); fs.writeFileSync(EXE, 'MZ a program pretending'); await fc2.setFiles(EXE);
     ok(await until(async () => /not what its name says/.test(await toast(iro))) && S.chatFiles.length === 1, 'a program renamed .pdf is refused before it leaves the device');
-    await iro.click('.so-composer .ns-menubtn'); await iro.click('.ns-pop button:has-text("Subject")'); await wait(400);
-    const subj = await until(() => iro.locator('.ns-sheet .so-pick').count());
-    if (subj) { await iro.click('.ns-sheet .so-pick >> nth=1'); ok(await until(() => iro.locator('.so-att-subject').count().then(n => n === 1), 15000) && S.chatFiles.some(f => f.mime === 'application/json'), 'one of her subjects is sent (its pack, as a file of the room)'); }
+    await iro.click('.so-composer .ns-menubtn'); await iro.click('noema-menu-item:visible:has-text("Subject")'); await wait(400);
+    const subj = await until(() => iro.locator('.so-picksheet .so-pick').count());
+    if (subj) { await iro.click('.so-picksheet .so-pick >> nth=1'); ok(await until(() => iro.locator('.so-att-subject').count().then(n => n === 1), 15000) && S.chatFiles.some(f => f.mime === 'application/json'), 'one of her subjects is sent (its pack, as a file of the room)'); }
     else ok(false, 'Iro has a subject to send');
     await iro.screenshot({ path: SHOTS + '/so2_chat.png', fullPage: true });
     const rid = Object.values(S.rooms).find(r => r.kind === 'dm').id;
-    await nikos.evaluate(() => NoemaSocial.refresh()); await wait(300);
+    await nikos.evaluate(() => NoemaCore.community.social.refresh()); await wait(300);
     ok(await nikos.locator('#ns-people .bellbadge').innerText() === '3', 'Nikos: 3 new messages on the People button');
     await nikos.click('.so-tabs [data-tab="chats"]'); await wait(200);
     await nikos.click(`.so-room[data-room="${rid}"]`); await wait(1200);
@@ -113,34 +113,34 @@ c = canvas.Canvas(sys.argv[1]); c.drawString(72, 720, 'Genetics summary'); c.sho
     ok(await until(() => nikos.locator('.so-att-file iframe').count()), 'Show opens the PDF in place');
     const [dl] = await Promise.all([nikos.waitForEvent('download'), nikos.click('.so-att-file .so-download')]);
     ok(dl.suggestedFilename() === 'Genetics summary.pdf' && (await fs.promises.readFile(await dl.path())).subarray(0, 4).toString() === '%PDF', 'Download gives the PDF with its name');
-    if (subj) { await nikos.click('.so-att-subject .so-addsubj');
+    if (subj) { await nikos.click('.so-att-subject .so-addsubj'); await nikos.click('.nc-ask .nc-ok');   // “Open it now?”
       ok(await until(() => nikos.evaluate(async () => (await Noema.subjectsFor(Noema.account.id)).filter(s => /^demo-physics-/.test(s.id) && s.title === 'Demo Physics').length === 1)) && await until(() => nikos.evaluate(() => /#\/subject/.test(location.hash))),
         'he adds her subject to his subjects (a copy beside his own Demo Physics) and opens it'); await goto(nikos, '#/chat/' + rid); await wait(600); }
-    ok(await until(() => nikos.evaluate(() => NoemaSocial.waiting()).then(n => n === 0)), 'read: nothing waits for him any more');
+    ok(await until(() => nikos.evaluate(() => NoemaCore.community.social.waiting()).then(n => n === 0)), 'read: nothing waits for him any more');
     await nikos.fill('.so-box', 'Yes! Tuesday at the library?'); await nikos.click('.so-send');
     ok(await until(() => iro.locator('.so-msg:not(.mine)').count().then(n => n === 1), 8000), 'his reply reaches her open conversation by itself');
-    await iro.click('.so-msg.mine >> nth=0 >> .so-msgmenu'); await iro.click('.ns-pop button:has-text("Edit")'); await wait(200);
-    await iro.fill('.ns-modal textarea', 'Hi Nikos! Shall we study genetics together this week?'); await iro.click('.so-saveedit');
+    await iro.click('.so-msg.mine >> nth=0 >> .so-msgmenu'); await iro.click('noema-menu-item:visible:has-text("Edit")'); await wait(200);
+    await iro.fill('.so-editdlg textarea', 'Hi Nikos! Shall we study genetics together this week?'); await iro.click('.so-saveedit');
     ok(await until(() => iro.locator('.so-msg.mine >> nth=0').innerText().then(t => /this week/.test(t) && /edited/.test(t))), 'she edits her message (marked “edited”)');
     const nMsgs = S.messages.length; await iro.click('.so-msg.mine.head >> nth=-1 >> .so-msgmenu').catch(() => { });
-    await iro.click('.ns-pop button:has-text("Delete")').catch(() => { });
+    await iro.click('noema-menu-item:visible:has-text("Delete")').catch(() => { }); await iro.click('.nc-ask .nc-ok').catch(() => { });   // “Delete it?”
     ok(await until(() => S.messages.some(m => m.deleted && !m.att && m.body === '')) && S.messages.length === nMsgs, 'she deletes one: its text and attachment are gone for everyone, “Message deleted” stays');
 
     console.log('— a study group: invite a buddy, an invitation link, its own vault folder');
     await goto(iro, '#/people'); await iro.click('.so-tabs [data-tab="groups"]'); await iro.click('.so-newgroup'); await wait(200);
-    await iro.click('.so-create'); ok(/Give the group a name/.test(await iro.locator('.ns-modal').innerText()), 'a group needs a name');
-    await iro.fill('.ns-modal [data-k="name"]', 'Genetics  2025'); await iro.fill('.ns-modal [data-k="course"]', 'Genetics'); await iro.fill('.ns-modal [data-k="university"]', 'University of Crete'); await iro.fill('.ns-modal [data-k="emoji"]', '🧬');
+    await iro.click('.so-create'); ok(/Give the group a name/.test(await iro.locator('.so-groupdlg').innerText()), 'a group needs a name');
+    await iro.fill('.so-groupdlg [data-k="name"]', 'Genetics  2025'); await iro.fill('.so-groupdlg [data-k="course"]', 'Genetics'); await iro.fill('.so-groupdlg [data-k="university"]', 'University of Crete'); await iro.fill('.so-groupdlg [data-k="emoji"]', '🧬');
     await iro.click('.so-create'); await wait(1000);
     const g = Object.values(S.rooms).find(r => r.kind === 'group');
     ok(g && g.name === 'Genetics 2025' && /#\/group\//.test(iro.url()) && /Genetics 2025/.test(await iro.locator('.so-grouptop').innerText()), 'the group is made (its name tidied), Iro is its owner: its page');
     await iro.click('.so-invite'); await wait(300);
     await iro.click(`.so-sheet .so-person[data-person="${uidOf('nikos@example.com')}"] .so-inviteone`); await wait(400);
     ok(S.members.some(m => m.room === g.id && m.user_id === uidOf('nikos@example.com') && m.status === 'invited'), 'she invites her buddy Nikos');
-    await iro.click('.so-sheet button:has-text("Done")'); await wait(500);
+    await iro.click('.so-sheet noema-button:has-text("Done")'); await wait(500);
     await iro.click('.so-linkon'); await wait(500);
     ok(/^[A-Za-z0-9]{18}$/.test(g.join_code || '') && await iro.locator('.so-copylink').count() === 1, 'she makes an invitation link');
     await iro.screenshot({ path: SHOTS + '/so3_group.png', fullPage: true });
-    await nikos.evaluate(() => NoemaSocial.refresh()); await goto(nikos, '#/people'); await nikos.click('.so-tabs [data-tab="chats"]'); await wait(300);
+    await nikos.evaluate(() => NoemaCore.community.social.refresh()); await goto(nikos, '#/people'); await nikos.click('.so-tabs [data-tab="chats"]'); await wait(300);
     ok(await nikos.locator(`.so-invite[data-room="${g.id}"]`).count() === 1, 'Nikos sees the invitation in his chats');
     await nikos.click(`.so-invite[data-room="${g.id}"] .so-joinbtn`); await wait(1000);
     ok(S.members.find(m => m.room === g.id && m.user_id === uidOf('nikos@example.com')).status === 'joined' && new RegExp(g.id).test(nikos.url()), 'he joins: the group chat opens');
@@ -162,7 +162,7 @@ c = canvas.Canvas(sys.argv[1]); c.drawString(72, 720, 'Genetics summary'); c.sho
       c.nodes = { dna: mk('dna', 'DNA', 'foundation'), genes: mk('genes', 'Genes', 'intro') }; c.edges = [{ from: 'dna', to: 'genes' }];
       c.goalId = 'genes'; c.status = 'ready'; c.stage = 'done'; c.title = 'Genetics'; c.prefetch = 0; C.save(acc, c); return c.id; });
     await goto(iro, '#/group/' + g.id); await wait(800);
-    await iro.click('.so-sharerm'); await wait(300); await iro.click(`.ns-sheet .so-pick[data-id="${cid}"]`);
+    await iro.click('.so-sharerm'); await wait(300); await iro.click(`.so-picksheet .so-pick[data-id="${cid}"]`);
     ok(await until(() => srv.state.curs[cid] && !srv.state.curs[cid].public && S.roomRms.some(x => x.room === g.id && x.curriculum === cid) && S.messages.some(m => m.room === g.id && m.att?.kind === 'roadmap')), 'Iro shares her Roadmap with the group: published privately, listed in the group, announced in its chat');
     await goto(eleni, '#/group/' + g.id); await wait(1000);
     await eleni.click(`.so-rms [data-cur="${cid}"] button`);
@@ -182,7 +182,7 @@ c = canvas.Canvas(sys.argv[1]); c.drawString(72, 720, 'Genetics summary'); c.sho
     const T4 = await token('kostas@example.com');
     ok(!(await (await rest(T4, '/rest/v1/noema_vault?select=id')).json()).some(f => f.id === vf.id) && (await rest(T4, '/storage/v1/object/authenticated/noema-vault/' + vf.path)).status === 404
       && (await (await rest(T3, '/rest/v1/noema_vault?select=id')).json()).some(f => f.id === vf.id), 'someone outside the group neither sees nor downloads it; Eleni (a member) does');
-    await iro.evaluate(() => NoemaVault.reset()); await goto(iro, '#/vault?g=' + g.id + '&id=' + vf.id); await wait(1200);
+    await iro.evaluate(() => NoemaCore.community.vault.reset()); await goto(iro, '#/vault?g=' + g.id + '&id=' + vf.id); await wait(1200);
     ok(await until(() => iro.locator('.vt-sheet .vt-sendto').count()), 'the file’s page has “Send to…”');
     await iro.click('.vt-sheet .vt-sendto'); await wait(500);
     await iro.fill('.so-sendline', 'For Tuesday'); await iro.click(`.so-sheet .so-pick[data-room="${g.id}"]`); await wait(800);
@@ -195,23 +195,23 @@ c = canvas.Canvas(sys.argv[1]); c.drawString(72, 720, 'Genetics summary'); c.sho
 
     console.log('— roles, reporting, blocking, privacy');
     await goto(iro, '#/group/' + g.id); await wait(800);
-    await iro.click(`.so-member[data-person="${uidOf('eleni@example.com')}"] .ns-menubtn`); await iro.click('.ns-pop button:has-text("Make admin")'); await wait(800);
+    await iro.click(`.so-member[data-person="${uidOf('eleni@example.com')}"] .ns-menubtn`); await iro.click('noema-menu-item:visible:has-text("Make admin")'); await wait(800);
     ok(S.members.find(m => m.room === g.id && m.user_id === uidOf('eleni@example.com')).role === 'admin' && /Admin/.test(await iro.locator('.so-members').innerText()), 'the owner names Eleni admin');
     const T2 = await token('nikos@example.com');
     await rest(T2, `/rest/v1/noema_room_members?room=eq.${g.id}&user_id=eq.${uidOf('eleni@example.com')}`, { method: 'PATCH', body: JSON.stringify({ status: 'left' }) });
     ok(S.members.find(m => m.room === g.id && m.user_id === uidOf('eleni@example.com')).status === 'joined', 'a plain member cannot remove anyone (the row is not his to change)');
     await goto(nikos, '#/chat/' + g.id); await wait(1200);
     const em = S.messages.find(m => m.room === g.id && m.author === uidOf('eleni@example.com'));
-    await nikos.click(`.so-msg[data-id="${em.id}"] .so-msgmenu`); await nikos.click('.ns-pop button:has-text("Report")'); await wait(200);
+    await nikos.click(`.so-msg[data-id="${em.id}"] .so-msgmenu`); await nikos.click('noema-menu-item:visible:has-text("Report")'); await wait(200);
     await nikos.selectOption('.so-reason', 'live_exam'); await nikos.click('.so-sendreport'); await wait(500);
     ok(S.mreports.length === 1 && S.mreports[0].reason === 'live_exam' && !em.hidden, 'Nikos reports a message (answers of an exam not held yet): one report does not hide it');
     await goto(nikos, '#/people'); await nikos.fill('.so-find', 'eleni'); await wait(800);
-    await nikos.click('.so-found .so-who'); await nikos.click('.so-sheet .so-blockbtn'); await wait(800);
+    await nikos.click('.so-found .so-who'); await nikos.click('.so-sheet .so-blockbtn'); await nikos.click('.nc-ask .nc-ok'); await wait(800);
     ok(S.blocks.length === 1, 'Nikos blocks Eleni');
     ok(!(await (await rest(T3, '/rest/v1/noema_people?select=user_id&or=(search.ilike."*nikos*")')).json()).length
       && (await (await rest(T3, '/rest/v1/rpc/noema_dm_open', { method: 'POST', body: JSON.stringify({ x: uidOf('nikos@example.com') }) })).json()).message === 'they do not take messages from you', 'she no longer finds him or can message him');
     await goto(iro, '#/people'); await iro.click('.so-view .ns-menubtn').catch(() => iro.click('.ns-top .ns-menubtn')); await iro.click('.ns-pop button:has-text("Privacy")'); await wait(400);
-    await iro.click('.so-sheet .ns-pfsw'); await iro.click('.so-dmfrom [data-v="nobody"]'); await iro.click('.so-saveprivacy'); await wait(500);
+    await iro.click('.so-sheet .so-findsw'); await iro.click('.so-dmfrom [data-v="nobody"]'); await iro.click('.so-saveprivacy'); await wait(500);
     ok(S.people[uidOf('iro@example.com')].findable === false && S.people[uidOf('iro@example.com')].dm_from === 'nobody', 'privacy: Iro is no longer findable and takes no new conversations');
     ok(!(await (await rest(T4, '/rest/v1/noema_people?select=user_id&or=(search.ilike."*iro*")')).json()).length && (await (await rest(T2, '/rest/v1/noema_people?select=user_id&or=(search.ilike."*iro*")')).json()).length === 1, 'a stranger no longer finds her; her buddy still sees her');
 

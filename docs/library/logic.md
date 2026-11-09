@@ -1,4 +1,4 @@
-# `logic@1` — logic from truth tables to norms (`engine/src/47_lib_logic.js`, `NoemaLibLogic`)
+# `logic@1` — logic from truth tables to norms (`src/engines/logic/logic.ts`, `NoemaLibLogic`)
 
 `logic@1` is a general engine of the library (`docs/INTERACTIVE_LIBRARY.md`). It has **one formula language**, written in ASCII or
 Unicode. Its parser gives precise error codes and positions. Over that language it runs **24 tasks**:
@@ -23,14 +23,11 @@ Unicode. Its parser gives precise error codes and positions. Over that language 
 Each task gives scalars, series, a scene and a trace. A slider bound to `model.step` walks through the trace: the SAT decisions,
 the resolvents, the tableau's worlds, the announcements, the grounded iterations, or the days of a norm trace.
 
-The Python twin is `tools/lib_logic.py`. It has the same tables and the same parser, with the same codes, positions and messages.
-It gives the same problems as the JS `checkSpec`, and it does not compute the tasks.
-
 The tests:
 - `node tests/lib_logic.js` has 148 assertions: published values, every code, the API, the adapter, the Worker, speed and the
   reference activities.
-- `tests/fixtures/enginelib/logic.json` has 60 specs (28 good, 32 bad). `node tests/enginelib.js` runs the JS ↔ Python parity on
-  it once the catalogue lists `logic@1`; until then `tests/lib_logic.js` runs that parity itself.
+- `tests/fixtures/enginelib/logic.json` has 60 specs (28 good, 32 bad). `node tests/enginelib.js` holds the checks to the golden outputs of the former Python
+  twin on it once the catalogue lists `logic@1`; until then `tests/lib_logic.js` does it itself.
 
 The reference activities are `tools/activities_examples/muddy-children` (epistemic) and `tools/activities_examples/duty-repair`
 (contrary-to-duty norms over a week).
@@ -108,11 +105,11 @@ that matches the facts, so `value` is NaN and the flag `empty` is set. Its exerc
 | `step` | numx | traces | how far the trace is shown (default: all); for epistemic, the number of announcements applied; for norms, the number of trace steps checked |
 | `view` | 4 numbers | scenes | the scene's view |
 
-### 1.2 Checker codes (`checkSpec`, the same in `tools/lib_logic.py`)
+### 1.2 Checker codes (`checkSpec`)
 
 | code | when |
 |---|---|
-| `format`, `value`, `enum`, `size`, `unknown-field` (warning) | the core's table walk (`46_lib_core.js`) |
+| `format`, `value`, `enum`, `size`, `unknown-field` (warning) | the core's table walk (`src/engines/kernel/core.ts`) |
 | `value` | a part the task needs is missing (`missing (kripke needs worlds)`), two formulas for `equivalent`, two terms for `unify`, a mood that is not three of A E I O, `domain` and `size` together, `worlds` with `puzzle` or `preset`, a `loop` outside the trace, a world's atom that is not an atom name, a norm without `act` (and, for `norms`, without `kind`), `puzzle.muddy` > n |
 | `parse-empty` `parse-long` `parse-char` `parse-token` `parse-eof` `parse-paren` `parse-op` `parse-agent` `parse-ctl` `parse-deep` | a formula does not parse (§2.2); the message gives the place |
 | `term` | a unification term is a formula, not a term |
@@ -545,9 +542,8 @@ randomness.
 
 ## 9. API for other engines (philo@1, rhetoric@1, law@1, agents@1)
 
-These names on `window.NoemaLibLogic` are stable. `source()` returns `'(' + module + ')(self);'`. The module needs
-`NoemaLibCore` first (`NoemaLibCore.source()`); NoemaExpr is needed only for numx expressions. `engine.workerSource` is a string
-that holds NoemaExpr, the core and this module. ASTs are plain objects `{t, …}`: `atom n`, `top`, `bot`, `not a`, `and/or/xor/imp/iff a b`,
+These names of the module's default export (`import NoemaLibLogic from '../logic/logic.ts'`) are stable. It imports the core;
+NoemaExpr is needed only for numx expressions. `engine.workerSource` is its Worker bundle: NoemaExpr, the core and this module. ASTs are plain objects `{t, …}`: `atom n`, `top`, `bot`, `not a`, `and/or/xor/imp/iff a b`,
 `all/ex v a`, `pred n args`, `eq l r`, `box/dia a ag?`, `O/P/F a c?`, `K/B ag a`, `EK/CK/DK g a`, `ann/annd f a`, `X/Fe/G a`,
 `U/R/W a b`, `A/E p`; terms `{t: 'fn', n, args}`.
 

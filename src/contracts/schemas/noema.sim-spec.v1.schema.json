@@ -1,0 +1,625 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noema-lite.netlify.app/schemas/noema.sim-spec.v1.schema.json",
+  "title": "spec",
+  "description": "A declarative simulation (runtime sim-spec@1, docs/INTERACTIVE.md §12): activities/<id>/spec.json. This schema states the SHAPE that checkSimSpec (src/features/content/domain/activities/simspec.ts) enforces (fields, types, enums, limits). What a schema cannot say stays with those validators: every expression parses in the expression language with only the declared names (docs/INTERACTIVE_SIMEXPR.md), names are unique and not reserved, min < max and min <= default <= max, a log scale has min > 0, every key is in every string table, the netlist, bindings and bench refer to real parts (circuit-mna@1), the spec is at most 64 KB. Titles are keys of the authoring UI's labels (engine.author.f.<title> in i18n/engine/en.arb). 'x-noema' marks a field for the authoring UI: 'expr' (an expression), 'key' (a key of the string tables), 'name' (a new name). tests/activity_author.js checks this schema against the reference specs and the parity cases of tests/activities.js.",
+  "type": "object",
+  "required": ["format", "params"],
+  "additionalProperties": false,
+  "properties": {
+    "format": { "const": "noema.sim-spec/v1" },
+    "engine": { "title": "engine", "enum": ["formula@1", "circuit-mna@1"], "default": "formula@1" },
+    "title": { "title": "title", "$ref": "#/$defs/key" },
+    "intro": { "title": "intro", "$ref": "#/$defs/key" },
+    "consts": {
+      "title": "consts",
+      "type": "object",
+      "maxProperties": 24,
+      "propertyNames": { "$ref": "#/$defs/name" },
+      "additionalProperties": { "title": "const", "type": "number" }
+    },
+    "params": { "title": "params", "type": "array", "minItems": 1, "maxItems": 24, "items": { "$ref": "#/$defs/param" } },
+    "derived": { "title": "derived", "type": "array", "maxItems": 48, "items": { "$ref": "#/$defs/derived" } },
+    "model": { "title": "model", "$ref": "#/$defs/model" },
+    "outputs": { "title": "outputs", "type": "array", "maxItems": 24, "items": { "$ref": "#/$defs/output" } },
+    "readouts": { "title": "readouts", "type": "array", "maxItems": 24, "items": { "$ref": "#/$defs/readout" } },
+    "plots": { "title": "plots", "type": "array", "maxItems": 6, "items": { "$ref": "#/$defs/plot" } },
+    "bench": { "title": "bench", "$ref": "#/$defs/bench" },
+    "parts": {
+      "title": "parts",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "items": { "$ref": "#/$defs/part" },
+      "description": "several engines in one spec (docs/INTERACTIVE.md §12.8): each part an engine with its model, outputs and inputs; leave engine, model and outputs out"
+    },
+    "couple": {
+      "title": "couple",
+      "oneOf": [
+        { "title": "coupleKind.chain", "const": "chain" },
+        { "title": "coupleKind.custom", "$ref": "#/$defs/couple" }
+      ]
+    }
+  },
+  "if": { "required": ["engine"], "properties": { "engine": { "const": "circuit-mna@1" } } },
+  "then": { "required": ["model"] },
+  "else": {
+    "not": {
+      "anyOf": [{ "required": ["model"] }, { "required": ["outputs"] }, { "required": ["bench"], "not": { "required": ["parts"] } }]
+    }
+  },
+  "$defs": {
+    "part": {
+      "type": "object",
+      "required": ["id"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "title": "partId", "$ref": "#/$defs/benchId" },
+        "engine": { "title": "engine", "type": "string", "minLength": 1 },
+        "model": { "title": "model", "type": "object" },
+        "outputs": { "title": "outputs", "type": "array", "minItems": 1, "maxItems": 24, "items": { "$ref": "#/$defs/partOutput" } },
+        "inputs": { "$ref": "#/$defs/partInputs" },
+        "use": { "title": "partUse", "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,60}$" },
+        "with": { "title": "partWith", "type": "object" }
+      },
+      "anyOf": [{ "required": ["engine"] }, { "required": ["use"] }]
+    },
+    "partOutput": {
+      "type": "object",
+      "required": ["id", "kind"],
+      "properties": {
+        "id": { "title": "id", "type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_]{0,31}$", "x-noema": "name" },
+        "kind": { "title": "outKind", "enum": ["scalar", "series", "scene", "sound"] }
+      }
+    },
+    "partInputs": {
+      "title": "partInputs",
+      "type": "object",
+      "maxProperties": 24,
+      "propertyNames": { "$ref": "#/$defs/name" },
+      "additionalProperties": { "$ref": "#/$defs/partInput" }
+    },
+    "partInput": {
+      "oneOf": [
+        { "title": "num", "type": "number" },
+        { "title": "exprAlt", "$ref": "#/$defs/expr" },
+        {
+          "title": "partInput.series",
+          "type": "object",
+          "required": ["series"],
+          "additionalProperties": false,
+          "properties": {
+            "series": { "title": "partSeries", "type": "string", "minLength": 1, "x-noema": "series" },
+            "points": { "title": "points", "type": "integer", "minimum": 2, "maximum": 2000 },
+            "stat": { "title": "stat", "enum": ["final", "min", "max", "mean", "pp", "rms"] }
+          }
+        }
+      ]
+    },
+    "couple": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "loops": { "title": "loops", "type": "array", "minItems": 1, "maxItems": 4, "items": { "$ref": "#/$defs/partLoop" } },
+        "cosim": { "title": "cosim", "$ref": "#/$defs/cosim" }
+      }
+    },
+    "partLoop": {
+      "type": "object",
+      "required": ["parts", "tol"],
+      "additionalProperties": false,
+      "properties": {
+        "parts": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,31}$", "x-noema": "part" },
+          "title": "loopParts"
+        },
+        "tol": { "title": "tol", "type": "number", "exclusiveMinimum": 0 },
+        "maxIter": { "title": "maxIter", "type": "integer", "minimum": 1, "maximum": 50 },
+        "relax": { "title": "relax", "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+        "init": {
+          "title": "init",
+          "type": "object",
+          "additionalProperties": { "type": "number" },
+          "propertyNames": { "$ref": "#/$defs/name" }
+        }
+      }
+    },
+    "cosim": {
+      "type": "object",
+      "required": ["tEnd", "dt", "parts"],
+      "additionalProperties": false,
+      "properties": {
+        "tEnd": { "title": "tEnd", "$ref": "#/$defs/numOrExpr" },
+        "dt": { "title": "dt", "$ref": "#/$defs/numOrExpr" },
+        "parts": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,31}$", "x-noema": "part" },
+          "title": "cosimParts"
+        },
+        "order": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,31}$", "x-noema": "part" },
+          "title": "cosimOrder"
+        },
+        "t0": { "title": "t0", "$ref": "#/$defs/numOrExpr" },
+        "time": { "title": "cosimTime", "$ref": "#/$defs/name" },
+        "init": {
+          "title": "init",
+          "type": "object",
+          "additionalProperties": { "type": "number" },
+          "propertyNames": { "$ref": "#/$defs/name" }
+        },
+        "iterate": {
+          "title": "iterate",
+          "type": "object",
+          "required": ["tol"],
+          "additionalProperties": false,
+          "properties": {
+            "tol": { "title": "tol", "type": "number", "exclusiveMinimum": 0 },
+            "maxIter": { "title": "maxIter", "type": "integer", "minimum": 1, "maximum": 50 }
+          }
+        }
+      }
+    },
+    "key": {
+      "type": "string",
+      "pattern": "^[a-z][a-zA-Z0-9_.-]{0,63}$",
+      "x-noema": "key",
+      "description": "a key of the activity's string tables (strings.<locale>.json)"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[A-Za-z_][A-Za-z0-9_]{0,31}$",
+      "not": { "enum": ["pi", "e", "true", "false"] },
+      "x-noema": "name",
+      "description": "a letter or _, then letters, digits, _ (at most 32); not pi, e or a reserved word"
+    },
+    "expr": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000,
+      "pattern": "\\S",
+      "x-noema": "expr",
+      "description": "an expression of docs/INTERACTIVE_SIMEXPR.md over the names the spec declares"
+    },
+    "numOrExpr": {
+      "oneOf": [
+        { "title": "num", "type": "number" },
+        { "title": "exprAlt", "$ref": "#/$defs/expr" }
+      ]
+    },
+    "posOrExpr": {
+      "oneOf": [
+        { "title": "num", "type": "number", "exclusiveMinimum": 0 },
+        { "title": "exprAlt", "$ref": "#/$defs/expr" }
+      ]
+    },
+    "unit": { "title": "unit", "type": "string", "maxLength": 16 },
+    "format": { "title": "numFormat", "enum": ["auto", "si", "fixed"] },
+    "digits": { "title": "digits", "type": "integer", "minimum": 1, "maximum": 8 },
+    "scale": { "title": "scale", "enum": ["lin", "log"] },
+    "benchId": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,31}$" },
+    "param": {
+      "type": "object",
+      "required": ["id", "kind", "label"],
+      "properties": {
+        "id": { "title": "id", "$ref": "#/$defs/name" },
+        "label": { "title": "label", "$ref": "#/$defs/key" },
+        "kind": { "title": "kind", "enum": ["slider", "number", "toggle", "choice"] }
+      },
+      "oneOf": [
+        { "title": "kind.slider", "$ref": "#/$defs/rangeParam", "properties": { "kind": { "const": "slider" } } },
+        { "title": "kind.number", "$ref": "#/$defs/rangeParam", "properties": { "kind": { "const": "number" } } },
+        { "title": "kind.toggle", "properties": { "kind": { "const": "toggle" }, "default": { "title": "default", "type": "boolean" } } },
+        {
+          "title": "kind.choice",
+          "required": ["options"],
+          "properties": {
+            "kind": { "const": "choice" },
+            "options": {
+              "title": "options",
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 12,
+              "items": {
+                "type": "object",
+                "required": ["value", "label"],
+                "properties": { "value": { "title": "value", "type": "number" }, "label": { "title": "label", "$ref": "#/$defs/key" } }
+              }
+            },
+            "default": { "title": "default", "type": "number" }
+          }
+        }
+      ]
+    },
+    "rangeParam": {
+      "required": ["min", "max", "default"],
+      "properties": {
+        "min": { "title": "min", "type": "number" },
+        "max": { "title": "max", "type": "number" },
+        "step": { "title": "step", "type": "number", "exclusiveMinimum": 0 },
+        "default": { "title": "default", "type": "number" },
+        "scale": { "$ref": "#/$defs/scale" },
+        "unit": { "$ref": "#/$defs/unit" },
+        "format": { "$ref": "#/$defs/format" },
+        "digits": { "$ref": "#/$defs/digits" }
+      }
+    },
+    "derived": {
+      "type": "object",
+      "required": ["id", "expr"],
+      "properties": { "id": { "title": "id", "$ref": "#/$defs/name" }, "expr": { "title": "expr", "$ref": "#/$defs/expr" } }
+    },
+    "readout": {
+      "type": "object",
+      "required": ["label", "expr"],
+      "properties": {
+        "label": { "title": "label", "$ref": "#/$defs/key" },
+        "expr": { "title": "expr", "$ref": "#/$defs/expr" },
+        "unit": { "$ref": "#/$defs/unit" },
+        "format": { "$ref": "#/$defs/format" },
+        "digits": { "$ref": "#/$defs/digits" }
+      }
+    },
+    "axis": {
+      "type": "object",
+      "properties": {
+        "label": { "title": "label", "$ref": "#/$defs/key" },
+        "unit": { "$ref": "#/$defs/unit" },
+        "min": { "title": "min", "$ref": "#/$defs/numOrExpr" },
+        "max": { "title": "max", "$ref": "#/$defs/numOrExpr" },
+        "scale": { "$ref": "#/$defs/scale" },
+        "format": { "$ref": "#/$defs/format" },
+        "digits": { "$ref": "#/$defs/digits" }
+      }
+    },
+    "mark": {
+      "type": "object",
+      "required": ["axis", "expr"],
+      "properties": {
+        "axis": { "title": "axis", "enum": ["x", "y"] },
+        "expr": { "title": "expr", "$ref": "#/$defs/expr" },
+        "label": { "title": "label", "$ref": "#/$defs/key" }
+      }
+    },
+    "plot": {
+      "type": "object",
+      "required": ["kind", "x", "series"],
+      "properties": {
+        "kind": { "title": "plotKind", "enum": ["function", "series"] },
+        "title": { "title": "title", "$ref": "#/$defs/key" }
+      },
+      "oneOf": [
+        {
+          "title": "plotKind.function",
+          "properties": {
+            "kind": { "const": "function" },
+            "x": {
+              "title": "xAxis",
+              "allOf": [{ "$ref": "#/$defs/axis" }],
+              "required": ["var", "min", "max"],
+              "properties": { "var": { "title": "xVar", "$ref": "#/$defs/name" } }
+            },
+            "y": { "title": "yAxis", "$ref": "#/$defs/axis" },
+            "points": { "title": "points", "type": "integer", "minimum": 2, "maximum": 2000 },
+            "series": {
+              "title": "lines",
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 6,
+              "items": {
+                "type": "object",
+                "required": ["expr"],
+                "properties": { "expr": { "title": "expr", "$ref": "#/$defs/expr" }, "label": { "title": "label", "$ref": "#/$defs/key" } }
+              }
+            },
+            "marks": { "title": "marks", "type": "array", "maxItems": 8, "items": { "$ref": "#/$defs/mark" } }
+          }
+        },
+        {
+          "title": "plotKind.series",
+          "properties": {
+            "kind": { "const": "series" },
+            "x": {
+              "title": "xAxis",
+              "allOf": [{ "$ref": "#/$defs/axis" }],
+              "required": ["series"],
+              "properties": { "series": { "title": "xSeries", "type": "string", "x-noema": "series" } }
+            },
+            "y": { "title": "yAxis", "$ref": "#/$defs/axis" },
+            "series": {
+              "title": "lines",
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 6,
+              "items": {
+                "type": "object",
+                "required": ["y"],
+                "properties": {
+                  "y": { "title": "ySeries", "type": "string", "x-noema": "series" },
+                  "label": { "title": "label", "$ref": "#/$defs/key" }
+                }
+              }
+            },
+            "marks": { "title": "marks", "type": "array", "maxItems": 8, "items": { "$ref": "#/$defs/mark" } }
+          }
+        }
+      ]
+    },
+    "model": {
+      "type": "object",
+      "required": ["netlist"],
+      "additionalProperties": false,
+      "properties": {
+        "netlist": { "title": "netlist", "$ref": "noema.circuit.v1.schema.json" },
+        "bindings": {
+          "title": "bindings",
+          "type": "array",
+          "maxItems": 24,
+          "items": {
+            "type": "object",
+            "required": ["element", "expr"],
+            "additionalProperties": false,
+            "properties": {
+              "element": { "title": "element", "type": "string", "x-noema": "element" },
+              "prop": { "title": "prop", "type": "string" },
+              "expr": { "title": "expr", "$ref": "#/$defs/expr" }
+            }
+          }
+        },
+        "transient": {
+          "title": "transient",
+          "type": "object",
+          "required": ["tEnd"],
+          "additionalProperties": false,
+          "properties": { "tEnd": { "title": "tEnd", "$ref": "#/$defs/posOrExpr" }, "dt": { "title": "dt", "$ref": "#/$defs/posOrExpr" } }
+        },
+        "noise": {
+          "title": "noise",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "rel": { "title": "rel", "type": "number", "minimum": 0, "maximum": 1 },
+            "abs": { "title": "abs", "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        },
+        "ac": {
+          "title": "ac",
+          "type": "object",
+          "required": ["source", "fStart", "fStop"],
+          "additionalProperties": false,
+          "properties": {
+            "source": { "title": "acSource", "type": "string", "x-noema": "element" },
+            "fStart": { "title": "fStart", "$ref": "#/$defs/posOrExpr" },
+            "fStop": { "title": "fStop", "$ref": "#/$defs/posOrExpr" },
+            "points": { "title": "acPoints", "type": "integer", "minimum": 2, "maximum": 1000 }
+          }
+        }
+      }
+    },
+    "output": {
+      "type": "object",
+      "required": ["id", "kind"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "title": "id", "$ref": "#/$defs/name" },
+        "kind": { "title": "outKind", "enum": ["scalar", "series"] },
+        "node": { "title": "node", "type": "string" },
+        "branch": { "title": "branch", "type": "string", "x-noema": "element" },
+        "time": { "title": "time", "const": true },
+        "probe": {
+          "title": "probe",
+          "type": "object",
+          "required": ["kind"],
+          "properties": {
+            "kind": { "title": "probeKind", "enum": ["V", "I", "R"] },
+            "a": { "title": "a", "type": "string" },
+            "b": { "title": "b", "type": "string" },
+            "element": { "title": "element", "type": "string", "x-noema": "element" },
+            "pin": { "title": "pin", "type": "integer", "minimum": 0 },
+            "mode": { "title": "mode", "enum": ["dc", "ac", "rms", "avg"] },
+            "zin": { "title": "zin", "type": "number", "minimum": 0 },
+            "tEnd": { "title": "tEnd", "type": "number", "exclusiveMinimum": 0 },
+            "dt": { "title": "dt", "type": "number", "exclusiveMinimum": 0 },
+            "tStart": { "title": "tStart", "type": "number", "minimum": 0 }
+          }
+        },
+        "power": { "title": "power", "type": "string", "x-noema": "element" },
+        "ac": { "title": "acOut", "enum": ["f", "db", "phase", "mag", "dcDb", "peakDb", "fPeak", "f3db", "fLow3db", "fUnity", "pm"] },
+        "ref": { "title": "ref", "type": "string" },
+        "at": { "title": "at", "$ref": "#/$defs/numOrExpr" },
+        "stat": { "title": "stat", "enum": ["final", "min", "max", "mean", "pp", "rms"] }
+      }
+    },
+    "fault": {
+      "type": "object",
+      "required": ["kind"],
+      "properties": { "kind": { "title": "faultKind", "enum": ["open", "short", "drift", "open-trace", "reverse"] } },
+      "oneOf": [
+        {
+          "title": "faultKind.open",
+          "required": ["element"],
+          "properties": {
+            "kind": { "const": "open" },
+            "element": { "title": "element", "type": "string", "x-noema": "element" },
+            "pin": { "title": "pin", "type": "integer", "minimum": 0 }
+          }
+        },
+        {
+          "title": "faultKind.short",
+          "required": ["element"],
+          "properties": {
+            "kind": { "const": "short" },
+            "element": { "title": "element", "type": "string", "x-noema": "element" },
+            "pins": { "title": "pins", "type": "array", "minItems": 2, "maxItems": 2, "items": { "type": "integer", "minimum": 0 } }
+          }
+        },
+        {
+          "title": "faultKind.drift",
+          "required": ["element"],
+          "properties": {
+            "kind": { "const": "drift" },
+            "element": { "title": "element", "type": "string", "x-noema": "element" },
+            "factor": { "title": "factor", "type": "number", "exclusiveMinimum": 0 },
+            "add": { "title": "add", "type": "number" },
+            "param": { "title": "param", "type": "string" }
+          }
+        },
+        {
+          "title": "faultKind.open-trace",
+          "required": ["node"],
+          "properties": {
+            "kind": { "const": "open-trace" },
+            "node": { "title": "node", "type": "string" },
+            "side": { "title": "side", "type": "array", "items": { "type": "string" } }
+          }
+        },
+        {
+          "title": "faultKind.reverse",
+          "required": ["element"],
+          "properties": {
+            "kind": { "const": "reverse" },
+            "element": { "title": "element", "type": "string", "x-noema": "element" },
+            "pins": { "title": "pins", "type": "array", "minItems": 2, "maxItems": 2, "items": { "type": "integer", "minimum": 0 } }
+          }
+        }
+      ]
+    },
+    "instrument": {
+      "type": "object",
+      "required": ["kind"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "title": "instKind", "enum": ["V", "I", "R", "scope", "logic", "bode"] },
+        "points": { "title": "instPoints", "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "parts": {
+          "title": "parts",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 24,
+          "items": {
+            "type": "object",
+            "required": ["element", "label"],
+            "additionalProperties": false,
+            "properties": {
+              "element": { "title": "element", "type": "string", "x-noema": "element" },
+              "label": { "title": "label", "$ref": "#/$defs/key" },
+              "pin": { "title": "pin", "type": "integer", "minimum": 0 }
+            }
+          }
+        },
+        "tEnd": { "title": "tEnd", "$ref": "#/$defs/posOrExpr" },
+        "dt": { "title": "dt", "$ref": "#/$defs/posOrExpr" },
+        "tStart": { "title": "tStart", "$ref": "#/$defs/numOrExpr" },
+        "threshold": { "title": "threshold", "$ref": "#/$defs/numOrExpr" },
+        "modes": {
+          "title": "modes",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": { "title": "mode", "enum": ["dc", "ac", "rms", "avg"] }
+        },
+        "zin": { "title": "zin", "type": "number", "minimum": 0 },
+        "leads": {
+          "title": "leads",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "required": ["label", "lead"],
+            "additionalProperties": false,
+            "properties": {
+              "label": { "title": "label", "$ref": "#/$defs/key" },
+              "lead": { "title": "lead", "type": "number", "minimum": 0 },
+              "cin": { "title": "cin", "type": "number", "minimum": 0 }
+            }
+          }
+        },
+        "source": { "title": "acSource", "type": "string", "x-noema": "element" },
+        "fStart": { "title": "fStart", "$ref": "#/$defs/posOrExpr" },
+        "fStop": { "title": "fStop", "$ref": "#/$defs/posOrExpr" },
+        "fPoints": { "title": "acPoints", "type": "integer", "minimum": 2, "maximum": 1000 }
+      }
+    },
+    "bench": {
+      "type": "object",
+      "required": ["faults", "points", "instruments", "diagnosis"],
+      "additionalProperties": false,
+      "properties": {
+        "part": {
+          "title": "benchPart",
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,31}$",
+          "x-noema": "part",
+          "description": "a spec with parts: the circuit-mna@1 or twin@1 part the bench measures (docs/INTERACTIVE.md §12.8)"
+        },
+        "faults": {
+          "title": "faults",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 16,
+          "items": {
+            "type": "object",
+            "required": ["id", "apply"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "title": "id", "$ref": "#/$defs/benchId" },
+              "apply": { "title": "apply", "type": "array", "maxItems": 4, "items": { "$ref": "#/$defs/fault" } }
+            }
+          }
+        },
+        "points": {
+          "title": "points.bench",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 24,
+          "items": {
+            "type": "object",
+            "required": ["id", "at", "label"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "title": "id", "$ref": "#/$defs/benchId" },
+              "at": { "title": "at.point", "type": "string" },
+              "label": { "title": "label", "$ref": "#/$defs/key" }
+            }
+          }
+        },
+        "instruments": { "title": "instruments", "type": "array", "minItems": 1, "maxItems": 7, "items": { "$ref": "#/$defs/instrument" } },
+        "budget": { "title": "budget", "type": "integer", "minimum": 1, "maximum": 100 },
+        "diagnosis": {
+          "title": "diagnosis",
+          "type": "object",
+          "required": ["options"],
+          "additionalProperties": false,
+          "properties": {
+            "label": { "title": "label", "$ref": "#/$defs/key" },
+            "options": {
+              "title": "dxOptions",
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 12,
+              "items": {
+                "type": "object",
+                "required": ["label"],
+                "additionalProperties": false,
+                "properties": {
+                  "label": { "title": "label", "$ref": "#/$defs/key" },
+                  "fault": { "title": "fault", "$ref": "#/$defs/benchId" }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

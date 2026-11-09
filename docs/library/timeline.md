@@ -1,4 +1,4 @@
-# `timeline@1` — chronology in every calendar (`engine/src/48_lib_timeline.js`, `NoemaLibTimeline`)
+# `timeline@1` — chronology in every calendar (`src/engines/timeline/timeline.ts`, `NoemaLibTimeline`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`) for dates and time spans: events and periods on one time axis, in
 33 calendars and eras, none of them "the" calendar. Any era can be the main axis of the picture (the Hijri years, the Hebrew years,
@@ -6,9 +6,9 @@ the Olympiads, years BP). Dates can be uncertain (circa, a range, a terminus pos
 answers with numbers: a converted date's fields, durations, the probability of each of Allen's 13 relations, statistics of a dating,
 Easter, regnal years, tree-ring cross-dating. Every limit of validity is a **code**, never a silently wrong date.
 
-The Python twin is `tools/lib_timeline.py`: it checks and does not compute, and it embeds the same JSON tables. The tests are
+The tests are
 `node tests/lib_timeline.js` (85 assertions: published reference values, comparisons with ICU on thousands of days, the codes, the
-adapter, the Worker, speed) and `node tests/enginelib.js` (JS ↔ Python parity on `tests/fixtures/enginelib/timeline.json`, 26
+adapter, the Worker, speed) and `node tests/enginelib.js` (the golden outputs of the former Python twin on `tests/fixtures/enginelib/timeline.json`, 26
 specs). The reference activity is `tools/activities_examples/calendar-synchronism`. The research behind this chapter is in the
 project's `engine-library/research/arts.md`.
 
@@ -71,7 +71,7 @@ BCE), `islamic` (the arithmetic leap scheme I–IV), `islamicEpoch` (`civil` or 
   `minOverlap`.
 - `axis`: `era` (any calendar: the ticks are labelled in its years), `from`, `to`, `bceKey`, `ceKey`.
 
-### 1.3 Checker codes (`checkSpec`, the same in `tools/lib_timeline.py`)
+### 1.3 Checker codes (`checkSpec`)
 
 | code | when |
 |---|---|

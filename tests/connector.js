@@ -1,27 +1,26 @@
-/* The Claude connector (cloud/mcp/server.mjs) against the Supabase emulator: OAuth discovery, MCP protocol,
+/* The Claude connector (src/connector, bundled as tools/build.py does) against the Supabase emulator: OAuth discovery, MCP protocol,
    upload → check → register, and the app side (consent page, the subject appearing in the picker).
    Usage: node tests/connector.js <prepared-repo-dir>   (needs dist/site and the demo-physics fixture) */
 const { chromium } = require(process.env.PW || 'playwright');
 const path = require('path'), fs = require('fs'), os = require('os');
 const { start } = require('./mock_supabase');
+const { connectorHandler, removeConnector } = require('./connector_fn');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
 const wait = ms => new Promise(r => setTimeout(r, ms));
 const PORT = 54331, BASE = `http://localhost:${PORT}`;
 
 (async () => {
-  const cfgJs = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', autoBackupMinutes: 5, askSubjectOnStart: true, shell: false };`;
+  const cfgJs = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', autoBackupMinutes: 5, askSubjectOnStart: true, onboarding: false, shell: false };`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfgJs });
   // the public library may be read by other apps (Meletee fetches registry.js and pack.json as data)
   ok(/\/library\/\*\n(  .+\n)*  Access-Control-Allow-Origin: \*\n/.test(fs.readFileSync(path.join(ROOT, 'dist/site/_headers'), 'utf8')), '_headers: the public library allows cross-origin reads');
-  // the function exactly as tools/build.py generates it, but pointed at the emulator
+  // the function exactly as tools/build.py bundles it (tests/connector_fn.js), but pointed at the emulator
   const CFG = { siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', storageChunkBytes: 4500, library: [{ id: 'databricks', title: 'Databricks', counts: { chapters: 13, exercises: 1715 } }] };
   const DOCS = { workflow: fs.readFileSync(path.join(ROOT, 'skill/noema-pack-builder/SKILL.md'), 'utf8'), content: fs.readFileSync(path.join(ROOT, 'tools/CONTENT_SPEC.md'), 'utf8'), visual: fs.readFileSync(path.join(ROOT, 'docs/VISUAL.md'), 'utf8'), bridge: fs.readFileSync(path.join(ROOT, 'docs/BRIDGE.md'), 'utf8'), pipelines: fs.readFileSync(path.join(ROOT, 'docs/PIPELINES.md'), 'utf8'),
     pipelineSteps: JSON.parse(fs.readFileSync(path.join(ROOT, 'tools/pipelines/steps.json'), 'utf8')).steps,
     pipelineFlows: Object.fromEntries(fs.readdirSync(path.join(ROOT, 'tools/pipelines')).map(f => JSON.parse(fs.readFileSync(path.join(ROOT, 'tools/pipelines', f), 'utf8'))).filter(f => f.format === 'noema.pipeline/v1').map(f => [f.id, f])) };
-  const fn = path.join(os.tmpdir(), `noema-mcp-${process.pid}.mjs`);
-  fs.writeFileSync(fn, `const CFG = ${JSON.stringify(CFG)};\nconst DOCS = ${JSON.stringify(DOCS)};\nglobalThis.window = globalThis;\n` + ['engine/report.js', 'engine/src/38_activity_h5p.js', 'engine/src/35_simexpr.js', 'engine/src/36_engine_circuit.js', 'engine/src/39_engine_thermal.js', 'engine/src/40_engine_pid.js', 'engine/src/41_engine_rf.js', 'engine/src/42_engine_twin.js', 'engine/packcheck.js', 'engine/src/44_activity_wasm.js', 'engine/src/45_activity_embed.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));   // as tools/build.py (MCP_ENGINE)   // as tools/build.py assembles it
-  const { default: handler } = await import(fn);
+  const handler = await connectorHandler(ROOT, { config: CFG, docs: DOCS });
   const call = async (body, token, method = 'POST', url = BASE + '/mcp') => {
     const r = await handler(new Request(url, { method, headers: Object.assign({ 'content-type': 'application/json' }, token ? { authorization: 'Bearer ' + token } : {}), body: method === 'POST' ? JSON.stringify(body) : undefined }));
     const t = await r.text(); let j = null; try { j = JSON.parse(t); } catch (e) { }
@@ -82,7 +81,7 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   const surl = ss.match(/https?:\/\/\S+upload\/sign\S+/)[0];
   const up = await fetch(surl, { method: 'PUT', headers: { 'x-upsert': 'true', apikey: 'k' }, body: Buffer.from('%PDF-1.4 x') });
   const me = Object.values(srv.state.users).find(u => u.email === 'claude-user@example.com').id;
-  ok(up.ok && Object.keys(srv.state.files).includes(`${me}/sources/physics-by-claude/part1/file.pdf`) && /Κεφ 5 βιβλίο\.pdf/.test(srv.state.kv[me]?.['a:srcfiles:physics-by-claude']?.value || ''), 'source files: signed upload (ASCII storage path) + registered in the synced index with the original name');
+  ok(up.ok && Object.keys(srv.state.files).includes(`${me}/sources/physics-by-claude/part1/file.pdf`) && /Κεφ 5 βιβλίο\.pdf/.test(JSON.stringify(srv.srcfiles(me, 'physics-by-claude'))) && !srv.state.kv[me]?.['a:srcfiles:physics-by-claude'], 'source files: signed upload (ASCII storage path) + registered as a row of noema_source_files with the original name (no kv map)');
 
   console.log('— saving a pack');
   const fx = path.join(ROOT, 'tests/fixtures/demo-physics');
@@ -99,6 +98,22 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   const fin = await tool('noema_finish_upload', { subject_id: 'physics-by-claude' });
   ok(!fin.isError && /Physics by Claude/.test(fin.content[0].text) && /11 visual/.test(fin.content[0].text), 'finish_upload checks and registers: ' + fin.content[0].text.split('\n')[0].slice(0, 110));
   const uid = Object.values(srv.state.users)[0].id;
+  // sagas (docs/CLAUDE_CONNECTOR.md §Sagas): the same upload finished again does nothing twice
+  { const inboxOf = () => Object.keys(srv.state.kv[uid] || {}).filter(k => k.startsWith('a:inbox:') || k.startsWith('a:curin:')).length, meta0 = srv.state.kv[uid]['a:packmeta:physics-by-claude']?.updated_at, in0 = inboxOf();
+    const again = await tool('noema_finish_upload', { subject_id: 'physics-by-claude' });
+    const sg = srv.sagas(uid).filter(r => r.kind === 'pack');
+    ok(!again.isError && /already saved by an earlier call/.test(again.content[0].text) && srv.state.kv[uid]['a:packmeta:physics-by-claude']?.updated_at === meta0 && inboxOf() === in0 && sg.length === 1 && sg[0].status === 'done',
+      'finish_upload twice with the same upload: the first answer again, nothing written twice (one saga, done)');
+    delete srv.state.kv[uid]['a:packmeta:physics-by-claude'];
+    const redo = await tool('noema_finish_upload', { subject_id: 'physics-by-claude' });
+    ok(!redo.isError && !/already saved/.test(redo.content[0].text) && !!srv.state.kv[uid]['a:packmeta:physics-by-claude'], 'a finished saga whose state is gone (the subject removed meanwhile) runs again');
+    const row = srv.sagas(uid).find(r => r.kind === 'pack'); row.status = 'running'; row.lease_until = new Date(Date.now() + 60e3).toISOString();
+    const busy = await tool('noema_finish_upload', { subject_id: 'physics-by-claude' });
+    ok(busy.isError && /being saved by another call/.test(busy.content[0].text), 'while another call holds the saga (its lease): “being saved, call again”');
+    row.status = 'failed'; row.lease_until = null; row.steps = {};
+    const resumed = await tool('noema_finish_upload', { subject_id: 'physics-by-claude' });
+    ok(!resumed.isError && srv.sagas(uid).find(r => r.kind === 'pack').status === 'done', 'a failed saga is resumed by the next call (its recorded steps skipped)');
+    const vs = srv.sagas(uid).map(r => r.updated_at); ok(vs.every(v => /\.\d{3}Z$/.test(v)), 'saga rows carry the server\'s version stamp'); }
   ok(!!srv.state.kv[uid]?.['a:packmeta:physics-by-claude'], 'registered as a:packmeta in the user’s synced key/value store (RLS: own rows only)');
   // broken pack
   const bad = JSON.parse(JSON.stringify(pack)); bad.subject.id = 'broken-pack'; bad.chapters[0].exercises[0].section = 'nope';
@@ -133,8 +148,9 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   const bOther = await tool('noema_save_bridge', { bridge_json: JSON.stringify({ ...br, pack: 'no-such-pack' }) });
   ok(bBad.isError && /DET/.test(bBad.content[0].text) && bOther.isError && /No pack/.test(bOther.content[0].text), 'save_bridge refuses a function word and a pack the account does not have');
   const bOk = await tool('noema_save_bridge', { bridge_json: JSON.stringify(br) });
-  const bix = JSON.parse(srv.state.kv[uid]['a:bridges']?.value || '{}');
-  ok(!bOk.isError && srv.state.files[`${uid}/bridges/tiny-inline.ru.json`] && bix['tiny-inline']?.ru?.entries === 1 && /^[0-9a-z]+$/.test(bix['tiny-inline'].ru.v), 'save_bridge stores <uid>/bridges/<pack>.<native>.json and the synced index a:bridges');
+  const bix = srv.bridges(uid);
+  ok(!bOk.isError && srv.state.files[`${uid}/bridges/tiny-inline.ru.json`] && bix['tiny-inline']?.ru?.entries === 1 && /^[0-9a-z]+$/.test(bix['tiny-inline'].ru.v), 'save_bridge stores <uid>/bridges/<pack>.<native>.json and its row of noema_bridges (one per pack × pair)');
+  ok(!srv.state.kv[uid]['a:bridges'], 'no kv map a:bridges is written any more');
   // a bridge too big to paste: subject_id + native → an upload command; the uploaded file goes live only once checked
   const bu1 = await tool('noema_save_bridge', { subject_id: 'tiny-inline', native: 'el' }); const buUrl = (bu1.content[0].text.match(/curl [^\n]* "([^"]+)"/) || [])[1];
   ok(!bu1.isError && !!buUrl && !srv.state.files[`${uid}/bridges/tiny-inline.el.json`], 'save_bridge with subject_id + native returns an upload command');
@@ -142,8 +158,22 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   const buWrong = await tool('noema_save_bridge', { subject_id: 'tiny-inline', native: 'el' });
   await fetch(buUrl, { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...br, native: 'el', status: 'reviewed' }) });
   const bu2 = await tool('noema_save_bridge', { subject_id: 'tiny-inline', native: 'el' });
-  const bix2 = JSON.parse(srv.state.kv[uid]['a:bridges']?.value || '{}');
-  ok(buWrong.isError && /not tiny-inline → el/.test(buWrong.content[0].text) && !bu2.isError && /\(reviewed\)/.test(bu2.content[0].text) && srv.state.files[`${uid}/bridges/tiny-inline.el.json`] && !srv.state.files[`${uid}/bridges/incoming/tiny-inline.el.json`] && bix2['tiny-inline']?.el?.status === 'reviewed' && bix2['tiny-inline']?.ru?.entries === 1, 'save_bridge from an upload: refuses the wrong file, saves the right one, clears the upload, keeps the other natives in a:bridges');
+  const bix2 = srv.bridges(uid);
+  ok(buWrong.isError && /not tiny-inline → el/.test(buWrong.content[0].text) && !bu2.isError && /\(reviewed\)/.test(bu2.content[0].text) && srv.state.files[`${uid}/bridges/tiny-inline.el.json`] && !srv.state.files[`${uid}/bridges/incoming/tiny-inline.el.json`] && bix2['tiny-inline']?.el?.status === 'reviewed' && bix2['tiny-inline']?.ru?.entries === 1, 'save_bridge from an upload: refuses the wrong file, saves the right one, clears the upload, keeps the other natives\' rows of noema_bridges');
+  // several agents saving bridges at the same moment: each pair is its own row of noema_bridges, so no save is lost
+  const natsC = ['de', 'fr', 'ar', 'es', 'it'];
+  const parC = await Promise.all(natsC.map(n => tool('noema_save_bridge', { bridge_json: JSON.stringify({ ...br, native: n }) })));
+  const bixC = srv.bridges(uid)['tiny-inline'] || {};
+  ok(parC.every(r => !r.isError) && natsC.every(n => bixC[n]?.entries === 1 && srv.state.files[`${uid}/bridges/tiny-inline.${n}.json`]) && bixC.ru?.entries === 1 && bixC.el?.status === 'reviewed' && !srv.state.kv[uid]['a:bridges'],
+    'save_bridge: 5 saves at the same time all keep their row of noema_bridges (and the rows saved before)');
+  { // the same again with the clock standing still: every write in the same millisecond (a version stamp must still change)
+    const RealDate = Date, FIXED = RealDate.now();
+    globalThis.Date = class extends RealDate { constructor(...a) { super(...(a.length ? a : [FIXED])); } static now() { return FIXED; } };
+    const natsF = ['ja', 'hi', 'tr', 'sq'];
+    let parF; try { parF = await Promise.all(natsF.map(n => tool('noema_save_bridge', { bridge_json: JSON.stringify({ ...br, native: n }) }))); } finally { globalThis.Date = RealDate; }
+    const bixF = srv.bridges(uid)['tiny-inline'] || {};
+    ok(parF.every(r => !r.isError) && [...natsF, ...natsC].every(n => bixF[n]?.entries === 1), 'save_bridge: 4 saves in the same millisecond all keep their row of noema_bridges');
+  }
   srv.state.kv[uid]['a:bridgeReports'] = { value: JSON.stringify([{ pack: 'tiny-inline', native: 'ru', k: 'energy', sense: '1', form: 'energy', sid: sid0, note: 'better: энергия (физ.)' }]), updated_at: new Date().toISOString() };
   const bg = (await tool('noema_bridge_guide', { subject_id: 'tiny-inline' })).content[0].text;
   ok(/tiny-inline → ru: 1 words/.test(bg) && /энергия \(физ\.\)/.test(bg), 'bridge_guide lists the account\'s bridges and the mistakes learners reported');
@@ -153,7 +183,7 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   const sm = await tool('noema_save_pack', { pack_json: JSON.stringify(multi) }), so = await tool('noema_save_pack', { pack_json: JSON.stringify(mono) });
   const metaOf = id => JSON.parse(srv.state.kv[uid]['a:packmeta:' + id]?.value || '{}');
   ok(!sm.isError && !so.isError && JSON.stringify(metaOf('tiny-multi').contentLocales) === JSON.stringify(Object.keys(multi.translations)) && !('contentLocales' in metaOf('tiny-mono')),
-     'packmeta lists the content translations as contentLocales (pack schema v2, docs/i18n.md §10); none without translations');
+     'packmeta lists the content translations as contentLocales (docs/i18n.md §10); none without translations');
 
   console.log('— a pack with its source files packaged (make_pack.py): every file must arrive');
   const crypto = require('crypto');
@@ -181,10 +211,10 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   ok(f2.isError && c2.length === 1 && c2[0].id === 'ecb-2', 'a file with a part missing still counts as missing; the complete one is accepted');
   await run(c2[0], F['ecb-2']);
   const f3 = await tool('noema_finish_upload', { subject_id: 'packaged-physics' });
-  const ix = JSON.parse(srv.state.kv[uid]?.['a:srcfiles:packaged-physics']?.value || '{}');
+  const ix = srv.srcfiles(uid, 'packaged-physics');
   ok(!f3.isError && /📎 2 source file\(s\)/.test(f3.content[0].text) && srv.state.kv[uid]['a:packmeta:packaged-physics'], 'with every file uploaded the subject is saved: ' + f3.content[0].text.split('\n').pop());
   ok(/🌐 Still to do before this subject's flow ends[^\n]*full translations into el, ru, de \([^\n]*文A bridges en→el, en→ru, en→ar, en→de, en→fr, el→en, el→ru, el→ar, el→de, el→fr, ru→en, ru→el, ru→ar, ru→de, ru→fr, de→en, de→el, de→ru, de→ar, de→fr, fr→en, fr→el, fr→ru, fr→ar, fr→de/.test(f3.content[0].text), 'a new pack (rules 2) is told which translations (el, ru, de: it has fr already) and which bridge pairs it still needs (from its own language and from each translation)');
-  ok(ix['ecb-1']?.size === F['ecb-1'].length && !ix['ecb-1'].chunks && ix['ecb-2']?.name === 'Βιβλίο μέρος 2.pdf' && ix['ecb-2'].type === 'application/pdf' && ix['ecb-2'].chunks === 2 && ix['ecb-2'].cloud && !ix.web, 'the synced index lists each file (original name, type, size, parts) → 👁 on every device');
+  ok(ix['ecb-1']?.size === F['ecb-1'].length && !ix['ecb-1'].chunks && ix['ecb-2']?.name === 'Βιβλίο μέρος 2.pdf' && ix['ecb-2'].type === 'application/pdf' && ix['ecb-2'].chunks === 2 && ix['ecb-2'].cloud && !ix.web, 'noema_source_files has a row for each file (original name, type, size, parts) → 👁 on every device');
   ok(Buffer.compare(Buffer.concat([0, 1].map(i => Buffer.from(srv.state.files[`${uid}/sources/packaged-physics/ecb-2/file.pdf.p00${i}`].data))), F['ecb-2']) === 0 && Buffer.compare(Buffer.from(srv.state.files[`${uid}/sources/packaged-physics/ecb-1/file.pdf`].data), F['ecb-1']) === 0, 'the storage holds exactly the packaged files (same paths as the app uses)');
   const inl = JSON.parse(JSON.stringify(pk)); inl.subject.id = 'inline-with-files'; inl.subject.title = 'Inline with files';
   const si = await tool('noema_save_pack', { pack_json: JSON.stringify(inl) });
@@ -253,7 +283,7 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   // 文A a bridge from a translation (docs/BRIDGE.md §2.4): ru → el of an en pack, only once the ru translation is saved
   const trb = { ...br, pack: 'tr-physics', source: 'ru', native: 'el', sections: {}, entries: [{ k: 'энергия', pos: 'NOUN', band: 2, senses: [{ id: '1', t: 'ενέργεια' }] }] };
   const tb1 = await tool('noema_save_bridge', { bridge_json: JSON.stringify(trb) });
-  const bixT = JSON.parse(srv.state.kv[uid]['a:bridges']?.value || '{}')['tr-physics'] || {};
+  const bixT = srv.bridges(uid)['tr-physics'] || {};
   ok(!tb1.isError && srv.state.files[`${uid}/bridges/tr-physics.ru.el.json`] && bixT['ru.el']?.source === 'ru' && !bixT.el, 'a bridge from the ru translation is stored as the pair ru.el (file and index), apart from the en → el one: ' + tb1.content[0].text.split('\n')[0]);
   const tb2 = await tool('noema_save_bridge', { bridge_json: JSON.stringify({ ...trb, source: 'de' }) });
   ok(tb2.isError && /translation saved first/.test(tb2.content[0].text), 'a bridge from a language the pack has no translation into is refused (bridges come after the translations)');
@@ -269,6 +299,51 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   ok(gtf?.format === 'noema-translation' && gtf.locale === 'ru' && /--from ru/.test(gt), 'get_pack_url with locale: the translation file (what its bridges are made from)');
   ok((await tool('noema_get_pack_url', { subject_id: 'tr-physics', locale: 'de' })).isError, 'get_pack_url with a locale the pack has no translation into: refused');
   ok(/library\/subjects\/databricks\/pack\.json/.test((await tool('noema_get_pack_url', { subject_id: 'databricks' })).content[0].text), 'library packs are offered from the website');
+
+  console.log('— 🪜 Roadmaps by level: levels proposed with the map, work of one level, a new arrangement for the learner to approve');
+  { // a learner of its own: the Roadmaps stay out of the account whose picker the app side checks below
+    const su2 = await (await fetch(BASE + '/auth/v1/signup', { method: 'POST', headers: { apikey: 'k', 'content-type': 'application/json' }, body: JSON.stringify({ email: 'levels-user@example.com', password: 'secret123' }) })).json();
+    const uid = Object.values(srv.state.users).find(u => u.email === 'levels-user@example.com').id;
+    const tool = async (name, args) => (await call({ jsonrpc: '2.0', id: 9, method: 'tools/call', params: { name, arguments: args } }, su2.access_token)).json?.result;
+    const T1 = r => r.content.map(x => x.text || '').join('\n');
+    const kvOf = k => { const v = srv.state.kv[uid]?.[k]?.value; return typeof v === 'string' ? JSON.parse(v) : v; };
+    const RM = { title: 'Physics I–II', summary: 'Two semesters.', levels: 'semester:2',
+      steps: [{ ref: 'v', title: 'Vectors', role: 'foundation', level: 's1' }, { ref: 'm', title: 'Mechanics', role: 'aspect', prerequisites: ['v'], level: { from: 's1', to: 's2' } }, { ref: 'o', title: 'Optics', role: 'aspect', prerequisites: ['m'], level: 's2' }] };
+    const badLv = await tool('noema_create_roadmap', { plan_json: JSON.stringify({ ...RM, steps: RM.steps.map(x => x.ref === 'o' ? { ...x, level: 's9' } : x) }), language: 'en' });
+    ok(badLv.isError && /level "s9" is not a level of the Roadmap/.test(T1(badLv)), 'a step at a level the ladder does not have is refused: ' + T1(badLv).split('\n')[1]);
+    const above = await tool('noema_create_roadmap', { plan_json: JSON.stringify({ ...RM, steps: RM.steps.map(x => x.ref === 'v' ? { ...x, level: 's2' } : x.ref === 'm' ? { ...x, level: 's1' } : x) }), language: 'en' });
+    ok(above.isError, 'a prerequisite above the step that builds on it is refused');
+    const made = await tool('noema_create_roadmap', { plan_json: JSON.stringify(RM), language: 'en', level_test: true });
+    const cid = (/\((c[0-9a-z]+)\)/.exec(T1(made)) || [])[1];
+    ok(!made.isError && /Levels: s1 = Semester 1 · s2 = Semester 2 \(a level test before moving up\)/.test(T1(made)), 'noema_create_roadmap keeps the ladder and the level test: ' + T1(made).split('\n').find(l => l.startsWith('Levels')));
+    const rec = kvOf('a:curriculum:' + cid);
+    const id = t => Object.values(rec.nodes).find(n => n.title === t)?.id;
+    ok(rec.levelTest === true && rec.nodes[id('Mechanics')].level?.to === 's2' && rec.nodes[id('Optics')].level === 's2' && Object.values(rec.nodes).every(n => n.pack?.status === 'app'), 'the record: levels, each step at its level, every step queued');
+    const map = T1(await tool('noema_roadmap_map', { curriculum_id: cid }));
+    ok(/level s1–s2/.test(map) && /Levels \(lowest first\): s1 = Semester 1 · s2 = Semester 2/.test(map) && /noema_restructure_levels/.test(map), 'noema_roadmap_map shows each step\'s level and the ladder');
+    const t2 = await tool('noema_curriculum_task', { curriculum_id: cid, level: 'Semester 2', peek: true });
+    ok(!t2.isError && /## Level: Semester 2 \(level id "s2"\)/.test(T1(t2)) && /"levels": \["s2"\]/.test(T1(t2)) && !/“Vectors”/.test(T1(t2).split('## Level')[0].split('chapters of')[1] || ''), 'noema_curriculum_task level: only that level\'s steps, and what the level means for difficulty');
+    const tBad = await tool('noema_curriculum_task', { curriculum_id: cid, level: 'Semester 9' });
+    ok(tBad.isError && /Its levels: s1 = Semester 1/.test(T1(tBad)), 'an unknown level is refused with the ladder');
+    const pl = await tool('noema_pipeline', { action: 'detect', facts: { step: true }, level: 's1', curriculum_id: cid });
+    ok(!pl.isError && /Flow 2/.test(T1(pl)) && /Level s1 of “Physics I–II”/.test(T1(pl)) && /"levels": \["s1"\]/.test(T1(pl)), 'noema_pipeline level: the flow and what that level means');
+    // a new arrangement: Optics moves up to a new third semester — only a proposal until the learner approves it
+    const plan = { why: 'Optics is third-semester work at this university.', levels: 'semester:3', steps: [{ step: '@' + id('Optics'), level: 's3' }] };
+    const badPlan = await tool('noema_restructure_levels', { curriculum_id: cid, plan_json: JSON.stringify({ why: 'x', steps: [{ step: '@' + id('Vectors'), level: 's2' }] }) });
+    ok(badPlan.isError && /prerequisite/.test(T1(badPlan)), 'a plan that breaks the level rules goes back with its problems');
+    const pr = await tool('noema_restructure_levels', { curriculum_id: cid, plan_json: JSON.stringify(plan) });
+    ok(!pr.isError && /waits for the learner's approval in the app/.test(T1(pr)) && /“Optics” \(@optics\): s2 → s3/.test(T1(pr)), 'noema_restructure_levels proposes; the reply lists the changes: ' + T1(pr).split('\n')[1]);
+    const rows = Object.keys(srv.state.kv[uid]).filter(k => k.startsWith('a:curin:' + cid + ':')).map(kvOf).filter(e => e.kind === 'restructure');
+    ok(rows.length === 1 && rows[0].plan.levels.length === 3 && rows[0].plan.steps[0].level === 's3', 'the proposal goes to the inbox (kind restructure), the Roadmap itself is unchanged');
+    ok(kvOf('a:curriculum:' + cid).nodes[id('Optics')].level === 's2', 'nothing changed before the learner decides');
+    ok(/REPLAYED|already saved|nothing was written again/.test(T1(await tool('noema_restructure_levels', { curriculum_id: cid, plan_json: JSON.stringify(plan) }))), 'the same plan sent again is not a second proposal');
+    const st = T1(await tool('noema_restructure_levels', { curriculum_id: cid, action: 'status' }));
+    ok(/Waiting for the learner's decision/.test(st) && /s2 → s3/.test(st), 'action status: the proposal waiting');
+    const ext = await tool('noema_extend_roadmap', { curriculum_id: cid, plan_json: JSON.stringify({ part: 'Semester 3', levels: 'semester:3', steps: [{ ref: 'w', title: 'Waves', role: 'aspect', prerequisites: ['@' + id('Mechanics')], level: 's3' }] }) });
+    ok(!ext.isError && /Levels: s1 = Semester 1 · s2 = Semester 2 · s3 = Semester 3 \(1 new\)/.test(T1(ext)), 'noema_extend_roadmap adds a level at the top with the new part: ' + (T1(ext).split('\n').find(l => l.startsWith('Levels')) || T1(ext).slice(0, 200)));
+    const extBad = await tool('noema_extend_roadmap', { curriculum_id: cid, plan_json: JSON.stringify({ part: 'Years', levels: 'year:2', steps: [{ ref: 'y', title: 'Relativity', role: 'aspect', prerequisites: ['@' + id('Optics')] }] }) });
+    ok(extBad.isError && /ladder is semester/.test(T1(extBad)), 'a part cannot bring a ladder of another kind');
+  }
 
   console.log('— the app side');
   const browser = await chromium.launch();
@@ -304,6 +379,6 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   ok(await p.evaluate(() => typeof SUBJ !== 'undefined' && SUBJ.id === 'physics-by-claude' && ALL_EX.length === 14), 'it opens: downloaded from the user’s private storage');
   ok(await p.evaluate(async n => (await NoemaSrcFiles.get(Noema.account.id, 'packaged-physics', 'ecb-2'))?.blob.size === n, F['ecb-2'].length), 'the app joins the parts Claude uploaded into the original file');
   ok(!E.length, 'no page errors ' + JSON.stringify(E.slice(0, 3)));
-  await browser.close(); srv.close(); fs.unlinkSync(fn);
+  await browser.close(); srv.close(); removeConnector(handler);
   console.log(fails ? `\n${fails} FAILED` : '\nALL PASSED'); process.exit(fails ? 1 : 0);
 })();

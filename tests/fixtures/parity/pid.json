@@ -1,0 +1,537 @@
+{
+ "check": {
+  "in": "6d84c113d83a2e88cb193b04f85fce7f5b3307fa718da245be3cb1f10eb34ea7",
+  "out": {
+   "m": [
+    [
+     {
+      "code": "model",
+      "path": "",
+      "msg": "model is not an object",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "model",
+      "path": "",
+      "msg": "model is not an object",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "model",
+      "path": "",
+      "msg": "model is not an object",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "plant",
+      "path": "plant",
+      "msg": "needs an object {type, …}",
+      "level": "error"
+     },
+     {
+      "code": "controller",
+      "path": "controller",
+      "msg": "a closed loop needs a controller {Kp, Ki?, Kd?, …}",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "plant",
+      "path": "plant",
+      "msg": "needs an object {type, …}",
+      "level": "error"
+     },
+     {
+      "code": "controller",
+      "path": "controller",
+      "msg": "a closed loop needs a controller {Kp, Ki?, Kd?, …}",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "plant",
+      "path": "plant.type",
+      "msg": "one of fopdt, second, integrator, motor, thermal, tank",
+      "level": "error"
+     },
+     {
+      "code": "controller",
+      "path": "controller",
+      "msg": "a closed loop needs a controller {Kp, Ki?, Kd?, …}",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "plant",
+      "path": "plant.zz",
+      "msg": "unknown field",
+      "level": "error"
+     },
+     {
+      "code": "plant",
+      "path": "plant.J",
+      "msg": "out of range",
+      "level": "error"
+     },
+     {
+      "code": "plant",
+      "path": "plant.output",
+      "msg": "one of speed, position",
+      "level": "error"
+     },
+     {
+      "code": "unused",
+      "path": "controller",
+      "msg": "ignored in an open loop",
+      "level": "warning"
+     }
+    ],
+    [
+     {
+      "code": "plant",
+      "path": "plant.h0",
+      "msg": "above hMax",
+      "level": "error"
+     },
+     {
+      "code": "controller",
+      "path": "controller",
+      "msg": "needs an object {Kp, Ki?, Kd?, …}",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "plant",
+      "path": "plant.K",
+      "msg": "out of range",
+      "level": "error"
+     },
+     {
+      "code": "plant",
+      "path": "plant.wn",
+      "msg": "out of range",
+      "level": "error"
+     },
+     {
+      "code": "plant",
+      "path": "plant.zeta",
+      "msg": "missing",
+      "level": "error"
+     },
+     {
+      "code": "controller",
+      "path": "controller.zz",
+      "msg": "unknown field",
+      "level": "error"
+     },
+     {
+      "code": "controller",
+      "path": "controller.Ki",
+      "msg": "out of range",
+      "level": "error"
+     },
+     {
+      "code": "controller",
+      "path": "controller.N",
+      "msg": "out of range",
+      "level": "error"
+     },
+     {
+      "code": "controller",
+      "path": "controller.Tf",
+      "msg": "out of range",
+      "level": "error"
+     },
+     {
+      "code": "no-gain",
+      "path": "controller",
+      "msg": "Kp, Ki and Kd are all 0",
+      "level": "warning"
+     },
+     {
+      "code": "no-limits",
+      "path": "controller.antiWindup",
+      "msg": "anti-windup needs uMin or uMax",
+      "level": "warning"
+     }
+    ],
+    [
+     {
+      "code": "controller",
+      "path": "controller.Tt",
+      "msg": "out of range",
+      "level": "error"
+     },
+     {
+      "code": "controller",
+      "path": "controller",
+      "msg": "uMin must be below uMax",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "signal",
+      "path": "setpoint",
+      "msg": "a number or one of step, ramp, sine, steps",
+      "level": "error"
+     },
+     {
+      "code": "signal",
+      "path": "load.step.to",
+      "msg": "missing",
+      "level": "error"
+     },
+     {
+      "code": "signal",
+      "path": "disturbance.ramp.until",
+      "msg": "must be after at",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "signal",
+      "path": "setpoint.steps",
+      "msg": "a list of 1 to 32 [t, value] pairs, t ≥ 0 ascending",
+      "level": "error"
+     },
+     {
+      "code": "signal",
+      "path": "load.sine.freq",
+      "msg": "missing",
+      "level": "error"
+     },
+     {
+      "code": "signal",
+      "path": "disturbance.step",
+      "msg": "needs an object",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "signal",
+      "path": "setpoint.steps",
+      "msg": "a list of 1 to 32 [t, value] pairs, t ≥ 0 ascending",
+      "level": "error"
+     },
+     {
+      "code": "signal",
+      "path": "disturbance",
+      "msg": "a number or one of step, ramp, sine, steps",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "noise",
+      "path": "noise",
+      "msg": "needs an object {std, seed?}",
+      "level": "error"
+     },
+     {
+      "code": "metrics",
+      "path": "metrics.x",
+      "msg": "unknown field",
+      "level": "error"
+     },
+     {
+      "code": "metrics",
+      "path": "metrics.band",
+      "msg": "needs a number in (0, 0.5]",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "noise",
+      "path": "noise.q",
+      "msg": "unknown field",
+      "level": "error"
+     },
+     {
+      "code": "noise",
+      "path": "noise.seed",
+      "msg": "needs a whole number ≥ 0",
+      "level": "error"
+     },
+     {
+      "code": "metrics",
+      "path": "metrics",
+      "msg": "needs an object {band?}",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "controller",
+      "path": "controller.Ts",
+      "msg": "shorter than the step (transient.dt)",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "unknown-field",
+      "path": "transient.x",
+      "msg": "unknown field",
+      "level": "error"
+     },
+     {
+      "code": "transient",
+      "path": "transient.tEnd",
+      "msg": "missing",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "transient",
+      "path": "transient.tEnd",
+      "msg": "needs a number > 0 or an expression",
+      "level": "error"
+     },
+     {
+      "code": "transient",
+      "path": "transient.dt",
+      "msg": "needs a number > 0 or an expression",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "transient",
+      "path": "transient",
+      "msg": "needs an object {tEnd, dt?}",
+      "level": "error"
+     }
+    ],
+    [],
+    [
+     {
+      "code": "stiff",
+      "path": "transient.dt",
+      "msg": "longer than half the plant's fastest time constant (inaccurate or unstable)",
+      "level": "warning"
+     }
+    ],
+    [
+     {
+      "code": "binding",
+      "path": "bindings[0]",
+      "msg": "an object {element, prop?, expr}",
+      "level": "error"
+     },
+     {
+      "code": "binding",
+      "path": "bindings[1].element",
+      "msg": "one of plant, controller, setpoint, load, disturbance, noise",
+      "level": "error"
+     },
+     {
+      "code": "binding",
+      "path": "bindings[2].element",
+      "msg": "not in the model",
+      "level": "error"
+     },
+     {
+      "code": "binding",
+      "path": "bindings[3].prop",
+      "msg": "one of K, tau, theta, y0",
+      "level": "error"
+     },
+     {
+      "code": "binding",
+      "path": "bindings[4].expr",
+      "msg": "needs an expression",
+      "level": "error"
+     },
+     {
+      "code": "binding",
+      "path": "bindings[5].prop",
+      "msg": "nothing to set here",
+      "level": "error"
+     },
+     {
+      "code": "unknown-field",
+      "path": "bindings[6].z",
+      "msg": "unknown field",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "binding",
+      "path": "bindings[2].prop",
+      "msg": "one of ramp.from, ramp.slope, ramp.at, ramp.until",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "binding",
+      "path": "bindings",
+      "msg": "a list of at most 24 {element, prop?, expr}",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "binding",
+      "path": "bindings",
+      "msg": "a list of at most 24 {element, prop?, expr}",
+      "level": "error"
+     }
+    ]
+   ],
+   "s": [
+    [
+     {
+      "code": "model",
+      "path": "model",
+      "msg": "pid@1 needs a model {plant, controller?, setpoint?, transient, …}",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "model",
+      "path": "model",
+      "msg": "pid@1 needs a model {plant, controller?, setpoint?, transient, …}",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "model",
+      "path": "model",
+      "msg": "pid@1 needs a model {plant, controller?, setpoint?, transient, …}",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "transient",
+      "path": "model.transient",
+      "msg": "missing: every output of pid@1 comes from a run {tEnd, dt?}",
+      "level": "error"
+     }
+    ],
+    [],
+    [
+     {
+      "code": "output",
+      "path": "outputs[2]",
+      "msg": "must name what it reads: one of signal, metric, time",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[3].time",
+      "msg": "true on a series output (the time axis)",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[4].time",
+      "msg": "true on a series output (the time axis)",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[5].signal",
+      "msg": "one of r, y, ym, u, e",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[5]",
+      "msg": "a scalar signal needs at or stat",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[6]",
+      "msg": "a metric is a scalar output",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[7].metric",
+      "msg": "one of rise, overshoot, peak, peakTime, settling, yFinal, ess, iae, ise, itae, satTime",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[7]",
+      "msg": "at and stat belong to a scalar output of a signal",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[8]",
+      "msg": "at or stat, not both",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[8].at",
+      "msg": "needs a number ≥ 0 or an expression",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[8].stat",
+      "msg": "one of final, min, max, mean, pp, rms",
+      "level": "error"
+     },
+     {
+      "code": "unknown-field",
+      "path": "outputs[9].zz",
+      "msg": "unknown field",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[10].signal",
+      "msg": "one of r, y, ym, u, e",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[10]",
+      "msg": "a scalar signal needs at or stat",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "controller",
+      "path": "model.controller",
+      "msg": "needs an object {Kp, Ki?, Kd?, …}",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "binding",
+      "path": "model.bindings[3].element",
+      "msg": "not in the model",
+      "level": "error"
+     }
+    ]
+   ]
+  }
+ }
+}

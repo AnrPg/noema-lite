@@ -13,6 +13,7 @@ const ctx = { console, fetch, Blob, URL, setTimeout, clearTimeout, Date, JSON, P
 ctx.window = ctx; vm.createContext(ctx);
 vm.runInContext(fs.readFileSync(path.join(ROOT, 'config.js'), 'utf8'), ctx);
 const CFG = Object.assign({}, ctx.NOEMA_CONFIG, arg('--url') ? { supabaseUrl: arg('--url') } : {}, arg('--key') ? { supabaseKey: arg('--key') } : {});
+vm.runInContext(fs.readFileSync(path.join(ROOT, 'engine', 'core.js'), 'utf8'), ctx);   // NoemaCore: cloud.js keeps its keys through it
 vm.runInContext(fs.readFileSync(path.join(ROOT, 'engine', 'cloud.js'), 'utf8'), ctx);
 const C = ctx.NoemaCloud;
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
@@ -21,7 +22,7 @@ let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m)
   console.log(`— anonymous checks: ${CFG.supabaseUrl}`);
   await C.init(CFG);
   const anon = async p => { const r = await fetch(CFG.supabaseUrl + p, { headers: { apikey: CFG.supabaseKey } }); return { status: r.status, body: await r.text() }; };
-  for (const t of ['noema_profiles', 'noema_kv', 'noema_snapshots', 'noema_conversations', 'noema_public_packs', 'noema_shares']) {
+  for (const t of ['noema_profiles', 'noema_kv', 'noema_events', 'noema_settings', 'noema_snapshots', 'noema_conversations', 'noema_public_packs', 'noema_shares']) {
     const r = await anon(`/rest/v1/${t}?select=*&limit=1`);
     ok(r.status === 200, `table ${t} ${r.status === 200 ? 'installed' : 'MISSING → run cloud/supabase.sql (' + r.body.slice(0, 80) + ')'}`);
   }

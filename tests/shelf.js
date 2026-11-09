@@ -10,8 +10,10 @@
      F. 🧭 Put on a map… from the Shelf; ⚙️ → Subjects; phone layout
    Usage: node tests/shelf.js <prepared-repo-dir> */
 const { chromium } = require(process.env.PW || 'playwright');
+const { deepText } = require('./deep');
 const path = require('path'), fs = require('fs'), os = require('os'), http = require('http');
 const { start } = require('./mock_supabase');
+const { connectorHandler, removeConnector } = require('./connector_fn');
 const F = require('./fixtures/curriculum_agents');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const SHOTS = '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
@@ -64,13 +66,11 @@ const makeMap = (p, { provider = 'auto', planned = true, attachFirst = false } =
 const node = (p, cid, nid) => p.evaluate(({ cid, nid }) => NoemaCurriculum.get(Noema.account.id, cid).nodes[nid], { cid, nid });
 
 (async () => {
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', askSubjectOnStart: true, shell: false };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', askSubjectOnStart: true, onboarding: false, shell: false };`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   const api = claude(); await new Promise(r => api.listen(APORT, r));
-  // the connector exactly as tools/build.py bundles it (MCP_ENGINE), pointed at the emulator
-  const fn = path.join(os.tmpdir(), `noema-mcp-shelf-${process.pid}.mjs`);
-  fs.writeFileSync(fn, `const CFG = ${JSON.stringify({ siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [{ id: 'databricks', title: 'Databricks' }, { id: 'lib-free', title: 'A library subject on no step' }] })};\nconst DOCS = ${JSON.stringify({ workflow: 'S', content: 'C', visual: 'V' })};\nglobalThis.window = globalThis;\n` + ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));
-  const { default: handler } = await import(fn);
+  // the connector exactly as tools/build.py bundles it (tests/connector_fn.js), pointed at the emulator
+  const handler = await connectorHandler(ROOT, { config: { siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [{ id: 'databricks', title: 'Databricks' }, { id: 'lib-free', title: 'A library subject on no step' }] }, docs: { workflow: 'S', content: 'C', visual: 'V' } });
   let T = null, rpc = 0;
   const tool = async (name, args = {}) => { const r = await handler(new Request(BASE + '/mcp', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + T }, body: JSON.stringify({ jsonrpc: '2.0', id: ++rpc, method: 'tools/call', params: { name, arguments: args } }) })); const j = await r.json(); return { text: j.result?.content?.[0]?.text || j.error?.message || '', error: !!j.result?.isError || !!j.error }; };
 
@@ -117,8 +117,8 @@ const node = (p, cid, nid) => p.evaluate(({ cid, nid }) => NoemaCurriculum.get(N
   await p.click('.cm-attachgo');
   ok(await until(async () => /🔄/.test(await p.locator('.cm-node[data-id="kinematics"] .cm-badges').innerText()), 5000), 'the step shows 🔄 while it is re-planned');
   await p.click('.cm-node[data-id="kinematics"]'); await wait(300);
-  const panel = await p.locator('.cm-panel').innerText();
-  ok(/Re-planning it to match its subject|Being re-planned/.test(panel) && !(await p.locator('.cm-panel button:has-text("Study this step")').count()), 'and it is closed: no 📖 Study while its new plan is coming');
+  const panel = await deepText(p, '.cm-panel');
+  ok(/Re-planning it to match its subject|Being re-planned/.test(panel) && !(await p.locator('.cm-panel noema-button:has-text("Study this step")').count()), 'and it is closed: no 📖 Study while its new plan is coming');
   ok(await until(async () => !(await node(p, cid, 'kinematics')).replan, 15000), 'the new plan arrives');
   const call = A.plans.slice(before);
   ok(call.length === 1 && call[0].ids.join() === 'kinematics', 'only that step went to the chapter planner');
@@ -130,17 +130,20 @@ const node = (p, cid, nid) => p.evaluate(({ cid, nid }) => NoemaCurriculum.get(N
   await wait(600);
   ok(/📦/.test(await p.locator('.cm-node[data-id="kinematics"] .cm-badges').innerText()), 'the map shows 📦 on it');
   await p.click('.cm-node[data-id="kinematics"]'); await wait(300);
-  ok(/Taught by your subject “Demo Physics”/.test(await p.locator('.cm-panel').innerText()) && await p.locator('.cm-panel button:has-text("Study this step")').isVisible(), 'its panel: 📦 taught by your subject · 📖 Study this step');
+  ok(/Taught by your subject “Demo Physics”/.test(await deepText(p, '.cm-panel')) && await p.locator('.cm-panel noema-button:has-text("Study this step")').isVisible(), 'its panel: 📦 taught by your subject · 📖 Study this step');
   await p.click('.cm-node[data-id="energy"]'); await wait(300);
   ok(/now taught by your own subject — check that this step still fits/.test(await p.locator('.cm-flag').innerText()), 'the step after it is flagged (⚑ check that it still fits)');
   await p.screenshot({ path: SHOTS + '/sh3_map.png' });
   ok(!(await p.evaluate(() => Noema.shelf(Noema.account.id).then(l => l.map(s => s.id)))).includes('demo-physics'), 'it is no longer on the Shelf');
-  await p.evaluate(({ cid }) => { const acc = Noema.account.id, n = NoemaCurriculum.get(acc, cid).nodes.kinematics; const res = {}; for (let i = 0; i < n.pack.exercises; i++) res['e' + i] = { ok: 1 }; localStorage.setItem(`noema1:${acc}:s:demo-physics:state`, JSON.stringify({ read: Object.fromEntries(n.pack.sections.map(x => [x, 1])), res })); }, { cid });
+  await p.evaluate(async ({ cid }) => { const acc = Noema.account.id, n = NoemaCurriculum.get(acc, cid).nodes.kinematics, L = NoemaCore.learning;   // the learner read every section and solved every exercise
+    for (const x of n.pack.sections) L.record({ type: 'section.read', subject: 'demo-physics', item: x, data: {} });
+    for (let i = 0; i < n.pack.exercises; i++) L.record({ type: 'answer.given', subject: 'demo-physics', item: 'e' + i, data: { ok: true } });
+    await L.flush(); }, { cid });
   ok(await p.evaluate(cid => { const C = NoemaCurriculum; return C.nodeStatus(Noema.account.id, C.get(Noema.account.id, cid), 'kinematics').mastered; }, cid), 'progress in the subject is the step’s progress (all read + 80 % solved → mastered)');
   await p.click('.cm-node[data-id="kinematics"]'); await wait(300);
-  await p.click('.cm-panel button:has-text("Review")'); await wait(2500);
+  await p.click('.cm-panel noema-button:has-text("Review")'); await wait(2500);
   ok(await p.evaluate(() => Noema.subject?.id === 'demo-physics' && Noema.node?.node === 'kinematics'), 'studying the step opens the subject, which knows its step (🧭 back to the map)');
-  ok(await p.locator('.curchip').count() > 0, 'the subject has the 🧭 Map button');
+  ok(await until(() => p.$('.subjhead .subjkicker'), 8000) && await p.locator('.subjhead .subjkicker[title="Open the Roadmap"]').count() > 0, 'the subject has the 🧭 Map button');
 
   console.log('— B2. take it off; a step’s own subject goes to the Shelf');
   const det = await p.evaluate(cid => NoemaCurriculum.Edit.detach(Noema.account.id, cid, 'kinematics'), cid);
@@ -181,8 +184,8 @@ const node = (p, cid, nid) => p.evaluate(({ cid, nid }) => NoemaCurriculum.get(N
   const app = await makeMap(p, { provider: 'claudeapp', planned: false, attachFirst: true });
   let w = await p.evaluate(id => { const c = NoemaCurriculum.get(Noema.account.id, id); return { hold: NoemaCurriculum.holding(c), work: NoemaCurJobs.work(c) }; }, app);
   ok(w.hold && !w.work.toPlan.length, 'Claude app: while the learner attaches their subjects, no step is handed out to plan');
-  await p.evaluate(() => NoemaCurMap.map(Noema.account.id, NoemaCurriculum.list(Noema.account.id).find(c => c.provider === 'claudeapp').id)); await wait(900);
-  ok(await p.locator('.cm-holdbar button:has-text("Attach subjects")').isVisible() && await p.locator('.cm-holdbar button:has-text("Plan the steps now")').isVisible(), 'the map says so: 📦 Attach subjects · ▶ Plan the steps now');
+  await p.evaluate(() => Noema.curriculumMap(NoemaCurriculum.list(Noema.account.id).find(c => c.provider === 'claudeapp').id)); await wait(900);
+  ok(await p.locator('.cm-holdbar noema-button:has-text("Attach subjects")').isVisible() && await p.locator('.cm-holdbar noema-button:has-text("Plan the steps now")').isVisible(), 'the map says so: 📦 Attach subjects · ▶ Plan the steps now');
   await p.click('.cm-holdbar .cm-attachsubs'); await wait(600);
   await box().locator('button:has-text("Suggest matches")').click(); await wait(200);
   ok(await box().locator('select[aria-label="Subject for Physics of motion"]').inputValue() === 'demo-physics', '✨ Suggest matches pairs “Demo Physics” with “Physics of motion” (no AI)');
@@ -238,6 +241,6 @@ const node = (p, cid, nid) => p.evaluate(({ cid, nid }) => NoemaCurriculum.get(N
   ok(await ph.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'phone: the attach dialog fits');
   await ph.screenshot({ path: SHOTS + '/sh5_phone.png' });
   ok(!E.length, 'no page errors ' + JSON.stringify(E.slice(0, 3)));
-  await browser.close(); srv.close(); api.close(); fs.rmSync(fn, { force: true });
+  await browser.close(); srv.close(); api.close(); removeConnector(handler);
   console.log(fails ? `\n${fails} FAILED` : '\nALL PASSED'); process.exit(fails ? 1 : 0);
 })().catch(e => { console.error(e); process.exit(1); });

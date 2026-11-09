@@ -1,9 +1,9 @@
 /* The expression language of sim-spec@1 without a browser (docs/INTERACTIVE_SIMEXPR.md, docs/adr/001 D5):
    1. the shared corpus (tests/fixtures/simexpr/corpus.json): every case in JS, against its expected value / error / check / print;
-   2. the same corpus, a seeded fuzz of random trees (printed to source and evaluated) and a fuzz of every function, all run
-      by the Python twin (tools/simexpr.py, one python3 process for everything): the trees, errors, printed sources and the
-      doubles must be identical (Object.is after the JSON round trip; NaN equals NaN; -0 is kept);
-   3. parse → print → parse is stable, and a tree from outside (JSON) is checked node by node in both twins;
+   2. the same corpus, a seeded fuzz of random trees (printed to source and evaluated) and a fuzz of every function, against the
+      golden outputs of the former Python twin tools/simexpr.py (tests/fixtures/parity/simexpr.json, of the default seed): the
+      trees, errors, printed sources and the doubles must be identical (Object.is after the JSON round trip; NaN equals NaN; -0 is kept);
+   3. parse → print → parse is stable, and a tree from outside (JSON) is checked node by node;
    4. the fdlibm ports stay within 1 ulp of this platform's Math; the safety refusals; the public API.
    Usage: node tests/simexpr.js [seed] */
 const path = require('path'), fs = require('fs'), cp = require('child_process');
@@ -12,9 +12,10 @@ let n = 0, fails = 0;
 const ok = (c, m) => { n++; if (!c) { fails++; console.log('✗ ' + m); } else console.log('✓ ' + m); };
 const quiet = (c, m) => { n++; if (!c) { fails++; if (fails < 60) console.log('✗ ' + m); } return c; };   // one of many: only failures are printed
 
-require(path.join(ROOT, 'engine', 'src', '35_simexpr.js'));
-const X = globalThis.NoemaExpr;
-const PY = path.join(ROOT, 'tools', 'simexpr.py');
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaExpr = ENGINES.kernel('expr');
+const X = NoemaExpr;
+const golden = require('./golden.cjs')('simexpr');   // the golden outputs of the former Python twin tools/simexpr.py (tests/golden.cjs)
 
 // ---- values across JSON: NaN, ±Infinity and -0 as strings
 const enc = v => (typeof v === 'boolean' ? v : v !== v ? 'NaN' : v === Infinity ? 'Infinity' : v === -Infinity ? '-Infinity' : Object.is(v, -0) ? '-0' : v);
@@ -32,7 +33,7 @@ const show = v => JSON.stringify(v, (k, x) => (typeof x === 'number' ? enc(x) : 
 const errObj = e => { if (!e || !e.code) throw e; return { code: e.code, pos: e.pos, msg: e.message }; };
 const stripPos = t => JSON.parse(JSON.stringify(t, (k, v) => (k === 'pos' ? undefined : v)));
 
-// ---- one job, the JS side (tools/simexpr.py _job is the Python side)
+// ---- one job (the golden outputs are the former Python twin's answers to the same jobs)
 function jsJob(j) {
   if (j.k === 'fn') return { value: enc(X.FUNCS[j.fn].fn(...j.args.map(dec))) };
   const out = {}, env = decEnv(j.env);
@@ -147,7 +148,7 @@ for (const fn of FN_NAMES) {
   }
 }
 
-// trees from outside (JSON): the node-by-node checks give the same errors in both twins
+// trees from outside (JSON): the node-by-node checks give the same errors as the golden outputs
 const deep = d => (d === 0 ? { t: 'num', v: 1 } : { t: 'un', op: '-', a: deep(d - 1) });
 const wide = d => (d === 0 ? { t: 'var', name: 'x' } : { t: 'bin', op: '+', a: wide(d - 1), b: wide(d - 1) });
 const AST_CASES = [
@@ -182,38 +183,23 @@ for (const [ast, env, want] of AST_CASES) {
 }
 ok(true, 'trees from outside: ' + AST_CASES.length + ' cases (malformed nodes → E_AST, depth → E_DEPTH, size → E_TOO_BIG)');
 
-// ================================================================ 3. the Python twin, once, with every job
-const t0 = Date.now();
-const py = cp.spawnSync('python3', [PY, '--batch'], { input: JSON.stringify(jobs), maxBuffer: 512 * 1024 * 1024, encoding: 'utf8' });
-if (py.status !== 0) { ok(false, 'python3 tools/simexpr.py --batch ran: ' + (py.stderr || py.error)); }
+// ================================================================ 3. the golden outputs of the former Python twin (tools/simexpr.py), every job
+if (seed !== 20261104) console.log('· seed ' + seed + ': the golden outputs (tests/fixtures/parity/simexpr.json) are of seed 20261104 — section 3 skipped');
 else {
-  const pyOut = JSON.parse(py.stdout);
-  ok(pyOut.length === jobs.length, 'Python answered all ' + jobs.length + ' jobs in ' + (Date.now() - t0) + ' ms');
+  const pyOut = golden('jobs', JSON.stringify(jobs), jsOut);
+  ok(pyOut.length === jobs.length, 'the golden outputs answer all ' + jobs.length + ' jobs');
   const tally = { corpus: [0, 0], fuzz: [0, 0], fn: [0, 0], tree: [0, 0] };
   for (let i = 0; i < jobs.length; i++) {
     const kind = labels[i].startsWith('corpus') ? 'corpus' : labels[i].startsWith('fuzz tree') || labels[i].startsWith('tree') ? 'tree' : labels[i].startsWith('fuzz') ? 'fuzz' : 'fn';
     tally[kind][1]++;
-    if (quiet(deepEq(jsOut[i], pyOut[i]), 'JS and Python differ on ' + labels[i] + '\n    JS ' + show(jsOut[i]).slice(0, 600) + '\n    PY ' + show(pyOut[i]).slice(0, 600))) tally[kind][0]++;
+    if (quiet(deepEq(jsOut[i], pyOut[i]), 'the JS differs from the golden output on ' + labels[i] + '\n    JS ' + show(jsOut[i]).slice(0, 600) + '\n    GOLDEN ' + show(pyOut[i]).slice(0, 600))) tally[kind][0]++;
   }
-  ok(tally.corpus[0] === tally.corpus[1], 'the twins agree on every corpus case — tree, check, print, value / error with msg (' + tally.corpus.join('/') + ')');
-  ok(tally.fuzz[0] === tally.fuzz[1], 'the twins agree on every random expression — tree, check, print, value (' + tally.fuzz.join('/') + ')');
-  ok(tally.tree[0] === tally.tree[1], 'the twins agree on every tree given as JSON (' + tally.tree.join('/') + ')');
-  ok(tally.fn[0] === tally.fn[1], 'the twins agree bit for bit on every function call (' + tally.fn.join('/') + ', ' + FN_NAMES.length + ' functions)');
+  ok(tally.corpus[0] === tally.corpus[1], 'the golden outputs on every corpus case — tree, check, print, value / error with msg (' + tally.corpus.join('/') + ')');
+  ok(tally.fuzz[0] === tally.fuzz[1], 'the golden outputs on every random expression — tree, check, print, value (' + tally.fuzz.join('/') + ')');
+  ok(tally.tree[0] === tally.tree[1], 'the golden outputs on every tree given as JSON (' + tally.tree.join('/') + ')');
+  ok(tally.fn[0] === tally.fn[1], 'the golden outputs bit for bit on every function call (' + tally.fn.join('/') + ', ' + FN_NAMES.length + ' functions)');
   const vals = jsOut.filter((o, i) => labels[i].startsWith('fuzz #') && o.value && !o.value.error);
   ok(vals.length > N_FUZZ / 2, 'the fuzz mostly evaluates (' + vals.length + ' values; the rest are errors such as an unset variable)');
-}
-// a Python-only path: host functions, check with fns, the error object
-{
-  const r = cp.spawnSync('python3', ['-c', [
-    'import sys; sys.path.insert(0, ' + JSON.stringify(path.join(ROOT, 'tools')) + '); import simexpr as S',
-    "assert S.evaluate('noise(x) + 1', {'x': 2}, fns={'noise': lambda v: v * 10}) == 21.0",
-    "assert S.check('noise(x)', vars=['x'], fns=['noise']) == []",
-    "assert S.check('noise(x)', vars=['x'])[0]['code'] == 'E_UNKNOWN_FN'",
-    "e = None\ntry: S.parse('a.b')\nexcept S.ExprError as x: e = x\nassert e.code == 'E_CHAR' and e.pos == 1",
-    "e = None\ntry: S.evaluate('x', {'x': 10**400})\nexcept S.ExprError as x: e = x\nassert e.code == 'E_VALUE'",
-    "assert S.print_ast(S.parse('2^(3^2)')) == '2^3^2'",
-    "print('ok')"].join('\n')], { encoding: 'utf8' });
-  ok(r.status === 0 && r.stdout.trim() === 'ok', 'Python: host functions, check(fns=…), ExprError(code, pos), a too-large int is E_VALUE' + (r.status ? ' — ' + r.stderr : ''));
 }
 
 // ================================================================ 4. the ports, safety, the API
@@ -232,10 +218,8 @@ else {
   ok(worst <= 1, 'the fdlibm ports are within 1 ulp of this platform\'s Math (' + exact + '/' + total + ' identical, worst ' + worst.toFixed(2) + ' ulp)');
 }
 {
-  const js = fs.readFileSync(path.join(ROOT, 'engine', 'src', '35_simexpr.js'), 'utf8').replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '');
-  const pysrc = fs.readFileSync(PY, 'utf8');
-  ok(!/\beval\s*\(|\bnew\s+Function\b|\bFunction\s*\(|\bsetTimeout\s*\(|\bimport\s*\(|\brequire\s*\(/.test(js), 'the JS twin has no eval, no new Function, no dynamic import');
-  ok(!/\b(eval|exec)\s*\(|__import__|\bimportlib\b|\bbuiltins\b/.test(pysrc.replace(/'''[\s\S]*?'''|"""[\s\S]*?"""/g, '')), 'the Python twin has no eval / exec / __import__');
+  const js = fs.readFileSync(path.join(ROOT, 'src', 'engines', 'kernel', 'simexpr.ts'), 'utf8').replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '');
+  ok(!/\beval\s*\(|\bnew\s+Function\b|\bFunction\s*\(|\bsetTimeout\s*\(|\bimport\s*\(|\brequire\s*\(/.test(js), 'the expression language has no eval, no new Function, no dynamic import');
 }
 {
   Object.prototype.polluted = 7; Object.prototype.evil = () => 1;   // eslint-disable-line no-extend-native

@@ -64,7 +64,7 @@ function messages(body, res, J) {
 }
 
 (async () => {
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', askSubjectOnStart: true, shell: false };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', askSubjectOnStart: true, onboarding: false, shell: false };`;
   fs.mkdirSync(path.join(ROOT, 'dist/site/testimg'), { recursive: true }); fs.writeFileSync(path.join(ROOT, 'dist/site/testimg/heart.png'), PNG);
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   // the picture search's view of the web (scripted): Bing finds a figure on a publisher's page; the other sources are down
@@ -171,13 +171,17 @@ function messages(body, res, J) {
   ok(/split|SKILL\.md §3b|work\/<id>\/sources/.test(m1.system[0].text) && /\.noema\.zip/.test(m1.system[0].text), 'Claude is told to package every uploaded file (or its parts) and to copy the .noema.zip');
   ok(!(await p.evaluate(() => NoemaClaude.jobs(Noema.account.id))).length, 'the finished job is cleaned up');
 
-  console.log('— ⚙️ Settings: a tab of the profile menu, with an optional Claude section');
-  ok(!(await p.locator('.topbar .iconbtn[title="Settings"]').count()), 'no ⚙️ in the top bar — Settings lives only in the avatar menu');
-  await p.click('.acchip'); await wait(400);
-  const tabsBox = await p.locator('.accbox .tabs').boundingBox(), helpBox = await p.locator('.accbox .tabs button[data-t="help"]').boundingBox();
-  ok(helpBox && helpBox.x + helpBox.width <= tabsBox.x + tabsBox.width + 1, 'every tab of the avatar menu is visible (❓ Help is not pushed off the edge)');
-  await p.click('.accbox .tabs button[data-t="settings"]'); await wait(400);
-  ok(await p.locator('.accbox .tabs button.on').innerText() === '⚙️ Settings' && await p.locator('.accbox .accsec').count() === 6, 'the avatar menu has a ⚙️ Settings tab: Gemini · Claude · language of the AI conversations · Display & studying · this subject · machine translation of shared texts');
+  console.log('— ⚙️ Settings: Me › Settings (the frame), with an optional Claude section');
+  ok(!(await p.locator('#ns-top [title="Settings"], .ns-tabs [title="Settings"]').count()), 'no ⚙️ in the top bar — Settings lives only in the Me menu');
+  await p.click('.ns-railme'); await p.waitForSelector('.ns-pop.ns-mepop');
+  const popBox = await p.locator('.ns-pop.ns-mepop').boundingBox(), helpBox = await p.locator('.ns-pop.ns-mepop button', { hasText: 'Help' }).first().boundingBox();
+  ok(helpBox && helpBox.x + helpBox.width <= popBox.x + popBox.width + 1 && helpBox.y + helpBox.height <= popBox.y + popBox.height + 1 && popBox.y >= 0, 'every item of the Me menu is visible (❓ Help is not pushed off the edge)');
+  await p.locator('.ns-pop.ns-mepop button', { hasText: 'Settings' }).first().click(); await until(() => p.evaluate(() => location.hash === '#/me'), 5000);
+  await p.click('noema-settings .ns-item:has-text("AI")'); await until(() => p.$('main .accsec'), 8000);
+  ok(await p.evaluate(() => location.hash) === '#/me/ai' && await p.locator('main .accsec').count() === 3 && /Gemini/.test(await p.locator('main .accsec').nth(0).innerText()) && /Claude/.test(await p.locator('main .accsec').nth(1).innerText()), 'Me › Settings › AI: Gemini · Claude · language of the AI conversations');
+  await p.evaluate(() => { location.hash = '#/me/look'; }); await until(() => p.$('noema-look'), 8000); await wait(400);
+  ok(await p.locator('noema-look .ns-seg').count() > 0 && await p.locator('noema-look .mt-enable').count() === 1 && await p.locator('noema-look input[aria-label="Daily goal"], noema-look .ns-check').count() > 0, 'Me › Settings › Language & appearance: Display & studying and machine translation of shared texts');
+  await p.evaluate(() => { location.hash = '#/me/ai'; }); await until(() => p.$('main .accsec'), 8000);
   await p.click('.accsec summary:has-text("Claude (optional)")'); await wait(300);
   ok(await until(async () => /The key works/.test(await p.locator('.accsec:has-text("Claude (optional)")').innerText()), 6000) && await p.locator('select[aria-label="Claude model"] option').count() === 4, 'the Claude key on this device is shown and checked; its models are listed');
   await p.selectOption('select[aria-label="Claude model"]', 'claude-opus-9'); await p.fill('input[aria-label="Spending limit per Roadmap step"]', '5'); await p.selectOption('select[aria-label="AI for new Roadmaps"]', 'claude');
@@ -186,7 +190,7 @@ function messages(body, res, J) {
   await p.evaluate(() => NoemaCurMap.create(Noema.account.id)); await wait(400);
   ok(await p.locator('.cm-provider').inputValue() === 'claude' && await p.locator('.cg-budget').inputValue() === '5', 'a new curriculum starts with them (Claude, $5 per step)');
   await p.locator('.noema-ovbox button:has-text("Close")').last().click(); await wait(300);
-  await p.evaluate(() => openAccountMenu('settings')); await wait(300); await p.click('.accsec summary:has-text("Claude (optional)")');
+  await p.evaluate(() => openAccountMenu('settings')); await until(() => p.$('main .accsec'), 8000); await p.click('.accsec summary:has-text("Claude (optional)")');
   await p.click('button:has-text("Remove the key")'); await wait(200);
   ok(await p.evaluate(() => NoemaClaude.Key.get(Noema.account.id)) === '', 'Remove the key → gone from this device');
   await p.fill('input[aria-label="Claude API key"]', KEY); await p.click('button:has-text("Check the key")');

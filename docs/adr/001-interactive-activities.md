@@ -136,7 +136,7 @@ mixed 64 KB rule was dropped because one path is simpler to test and the packs g
 **D3 · Tier A runaway code (new, from spike c).** The host rewrites every loop of a Tier A app's inline scripts at mount time, adding a
 time guard (`for`/`while`/`do`/`for … of`). Code the rewrite never saw cannot run: the CSP allows scripts **only by the hashes of the
 rewritten scripts** (no `'unsafe-inline'`, no `'unsafe-eval'`), so inline handlers, `javascript:` URLs, scripts added at run time,
-`eval` and `new Function` are refused by the browser (the spike's `'unsafe-inline'` policy is not the one P1 ships). **As built:** a small tokenizer (`engine/src/33_activity_guard.js`, no vendored parser)
+`eval` and `new Function` are refused by the browser (the spike's `'unsafe-inline'` policy is not the one P1 ships). **As built:** a small tokenizer (`engine/src/33_activity_guard.js`, now `src/runtimes/loop-guard.ts`; no vendored parser)
 that skips strings, template literals, comments and regular expressions and adds `G()&&(…)` to each loop condition; the scripts are
 then allowed by their hashes in the frame's CSP, so only the guarded scripts can run. After 1.5 s of uninterrupted running, the guard throws and the bootstrap reports `error {code:"runaway"}`; the host then shows
 *This activity stopped responding · Restart*. The lint also refuses obvious traps (`while(true)` without a `break`, huge array sizes,
@@ -214,7 +214,7 @@ step with its check in `tools/pipelines/`), and the toolkit scripts `activity_ne
   * **Feature flags:** `NOEMA_CONFIG.activities = { 'html-app@1': true, 'sim-spec@1': true, 'py-module@1': false }` for staged rollout (as built: every runtime on by default, py-module@1 since batch 1, §10).
 * **Runtimes:** `engine/activities/html_app.js` (Tier A), `engine/activities/sim_spec.js` + `engine/activities/sim_worker.js` and engines in
   `engine/activities/engines/` (Tier B; `registerEngine()`), `engine/activities/py_runner.js` (Tier C).
-* **Schemas (schema-first, JSON Schema 2020-12)** in `tools/schemas/`: `noema.activities.v1.schema.json`, `noema.activity-protocol.v1.schema.json`,
+* **Schemas (schema-first, JSON Schema 2020-12)** in `src/contracts/schemas/`: `noema.activities.v1.schema.json`, `noema.activity-protocol.v1.schema.json`,
   `sim-spec.v1.schema.json`, `noema.events.v1.schema.json`. Python validates with `jsonschema` when it is installed and otherwise with the
   same hand-written checks as `packcheck.js` (the repo's existing pattern: `validate.py` and `packcheck.js` keep the same rules).
 * **Protocol** `noema.activity/v1`: exactly the brief's §8 (envelope, message table, limits). Handshake as tested in spike (c):
@@ -255,7 +255,7 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
 
 ## 8. As built — P2 (`sim-spec@1`, 2026-11-04)
 
-* **No frame.** A spec is data: the app's own code (`engine/src/35_activity_sim.js`) renders the controls, readouts and plots in the
+* **No frame.** A spec is data: the app's own code (`src/runtimes/sim-spec`) renders the controls, readouts and plots in the
   page with the app's DOM, styles and tokens, and computes them with NoemaExpr and the registered engines. Nothing of the pack is
   ever executed or put in the page as HTML (labels are text nodes, plots are SVG built element by element), so the sandbox, the CSP
   and the loop guard that protect the app from *code* have nothing to guard here; a frame would only cost what the brief wanted
@@ -286,15 +286,15 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
 
 ## 9. As built — P3 (`circuit-mna@1` and the fault-finding bench, 2026-11-04)
 
-* **The engine in sim-spec.** `engine/src/36_engine_circuit.js` (NoemaCircuit: MNA, Newton, trapezoidal transients, faults,
-  instruments, seeded noise) is registered by `engine/src/36_engine_circuit_sim.js` as `circuit-mna@1` with `{bench: true, check,
+* **The engine in sim-spec.** `src/engines/circuit/circuit.ts` (NoemaCircuit: MNA, Newton, trapezoidal transients, faults,
+  instruments, seeded noise) is registered by `src/engines/circuit/sim.ts` as `circuit-mna@1` with `{bench: true, check,
   prepare, create, workerSource}`. `workerSource` is the engine's own source (`NoemaCircuit.source()`, the module's
   `Function.toString`) plus the adapter's: one copy of the code, the same in the page and in the worker. `prepare` evaluates the
   spec's expressions (bindings, transient times, `at`) with the app's NoemaExpr on the main thread, so the worker gets numbers only
   and needs no expression language. The model is `{netlist, bindings, transient, noise}`; outputs are node/branch series, DC or
   transient scalars (`at`, `stat`) and probe readings (docs/INTERACTIVE_CIRCUIT.md §1).
 * **A bench is a minimal extension of the spec** (`spec.bench`: faults, points, instruments, budget, diagnosis) rendered by the
-  sim-spec runtime itself (`makeBench` in 35_activity_sim.js), for engines that declare `bench: true`; the engine adds
+  sim-spec runtime itself (`makeBench` in src/runtimes/sim-spec/bench.ts), for engines that declare `bench: true`; the engine adds
   `measure(inputs, probe)` next to `run`. The runner queues runs and measurements: the latest run wins, measurements are first in,
   first out, and every result still passes the P2 gate (`values()` is null while the latest inputs are not computed). The bench's
   values `diagnosis`, `measurements`, `correct` join the checks' names only (not readouts or marks, never declarable), and
@@ -322,7 +322,7 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
 * **The binding: a spec drawn by the app, numbers from Python.** A py-module@1 item carries `python` (its `main.py`, inline with
   `sha256` and `bytes`), `packages` (⊆ numpy, scipy and the allow-listed extras of `tools/pywheels_allow.json`), `requiresNetwork`
   (required `true` with an extra), `stepMs` (100–10 000) and a `spec` in the sim-spec@1 format without `engine`, `model` or `bench` and
-  with at least one `output`. The app mounts the sim-spec view of 35_activity_sim.js (`ACT.simView`, the P2 runtime turned into a
+  with at least one `output`. The app mounts the sim-spec view of src/runtimes/sim-spec (`ACT.simView`, the P2 runtime turned into a
   function with an optional host: its engine id, its spec check, its runner, extra state, a decoration) with a runner that calls
   Python's `step(inputs, state)` one at a time, the latest inputs winning. So the learner gets the app's own controls, readouts and
   plots (theme, 360 px, keyboard, screen reader) and **the checks grader works on Python's outputs unchanged** (the P2 rev gate keeps
@@ -345,8 +345,8 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
   Restart). Settings: a section in the backup view (its header has a line icon, `accSection({ line: 'download' }, …)`, no emoji) (`accView('backup')`, so the classic Backup tab and the shell's Me › Data and
   sync), one line with a pill, the size on the device and the Prepare button with a progress bar; the per-part detail and whether
   `persist()` was granted are in its ⓘ. All words in the 15 UI catalogs.
-* **Deploy.** `build_site` copies `engine/pyodide-sw.js` and writes the Python headers into the real `_headers`
-  (`Service-Worker-Allowed: /vendor/`, immutable versioned files, a no-cache manifest, `application/wasm`); `netlify.toml` runs
+* **Deploy.** `build_site` writes the app's one service worker `/sw.js` (from `src/composition/sw.ts`; it replaced the separate
+  `engine/pyodide-sw.js` in phase 1 of the redesign) and the Python headers into the real `_headers` (immutable versioned files, a no-cache manifest, `application/wasm`); `netlify.toml` runs
   `tools/fetch_pyodide.py` after the site build with the downloads in Netlify's build cache, and a failed fetch only prints a warning
   (the deploy goes out; Python activities show their fallback there). `docs/activities-dev/pyodide.md` and its headers file are folded
   into `docs/INTERACTIVE_PYTHON.md`, which the connector's 'interactive' guide and the skill's references now include.
@@ -357,7 +357,7 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
 
 ## 11. As built — P4b (`h5p@1`, 2026-11-04)
 
-* **The runtime** is the spike's (`engine/src/38_activity_h5p.js`, `window.NoemaH5P`: unzip, check, load, mount; the vendored player
+* **The runtime** is the spike's (`engine/src/38_activity_h5p.js`, `window.NoemaH5P`, now the typed runtime `src/runtimes/h5p`: unzip, check, load, mount; the vendored player
   `engine/vendor/h5p/3.8.2/`), unchanged in its security model: the item frame is opaque, offline, scripts by hash, inside the
   navigation-blocking wrapper; xAPI → `result` / `event` / `state` (docs/INTERACTIVE_H5P.md §3). It registers itself whenever it is
   in the engine (on by default; `NOEMA_CONFIG.activities['h5p@1'] = false` turns it off).
@@ -393,8 +393,8 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
 
 ## 12. As built — P6 engines (`thermal@1`, `pid@1`, `rf@1`, `twin@1`, 2026-11-04)
 
-* **Registration like `circuit-mna@1`.** The four engines (`engine/src/39_engine_thermal.js` … `42_engine_twin.js`, each with its
-  Python twin `tools/{thermal,pid,rf,twin}.py`) are registered by `engine/src/43_engines_p6.js`, one `ACT.registerEngine(…engine)`
+* **Registration like `circuit-mna@1`.** The four engines (`src/engines/thermal/thermal.ts` … `src/engines/twin/twin.ts`, each with its
+  Python twin `tools/{thermal,pid,rf,twin}.py`) are registered by `engine/src/43_page_runtimes.js`, one `ACT.registerEngine(…engine)`
   each: `{id, check, prepare, create, workerSource}`, and `bench: true` for `twin@1`. Every run is in a Worker built from the
   engine's own source; `prepare` evaluates the expressions on the main thread. Formats and APIs: `docs/INTERACTIVE_ENGINES.md`
   (folded from the four development notes, now removed).
@@ -415,7 +415,7 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
   should not list them (INTERACTIVE_AUTHORING.md).
 * **Loaded wherever NoemaCircuit is.** The four engine files sit beside `packcheck.js` in the shell (`index.html`), the site, the
   one-file bundle and the MCP connector (`tools/build.py`, `tests/connector.js`); the skill zip ships the Python twins next to
-  `activities.py`, and the activity harness loads the engines and `43_engines_p6.js` after the circuit engine.
+  `activities.py`, and the activity harness loads the engines and `engine/src/43_page_runtimes.js` after the circuit engine.
 * **Reference activities** `heatsink` (thermal), `pid-tune`, `lora-link` and `sensor-node` (twin), each with en/el/ru/fr strings, a
   fallback picture and text and six `tests.json` cases; `tests/activities_pack.py` builds them into a pack (11 activities with
   wasm-oscillator, py-filter and planets-quiz) and back; `activity_new.py --from heatsink | pid-tune | lora-link | sensor-node` starts from them.
@@ -453,7 +453,7 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
   `make_pack.py` inlines `module.wasm` as base64 + sha256; `unpack.py` writes it back byte for byte; an embed has no file.
   `45_activity_embed.js` declares `var NoemaEmbed`, because the app loads it both on its own (for packcheck) and inside `engine.js`.
 * **xAPI export** (`43_xapi.js`, `docs/INTERACTIVE_XAPI.md`): the subject's ⋮ menu has "Export learning record (xAPI)"; it
-  writes `<subject>.xapi.json` (`noema.xapi-export/v1`, xAPI 1.0.3 statements from `S.att` and `S.res`). The actor is
+  writes `<subject>.xapi.json` (`noema.xapi-export/v1`, xAPI 1.0.3 statements from the learning log's attempts and answers). The actor is
   `{account: {homePage: <site>, name: <account id>}}` — never an e-mail. Next to it **Course package for an LMS (cmi5)**
   downloads `<subject>.cmi5.zip` (cmi5.xml, zipped with JSZip like the package export); an LMS launch is not implemented, and
   there is no LRS posting. The shell's "My subjects" ⋮ has both items too (from the subject's saved state and pack:
@@ -479,14 +479,14 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
 ## 14. As built — P6 (the authoring UI, 2026-11-04)
 
 * **A route, not a page of its own.** The preview must be the real `sim-spec@1` runtime, which lives in `engine.js` and starts only
-  with a subject open, so the author is the engine route `#/author` (`authorView` in `engine/src/40_views.js`; `author` is one of
-  the shell's `ENGINE_ROUTES`, so the frame draws it with `shellChrome({ sub: true, crumbs: [[Activity author]] })`). It works
+  with a subject open, so the author is the route `#/author` (since phase 3 a page of the frame, `NoemaShell.registerPage`, drawn with
+  `subjectChrome({ sub: true, crumbs: [[Activity author]] })`, and `Noema.app.author` for the classic router). It works
   with any subject open and never changes that subject: the activity leaves the device only as the downloaded folder.
 * **One quiet way in**: subject ⋮ › *Create an activity* (line icon `wrench`, a one-line explanation under it), next to Edit —
   where docs/UI_MAP.md keeps the tools that change content. No button on the subject page, nothing in Me.
-* **Loaded on first use.** `schemaform.js`, `activity_author_schemas.js`, `activity_author.js` and `activity_author.css` (≈ 110 KB)
-  are fetched from `NOEMA_ENGINE_BASE` the first time the route opens (the pattern of the language UI); the site copies them, the
-  one-file bundle has them inline. Leaving the route destroys the page (its keys, its preview session).
+* **Loaded on first use.** `activity_author_schemas.js` and the lazy piece `build/author.js` (strict TS and Lit since phase 3:
+  `src/features/author`, `src/ui/screens/author`; the old `schemaform.js`, `activity_author.js` and `.css` are gone) load the first
+  time the route opens; the site copies them, the one-file bundle has them inline. Leaving the route destroys the page (its keys, its preview session).
 * **The schemas** are copied into `engine/activity_author_schemas.js` by `tools/build.py` (a `file://` page cannot fetch them);
   `python3 tools/build.py --author-schemas` prints the copy, and `tests/activity_author.js` checks that the committed one is current.
 * **The words are engine strings.** The 287 `engine.author.*` keys (UI, field labels `f.<schema title>` / `p.<netlist property>`,
@@ -507,7 +507,7 @@ request for each subject; Γ: a library of general engines), **Γ is the canonic
 - **Γ, the library** (`docs/INTERACTIVE_LIBRARY.md`): general engines, each for a whole family of subjects — mathematics (`formula@1`,
   `ode@1`, `prob@1`, `graph@1`, `geom@1`), life sciences and medicine (`genetics@1`, `seq@1`, `med@1`, `clinic@1` — clinical reasoning,
   its own engine and the deepest — `anatomy@1`), humanities, arts and crafts (`timeline@1` with every calendar first-class, `music@1`,
-  `map@1`, `text@1`, `craft@1`). One contract (`46_lib_core.js` + a module per engine + a Python twin of its checks), new output kinds
+  `map@1`, `text@1`, `craft@1`). One contract (`src/engines/kernel/core.ts` + a module per engine + a Python twin of its checks), new output kinds
   `scene` and `sound` and line styles for library engines only. Models follow current published science; every source, validity
   range and "check before release" value is in the engine's chapter (`docs/library/<name>.md`).
 - **A, the free way**, stays: `formula@1` is in the library; `html-app@1` and `py-module@1` when no engine fits.
@@ -531,7 +531,7 @@ a spec without `parts` is checked, run and graded exactly as before, and every o
 - **The stepper contract** (`docs/INTERACTIVE_LIBRARY.md` §1.6) is an optional `stepper` of `makeEngine`: `init`, `step`, optional
   `snapshot` / `restore` / `output` / `onEvent`, the signature of `NoemaSimKit.stepper`. Only engines with one may be co-simulated
   (`STEPPERS`, the same list in both validators).
-- **Runtime.** `ACT.partsRunner` (35_activity_sim.js) runs the plan: one engine instance and Worker per part (each job ≤ 5 s), the
+- **Runtime.** `partsRunner` (src/runtimes/sim-spec/parts.ts) runs the plan: one engine instance and Worker per part (each job ≤ 5 s), the
   whole graph ≤ 5 s, the latest inputs win. A loop that does not settle or a part that fails gives NaN and a visible note
   (`engine.act.sim.noConverge`, `engine.act.sim.partFailed`), never a crash or a stale value.
 - **Reuse.** `activities/_parts/<name>.json`, referenced with `use` / `with`, travels as `pack.activities.parts` (hashed with the
@@ -540,3 +540,30 @@ a spec without `parts` is checked, run and graded exactly as before, and every o
   engines the item declares, under the same host checks as `noema.engine` (§15).
 - **Tests.** `tests/parts.js` (the plan, both validators on `tests/fixtures/parts_cases.json`, the steppers, the orchestrator, the
   mini-app bridge, the three references), `tests/activities_pack.py` (the `_parts` round trip) and the activity harness in Chromium.
+
+## 17. Addendum — the engines as ES modules, plugins of the microkernel (2026-11-07)
+
+The sections above describe the engines as page scripts (`engine/src/35–49_*.js`, globals such as `NoemaCircuit`, `NoemaLibCore`,
+a Worker source made with `Function.toString`). They are now ES modules in `src/engines/<name>/` (the shared kernel in
+`src/engines/kernel/`), each a plugin of the microkernel (`src/plugins`, one line of `src/engines/plugins.ts`: its manifest
+`engine:<id>`, its module, its Worker bundle). The page reaches them only through `NoemaCore.engines` (`src/engines/library.ts`):
+`ids()`, `load(ids)` (lazy: an activity loads the engines it needs before it starts; `packcheck.js` loads `enginesNamed(pack)` before
+checking a pack), `loaded(id)`, `engine(id)`, `catalog`, `expr`, `schema()`. A Worker runs the engine's **Worker bundle**, built by
+esbuild from the same module (`noemaWorkers` in `tools/esbuild.mjs`), so the page and the Worker still run one copy of the
+code. The library is in three entries of `tools/esbuild.mjs`: `build/app.js` (the app root registers it as `NoemaCore.engines`: the
+site, the one-file bundle), `build/harness.js` (`NoemaCore` of an activity host: the skill's `activity_host/noema-core.js`) and
+`build/engines-node.cjs` (`tests/engines.cjs`); the connector imports `src/engines/node.ts` in its root. The Python twins and
+the parity fixtures are unchanged; the outputs of every engine were compared run by run with the page scripts they replace.
+`engine/src/43_engines_p6.js` became `engine/src/43_page_runtimes.js` (only `wasm-module@1` and `external-embed@1` stay page runtimes).
+
+## 18. Addendum — one source for the checks, no Python twins (2026-11-08)
+
+The sections above name Python twins of the validators and the engines' checks (`tools/activities.py`, `simexpr.py`,
+`circuit.py`, `thermal.py`, `pid.py`, `rf.py`, `twin.py`, `enginelib.py`, `lib_<name>.py`, `wasm_check.py`, `embed_check.py`,
+`h5p_check.py`) and `engine/packcheck.js`. They are gone. The checks of a pack and its activities are one TypeScript source,
+`src/features/content` (the app's `NoemaCore.content`, the connector, the Gemini generator), and the Python tools and the skill's
+scripts run the same code in node through one bridge, `build/noema-tools.cjs` (`tools/noema_core.py`; the skill ships it as
+`scripts/noema-tools.cjs`). The runtimes' package checkers stay where they were (`engine/src/38_activity_h5p.js` — since moved to `src/runtimes/h5p/check.ts` —,
+`44_activity_wasm.js`, `45_activity_embed.js`) and the content checks call them. The JS = Python parity tests became JS tests
+against the golden outputs of the twins, captured from them before they were deleted (`tests/golden.cjs`,
+`tests/fixtures/parity/`).

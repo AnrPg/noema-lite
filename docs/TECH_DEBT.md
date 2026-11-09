@@ -41,7 +41,7 @@ privacy — never upload without consent), transcripts for accessibility and for
 
 ### TD-3 · Keyboard-only answering for picture exercises — ✅ closed 2026-10-07
 Every picture exercise now works without a mouse or touch screen (`vStage().keyboard()` in
-`engine/src/35_visual.js`):
+`src/features/study/ui/exercise/visual.ts`):
 - **Tab** focuses the picture; a crosshair appears in the middle.
 - **Arrow keys** move it (4 % of the picture per press, **Shift** + arrow = 1 % for small parts).
 - **Enter / Space** taps at the crosshair (hotspot: places the pin; sequence: picks the next part;
@@ -109,6 +109,15 @@ how-to. Each locale: ≈200 k characters of drafts → review in Weblate → fla
 **Think first:** Turkish suffixes after placeholders (vowel harmony: rephrase so no suffix follows `{name}`); zh-Hant is
 Taiwan vocabulary, not a conversion of zh-Hans; Arabic: MSA, gender-neutral phrasing, digits from ICU only.
 
+**Redesign status (2026-11-08, phases 2–3):** the owner (14:18 UTC) kept five languages: new UI strings are written in
+en, el, ru, de and fr; the other locales wait here. Already drafted in all 14 locales during the redesign (keep, review later): `i18n/ui`
+(the Lit kit, 147+ keys) and `i18n/roadmaps`. Waiting, per catalog:
+
+| Catalog | Done | Waiting |
+|---|---|---|
+| `i18n/roadmaps-map` (754 keys) | el, fr, ru, de | es-ES (480/754 drafted), ar-EG, hi, it, ja, pt-PT, sq, tr, zh-Hans, zh-Hant (0/754) |
+| new phase-3 keys (study, community, languages, shell, roadmaps) | en, el, ru, de, fr | the other 10 locales |
+
 ### TD-10 · Language lessons: etymology, folk tradition and culture as sections of each lesson — ⏸ parked by the owner (2026-10-18)
 **What:** the aspect sections of a theory lesson (D29) exist for what the data already says (sounds, word forms, sentences, meaning, vocabulary, use — from the grammar points' `category`) and the library lists writing, listening & speaking and reading. **Etymology, folk tradition and culture** are not sections of the lessons: grammar points carry no such category, so each language needs new content per lesson (and exercises for it, D27) before the lesson can show them.
 **Size:** large — new writing per language and lesson, a data field (e.g. `aspect` on lesson blocks), validator rules, exercise generators and tests; roughly a content project per language.
@@ -128,3 +137,30 @@ They also lack the languages every new pack gets since 2026-10-21 (docs/PIPELINE
 English, Greek and Russian, and since 2026-11-05 German and French too (Databricks: el, ru, de, fr), and 文A bridges for
 every pair into English, Greek, Russian, Arabic, German and French (Databricks has en → el, ru, ar only) — the Databricks bridges
 of PR #29 are drafts measured before the everyday-word minimum (`tools/bridge.py require`).
+
+### TD-12 · Language course runtime into the hexagonal design — 🔺 high priority, postponed by the owner (2026-11-08)
+`engine/lang/` (35 files, about 490 KB) still holds the language courses as engine-scope scripts sharing globals:
+vocabulary, grammar, exercises and their grading, study sessions, scripts and transliteration, speech, production,
+polyglot cards, notes, Claude inside a lesson. The phase-3 redesign ported only the language screens to Lit (the
+Languages tab, a language's home, chip strip, chooser, Today's card, parallel lanes, the lesson head, aspects, drills and
+peculiarities, the lesson body, "In other languages", underlined words, Aa·). What is left, by the plan's patterns:
+- the rules (next item, grading, transliteration, lesson rules D1–D29) as pure TS in `src/features/languages/domain`, with tests;
+- language progress onto the learning log (event sourcing, FSRS-6) instead of the KV keys, migrating every existing
+  learner's progress without loss;
+- speech, transliteration and the in-lesson Claude as adapters behind ports;
+- the remaining views (vocab2, grammar2, poly, prod, script, speech, qa, claude, notes, session) as Lit screens, and the
+  old files deleted.
+Read docs/LANGUAGE_RULES.md first. Postponed to save the owner's weekly usage; start only when the owner says so (suggested split: two helpers, rules and progress; screens).
+
+### TD-13 · The last old-JS screens into Lit — ⏸ postponed by the owner (2026-11-08)
+Phase 3 ported to Lit the shell, the study area, the tutor, the community screens, #/author, the language screens and
+the Roadmaps' map, library, share dialog, public list and change review. These screens are still old JS (`h(...)` DOM,
+the engine's modals):
+- `engine/curmap.js`: the Roadmap dialogs: new Roadmap (keys, provider, Claude setup), planning progress, the step
+  editor, a step's sources, import, export, settings; plus the Roadmap modals left in `engine/app/roadmaps.js`;
+- `engine/app/library.js` and `engine/app/community.js`: the parts of the library, the subject picker, the Subjects page,
+  import and the Shelf still drawn by hand;
+- `engine/viewer.js` (the file viewer), `engine/bridge.js` (the 文A bridge's UI) and `engine/mt.js` (the translation
+  toggles and marks): their logic to typed `src` code, their UI to Lit.
+Each keeps its features and the CSS classes the suites read; the old code is deleted. Postponed to save the owner's
+weekly usage; start only when the owner says so (suggested split: three helpers along the three items).

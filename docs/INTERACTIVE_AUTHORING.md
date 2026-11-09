@@ -24,7 +24,7 @@ A sim-spec@1 activity computes with an **engine of the library** whenever one fi
 `geom@1` (constructions), `genetics@1`, `seq@1`, `med@1` (physiology and pharmacology), `clinic@1` (clinical reasoning: virtual
 patients, differential diagnosis, decisions), `anatomy@1`, `timeline@1` (every calendar), `music@1`, `map@1`, `text@1`, `craft@1`.
 Each has its chapter in `docs/library/<name>.md` (its model, outputs, sources, limits and a reference activity). Search the
-catalogue with the subject's words (`NoemaEngineCatalog.suggest`, or the connector's `noema_request_engine` with `check_only`).
+catalogue with the subject's words (`NoemaCore.engines.catalog.suggest`, or the connector's `noema_request_engine` with `check_only`).
 Only when no engine fits: the free way below (html-app@1, py-module@1) — or, when the subject needs an exact model the library does
 not have, **ask for a new engine** (`noema_request_engine`, or ⋮ › *Engines of activities* in the app) and use the free way meanwhile.
 
@@ -96,7 +96,7 @@ along with the course.
 `H5P.Summary`, `H5P.Dialogcards`. Allowed with a warning (not yet tested): `H5P.QuestionSet`, `H5P.InteractiveVideo` (the video
 must be inside the package: a YouTube or other outside link is refused), `H5P.BranchingScenario`, `H5P.CoursePresentation`.
 Refused: anything that loads from the network (`H5P.MathDisplay`, `H5P.IFrameEmbed`, `H5P.Twitter`, `H5P.GoogleMap`, …), any outside
-link in the content, files H5P itself would refuse (`.php`, `.html`, `.exe`). `python3 h5p_check.py item.h5p` says exactly what is
+link in the content, files H5P itself would refuse (`.php`, `.html`, `.exe`). `python3 activity_lint.py work/<id>` says exactly what is
 wrong with a package. Content-type libraries come inside the package with their own licences (normally MIT); give the content's own
 licence in `activity.json`.
 
@@ -157,7 +157,7 @@ licence in `activity.json`.
 
 For a sim-spec@1 activity there is also a page in the app: open any subject, then **⋮ › Create an activity** (a line icon, next
 to Edit; the route is `#/author`, the crumbs end with “Activity author”). It is a form generated from the same JSON Schemas the
-validators enforce (`tools/schemas/noema.sim-spec.v1.schema.json`, `noema.activities.v1.schema.json`; ADR 001 D12), with the
+validators enforce (`src/contracts/schemas/noema.sim-spec.v1.schema.json`, `noema.activities.v1.schema.json`; ADR 001 D12), with the
 activity running beside it in the app's own `sim-spec@1` runtime — the preview is exactly what a learner will see.
 
 * **Kind**: a simulation with formulas (`formula@1`) or a circuit simulation (`circuit-mna@1`, with its netlist, bindings and an

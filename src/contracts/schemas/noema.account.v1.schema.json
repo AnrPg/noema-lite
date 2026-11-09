@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noema-lite.netlify.app/schemas/noema.account.v1.schema.json",
+  "title": "noema-lite account values (settings, source-file index, local profile seed, subject groups)",
+  "description": "The small account-wide values the app, the connector and the tools exchange: the settings value (KV a:settings), the source-file index of a subject (KV a:srcfiles:<subject>, engine/srcfiles.js), the local profile seed (accounts/<profile>/account.json) and the subject picker's groups (library/groups.json). The account's index of its subjects (KV a:packmeta:<id>) is noema.subject.v1 $defs/packmeta.",
+  "$defs": {
+    "settings": {
+      "description": "KV a:settings: one object, written by several parts of the app (the engine, the menus' language, the character, a language course). Keys this schema does not name are kept (each owner documents its own).",
+      "type": "object",
+      "properties": {
+        "lang": { "type": "string", "description": "the interface locale" },
+        "chatLang": { "type": "string" },
+        "native": { "type": ["string", "null"] },
+        "knows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "code": { "type": "string" },
+              "name": { "type": "string" },
+              "level": { "type": "string" },
+              "type": { "type": "string" },
+              "family": { "type": "string" }
+            }
+          }
+        },
+        "studyLangs": { "type": "array", "items": { "type": "string" }, "description": "D21: the languages the learner chose to study" },
+        "theme": { "type": "string" },
+        "character": { "type": ["string", "object", "null"] },
+        "goal": { "type": "number", "description": "the daily XP goal" },
+        "model": { "type": "string" },
+        "models": { "type": "object" },
+        "sound": { "type": "boolean" },
+        "chunk": { "type": "boolean" },
+        "embedOk": {
+          "type": "object",
+          "additionalProperties": { "type": "number" },
+          "description": "external-embed@1 providers the learner allowed, with the time"
+        },
+        "hiddenSubjects": { "type": "array", "items": { "type": "string" } },
+        "askSubjectOnStart": { "type": "boolean" },
+        "mt": { "type": "object" }
+      },
+      "not": { "required": ["apiKey"] },
+      "x-message": "the API key is never stored in a:settings (it stays on the device)"
+    },
+    "srcfile": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "size": { "type": "number", "minimum": 0 },
+        "added": { "type": "string" },
+        "cloud": { "type": "boolean" },
+        "chunks": { "type": "integer", "minimum": 0 },
+        "sha256": { "$ref": "noema.common.v1.schema.json#/$defs/sha256" },
+        "ref": {},
+        "via": { "type": "string" },
+        "cloudError": { "type": "string" }
+      }
+    },
+    "srcfiles": {
+      "description": "KV a:srcfiles:<subject>: {sourceId: the file of that source}.",
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/srcfile" }
+    },
+    "profile": {
+      "description": "accounts/<profile>/account.json: a local profile seed.",
+      "type": "object",
+      "required": ["id", "name"],
+      "properties": {
+        "_doc": { "type": "string" },
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]*$" },
+        "name": { "type": "string" },
+        "emoji": { "type": "string" },
+        "email": { "type": "string" },
+        "learner": { "type": "string" },
+        "subjects": { "oneOf": [{ "const": "*" }, { "type": "array", "items": { "type": "string" } }] }
+      }
+    },
+    "groups": {
+      "description": "library/groups.json: the groups of the subject picker, in order.",
+      "type": "object",
+      "required": ["groups"],
+      "properties": {
+        "_doc": { "type": "string" },
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "title"],
+            "properties": {
+              "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+              "title": { "type": "string" },
+              "emoji": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

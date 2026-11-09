@@ -1,4 +1,9 @@
 {
   "@@locale": "sq",
-  "loader.export.missingActivities": "{n, plural, one {# element ndërveprues mbeti} other {# elemente ndërvepruese mbetën}} jashtë paketës: skedari .h5p nuk është në këtë pajisje ({items}). Hape lëndën një herë në linjë, pastaj eksportoje përsëri."
+  "loader.export.missingActivities": "{n, plural, one {# element ndërveprues mbeti} other {# elemente ndërvepruese mbetën}} jashtë paketës: skedari .h5p nuk është në këtë pajisje ({items}). Hape lëndën një herë në linjë, pastaj eksportoje përsëri.",
+  "loader.storage.full": "Hapësira e ruajtjes së kësaj pajisjeje është plot, ndaj përparimi yt i fundit nuk u ruajt këtu. Bëj një kopje rezervë (Unë › Të dhënat dhe sinkronizimi), pastaj hiq lëndët që nuk të duhen më.",
+  "loader.storage.low": "Hapësira e ruajtjes së kësaj pajisjeje është pothuajse plot ({pct}% e përdorur). Bëj një kopje rezervë (Unë › Të dhënat dhe sinkronizimi), pastaj hiq lëndët që nuk të duhen më.",
+  "loader.pwa.updateReady": "Një version i ri është gati.",
+  "loader.pwa.reload": "Ringarko",
+  "loader.pwa.later": "Më vonë"
 }

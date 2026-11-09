@@ -8,7 +8,7 @@ and how the courses can live inside it. Nothing on the `languages` branch has to
 working as they are. The new frame only gives them a place to appear.
 
 ## What the new frame is
-* `engine/shell.js` (`window.NoemaShell`) draws the frame every screen lives in: a top bar (crumbs, ⋮, 🔔, "Me") and tabs at
+* the frame (src/composition/shell/host.ts) (`window.NoemaShell`) draws the frame every screen lives in: a top bar (crumbs, ⋮, 🔔, "Me") and tabs at
   the bottom on phones, or a rail on the left on wider screens. Tabs: **Today · Knowledge · Languages · Discover · Progress**.
 * The **Languages** tab (icon `文A`, never 🌍 and never a speaking person) shows only when the learner chose
   "Languages" or "Both" (the first-start question, or Me › What I learn). The choice is `world: 'know' | 'lang' | 'both'` in
@@ -19,7 +19,7 @@ working as they are. The new frame only gives them a place to appear.
   The older test suites run in that mode; `tests/shell.js` tests the new frame.
 
 ## How the language courses plug in
-The languages branch registers its world once `NoemaShell` exists (it is loaded before `engine/loader.js`):
+The languages branch registers its world once `NoemaShell` exists (it is loaded before `engine/app/languages.js`):
 
 ```js
 window.NoemaShell?.registerWorld('lang', {
@@ -39,21 +39,21 @@ window.NoemaShell?.registerWorld('lang', {
 });
 ```
 
-Every member is optional. `studying` (2026-10-11) is filled on main in engine/loader.js from the courses' own progress; a course may refine it (e.g. levels per language) without changing its shape. `chrome({ tutor })` (and `page`) may name what the character button opens on that page (a
+Every member is optional. `studying` (2026-10-11) is filled on main in engine/app/languages.js from the courses' own progress; a course may refine it (e.g. levels per language) without changing its shape. `chrome({ tutor })` (and `page`) may name what the character button opens on that page (a
 course: its own tutor). Done on the `languages` branch on 2026-10-09: docs/LANGUAGES.md §8 *Inside the frame*. Without a registered world the Languages tab lists the subjects with `kind: 'language'` (none
 today) and says there are no languages yet. Menus and ⋮ items take `{ label, sub, icon, run, href, danger }` (or `'-'` for a line).
 
 ## Where the two branches will meet (merge conflicts)
-1. **`engine/loader.js`, boot.** With the frame on, the boot no longer opens the subject picker at start (unless the
+1. **`engine/app/languages.js`, boot.** With the frame on, the boot no longer opens the subject picker at start (unless the
    learner asked for it in Me › Profile); it mounts the frame and opens Today. The languages branch's line
    `if (meta.kind === 'language') return startLanguage(acc, meta);` must come **after** the frame is mounted, and the
    frame should then be mounted with `NoemaShell.mount({ engine: meta.kind !== 'language' })` (otherwise it waits for a
    subject engine that never comes). Better still, in the frame open a course at `#/lang/<course>` through `route()` above,
    and keep `startLanguage` for `shell: false`.
-2. **`engine/loader.js`, `pickSubject`.** Unchanged by the frame (it is still opened from ⋮ › "Choose a subject"); keep
+2. **`engine/app/languages.js`, `pickSubject`.** Unchanged by the frame (it is still opened from ⋮ › "Choose a subject"); keep
    the 🌍 Languages button the languages branch adds (merge note in docs/SHELF_AND_LANGUAGES.md).
-3. **`index.html`.** The frame adds `engine/i18n_shell.js`, `engine/themes.js`, `engine/art.js` after `i18n.js`, and
-   `engine/shell.js`, `engine/react.js` after `curmap.js`, and replaces the Google Fonts links with
+3. **`index.html`.** The frame adds `engine/i18n_shell.js`, `src/composition/shell/themes.ts`, `engine/art.js` after `i18n.js`, and
+   the frame (src/composition/shell/host.ts), `engine/react.js` after `curmap.js`, and replaces the Google Fonts links with
    `<link rel="stylesheet" href="fonts/fonts.css">` (the fonts are self-hosted in `fonts/`). Keep both sets of scripts.
 4. **`tools/build.py`.** `build_site` copies the five new files and `fonts/`; the bundle inlines them. Keep main's file list
    and add the languages branch's own copy loop (`langcore.js`, `langui.js`, `langui.css`) as it is.

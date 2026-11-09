@@ -1,4 +1,4 @@
-/* The new frame (engine/shell.js, docs/UI_MAP.md), Playwright + Chromium:
+/* The new frame (src/composition/ui-root.ts and src/ui/screens/shell, docs/UI_MAP.md), Playwright + Chromium:
      A. first start: what do you learn → who comes with you (29 characters) → Today; tabs follow the choice
      B. Knowledge, the Shelf and its ⋮ menus; a subject from the Shelf: chapters as a list or as cards, Practice ▾, the subject's ⋮
      C. chapter (Theory · Practice · Traps), section (reading mode, Ask ▾), the tutor sheet
@@ -8,6 +8,7 @@
      G. Greek menus: the tutor's Greek name, Roadmap = Οδικός χάρτης; wide screens: the rail
    Usage: node tests/shell.js <prepared-repo-dir> */
 const { chromium } = require(process.env.PW || 'playwright');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const path = require('path'), fs = require('fs');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const SHOTS = process.env.SHOTS || '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
@@ -25,7 +26,7 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
 
 (async () => {
   const browser = await chromium.launch();
-  const url = 'file://' + ROOT + '/index.html';
+  const url = await appUrl(ROOT);
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
   const page = await ctx.newPage(); const E = []; errs(page, E);
 
@@ -53,15 +54,15 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   await page.reload(); await wait(1200);
   await page.click('#ns-fab'); await until(() => page.$('.drawer.open'), 12000);
   ok(await page.$('.drawer.open') && await page.evaluate(() => location.hash === '#/me/profile'), 'the tutor opens from any page, even before a subject is opened');
-  await page.evaluate(() => closeTutor());
+  await page.evaluate(() => NoemaTutor.current().session.close());
   await page.goto(url); await page.reload(); await wait(1200);
   ok(!(await page.$('.ns-onb')) && await page.$('.ns-hello'), 'after a reload the app opens on Today, no picker, no questions');
 
   console.log('B. Knowledge, the Shelf, a subject');
   await page.click('.ns-tab[data-tab="learn"]'); await wait(500);
-  ok(await page.$('.ns-newrm') && await page.$('.ns-shelflink'), 'Knowledge: Roadmaps first (+ New Roadmap), the Shelf as a quiet link');
+  ok(await page.$('noema-roadmap-library .cm-new') && await page.$('noema-roadmap-library .cm-shelflink'), 'Knowledge: Roadmaps first (+ New Roadmap), the Shelf as a quiet link');
   ok((await menuItems(page, '#ns-top .ns-menubtn')).some(t => t.includes('Import a Roadmap')), 'Knowledge ⋮: import a map, Roadmaps others share, the Shelf');
-  await page.click('.ns-shelflink'); await wait(800);
+  await page.click('noema-roadmap-library .cm-shelflink'); await wait(800);
   const shelf = await texts(page, '.ns-subj b');
   ok(['Databricks', 'Demo Physics', 'Secret Notes'].every(t => shelf.some(x => x.startsWith(t))), 'the Shelf lists the subjects on no Roadmap: ' + shelf.join(' | '));
   const sm = await menuItems(page, '.ns-itemwrap:has([data-subject="demo-physics"]) .ns-menubtn'), sm2 = await menuItems(page, '.ns-itemwrap:has([data-subject="secret-notes"]) .ns-menubtn');
@@ -110,10 +111,10 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   await page.click('.drawer .ns-modesel'); await wait(250);
   ok(has(await page.$$eval('.drawer .ns-pop button', l => l.map(x => x.querySelector('.mt')?.firstChild?.textContent.trim())), ['Socratic', 'Explain', 'Quiz', 'Interview', 'Case simulation']), 'the modes, each with its line');
   await page.click('.drawer .ns-pop button:has-text("Explain")'); await wait(250);
-  ok((await page.$eval('.drawer .ns-modesel b', d => d.textContent)) === 'Explain' && await page.evaluate(() => T.mode) === 'explain', 'picking a mode');
+  ok((await page.$eval('.drawer .ns-modesel b', d => d.textContent)) === 'Explain' && await page.evaluate(() => NoemaTutor.current().session.mode) === 'explain', 'picking a mode');
   ok(has(await menuItems(page, '.drawer .ns-menubtn'), ['Conversation history', 'New conversation', 'Conversation language']), 'the tutor’s ⋮: history, new, language (export once there is a conversation)');
-  await page.evaluate(() => { T.mode = 'socratic'; });
-  await page.evaluate(() => closeTutor());
+  await page.evaluate(() => { NoemaTutor.current().session.mode = 'socratic'; });
+  await page.evaluate(() => NoemaTutor.current().session.close());
 
   console.log('D. a Roadmap as a page');
   const cid = await page.evaluate(() => {
@@ -123,21 +124,21 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
     c.edges = [{ from: 'a', to: 'd' }, { from: 'b', to: 'd' }, { from: 'b', to: 'e' }, { from: 'd', to: 'f' }, { from: 'e', to: 'f' }];
     c.goalId = 'f'; c.paths = { minimal: [], deep: C.order(c) }; c.title = 'Data engineer'; c.status = 'ready'; C.save(acc, c); return c.id;
   });
-  await page.goto(url + '#/learn'); await until(() => page.$('.ns-rmcard'));
-  ok((await page.$eval('.ns-rmcard', b => b.textContent)).includes('Mastered 0 of 5 steps'), 'Knowledge: the Roadmap card with its progress');
-  await page.click('.ns-rmcard'); await until(() => page.$('.cm-page'));
-  ok(await page.$('.cm-page .cm-vert') && await page.$$eval('.cm-node[data-id]', l => l.length) === 5, 'the map is a page; the path grows upwards (5 stations)');
+  await page.goto(url + '#/learn'); await until(() => page.$('noema-roadmap-library .cm-card'));
+  ok((await page.$eval('noema-roadmap-library .cm-card', b => b.textContent)).includes('0/5 mastered'), 'Knowledge: the Roadmap card with its progress');
+  await page.click('noema-roadmap-library .cm-card'); await until(() => page.$('noema-roadmap-map .cm-node'));
+  ok(await page.$('noema-roadmap-map .cm-vert') && await page.$$eval('.cm-node[data-id]', l => l.length) === 5, 'the map is a page; the path grows upwards (5 stations)');
   const ya = await page.$eval('.cm-node[data-id="a"]', b => b.getBoundingClientRect().top), yf = await page.$eval('.cm-node[data-id="f"]', b => b.getBoundingClientRect().top);
   ok(ya > yf, 'the first station is at the bottom, the goal at the top');
   ok(await page.$('.cm-node.cm-nextup .cm-hero svg'), 'the character waits at the next station');
   const mm = await menuItems(page, '#ns-top .ns-menubtn');
   ok(has(mm, ['Show as a list', 'Add a step', 'Share', 'Settings', 'Export (.json)', 'What the signs mean']), 'the map’s ⋮: ' + mm.join(' · '));
-  ok(!(await page.$('.cm-page .cm-legend')) && !(await page.$('.cm-page .cm-sharetool')), 'the legend and the share/settings buttons moved into ⋮');
+  ok(!(await page.isVisible('noema-roadmap-map .cm-legend')) && !(await page.$('noema-roadmap-map .cm-legendbtn')) && !(await page.$('noema-roadmap-map .cm-sharetool')), 'the legend and the share/settings buttons moved into ⋮');
   await page.click('.cm-vbtn[data-list="true"]'); await wait(300);
   ok(await page.$$eval('.cm-list .cm-listnode', l => l.length) === 5 && await page.evaluate(() => localStorage.getItem('noema-mapview')) === 'list', 'Map ↔ List (remembered)');
   await page.click('.cm-listnode[data-id="a"]'); await wait(300);
   ok(await page.$('.cm-panel.on'), 'a station opens its panel');
-  ok((await page.$eval('.cm-panel.on .cm-editbtn', b => [b.textContent, b.title].join('|'))) === '✏️|Edit this step' && !(await page.$$eval('.cm-panel.on > p', l => l.some(p => p.textContent === 'Python basics'))), 'the panel: no description (its contents say it), ✏️ edits the step');
+  ok((await page.$eval('.cm-panel.on .cm-editbtn', b => [b.textContent, b.title].join('|'))) === '✏️|Edit this step' && !(await page.$$eval('.cm-panel.on p', l => l.some(p => p.textContent.trim() === 'Python basics'))), 'the panel: no description (its contents say it), ✏️ edits the step');
   await page.screenshot({ path: SHOTS + '/sh_d1_map_list.png' });
   await page.click('.cm-vbtn[data-list="false"]'); await wait(200);
   ok(await page.evaluate(() => document.body.classList.contains('ns-mapmode')), 'the map takes the whole page');
@@ -229,7 +230,7 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   await page.keyboard.press('Escape'); await wait(200);
   await pick(page, '#ns-top .ns-menubtn', 'Sources'); await wait(300);
   ok(await page.$('.srcdeck.open'), '⋮ › Sources: the sources deck');
-  await page.evaluate(() => toggleSourcesDeck(false)); await wait(300);
+  await page.evaluate(() => NoemaCore.studyUi.current().app.sourcesUi.toggleDeck(false)); await wait(300);
   await pick(page, '#ns-top .ns-menubtn', 'Focus sprint'); await wait(400);
   ok(/⏱️ 1[45]:\d\d/.test(await page.$eval('#ns-top .ns-focus', b => b.textContent)), '⋮ › Focus sprint: a small clock next to ⋮');
   await page.click('#ns-top .ns-focus'); await wait(200);
@@ -286,7 +287,7 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   await page.keyboard.press('Escape'); await wait(200);
   ok(!(await page.$('.ns-mdwin')) && await page.evaluate(() => /Conversations/.test(document.activeElement?.textContent || '')), 'Esc closes the window and gives focus back to “Conversations”');
   const lk = await page.evaluate(cid => { const C = NoemaCurriculum, acc = Noema.account.id, c = C.get(acc, cid); c.nodes.f.pack = { id: SUBJ.id, status: 'ready', title: SUBJ.title }; C.save(acc, c); return C.statuses(acc, c).f.open; }, cid);
-  await page.goto(url + '#/map/' + cid); await until(() => page.$('.cm-page'));
+  await page.goto(url + '#/map/' + cid); await until(() => page.$('noema-roadmap-map .cm-node'));
   await page.click('.cm-node[data-id="f"]'); await wait(400);
   ok(lk === false && await page.$('.cm-panel.on .cm-lock') && await page.$('.cm-panel.on .cm-readtheory') && await page.$('.cm-panel.on .cm-srcbtn'), 'a locked, prepared step: “Read the theory” and 📚 its sources');
   await page.click('.cm-panel.on .cm-srcbtn'); await until(() => page.$('.cm-srcbox .cm-srcrow'), 5000);
@@ -341,7 +342,7 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   ok(!(await page.$('.ns-pfpart')), 'nothing of you is shown until you switch it on');
   await page.click('[data-act="edit"]'); await until(() => page.$('.ns-pfsheet textarea'), 4000);
   await page.fill('.ns-pfsheet textarea', 'I study physics\nand Greek.');
-  await page.click('.ns-pfsheet .ns-pfsw:has(input[data-part="progress"])'); await page.click('.ns-pfsheet .ns-pfsw:has(input[data-part="topics"])');
+  await page.click('.ns-pfsheet noema-switch[data-part="progress"] button'); await page.click('.ns-pfsheet noema-switch[data-part="topics"] button');
   await page.setInputFiles('.ns-pfsheet input[type="file"]', { name: 'me.png', mimeType: 'image/png', buffer: Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAAEklEQVR4nGP4z8CAB+GTG8HSALfKY52fTcuYAAAAAElFTkSuQmCC', 'base64') });
   await until(() => page.$('.ns-pfsheet img.ns-avatar'), 4000);
   await page.click('.ns-pfsheet [data-act="save"]'); await wait(600);
@@ -355,7 +356,7 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   console.log('G. Greek, wide screens');
   await page.evaluate(() => { NoemaThemes.putSettings({ lang: 'el' }); }); await page.goto(url + '#/learn'); await page.reload(); await wait(1500);
   ok((await texts(page, '.ns-tab .lb')).join(',') === 'Σήμερα,Γνώσεις,Ανακάλυψη,Θησαυροφυλάκιο,Πρόοδος', 'Greek tabs: ' + (await texts(page, '.ns-tab .lb')).join(','));
-  ok((await texts(page, '.ns-view h1'))[0] === 'Γνώσεις' && (await page.$eval('.ns-newrm', b => b.textContent)).includes('Οδικός χάρτης'), 'Roadmap = Οδικός χάρτης: ' + (await page.$eval('.ns-newrm', b => b.textContent)));
+  ok((await texts(page, '.ns-view h1'))[0] === 'Γνώσεις' && (await page.$eval('noema-roadmap-library .cm-new', b => b.textContent)).includes('Οδικός χάρτης'), 'Roadmap = Οδικός χάρτης: ' + (await page.$eval('noema-roadmap-library .cm-new', b => b.textContent)));
   ok(await page.evaluate(() => [NoemaThemes.tutor('owl').n, NoemaThemes.tutor('candy').n, NoemaThemes.tutor('hedge').n, NoemaShell.L('askTutor')].join('|')) === 'Γλαυκούλα|Χάνσελ και Γκρέτελ|Αγκαθούλης|Ρώτα τον Κόβαλτ', 'the tutor’s Greek names, in the right form');
   await page.evaluate(() => NoemaThemes.putSettings({ lang: undefined }));
   await page.setViewportSize({ width: 1280, height: 860 }); await page.goto(url + '#/'); await page.reload(); await wait(1200);

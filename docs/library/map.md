@@ -1,12 +1,9 @@
-# `map@1` — maps, projections, geodesy and journeys (`engine/src/48_lib_map.js`, `NoemaLibMap`)
+# `map@1` — maps, projections, geodesy and journeys (`src/engines/map/map.ts`, `NoemaLibMap`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`) for history, geography, archaeology and the classics: map
 projections and their distortion, distances and bearings on the sphere and on the ellipsoid, territories through time (area,
 containment, overlap), journeys on a network of roads, rivers and sea lanes (ORBIS-like), historical units of length with their
-uncertainty, and ancient measurement (Eratosthenes, the gnomon, the obliquity of the ecliptic, longitude by time). The Python twin is
-`tools/lib_map.py` (`ID`, `check_spec`, `exprs`, `keys`): it checks and does not compute, with the same problems (code, path, message,
-level) as the JS `checkSpec`. The tests are `node tests/lib_map.js` (129 assertions) and `node tests/enginelib.js` (JS ↔ Python
-parity on `tests/fixtures/enginelib/map.json`, 23 specs). The reference activity is `tools/activities_examples/roman-itinerary`
+uncertainty, and ancient measurement (Eratosthenes, the gnomon, the obliquity of the ecliptic, longitude by time). The tests are `node tests/lib_map.js` (129 assertions) and `node tests/enginelib.js` (the golden outputs of the former Python twin on `tests/fixtures/enginelib/map.json`, 23 specs). The reference activity is `tools/activities_examples/roman-itinerary`
 (Rome → Alexandria: the month opens or closes the sea lanes, the fastest route, its days, kilometres, Roman miles and relative cost).
 The research behind this chapter is the project's `engine-library/research/maptext.md` (§ map).
 
@@ -69,7 +66,7 @@ the engine still runs: geodesic outputs give NaN with the code `no_geodesic`, th
 | `territories` | ≤ 64 `{id!, from, to, rings! [[lon, lat, …]], label, c, big}` | §6; ≤ 16 rings, ≤ 20 000 vertices in all |
 | `units` | ≤ 12 `{name: {m!, min, max}}` | extra units of length in metres with their plausible range (§10) |
 
-### 1.2 Checker codes (`checkSpec`, the same in `tools/lib_map.py`)
+### 1.2 Checker codes (`checkSpec`)
 
 | code | when |
 |---|---|
@@ -303,11 +300,11 @@ Worker source (vendor + core + engine) giving identical outputs in a fresh `vm` 
 
 | directory | library | version | licence | size | why |
 |---|---|---|---|---|---|
-| `engine/vendor/geographiclib-geodesic@2.2.0/` | GeographicLib geodesic (C. Karney) | 2.2.0 | MIT | 32 kB (min.js; wrapper `noema-geodesic.js` 33 kB) | exact geodesics and polygon areas on the ellipsoid; the reference implementation |
-| `engine/vendor/world-atlas@2.0.2/` | world-atlas `land-110m.json` (M. Bostock), Natural Earth 4.1.0 1:110m | 2.0.2 | ISC; data public domain | 55 kB (wrapper `noema-land-110m.js` 56 kB) | the basemap; decoded by the engine (no topojson-client) |
+| `src/engines/map/vendor/` | GeographicLib geodesic (C. Karney) | 2.2.0 | MIT | 32 kB (min.js; wrapper `noema-geodesic.js` 33 kB) | exact geodesics and polygon areas on the ellipsoid; the reference implementation |
+| `src/engines/map/vendor/` | world-atlas `land-110m.json` (M. Bostock), Natural Earth 4.1.0 1:110m | 2.0.2 | ISC; data public domain | 55 kB (wrapper `noema-land-110m.js` 56 kB) | the basemap; decoded by the engine (no topojson-client) |
 
 Each directory's README gives the source URL and sha256. The page must load `noema-geodesic.js` and `noema-land-110m.js` before
-`48_lib_map.js` (the Worker source is assembled when the module loads). The Python checker needs neither.
+`src/engines/map/map.ts` (the Worker source is assembled when the module loads).
 
 ## 15. Not covered (and why)
 

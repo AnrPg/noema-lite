@@ -44,6 +44,7 @@ import re
 work = tempfile.mkdtemp(prefix="pipe-"); sk = os.path.join(work, "_skill"); os.makedirs(os.path.join(sk, "pipelines"))
 for f in os.listdir(SCRIPTS): shutil.copy(os.path.join(SCRIPTS, f), sk) if f.endswith(".py") else None
 for t in re.search(r"SKILL_TOOLS = \[([^\]]*)\]", open(os.path.join(TOOLS, "build.py"), encoding="utf-8").read()).group(1).replace("'", "").split(", "): shutil.copy(os.path.join(TOOLS, t), sk)
+shutil.copy(os.path.join(ROOT, "build", "noema-tools.cjs"), sk)   # the content checks the scripts call (tools/noema_core.py), as build_skill puts them in scripts/
 for f in os.listdir(pipeline.PIPES): shutil.copy(os.path.join(pipeline.PIPES, f), os.path.join(sk, "pipelines"))
 P = lambda *a: subprocess.run([sys.executable, os.path.join(sk, "pipeline.py"), *a], capture_output=True, text=True)
 try:
@@ -59,7 +60,7 @@ try:
     r = P("check", d, "map"); ok(r.returncode == 1 and "no map/chNN.json" in r.stdout, "map: no map yet → fails")
     # the chapter, its map and its review (the same good chapter as tests/pack_rules.js)
     T9 = ["mcq", "tf", "odd", "order", "match", "bucket", "cloze", "scenario", "free"]; TG = ["concept", "pitfall", "debug", "exam", "interview", "compare"]
-    Q = json.load(open(os.path.join(TOOLS, "pack_rules.json"), encoding="utf-8"))["quality"]; M6 = Q["vocab"]["modes"][:6]
+    import noema_core; Q = noema_core.rules()["quality"]; M6 = Q["vocab"]["modes"][:6]
     SHAPE = {"tf": {"answer": True}, "order": {"items": ["a", "b", "c"]}, "match": {"pairs": [["a", "1"], ["b", "2"], ["c", "3"]]}, "bucket": {"buckets": ["x", "y"], "items": [{"text": f"t{i}", "bucket": i % 2} for i in range(4)]},
              "cloze": {"text": "The force falls with the [[square]] of the distance."}, "scenario": {"steps": [{"prompt": "p", "options": [{"text": "a", "ok": True, "fb": "f"}, {"text": "b", "ok": False, "fb": "g"}]}]}, "free": {"model": "m", "rubric": ["r"]}}
     EX = "The rule holds because the force falls with the square of the distance. The tempting answer forgets the square and halves it."
@@ -93,7 +94,7 @@ try:
     ok(P("check", d, "review").returncode == 0, "review: rubric on 15 learnables")
     ok(P("done", d, "pictures", "--note", "no picture teaches here; none kept").returncode == 0, "pictures: a judgement, recorded with a note")
     r = P("check", d, "activities"); ok(r.returncode == 0 and "optional" in r.stdout, "activities: none is fine (they are optional; with activities/ the lint and the browser test run)" + ("" if r.returncode == 0 else "\n" + r.stdout))
-    # the languages every new pack gets (pack_rules.json "languages"): an English pack → translations el, ru, de, fr; bridges el, ru, ar, de, fr
+    # the languages every new pack gets (the pack rules' languages): an English pack → translations el, ru, de, fr; bridges el, ru, ar, de, fr
     r = P("check", d, "translate"); ok(r.returncode == 1 and all(f"{l}: missing ch01" in r.stdout for l in ("el", "ru", "de", "fr")) and "en:" not in r.stdout, "translate: an English pack needs el, ru, de and fr (never its own language)")
     for loc in ("el", "ru"):
         os.makedirs(os.path.join(d, "translations", loc), exist_ok=True); json.dump(ch, open(os.path.join(d, "translations", loc, "ch01.json"), "w"))
@@ -156,7 +157,7 @@ try:
     ok("write          stale" in st and "checks         stale" in st and "map            done" in st, "a change to the chapter makes write and every later step stale, not the map")
     r = P("check", d, "checks"); ok(r.returncode == 1 and r.stdout.startswith("first: review"), "checks: refused while an earlier step is stale")
     ok(all(P("check", d, x).returncode == 0 for x in ("write", "blind_solve", "review", "translate", "bridges")), "write, blind_solve, review, translate, bridges: checked again")
-    r = P("check", d, "checks"); ok(r.returncode == 1 and "[self.contained]" in r.stdout, "checks: make_pack.py refuses the pointer to the source (self.contained)")
+    r = P("check", d, "checks"); ok(r.returncode == 1 and "[self.contained]" in r.stdout, "checks: make_pack.py refuses the pointer to the source (self.contained)" + ("" if "[self.contained]" in r.stdout else "\n" + r.stdout + r.stderr))
     ok(P("next", d).stdout.startswith("next: checks"), "next: the first step that is not done")
 finally:
     shutil.rmtree(work, ignore_errors=True)

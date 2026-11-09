@@ -8,8 +8,10 @@
    (with and without a key), phone width, lang + dir, keyboard, no page errors.
    Usage: node tests/lang_prod.js [prepared-repo-dir]   (built with tools/build.py) */
 const fs = require('fs'), path = require('path');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const N = require(path.join(__dirname, '..', 'engine', 'langcore.js'));
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
+require('./built').ensureBuilt(ROOT);   // the generated files it reads (never committed): built first, unless tests/run_e2e.sh did
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
 const wait = ms => new Promise(r => setTimeout(r, ms));
 const SHOTS = process.env.SHOTS || '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
@@ -166,11 +168,12 @@ console.log('— the AI: prompts, checks of its text, the tutor context');
 }
 
 /* ---------------------------------------------------------------- Part 2 · the browser ---------------------------------------------------------------- */
+let BROWSER = null;   // closed in the end whatever happened (a failed step must not leave it open: node would never exit)
 (async () => {
   let chromium; try { ({ chromium } = require(process.env.PW || 'playwright')); } catch (e) { console.log('  (playwright not installed: the browser part is skipped)'); return finish(); }
   if (!fs.existsSync(path.join(ROOT, 'engine', 'langui.js'))) { console.log('  (not built: run tools/build.py)'); fails++; return finish(); }
   console.log('— the browser (Gemini mocked)');
-  const browser = await chromium.launch();
+  const browser = BROWSER = await chromium.launch();
   const AI = { calls: [] };
   async function mockGemini(ctx) {
     await ctx.route(/fonts\.(googleapis|gstatic)\.com/, r => r.fulfill({ status: 200, body: '' }));
@@ -188,7 +191,7 @@ console.log('— the AI: prompts, checks of its text, the tutor context');
   }
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } }); await mockGemini(ctx);
   const page = await ctx.newPage(); const E = []; page.on('pageerror', e => E.push(e.message));
-  const url = 'file://' + ROOT + '/index.html';
+  const url = await appUrl(ROOT);
   await page.goto(url); await page.evaluate(() => localStorage.clear());
   await page.goto(url + '?account=anr&subject=' + SUBJ); await wait(1200);
   // a learner who has passed the foundations and C01–C04 everywhere
@@ -364,7 +367,6 @@ console.log('— the AI: prompts, checks of its text, the tutor context');
   ok(await wide() <= 0 && await pp.evaluate(() => document.querySelector('.lx-tutor').getBoundingClientRect().width <= 390), '390 px: the tutor fills the screen without sideways scrolling');
 
   ok(!E.length, 'no page errors' + (E.length ? ': ' + E.slice(0, 3).join(' | ') : ''));
-  await browser.close();
   finish();
-})().catch(e => { console.error(e); fails++; finish(); });
+})().catch(e => { console.error(e); fails++; finish(); }).finally(() => BROWSER?.close().catch(() => { }));
 function finish() { console.log(fails ? `\n${fails} FAILED` : '\nALL PASSED'); process.exitCode = fails ? 1 : 0; }

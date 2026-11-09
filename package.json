@@ -1,0 +1,45 @@
+{
+  "name": "noema-lite",
+  "private": true,
+  "description": "noema-lite: the app, the connector and the tools (docs/ARCHITECTURE.md)",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "node tools/dev.mjs",
+    "prebuild": "npm run contracts",
+    "build": "node tools/esbuild.mjs",
+    "site": "python3 tools/build.py site",
+    "bundle": "python3 tools/build.py bundle",
+    "pretypecheck": "npm run contracts --silent",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prelint": "npm run contracts --silent",
+    "lint": "node --max-old-space-size=4096 node_modules/eslint/bin/eslint.js . --max-warnings 0",
+    "format": "prettier --write src",
+    "format:check": "prettier --check src",
+    "contracts": "node tools/contracts.mjs",
+    "migrate": "node --experimental-strip-types --no-warnings tools/migrate/run.mjs",
+    "pretest:unit": "npm run contracts --silent",
+    "test:unit": "node --test --experimental-strip-types --no-warnings \"src/**/*.test.ts\"",
+    "test:a11y": "node tests/a11y.js",
+    "check": "npm run contracts && npm run typecheck && npm run lint && npm run format:check && npm run test:unit && npm run migrate -- --check"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@happy-dom/global-registrator": "21.0.4",
+    "@types/node": "^22.20.5",
+    "ajv": "^8.20.0",
+    "esbuild": "0.28.2",
+    "eslint": "^10.14.0",
+    "eslint-import-resolver-typescript": "^4.4.5",
+    "eslint-plugin-boundaries": "^7.4.2",
+    "happy-dom": "21.0.4",
+    "json-schema-to-typescript": "^16.0.0",
+    "prettier": "^3.9.10",
+    "typescript": "6.0.3",
+    "typescript-eslint": "^8.72.1"
+  },
+  "dependencies": {
+    "lit": "3.3.3"
+  }
+}

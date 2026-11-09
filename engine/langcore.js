@@ -434,7 +434,7 @@
 
   /* ---------- explanation facades (§3): translated texts overlaid at their addresses, the master everywhere else ---------- */
   /** The roots of the addresses: prefix → (data, id) → the object the JSON-pointer tail starts from (the registry of the fields:
-   *  tools/schemas/noema.langfacade.fields.json). */
+   *  src/contracts/schemas/noema.langfacade.fields.json). */
   const FACADE_ROOTS = {
     k: d => d.course || null,
     fd: (d, id) => (d.fields || []).find(f => f.field === id) || null,
@@ -1291,8 +1291,10 @@
   }
   /** Is a built sentence right? (the tiles in order vs the sentence and its alternatives) */
   function checkBuilt(C, code, item, tiles) {
-    const X = C.lang[code], text = joinTokens(tiles.map(t => ({ t })), item.join || X.language.tokenJoin);
-    return item.answers.some(a => cmpText(code, a) === cmpText(code, text));
+    const X = C.lang[code], how = item.join || X.language.tokenJoin, text = joinTokens(tiles.map(t => ({ t })), how);
+    // a language written without spaces (Chinese): the punctuation inside the sentence (，、) is no tile, so it must not leave a space
+    const key = s => how === 'none' ? cmpText(code, s).replace(/\s+/g, '') : cmpText(code, s);
+    return item.answers.some(a => key(a) === key(text));
   }
   /** Recognition items for words: the word → its meaning (distractors: other words of the same lesson/node first). */
   function wordItems(C, L, code, lexIds, opts = {}) {
@@ -3809,7 +3811,7 @@
   API.GEN = GEN;
   Object.assign(API, { typedAnswer, sameWords, checkText, translateItems, rewriteItems, composeTask, composeCheck, readerTexts, readerQuestions, numberWords, numberWord, numberItems, countingItems, heAnd, digitsIn, clockOf, dateOf, clockItems, dateItems, registerItems, dialogueItems, turnsOf, aiTask, readerTask, readerProblems, tutorContext, tutorTask, TUTOR_INTENTS, TUTOR_RULE, MONTHS, WEEKDAYS, frameFamily });
   /* ---------- P8 — Through Claude (course creation and generation): account courses, task queue, checks and merges (§7.4, §10.1) ---------- */
-  /* The same code runs in the app (engine/lang/95_claude.js) and in the connector (cloud/mcp/server.mjs, bundled by tools/build.py):
+  /* The same code runs in the app (engine/lang/95_claude.js) and in the connector (src/connector, bundled by tools/connector_bundle.mjs):
      a task, the check of its answer and the way the answer changes the course are identical everywhere. Pure: no DOM, no storage. */
   /* i18n-ignore-start — P8 speaks to Claude and to course authors (tasks, checks, the guide): English. The learner-facing words of
      this part (a new course's errors, the log lines) use lcU and the catalog. */
@@ -3933,7 +3935,7 @@
         else for (const [loc, es] of Object.entries(pkg.facades)) {
           if (!/^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$/.test(loc) || !isObj(es)) { E.push(`facades.${loc}: a locale → {address: {t, src}}`); continue; }
           const bad = Object.entries(es).find(([a, e]) => !/^[a-z]{1,4}:[^/]+\/.+$/.test(a) || !isObj(e) || !str(e.t) || !/^[0-9a-f]{12}$/.test(e.src || ''));
-          if (bad) E.push(`facades.${loc}: “${bad[0]}” — every entry is {t, src} at an address of tools/schemas/noema.langfacade.fields.json`);
+          if (bad) E.push(`facades.${loc}: “${bad[0]}” — every entry is {t, src} at an address of src/contracts/schemas/noema.langfacade.fields.json`);
         }
       }
       if (E.length) return E;

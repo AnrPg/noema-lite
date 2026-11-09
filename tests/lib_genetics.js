@@ -1,4 +1,4 @@
-/* genetics@1 (engine/src/48_lib_genetics.js, docs/library/genetics.md) against published and exactly derived values:
+/* genetics@1 (src/engines/genetics/genetics.ts, docs/library/genetics.md) against published and exactly derived values:
    1. crosses: Mendel's ratios and χ² (Mendel 1866), epistasis presets, ABO, lethal yellow (Castle & Little 1910), X-linkage,
       linkage and three-point coincidence; 2. pedigrees (Bayes carrier risks); 3. Hardy–Weinberg, the exact test (Wigginton 2005)
       against brute-force enumeration; 4. selection, mutation, migration; 5. drift: Kimura 1962, Moran 1958, H decay (statistical,
@@ -9,8 +9,9 @@
 const path = require('path'), vm = require('vm');
 const SRC = path.join(__dirname, '..', 'engine', 'src');
 globalThis.window = globalThis;
-require(path.join(SRC, '35_simexpr.js')); require(path.join(SRC, '46_lib_core.js')); require(path.join(SRC, '48_lib_genetics.js'));
-const G = globalThis.NoemaLibGenetics, C = globalThis.NoemaLibCore;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaLibCore = ENGINES.kernel('core'), NoemaLibGenetics = ENGINES.mod('genetics@1');
+const G = NoemaLibGenetics, C = NoemaLibCore;
 let n = 0, fails = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 const near = (a, b, tol) => Math.abs(a - b) <= tol;

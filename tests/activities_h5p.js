@@ -1,7 +1,8 @@
-/* The h5p@1 runtime (engine/src/38_activity_h5p.js, docs/INTERACTIVE_H5P.md, docs/adr/001 D11), in real browsers, with a stub host
-   like skill/noema-pack-builder/scripts/activity_harness.js (ACT.registerRuntime stubbed, ACTP taken from 32_activities.js):
-     1. the rules: tools/h5p_allow.json = NoemaH5P.ALLOW; tools/h5p_check.py and NoemaH5P.check give the same errors on the same
-        packages (the fixtures and hostile variants: outside links, YouTube, a library off the list or refused, a .php file, a script in
+/* The h5p@1 runtime (src/runtimes/h5p, docs/INTERACTIVE_H5P.md, docs/adr/001 D11), in real browsers, with a stub host
+   like skill/noema-pack-builder/scripts/activity_harness.js (ACT.registerRuntime stubbed, ACTP taken from 32_activities.js, the typed
+   runtimes of build/harness.js made for it by NoemaCore.attachRuntimes; the player loaded through host.asset — npm run build first):
+     1. the rules: tools/h5p_allow.json = the h5p@1 checks' ALLOW (NoemaCore.runtimes.checks.h5p); their check gives the golden errors of the former Python twin
+        (tools/h5p_check.py, tests/fixtures/parity/activities_h5p.json) on the same packages (the fixtures and hostile variants: outside links, YouTube, a library off the list or refused, a .php file, a script in
         content/, a missing library, a path that leaves the package);
      2. the frames: the wrapper without scripts (frame-src 'none'), the item in a frame sandboxed with exactly allow-scripts, scripts
         only by hash (no 'unsafe-inline', no 'unsafe-eval');
@@ -83,11 +84,23 @@ const hostile = (beacon, which) => variant('mc.h5p', es => { const i = es.findIn
 
 /* ---------- the stub host ---------- */
 const s32 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8'), ACTPsrc = s32.slice(s32.indexOf('const ACTP = '), s32.indexOf('const ACT = ('));
+const ENGINE_DIR = 'file://' + path.join(ROOT, 'engine') + '/';
 const HOST = `<!doctype html><meta charset="utf-8"><style>#box iframe{display:block;width:100%;height:100%;border:0}</style><body style="margin:0;font-family:system-ui"><div id="box" style="position:relative;width:820px;height:640px"></div><script>
-var RT = null; var ACT = { registerRuntime: function (d) { RT = d; } };
+var RTS = {}, RT = null; var ACT = { registerRuntime: function (d) { RTS[d.id] = d; }, registerEngine: function () {} };
 ${ACTPsrc}
 window.ACTP = ACTP;
-</script><script src="${'file://' + path.join(ROOT, 'engine', 'src', '33_activity_guard.js')}"></script><script src="${'file://' + path.join(ROOT, 'engine', 'src', '38_activity_h5p.js')}"></script><script>
+</script><script src="${'file://' + path.join(ROOT, 'build', 'harness.js')}"></script><script>
+// what the typed runtimes get from their host (src/runtimes/types.ts RuntimeHost): the player comes through asset(path), the app's own file under engine/
+window.ASSETS = [];
+var RTHOST = { t: function (k) { return k; }, message: function (type, payload, extra) { return ACTP.out(type, payload, extra); }, check: function (raw) { return ACTP.check(raw); },
+  asset: function (p) { ASSETS.push(p); return ${JSON.stringify(ENGINE_DIR)} + p; }, setting: function () { return undefined; }, setSetting: function () {},
+  flags: function () { return {}; }, warn: function () { console.warn.apply(console, arguments); }, now: function () { return Date.now(); },
+  items: function () { return {}; }, expr: function () { return NoemaCore.engines.expr; }, loadedRuntime: function (id) { return RTS[id] || null; },
+  config: function () { return undefined; }, num: function (n) { return String(n); }, simView: function () { return null; },
+  compute: { engine: function () { return null; }, engines: function () { return []; }, library: function () { return []; }, compile: function (src) { return NoemaCore.engines.expr.compile(src); },
+    content: function () { return NoemaCore.content; }, parts: function () { return null; } } };
+window.H5PC = NoemaCore.runtimes.checks.h5p;   // the package rules (src/runtimes/h5p/check.ts), as the content checks read them
+NoemaCore.attachRuntimes(ACT, RTHOST).then(function () { RT = RTS['h5p@1'] || null; });
 window.LOG = []; window.H = null;
 window.run = function (act, init) {
   var box = document.getElementById('box'); box.innerHTML = ''; window.LOG = [];
@@ -101,12 +114,8 @@ window.run = function (act, init) {
 const THEME = { tokens: { bg: '#fafaf7', card: '#ffffff', ink: '#222', c: '#4a6fa5', font: 'system-ui, sans-serif' }, scheme: 'light', reducedMotion: false, textScale: 1, dir: 'ltr' };
 const initOf = (id, o = {}) => ({ activityId: id, exerciseId: o.ex || null, attemptId: 't', seed: 1, task: {}, locale: o.locale || 'en', strings: {}, theme: THEME, state: o.state || null, stateVersion: 1, capabilities: ['state', 'events', 'resize', 'result'], limits: { msgBytes: 65536, stateBytes: 262144, eventsPerSec: 50 } });
 
-/* ---------- 1. the rules (no browser needed for the Python side) ---------- */
-function pyCheck(buf) {
-  const f = path.join(TMP, 'v' + Math.random().toString(36).slice(2) + '.h5p'); fs.writeFileSync(f, buf);
-  const out = cp.spawnSync('python3', ['-I', path.join(ROOT, 'tools', 'h5p_check.py'), f, '--json'], { encoding: 'utf8' });
-  return JSON.parse(out.stdout || '{}')[f] || { errors: ['h5p_check.py: ' + (out.stderr || '').slice(-200)], warnings: [] };
-}
+/* ---------- 1. the rules: the golden answers of the former Python twin tools/h5p_check.py, one per package in order ---------- */
+const GOLDEN = require('./golden.cjs')('activities_h5p')('rules');
 let TMP;
 
 async function run(name, beacon, hits) {
@@ -117,7 +126,7 @@ async function run(name, beacon, hits) {
   const ctx = await browser.newContext({ viewport: { width: 900, height: 900 } }); const p = await ctx.newPage(); p.setDefaultTimeout(15000);
   const E = []; p.on('pageerror', e => E.push(e.message)); p.on('console', m => { if (process.env.DEBUG && /noema/.test(m.text())) console.log('    console:', m.text().slice(0, 300)); });
   await p.goto('file://' + path.join(TMP, 'host.html'));
-  await until(() => p.evaluate(() => !!(window.RT && window.NoemaH5P)), 5000);
+  await until(() => p.evaluate(() => !!(window.RT && window.H5PC)), 5000);
   const inner = async () => {   // the item's frame, inside the wrapper (contentFrame: in the full Chromium both frames are out-of-process)
     const t0 = Date.now();
     while (Date.now() - t0 < 8000) { try { const w = await (await p.$('#box iframe'))?.contentFrame(); const i = w && await (await w.$('iframe'))?.contentFrame(); if (i) return i; } catch (e) { } await wait(150); }
@@ -134,22 +143,24 @@ async function run(name, beacon, hits) {
   };
   const results = L => L.filter(m => m.type === 'result');
 
-  console.log('— the rules: the same in Python and in the app');
+  console.log('— the rules: the golden answers in the app');
   if (name === (process.env.BROWSERS || 'chromium').split(',')[0]) {
     const allow = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'h5p_allow.json'), 'utf8'));
-    const js = await p.evaluate(() => NoemaH5P.ALLOW);
+    const js = await p.evaluate(() => H5PC.ALLOW);
     const same = JSON.stringify(Object.fromEntries(Object.entries(allow.content).map(([k, v]) => [k, v.versions]))) === JSON.stringify(js.content)
       && JSON.stringify(Object.keys(allow.content).filter(k => !allow.content[k].tested)) === JSON.stringify(js.untested)
       && JSON.stringify(allow.libraries) === JSON.stringify(js.libraries) && JSON.stringify(allow.refuse) === JSON.stringify(js.refuse)
       && JSON.stringify(allow.files.extensions) === JSON.stringify(js.extensions) && JSON.stringify(allow.files.noExtension) === JSON.stringify(js.noExtension);
-    ok(same, 'tools/h5p_allow.json and NoemaH5P.ALLOW agree');
-    for (const [k, buf] of [...Object.entries(PKG).map(([k, b]) => ['fixture ' + k, b]), ...Object.entries(BAD)]) {
-      const py = pyCheck(buf);
+    ok(same, 'tools/h5p_allow.json and the h5p@1 checks\' ALLOW agree');
+    const all = [...Object.entries(PKG).map(([k, b]) => ['fixture ' + k, b]), ...Object.entries(BAD)];
+    ok(all.length === GOLDEN.length, `a golden answer for each of the ${all.length} packages`);
+    for (const [i, [k, buf]] of all.entries()) {
+      const py = GOLDEN[i] || { errors: [], warnings: [] };
       const jsr = await p.evaluate(async b64 => { const bin = atob(b64), u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
-        try { const r = NoemaH5P.check(await NoemaH5P.unzip(u)); return { errors: r.errors, warnings: r.warnings }; } catch (e) { return { errors: ['unzip: ' + e.message], warnings: [] }; } }, buf.toString('base64'));
+        try { const r = H5PC.check(await H5PC.unzip(u)); return { errors: r.errors, warnings: r.warnings }; } catch (e) { return { errors: ['unzip: ' + e.message], warnings: [] }; } }, buf.toString('base64'));
       const want = k.startsWith('fixture') ? 0 : 1;
       ok(!!py.errors.length === !!want && JSON.stringify(py.errors) === JSON.stringify(jsr.errors) && JSON.stringify(py.warnings) === JSON.stringify(jsr.warnings),
-        `${k}: ${want ? 'refused' : 'accepted'} by h5p_check.py and NoemaH5P.check alike${py.errors.length ? ' — ' + py.errors[0] : ''}${JSON.stringify(py.errors) !== JSON.stringify(jsr.errors) ? '  (JS: ' + JSON.stringify(jsr.errors).slice(0, 200) + ')' : ''}`);
+        `${k}: ${want ? 'refused' : 'accepted'} by the h5p@1 check, as the golden answer${py.errors.length ? ' — ' + py.errors[0] : ''}${JSON.stringify(py.errors) !== JSON.stringify(jsr.errors) ? '  (JS: ' + JSON.stringify(jsr.errors).slice(0, 200) + ')' : ''}`);
     }
   }
 
@@ -157,6 +168,8 @@ async function run(name, beacon, hits) {
   hits.length = 0;
   let r = await mount('mc', PKG.mc);
   ok(r.L.some(m => m.type === 'ready'), `mc.h5p starts (hello → ready) in ${r.ms} ms${r.L.find(m => m.type === 'fail' || m.type === 'error') ? ' — ' + JSON.stringify(r.L.find(m => m.type === 'fail' || m.type === 'error')) : ''}`);
+  const pl = await p.evaluate(() => ({ assets: window.ASSETS.slice(), player: !!(window.NoemaH5PPlayer && typeof NoemaH5PPlayer.js === 'string'), tags: [...document.querySelectorAll('script[src*="player.js"]')].length }));
+  ok(JSON.stringify(pl.assets) === JSON.stringify(['vendor/h5p/3.8.2/player.js']) && pl.player && pl.tags === 1, `the player is the app's own file, loaded once through host.asset ${JSON.stringify(pl)}`);
   const fr = await p.$eval('#box iframe', f => ({ sandbox: f.getAttribute('sandbox'), srcdoc: f.srcdoc, allow: f.getAttribute('allow') }));
   const docs = await p.evaluate(src => { const P = new DOMParser(), w = P.parseFromString(src, 'text/html'), f = w.querySelector('iframe'), inn = f ? P.parseFromString(f.getAttribute('srcdoc'), 'text/html') : null;
     const csp = d => d?.head.querySelector('meta[http-equiv="Content-Security-Policy"]')?.getAttribute('content') || '';
@@ -234,7 +247,7 @@ async function run(name, beacon, hits) {
   ok(ds && ds.ran && !ds.ev && !ds.fn && !ds.dyn && !ds.inl, `eval, new Function, a script added at run time and an inline handler do not run ${JSON.stringify(ds)}`);
   for (const k of ['replace', 'href', 'anchor', 'meta', 'open', 'data']) { await mount('evil-' + k, hostile(beacon, [k])); await wait(1600); }
   ok(hits.length === 0, `0 requests reached the beacon server (fetch, XHR, image, sendBeacon, CSS, form, location, link, meta refresh, popup, data: page): ${JSON.stringify(hits)}`);
-  // an endless loop in a library: the loop guard (33_activity_guard.js) runs over every library script too
+  // an endless loop in a library: the loop guard (src/runtimes/loop-guard.ts) runs over every library script too
   r = await mount('hog', hostile(beacon, ['hog']));
   const t0 = Date.now(), hog = await until(async () => (await log()).find(m => m.type === 'error' && m.payload.code === 'runaway'), 10000);
   ok(!!hog, `an endless loop in a library is stopped by the loop guard (error runaway after ${((Date.now() - t0) / 1000).toFixed(1)} s) and the host stays responsive`);
@@ -270,7 +283,7 @@ const ACTP_ok = x => x === true;
 async function chromiumIsolated(beacon, hits) {
   const browser = await pw.chromium.launch({ channel: 'chromium' });
   const p = await (await browser.newContext()).newPage();
-  await p.goto('file://' + path.join(TMP, 'host.html')); await until(() => p.evaluate(() => !!(window.RT && window.NoemaH5P)), 5000);
+  await p.goto('file://' + path.join(TMP, 'host.html')); await until(() => p.evaluate(() => !!(window.RT && window.H5PC)), 5000);
   const mount = async (id, buf) => { await p.evaluate(([a, i]) => window.run(a, i), [{ id, runtime: 'h5p@1', h5p: buf.toString('base64'), sha256: sha(buf) }, initOf(id)]);
     return await until(async () => { const L = await p.evaluate(() => window.LOG); return L.some(m => m.type === 'ready' || m.type === 'fail') ? L : null; }, 20000) || []; };
   console.log('— the full Chromium with out-of-process sandboxed frames');

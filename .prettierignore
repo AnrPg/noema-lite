@@ -1,0 +1,6 @@
+# Prettier formats the TypeScript of src/ (npm run format, npm run format:check in CI); the older code keeps its layout until phase 3
+src/contracts/generated/
+src/package.json
+# vendored code and data, byte for byte as published (src/engines/map/vendor/README.md)
+src/engines/map/vendor/
+src/engines/geom/vendor/

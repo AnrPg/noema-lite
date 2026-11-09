@@ -1,57 +1,56 @@
 /* ===================== Results inbox: study results that other apps append (e.g. Meletee) ===================== */
-/* A subject's progress is one blob (s:<subject>:state) that the open tab rewrites on every save, so no other app may
-   write it. Other apps append rows to noema_kv instead: key a:inbox:<app>:<id>, value (schema noema.results/v1)
+/* Other apps never write a learner's progress: they append rows to noema_kv, key a:inbox:<app>:<id>, value (schema noema.results/v1)
      { schema, app, subject, at, items: [{ kind: 'section'|'chapter'|'exercise'|'card', id, event?, ok?, grade?, rating?, date?, at }] }
-   The open subject applies its own rows (on start and after each pull), saves, pushes, then deletes them — the same
-   pattern as the Claude app's a:curin: answers (engine/curjobs.js). Rows of other subjects wait until that subject is
-   opened. Applying is idempotent: the keys of applied rows are kept in the state (S.inboxDone) and saved together with
-   what they changed, so a row read twice (a failed delete, two open tabs) counts once. Malformed items are skipped. */
-const INBOX = 'a:inbox:', RESULTS_SCHEMA = 'noema.results/v1', INBOX_KEEP = 500, EXT_KEEP = 200;
+   The open subject records its own rows as events of the learning log (origin "inbox"), pushes, then deletes them — the same
+   pattern as the Claude app's a:curin: answers (engine/curjobs.js). Rows of other subjects wait until that subject is opened.
+   Applying is idempotent: each item's event id is made from the row's key and the item's place (NoemaCore.learning.idFor), so
+   a row read twice (a failed delete, two open tabs, two devices) counts once. Malformed items are skipped. */
+const INBOX = 'a:inbox:', RESULTS_SCHEMA = 'noema.results/v1';
 const inboxRun = { busy: false };
-function cardKeyKnown(key) { return FULL_COURSE.some(c => c.flashcards.some(f => f._key === key)); }   // card keys as the decks use them (50_sources.js)
-/** Apply one parsed row to S (no saving) → how many items were applied. */
-function applyResults(v) {
-  let n = 0;
+function cardKeyKnown(key) { return FULL_COURSE.some(c => c.flashcards.some(f => f._key === key)); }   // card keys as the decks use them (40_views.js)
+/** One parsed row (its key: `key`) → the events it stands for (drafts with their own ids; nothing recorded yet). */
+function inboxDrafts(key, v) {
+  const out = [];
   const app = /^[a-z0-9_-]{1,32}$/i.test(v.app) ? v.app : 'app';
-  for (const it of Array.isArray(v.items) ? v.items : []) {
-    if (!it || typeof it !== 'object' || typeof it.id !== 'string') continue;
+  (Array.isArray(v.items) ? v.items : []).forEach((it, i) => {
+    if (!it || typeof it !== 'object' || typeof it.id !== 'string') return;
     const at = Date.parse(it.at) || Date.parse(v.at) || Date.now();
-    if (it.kind === 'section' && it.event === 'studied' && SEC[it.id]) { S.read[it.id] = true; n++; }
-    else if (it.kind === 'exercise' && typeof it.ok === 'boolean' && EX[it.id]) { record(EX[it.id], it.ok); n++; }
-    else if (it.kind === 'card' && [0, 1, 2].includes(it.grade) && cardKeyKnown(it.id)) { rateCardKey(it.id, it.grade, new Date(at)); n++; }
+    const base = { subject: SUBJ.id, item: it.id, origin: 'inbox', id: LOG.idFor('inbox', [ACCOUNT.id, key, i]), day: NoemaCore.day.of(new Date(at)) };
+    if (it.kind === 'section' && it.event === 'studied' && SEC[it.id]) out.push({ ...base, type: 'section.read', data: {} });
+    else if (it.kind === 'exercise' && typeof it.ok === 'boolean' && EX[it.id]) out.push({ ...base, type: 'answer.given', data: { ok: it.ok } });
+    else if (it.kind === 'card' && [0, 1, 2].includes(it.grade) && cardKeyKnown(it.id)) out.push({ ...base, type: 'card.reviewed', data: { rating: LOG.cardRating(it.grade) } });   // due counted from the item's day
     else if ((it.event === 'review' || it.event === 'studied') && (it.kind === 'chapter' ? CH[it.id] : SEC[it.id])) {
       // what noema-lite has no field for (a chapter studied elsewhere, a spaced review and its rating): kept for display
-      S.ext = S.ext || {};
-      const log = S.ext[app] = Array.isArray(S.ext[app]) ? S.ext[app] : [];
-      log.push({ kind: it.kind, id: it.id, event: it.event, rating: typeof it.rating === 'string' ? it.rating.slice(0, 20) : undefined, date: typeof it.date === 'string' ? it.date.slice(0, 10) : undefined, at: new Date(at).toISOString() });
-      if (log.length > EXT_KEEP) log.splice(0, log.length - EXT_KEEP);
-      n++;
+      const data = { app, kind: it.kind === 'chapter' ? 'chapter' : 'section', event: it.event };
+      if (typeof it.rating === 'string') data.rating = it.rating.slice(0, 20);
+      if (typeof it.date === 'string') data.date = it.date.slice(0, 10);
+      out.push({ ...base, type: 'external.studied', data });
     }
-  }
-  return n;
+  });
+  return out;
 }
-/** Read the inbox, apply this subject's rows, save + push, then delete them → how many items were applied. */
+/** Read the inbox, record this subject's rows, push, then delete them → how many items were applied. */
 async function checkInbox() {
   const CL = window.NoemaCloud;
   if (inboxRun.busy || ACCOUNT.kind !== 'cloud' || !CL?.session?.() || !CL.kvRows) return 0;
   inboxRun.busy = true; let n = 0;
   try {
     const rows = (await CL.kvRows(INBOX)).sort((a, b) => a.key.localeCompare(b.key));   // storage keys, not words (i18n-ignore)
-    const done = []; const seen = S.inboxDone = S.inboxDone || {};
+    const done = [], drafts = [];
     for (const r of rows) {
       let v; try { v = JSON.parse(r.value); } catch (e) { done.push(r.key); continue; }   // unreadable: it can never be applied
       if (!v || typeof v !== 'object' || v.schema !== RESULTS_SCHEMA) continue;            // another format (a newer app?): leave it
       if (v.subject !== SUBJ.id) continue;                                                   // another subject: applied when that one is opened
-      if (!seen[r.key]) { n += applyResults(v); seen[r.key] = Date.now(); }
+      drafts.push(...inboxDrafts(r.key, v));
       done.push(r.key);
     }
     if (!done.length) return 0;
-    const keep = Object.entries(seen).sort((a, b) => b[1] - a[1]).slice(0, INBOX_KEEP); S.inboxDone = Object.fromEntries(keep);
-    flushSave();
-    // the changed state reaches the cloud BEFORE its rows leave the inbox (a failed push keeps them for the next check)
+    n = (await LOG.recordOnce(drafts)).length;
+    // the events are stored, and reach the cloud, BEFORE their rows leave the inbox (a failure keeps them for the next check)
+    if (!(await LOG.flush())) return n;
     if (n) await CL.push(ACCOUNT.id);
     for (const k of done) await CL.kvDelete(k).catch(() => { });
-    if (n) { (Noema.notice || toast)('📥 ' + tE('engine.inbox.applied', { n })); renderTopStats(); }
+    if (n) { (Noema.notice || toast)('📥 ' + tE('engine.inbox.applied', { n })); }
   } catch (e) { console.warn('[inbox]', e); } finally { inboxRun.busy = false; }
   return n;
 }

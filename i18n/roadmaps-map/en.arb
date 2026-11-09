@@ -3943,5 +3943,151 @@
         "example": "book.pdf, notes.md"
       }
     }
+  },
+  "roadmap.map.sign.replan": "Being re-planned to match your subject",
+  "@roadmap.map.sign.replan": {
+    "description": "A sign on a step of the map: the step is being re-planned to match a subject the learner attached."
+  },
+  "roadmap.map.sign.own": "Taught by your own subject",
+  "@roadmap.map.sign.own": {
+    "description": "A sign on a step of the map: a subject the learner already had teaches it."
+  },
+  "roadmap.map.sign.byOther": "Prepared by another member",
+  "@roadmap.map.sign.byOther": {
+    "description": "A sign on a step of a shared map: another member prepared it."
+  },
+  "roadmap.map.sign.ready": "Prepared: ready to study",
+  "@roadmap.map.sign.ready": {
+    "description": "A sign on a step of the map: its material is prepared."
+  },
+  "roadmap.map.sign.app": "Waiting for your Claude app",
+  "@roadmap.map.sign.app": {
+    "description": "A sign on a step of the map: the learner's Claude app has to plan or prepare it."
+  },
+  "roadmap.map.sign.busy": "Being prepared",
+  "@roadmap.map.sign.busy": {
+    "description": "A sign on a step of the map: its material is being generated."
+  },
+  "roadmap.map.sign.failed": "Preparing failed: open it to try again",
+  "@roadmap.map.sign.failed": {
+    "description": "A sign on a step of the map: generating its material failed."
+  },
+  "roadmap.map.sign.paused": "Preparing is paused",
+  "@roadmap.map.sign.paused": {
+    "description": "A sign on a step of the map (and after the map's summary): preparing steps is paused on this device."
+  },
+  "roadmap.map.sign.review": "Look over its plan, then it is prepared",
+  "@roadmap.map.sign.review": {
+    "description": "A sign on a step of the map: the learner reviews its chapter plan before its material is generated."
+  },
+  "roadmap.map.sign.material": "Taught from your material",
+  "@roadmap.map.sign.material": {
+    "description": "A sign on a step of the map: the learner's own files teach it."
+  },
+  "roadmap.map.sign.mastered": "Mastered: its flag stays there",
+  "@roadmap.map.sign.mastered": {
+    "description": "The legend of the treasure map: what a mastered station looks like."
+  },
+  "roadmap.map.sign.open": "Open: tap it to study; the number is how much of its practice you solved",
+  "@roadmap.map.sign.open": {
+    "description": "The legend of the treasure map: what an open station looks like."
+  },
+  "roadmap.map.sign.here": "You are here: your character waits at the next station",
+  "@roadmap.map.sign.here": {
+    "description": "The legend of the treasure map: the learner's character stands beside the next station."
+  },
+  "roadmap.map.sign.locked": "Locked: master the stations that lead to it first",
+  "@roadmap.map.sign.locked": {
+    "description": "The legend of the treasure map: what a locked station looks like."
+  },
+  "roadmap.map.sign.rule": "A station opens when every station before it is mastered: all its sections read and at least 80% of its exercises solved, or the short “I already know this” test passed.",
+  "@roadmap.map.sign.rule": {
+    "description": "The rule under the legend of the treasure map. A station = a step of the Roadmap."
+  },
+  "roadmap.map.sign.title": "What the signs mean",
+  "@roadmap.map.sign.title": {
+    "description": "The heading of the map's legend and the button that opens it."
+  },
+  "roadmap.map.tmap.start": "Start",
+  "@roadmap.map.tmap.start": {
+    "description": "On the treasure map: the bottom, where the path begins. One word."
+  },
+  "roadmap.map.tmap.treasure": "The treasure: {goal}",
+  "@roadmap.map.tmap.treasure": {
+    "description": "On the treasure map: the label above the treasure at the top. goal = the Roadmap's goal.",
+    "placeholders": {
+      "goal": {
+        "type": "String",
+        "example": "Quantum physics"
+      }
+    }
+  },
+  "roadmap.map.tmap.north": "N",
+  "@roadmap.map.tmap.north": {
+    "description": "The letter for north on the treasure map's compass. One letter."
+  },
+  "roadmap.map.tmap.here": "You are here",
+  "@roadmap.map.tmap.here": {
+    "description": "Tooltip of the learner's character beside the next station of the treasure map."
+  },
+  "roadmap.map.view.aria": "Map or list",
+  "@roadmap.map.view.aria": {
+    "description": "Screen-reader label of the switch between the map and the list of steps."
+  },
+  "roadmap.map.view.map": "Map",
+  "@roadmap.map.view.map": {
+    "description": "The switch between the map and the list: the map. One word."
+  },
+  "roadmap.map.view.list": "List",
+  "@roadmap.map.view.list": {
+    "description": "The switch between the map and the list: the list of steps in study order. One word."
+  },
+  "roadmap.map.band.level": "Level · {level}",
+  "@roadmap.map.band.level": {
+    "description": "The label of a level band on the map: the steps of one level of the Roadmap's ladder. level = the level's name.",
+    "placeholders": {
+      "level": {
+        "type": "String",
+        "example": "Semester 2"
+      }
+    }
+  },
+  "roadmap.map.band.noLevel": "Without a level",
+  "@roadmap.map.band.noLevel": {
+    "description": "The label of the band of steps that have no level on the Roadmap's ladder."
+  },
+  "roadmap.map.map.summary": "{m, number} of {n, number} mastered",
+  "@roadmap.map.map.summary": {
+    "description": "The short summary under the title of the treasure map: steps mastered of all.",
+    "placeholders": {
+      "m": {
+        "type": "int",
+        "example": 3
+      },
+      "n": {
+        "type": "int",
+        "example": 12
+      }
+    }
+  },
+  "roadmap.map.map.whole": "See the whole map",
+  "@roadmap.map.map.whole": {
+    "description": "Tooltip of the button that zooms the map out so all of it fits."
+  },
+  "roadmap.map.pnl.edit": "Edit this step",
+  "@roadmap.map.pnl.edit": {
+    "description": "Tooltip and screen-reader label of the ✏️ button of a step's panel: change its name, place, links or chapters."
+  },
+  "roadmap.map.pnl.sources": "Sources of this step",
+  "@roadmap.map.pnl.sources": {
+    "description": "Tooltip and screen-reader label of the 📚 button of a step's panel: the files it is taught from."
+  },
+  "roadmap.map.pnl.readTheory": "Read the theory",
+  "@roadmap.map.pnl.readTheory": {
+    "description": "Button of a locked step's panel: read its theory before the step opens (its exercises wait)."
+  },
+  "roadmap.map.pnl.readTheoryTip": "The exercises open when the step opens",
+  "@roadmap.map.pnl.readTheoryTip": {
+    "description": "Tooltip of the button that reads a locked step's theory."
   }
 }

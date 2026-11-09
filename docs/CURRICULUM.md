@@ -12,6 +12,14 @@ backups. The only additions are the 🧭 **Map** button and a banner with the st
 > **Starting from a pile of material?** 📚 *From your sources* (docs/FROM_SOURCES.md) proposes a Roadmap or one subject and
 > then uses §6b (a Roadmap) or ✨ Create with Claude (a subject).
 
+**Where the code is.** The Roadmap itself — the graph, the queue for the learner's Claude (tasks, claims, the inbox),
+mastery and unlocking, the chapter plans of two copies, translations, levels and restructuring — is the domain
+`src/features/roadmaps/domain` (pure TypeScript, every time a `now` argument), with its services in
+`src/features/roadmaps/application` (the way up the ladder, an approved restructuring) and the 文A bridges' lookup in
+`src/features/bridges/domain`. The older screens and the connector reach it as `NoemaCore.roadmaps` / `NoemaCore.bridges`
+(the phase bridge; the connector imports it directly); `engine/curriculum.js`, `curjobs.js`, `curshare.js`, `curimport.js`
+and `sourceplan.js` keep the agents' prompts and checks and the app's side, and call the domain for the rest.
+
 ## 1. Building a curriculum (four agents)
 
 Subject picker → **🧭 Curricula** → **➕ New curriculum**. You give the goal, the language, your
@@ -91,7 +99,7 @@ mastered-by-test step can be undone. A step **opens** when all its prerequisites
   call per planned chapter in noema-lite's own format (contract from `tools/CONTENT_SPEC.md` +
   `docs/VISUAL.md`, shipped as `engine/authoring.js`), with 0–2 diagrams per chapter (only where they teach) drawn by the JS
   diagram kit (flow, cycle, hub, layers, tree, compare — SVG + clickable regions) and picture exercises
-  on them. Each chapter is checked by `engine/packcheck.js` (strict) plus quantity rules (≥ 4 exercises per section; `engine/packcheck.js` strict; ≥ 3 picture exercises when the chapter has a diagram; ≥ 25 % pitfall/debug/exam; flashcards, pitfalls…) and
+  on them. Each chapter is checked by `checkPack` (strict; `src/features/content`, `NoemaCore.content`) plus quantity rules (≥ 4 exercises per section; `checkPack` strict; ≥ 3 picture exercises when the chapter has a diagram; ≥ 25 % pitfall/debug/exam; flashcards, pitfalls…) and
   repaired by Gemini when needed. Progress is saved per chapter (resumes after a reload).
 * Two devices never build the same step (a lock in the synced key `a:curgen:<id>`, renewed every minute).
 
@@ -199,7 +207,9 @@ usage limits may spread a big one over days).
   Roadmap (`noema_extend_roadmap`, `{ kind: 'extend' }`) arrives the same way: its steps, links and `c.parts` entry
   (docs/FROM_SOURCES.md §6). So do **links between steps already on the map** (`noema_link_roadmap_steps`,
   `{ kind: 'link', links, remove }`, 🔗 a toast): edges added (with their `why`) or removed and the study order recomputed —
-  a prepared step may get a new prerequisite, because only the map changes (no re-plan, no pack, no progress).
+  a prepared step may get a new prerequisite, because only the map changes (no re-plan, no pack, no progress). A **new
+  arrangement by level** (`noema_restructure_levels`, `{ kind: 'restructure', id, plan }`, 🪜 a notice) is kept on the
+  Roadmap as a pending proposal (`c.proposals`) — it changes nothing until the learner approves it (§11.3).
 * **Each queued step is prepared once.** `noema_curriculum_task` hands a step out only after *claiming* it for that run —
   an atomic KV row `a:curclaim:<cid>:<nid>` (insert-if-absent; an expired one is taken over by a conditional update), so
   overlapping scheduled runs and two runs asking at the same moment always get different steps. The claim ends when the
@@ -351,13 +361,133 @@ coverage item of the planned chapter, in order. **Everything the step's panel sh
 * **Edits.** Renaming a step or changing its summary, goals or chapters (✏️ `Edit.update`) and a new chapter plan
   (`applyPlans`) drop that step's translations of those fields (`dropI18n`); they are made again with the next translation.
 
+## 11. 🪜 Levels (grade, semester, year, difficulty)
+A Roadmap may say for whom each step is — only when its material says so (a school syllabus by grade, a university
+course by semester); levels are never invented.
+* **The ladder**: `c.levels = [{ id, kind, order, names, description? }]` — `kind` is `grade`, `semester`, `year`,
+  `difficulty` or `custom` (one kind per ladder), `order` places a level on it (unique, like the ids), `names` per
+  locale (`{"en": "Semester 3", "el": "3ο εξάμηνο"}`; the app shows the one of the UI locale, like a step's title).
+* **A step's level**: `nodes[id].level` — one level id (`"s3"`) or a range `{ "from": "s3", "to": "s4" }`. Not to be
+  confused with `nodes[id].levels`, the processing levels (Marzano & Kendall, §1) its goals ask for.
+* **A step's pack** names its level(s) in `subject.levels` (the Roadmap's ids), and its chapters, sections, exercises
+  and cards may name their own (tools/CONTENT_SPEC.md "Levels").
+* **The rules** (`src/contracts/rules/levels.ts`, `roadmapLevels`): the ladder is well formed, every step's level is on
+  it, and **a prerequisite never sits above the step that needs it** — for every link `from → to`, the first level of
+  `from` is at most the first level of `to` (a step of semester 2 never needs one of semester 3). Steps without a level
+  are not compared.
+* **The format stays `noema.curriculum/v1`** (`src/contracts/schemas/noema.curriculum.v1.schema.json`): `levels` and
+  `level` are optional fields that a Roadmap without levels never has, and every reader (the app, the connector, the
+  shared copies of the other participants, §8) finds Roadmaps by that format string — a new version would hide every
+  Roadmap from the readers that do not know it yet. The inbox entries of every kind (§7) and a step's claim are
+  `noema.curriculum.v1#inboxEntry` and `#claim`; the agents' answers (§1) `noema.curriculum-agents.v1`.
+* **Where the levels come from**: Claude proposes them with the map (`noema_create_roadmap`: `"levels"` and each step's
+  `"level"`), a new part adds levels at the top of the ladder (`noema_extend_roadmap`: the next semester; a ladder of
+  another kind is refused), and `noema_restructure_levels` re-arranges a Roadmap that has them — or gives it its first
+  ladder (§11.3). Every one is checked by the rules above before anything is written.
+
+### 11.1 Ready ladders (presets) and custom ones
+`src/features/roadmaps/domain/levels.ts` `ladderFrom` takes a preset or a list:
+
+| `"levels"` | the ladder | ids |
+|---|---|---|
+| `"grade"`, `"grade:5-9"` | school grades (1–12 by default; 1–13) | `g5` … `g9` |
+| `"semester"`, `"semester:6"` | semesters (8 by default; up to 20) | `s1` … `s6` |
+| `"year"`, `"year:4"` | years of study (4 by default; up to 20) | `y1` … `y4` |
+| `"difficulty"` | three tiers | `introductory` · `intermediate` · `advanced` |
+| `[{ "id", "kind"?, "names" \| "name", "order"? }, …]` | the course's own (kind `custom` unless named), lowest first | its ids |
+
+A preset level is named in English in `names.en`; in another UI locale the app names it from its catalog
+(`roadmap.levels.kind.*` with its number, `roadmap.levels.difficulty.*`) unless the level has its own name there. A custom
+level shows its own names along the UI locale's fallback chain (the I18n port's `chain`), else any name it has.
+
+### 11.2 Moving up a level
+* **Where the learner is**: a level is **done** when every step whose range ends at it or below is mastered (§3); steps
+  without a level never hold a level back. The learner starts at the lowest level; the **current level** is the one after
+  the highest level reached; the top of the ladder reached shows *Every level reached*.
+* **Moving up is automatic**: whenever the map is drawn, every level that is done is reached, one after the other, in order
+  (several at once when steps were mastered by “I already know this”) — 🎉 *Level reached* in the 🔔 news.
+* **The level test (optional)**: a Roadmap with `levelTest: true` (`noema_create_roadmap` `level_test`) asks for a final test
+  of a level before moving up: the level bar shows *… is done: take the level test*. The questions come from the level's
+  own prepared subjects — single-answer multiple choice and true/false exercises, taken in turn from each subject so every
+  step is tested (12 questions; fewer than 8 available → *not enough questions yet*), no AI asked. 80 % passes (the step
+  test's bar); a failed test can be taken again.
+* **In the learning log**: each level reached is the event `roadmap.level.reached` (`{ roadmap, level, from, how: auto |
+  test }`, id `lvl:<roadmap>:<level>`: recorded once, on every device); each test taken is `roadmap.level.tested`
+  (`{ level, score, passed, attempt }`). The current level of a Roadmap is the fold of these events
+  (`src/features/roadmaps/domain/events.ts` `foldLevels`), so it is the same on every device and never stored on the
+  Roadmap record (a shared Roadmap's members each have their own).
+
+### 11.3 A new arrangement by level (`noema_restructure_levels`)
+Claude may propose to re-arrange a Roadmap by level: a new ladder, steps or single chapters moved to another level, a step
+that spans levels **split** into one step per level, steps of one level **merged**, links between steps changed. The way:
+
+1. **Plan** — `plan_json` `{ why, levels?, steps?, chapters?, split?, merge?, links?, unlink? }` (steps as `"@<step id>"`,
+   chapters by their refs, from `noema_roadmap_map`), checked all at once (`planFrom` + `checkRestructure`): the result
+   must keep every rule of §11 and stay acyclic, every chapter of a split step in exactly one part, merged steps all
+   prepared or all not.
+2. **Inbox** — the plan is an inbox entry `{ kind: 'restructure' }`; the app keeps it as the Roadmap's pending proposal
+   (`c.proposals`, at most one pending: a newer plan replaces it; never shared with members) and shows 🪜 *Claude proposes
+   a new arrangement of the levels* above the map.
+3. **Approval** — *Review* lists every change in the learner's language (`changes`); **Apply it** or **Keep it as it is**.
+   In a shared Roadmap only its owner decides (a member gets *only the owner…*); the owner's map then reaches the members
+   as any change of the map does (§8).
+4. **Applied** — `src/features/roadmaps/application/restructure.ts` `applyProposal`: everything is read and checked first,
+   then written — new subjects first, then the changed ones, then the subjects joined into another are removed.
+
+Nothing is lost:
+* **Ids are kept**, so progress follows the material: a split's first part keeps the step's id and its subject's id, the
+  other parts are new steps (and new subjects) with the chapters they take; a merge keeps the first step's id and subject.
+  Chapters, sections, exercises and cards keep their ids (a chapter ref that clashes in a merge is renamed in the plan; pack
+  chapter or exercise ids that clash refuse the merge). Links: into a split step → its first part, out of it → from its
+  last part, the parts in a chain; links of merged steps move to the step they joined.
+* **Translations and 文A bridges move with their chapters** (`splitBundle` / `mergeBundles`, `splitBridge` /
+  `mergeBridges`), the Roadmap's own translations of a step with its chapters (`moveI18n`), the learner's progress state
+  of a subject with its items (`splitState` / `mergeStates`; with the learning log's per-item events this follows by
+  itself). Chapters, sections, exercises, cards, translated chapters and bridge parts are **counted before and after**: if
+  the counts differ, nothing is written.
+* **The learner's own subjects** (§9) never change: a step taught by one may change level, nothing else; in a shared
+  Roadmap a prepared step is not split or merged (other members study it).
+* The learning log gets `roadmap.restructured` (`{ proposal, moves: [{ item, from, to }] }`: every chapter that changed
+  subject); a pack whose levels changed gets its new `subject.levels` and chapter levels.
+
+### 11.3a On the screen (`src/features/roadmaps/ui/`)
+* **The level bar** (`noema-roadmap-levels`, above the map): the ladder as badges, the current level and how many of its
+  steps are mastered, *… is done: take the level test* when a test is due, 🪜 *Claude proposes …* with **Review** for a
+  pending proposal (not for a member). Moving up happens when it is drawn; a level reached opens the short *A new level*
+  moment (its badge rises; no motion with reduced motion).
+* **The level test** (`noema-roadmap-level-test`) and **the review of a proposal** (`noema-roadmap-restructure`: every change
+  in the learner's words, Apply it / Keep it as it is) are dialogs; `noema-roadmap-step-test` is a step's placement test.
+* **Level bands on the map** (`layout.ts` `mapColumns`): a Roadmap with a ladder is drawn in bands, one per level, lowest
+  first — each level's steps in columns of their own (on the treasure map: layers), a step without a level beside its latest
+  prerequisite. Since a prerequisite never sits above the step that needs it (§11), every link still runs forwards. A
+  Roadmap without a ladder keeps the three parts (prerequisites · the goal · applications).
+* Every screen reads the Roadmap through one data port (`data.ts` `RoadmapsData`; today `src/composition/roadmaps-ui.ts`
+  over the engine's globals). Unit tests: `src/features/roadmaps/ui/test/` (happy-dom); in a browser
+  `tests/roadmap_levels.js` (the bar, the moment, both tests, approve and decline, 320 px, axe, the keyboard).
+
+### 11.4 Work for one level (the learner's Claude)
+`noema_curriculum_task` `level` (an id or a name) hands out only that level's chapter plans and steps; the task then says
+what the level means (`levelBrief`): the difficulty of the exercises is **relative to the level** (difficulty 3 is the
+hardest that is still that level's material, never a higher level's), the mix of 20 / 25 / 55 % holds within the level,
+what the levels below already taught is built on, and the pack carries `"levels": ["<id>"]`. A step's task carries its
+own level without asking. `noema_pipeline` `level` (+ `curriculum_id`) adds the same to the flow's steps;
+`noema_roadmap_map` shows each step's level, chapters at another level in `[ ]`, the ladder and a pending proposal.
+
 ## 6. Tests
+Unit tests (`npm run test:unit`): `src/features/roadmaps/domain/domain.test.ts` (graph, claims, the queue and a level filter,
+the inbox — a part with levels, links, a proposal, the merged view —, translations, two copies, presets and ladders, the
+rules and the way up, the level test's questions, a split and a merge with nothing lost, an attached subject),
+`src/features/roadmaps/application/application.test.ts` (moving up once per level, the level test, an approved split
+writing the new subject first and moving progress and translations, a failed check writing nothing),
+`src/features/bridges/domain/lookup.test.ts`. `tests/connector.js` § Roadmaps by level: levels with the map, refused
+levels, `noema_roadmap_map`, `noema_curriculum_task` / `noema_pipeline` `level`, `noema_restructure_levels` (refused plan,
+proposal in the inbox, nothing changed, sent again, status), a part bringing a level.
 `tests/curriculum.js` (scripted Claude + Gemini APIs, Supabase emulator): the four agents incl. a
 repaired graph, 25-node map in three parts, locked/open, chapter details, background preparation of the
 next 2 steps by Claude skill jobs (web search + fetch), cloud storage and sync, studying a step in the
 engine, automatic mastery, placement test unlocking the next step and undo, phone layout, the Gemini path
 (stop + resume without redoing agents, Google Search research, repaired chapter, 4-chapter subject with
-drawn diagrams and listed sources). `engine/packcheck.js` is also the connector's pack gate.
+drawn diagrams and listed sources). The same content checks (`src/features/content`) are also the connector's pack gate.
 `tests/curriculum_app.js`: §7 end to end — the connector (run in-process as the learner's Claude) builds a curriculum's map
 (a wrong answer sent back), plans it in batches, prepares a reviewed step; an imported map with a PDF (signed link, the same
 file not uploaded twice); copy / paste, a step bundle and its package; re-plan with a wish; Set up Claude → C; phone.

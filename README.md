@@ -5,39 +5,52 @@ debug/diagnosis drills, spaced-repetition flashcards, lightning rounds and boss 
 The engine knows nothing about the content; each subject is a **pack** generated from your sources.
 
 ## Open it
-* **On this Mac:** double-click `index.html` (Chrome recommended). Works offline except for the AI tutor and fonts.
+* **On your computer:** you need Node.js 22 and Python 3.10 or newer. Once, in this folder: `npm ci`. Then `npm run dev` and open
+  <http://localhost:8080>. It builds everything, serves the app and reloads the page when you change a file. Stop it with Ctrl+C.
 * **Anywhere:** the website built from this repo (see `cloud/README.md`), with a cloud account that syncs your progress.
-* **One file:** `python3 tools/build.py bundle` → `dist/noema-lite.html` (all subjects inlined; e.g. for a phone).
+  You can install it as an app (the browser's "Install" or "Add to Home Screen"); after the first visit it also opens offline,
+  and it tells you when a new version is ready.
+* **One file, offline:** `npm ci` once, then `python3 tools/build.py bundle` → `dist/noema-lite.html`. Everything is inside it
+  (all subjects too), so you can copy it anywhere, for example to a phone, and open it with a double-click.
 
 ## Repository map
 ```
-index.html                 entry point (loads config → registry → loader → one subject pack → engine)
+index.html                 entry point (loads config → the bundles in build/ → registry → loader → one subject pack → engine)
+package.json               the TypeScript toolchain: npm run dev | build | typecheck | lint | format | test:unit | check
+src/                       the TypeScript source (layers checked by eslint.config.js) → build/*.js by tools/esbuild.mjs (GENERATED)
+manifest.webmanifest, icons/   the installable app (the service worker is src/composition/sw.ts → the site's /sw.js)
 config.js                  public settings (Supabase URL + publishable key go here); config.local.js = private, git-ignored
 engine/
   loader.js                profiles, subject picker, pack loading, namespaced storage, backups, restore points
   cloud.js                 Supabase adapter (auth, sync, snapshots, private storage) — dependency-free
-  src/*.js, src/*.css      the study engine source  →  engine.js / engine.css (GENERATED)
+  src/*.js, src/*.css      the study engine source  →  engine.js / engine.css (GENERATED, like engine/i18n/ and langui.*)
+  tokens.css               the design tokens: the base set and every character's (GENERATED from ../src/ui/tokens by npm run build)
   vendor/                  marked, DOMPurify, KaTeX
 library/
   groups.json              groups of the subject picker
   subjects/<id>/           shared subjects (subject.json, sources.json, sources/*.pdf, chapters/, patches/, media/, coverage/)
-  registry.js              GENERATED catalogue
+  registry.js              GENERATED catalogue (and every pack.js / pack.json next to the chapters)
 accounts/<profile>/
   account.json             local profile seed (name, emoji, "about me" for the tutor)
   backups/                 suggested target for the app's automatic folder backups
   packs/<id>/              PRIVATE subjects of this profile (never published to the website)
-tools/                     build, validate, pack_quality, pipeline (+ pipelines/), new_subject, source_text, db_sync, db_restore, svgkit (diagrams), CONTENT_SPEC.md, schemas/
+tools/                     build, validate + noema_core (the content checks through build/noema-tools.cjs), pipeline (+ pipelines/), new_subject, source_text, db_sync, db_restore, svgkit (diagrams), CONTENT_SPEC.md, schemas/
 docs/                      LANGUAGES.md (foreign languages, polyglot — design + plan), VISUAL.md (picture exercises — canonical schema), INTERACTIVE.md (interactive activities: mini-apps and declarative simulations in the theory and graded sim exercises; INTERACTIVE_AUTHORING.md is the playbook, INTERACTIVE_LIBRARY.md the engine library (general engines for every field, library/<name>.md one chapter each, requests for new engines on #/engines), INTERACTIVE_SIMEXPR.md the expression language, INTERACTIVE_CIRCUIT.md circuits and fault benches, INTERACTIVE_PYTHON.md Python activities and their deployment, adr/001 the decisions), CLAUDE_CONNECTOR.md, TUTORING.md, CONVERSATIONS.md, VAULT.md (the shared file vault), SEARCH.md (search, stable addresses, collections), REPORTS.md (problem reports: the button, the locator, the admins' page), BRIDGE.md (文A language help: a pack's words in the learner's own language), FROM_SOURCES.md (from a pile of material to a Roadmap or one subject), PIPELINES.md (every content flow, step by step, and the quality rules), TECH_DEBT.md
-cloud/                     supabase.sql (schema + row-level security), the setup guide, mcp/server.mjs (the Claude connector)
+cloud/                     supabase.sql (schema + row-level security), the setup guide
+src/connector/             the Claude connector (MCP server, TypeScript: one module per tool; bundled by tools/connector_bundle.mjs — docs/CLAUDE_CONNECTOR.md)
 skill/noema-pack-builder/  the Claude skill users add to their own Claude (zip built into the website)
 data/noema-lite.db     SQLite backup database (GENERATED, git-ignored; upload it to the cloud from the app)
 tests/                     end-to-end tests (Playwright) incl. a Supabase emulator
 ```
 
 ## Everyday commands
+Generated files (marked GENERATED above, and `build/`) are never committed: the commands below make them. Run `npm ci` once first.
 ```bash
-python3 tools/build.py                  # validate + rebuild engine, packs, registry
-python3 tools/build.py site bundle      # + website folder (dist/site) + single-file app
+npm run dev                             # build, serve on http://localhost:8080 and rebuild + reload on every change
+npm run check                           # typecheck + lint + format check + unit tests of src/
+npm run build                           # only the TypeScript bundles (build/), each within its size budget
+python3 tools/build.py                  # the bundles, then validate + rebuild engine, packs, registry
+python3 tools/build.py site bundle      # + website folder (dist/site) + single-file app (dist/noema-lite.html)
 python3 tools/fetch_pyodide.py --site dist/site   # after `site`: the pinned Python runtime for py-module@1 activities (Netlify does this; a failed fetch never breaks the deploy) — docs/INTERACTIVE_PYTHON.md
 python3 tools/db_sync.py                # refresh the SQLite backup database (versioned copy of every file + all content + profile backups)
 python3 tools/db_restore.py list        # what the database holds; restore files/subjects/packs/backups into a NEW folder
@@ -66,7 +79,7 @@ Every chapter shows the sources it comes from; the original files (PDFs, slides,
 ## Adding a subject (through Claude)
 In the app: **✨ Create with Claude** — any user can do it, three ways (docs/CLAUDE_CONNECTOR.md): **A.** here in the app with their own Claude API key (the app uploads the skill, runs Claude and imports the result), **B.** in the Claude app/website with their Claude plan + the noema-lite connector, or **C.** a whole curriculum with their Claude plan (the connector hands Claude the curriculum's tasks; recommended for curricula). Finished subjects can be shared: 🔗 on a subject → public (🌍 Explore) or to one person (🔔), see docs/SHARING.md. Or, for the shared library:
 1. Give Claude the sources (PDFs, links, notes) + subject name, group, goal (exam / understanding / project) and language.
-2. Claude finds its flow and follows it step by step (`tools/pipeline.py`, docs/PIPELINES.md: every way content is made, each step checked): scaffolds it (`tools/new_subject.py`), reads every page, writes each chapter's exhaustive knowledge map first, then the chapters per `tools/CONTENT_SPEC.md` (every type and paradigm that fits the chapter, difficulty ≈ 20/25/55, recall ≤ 25 %, several exercises per learnable), pictures only where they teach per `docs/VISUAL.md`, interactive activities only where trying teaches per `docs/INTERACTIVE.md`, solves every exercise blind, reviews, validates (`tools/pack_rules.json`, the same checks in the app and the connector), builds and tests.
+2. Claude finds its flow and follows it step by step (`tools/pipeline.py`, docs/PIPELINES.md: every way content is made, each step checked): scaffolds it (`tools/new_subject.py`), reads every page, writes each chapter's exhaustive knowledge map first, then the chapters per `tools/CONTENT_SPEC.md` (every type and paradigm that fits the chapter, difficulty ≈ 20/25/55, recall ≤ 25 %, several exercises per learnable), pictures only where they teach per `docs/VISUAL.md`, interactive activities only where trying teaches per `docs/INTERACTIVE.md`, solves every exercise blind, reviews, validates (the content checks of `src/features/content`, the same code in the app, the connector and the Python tools), builds and tests.
 3. The new subject appears as a chip in the picker. New sources for an existing subject are merged **additively** (patches) — your progress is never lost.
 
 ## Profiles, privacy & data
@@ -88,10 +101,10 @@ In the app: **✨ Create with Claude** — any user can do it, three ways (docs/
 Everything is **noema-lite**: repository, folder, website, docs, browser storage (`noema1:…` keys, IndexedDB `noema-lite`),
 the `Noema` JavaScript namespace, Supabase tables `noema_*` and bucket `noema-private`, pack format `noema-pack`,
 backup format `noema-lite-backup`, conversation schema `noema.conversation/v1`.
-Data written by the app before it was renamed is copied over automatically on first start (see `LEGACY` in `engine/loader.js`).
+Data written by the app before it was renamed is copied over automatically on first start (see `LEGACY` in the UI root (src/composition/ui-root.ts) and the areas (engine/app/*.js)).
 
 ## Γρήγορος οδηγός (Ελληνικά)
-* Άνοιγμα: διπλό κλικ στο `index.html` (Chrome). Διαλέγεις προφίλ και μάθημα από τα chips.
+* Άνοιγμα: μία φορά `npm ci`, μετά `npm run dev` και άνοιξε το <http://localhost:8080> (ή ένα αρχείο για offline: `python3 tools/build.py bundle` → `dist/noema-lite.html`, διπλό κλικ). Διαλέγεις προφίλ και μάθημα από τα chips.
 * Νέο μάθημα: **✨ Create with Claude** — (A) μέσα στην εφαρμογή με δικό σου Claude API key, ή (B) στην εφαρμογή/ιστοσελίδα του Claude με τον connector `https://noema-lite.netlify.app/mcp` (ίδια διεύθυνση για όλους, σε Windows, Mac, Linux, κινητά).
 * Curricula: 🧭 → γράφεις τον στόχο → χάρτης βημάτων (προαπαιτούμενα → στόχος → εφαρμογές)· κάθε βήμα γίνεται μάθημα όταν φτάσεις εκεί.
 * Κοινή χρήση: 🔗 πάνω σε δικό σου μάθημα → δημόσιο (🌍 Explore) ή σε ένα άτομο (🔔 ειδοποίηση, Accept / Reject).

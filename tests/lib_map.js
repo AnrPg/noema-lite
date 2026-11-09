@@ -1,19 +1,16 @@
-/* map@1 (engine/src/48_lib_map.js, docs/library/map.md): published reference values (Snyder 1987, Karney 2013, Šavrič et al. 2018,
+/* map@1 (src/engines/map/map.ts, docs/library/map.md): published reference values (Snyder 1987, Karney 2013, Šavrič et al. 2018,
    PROJ 9 / GeographicLib 2.1 as independent implementations), the edge cases and their codes, the checks, the sim adapter, the Worker
    source in a fresh global, speed.   Run: node tests/lib_map.js */
 'use strict';
 const path = require('path'), vm = require('vm'), fs = require('fs');
-const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src'), VEN = path.join(ROOT, 'engine', 'vendor');
+const ROOT = path.join(__dirname, '..');
 let fails = 0, n = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 const near = (a, b, tol, m) => ok(Number.isFinite(a) && Math.abs(a - b) <= tol, `${m}: ${a} ≈ ${b} (± ${tol})`);
 globalThis.window = globalThis;
-require(path.join(SRC, '35_simexpr.js'));
-require(path.join(VEN, 'geographiclib-geodesic@2.2.0', 'noema-geodesic.js'));
-require(path.join(VEN, 'world-atlas@2.0.2', 'noema-land-110m.js'));
-require(path.join(SRC, '46_lib_core.js'));
-require(path.join(SRC, '48_lib_map.js'));
-const M = globalThis.NoemaLibMap;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaLibMap = ENGINES.mod('map@1');
+const M = NoemaLibMap;
 const sp = M.ellipsoid('sphere', 1), clk = M.ellipsoid('clarke1866'), wgs = M.ellipsoid('WGS84');
 const xy = (P, el, R, lat, lon) => M.makeProjection(P, el, R).fwd(lat, lon);
 const both = (r, x, y, tol, m) => { near(r[0], x, tol, m + ' x'); near(r[1], y, tol, m + ' y'); };
@@ -55,7 +52,7 @@ near(tis({ type: 'lcc', lat1: 33, lat2: 45, lat0: 23, lon0: -96 }, 45, -96).k, 1
 ok(tis({ type: 'mercator' }, 90, 0).code === 'pole' && Number.isNaN(tis({ type: 'mercator' }, 90, 0).h), 'Tissot at a pole: NaN with the code pole');
 
 // ---- 3. distances, bearings (Karney 2013; GeographicLib 2.1 / PROJ Geod agree) ----
-const G = globalThis.NoemaVendorGeodesic.lib.Geodesic.WGS84;
+const G = require(path.join(ROOT, 'src', 'engines', 'map', 'vendor', 'geodesic.cjs')).Geodesic.WGS84;   // the vendored GeographicLib map@1 imports
 { const r = G.Direct(40, 0, 30, 10e6); near(r.lat2, 41.79331020506, 1e-9, 'Karney 2013 Table 2 direct: φ2'); near(r.lon2, 137.84490004377, 1e-9, 'λ12'); near(r.azi2, 149.09016931807, 1e-9, 'α2'); }
 { const r = G.Inverse(-30, 0, 29.9, 179.8); near(r.s12, 19989832.8276, 1e-4, 'Karney 2013 near-antipodal inverse s12 (Vincenty 1975 does not converge here)'); near(r.azi1, 161.890524736, 1e-8, 'α1'); }
 near(M.meridian(wgs, Math.PI / 2), 10001965.7293, 1e-3, 'WGS84 quarter meridian (Helmert series; GeographicLib)');

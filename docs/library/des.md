@@ -1,4 +1,4 @@
-# `des@1` — discrete-event simulation of queues and service networks (`engine/src/47_lib_des.js`, `NoemaLibDES`)
+# `des@1` — discrete-event simulation of queues and service networks (`src/engines/des/des.ts`, `NoemaLibDES`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`), built on the simulation kernel `NoemaSimKit`
 (`docs/library/simkit.md`). Entities of up to 8 classes arrive from up to 8 sources. A source can be Poisson, use any interarrival
@@ -10,9 +10,8 @@ waits, time-weighted queue lengths, utilisation, throughput and counts with Stud
 replications, or from batch means of one long run, after a fixed warm-up or one found by MSER-5. Where queueing theory has an exact
 value it gives that too, and says whether the interval covers it.
 
-The Python twin is `tools/lib_des.py` (`ID`, `check_spec`, `exprs`, `keys`). It checks and does not compute, and it gives the same
-problems (code, path, message, level) as the JS `checkSpec`. Tests: `node tests/lib_des.js` (60 assertions against queueing theory,
-birth–death chains and exact counts; JS ↔ Python parity on `tests/fixtures/enginelib/des.json`, 29 specs: 7 good, 22 bad). The
+Tests: `node tests/lib_des.js` (60 assertions against queueing theory,
+birth–death chains and exact counts; the golden outputs of the former Python twin on `tests/fixtures/enginelib/des.json`, 29 specs: 7 good, 22 bad). The
 reference activity is `tools/activities_examples/ed-triage`: an emergency department with triage, two patient classes,
 pre-emptive priority and patients who leave unseen.
 
@@ -199,7 +198,7 @@ throughput (Little). `erlangC`, `mmc`, `mmck`, `mg1`, `mg1prio` and `theory(M, P
 ## 6. The engine and its stepper
 
 `NoemaLibDES.engine` is the library adapter (`C.makeEngine`): `check(spec)`, `create(spec, {seed}).run(inputs) → outputs`,
-`scenes: true`, `stepper: true`, and `workerSource` (NoemaExpr + the core + `NoemaSimKit.source()` + this module). The Worker gives
+`scenes: true`, `stepper: true`, and `workerSource` (the Worker bundle: NoemaExpr, the core, the kit and this module). The Worker gives
 the same outputs as the page; the test checks this in a fresh `vm` global.
 
 The **stepper** (`NoemaLibDES.stepper`, and through `simEngine.create(spec).stepInit / stepTo`, `docs/library/simkit.md` §8) runs

@@ -1,4 +1,9 @@
 {
   "@@locale": "de",
-  "loader.export.missingActivities": "{n, plural, one {# interaktives Element fehlt} other {# interaktive Elemente fehlen}} im Paket: Die .h5p-Datei ist nicht auf diesem Gerät ({items}). Öffne das Fach einmal online und exportiere es dann erneut."
+  "loader.export.missingActivities": "{n, plural, one {# interaktives Element fehlt} other {# interaktive Elemente fehlen}} im Paket: Die .h5p-Datei ist nicht auf diesem Gerät ({items}). Öffne das Fach einmal online und exportiere es dann erneut.",
+  "loader.storage.full": "Der Speicher dieses Geräts ist voll, daher wurde dein neuester Fortschritt hier nicht gespeichert. Erstelle eine Sicherung (Ich › Daten und Sync) und entferne dann Fächer, die du nicht mehr brauchst.",
+  "loader.storage.low": "Der Speicher dieses Geräts ist fast voll ({pct} % belegt). Erstelle eine Sicherung (Ich › Daten und Synchronisierung) und entferne dann Fächer, die du nicht mehr brauchst.",
+  "loader.pwa.updateReady": "Eine neue Version ist bereit.",
+  "loader.pwa.reload": "Neu laden",
+  "loader.pwa.later": "Später"
 }

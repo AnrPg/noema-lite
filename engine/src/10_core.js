@@ -3,7 +3,7 @@
 const COURSE = window.COURSE;               // array of chapters of the loaded subject pack (set by the loader)
 const SUBJ = Noema.subject;                    // subject.json of the loaded pack
 const ACCOUNT = Noema.account;                 // current profile / cloud account
-/* i18n-ignore-start */   // the tutor's defaults are words for the AI's prompts (20_ai.js), not for the learner
+/* i18n-ignore-start */   // the tutor's defaults are words for the AI's prompts (src/features/tutor/domain/prompts.ts), not for the learner
 const TUTOR = Object.assign({ name: 'Brick', avatar: '🦉', domain: SUBJ.title, prior: '', examples: 'Concrete, everyday examples from the subject.', interviewer: `an examiner for ${SUBJ.title}`, simulation: 'a realistic problem, misconception or anomaly from the subject', terminology: 'the canonical terminology of the field', examinerRole: `${SUBJ.title} examiner` }, SUBJ.tutor || {});
 /* i18n-ignore-end */
 // in the new frame the tutor is the character on screen now (NoemaThemes.current(): the learner's own, or the one on a 5-minute try), named in the menus' language;
@@ -11,10 +11,9 @@ const TUTOR = Object.assign({ name: 'Brick', avatar: '🦉', domain: SUBJ.title,
 if (window.NoemaShell?.mounted && window.NoemaThemes) for (const [k, f] of [['name', t => t.n], ['avatar', t => t.emoji]]) Object.defineProperty(TUTOR, k, { get: () => f(NoemaThemes.tutor()), enumerable: true });
 const APP_TITLE = SUBJ.appTitle || `${SUBJ.title} Quest`;
 const DEFAULT_KEY = Noema.local.geminiKey || window.DEFAULT_GEMINI_KEY || '';
-const PALETTE = [
-  ['#ff6b6b','#ffe7e7'],['#ff922b','#fff0e1'],['#f2a20c','#fff4d6'],['#40c057','#e4f7e8'],['#12b5a5','#ddf6f3'],
-  ['#3b9cf6','#e1effe'],['#5c6cff','#e8eaff'],['#9254ff','#f0e7ff'],['#e64fa5','#fde6f3'],['#f0563d','#fde9e4'],['#2b8a3e','#e3f4e6'],['#1c7ed6','#dfeefc'],['#d9480f','#ffe8d9']];
-const PALETTE_DARK = ['#ff8787','#ffa94d','#ffc53d','#69db7c','#38d9c6','#5fb0ff','#8291ff','#b083ff','#f783c6','#ff8a6e','#51cf66','#4dabf7','#ff8c42'];
+/* a chapter's colours (--c, --c-bg, --c-ink as text, --c-fill/--c-on as a fill under text) come from engine/tokens.css by
+   data-ci (src/ui/tokens/chapters.ts, light and dark, checked for contrast by tokens.test.ts); this is their number */
+const CHAPTER_COLOURS = 13;
 
 /* ---------- indexes ---------- */
 const CH = {}, SEC = {}, EX = {}, PB = {};
@@ -57,9 +56,7 @@ const F = s => h('span', { html: fmt(s) });
 /* an arrow written into a text points along the reading direction: mirrored in a right-to-left interface (docs/i18n.md §5) */
 const arrowBack = () => window.NoemaI18n?.dir === 'rtl' ? '→' : '←', arrowOn = () => window.NoemaI18n?.dir === 'rtl' ? '←' : '→';
 const shuffle = a => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
-const norm = s => String(s ?? '').toLowerCase().replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, ' ').trim().replace(/;$/, '').trim();
-const today = () => new Date().toISOString().slice(0, 10);
-const daysBetween = (a, b) => Math.round((new Date(b) - new Date(a)) / 864e5);
+const today = () => NoemaCore.clock.today();   // the learner's local day (src/kernel/day.ts)
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 /* ---------- syntax highlight ---------- */
@@ -106,7 +103,7 @@ function codeBlock(code, lang) {
 }
 /* chat markdown */
 function md(s) {                 // full markdown (marked + DOMPurify when available), lite fallback
-  if (window.marked && window.DOMPurify) { try { return mdRich(s); } catch (e) { } }
+  if (window.NoemaTutor?.md) { try { return NoemaTutor.md(s); } catch (e) { NoemaCore.errors.report(e, { where: 'engine.markdown', severity: 'warning' }); } }   // marked + DOMPurify (src/composition/tutor-page.ts)
   return mdLite(s);
 }
 function mdLite(s) {
@@ -141,22 +138,31 @@ function mdLite(s) {
 }
 
 /* ---------- state ---------- */
-/* State is namespaced: per-subject progress  → noema1:<account>:s:<subject>:state
-                        per-account settings  → noema1:<account>:a:settings   (model, theme, goal…)
+/* Progress is the account's learning log (NoemaCore.learning, src/features/study/application/learning-log.ts): every
+   answer, review, read section, XP… is recorded as an event (LOG.record), and S is this subject's fold of them — read
+   only, the same object while events fold in (another tab, another device, a restore). Settings:
+                        per-account settings  → noema1:<account>:a:settings   (model, theme, goal…: the log's copy)
+                        this subject's        → the log (srcOn: the sources it shows)
                         the Gemini key        → noema-device:geminiKey:<account>  (this device only, Noema.geminiKey)
-                        XP / streak across all subjects → Noema.stats (noema1:<account>:a:stats)            */
-const STATE_KEY = Noema.kv.subjectKey('state'), SETTINGS_KEY = Noema.kv.accountKey('settings');
+                        XP / streak across all subjects → Noema.stats (the log's)                               */
+const LOG = NoemaCore.learning;
+const SETTINGS_KEY = Noema.kv.accountKey('settings');
 const SETTINGS_DEFAULT = { apiKey: DEFAULT_KEY, model: '', models: [], theme: 'auto', sound: true, goal: 120, chunk: true };
 Noema.geminiKey.migrate(ACCOUNT.id);   // the Gemini key lives on this device only (never in a:settings → never synced)
-const S = (() => {
-  let s = {}, g = {};
-  try { s = JSON.parse(Noema.kv.get(STATE_KEY) || '{}'); } catch (e) { s = {}; }
+const subjectSrcOn = () => LOG.settings(SUBJ.id).srcOn ?? null;
+const PAGE_SETTINGS = (() => {
+  let g = {};
   try { g = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}'); } catch (e) { g = {}; }
-  const st = Object.assign({ xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null }, s);
-  delete g.apiKey; st.settings = Object.assign({}, SETTINGS_DEFAULT, g, { srcOn: s.srcOn ?? null }, Noema.geminiKey.get(ACCOUNT.id) ? { apiKey: Noema.geminiKey.get(ACCOUNT.id) } : {});
-  delete st.srcOn; delete st.xpDay; delete st.streak; delete st.lastDay;
-  return st;
+  delete g.apiKey;
+  return Object.assign({}, SETTINGS_DEFAULT, g, { srcOn: subjectSrcOn() }, Noema.geminiKey.get(ACCOUNT.id) ? { apiKey: Noema.geminiKey.get(ACCOUNT.id) } : {});
 })();
+const S = new Proxy(LOG.progress(SUBJ.id), {
+  get: (p, k) => k === 'settings' ? PAGE_SETTINGS : p[k],
+  set(p, k) { NoemaCore.errors.report(new Error('progress is recorded as events (NoemaCore.learning.record), never written: S.' + String(k)), { where: 'engine.state.write', severity: 'error' }); return true; },
+  deleteProperty(p, k) { NoemaCore.errors.report(new Error('progress is recorded as events, never deleted: S.' + String(k)), { where: 'engine.state.write', severity: 'error' }); return true; },
+});
+/** Records one event of this subject (LOG.record) → the event, or null (refused: reported). */
+const learnt = (type, item, data = {}, more = {}) => LOG.record({ type, subject: SUBJ.id, ...(item == null ? {} : { item }), data, ...more });
 if (!S.settings.apiKey) S.settings.apiKey = DEFAULT_KEY;
 /* a:settings has other writers too (the character, the menus' language, the native language, a course…): S.settings is this page's
    copy of it. What the page last read or wrote, key by key: a save writes only the keys changed HERE, so it can never put an
@@ -165,71 +171,38 @@ let settingsSeen = {};
 const seeSettings = () => { settingsSeen = {}; for (const k of Object.keys(S.settings)) settingsSeen[k] = JSON.stringify(S.settings[k]); };
 seeSettings();
 /* flashcards have ids now (chNN-fNNN); their progress used to be keyed by position (chNN#k), which shifted when a card
-   was inserted. Move positional progress to the card's id (idempotent: a moved key is gone; if both exist the id wins). */
-const CARD_KEYS_MOVED = (() => {
-  let n = 0;
-  COURSE.forEach(c => c.flashcards.forEach((f, k) => {
-    const old = c.id + '#' + k;
-    if (!f.id || !S.fc[old]) return;
-    if (!S.fc[f.id]) S.fc[f.id] = S.fc[old];
-    delete S.fc[old]; n++;
-  }));
-  return n;
-})();
+   was inserted. Positional progress moves to the card's id (card.imported of its FSRS memory from the old key: a moved key
+   is gone; if both exist the one reviewed last wins). */
+COURSE.forEach(c => c.flashcards.forEach((f, k) => {
+  const old = c.id + '#' + k, r = S.fc[old];
+  if (!f.id || !r) return;
+  learnt('card.imported', f.id, { state: { ...r }, from: old });
+}));
 let saveT;
 function flushSave() {
   clearTimeout(saveT);
-  const { settings, ...rest } = S; const { srcOn, apiKey, mt: _mt, ...glob } = settings;   // a:settings.mt is engine/mt.js's own (written there): never written back from this copy
-  Noema.kv.set(STATE_KEY, JSON.stringify({ ...rest, srcOn }));
+  const { srcOn, apiKey, mt: _mt, ...glob } = S.settings;   // a:settings.mt is engine/mt.js's own (written there): never written back from this copy
+  if (JSON.stringify(srcOn ?? null) !== JSON.stringify(subjectSrcOn())) LOG.setSubjectSetting(SUBJ.id, 'srcOn', srcOn ?? null);
   Noema.geminiKey.set(ACCOUNT.id, apiKey);   // this device only; the default key is not stored
-  let cur = {}; try { cur = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}') || {}; } catch (e) { }
+  let cur = {}; try { cur = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}') || {}; } catch (e) { NoemaCore.errors.report(e, { where: 'engine.settings.read', severity: 'warning' }); }
   delete cur.apiKey;
   for (const k of Object.keys(glob)) if (!(k in cur) || JSON.stringify(glob[k]) !== settingsSeen[k]) cur[k] = glob[k];
-  Noema.kv.set(SETTINGS_KEY, JSON.stringify(cur));
+  Noema.kv.set(SETTINGS_KEY, JSON.stringify(cur));   // → setting.changed events (engine/loader.js)
   Object.assign(S.settings, cur); seeSettings();   // the page's copy follows what the others saved
+  LOG.flush();
 }
 function save() { clearTimeout(saveT); saveT = setTimeout(flushSave, 150); }
-/* another device's progress or settings arrived (engine/cloud.js): fold them into what this page holds, so the next save
-   can't write the older copy back over them. Progress only grows: answers, reviews and read sections of both are kept. */
-addEventListener('noema:remote', e => {
-  if (e.detail?.acc !== ACCOUNT.id || !window.NoemaCloud?.mergeState) return;
-  const keys = e.detail.keys || [];
-  if (keys.includes(STATE_KEY) && Noema.kv.get(STATE_KEY) == null) {   // deleted on another device (e.g. a restore without this subject): start empty, don't upload the old copy again
-    for (const k of Object.keys(S)) if (k !== 'settings') delete S[k];
-    Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null });
-  } else if (keys.includes(STATE_KEY)) {
-    let st = {}; try { st = JSON.parse(Noema.kv.get(STATE_KEY) || '{}'); } catch (x) { }
-    const { settings, ...mine } = S; const merged = NoemaCloud.mergeState(mine, st); delete merged.settings;
-    for (const k of Object.keys(S)) if (k !== 'settings') delete S[k];
-    Object.assign(S, { read: {}, res: {}, pb: {}, fc: {}, boss: {} }, merged); delete S.srcOn;
-    if (st.srcOn !== undefined) S.settings.srcOn = st.srcOn;
-  }
-  if (keys.includes(SETTINGS_KEY)) { try { const g = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}'); delete g.apiKey; Object.assign(S.settings, g); seeSettings(); } catch (x) { } }
-  if (keys.includes(STATE_KEY) || keys.includes(SETTINGS_KEY)) { if (Noema.kv.get(STATE_KEY) != null) flushSave(); try { renderTopStats(); route(); } catch (x) { } }
+/* the settings changed elsewhere (another tab or device, a restore): this page's copy follows, so the next save can't write
+   the older copy back; the log changed (the same): the page shows it */
+LOG.onSettings(g => { const x = { ...g }; delete x.apiKey; Object.assign(S.settings, x, { srcOn: subjectSrcOn() }); seeSettings(); });
+LOG.onChange((evs, why) => {
+  if (why === 'local') return;   // this page's own: it drew them already
+  try { if (why !== 'tab') route(); } catch (x) { NoemaCore.errors.report(x, { where: 'engine.remote.render', severity: 'error' }); }   // another tab's answer never redraws an exercise being done here
 });
-if (CARD_KEYS_MOVED) save();
 addEventListener('pagehide', flushSave);
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flushSave(); });
 function touchStreak() { Noema.stats.touchStreak(); }
-function addXP(n, el) {
-  if (n <= 0) return;
-  const before = Noema.stats.todayXP(), LV = window.NoemaShell?.level, lv0 = LV ? LV(Noema.stats.get().xp || 0).lv : 0;
-  S.xp += n; Noema.stats.add(n); save();
-  renderTopStats();
-  const r = el?.getBoundingClientRect?.();
-  const f = h('div', { class: 'xpfloat', style: { left: (r ? r.left + r.width / 2 : innerWidth / 2) + 'px', top: (r ? r.top : innerHeight / 2) + 'px' } }, tE('engine.core.xpFloat', { n }));
-  document.body.append(f); setTimeout(() => f.remove(), 1200);
-  const RX = window.NoemaShell?.mounted ? window.NoemaReact : null;   // the character's reactions live in the new frame
-  if (before < S.settings.goal && Noema.stats.todayXP() >= S.settings.goal) { if (RX) RX.big('goal'); else confetti(160); toast('🎯 ' + tE('engine.core.goalSmashed')); }
-  else if (LV && RX && LV(Noema.stats.get().xp || 0).lv > lv0) RX.big('level');
-}
-function record(ex, ok, firstTry = true, conf = null) {
-  const r = S.res[ex.id] || { n: 0, ok: 0 };
-  r.n++; if (ok) r.ok++; r.last = ok; r.t = Date.now();
-  if (conf) r.conf = conf; else delete r.conf;   // how sure the learner was this time: sure | think | guess
-  S.res[ex.id] = r; save();
-}
-const solved = id => S.res[id]?.ok > 0;
+const solved = id => NoemaCore.study.practice.solved(S.res, id);
 
 /* ---------- sound ---------- */
 let AC;
@@ -245,7 +218,7 @@ function beep(kind) {
       g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.08, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.18);
       o.connect(g).connect(AC.destination); o.start(t); o.stop(t + 0.2);
     });
-  } catch (e) { }
+  } catch (e) { NoemaCore.errors.report(e, { where: 'engine.sound', severity: 'debug' }); }
 }
 
 /* ---------- confetti ---------- */
@@ -264,8 +237,7 @@ function confetti(n = 120) {
   })();
 }
 function toast(msg, ms = 2200) {
-  let t = $('.toasts'); if (!t) { t = h('div', { class: 'toasts' }); document.body.append(t); }
-  const el = h('div', { class: 'toast' }, window.Noema?.plain ? Noema.plain.text(msg) : msg); t.append(el); setTimeout(() => el.remove(), ms);
+  NoemaCore.notify.toast(window.Noema?.plain ? Noema.plain.text(msg) : msg, { ms });
 }
 function modal(build) {
   const m = h('div', { class: 'modal', onclick: e => { if (e.target === m) close(); } });
@@ -281,47 +253,14 @@ function confirmBox(text, onYes) {
 
 /* ---------- theming per chapter ---------- */
 function isDark() { return document.documentElement.dataset.theme === 'dark' || (document.documentElement.dataset.theme !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches); }   // i18n-ignore
-function setAccent(el, ch) {
-  const i = ch ? (ch._ci ?? ch._i) % PALETTE.length : 7;
-  const c = isDark() ? PALETTE_DARK[i] : PALETTE[i][0];
-  const bg = isDark() ? `color-mix(in srgb, ${PALETTE_DARK[i]} 18%, #1f232e)` : PALETTE[i][1];   // i18n-ignore
-  el.style.setProperty('--c', c); el.style.setProperty('--c-bg', bg);
-}
+function setAccent(el, ch) { el.dataset.ci = String(ch ? (ch._ci ?? ch._i) % CHAPTER_COLOURS : 7); }
 function applyTheme() {
   const t = S.settings.theme;
   if (t === 'auto') delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = t;
 }
 
-/* ---------- progress ---------- */
-function chProgress(c) {
-  const sr = c.sections.filter(s => S.read[s.id]).length / c.sections.length;
-  const ex = c.exercises.filter(e => solved(e.id)).length / c.exercises.length;
-  return { sr, ex };
-}
+/* ---------- progress: the study domain's (src/features/study/domain/queries.ts) ---------- */
+const chProgress = c => NoemaCore.study.progress.chapter(c, S.read, S.res);
 
-/* ---------- section plain text (for AI context) ---------- */
-/* i18n-ignore-start */   // context for the AI's prompts (English, like the prompts themselves)
-function blockText(b) {
-  switch (b.t) {
-    case 'p': return b.text;
-    case 'list': return b.items.map(x => '- ' + x).join('\n');
-    case 'code': return '```' + (b.lang || '') + '\n' + b.code + '\n```';
-    case 'diagram': return b.text;
-    case 'table': return [b.head.join(' | '), ...b.rows.map(r => r.join(' | '))].join('\n');
-    case 'callout': return `[${b.kind.toUpperCase()}] ${b.title || ''}: ${b.text}`;
-    case 'compare': return b.items.map(i => i.title + ': ' + i.points.join('; ')).join('\n');
-    case 'flow': return b.items.join(' → ');
-    case 'reveal': return `Q: ${b.label}\nA: ${b.text}`;
-    case 'ask': return (b.title || 'Ask yourself') + ':\n' + b.questions.map((q, i) => `${i + 1}. ${q}`).join('\n');
-    case 'terms': return b.items.map(i => `${i.term}: ${i.def}`).join('\n');
-    case 'figure': return figureAsText(b);
-    case 'interactive': return interactiveAsText(b);
-  }
-  return '';
-}
-function sectionText(s) { return `## ${s.title}\n${s.hook || ''}\n` + s.blocks.map(blockText).join('\n\n'); }
-function chapterOutline(c) {
-  return `# Chapter ${c.num}: ${c.title} — ${c.subtitle}\nMantra: ${c.mantra}\nSections:\n` + c.sections.map(s => `- ${s.title}: ${s.hook || ''}`).join('\n') +
-    '\nKey pitfalls:\n' + c.pitfalls.map(p => `- ${p.title}: ${p.text}`).join('\n');
-}
-/* i18n-ignore-end */
+/* ---------- the course as text for the AI: the study area's (src/features/study/domain/as-text.ts) ---------- */
+const sectionText = s => STUDY.sectionText(s), chapterOutline = c => STUDY.chapterOutline(c);

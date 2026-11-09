@@ -1,31 +1,62 @@
 #!/usr/bin/env python3
-"""noema-lite build tool (stdlib only).
+"""noema-lite build tool (Python stdlib + Node: `npm ci` once).
 
-  python3 tools/build.py                 # validate + build engine, every subject pack and the registry
+Every file it writes is GENERATED and never committed (.gitignore, "generated"): build before you use the repo (npm run dev does).
+
+  python3 tools/build.py                 # the TypeScript bundles (npm run build → build/), validate + build engine, every subject pack and the registry
+  python3 tools/build.py engine          # only the bundles and the engine files (engine.js/.css, langui, UI catalogs, authoring.js, the author's schemas)
   python3 tools/build.py site            # + dist/site/  (what the website serves: no PDFs, no private packs, no backups)
   python3 tools/build.py skill           # + dist/noema-pack-builder.zip  (the Claude skill users add to their own Claude)
                                          #   + dist/noema-language-builder.zip  (a whole language in one prompt, docs/LANGUAGES.md §10.2)
   python3 tools/build.py bundle [--subjects a,b] [--with-local-config]
                                          # + dist/noema-lite.html  (one self-contained file, e.g. for phone/offline)
   python3 tools/build.py --no-validate   # skip validation (faster)
+  python3 tools/build.py --no-esbuild    # keep build/ as it is (npm run dev rebuilds it in watch mode)
 """
-import os, sys, glob, json, subprocess, tempfile, shutil, re, zipfile, base64, io
+import os, sys, glob, json, subprocess, tempfile, shutil, re, zipfile, base64, io, hashlib
 for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux alike
     try: _s.reconfigure(encoding='utf-8', errors='replace')
     except Exception: pass
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from noema_lib import ROOT, LIB, ACC, rj, wj, wt, now_iso, subject_dirs, load_subject, load_media, content_hash, load_translations, pack_i18n, translation_file
+from noema_lib import ROOT, LIB, ACC, rj, wj, wt, now_iso, subject_dirs, load_subject, load_media, content_hash, load_translations, pack_i18n, translation_file, load_activities, fallback_media, hash_part, ACTIVITIES_FORMAT
 from bridge import build_library as build_bridges
-import activities as ACTS   # interactive activities (docs/INTERACTIVE.md)
+import noema_core   # the content checks (src/features/content) through the Node bridge build/noema-tools.cjs
 
 ENGINE = os.path.join(ROOT, 'engine')
 args = sys.argv[1:]
 VALIDATE = '--no-validate' not in args
+BUILD = os.path.join(ROOT, 'build')   # the TypeScript bundles (tools/esbuild.mjs; src/composition/*.ts)
+BUILD_MANIFEST = {'entries': {}, 'hash': ''}
+
+def run_esbuild():
+    """npm run build: every bundle of src/ into build/ (tools/esbuild.mjs: the entries, their size budgets) → its manifest"""
+    global BUILD_MANIFEST
+    if '--no-esbuild' not in args:
+        if not os.path.isdir(os.path.join(ROOT, 'node_modules', 'esbuild')): sys.exit('✗ the TypeScript build needs its tools: run  npm ci  once (Node 22)')
+        r = subprocess.run(['node', os.path.join(ROOT, 'tools', 'esbuild.mjs')], cwd=ROOT)
+        if r.returncode != 0: sys.exit('✗ npm run build (tools/esbuild.mjs) failed')
+    mp = os.path.join(BUILD, 'manifest.json')
+    if not os.path.exists(mp): sys.exit('✗ build/manifest.json is missing: run  npm run build')
+    BUILD_MANIFEST = rj(mp)
+
+def bundle_file(name):
+    """the built file of one bundle (build/<file>), or None when that entry's source is not in the tree yet"""
+    e = BUILD_MANIFEST['entries'].get(name)
+    return os.path.join(BUILD, e['file']) if e else None
+
+def bundle_text(name):
+    """a bundle's code for an inline <script> (its source-map comment dropped: the one file has no maps beside it)"""
+    return re.sub(r'\n//# sourceMappingURL=\S+\s*$', '\n', open(bundle_file(name), encoding='utf-8').read())
+
+# index.html's <script src="build/<name>.js"> of a bundle that is not built (its source is not in the tree yet) is left out of the site
+BUNDLE_TAG = re.compile(r'[ \t]*<script src="build/([\w.-]+)\.js"[^>]*></script>[^\n]*\n?')
+def drop_missing_bundles(html):
+    return BUNDLE_TAG.sub(lambda m: m.group(0) if m.group(1) in BUILD_MANIFEST['entries'] else '', html)
 
 AUTHOR_SCHEMAS = ['noema.sim-spec.v1.schema.json', 'noema.circuit.v1.schema.json', 'noema.activities.v1.schema.json']
 def author_schemas_js():
     # the activity author's copy of the JSON Schemas (a file:// page cannot fetch them): engine/activity_author_schemas.js
-    sch = {f: rj(os.path.join(ROOT, 'tools', 'schemas', f)) for f in AUTHOR_SCHEMAS}
+    sch = {f: rj(os.path.join(ROOT, 'src', 'contracts', 'schemas', f)) for f in AUTHOR_SCHEMAS}
     # and the reference activity of every engine of the library (tools/activities_examples/<ref>/: its entry, spec and words): the author's
     # "Start from the reference activity" (docs/activities-dev/authoring_ui.md)
     refs, ex = {}, os.path.join(ROOT, 'tools', 'activities_examples')
@@ -34,22 +65,35 @@ def author_schemas_js():
         if not (os.path.isfile(os.path.join(p, 'spec.json')) and os.path.isfile(os.path.join(p, 'activity.json'))): continue
         spec = rj(os.path.join(p, 'spec.json'))
         parts = spec.get('parts') if isinstance(spec, dict) else None   # a spec with parts (docs/INTERACTIVE.md §12.8): the author's kind "Several engines"
-        if not (isinstance(spec, dict) and (spec.get('engine') in ACTS.LIB or (isinstance(parts, list) and parts))): continue
+        if not (isinstance(spec, dict) and (spec.get('engine') in noema_core.call('activities.rules')['LIB'] or (isinstance(parts, list) and parts))): continue
         refs[d] = {'item': rj(os.path.join(p, 'activity.json')), 'spec': spec,
                    'strings': {f.split('.')[1]: rj(os.path.join(p, f)) for f in sorted(os.listdir(p)) if re.fullmatch(r'strings\.[\w-]+\.json', f)}}
-    return ('/* noema-lite — the JSON Schemas of the activity author (engine/activity_author.js). GENERATED from tools/schemas/ by\n'
+    return ('/* noema-lite — the JSON Schemas of the activity author (src/composition/author.ts). GENERATED from src/contracts/schemas/ by\n'
             '   tools/build.py (tests/activity_author.js checks that it is up to date). Do not edit. Schema data, not words a learner reads: */\n/* i18n-ignore-start */\n'
             '(function (root) { root.NoemaActivitySchemas = ' + json.dumps(sch, ensure_ascii=False, separators=(',', ':')) + ';\n'
             '  root.NoemaActivityRefs = ' + json.dumps(refs, ensure_ascii=False, separators=(',', ':')) + '; })(typeof window !== \'undefined\' ? window : globalThis);\n/* i18n-ignore-end */\n')
+
+_CONTRACTS_BUILT = False
+def build_contracts():
+    """The data contracts (src/contracts/schemas → src/contracts/validate.ts and the types): generated,
+    never committed (npm run contracts; it needs the packages of package.json: npm ci). Everything below checks with them."""
+    global _CONTRACTS_BUILT
+    if _CONTRACTS_BUILT: return   # once per run
+    if not os.path.isdir(os.path.join(ROOT, 'node_modules', 'ajv')): sys.exit('build: the data contracts need the node packages first: npm ci')
+    subprocess.run(['node', os.path.join(ROOT, 'tools', 'contracts.mjs')], check=True)
+    _CONTRACTS_BUILT = True
 
 def build_engine():
     wt(os.path.join(ENGINE, 'activity_author_schemas.js'), author_schemas_js())
     # the UI catalogs: i18n/<component>/<locale>.arb → engine/i18n/<locale>.js (docs/i18n.md)
     subprocess.run(['node', os.path.join(ROOT, 'tools', 'i18n', 'build.js')], check=True)
-    js = ''.join(f'\n/* ---- {os.path.basename(f)} ---- */\n' + open(f, encoding='utf-8').read() for f in sorted(glob.glob(os.path.join(ENGINE, 'src', '*.js'))))
-    css = ''.join(f'\n/* ---- {os.path.basename(f)} ---- */\n' + open(f, encoding='utf-8').read() for f in sorted(glob.glob(os.path.join(ENGINE, 'src', '*.css'))))
+    # the files the page loads on its own (PAGE_SRC: index.html and the bundle, before any subject) are NOT in engine.js again
+    check_page_src()
+    js = ''.join(f'\n/* ---- {os.path.basename(f)} ---- */\n' + open(f, encoding='utf-8').read() for f in sorted(glob.glob(os.path.join(ENGINE, 'src', '*.js'))) if os.path.basename(f) not in PAGE_SRC)
+    # the styles of engine/src and of the typed activity runtimes (src/runtimes/<id>/*.css: what they draw in the activity's box)
+    css = ''.join(f'\n/* ---- {os.path.relpath(f, ROOT)} ---- */\n' + open(f, encoding='utf-8').read() for f in sorted(glob.glob(os.path.join(ENGINE, 'src', '*.css'))) + sorted(glob.glob(os.path.join(ROOT, 'src', 'runtimes', '*', '*.css'))))
     wt(os.path.join(ENGINE, 'engine.js'), '/* noema-lite engine — GENERATED by tools/build.py from engine/src/*.js. Do not edit. */\n' + js)
-    wt(os.path.join(ENGINE, 'engine.css'), '/* noema-lite engine styles — GENERATED from engine/src/*.css. Do not edit. */\n' + css)
+    wt(os.path.join(ENGINE, 'engine.css'), '/* noema-lite engine styles — GENERATED from engine/src/*.css and the CSS of the runtimes (src/runtimes/<name>/). Do not edit. */\n' + css)
     # the content contract for packs generated in the browser (engine/packgen.js)
     rd = lambda q: open(os.path.join(ROOT, q), encoding='utf-8').read()
     wt(os.path.join(ENGINE, 'authoring.js'), '/* GENERATED by tools/build.py from tools/CONTENT_SPEC.md + docs/VISUAL.md — do not edit */\nwindow.NOEMA_AUTHORING = '
@@ -62,26 +106,25 @@ def build_engine():
         wt(os.path.join(ENGINE, 'langui.js'), '/* noema-lite language-course UI — GENERATED by tools/build.py from engine/lang/*.js. Do not edit. */\n(function () {\n' + ljs + '\n})();\n')
         wt(os.path.join(ENGINE, 'langui.css'), '/* GENERATED from engine/lang/*.css. Do not edit. */\n' + lcss)
 
-def validate(chapters, label, media=None, min_visual=0, sdir=None, translations=None, balance=()):
+def validate(chapters, label, media=None, min_visual=0, sdir=None, translations=None, opts=None):
+    """the authoring check of every chapter, of subject.json and of every translated chapter (the skill's validate.py, the
+    same code: src/features/content/domain/chapter.ts), in ONE run of the bridge"""
     if not VALIDATE: return True
+    mm = {k: {'w': v['w'], 'h': v['h'], 'regions': v.get('regions')} for k, v in (media or {}).items()}
+    base = {'media': mm, 'minVisual': min_visual, **(opts or {})}
+    jobs, what = [], []
+    for c in chapters: jobs.append(('chapter.check', c, base)); what.append(c['id'])
+    # a pack in several languages (CONTENT_SPEC.md): the metadata of subject.i18n, every translated chapter against its source
+    if sdir and (translations or 'i18n' in rj(os.path.join(sdir, 'subject.json'))):
+        jobs.append(('subject.check', rj(os.path.join(sdir, 'subject.json')), list(translations or {}))); what.append('subject.json')
     ok = True
-    V = lambda *a: subprocess.run([sys.executable, os.path.join(ROOT, 'tools', 'validate.py'), *a], capture_output=True, text=True)
-    def bad(what, r):
-        nonlocal ok
-        if r.returncode != 0: ok = False; print(f'  ✗ {label}/{what}:\n' + '\n'.join('    ' + l for l in r.stdout.splitlines() if l.startswith('ERROR')))
-    with tempfile.TemporaryDirectory() as td:
-        mp = os.path.join(td, '_media.json'); wj(mp, {k: {'w': v['w'], 'h': v['h'], 'regions': v.get('regions')} for k, v in (media or {}).items()})
-        for c in chapters:
-            p = os.path.join(td, c['id'] + '.json'); wj(p, c)
-            bad(c['id'], V(p, '--media', mp, '--min-visual', str(min_visual), *balance))
-        # a pack in several languages (CONTENT_SPEC.md): the metadata of subject.i18n, every translated chapter against its source
-        if sdir and (translations or 'i18n' in rj(os.path.join(sdir, 'subject.json'))):
-            bad('subject.json', V(os.path.join(sdir, 'subject.json'), '--subject', '--translations', ','.join(translations or {})))
-        for loc, chs in (translations or {}).items():
-            for c in chs:
-                if not any(x['id'] == c.get('id') for x in chapters): ok = False; print(f'  ✗ {label}/translations/{loc}: {c.get("id")} is not a chapter of the subject'); continue
-                p = os.path.join(td, f'{loc}.{c["id"]}.json'); wj(p, c)
-                bad(f'translations/{loc}/{c["id"]}', V(p, '--media', mp, '--min-visual', str(min_visual), '--source', os.path.join(td, c['id'] + '.json')))
+    for loc, chs in (translations or {}).items():
+        for c in chs:
+            src = next((x for x in chapters if x['id'] == c.get('id')), None)
+            if src is None: ok = False; print(f'  ✗ {label}/translations/{loc}: {c.get("id")} is not a chapter of the subject'); continue
+            jobs.append(('chapter.check', c, {'media': mm, 'minVisual': min_visual, 'source': src})); what.append(f'translations/{loc}/{c["id"]}')
+    for w, r in zip(what, noema_core.batch(jobs)):
+        if r['errors']: ok = False; print(f'  ✗ {label}/{w}:\n' + '\n'.join('    ERROR: ' + m for m in r['errors']))
     return ok
 
 def build_packs():
@@ -89,7 +132,7 @@ def build_packs():
     for sdir, owner in subject_dirs():
         meta, sources, chapters, report = load_subject(sdir)
         media, mrep = load_media(sdir)
-        acts, arep = ACTS.load_activities(sdir); mrep += arep
+        acts, arep = load_activities(sdir); mrep += arep
         for m in mrep:
             if m.startswith('WARN'): print('  ' + m)
         per_pic = int((meta.get('authoring') or {}).get('minExercisesPerPicture', 0))
@@ -97,35 +140,35 @@ def build_packs():
             from collections import Counter
             used = Counter(e.get('media') for c in chapters for e in c['exercises'] if e['type'].startswith('img_'))
             for m in media:   # (an activity's still picture, its fallback, needs no exercises)
-                if used[m] < per_pic and m not in ACTS.fallback_media(acts): mrep.append(f'ERROR media {m}: used by {used[m]} exercise(s); every picture needs >= {per_pic} (authoring.minExercisesPerPicture)')
+                if used[m] < per_pic and m not in fallback_media(acts): mrep.append(f'ERROR media {m}: used by {used[m]} exercise(s); every picture needs >= {per_pic} (authoring.minExercisesPerPicture)')
         errs = [r for r in report + mrep if r.startswith('ERROR')]
         if errs: print('\n'.join(errs)); failed.append(meta['id']); continue
         translations = load_translations(sdir, chapters)   # translations/<locale>/chNN.json (CONTENT_SPEC.md "Packs in several languages")
         auth = meta.get('authoring') or {}
-        feats = ','.join(k for k, v in (meta.get('features') or {}).items() if v)
-        if int(auth.get('rules', 0)) >= 2:   # the quality rules (tools/pack_rules.json "quality"): map/chNN.json + review/chNN.json go into the chapter
+        feats = [k for k, v in (meta.get('features') or {}).items() if v]
+        if int(auth.get('rules', 0)) >= 2:   # the quality rules Q1–Q8 (tools/CONTENT_SPEC.md): map/chNN.json + review/chNN.json go into the chapter
             for c in chapters:
                 for k in ('map', 'review'):
                     f = os.path.join(sdir, k, c['id'] + '.json')
                     if os.path.exists(f): c[k] = rj(f)
-            balance = ('--quality', 'error' if auth.get('by', 'claude') in ('claude', 'gemini') else 'warn', '--features', feats)
-        else:   # older subjects: every exercise type, difficulty and focus tag >= minPerKind per chapter (pack_rules.json "rules")
-            balance = ('--balance', str(auth['minPerKind']), '--features', feats) if auth.get('minPerKind') else ()
+            balance = {'quality': 'error' if auth.get('by', 'claude') in ('claude', 'gemini') else 'warn', 'features': feats}
+        else:   # older subjects: every exercise type, difficulty and focus tag >= minPerKind per chapter (the quantity rules)
+            balance = {'balance': int(auth['minPerKind']), 'features': feats} if auth.get('minPerKind') else {}
         if not validate(chapters, meta['id'], media, int(auth.get('minVisualPerChapter', 0)), sdir, translations, balance): failed.append(meta['id']); continue
         meta = dict(meta); meta['owner'] = owner
         counts = {'chapters': len(chapters), 'sections': sum(len(c['sections']) for c in chapters), 'exercises': sum(len(c['exercises']) for c in chapters),
                   'playbooks': sum(len(c['debug']) for c in chapters), 'flashcards': sum(len(c['flashcards']) for c in chapters)}
         counts['visual'] = sum(1 for c in chapters for e in c['exercises'] if e['type'].startswith('img_')); counts['media'] = len(media)
-        pack = {'format': 'noema-pack', 'v': 1, 'subject': meta, 'sources': sources, 'chapters': chapters, 'media': media, 'counts': counts, 'builtAt': now_iso()}
-        if acts and acts['items']: pack['activities'] = {'format': ACTS.FORMAT, 'items': acts['items']}; pack['requires'] = ACTS.requires(acts); counts['activities'] = len(acts['items'])
-        ae, aw = ACTS.check_activities(pack, list(translations))
+        pack = {'format': 'noema-pack', 'v': 3, 'subject': meta, 'sources': sources, 'chapters': chapters, 'media': media, 'counts': counts, 'builtAt': now_iso()}
+        if acts and acts['items']: pack['activities'] = {'format': ACTIVITIES_FORMAT, 'items': acts['items']}; pack['requires'] = noema_core.requires(acts); counts['activities'] = len(acts['items'])
+        ae, aw = noema_core.check_activities(pack, list(translations))
         for w in aw: print(f'  WARN {meta["id"]}: activities: {w}')
-        he, hw = ACTS.check_h5p_packages(pack, lambda a: open(os.path.join(sdir, *a['entry'].split('/')), 'rb').read() if os.path.isfile(os.path.join(sdir, *str(a.get('entry') or '').split('/'))) else None)   # h5p@1: the .h5p files beside the pack
+        he, hw = noema_core.check_packages(pack, sdir)   # h5p@1: the .h5p files beside the pack
         for w in hw: print(f'  WARN {meta["id"]}: activities: {w}')
         ae += he
         if ae: print('\n'.join(f'ERROR {meta["id"]}: activities: {x}' for x in ae)); failed.append(meta['id']); continue
         tr = pack_i18n(pack, translations, external=True)   # each translation in its own file: tr.<locale>.js / .json (docs/i18n.md §10)
-        pack['version'] = content_hash({'s': meta, 'src': sources, 'c': chapters, 'm': {k: v.get('sha') or v.get('url') for k, v in media.items()}, 'mm': {k: {x: y for x, y in v.items() if x != 'data'} for k, v in media.items()}, **({'t': tr} if tr else {}), **({'a': ACTS.hash_part(acts)} if acts and acts['items'] else {})})
+        pack['version'] = content_hash({'s': meta, 'src': sources, 'c': chapters, 'm': {k: v.get('sha') or v.get('url') for k, v in media.items()}, 'mm': {k: {x: y for x, y in v.items() if x != 'data'} for k, v in media.items()}, **({'t': tr} if tr else {}), **({'a': hash_part(acts)} if acts and acts['items'] else {})})
         try:   # unchanged content → keep the previous build time so git sees no change
             prev = rj(os.path.join(sdir, 'pack.json'))
             if prev.get('version') == pack['version']: pack['builtAt'] = prev.get('builtAt', pack['builtAt'])
@@ -262,7 +305,7 @@ def h5p_entries(m):
     """the .h5p files (entry, relative to the subject folder) of a library subject's h5p@1 activities (docs/INTERACTIVE_H5P.md)"""
     try: items = (rj(os.path.join(ROOT, os.path.dirname(m['path']), 'pack.json')).get('activities') or {}).get('items') or []
     except Exception: return []
-    return [a['entry'] for a in items if isinstance(a, dict) and a.get('runtime') == ACTS.H5P and isinstance(a.get('entry'), str) and '..' not in a['entry'].split('/')
+    return [a['entry'] for a in items if isinstance(a, dict) and a.get('runtime') == 'h5p@1' and isinstance(a.get('entry'), str) and '..' not in a['entry'].split('/')
             and os.path.isfile(os.path.join(ROOT, os.path.dirname(m['path']), *a['entry'].split('/')))]
 
 H5P_INLINE_MAX = int(os.environ.get('NOEMA_H5P_INLINE_MAX', str(2 * 1024 * 1024)))   # the one-file bundle: a .h5p file up to this size goes inline (base64), a bigger one shows its fallback there
@@ -286,7 +329,7 @@ def build_site(metas):
     shutil.copy(os.path.join(ROOT, 'config.js'), out)
     # the website never has a config.local.js → drop its <script> tag (avoids a 404 + MIME error in the console)
     html = open(os.path.join(ROOT, 'index.html'), encoding='utf-8').read()
-    html = '\n'.join(l for l in html.split('\n') if 'config.local.js' not in l)
+    html = drop_missing_bundles('\n'.join(l for l in html.split('\n') if 'config.local.js' not in l))
     stamp = build_stamp()
     html = html.replace('<script src="config.js"></script>', '<script src="config.js"></script>\n' + stamp, 1)   # ⚑ reports say which build they come from
     wt(os.path.join(out, 'index.html'), html)
@@ -303,11 +346,21 @@ def build_site(metas):
             dst = os.path.join(out, f['path']); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f['path']), dst)
         for f in m.get('media') or []:
             dst = os.path.join(out, f); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f), dst)
-    for f in ('engine.js', 'engine.css', 'loader.js', 'i18n.js', 'themes.js', 'art.js', 'shell.js', 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'vault.js', 'social.js', 'packgen.js', 'curmap.js', 'search.js', 'catalog.js', 'report.js', 'enginereq.js', 'authoring.js', 'srcfiles.js', 'viewer.js', 'schemaform.js', 'activity_author_schemas.js', 'activity_author.js', 'activity_author.css'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))   # (the activity author's four load on #/author)
-    os.makedirs(os.path.join(out, 'engine', 'src'), exist_ok=True); [shutil.copy(os.path.join(ENGINE, 'src', f), os.path.join(out, 'engine', 'src', f)) for f in ('35_simexpr.js', '36_engine_circuit.js', *P6_ENGINES, *LIB_ENGINES)]   # NoemaExpr, NoemaCircuit and the P6 engines beside packcheck.js: the shell checks sim-spec@1 packs before any subject (and engine.js) is open
-    for f in ('43_xapi.js', '44_activity_wasm.js', '45_activity_embed.js'): shutil.copy(os.path.join(ENGINE, 'src', f), os.path.join(out, 'engine', 'src', f))   # NoemaXAPI for the shell's ⋮; NoemaWasm and NoemaEmbed beside packcheck.js (wasm-module@1, external-embed@1)
-    shutil.copy(os.path.join(ENGINE, 'pyodide-sw.js'), os.path.join(out, 'engine', 'pyodide-sw.js'))   # py-module@1: the service worker that keeps Python offline (its files: tools/fetch_pyodide.py after this)
+    os.makedirs(os.path.join(out, 'engine', 'app'), exist_ok=True)
+    for f in ('engine.js', 'engine.css', 'tokens.css', 'i18n.js', 'art.js', *APP_AREAS, 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'packgen.js', 'curmap.js', 'authoring.js', 'srcfiles.js', 'viewer.js', 'activity_author_schemas.js'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))   # (the activity author's schemas and references load on #/author, with build/author.js)
+    os.makedirs(os.path.join(out, 'engine', 'src'), exist_ok=True)
+    for f in PAGE_SRC: shutil.copy(os.path.join(ENGINE, 'src', f), os.path.join(out, 'engine', 'src', f))   # NoemaXAPI for the shell's ⋮
+    # the TypeScript bundles of the page (build/: npm run build) with their source maps — build/app.js holds the engine library
+    # too (NoemaCore.engines); the connector is a function, the harness and the node bundles are not the site's
+    os.makedirs(os.path.join(out, 'build'))
+    for e in BUILD_MANIFEST['entries'].values():
+        if e['kind'] in ('page', 'lazy', 'worker'):
+            for f in (e['file'], e['map']): shutil.copy(os.path.join(BUILD, f), os.path.join(out, 'build', f))
+    # the installable app (PWA): the web manifest and its icons
+    shutil.copy(os.path.join(ROOT, 'manifest.webmanifest'), out)
+    shutil.copytree(os.path.join(ROOT, 'icons'), os.path.join(out, 'icons'))
     shutil.copytree(os.path.join(ENGINE, 'vendor'), os.path.join(out, 'engine', 'vendor'))
+    for f in ENGINES_LICENSES: shutil.copy(os.path.join(ROOT, f), os.path.join(out, 'engine', 'vendor', os.path.basename(f)))   # the licences of the vendored code inside build/app.js (map@1)
     shutil.copytree(os.path.join(ENGINE, 'i18n'), os.path.join(out, 'engine', 'i18n'))   # the UI catalogs (docs/i18n.md), loaded per locale
     shutil.copytree(os.path.join(ROOT, 'fonts'), os.path.join(out, 'fonts'), ignore=shutil.ignore_patterns('*.md', '*.json'))   # the characters' self-hosted fonts
     for m in metas:
@@ -330,28 +383,59 @@ def build_site(metas):
     build_lang_skill(os.path.join(out, 'downloads', 'noema-language-builder.zip'))
     build_mcp_function(metas, os.path.join(ROOT, 'dist', 'functions'))
     build_img_function(os.path.join(ROOT, 'dist', 'functions'))
-    wt(os.path.join(out, '_headers'), '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/engine/*\n  Cache-Control: public, max-age=300\n/engine/vendor/pdfjs/*.mjs\n  Content-Type: text/javascript; charset=utf-8\n/engine/vendor/pdfjs/wasm/*.wasm\n  Content-Type: application/wasm\n/library/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n/build.json\n  Cache-Control: no-store\n/fonts/*\n  Cache-Control: public, max-age=604800\n' + PY_HEADERS)
+    wt(os.path.join(out, '_headers'), '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/engine/*\n  Cache-Control: public, max-age=300\n/build/*\n  Cache-Control: public, max-age=300\n/engine/vendor/pdfjs/*.mjs\n  Content-Type: text/javascript; charset=utf-8\n/engine/vendor/pdfjs/wasm/*.wasm\n  Content-Type: application/wasm\n/library/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n/build.json\n  Cache-Control: no-store\n/fonts/*\n  Cache-Control: public, max-age=604800\n'
+       + '/sw.js\n  Cache-Control: no-cache\n  Content-Type: text/javascript; charset=utf-8\n/manifest.webmanifest\n  Content-Type: application/manifest+json; charset=utf-8\n  Cache-Control: no-cache\n' + PY_HEADERS)
+    write_service_worker(out)
     print('site →', os.path.relpath(out, ROOT))
 
-# the P6 engines of sim-spec@1 (docs/INTERACTIVE_ENGINES.md): their check code is loaded beside packcheck.js like NoemaCircuit; registered by 43_engines_p6.js
-P6_ENGINES = ('39_engine_thermal.js', '40_engine_pid.js', '41_engine_rf.js', '42_engine_twin.js')
-KERNEL = '46_lib_simkit.js'   # the simulation kernel (docs/library/simkit.md): loaded after NoemaExpr, before the plugins 39–42 and the library, which use it
-# the engine library of sim-spec@1 (docs/INTERACTIVE_LIBRARY.md): the shared core, every general engine (47–48_lib_*.js) and the catalogue
-# (which also registers them); loaded beside packcheck.js like the P6 engines; their Python twins tools/enginelib.py + tools/lib_<name>.py
-LIB_ENGINES = ('46_lib_core.js', *sorted(os.path.basename(f) for f in glob.glob(os.path.join(ENGINE, 'src', '46_lib_*.js')) if not f.endswith('46_lib_core.js')), *sorted(os.path.basename(f) for f in glob.glob(os.path.join(ENGINE, 'src', '4[78]_lib_*.js'))), '49_lib_catalog.js')
-LIB_VENDOR = ('geographiclib-geodesic@2.2.0/noema-geodesic.js', 'world-atlas@2.0.2/noema-land-110m.js')   # vendored code of library engines (engine/vendor/, each with its licence), loaded before 46–49_lib_*.js: map@1's exact geodesics and land
+# the app shell the service worker precaches besides what index.html loads: the study engine (loaded when a subject opens),
+# the UI catalogs (any locale offline; not the test pseudo-locales), the language-course UI, the activity author's files
+# (#/author), the web manifest and its icons. Packs and data are not in it (network first, the last copy offline).
+APP_AREAS = ('app/library.js', 'app/community.js', 'app/roadmaps.js', 'app/languages.js', 'app/study.js')   # the areas of the app on the frame, in index.html's order
+SHELL_EXTRA = ('engine/engine.js', 'engine/i18n/*.js', 'engine/langcore.js', 'engine/langui.js', 'engine/langui.css', 'engine/activity_author_schemas.js',
+               'build/*.js', 'manifest.webmanifest', 'icons/*.png', 'icons/*.svg', 'fonts/*.css')   # build/*.js: the page bundles and every Worker bundle (offline on first use)
+def write_service_worker(out):
+    """dist/site/sw.js: { version, shell } + the service worker bundle (src/composition/sw.ts). The version is a hash of every
+    precached file, so a deploy that changes any of them installs a new worker (and a new cache); one that changes nothing keeps it."""
+    sw = bundle_file('sw')
+    if not sw: sys.exit('✗ the site needs its service worker: src/composition/sw.ts is not in the tree')
+    html = open(os.path.join(out, 'index.html'), encoding='utf-8').read()
+    refs = {u.split('?')[0].split('#')[0] for u in re.findall(r'(?:src|href)="([^":]+)"', html)}   # local files only (no scheme)
+    refs |= {os.path.relpath(f, out).replace(os.sep, '/') for g in SHELL_EXTRA for f in glob.glob(os.path.join(out, *g.split('/')))}
+    shell = sorted(r for r in refs if not r.startswith(('library/', 'data/', '/')) and not re.search(r'/i18n/(en-XA|ar-XB)\.js$', r) and os.path.isfile(os.path.join(out, *r.split('/'))))
+    missing = sorted(r for r in refs if not r.startswith(('library/', 'data/')) and not os.path.isfile(os.path.join(out, *r.split('/'))))
+    if missing: sys.exit('✗ index.html loads files the site does not have: ' + ', '.join(missing))
+    h = hashlib.sha256()
+    for r in shell: h.update(r.encode()); h.update(open(os.path.join(out, *r.split('/')), 'rb').read())
+    cfg = {'version': h.hexdigest()[:16], 'shell': ['index.html', *shell]}
+    wt(os.path.join(out, 'sw.js'), '/* GENERATED by tools/build.py: the precache list + build/sw.js (src/composition/sw.ts) */\nself.NOEMA_SW = '
+       + json.dumps(cfg, separators=(',', ':')) + ';\n' + open(sw, encoding='utf-8').read().replace('//# sourceMappingURL=sw.js.map', ''))
+    print(f'service worker: {len(cfg["shell"])} files precached · version {cfg["version"]}')
+
+# the engine library (src/engines, docs/INTERACTIVE_LIBRARY.md): every engine of sim-spec@1 is an ES module and a plugin of the
+# microkernel, bundled by tools/esbuild.mjs into build/app.js (NoemaCore.engines; the site, the one-file bundle), build/harness.js
+# (the skill's activity_host/noema-core.js) and build/engines-node.cjs (the node suites); the connector imports it
+# (src/composition/connector.ts) and build/noema-tools.cjs (the Python tools' content checks) runs it.
+ENGINES_LICENSES = ('src/engines/map/vendor/LICENSE-geographiclib-geodesic.txt', 'src/engines/map/vendor/LICENSE-world-atlas')   # map@1's vendored code, inside the bundles
+
+# engine/src files the page loads by themselves, before engine.js (the shell checks packs with them and the ⋮ exports with
+# NoemaXAPI before any subject is open). They run once: engine.js leaves them out, and every page that starts the engine
+# (index.html, the one-file bundle) must load each of them — check_page_src() stops the build when one is missing.
+PAGE_SRC = ('43_xapi.js',)
+def check_page_src():
+    html = open(os.path.join(ROOT, 'index.html'), encoding='utf-8').read()
+    miss = [f for f in ('engine/src/' + f for f in PAGE_SRC) if f'<script src="{f}"></script>' not in html]
+    if miss: sys.exit('index.html must load these files itself (engine.js leaves them out): ' + ', '.join(miss))
 LIB_DOCS = sorted(os.path.basename(f) for f in glob.glob(os.path.join(ROOT, 'docs', 'library', '*.md')))   # the chapters of the engine library (skill references/library/, the connector's guide part "interactive")
-LIB_TOOLS = ['enginelib.py', *sorted(os.path.basename(f) for f in glob.glob(os.path.join(ROOT, 'tools', 'lib_*.py')))]
-# py-module@1 (docs/INTERACTIVE_PYTHON.md §Deployment): the service worker's scope is /vendor/pyodide/ (its script lives in /engine/), the
+# py-module@1 (docs/INTERACTIVE_PYTHON.md §Deployment): the site's one service worker (/sw.js) keeps the Python files; the
 # versioned Pyodide folder and the wheels never change (immutable), the manifest is checked every time; ACAO/CORP only for a direct load
 PY_VERSION = json.load(open(os.path.join(ROOT, 'tools', 'pyodide_manifest.json'), encoding='utf-8'))['version']   # the pinned Pyodide (tools/fetch_pyodide.py)
-PY_HEADERS = ('/engine/pyodide-sw.js\n  Service-Worker-Allowed: /vendor/\n  Cache-Control: no-cache\n  Content-Type: text/javascript; charset=utf-8\n'
-              '/vendor/pyodide/manifest.json\n  Cache-Control: no-cache\n  Access-Control-Allow-Origin: *\n'
+PY_HEADERS = ('/vendor/pyodide/manifest.json\n  Cache-Control: no-cache\n  Access-Control-Allow-Origin: *\n'
               f'/vendor/pyodide/{PY_VERSION}/*\n  Cache-Control: public, max-age=31536000, immutable\n  Access-Control-Allow-Origin: *\n  Cross-Origin-Resource-Policy: cross-origin\n'
               f'/vendor/pyodide/{PY_VERSION}/*.wasm\n  Content-Type: application/wasm\n'
               '/vendor/pywheels/*\n  Cache-Control: public, max-age=31536000, immutable\n  Access-Control-Allow-Origin: *\n  Cross-Origin-Resource-Policy: cross-origin\n')
 
-SKILL_TOOLS = ['noema_lib.py', 'activities.py', 'simexpr.py', 'circuit.py', 'thermal.py', 'pid.py', 'rf.py', 'twin.py', 'wasm_check.py', 'embed_check.py', 'embed_allow.json', 'h5p_import.py', 'h5p_check.py', 'h5p_allow.json', 'bridge.py', 'validate.py', 'pack_rules.json', 'pack_quality.py', 'pipeline.py', 'svgkit.py', 'extract_images.py', 'fetch_image.py', 'find_images.py']
+SKILL_TOOLS = ['noema_lib.py', 'noema_core.py', 'embed_allow.json', 'h5p_allow.json', 'h5p_import.py', 'bridge.py', 'validate.py', 'pipeline.py', 'svgkit.py', 'extract_images.py', 'fetch_image.py', 'find_images.py']
 LANG_SKILL_TOOLS = ['validate_lang.py', 'lang_refcheck.py', 'langlib.py', 'lang_course.py', 'lang_script.py', 'lang_phenomena.py', 'lang_readback.js', 'lang_facade.py']
 # P6 runtimes and exports (docs/adr/001 D12): in the skill's references and the connector's guide part "interactive"
 INTERACTIVE_P6 = ('INTERACTIVE_WASM.md', 'INTERACTIVE_EMBED.md', 'INTERACTIVE_XAPI.md')
@@ -370,9 +454,9 @@ def lang_builder_files():
             (os.path.join(ROOT, 'docs', 'NEW_LANGUAGE_PLAYBOOK.md'), 'references/NEW_LANGUAGE_PLAYBOOK.md'), (os.path.join(ROOT, 'tools', 'CONTENT_SPEC.md'), 'references/CONTENT_SPEC.md'),
             (os.path.join(ROOT, 'tools', 'lang_sources', 'AGENT_BRIEF.md'), 'references/AGENT_BRIEF.md')]
     out += [(f, 'references/briefs/' + os.path.basename(f)) for f in sorted(glob.glob(os.path.join(ROOT, 'tools', 'lang_sources', 'briefs', '*.txt')))]
-    out += [(f, 'schemas/' + os.path.basename(f)) for f in sorted(glob.glob(os.path.join(ROOT, 'tools', 'schemas', 'noema.lang*.schema.json')))]
+    out += [(f, 'schemas/' + os.path.basename(f)) for f in sorted(glob.glob(os.path.join(ROOT, 'src', 'contracts', 'schemas', 'noema.lang*.schema.json')))]
     # D19: the field registry and the CLDR language names the facade lint (lang_facade.py, run by validate_lang.py) reads
-    out += [(os.path.join(ROOT, 'tools', 'schemas', 'noema.langfacade.fields.json'), 'schemas/noema.langfacade.fields.json'), (os.path.join(ROOT, 'docs', 'language-packs.md'), 'references/language-packs.md')]
+    out += [(os.path.join(ROOT, 'src', 'contracts', 'schemas', 'noema.langfacade.fields.json'), 'schemas/noema.langfacade.fields.json'), (os.path.join(ROOT, 'docs', 'language-packs.md'), 'references/language-packs.md')]
     out += [(f, 'scripts/i18n/langnames/' + os.path.basename(f)) for f in sorted(glob.glob(os.path.join(ROOT, 'tools', 'i18n', 'langnames', '*.json')))]
     for d in ('_typology', '_phenomena'): out += [(f, f'library/languages/{d}/{os.path.basename(f)}') for f in sorted(glob.glob(os.path.join(LANGS, d, '*.json')))]
     return [(a, b) for a, b in out if os.path.exists(a)]
@@ -391,7 +475,8 @@ def build_skill(out_zip):
     with zipfile.ZipFile(out_zip, 'w', zipfile.ZIP_DEFLATED) as z:
         for f in sorted(glob.glob(os.path.join(src, '**', '*'), recursive=True)):
             if os.path.isfile(f) and '__pycache__' not in f: z.write(f, os.path.join('noema-pack-builder', os.path.relpath(f, src)))
-        for t in SKILL_TOOLS + LIB_TOOLS: z.write(os.path.join(ROOT, 'tools', t), f'noema-pack-builder/scripts/{t}')
+        for t in SKILL_TOOLS: z.write(os.path.join(ROOT, 'tools', t), f'noema-pack-builder/scripts/{t}')
+        z.writestr('noema-pack-builder/scripts/noema-tools.cjs', bundle_text('noema-tools'))   # the content checks for the scripts (noema_core.py): build/noema-tools.cjs
         for f in sorted(glob.glob(os.path.join(ROOT, 'tools', 'pipelines', '*.json'))): z.write(f, f'noema-pack-builder/scripts/pipelines/{os.path.basename(f)}')   # docs/PIPELINES.md
         # interactive activities (docs/INTERACTIVE.md): the reference activity, the app's runtime for the harness, the contract
         # the reference activities travel as ONE inner zip (claude.ai takes a skill zip of at most 200 files);
@@ -401,13 +486,12 @@ def build_skill(out_zip):
             for f in sorted(glob.glob(os.path.join(ex_root, '**', '*'), recursive=True)):
                 if os.path.isfile(f) and '__pycache__' not in f: ez.write(f, os.path.relpath(f, ex_root).replace(os.sep, '/'))
         z.writestr('noema-pack-builder/scripts/activities_examples.zip', ex_buf.getvalue())
-        for f in ('32_activities.js', '33_activity_guard.js', '34_activity_html.js', '35_activity_sim.js', '35_simexpr.js', '36_engine_circuit.js', '36_engine_circuit_sim.js', *P6_ENGINES, '43_engines_p6.js', *LIB_ENGINES, '37_activity_py.js', '37_activity_py_ui.js', '38_activity_h5p.js', '32_activities.css', '44_activity_wasm.js'): z.write(os.path.join(ENGINE, 'src', f), f'noema-pack-builder/scripts/activity_host/{f}')
+        z.writestr('noema-pack-builder/scripts/activity_host/noema-core.js', bundle_text('harness'))   # NoemaCore of the harness (build/harness.js): the data contracts, the engine library and the typed runtimes (src/runtimes: sim-spec@1, html-app@1, wasm-module@1, py-module@1)
+        for f in ('32_activities.js', '32_activities.css'): z.write(os.path.join(ENGINE, 'src', f), f'noema-pack-builder/scripts/activity_host/{f}')
         h5pv = os.path.join(ENGINE, 'vendor', 'h5p', '3.8.2')   # h5p@1: the app's own H5P player for the harness, with its licences and readable source (GPL-3.0)
         for f in ['player.js', 'LICENSE', 'LICENSE-NOTICE.txt'] + sorted(os.path.relpath(g, h5pv).replace(os.sep, '/') for g in glob.glob(os.path.join(h5pv, 'source', '**', '*'), recursive=True) if os.path.isfile(g)):
             z.write(os.path.join(h5pv, f), 'noema-pack-builder/scripts/activity_host/h5p/' + f)
-        for f in LIB_VENDOR: z.write(os.path.join(ENGINE, 'vendor', f), 'noema-pack-builder/scripts/activity_host/vendor/' + os.path.basename(f))   # the library engines' vendored code (map@1), with its licences
-        for f in LIB_VENDOR: z.write(os.path.join(ENGINE, 'vendor', os.path.dirname(f), next(l for l in os.listdir(os.path.join(ENGINE, 'vendor', os.path.dirname(f))) if l.startswith('LICENSE'))), 'noema-pack-builder/scripts/activity_host/vendor/LICENSE-' + os.path.dirname(f))
-        z.write(os.path.join(ENGINE, 'packcheck.js'), 'noema-pack-builder/scripts/activity_host/packcheck.js')   # sim-spec@1: the spec check the runtime runs
+        for f in ENGINES_LICENSES: z.write(os.path.join(ROOT, f), 'noema-pack-builder/scripts/activity_host/vendor/' + os.path.basename(f))   # the licences of the vendored code inside noema-core.js (map@1)
         for f in ('INTERACTIVE.md', 'INTERACTIVE_AUTHORING.md', 'INTERACTIVE_LIBRARY.md', 'INTERACTIVE_SIMEXPR.md', 'INTERACTIVE_CIRCUIT.md', 'INTERACTIVE_ENGINES.md', 'INTERACTIVE_PYTHON.md', 'INTERACTIVE_H5P.md') + INTERACTIVE_P6:
             if os.path.exists(os.path.join(ROOT, 'docs', f)): z.write(os.path.join(ROOT, 'docs', f), f'noema-pack-builder/references/{f}')
         z.writestr('noema-pack-builder/references/LIBRARY_ENGINES.md', '# The chapters of the engine library (docs/library/*.md), one per engine\n\n' + ''.join(f'\n\n---\n\n<!-- docs/library/{f} -->\n\n' + open(os.path.join(ROOT, 'docs', 'library', f), encoding='utf-8').read() for f in LIB_DOCS))   # the engine library: every engine's chapter in ONE file (claude.ai accepts at most 200 files in a skill)
@@ -420,7 +504,7 @@ def build_skill(out_zip):
         # language courses (docs/LANGUAGES.md §10.1): the checks Claude runs in its sandbox, with the shared typology and catalogues they read
         for t in LANG_SKILL_TOOLS:
             if os.path.exists(os.path.join(ROOT, 'tools', t)): z.write(os.path.join(ROOT, 'tools', t), f'noema-pack-builder/scripts/{t}')
-        if os.path.exists(os.path.join(ROOT, 'tools', 'schemas', 'noema.lang.v1.schema.json')): z.write(os.path.join(ROOT, 'tools', 'schemas', 'noema.lang.v1.schema.json'), 'noema-pack-builder/schemas/noema.lang.v1.schema.json')
+        if os.path.exists(os.path.join(ROOT, 'src', 'contracts', 'schemas', 'noema.lang.v1.schema.json')): z.write(os.path.join(ROOT, 'src', 'contracts', 'schemas', 'noema.lang.v1.schema.json'), 'noema-pack-builder/schemas/noema.lang.v1.schema.json')
         for d in ('_typology', '_phenomena'):
             for f in sorted(glob.glob(os.path.join(LANGS, d, '*.json'))): z.write(f, f'noema-pack-builder/library/languages/{d}/{os.path.basename(f)}')
         # a whole language in one prompt (docs/LANGUAGES.md §10.2): the skill noema-language-builder as LANGUAGE_BUILDER.md + its files
@@ -437,9 +521,15 @@ def public_config():
     g = lambda k: (re.search(k + r"\s*:\s*'([^']*)'", txt) or [None, ''])[1]
     return {'siteUrl': g('siteUrl'), 'supabaseUrl': g('supabaseUrl'), 'supabaseKey': g('supabaseKey')}
 
-# the app's own code the connector runs (pack checks; curriculum tasks, checks and how answers change a curriculum)
-MCP_ENGINE = ['engine/report.js', 'engine/enginereq.js', 'engine/src/38_activity_h5p.js', 'engine/src/35_simexpr.js', 'engine/src/36_engine_circuit.js', *('engine/src/' + f for f in P6_ENGINES), *('engine/src/' + f for f in LIB_ENGINES), 'engine/packcheck.js', 'engine/src/44_activity_wasm.js', 'engine/src/45_activity_embed.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js']
-MCP_PRELUDE = 'globalThis.window = globalThis;\n'
+# the app's own code the connector runs, in load order (pack checks; curriculum tasks, checks and how answers change a
+# curriculum; pictures; language courses): src/connector/engine/sources.ts lists them and tools/connector_bundle.mjs bundles
+# each as its text. The data contracts and the engine library are ES modules the connector's composition root hands them.
+CONNECTOR_ENGINE = ('engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js')
+
+def connector_engine_files():
+    """The engine files src/connector/engine/sources.ts loads (LEGACY_SOURCES, in order)."""
+    txt = open(os.path.join(ROOT, 'src', 'connector', 'engine', 'sources.ts'), encoding='utf-8').read()
+    return tuple(re.findall(r"S\('([^']+)'", txt[txt.index('LEGACY_SOURCES'):]))
 
 def build_stamp():
     """<script>window.NOEMA_BUILD = {commit, builtAt}</script>: which build a ⚑ problem report comes from (docs/REPORTS.md).
@@ -451,7 +541,7 @@ def build_stamp():
     return '<script>window.NOEMA_BUILD = ' + json.dumps({'commit': commit[:40] or None, 'builtAt': now_iso()}) + ';</script>'
 
 def build_mcp_function(metas, out_dir):
-    """dist/functions/mcp.mjs — the Claude connector (cloud/mcp/server.mjs + public config + the content contract)."""
+    """dist/functions/mcp.mjs — the Claude connector: src/composition/connector.ts bundled by esbuild with the public config and the content contract."""
     cfg = public_config()
     if not (cfg['siteUrl'] and cfg['supabaseUrl'] and cfg['supabaseKey']): print('mcp: skipped (config.js needs siteUrl, supabaseUrl, supabaseKey)'); return
     cfg['library'] = [{**{k: m.get(k) for k in ('id', 'title', 'counts', 'version')}, **({'bridgeLocales': m['bridgeLocales']} if m.get('bridgeLocales') else {})} for m in metas if not m.get('owner')]
@@ -465,10 +555,17 @@ def build_mcp_function(metas, out_dir):
     docs['pipelineSteps'] = rj(os.path.join(ROOT, 'tools', 'pipelines', 'steps.json'))['steps']
     docs['pipelineFlows'] = {f['id']: f for f in (rj(x) for x in sorted(glob.glob(os.path.join(ROOT, 'tools', 'pipelines', '*.json')))) if f.get('format') == 'noema.pipeline/v1'}
     if os.path.exists(os.path.join(ROOT, 'docs', 'LANGUAGE_RULES.md')): docs['languages'] = rd('docs/LANGUAGE_RULES.md') + ('\n\n---\n\n' + rd('skill/noema-pack-builder/LANGUAGES.md') if os.path.exists(os.path.join(ROOT, 'skill', 'noema-pack-builder', 'LANGUAGES.md')) else '') + ('\n\n---\n\n' + rd('docs/language-packs.md') if os.path.exists(os.path.join(ROOT, 'docs', 'language-packs.md')) else '')   # D19: the contract of the explanation layers   # language courses: the binding rules + how to answer a task
-    code = (f'/* GENERATED by tools/build.py from cloud/mcp/server.mjs — do not edit */\nconst CFG = {json.dumps(cfg, ensure_ascii=False)};\nconst DOCS = {json.dumps(docs, ensure_ascii=False)};\n'
-            + MCP_PRELUDE + ''.join(rd(f) + '\n' for f in MCP_ENGINE) + rd('cloud/mcp/server.mjs') + '\nexport const config = { path: ["/mcp", "/.well-known/oauth-protected-resource", "/.well-known/oauth-protected-resource/mcp"] };\n')
-    wt(os.path.join(out_dir, 'mcp.mjs'), code)
-    print('mcp →', os.path.relpath(os.path.join(out_dir, 'mcp.mjs'), ROOT))
+    have = connector_engine_files()
+    if have != CONNECTOR_ENGINE:
+        sys.exit('✗ src/connector/engine/sources.ts does not load the engine files the connector needs, in order:\n  missing: '
+                 + (', '.join(f for f in CONNECTOR_ENGINE if f not in have) or '-') + '\n  extra: ' + (', '.join(f for f in have if f not in CONNECTOR_ENGINE) or '-') + '\n  (or the order differs)')
+    out = os.path.join(out_dir, 'mcp.mjs')
+    with tempfile.TemporaryDirectory() as td:
+        data = os.path.join(td, 'connector-data.json')
+        wt(data, json.dumps({'config': cfg, 'docs': docs}, ensure_ascii=False))
+        r = subprocess.run(['node', os.path.join(ROOT, 'tools', 'connector_bundle.mjs'), '--data', data, '--out', out], cwd=ROOT, capture_output=True, text=True, encoding='utf-8')
+    if r.returncode: sys.exit('✗ the connector bundle failed (tools/connector_bundle.mjs, esbuild):\n' + (r.stderr or r.stdout).strip())
+    print('mcp →', os.path.relpath(out, ROOT))
 
 def build_img_function(out_dir):
     """dist/functions/img.mjs — /api/img, the picture fetcher for web pictures whose host blocks browsers (cloud/img/proxy.mjs)."""
@@ -497,7 +594,7 @@ def build_bundle(metas):
     if '--subjects' in args: sel = set(args[args.index('--subjects') + 1].split(','))
     rd = lambda p: open(os.path.join(ROOT, p), encoding='utf-8').read()
     # a source inlined in a <script>: '</script' would end it, and '<!--' followed later by '<script' (the Python runner's srcdoc,
-    # 37_activity_py.js) puts the HTML parser in the 'double escaped' state, where '</script>' no longer ends the element (the
+    # src/runtimes/py-module/runner.ts) puts the HTML parser in the 'double escaped' state, where '</script>' no longer ends the element (the
     # engine then swallowed the loader and the bundle stayed blank). Both are written as JS escapes that mean the same text.
     esc = lambda s: s.replace('</script', '<\\/script').replace('<!--', '<\\x21--')
     packs = ''.join(f'<script>{esc(rd(m["path"]))}</script>\n' for m in metas if (not sel or m['id'] in sel))
@@ -507,26 +604,33 @@ def build_bundle(metas):
     reg_metas = [dict(m, path=None) for m in metas if (not sel or m['id'] in sel)]
     local = ''
     if '--with-local-config' in args and os.path.exists(os.path.join(ROOT, 'config.local.js')): local = f'<script>{esc(rd("config.local.js"))}</script>'
-    css = rd('engine/engine.css') + '\n' + rd('engine/activity_author.css')
+    css = rd('engine/engine.css')
     # every UI catalog inline (the single file works offline in any locale; pseudo-locales only for tests)
     i18n_cats = ''.join(f'<script>{esc(rd("engine/i18n/" + f))}</script>\n' for f in sorted(os.listdir(os.path.join(ENGINE, 'i18n'))) if f.endswith('.js') and f[:-3] not in ('en-XA', 'ar-XB'))
-    p6_scripts = ''.join(f'<script>{esc(rd("engine/vendor/" + f))}</script>\n' for f in LIB_VENDOR) + ''.join(f'<script>{esc(rd("engine/src/" + f))}</script>\n' for f in (KERNEL, *P6_ENGINES, *(f for f in LIB_ENGINES if f != KERNEL)))   # the kernel first (the plugins 39–42 and the library use it; circuit-mna@1 reaches it only at run time), then the P6 engines' checks beside packcheck, like NoemaCircuit
+    # the TypeScript core (build/app.js: window.NoemaCore) before every older script, and each Worker's code as text: the one
+    # file cannot load build/<worker>.js from file://, so the app starts a Worker from a Blob of <script id="noema-worker:<name>">
+    core_scripts = (f'<script>{esc(bundle_text("app"))}</script>\n' if bundle_file('app') else '') + ''.join(
+        f'<script type="text/plain" id="noema-worker:{n}">{esc(bundle_text(n))}</script>\n' for n, e in sorted(BUILD_MANIFEST['entries'].items()) if e['kind'] == 'worker') + ''.join(
+        f'<script type="text/plain" id="noema-lazy:{n}">{esc(bundle_text(n))}</script>\n' for n, e in sorted(BUILD_MANIFEST['entries'].items()) if e['kind'] == 'lazy')   # build/engines.js: run when first needed
+    app_areas = ''.join(f'<script>{esc(rd("engine/" + f))}</script>\n' for f in APP_AREAS)   # the areas on the frame (engine/app/*.js)
     html = f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>noema-lite</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235f8d5a' stroke-width='2.4' stroke-linecap='round'><circle cx='5' cy='19' r='2'/><circle cx='19' cy='5' r='2'/><path d='M7 19h7a3.5 3.5 0 0 0 0-7h-4a3.5 3.5 0 0 1 0-7h7'/></svg>">
 <link href="{google_fonts_url()}" rel="stylesheet">
-<style>{css}</style></head>
+<style>{css}</style>
+<style>{rd('engine/tokens.css')}</style></head>
 <body><div id="noema-splash"><div class="logo"></div></div>
 <script>{esc(rd("config.js"))}</script>{local}
 <script>window.NOEMA_BUNDLE = true;</script>
 {build_stamp()}
+{core_scripts}
 <script>{esc(build_registry(reg_metas))}</script>
 {packs}<script>{esc(rd("engine/vendor/marked.umd.js"))}</script>
 <script>{esc(rd("engine/vendor/purify.min.js"))}</script>
 <script>{esc(rd("engine/vendor/intl-messageformat.iife.js"))}</script>
 {i18n_cats}<script>{esc(rd("engine/i18n.js"))}</script>
-<script>{esc(rd("engine/themes.js"))}</script>
+<script>{esc(bundle_text("ui"))}</script>
 <script>{esc(rd("engine/art.js"))}</script>
 <script>{esc(rd("engine/convos.js"))}</script>
 <script>{esc(rd("engine/cloud.js"))}</script>
@@ -534,15 +638,8 @@ def build_bundle(metas):
 <script>{esc(rd("engine/claude.js"))}</script>
 <script>{esc(rd("engine/srcfiles.js"))}</script>
 <script>{esc(rd("engine/viewer.js"))}</script>
-<script>{esc(rd("engine/src/35_simexpr.js"))}</script>
-<script>{esc(rd("engine/src/36_engine_circuit.js"))}</script>
-{p6_scripts}<script>{esc(rd("engine/packcheck.js"))}</script>
 <script>{esc(rd("engine/src/43_xapi.js"))}</script>
-<script>{esc(rd("engine/src/44_activity_wasm.js"))}</script>
-<script>{esc(rd("engine/src/45_activity_embed.js"))}</script>
-<script>{esc(rd("engine/schemaform.js"))}</script>
 <script>{esc(rd("engine/activity_author_schemas.js"))}</script>
-<script>{esc(rd("engine/activity_author.js"))}</script>
 <script>{esc(rd("engine/llm.js"))}</script>
 <script>{esc(rd("engine/mt.js"))}</script>
 <script>{esc(rd("engine/wordlink.js"))}</script>
@@ -553,27 +650,22 @@ def build_bundle(metas):
 <script>{esc(rd("engine/curshare.js"))}</script>
 <script>{esc(rd("engine/curimport.js"))}</script>
 <script>{esc(rd("engine/sourceplan.js"))}</script>
-<script>{esc(rd("engine/vault.js"))}</script>
-<script>{esc(rd("engine/social.js"))}</script>
 <script>{esc(rd("engine/curmap.js"))}</script>
-<script>{esc(rd("engine/catalog.js"))}</script>
-<script>{esc(rd("engine/search.js"))}</script>
 <script>{esc(rd("engine/vendor/modern-screenshot.umd.js"))}</script>
-<script>{esc(rd("engine/report.js"))}</script>
-<script>{esc(rd("engine/enginereq.js"))}</script>
-<script>{esc(rd("engine/shell.js"))}</script>
-<script>{esc(rd("engine/react.js"))}</script>
+{app_areas}<script>{esc(rd("engine/react.js"))}</script>
 <script>{esc(rd("engine/authoring.js"))}</script>
 <script>{esc(rd("engine/vendor/h5p/3.8.2/player.js"))}</script>
 <script type="text/plain" id="noema-engine-src">{esc(rd("engine/engine.js"))}</script>
-<script>{esc(rd("engine/loader.js"))}</script>
 </body></html>'''
     out = os.path.join(ROOT, 'dist', 'noema-lite.html'); wt(out, html)
     print(f'bundle → dist/noema-lite.html ({len(html)/1e6:.1f} MB, {len(reg_metas)} subjects{", with local config" if local else ""})')
 
 if __name__ == '__main__':
     if '--author-schemas' in args: sys.stdout.write(author_schemas_js()); sys.exit(0)   # (tests/activity_author.js: is the copy current?)
+    build_contracts()   # first: src/contracts/validate.ts and the types are generated, and the TypeScript bundles import them
+    run_esbuild()
     build_engine()
+    if 'engine' in args: sys.exit(0)
     metas, failed = build_packs()
     LANG_METAS, lfailed = build_lang_courses(); failed += lfailed
     wt(os.path.join(LIB, 'registry.js'), build_registry(metas))

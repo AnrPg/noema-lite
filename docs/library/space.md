@@ -1,4 +1,4 @@
-# `NoemaSpaceKit` — space for the engine library (`engine/src/46_lib_space.js`)
+# `NoemaSpaceKit` — space for the engine library (`src/engines/kernel/space.ts`)
 
 A kit, not an engine: grids with boundary conditions, finite-difference operators and their stability analysis, neighbourhoods,
 graphs used as space, continuous-space neighbour search, toroidal distances, random walks, spatial statistics and two scene
@@ -6,7 +6,7 @@ builders. `field@1` (`docs/library/field.md`) and `agents@1` (`docs/library/agen
 Time, events, randomness and output analysis are **not** here: they are NoemaSimKit's (`docs/library/simkit.md`). Functions that
 draw take a uniform generator `rng()` — in the engines a `NoemaSimKit.stream(seed, name)`.
 
-Pure, Worker-safe (`NoemaSpaceKit.source()` is the module's source; an engine's `workerSource` includes it), deterministic,
+Pure, Worker-safe (an ES module the engines import; their Worker bundles carry it), deterministic,
 bounded (grids ≤ 200 × 200 in 2-D, ≤ 2000 nodes in 1-D, walks ≤ 200 000 steps, scene builders ≤ their item budget), and it never
 throws: bad input gives NaN, −1 or an empty result. Tests: `node tests/lib_space.js` (68 assertions, §8).
 

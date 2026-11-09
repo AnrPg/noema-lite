@@ -105,6 +105,85 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
     if (p === '/storage/v1/object/noema-vault' && M === 'DELETE') { for (const k of data.prefixes || []) if (vfiles.some(f => f.path === k && f.uploader === uid)) delete vobj[k]; return json(res, 200, []); }
     return json(res, 404, { message: 'not found ' + p });
   }
+  /* ---------- entry tables (cloud/supabase.sql §17, §18): noema_source_files, noema_bridges, noema_sagas — owner only
+     (a row for another user is refused), upsert (merge-duplicates / ignore-duplicates), filters eq/neq/lt/gt/in/like, order,
+     PATCH and DELETE on filters (a compare-and-swap on updated_at=eq.), return=representation. The server stamps
+     updated_at in milliseconds, strictly later than the version it replaces, and keeps the keys of a row. ---------- */
+  const ENTRY = { noema_source_files: ['subject_id', 'source_id'], noema_bridges: ['pack_id', 'pair'], noema_sagas: ['key'] };
+  const entries = { noema_source_files: [], noema_bridges: [], noema_sagas: [] };
+  const stamp = prev => new Date(Math.max(Date.now(), prev ? Date.parse(prev) + 1 : 0)).toISOString();
+  const likeOk = (x, pat) => new RegExp('^' + pat.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*') + '$').test(String(x));
+  function entryTables(req, res, p, u, uid, data) {
+    const m = /^\/rest\/v1\/(noema_source_files|noema_bridges|noema_sagas)$/.exec(p); if (!m) return;
+    if (!uid) return json(res, 401, { message: 'JWT required' });
+    const t = m[1], keys = ENTRY[t], all = entries[t], M = req.method, sp = [...u.searchParams.entries()];
+    const like = sp.filter(([, v]) => /^like\./.test(v));
+    const mine = () => filt(all.filter(r => r.user_id === uid), sp.filter(([, v]) => !/^like\./.test(v))).filter(r => like.every(([k, v]) => likeOk(r[k], v.slice(5))));
+    const pick = r => { const sel = (u.searchParams.get('select') || '*').split(','); return sel.includes('*') ? { ...r } : Object.fromEntries(sel.map(k => [k, r[k]])); };
+    const same = (a, b) => keys.every(k => a[k] === b[k]);
+    if (M === 'GET') {
+      let rows = mine(); const ord = (u.searchParams.get('order') || '').split(',').filter(Boolean).map(o => o.split('.'));
+      if (ord.length) rows = rows.slice().sort((a, b) => { for (const [k, d] of ord) { if (a[k] !== b[k]) return (String(a[k]) < String(b[k]) ? -1 : 1) * (d === 'desc' ? -1 : 1); } return 0; });
+      const lim = +u.searchParams.get('limit'); if (lim) rows = rows.slice(0, lim);
+      return json(res, 200, rows.map(pick));
+    }
+    if (M === 'POST') {
+      const pref = req.headers.prefer || '', keep = /ignore-duplicates/.test(pref), out = [];
+      for (const r of [].concat(data || [])) {
+        if (r.user_id !== uid || keys.some(k => r[k] == null || r[k] === '')) return rls(res);
+        const i = all.findIndex(x => x.user_id === uid && same(x, r));
+        if (i >= 0 && keep) continue;
+        if (i >= 0) { const row = { ...all[i], ...r, user_id: uid, updated_at: stamp(all[i].updated_at) }; keys.forEach(k => { row[k] = all[i][k]; }); all[i] = row; out.push(row); }
+        else { const row = { ...(t === 'noema_sagas' ? { status: 'running', steps: {}, result: null, error: null, lease_until: null, created_at: new Date().toISOString() } : {}), ...r, updated_at: stamp(null) }; all.push(row); out.push(row); }
+      }
+      return repr(req, res, 201, out.map(r => ({ ...r })));
+    }
+    if (M === 'PATCH') {
+      const out = [];
+      for (const row of mine()) { const prev = row.updated_at, fixed = keys.map(k => row[k]); Object.assign(row, data, { user_id: uid }); keys.forEach((k, i) => { row[k] = fixed[i]; }); row.updated_at = stamp(prev); out.push({ ...row }); }
+      return /representation/.test(req.headers.prefer || '') ? json(res, 200, out) : json(res, 204);
+    }
+    if (M === 'DELETE') {
+      const gone = mine(); for (const r of gone) all.splice(all.indexOf(r), 1);
+      return /representation/.test(req.headers.prefer || '') ? json(res, 200, gone) : json(res, 204);
+    }
+  }
+  /* ---------- 🔄 sync (cloud/supabase.sql §19): noema_events (append-only, once per id) and noema_settings (per key, the
+     later hlc wins; a stamp more than 5 minutes ahead is stored as the server's time), read with the rpcs
+     noema_events_since / noema_settings_since (after "<tx>:<seq>", max_rows) → rows in order with their cursor. Here every
+     write is its own transaction, so the cursor is "1:<seq>". ---------- */
+  const syncRows = { noema_events: [], noema_settings: [] }; let syncSeq = 0;
+  const HLC = /^(\d{15})-(\d{5})-([A-Za-z0-9_-]{1,64})$/;
+  const clampHlc = h => { const m = HLC.exec(h); return m && +m[1] > Date.now() + 300000 ? String(Date.now()).padStart(15, '0') + '-00000-' + m[3] : h; };
+  const seqOf = c => { const m = /^(\d+):(\d+)$/.exec(c || ''); return m ? +m[2] : 0; };
+  function sync(req, res, p, u, uid, data) {
+    const m = /^\/rest\/v1\/(?:(noema_events|noema_settings)|rpc\/(noema_events_since|noema_settings_since))$/.exec(p); if (!m) return;
+    if (!uid) return json(res, 401, { message: 'JWT required' });
+    if (m[2]) {
+      const t = m[2] === 'noema_events_since' ? 'noema_events' : 'noema_settings', after = data && data.after ? seqOf(data.after) : 0;
+      if (data && data.after && !after) return json(res, 400, { code: '22P02', message: 'invalid cursor' });
+      const max = Math.min(Math.max(+(data && data.max_rows) || 1000, 1), 1000);
+      const rows = syncRows[t].filter(r => r.user_id === uid && r.seq > after).sort((a, b) => a.seq - b.seq).slice(0, max);
+      return json(res, 200, rows.map(r => t === 'noema_events' ? { id: r.id, type: r.type, hlc: r.hlc, device: r.device, body: r.body, cursor: '1:' + r.seq } : { key: r.key, value: r.value, hlc: r.hlc, device: r.device, cursor: '1:' + r.seq }));
+    }
+    const t = m[1], all = syncRows[t], out = [];
+    if (req.method !== 'POST') return json(res, 403, { code: '42501', message: 'permission denied' });   // no update / delete policy
+    for (const r of [].concat(data || [])) {
+      if (r.user_id !== uid) return rls(res);
+      if (!HLC.test(r.hlc || '') || !r.device) return json(res, 400, { code: '23514', message: 'new row violates check constraint' });
+      if (t === 'noema_events') {
+        if (!r.id || !r.type || !r.body || typeof r.body !== 'object') return json(res, 400, { code: '23514', message: 'new row violates check constraint' });
+        if (all.some(x => x.user_id === uid && x.id === r.id)) { if (/ignore-duplicates/.test(req.headers.prefer || '')) continue; return dupe(res); }
+        const row = { user_id: uid, id: r.id, type: r.type, hlc: r.hlc, device: r.device, body: r.body, seq: ++syncSeq, created_at: new Date().toISOString() }; all.push(row); out.push(row);
+      } else {
+        const hlc = clampHlc(r.hlc), i = all.findIndex(x => x.user_id === uid && x.key === r.key);
+        if (i >= 0 && !(hlc > all[i].hlc)) continue;   // not later than the stored one: the row stays (and is not returned)
+        const row = { user_id: uid, key: r.key, value: r.value === undefined ? null : r.value, hlc, device: r.device, seq: ++syncSeq, updated_at: new Date().toISOString() };
+        if (i >= 0) all[i] = row; else all.push(row); out.push(row);
+      }
+    }
+    return repr(req, res, 201, out.map(r => ({ ...r })));
+  }
   /* ---------- ⚑ problem reports (cloud/supabase.sql §15): the reporter sends and sees their own; the admins (noema_admins,
      here: the e-mails in admins) see, answer and delete every one. The guard of the server: who, the status and the answer. ---------- */
   const ereps = [], admins = new Set();
@@ -234,6 +313,8 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
       // ---- 👥 shared curricula (rules as in cloud/supabase.sql §10; anonymous reads of public ones)
       sharedCurricula(req, res, p, u, uid, data, buf); if (res.headersSent) return;
       vault(req, res, p, u, uid, data, buf); if (res.headersSent) return;
+      entryTables(req, res, p, u, uid, data); if (res.headersSent) return;
+      sync(req, res, p, u, uid, data); if (res.headersSent) return;
       reports(req, res, p, u, uid, data); if (res.headersSent) return;
       engineRequests(req, res, p, u, uid, data); if (res.headersSent) return;
       so.handle(req, res, p, u, uid, data, buf); if (res.headersSent) return;
@@ -362,7 +443,11 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
       json(res, 404, { message: 'not found ' + p });
     });
   });
-  server.log = []; server.state = { users, kv, snaps, files, profiles, convs: {}, authz: {}, consents: [], callbacks: [], pubFiles, shrFiles, pubPacks, shares, pages, curs, mems, steps, curFiles, stepWrites: 0, vfiles, vrat, vrep, vobj, vfields, social: so.state, ereps, ereqs, admins };
+  server.log = []; server.state = { users, kv, snaps, files, profiles, convs: {}, authz: {}, consents: [], callbacks: [], pubFiles, shrFiles, pubPacks, shares, pages, curs, mems, steps, curFiles, stepWrites: 0, vfiles, vrat, vrep, vobj, vfields, social: so.state, ereps, ereqs, admins, entries, events: syncRows.noema_events, settings: syncRows.noema_settings };
+  /** The entry tables as the app's caches hold them: a subject's source files { source: meta }, the bridges { pack: { pair: meta } }. */
+  server.srcfiles = (uid, subj) => Object.fromEntries(entries.noema_source_files.filter(r => r.user_id === uid && r.subject_id === subj).map(r => [r.source_id, r.meta]));
+  server.bridges = uid => { const o = {}; for (const r of entries.noema_bridges.filter(x => x.user_id === uid)) (o[r.pack_id] = o[r.pack_id] || {})[r.pair] = r.meta; return o; };
+  server.sagas = uid => entries.noema_sagas.filter(r => r.user_id === uid);
   return new Promise(r => server.listen(port, () => r(server)));
 }
 module.exports = { start };

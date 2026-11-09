@@ -1,0 +1,524 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noema-lite.netlify.app/schemas/noema.curriculum-agents.v1.schema.json",
+  "title": "noema-lite Roadmap agents: the answers of agents 1, 1b, 2 and 3 (schemaVersion 1)",
+  "description": "The JSON Schema of each agent's answer (docs/CURRICULUM.md §1): the DAG creator (dag), the prerequisite auditor (audit), the goal expander (expand) and the chapter planner (plan). The same schema is the tool input of the in-app agents, the task Claude gets through noema_curriculum_task and the first check of noema_curriculum_submit; the agents' semantic rules (refs, acyclic, coverage) are engine/curriculum.js validateDag / validateAudit / validateExpand / validatePlans.",
+  "$defs": {
+    "dag": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "stage",
+        "nodes",
+        "goalRef",
+        "applicationRefs",
+        "edges",
+        "bottlenecks",
+        "minimalLearningPath",
+        "deepLearningPath",
+        "mastery"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "type": "integer",
+          "const": 1
+        },
+        "stage": {
+          "type": "string",
+          "const": "dag_creator"
+        },
+        "nodes": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 160,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["ref", "title", "summary", "role", "knowledgeDomains"],
+            "properties": {
+              "ref": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_]{0,48}$"
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100
+              },
+              "summary": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+              },
+              "role": {
+                "type": "string",
+                "enum": ["foundation", "goal", "application"]
+              },
+              "knowledgeDomains": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 5,
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 60
+                }
+              }
+            }
+          }
+        },
+        "goalRef": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,48}$"
+        },
+        "applicationRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,48}$"
+          },
+          "maxItems": 12
+        },
+        "edges": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 500,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["fromRef", "toRef", "rationale"],
+            "properties": {
+              "fromRef": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_]{0,48}$"
+              },
+              "toRef": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_]{0,48}$"
+              },
+              "rationale": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+              }
+            }
+          }
+        },
+        "bottlenecks": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["nodeRef", "explanation"],
+            "properties": {
+              "nodeRef": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_]{0,48}$"
+              },
+              "explanation": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+              }
+            }
+          }
+        },
+        "minimalLearningPath": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 160,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,48}$"
+          }
+        },
+        "deepLearningPath": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 160,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,48}$"
+          }
+        },
+        "mastery": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["nodeRef", "knowledgeDomain", "processingLevels"],
+            "properties": {
+              "nodeRef": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_]{0,48}$"
+              },
+              "knowledgeDomain": {
+                "type": "string",
+                "enum": ["information", "mental_procedure", "psychomotor_procedure"]
+              },
+              "processingLevels": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 6,
+                "items": {
+                  "type": "string",
+                  "enum": ["retrieval", "comprehension", "analysis", "knowledge_utilization", "metacognitive_system", "self_system"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "stage", "added", "edges", "notes"],
+      "properties": {
+        "schemaVersion": {
+          "type": "integer",
+          "const": 1
+        },
+        "stage": {
+          "type": "string",
+          "const": "prerequisite_auditor"
+        },
+        "added": {
+          "type": "array",
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["ref", "title", "summary", "knowledgeDomains", "knowledgeDomain", "processingLevels", "why"],
+            "properties": {
+              "ref": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_]{0,48}$"
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100
+              },
+              "summary": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+              },
+              "knowledgeDomains": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 5,
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 60
+                }
+              },
+              "knowledgeDomain": {
+                "type": "string",
+                "enum": ["information", "mental_procedure", "psychomotor_procedure"]
+              },
+              "processingLevels": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "enum": ["retrieval", "comprehension", "analysis", "knowledge_utilization", "metacognitive_system", "self_system"]
+                }
+              },
+              "why": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+              }
+            }
+          }
+        },
+        "edges": {
+          "type": "array",
+          "maxItems": 160,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["fromRef", "toRef", "rationale"],
+            "properties": {
+              "fromRef": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_]{0,48}$"
+              },
+              "toRef": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_]{0,48}$"
+              },
+              "rationale": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+              }
+            }
+          }
+        },
+        "notes": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          }
+        }
+      }
+    },
+    "expand": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "stage",
+        "goalId",
+        "expectedGoalTitle",
+        "introductionTitle",
+        "aspects",
+        "subtopics",
+        "relatedTopics",
+        "synthesisRef",
+        "synthesisTitle",
+        "coveragePlan",
+        "internalEdges"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "type": "integer",
+          "const": 1
+        },
+        "stage": {
+          "type": "string",
+          "const": "goal_expander"
+        },
+        "goalId": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,48}$"
+        },
+        "expectedGoalTitle": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "introductionTitle": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "aspects": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 20,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["ref", "title", "coverage", "atomic"],
+            "properties": {
+              "ref": {
+                "type": "string",
+                "pattern": "^g_[a-z0-9_]{1,56}$"
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100
+              },
+              "coverage": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 400
+              },
+              "atomic": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "subtopics": {
+          "type": "array",
+          "maxItems": 90,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["ref", "title", "coverage", "aspectRef"],
+            "properties": {
+              "ref": {
+                "type": "string",
+                "pattern": "^g_[a-z0-9_]{1,56}$"
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100
+              },
+              "coverage": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 400
+              },
+              "aspectRef": {
+                "type": "string",
+                "pattern": "^g_[a-z0-9_]{1,56}$"
+              }
+            }
+          }
+        },
+        "relatedTopics": {
+          "type": "array",
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["ref", "title", "parentRef"],
+            "properties": {
+              "ref": {
+                "type": "string",
+                "pattern": "^g_[a-z0-9_]{1,56}$"
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100
+              },
+              "parentRef": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "synthesisRef": {
+          "type": "string",
+          "const": "goal_synthesis"
+        },
+        "synthesisTitle": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "coveragePlan": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 30,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 400
+          }
+        },
+        "internalEdges": {
+          "type": "array",
+          "maxItems": 120,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["fromRef", "toRef"],
+            "properties": {
+              "fromRef": {
+                "type": "string",
+                "pattern": "^g_[a-z0-9_]{1,56}$"
+              },
+              "toRef": {
+                "type": "string",
+                "pattern": "^g_[a-z0-9_]{1,56}$"
+              }
+            }
+          }
+        }
+      }
+    },
+    "plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "stage", "plans"],
+      "properties": {
+        "schemaVersion": {
+          "type": "integer",
+          "const": 1
+        },
+        "stage": {
+          "type": "string",
+          "const": "chapter_planner"
+        },
+        "plans": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 12,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["nodeId", "learningGoals", "chapters"],
+            "properties": {
+              "nodeId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "learningGoals": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 12,
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                }
+              },
+              "chapters": {
+                "type": "array",
+                "minItems": 4,
+                "maxItems": 18,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["ref", "title", "teachingGoals", "requiredCoverage"],
+                  "properties": {
+                    "ref": {
+                      "type": "string",
+                      "pattern": "^[a-z0-9][a-z0-9_-]{0,40}$"
+                    },
+                    "title": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 120
+                    },
+                    "teachingGoals": {
+                      "type": "array",
+                      "minItems": 1,
+                      "maxItems": 10,
+                      "items": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 300
+                      }
+                    },
+                    "requiredCoverage": {
+                      "type": "array",
+                      "minItems": 1,
+                      "maxItems": 16,
+                      "items": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 300
+                      }
+                    },
+                    "material": {
+                      "type": "string",
+                      "maxLength": 200
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

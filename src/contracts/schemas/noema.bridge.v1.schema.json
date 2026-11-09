@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noema-lite.netlify.app/schemas/noema.bridge.v1.schema.json",
+  "title": "noema-lite 文A language bridge (noema-bridge, noema-bridge-core, noema-bridge-locale v1)",
+  "description": "Language help for a learner who reads a pack in a language that is not their own (docs/BRIDGE.md). The built bridge (the root: what the app reads, noema_save_bridge, bridge.<native>.js) and its two source files: bridges/core.json ($defs/core) and bridges/<native>.json ($defs/locale). That every anchor and key word names an entry, and that a bridge belongs to its pack, is checked by checkBridge (src/features/content/domain/bridge.ts; tools/bridge.py through build/noema-tools.cjs).",
+  "$ref": "#/$defs/built",
+  "$defs": {
+    "plain": {
+      "description": "Plain text: never markup or script.",
+      "type": "string",
+      "not": { "pattern": "<\\s*[A-Za-z!/]|[Jj][Aa][Vv][Aa][Ss][Cc][Rr][Ii][Pp][Tt]:|[Dd][Aa][Tt][Aa]:[Tt][Ee][Xx][Tt]/[Hh][Tt][Mm][Ll]" },
+      "x-message": "plain text only (no HTML or links)"
+    },
+    "word": { "type": "string", "pattern": "\\S", "maxLength": 80 },
+    "band": { "enum": [1, 2, 3], "x-message": "must be 1 (everyday), 2 (academic) or 3 (rare or technical)" },
+    "anchor": {
+      "type": "object",
+      "required": ["at", "quote", "k", "sense"],
+      "properties": {
+        "at": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*/[A-Za-z0-9_-]+$",
+          "x-message": "at must be \"<section id>/<block id>\" (the search address, docs/SEARCH.md)"
+        },
+        "quote": {
+          "allOf": [{ "$ref": "noema.common.v1.schema.json#/$defs/text" }],
+          "x-message": "quote (the words exactly as the text writes them) is required"
+        },
+        "prefix": { "type": "string" },
+        "suffix": { "type": "string" },
+        "k": { "type": "string" },
+        "sense": { "type": ["string", "integer"] },
+        "auto": { "type": "boolean" }
+      }
+    },
+    "built": {
+      "type": "object",
+      "required": ["format", "v", "pack", "source", "native", "status", "entries"],
+      "properties": {
+        "format": { "const": "noema-bridge", "x-message": "must be \"noema-bridge\"" },
+        "v": { "const": 1, "x-message": "must be 1" },
+        "pack": {
+          "allOf": [{ "$ref": "noema.common.v1.schema.json#/$defs/subjectId" }],
+          "x-message": "the subject id the bridge belongs to (pack.subject.id)"
+        },
+        "source": {
+          "allOf": [{ "$ref": "noema.common.v1.schema.json#/$defs/language" }],
+          "x-message": "the language of the pack's content (BCP 47, e.g. \"el\")"
+        },
+        "native": {
+          "allOf": [{ "$ref": "noema.common.v1.schema.json#/$defs/language" }],
+          "x-message": "the learner's language the words are translated into (BCP 47, e.g. \"ru\")"
+        },
+        "status": { "enum": ["draft", "reviewed"], "x-message": "must be \"draft\" or \"reviewed\"" },
+        "coverage": { "type": "number" },
+        "everyday": { "type": "number" },
+        "chapters": { "type": "array", "items": { "type": "string" } },
+        "of": { "type": "integer", "minimum": 0 },
+        "updated": { "type": "string" },
+        "entries": {
+          "type": "array",
+          "maxItems": 20000,
+          "items": {
+            "type": "object",
+            "required": ["k", "senses"],
+            "properties": {
+              "k": {
+                "allOf": [{ "$ref": "#/$defs/word" }],
+                "x-message": "k (the word or phrase as the pack writes it) is required, at most 80 characters"
+              },
+              "forms": {
+                "type": "array",
+                "maxItems": 40,
+                "items": { "$ref": "#/$defs/word" },
+                "x-message": "forms must be a list of at most 40 texts"
+              },
+              "pos": { "type": "string" },
+              "band": { "$ref": "#/$defs/band" },
+              "key": { "type": "boolean" },
+              "senses": {
+                "type": "array",
+                "minItems": 1,
+                "x-message": "at least one sense (the meaning in this pack)",
+                "items": {
+                  "type": "object",
+                  "required": ["id", "t"],
+                  "properties": {
+                    "id": { "type": ["string", "integer"] },
+                    "t": {
+                      "allOf": [{ "$ref": "noema.common.v1.schema.json#/$defs/text" }, { "$ref": "#/$defs/plain" }],
+                      "maxLength": 200,
+                      "x-message": "t (the translation) is required, plain text, at most 200 characters"
+                    },
+                    "gloss": { "allOf": [{ "$ref": "#/$defs/plain" }], "maxLength": 300 },
+                    "note": { "allOf": [{ "$ref": "#/$defs/plain" }], "maxLength": 400 },
+                    "st": { "enum": ["draft", "reviewed", "stale"], "x-message": "st must be draft, reviewed or stale" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "sections": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "terms": { "type": "array", "maxItems": 30, "items": { "type": "string" }, "x-message": "a list of at most 30 entry keys" },
+              "preview": { "allOf": [{ "$ref": "#/$defs/plain" }], "maxLength": 1500 },
+              "auto": { "type": "boolean" }
+            }
+          }
+        },
+        "anchors": { "type": "array", "items": { "$ref": "#/$defs/anchor" } }
+      }
+    },
+    "core": {
+      "description": "bridges/core.json (or bridges/from-<loc>/core.json): the pack's content words, once for every native language.",
+      "type": "object",
+      "required": ["format", "v", "pack", "source", "entries"],
+      "properties": {
+        "format": { "const": "noema-bridge-core" },
+        "v": { "const": 1 },
+        "pack": { "$ref": "noema.common.v1.schema.json#/$defs/subjectId" },
+        "source": { "$ref": "noema.common.v1.schema.json#/$defs/language" },
+        "entries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["k", "senses"],
+            "properties": {
+              "k": { "$ref": "#/$defs/word" },
+              "forms": { "type": "array", "items": { "$ref": "#/$defs/word" } },
+              "pos": { "type": "string" },
+              "band": { "$ref": "#/$defs/band" },
+              "key": { "type": "boolean" },
+              "senses": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": ["id"],
+                  "properties": {
+                    "id": { "type": ["string", "integer"] },
+                    "gloss": { "type": "string" },
+                    "pos": { "type": "string" },
+                    "forms": { "type": "array", "items": { "type": "string" } },
+                    "cues": { "type": "array", "items": { "type": "string" } }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "keep": { "type": "array", "items": { "type": "string" } },
+        "sections": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": { "terms": { "type": "array", "items": { "type": "string" } }, "auto": { "type": "boolean" } }
+          }
+        },
+        "anchors": { "type": "array", "items": { "$ref": "#/$defs/anchor" } }
+      }
+    },
+    "locale": {
+      "description": "bridges/<native>.json: the translations of the core's senses into one native language.",
+      "type": "object",
+      "required": ["format", "v", "native", "t"],
+      "properties": {
+        "format": { "const": "noema-bridge-locale" },
+        "v": { "const": 1 },
+        "native": { "$ref": "noema.common.v1.schema.json#/$defs/language" },
+        "status": { "enum": ["draft", "reviewed"] },
+        "updated": { "type": "string" },
+        "t": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["t"],
+            "properties": {
+              "t": { "type": "string" },
+              "src": { "type": "string" },
+              "note": { "type": "string" },
+              "st": { "enum": ["draft", "reviewed", "stale"] }
+            }
+          }
+        },
+        "sections": { "type": "object", "additionalProperties": { "type": "string" } }
+      }
+    }
+  }
+}

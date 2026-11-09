@@ -1,4 +1,4 @@
-# `clinic@1` — clinical reasoning: differentials, thresholds, decisions, virtual patients, triage (`engine/src/48_lib_clinic.js`, `NoemaLibClinic`)
+# `clinic@1` — clinical reasoning: differentials, thresholds, decisions, virtual patients, triage (`src/engines/clinic/clinic.ts`, `NoemaLibClinic`)
 
 The deepest engine of the library (`docs/INTERACTIVE_LIBRARY.md`): it models **how a clinician reasons**, not one formula. A spec can
 hold any of ten sections, and they work together: a differential diagnosis updated finding by finding with Bayes' theorem (with the
@@ -7,9 +7,8 @@ analysis, Markov cohorts, cost-effectiveness, triage, script concordance and for
 case in which the learner's actions (history, examination, tests with a turnaround, treatments with effects) drive a small model of the
 circulation, oxygenation and lactate minute by minute, the tests reveal the differential's findings when their results arrive, and the
 **path of reasoning is graded** (essential actions, deadlines, harm, order, efficiency, calibration, information efficiency of the
-tests chosen, premature closure). The Python twin is `tools/lib_clinic.py` (`ID`, `check_spec`, `exprs`, `keys`, `offered`): it checks
-and does not compute, with the same problems (code, path, message, level) as the JS `checkSpec`. The tests are `node tests/lib_clinic.js`
-(64 assertions) and `node tests/enginelib.js` (JS ↔ Python parity on `tests/fixtures/enginelib/clinic.json`, 23 specs). The
+tests chosen, premature closure). The tests are `node tests/lib_clinic.js`
+(64 assertions) and `node tests/enginelib.js` (the golden outputs of the former Python twin on `tests/fixtures/enginelib/clinic.json`, 23 specs). The
 reference activity is `tools/activities_examples/sepsis-case`. The research behind this chapter is in the project's
 `engine-library/research/med.md` (part B).
 
@@ -54,7 +53,7 @@ core, med@1 and clinic@1 into the Worker). Without med@1, NEWS2 and the virtual 
   recorded every minute: ≤ 1441 points per series), ≤ 2000 items per scene; ≤ 200 forecasts. A differential runs in < 1 ms, a 6-hour
   virtual patient in ≈ 25 ms, a 24-hour one in ≈ 80 ms.
 
-### 1.1 Checker codes (`checkSpec`, the same in `tools/lib_clinic.py`)
+### 1.1 Checker codes (`checkSpec`)
 
 | code | level | when |
 |---|---|---|

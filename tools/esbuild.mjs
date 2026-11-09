@@ -1,0 +1,330 @@
+/* noema-lite — the TypeScript build (npm run build): every bundle of src/ with esbuild, into build/ (git-ignored).
+
+   THE ENTRY LIST lives here and only here (ENTRIES below, plus every src/**\/*.worker.ts found on disk). An entry whose source
+   file does not exist yet is skipped with a notice, never an error: helpers add their composition roots over time.
+
+   Output (build/):
+     app.js        src/composition/app.ts — the page's core. A classic IIFE script: it runs synchronously, in order, before the
+                   older engine/*.js scripts, and sets window.NoemaCore (the phase bridge, deleted in phase 3).
+     pwa.js        src/composition/pwa.ts — registers the service worker and shows "update ready" (the site only).
+     worker.js     src/composition/worker.ts and every <name>.worker.ts — one self-contained IIFE per Worker.
+     sw.js         src/composition/sw.ts — the ONE service worker (app shell + Python files). tools/build.py writes the site's
+                   /sw.js from it, with the precache list and the build hash in front.
+     harness.js    src/composition/harness.ts — window.NoemaCore = { contracts, engines } for a page that is not the app: the
+                   skill's activity host (activity_host/noema-core.js) and the test pages that host one activity. Not in the site.
+     ui.js         src/composition/ui.ts — the app's UI root (src/composition/ui-root.ts: Lit, the kit, the frame and the shell's
+                   screens, window.Noema / NoemaThemes / NoemaShell; the areas' screens of src/features/<name>/ui with their data
+                   ports, e.g. src/composition/roadmaps-ui.ts), right after app.js and engine/i18n.js.
+     engines.js, contracts.js, author.js  the lazy pieces (kind "lazy", below): every engine's code; the compiled data contracts
+                   and the content checks (src/composition/contracts.ts) — app.js keeps only the learning log's event contract
+                   (src/contracts/page.ts, pageContracts below); the activity author (src/composition/author.ts, #/author).
+     community.js  the lazy piece of the community screens (src/composition/community-piece.ts: search, vault, people, ⚑
+                   reports, #/engines, Explore and sharing, Lit on the kit), run the first time one of them opens.
+     ui-kit.js     src/composition/ui-kit.ts — the kit's demo on #/ui-kit (a local host only; kind "dev").
+     lang-activities.js  src/composition/lang-activities.ts — the screens of area 5 (languages and activities, src/ui/screens/
+                   languages-activities.ts), kind "lazy": the shell loads it on the first language page (NoemaShell.area5). It
+                   brings no Lit and no kit of its own: those are build/ui.js's (src/composition/ui-shared.ts, uiShared below).
+     roadmaps-node.cjs  src/composition/roadmaps-node.ts — the Roadmaps domain and the bridges' lookup, CommonJS, for the node
+                   suites that run the older Roadmap files in a vm (tests/roadmaps_core.js). Not in the site.
+     engines-node.cjs  src/engines/node.ts — the engine library with every engine in hand, CommonJS, for the node suites
+                   (tests/engines.cjs). Not in the site.
+     noema-tools.cjs  src/composition/noema-tools.ts — the Node bridge of the Python tools (tools/noema_core.py): the content
+                   checks (src/features/content) as a CLI. The skill zip carries it as scripts/noema-tools.cjs. Not in the site.
+     engine/tokens.css  the design tokens (src/ui/tokens, tools/tokens.mjs), written next to engine.css on every build.
+     (the Claude connector, src/composition/connector.ts, is bundled by tools/connector_bundle.mjs: it needs the data
+      tools/build.py collects, so build.py runs it → dist/functions/mcp.mjs)
+     *.map         source maps (linked); meta.json (esbuild's metafile); manifest.json (what was built, sizes, the build hash).
+
+   Why IIFE and no code splitting for the browser bundles: the app bundle must run synchronously before the older scripts
+   (a module script is deferred, so window.NoemaCore would not exist yet when build/ui.js and the older scripts start), and the one-file
+   offline bundle (dist/noema-lite.html, opened from file://) cannot fetch chunk files: module scripts and import() of
+   files do not load from file://. esbuild bundles every import() of a string literal INTO the IIFE (it resolves to a
+   promise of the module, as with splitting), so engine code may already use import() for lazy parts: the day the app
+   becomes an ES module (phase 3, no bridge, no file://), turning on `splitting` here makes those imports real chunks
+   without a change in src/. Workers are IIFEs for the same reason: the one-file bundle starts them from a Blob of their
+   text (<script type="text/plain" id="noema-worker:<name>">).
+   (The connector stays one ESM file: Netlify treats every top-level file of the functions directory as a function.)
+
+   The engine library (src/engines) is split: build/app.js holds the expression language, the catalogue and every engine's
+   manifest (NoemaCore.engines answers at once); the code of every engine, its Worker bundle (a string: noemaWorkers below)
+   and the schema kernel are build/engines.js (kind "lazy"), which the page runs the first time NoemaCore.engines.load() or
+   schema() needs it (src/engines/lazy.ts) — the start path never downloads or parses them (docs/ARCHITECTURE.md).
+
+   Minification is whitespace and names only, never syntax (minifySyntax): it would rewrite arithmetic (constant folding,
+   reordered operands), and the engines must compute every double exactly as their source writes it (the golden outputs of
+   tests/fixtures/parity hold them to their numbers bit for bit).
+
+   Every bundle has a size budget (KB, minified) and the build FAILS when one is exceeded: raise a budget only on purpose.
+
+   Usage: node tools/esbuild.mjs [--quiet]     (npm run build; npm run dev rebuilds with watch()) */
+import * as esbuild from 'esbuild';
+import { createHash } from 'node:crypto';
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { gzipSync } from 'node:zlib';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { writeTokensCss } from './tokens.mjs';
+
+export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+export const OUT = path.join(ROOT, 'build');
+const BROWSERS = ['chrome111', 'edge111', 'firefox114', 'safari16.4'];   // Baseline 2023: the oldest browsers the site supports
+
+/** kind: page = a script of the site and the one-file bundle; worker = a Worker of the app; sw = the service worker;
+    harness = a browser script for pages other than the app (not in the site); dev = a browser script the development pages load
+    on demand (not in the site or the one-file bundle); node = a bundle for Node (format esm | cjs)
+    @typedef {{ name: string, in: string, kind: 'page' | 'lazy' | 'worker' | 'sw' | 'harness' | 'dev' | 'node', out: string, budgetKB: number, format?: 'esm' | 'cjs', shared?: 'ui' }} Entry */
+/** lazy = a script of the site and the one-file bundle the page runs only when it needs it (the one-file bundle keeps it as
+    text: <script type="text/plain" id="noema-lazy:<name>">) */
+const APP_KB = 544;   // + 24 KB (area 4, phase 3): the community's eager half (the search's, the vault's and the reports' models, the host; the screens are build/community.js); + 8 KB the language courses service (NoemaCore.languages). The core of the start path (with build/ui.js): phase 2's core (the learning log, sync, read models, Roadmaps
+                      // with the agents' prompts that left engine/curriculum.js, community: about 360 KB) and the learning log's event contract
+                      // (about 140 KB), the engines' catalogue (about 28 KB) and the language courses before one is loaded (NoemaCore.languages, about 5 KB); the engines, the other contracts and the content checks are lazy pieces.
+                      // 520 since the runtimes' manifests (src/runtimes) and the study pages' bridge and route table (src/composition/study-ui.ts) joined it
+/** @type {Entry[]} the bundles (the one place that names them) */
+export const ENTRIES = [
+  { name: 'app', in: 'src/composition/app.ts', kind: 'page', out: 'app.js', budgetKB: APP_KB },   // the core, the expression language and the engines' catalogue
+  { name: 'engines', in: 'src/composition/engines.ts', kind: 'lazy', out: 'engines.js', budgetKB: 4096 },   // every engine's code and Worker text + the schema kernel: loaded when first needed (src/engines/lazy.ts)
+  { name: 'community', in: 'src/composition/community-piece.ts', kind: 'lazy', out: 'community.js', budgetKB: 640 },   // the community screens (Lit and the UI kit with them): loaded when one is first opened (src/composition/community-app.ts)
+  { name: 'runtimes', in: 'src/composition/runtimes.ts', kind: 'lazy', out: 'runtimes.js', budgetKB: 512 },   // the activity runtimes' code (src/runtimes): loaded when an activity first needs one (ACT.runtime)
+  { name: 'contracts', in: 'src/composition/contracts.ts', kind: 'lazy', out: 'contracts.js', budgetKB: 1792 },   // the compiled data contracts and the content checks: loaded after the first screen, before a subject opens (src/contracts/lazy.ts)
+  { name: 'study', in: 'src/composition/study-pages.ts', kind: 'lazy', out: 'study.js', budgetKB: 320 },   // the study area's pages (src/features/study/ui): loaded before the first subject opens (src/composition/study-ui.ts)
+  { name: 'author', in: 'src/composition/author.ts', kind: 'lazy', out: 'author.js', budgetKB: 160 },   // the activity author (#/author): its forms, checks and files; loaded on the first visit (src/composition/shell/author-page.ts)
+  { name: 'pwa', in: 'src/composition/pwa.ts', kind: 'page', out: 'pwa.js', budgetKB: 16 },
+  { name: 'worker', in: 'src/composition/worker.ts', kind: 'worker', out: 'worker.js', budgetKB: 600 },
+  { name: 'sw', in: 'src/composition/sw.ts', kind: 'sw', out: 'sw.js', budgetKB: 24 },
+  { name: 'harness', in: 'src/composition/harness.ts', kind: 'harness', out: 'harness.js', budgetKB: 5632 },   // the contracts + the engine library
+  { name: 'ui', in: 'src/composition/ui.ts', kind: 'page', out: 'ui.js', budgetKB: 408 },   // the app's UI root: Lit, the kit, the frame and the shell's screens (src/ui), the Roadmap screens (src/features/roadmaps/ui), the tutor's conversations window (src/features/tutor/ui/conversations.ts; 400 since it joined; 408: the public Roadmaps and the review of a shared Roadmap's changes, from engine/curmap.js)
+  { name: 'ui-kit', in: 'src/composition/ui-kit.ts', kind: 'dev', out: 'ui-kit.js', budgetKB: 256 },   // the kit's demo; loaded only on #/ui-kit
+  { name: 'lang-activities', in: 'src/composition/lang-activities.ts', kind: 'lazy', shared: 'ui', out: 'lang-activities.js', budgetKB: 256 },   // the screens of languages and activities on build/ui.js's Lit and kit; loaded on the first language page
+  { name: 'engines-node', in: 'src/engines/node.ts', kind: 'node', format: 'cjs', out: 'engines-node.cjs', budgetKB: 4096 },
+  { name: 'noema-tools', in: 'src/composition/noema-tools.ts', kind: 'node', format: 'cjs', out: 'noema-tools.cjs', budgetKB: 5632 },   // the engine library + the content checks + the runtimes' checks (src/runtimes) + engine/src/38
+  { name: 'runtimes-node', in: 'src/runtimes/node.ts', kind: 'node', format: 'cjs', out: 'runtimes-node.cjs', budgetKB: 512 },   // the runtimes' checks and code for the node suites
+  { name: 'roadmaps-node', in: 'src/composition/roadmaps-node.ts', kind: 'node', format: 'cjs', out: 'roadmaps-node.cjs', budgetKB: 256 },
+];
+const WORKER_BUDGET_KB = 600;   // each src/**/<name>.worker.ts
+
+/** every <name>.worker.ts under src/ (a Worker entry of its own: build/<name>.worker.js) */
+function workerEntries() {
+  const out = [], walk = dir => {
+    for (const d of readdirSync(dir, { withFileTypes: true })) {
+      const p = path.join(dir, d.name);
+      if (d.isDirectory()) walk(p);
+      else if (d.name.endsWith('.worker.ts')) out.push(p);
+    }
+  };
+  if (existsSync(path.join(ROOT, 'src'))) walk(path.join(ROOT, 'src'));
+  return out.sort().map(p => {
+    const name = path.basename(p, '.ts');
+    return /** @type {Entry} */ ({ name, in: path.relative(ROOT, p).split(path.sep).join('/'), kind: 'worker', out: name + '.js', budgetKB: WORKER_BUDGET_KB });
+  });
+}
+
+/** the entries whose source exists now; the others are listed as skipped */
+export function entries() {
+  const all = [...ENTRIES, ...workerEntries()];
+  const names = new Set();
+  for (const e of all) { if (names.has(e.name)) throw new Error(`two bundles are named ${e.name}`); names.add(e.name); }
+  return { present: all.filter(e => existsSync(path.join(ROOT, e.in))), skipped: all.filter(e => !existsSync(path.join(ROOT, e.in))) };
+}
+
+/** whitespace and names only, never syntax (the engines' arithmetic stays exactly as written: see the header) */
+const MINIFY = { minifyWhitespace: true, minifyIdentifiers: true, minifySyntax: false };
+const ENGINES = path.join(ROOT, 'src', 'engines');
+/** the modules of src/engines built once as their own piece and shared by the Worker bundles that import them (by module name: the path
+    under src/engines without its extension, the key of self.__noemaShared) */
+export const SHARED_PIECES = ['kernel/simexpr', 'kernel/simkit', 'kernel/core', 'kernel/space', 'logic/logic', 'med/med'];
+
+/** The esbuild plugin of the engines' Worker bundles (src/engines/plugins.ts, node.ts):
+    `import src from 'noema-worker:./prob/prob.ts#simEngine'` is the Worker bundle of that engine as TEXT — the module and what
+    it imports, as one IIFE script that sets self.noemaEngine to the named export. The kernels several engines share
+    (SHARED_PIECES) are built once each as a piece that sets self.__noemaShared[<path>]: a Worker's text is the pieces it needs,
+    each after its own dependencies, then its own part, and a bundle holds each piece's text once. One instance per build()
+    keeps the pieces for every entry of that build (the app, the harness, the node bundle and the connector). */
+export function noemaWorkers() {
+  const keyOf = abs => { const r = path.relative(ENGINES, abs).split(path.sep).join('/').replace(/\.[jt]s$/, ''); return SHARED_PIECES.includes(r) ? r : null; };
+  const pieces = new Map();   // key → Promise<{ text, deps }>
+  /** an import of a shared module (other than the piece being built) reads it from self.__noemaShared */
+  const shared = (own, used) => ({
+    name: 'noema-shared',
+    setup(b) {
+      b.onResolve({ filter: /^\.{1,2}\// }, a => {
+        const k = keyOf(path.resolve(a.resolveDir, a.path));
+        if (!k || k === own) return undefined;
+        used.add(k);
+        return { path: k, namespace: 'noema-shared' };
+      });
+      b.onLoad({ filter: /.*/, namespace: 'noema-shared' }, a => ({ contents: `export default self.__noemaShared[${JSON.stringify(a.path)}];`, loader: 'js' }));
+    },
+  });
+  async function text(contents, own) {
+    const used = new Set();
+    const r = await esbuild.build({ ...MINIFY, bundle: true, format: 'iife', write: false, platform: 'browser', target: BROWSERS, legalComments: 'none', logLevel: 'silent',
+      stdin: { contents, resolveDir: ENGINES, sourcefile: own ? 'shared-piece:' + own : 'worker-part', loader: 'js' }, plugins: [shared(own, used)] });
+    return { text: r.outputFiles[0].text, deps: [...used] };
+  }
+  const piece = k => {
+    if (!pieces.has(k)) pieces.set(k, text(`import M from ${JSON.stringify('./' + k)};\n(self.__noemaShared = self.__noemaShared || {})[${JSON.stringify(k)}] = M;\n`, k));
+    return pieces.get(k);
+  };
+  async function order(deps, out = [], seen = new Set()) {
+    for (const k of deps) {
+      if (seen.has(k)) continue;
+      seen.add(k);
+      await order((await piece(k)).deps, out, seen);
+      out.push(k);
+    }
+    return out;
+  }
+  return {
+    name: 'noema-workers',
+    setup(b) {
+      b.onResolve({ filter: /^noema-worker:/ }, a => {
+        const [mod, exp] = a.path.slice('noema-worker:'.length).split('#');
+        if (!mod || !exp || !/^[A-Za-z_$][\w$]*$/.test(exp)) return { errors: [{ text: `noema-worker: "${a.path}" must be <module>#<export>` }] };
+        return { path: path.resolve(a.resolveDir, mod) + '#' + exp, namespace: 'noema-worker' };
+      });
+      b.onLoad({ filter: /.*/, namespace: 'noema-worker' }, async a => {
+        const [abs, exp] = a.path.split('#'), rel = './' + path.relative(ENGINES, abs).split(path.sep).join('/');
+        const part = await text(`import M from ${JSON.stringify(rel)};\nself.noemaEngine = M[${JSON.stringify(exp)}];\n`, null);
+        const ks = await order(part.deps), names = ks.map((_, i) => 's' + i);
+        const contents = ks.map((k, i) => `import ${names[i]} from ${JSON.stringify('noema-shared-text:' + k)};\n`).join('')
+          + `export default ${[...names, JSON.stringify(part.text)].join(' + ')};\n`;
+        return { contents, loader: 'js', resolveDir: ENGINES, watchFiles: [abs] };
+      });
+      b.onResolve({ filter: /^noema-shared-text:/ }, a => ({ path: a.path.slice('noema-shared-text:'.length), namespace: 'noema-shared-text' }));
+      b.onLoad({ filter: /.*/, namespace: 'noema-shared-text' }, async a => ({ contents: `export default ${JSON.stringify((await piece(a.path)).text)};\n`, loader: 'js' }));
+    },
+  };
+}
+
+/** The esbuild plugin of `legacy:<path>` imports: the TEXT of that file of the repository (one of the app's engine/*.js
+    scripts, run by src/connector/engine/legacy.ts in a scope of its own: one copy, the app's own file). The connector
+    (tools/connector_bundle.mjs) and the Node tools (src/composition/noema-tools.ts) use it. */
+export function legacyText(root = ROOT) {
+  return {
+    name: 'noema-legacy',
+    setup(build) {
+      build.onResolve({ filter: /^legacy:/ }, a => {
+        const abs = path.resolve(root, a.path.slice('legacy:'.length));
+        if (!abs.startsWith(root + path.sep)) return { errors: [{ text: `legacy import outside the repository: ${a.path}` }] };
+        return { path: abs, namespace: 'legacy' };
+      });
+      build.onLoad({ filter: /.*/, namespace: 'legacy' }, a => ({ contents: 'export default ' + JSON.stringify(readFileSync(a.path, 'utf8')) + ';\n', loader: 'js', watchFiles: [a.path] }));
+    },
+  };
+}
+
+/** The esbuild plugin of the page's scripts (kind "page"): src/contracts/index.ts is bundled as src/contracts/page.ts, which
+    checks the learning log's events with its own few validators (src/contracts/validate-start.ts) and every other contract
+    with those of the lazy piece build/contracts.js once NoemaCore.contracts.ready() has handed it over. The domain modules
+    that check a shape import ./index.ts everywhere; only the page leaves its 1.4 MB of validators out of the start path. */
+export function pageContracts(root = ROOT) {
+  const index = path.join(root, 'src', 'contracts', 'index.ts'), page = path.join(root, 'src', 'contracts', 'page.ts');
+  return {
+    name: 'noema-page-contracts',
+    setup(b) {
+      b.onResolve({ filter: /(^|\/)index\.ts$/ }, a => (path.resolve(a.resolveDir, a.path) === index && a.importer !== page ? { path: page } : undefined));
+    },
+  };
+}
+
+/** The esbuild plugin of a lazy piece of screens (an entry with `shared: 'ui'`, e.g. build/lang-activities.js): an import of a
+    module that build/ui.js shares (src/composition/ui-shared.ts, UI_SHARED) reads it from globalThis.__noemaUiShared, so
+    the page keeps one Lit, one kit and one class per element; an import of any other module of Lit or of
+    src/ui/{core,kit,frame,router} fails the build (it would be a second copy: add it to ui-shared.ts). */
+export function uiShared(root = ROOT) {
+  const table = readFileSync(path.join(root, 'src', 'composition', 'ui-shared.ts'), 'utf8');
+  const keys = new Set([...table.matchAll(/^\s+'?([\w@./-]+)'?: \w+,$/gm)].map(m => m[1]));
+  const guarded = abs => {
+    const r = path.relative(root, abs).split(path.sep).join('/');
+    return /^node_modules\/(lit|lit-html|lit-element|@lit)\//.test(r) || /^src\/ui\/(core|kit|frame|router)\//.test(r);
+  };
+  const names = new Map();   // key → Promise<string[]> (the module's exports)
+  const exportsOf = (key, abs) => {
+    if (!names.has(key)) names.set(key, esbuild.build({ stdin: { contents: `export * from ${JSON.stringify(abs)};`, resolveDir: root, loader: 'ts' }, bundle: true,
+      write: false, format: 'esm', metafile: true, logLevel: 'silent', tsconfig: path.join(root, 'tsconfig.json'), platform: 'browser' })
+      .then(r => Object.values(r.metafile.outputs)[0].exports));
+    return names.get(key);
+  };
+  return {
+    name: 'noema-ui-shared',
+    setup(b) {
+      b.onResolve({ filter: /.*/ }, async a => {
+        if (a.pluginData?.uiShared || a.kind === 'entry-point') return undefined;
+        const r = await b.resolve(a.path, { resolveDir: a.resolveDir, kind: a.kind, importer: a.importer, pluginData: { uiShared: true } });
+        if (r.errors.length) return { errors: r.errors };
+        const rel = path.relative(root, r.path).split(path.sep).join('/');
+        const key = keys.has(a.path) ? a.path : keys.has(rel) ? rel : null;
+        if (key) return { path: key, namespace: 'noema-ui-shared', pluginData: { abs: r.path } };
+        if (guarded(r.path)) return { errors: [{ text: `${a.path} (${rel}) is not shared by build/ui.js: add it to src/composition/ui-shared.ts` }] };
+        return r;
+      });
+      b.onLoad({ filter: /.*/, namespace: 'noema-ui-shared' }, async a => {
+        const ex = await exportsOf(a.path, a.pluginData.abs);
+        const m = `globalThis.__noemaUiShared[${JSON.stringify(a.path)}]`;
+        return { contents: `const m = ${m};\nif (!m) throw new Error(${JSON.stringify('build/ui.js shares no ' + a.path)});\n` + (ex.length ? `export const { ${ex.join(', ')} } = m;\n` : ''), loader: 'js' };
+      });
+    },
+  };
+}
+
+/** esbuild options of one entry */
+function options(e, workers) {
+  const common = {
+    entryPoints: [path.join(ROOT, e.in)], outfile: path.join(OUT, e.out), bundle: true, ...MINIFY, sourcemap: 'linked',
+    metafile: true, legalComments: 'eof', charset: 'utf8', logLevel: 'silent', tsconfig: path.join(ROOT, 'tsconfig.json'), plugins: [workers, legacyText()],
+  };
+  if (e.kind === 'node') {
+    const format = e.format ?? 'esm';
+    return { ...common, platform: 'node', format, target: 'node22', packages: 'bundle',
+      ...(format === 'esm' ? { banner: { js: "import { createRequire as __noemaRequire } from 'node:module'; const require = __noemaRequire(import.meta.url);" } } : {}) };
+  }
+  return { ...common, platform: 'browser', format: 'iife', target: BROWSERS,
+    ...(e.kind === 'page' ? { plugins: [...common.plugins, pageContracts()] } : e.shared === 'ui' ? { plugins: [...common.plugins, uiShared()] } : {}) };
+}
+
+const kb = n => Math.round(n / 102.4) / 10;
+
+/** Builds every present entry. → the manifest { hash, entries: { name: { file, map, bytes, gzip, budgetKB, kind } }, skipped } */
+export async function build({ quiet = false } = {}) {
+  const { present, skipped } = entries();
+  rmSync(OUT, { recursive: true, force: true }); mkdirSync(OUT, { recursive: true });
+  const meta = { inputs: {}, outputs: {} }, manifest = { format: 'noema.build-manifest/v1', hash: '', entries: {}, skipped: skipped.map(e => e.in) };
+  const over = [], h = createHash('sha256');
+  const workers = noemaWorkers();
+  const tokens = writeTokensCss();   // engine/tokens.css (the page links it beside engine.css)
+  const results = await Promise.all(present.map(e => esbuild.build(options(e, workers)).then(r => ({ e, r }), err => ({ e, err }))));
+  await tokens;
+  const failed = results.filter(x => x.err);
+  if (failed.length) throw new Error(failed.map(x => `${x.e.in}:\n${(x.err.errors || []).map(m => '  ' + (m.location ? `${m.location.file}:${m.location.line}: ` : '') + m.text).join('\n') || x.err.message}`).join('\n'));
+  for (const { e, r } of results) {
+    Object.assign(meta.inputs, r.metafile.inputs); Object.assign(meta.outputs, r.metafile.outputs);
+    const body = readFileSync(path.join(OUT, e.out)), gz = gzipSync(body).length;
+    h.update(e.name).update(body);
+    manifest.entries[e.name] = { file: e.out, map: e.out + '.map', kind: e.kind, source: e.in, bytes: body.length, gzip: gz, budgetKB: e.budgetKB };
+    if (body.length > e.budgetKB * 1024) over.push(`${e.out}: ${kb(body.length)} KB > budget ${e.budgetKB} KB (tools/esbuild.mjs ENTRIES)`);
+    if (r.warnings.length && !quiet) for (const w of r.warnings) console.warn(`  ⚠ ${e.in}: ${w.text}`);
+  }
+  manifest.hash = h.digest('hex').slice(0, 16);
+  writeFileSync(path.join(OUT, 'meta.json'), JSON.stringify(meta));
+  writeFileSync(path.join(OUT, 'manifest.json'), JSON.stringify(manifest, null, 1) + '\n');
+  if (!quiet) {
+    for (const [n, x] of Object.entries(manifest.entries)) console.log(`esbuild: ${x.file.padEnd(16)} ${String(kb(x.bytes)).padStart(7)} KB (gzip ${kb(x.gzip)} KB, budget ${x.budgetKB} KB)  ← ${x.source}${n === 'app' ? ' · window.NoemaCore' : ''}`);
+    for (const s of skipped) console.log(`esbuild: (not yet in the tree, skipped) ${s.in}`);
+  }
+  if (over.length) throw new Error('size budget exceeded:\n  ' + over.join('\n  '));
+  return manifest;
+}
+
+/** watch mode for npm run dev: rebuilds on every change, calls onBuild(manifest | null, error | null) */
+export async function watch(onBuild) {
+  let timer = null;
+  const run = () => build({ quiet: true }).then(m => onBuild(m, null), err => onBuild(null, err));
+  const { watch: fsWatch } = await import('node:fs');
+  fsWatch(path.join(ROOT, 'src'), { recursive: true }, () => { clearTimeout(timer); timer = setTimeout(run, 120); });
+  await run();
+}
+
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  const quiet = process.argv.includes('--quiet');
+  build({ quiet }).catch(err => { console.error('✗ esbuild: ' + (err && err.message ? err.message : String(err))); process.exit(1); });
+}

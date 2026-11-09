@@ -8,8 +8,10 @@
       home and #/grammar, the feasibility lights, a practice block that records practiceFunction, the session's grammar step, 🆕 words.
    Usage: node tests/lang_grammar.js [<prepared-repo-dir>]   (built with tools/build.py; no network) */
 const fs = require('fs'), path = require('path'), os = require('os'), { execFileSync } = require('child_process');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const N = require(path.join(__dirname, '..', 'engine', 'langcore.js'));
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
+require('./built').ensureBuilt(ROOT);   // the generated files it reads (never committed): built first, unless tests/run_e2e.sh did
 const SHOTS = process.env.SHOTS || '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
 const wait = ms => new Promise(r => setTimeout(r, ms));
@@ -230,9 +232,9 @@ ok(!ws.errors.length && ws.warnings.some(w => /generator 5 \(agree\): makes no e
   console.log('— in the browser (pilot course)');
   const browser = await chromium.launch();
   const ctx = await browser.newContext({ viewport: { width: 1200, height: 900 } });
-  await ctx.route(/^https?:\/\//, r => /fonts\.(googleapis|gstatic)\.com/.test(r.request().url()) ? r.fulfill({ status: 200, body: '' }) : r.abort());   // no network
+  await ctx.route(/^https?:\/\/(?!127\.0\.0\.1[:/])/, r => /fonts\.(googleapis|gstatic)\.com/.test(r.request().url()) ? r.fulfill({ status: 200, body: '' }) : r.abort());   // no network
   const page = await ctx.newPage(); const E = []; page.on('pageerror', e => E.push(e.message));
-  const url = 'file://' + ROOT + '/index.html', SUBJ = 'lang:polyglot-semitic-zh-de';
+  const url = await appUrl(ROOT), SUBJ = 'lang:polyglot-semitic-zh-de';
   await page.goto(url); await page.evaluate(() => localStorage.clear());
   await page.goto(url + '?account=anr&subject=' + SUBJ + '#/'); await page.waitForSelector('.lx-hero');
   { const r = await page.evaluate(() => { const { C } = NoemaLangUI.UI; return [...document.querySelectorAll('.lx-laneh .lx-lanerow')].map(e => ({ c: e.dataset.lang, fn: e.dataset.fn })).every(x => NoemaLang.lessonFunctions(C, x.c, C.order.find(n => C.nodes[n].kind === 'lesson' && C.lang[x.c].applies[n])).includes(x.fn)); });

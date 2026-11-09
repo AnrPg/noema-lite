@@ -116,30 +116,6 @@
   "@engine.gemini.empty": {
     "description": "Error when Gemini answered with no text."
   },
-  "engine.mode.socratic": "Socratic",
-  "@engine.mode.socratic": {
-    "description": "Tutor mode chip (after the tutor’s emoji): a Socratic dialogue. One word if possible."
-  },
-  "engine.mode.explain": "Explain",
-  "@engine.mode.explain": {
-    "description": "Tutor mode chip (after 💡): the tutor explains in depth. One word."
-  },
-  "engine.mode.hint": "Hint",
-  "@engine.mode.hint": {
-    "description": "Tutor mode chip (after 🪜): hints on an exercise, never the answer. One word."
-  },
-  "engine.mode.quiz": "Quiz me",
-  "@engine.mode.quiz": {
-    "description": "Tutor mode chip (after ⚡): rapid-fire quiz questions. Short imperative."
-  },
-  "engine.mode.interview": "Interview",
-  "@engine.mode.interview": {
-    "description": "Tutor mode chip (after 🎤): a mock interview / oral exam. One word."
-  },
-  "engine.mode.debug": "Case sim",
-  "@engine.mode.debug": {
-    "description": "Tutor mode chip (after 🔧): an interactive case / debugging simulation. Very short."
-  },
   "engine.tutor.explainThis": "Explain this (AI)",
   "@engine.tutor.explainThis": {
     "description": "Tooltip of the 💡 button on a part of a lesson: the AI tutor explains that part."
@@ -364,18 +340,6 @@
   "@engine.aimsg.wrapUp": {
     "description": "The learner’s own first message to the AI tutor, sent when they press a button; shown as THEIR chat bubble (first person, addressed to the tutor). Button “🎓 Wrap up” of the tutor."
   },
-  "engine.tutor.history": "Conversation history",
-  "@engine.tutor.history": {
-    "description": "Tutor drawer menu item / tooltip: shows earlier conversations."
-  },
-  "engine.tutor.export": "Export this conversation (.md)",
-  "@engine.tutor.export": {
-    "description": "Tutor drawer menu item: download this conversation as a Markdown file."
-  },
-  "engine.tutor.newConvo": "New conversation",
-  "@engine.tutor.newConvo": {
-    "description": "Tutor drawer menu item: start a new, empty conversation."
-  },
   "engine.tutor.more": "More",
   "@engine.tutor.more": {
     "description": "Label of the ⋮ (more actions) menu button in the tutor drawer."
@@ -394,92 +358,6 @@
       }
     }
   },
-  "engine.tutor.poweredBy": "Your Gemini-powered tutor · {model}",
-  "@engine.tutor.poweredBy": {
-    "description": "Subtitle under the tutor’s name (classic layout). model = the Gemini model’s id or engine.tutor.autoModel.",
-    "placeholders": {
-      "model": {
-        "type": "String",
-        "example": "gemini-2.5-flash"
-      }
-    }
-  },
-  "engine.tutor.autoModel": "auto model",
-  "@engine.tutor.autoModel": {
-    "description": "Shown instead of a model id when the app picks the Gemini model itself. Lowercase."
-  },
-  "engine.tutor.close": "Close",
-  "@engine.tutor.close": {
-    "description": "Tooltip of the ✕ button that closes the tutor drawer."
-  },
-  "engine.tutor.useWhole": "use whole course",
-  "@engine.tutor.useWhole": {
-    "description": "Small link next to the tutor’s context chip: talk about the whole course instead. Lowercase."
-  },
-  "engine.tutor.placeholder": "Your answer or question…",
-  "@engine.tutor.placeholder": {
-    "description": "Placeholder of the tutor chat’s text box."
-  },
-  "engine.tutor.greet": "Hi {name}! I'm **{tutor}** {avatar}. Mode: **{mode}**. Pick a starter or just type.",
-  "@engine.tutor.greet": {
-    "description": "First message of the tutor (classic layout), Markdown: keep the ** marks. name = the learner, tutor = the tutor’s name, avatar = an emoji, mode = the mode’s label (e.g. “💡 Explain”).",
-    "placeholders": {
-      "name": {
-        "type": "String",
-        "example": "Maria"
-      },
-      "tutor": {
-        "type": "String",
-        "example": "Brick"
-      },
-      "avatar": {
-        "type": "String",
-        "example": "🦉"
-      },
-      "mode": {
-        "type": "String",
-        "example": "🦉 Socratic"
-      }
-    }
-  },
-  "engine.tutor.greetAnon": "Hi there! I'm **{tutor}** {avatar}. Mode: **{mode}**. Pick a starter or just type.",
-  "@engine.tutor.greetAnon": {
-    "description": "First message of the tutor (classic layout) when the learner has no name, Markdown: keep the ** marks. tutor = the tutor’s name, avatar = an emoji, mode = the mode’s label.",
-    "placeholders": {
-      "tutor": {
-        "type": "String",
-        "example": "Brick"
-      },
-      "avatar": {
-        "type": "String",
-        "example": "🦉"
-      },
-      "mode": {
-        "type": "String",
-        "example": "🦉 Socratic"
-      }
-    }
-  },
-  "engine.tutor.starterSocratic": "Question me Socratically on this",
-  "@engine.tutor.starterSocratic": {
-    "description": "Starter button in an empty tutor chat (after the tutor’s emoji): starts a Socratic dialogue."
-  },
-  "engine.tutor.starterQuiz": "Rapid-fire quiz, traps only",
-  "@engine.tutor.starterQuiz": {
-    "description": "Starter button (after ⚡): a fast quiz with trick questions only."
-  },
-  "engine.tutor.starterDebug": "Simulate a broken scenario",
-  "@engine.tutor.starterDebug": {
-    "description": "Starter button (after 🔧): a simulated case where something is broken, to diagnose."
-  },
-  "engine.tutor.starterInterview": "Interview me",
-  "@engine.tutor.starterInterview": {
-    "description": "Starter button (after 🎤): a mock interview."
-  },
-  "engine.tutor.starterExplain": "Explain it differently",
-  "@engine.tutor.starterExplain": {
-    "description": "Starter button (after 💡): explain the topic differently from the notes."
-  },
   "engine.tutor.lessonsLearned": "{n, plural, one {# lesson learned} other {# lessons learned}}",
   "@engine.tutor.lessonsLearned": {
     "description": "Toast (after 📌) when the tutor saved lessons from the conversation. n = how many.",
@@ -497,6 +375,18 @@
   "engine.tutor.howKey": "How to get a key",
   "@engine.tutor.howKey": {
     "description": "Button under an AI error about the API key (after 🔑): opens the guide to get a free Gemini key."
+  },
+  "engine.tutor.thinking": "The tutor is writing…",
+  "@engine.tutor.thinking": {
+    "description": "Screen-reader label of the three animated dots shown while the tutor (the learner's character) writes its answer."
+  },
+  "engine.tutor.copyPrompt": "Copy the prompt",
+  "@engine.tutor.copyPrompt": {
+    "description": "Button under the tutor's \"no AI key\" error (after 📋): copies the whole request (instructions and the conversation) so the learner can paste it into any AI chat they use."
+  },
+  "engine.tutor.promptCopied": "Prompt copied — paste it into your AI chat.",
+  "@engine.tutor.promptCopied": {
+    "description": "Toast after the learner copied the tutor's prompt (after 📋). Short."
   },
   "engine.log.exCtx": "{ch} · {id}",
   "@engine.log.exCtx": {
@@ -1371,116 +1261,6 @@
         "example": "Delta Lake"
       }
     }
-  },
-  "engine.share.upToDate": "“{title}” is up to date",
-  "@engine.share.upToDate": {
-    "description": "Toast (after ✅) after taking an update of a shared subject or Roadmap.",
-    "placeholders": {
-      "title": {
-        "type": "String",
-        "example": "Delta Lake"
-      }
-    }
-  },
-  "engine.share.keepYours": "You keep your version of “{title}”",
-  "@engine.share.keepYours": {
-    "description": "Toast (after 👍) when the learner declined an update and keeps their own version.",
-    "placeholders": {
-      "title": {
-        "type": "String",
-        "example": "Delta Lake"
-      }
-    }
-  },
-  "engine.share.more": "(+{n, number} more in 🔔)",
-  "@engine.share.more": {
-    "description": "Small note in the share banner: n more notifications wait in the 🔔 bell.",
-    "placeholders": {
-      "n": {
-        "type": "int",
-        "example": "3"
-      }
-    }
-  },
-  "engine.share.keepMyCopy": "Keep my copy",
-  "@engine.share.keepMyCopy": {
-    "description": "Banner button: decline an update of a shared Roadmap and keep one’s own copy."
-  },
-  "engine.share.keepMine": "Keep mine",
-  "@engine.share.keepMine": {
-    "description": "Banner button: decline an update of a shared subject / step and keep one’s own version."
-  },
-  "engine.share.laterTip": "Decide later (it stays in 🔔)",
-  "@engine.share.laterTip": {
-    "description": "Tooltip of the “Later” button of the share banner."
-  },
-  "engine.share.later": "Later",
-  "@engine.share.later": {
-    "description": "Banner button: decide later about a share or update."
-  },
-  "engine.share.invite": "{name} invites you to the Roadmap “{title}”",
-  "@engine.share.invite": {
-    "description": "Share banner (after 👥): an invitation to a shared Roadmap. name = the sender (shown bold), title = the Roadmap (bold).",
-    "placeholders": {
-      "name": {
-        "type": "String",
-        "example": "Maria"
-      },
-      "title": {
-        "type": "String",
-        "example": "Data Engineer"
-      }
-    }
-  },
-  "engine.share.offer": "{name} wants to share “{title}” with you",
-  "@engine.share.offer": {
-    "description": "Share banner (after 📬): someone shares a subject. name = the sender (bold), title = the subject (bold).",
-    "placeholders": {
-      "name": {
-        "type": "String",
-        "example": "Maria"
-      },
-      "title": {
-        "type": "String",
-        "example": "Delta Lake"
-      }
-    }
-  },
-  "engine.share.someone": "Someone",
-  "@engine.share.someone": {
-    "description": "Shown instead of the sender’s name when it is unknown."
-  },
-  "engine.share.joined": "You joined “{title}” — your progress is your own, the prepared steps are shared",
-  "@engine.share.joined": {
-    "description": "Toast (after 👥) after joining a shared Roadmap.",
-    "placeholders": {
-      "title": {
-        "type": "String",
-        "example": "Delta Lake"
-      }
-    }
-  },
-  "engine.share.added": "“{title}” added to your subjects",
-  "@engine.share.added": {
-    "description": "Toast (after ✅) after accepting a shared subject.",
-    "placeholders": {
-      "title": {
-        "type": "String",
-        "example": "Delta Lake"
-      }
-    }
-  },
-  "engine.share.join": "Join",
-  "@engine.share.join": {
-    "description": "Banner button (after ✓): join a shared Roadmap."
-  },
-  "engine.share.accept": "Accept",
-  "@engine.share.accept": {
-    "description": "Banner button (after ✓): accept a shared subject."
-  },
-  "engine.share.reject": "Reject",
-  "@engine.share.reject": {
-    "description": "Banner button (after ✕): decline a share."
   },
   "engine.home.resetConfirm": "Reset your progress in {title}? (a restore point is kept)",
   "@engine.home.resetConfirm": {
@@ -2770,50 +2550,6 @@
   "@engine.cv.md.contents": {
     "description": "Heading of the table of contents of the export of all conversations."
   },
-  "engine.cv.title": "Conversations ({n, number})",
-  "@engine.cv.title": {
-    "description": "Heading (after 🕘) of the conversation history in the tutor drawer.",
-    "placeholders": {
-      "n": {
-        "type": "int",
-        "example": "3"
-      }
-    }
-  },
-  "engine.cv.tip": "Every conversation with the tutor — and every AI grading, code review and generated question — is saved automatically in the background: in this browser, in your backup folder (if set) and in the cloud (cloud accounts). ⬇️ exports a readable Markdown copy on demand.",
-  "@engine.cv.tip": {
-    "description": "Info tooltip of the conversation history."
-  },
-  "engine.cv.exportAll": "Export all",
-  "@engine.cv.exportAll": {
-    "description": "Button (after ⬇️): export all conversations as one Markdown file."
-  },
-  "engine.cv.chat": "Chat",
-  "@engine.cv.chat": {
-    "description": "Button (after ←): back from the history to the chat."
-  },
-  "engine.cv.alsoShow": "{n, plural, one {Also show # AI grading / review / question record} other {Also show # AI grading / review / question records}}",
-  "@engine.cv.alsoShow": {
-    "description": "Checkbox in the conversation history: also list the saved one-shot AI records.",
-    "placeholders": {
-      "n": {
-        "type": "int",
-        "example": "3"
-      }
-    }
-  },
-  "engine.cv.search": "Search conversations…",
-  "@engine.cv.search": {
-    "description": "Placeholder of the search box of the conversation history."
-  },
-  "engine.cv.empty": "No conversations yet. Every chat with your tutor is saved here automatically, ready to export as Markdown.",
-  "@engine.cv.empty": {
-    "description": "Empty conversation history."
-  },
-  "engine.cv.namingShort": "naming…",
-  "@engine.cv.namingShort": {
-    "description": "After a conversation’s temporary title while the AI writes its title. Lowercase."
-  },
   "engine.cv.fromApp": "from {app}",
   "@engine.cv.fromApp": {
     "description": "Conversation list: the conversation was made in another app. app = its name (e.g. Meletee).",
@@ -2823,32 +2559,6 @@
         "example": "Meletee"
       }
     }
-  },
-  "engine.cv.messages": "{n, plural, one {# messages} other {# messages}}",
-  "@engine.cv.messages": {
-    "description": "Conversation list: number of messages (after the date). (English uses “messages” also for 1.)",
-    "placeholders": {
-      "n": {
-        "type": "int",
-        "example": "3"
-      }
-    }
-  },
-  "engine.cv.rename": "Rename",
-  "@engine.cv.rename": {
-    "description": "Tooltip of the ✏️ button of a conversation."
-  },
-  "engine.cv.exportMd": "Export .md",
-  "@engine.cv.exportMd": {
-    "description": "Tooltip of the ⬇️ button of a conversation (Markdown file)."
-  },
-  "engine.cv.delete": "Delete",
-  "@engine.cv.delete": {
-    "description": "Tooltip of the 🗑️ button of a conversation."
-  },
-  "engine.cv.deleteAgain": "Click again to delete",
-  "@engine.cv.deleteAgain": {
-    "description": "Tooltip of the delete button after the first click (confirm by clicking again)."
   },
   "engine.thr.workingOn": "Working on:",
   "@engine.thr.workingOn": {
@@ -3371,98 +3081,6 @@
   "engine.acc.deleteProfile": "Delete this profile",
   "@engine.acc.deleteProfile": {
     "description": "Account menu › Profile: button (after 🗑️)."
-  },
-  "engine.acc.subjIntro": "Choose which subjects appear in your picker. Library subjects are shared; imported packs belong only to this profile.",
-  "@engine.acc.subjIntro": {
-    "description": "Account menu › Subjects: intro."
-  },
-  "engine.acc.subjRoadmap": "The way to study is a Roadmap: each of its steps is taught by a subject. The subjects on no step wait on your 📚 Shelf — study them from there, or put them on a Roadmap (🧭 Put on a Roadmap…).",
-  "@engine.acc.subjRoadmap": {
-    "description": "Account menu › Subjects: note (after 🧭). “Put on a Roadmap…” is the name of a menu item."
-  },
-  "engine.acc.originLibrary": "Library",
-  "@engine.acc.originLibrary": {
-    "description": "Account menu › Subjects: where a subject comes from (the shared library)."
-  },
-  "engine.acc.originPrivate": "Private (folder)",
-  "@engine.acc.originPrivate": {
-    "description": "Account menu › Subjects: origin (after 🔒): a private folder of the installation."
-  },
-  "engine.acc.originImported": "Imported",
-  "@engine.acc.originImported": {
-    "description": "Account menu › Subjects: origin (after 📥): imported by this profile."
-  },
-  "engine.acc.subjCounts": "{c} chapters · {e} exercises",
-  "@engine.acc.subjCounts": {
-    "description": "Account menu › Subjects: counts of a subject (c, e are numbers, or ? when unknown).",
-    "placeholders": {
-      "c": {
-        "type": "String",
-        "example": "12"
-      },
-      "e": {
-        "type": "String",
-        "example": "340"
-      }
-    }
-  },
-  "engine.acc.onSteps": "{n, plural, one {on # Roadmap step} other {on # Roadmap steps}}",
-  "@engine.acc.onSteps": {
-    "description": "Account menu › Subjects (after 🧭): on how many Roadmap steps the subject is.",
-    "placeholders": {
-      "n": {
-        "type": "int",
-        "example": "3"
-      }
-    }
-  },
-  "engine.acc.onShelf": "on the Shelf",
-  "@engine.acc.onShelf": {
-    "description": "Account menu › Subjects (after 📚): the subject is on no Roadmap step."
-  },
-  "engine.acc.isOpen": "open",
-  "@engine.acc.isOpen": {
-    "description": "Account menu › Subjects: pill on the subject that is open now. Lowercase."
-  },
-  "engine.acc.open": "Open",
-  "@engine.acc.open": {
-    "description": "Account menu › Subjects: button that opens a subject."
-  },
-  "engine.acc.editTip": "Rename, describe or delete",
-  "@engine.acc.editTip": {
-    "description": "Account menu › Subjects: tooltip of ✏️."
-  },
-  "engine.acc.editAria": "Edit {title}",
-  "@engine.acc.editAria": {
-    "description": "Account menu › Subjects: screen-reader label of ✏️. title = the subject.",
-    "placeholders": {
-      "title": {
-        "type": "String",
-        "example": "Databricks"
-      }
-    }
-  },
-  "engine.acc.shareTip": "Share or make public",
-  "@engine.acc.shareTip": {
-    "description": "Account menu › Subjects: tooltip of 🔗."
-  },
-  "engine.acc.openShelf": "Open the Shelf",
-  "@engine.acc.openShelf": {
-    "description": "Account menu › Subjects: button (after 📚)."
-  },
-  "engine.acc.importPack": "Import subject pack…",
-  "@engine.acc.importPack": {
-    "description": "Account menu › Subjects: button (after 📥)."
-  },
-  "engine.acc.exportPackage": "Export “{title}” (package with its source files)",
-  "@engine.acc.exportPackage": {
-    "description": "Account menu › Subjects: button (after ⬇️). title = the open subject.",
-    "placeholders": {
-      "title": {
-        "type": "String",
-        "example": "Databricks"
-      }
-    }
   },
   "engine.bk.noFolders": "This browser cannot write to folders (needs Chrome, Edge or Brave). Use “Download backup”, or a cloud account.",
   "@engine.bk.noFolders": {

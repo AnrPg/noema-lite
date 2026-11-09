@@ -1,4 +1,4 @@
-# `agents@1` — agent-based models and multi-agent systems (`engine/src/47_lib_agents.js`, `NoemaLibAgents`)
+# `agents@1` — agent-based models and multi-agent systems (`src/engines/agents/agents.ts`, `NoemaLibAgents`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`). A model is described in the terms of the ODD protocol (Grimm et
 al. 2006, 2020; Railsback & Grimm 2019): **entities** (breeds of agents with typed state, patches, globals), **space** (continuous,
@@ -8,9 +8,7 @@ intervals by the kernel). On top of the agent loop it has the multi-agent-system
 norms monitored by `NoemaLibLogic`, and five protocols (Contract Net, auctions, bargaining, coalitions, the iterated prisoner's
 dilemma). Space comes from `NoemaSpaceKit` (`docs/library/space.md`), time/randomness/statistics from `NoemaSimKit`.
 
-Python twin: `tools/lib_agents.py` (`ID`, `check_spec`, `exprs`, `keys`, `CODES`, `SERIES`, `SCALARS`, `SCENES`, `ACTIONS`,
-`PROTOCOLS`, `PROTO_NAMES`, `TEMPLATES` with their parameters, `TPL` — each template's reporters, variables, breeds and
-histograms). Tests: `node tests/lib_agents.js` (70 assertions, §8); JS ↔ Python parity on `tests/fixtures/enginelib/agents.json`
+Tests: `node tests/lib_agents.js` (70 assertions, §8); the golden outputs of the former Python twin on `tests/fixtures/enginelib/agents.json`
 (32 specs: 18 good, 14 bad). Reference activity: `tools/activities_examples/schelling-segregation`.
 
 Pure, deterministic per seed, bounded (≤ 5000 agents, ≤ 2000 steps, an operation budget `maxOps` ≤ 4·10⁶ (default 2·10⁶) with
@@ -85,7 +83,7 @@ until achieved; **single-minded** until achieved or impossible; **open-minded** 
 
 `norms: [{id, kind O|F|P, act, cond, deadline, within, until, rank, issued, mode achieve|maintain, breed, sanction {var, add}}]`:
 obligations, prohibitions and permissions over the actions agents take (`act` names) and the facts (bool variables, `breed_<id>`,
-true globals). They are monitored each step by `NoemaLibLogic.normMonitor` (47_lib_logic.js, `docs/library/logic.md` §9) per
+true globals). They are monitored each step by `NoemaLibLogic.normMonitor` (src/engines/logic/logic.ts, `docs/library/logic.md` §9) per
 agent; without it a fallback monitor with the same records runs (code `logic-fallback`; tested to give the same violations). A
 violation applies its sanction to the agent's variable. Outputs `violations` (series per step, or a total / per norm),
 `fulfilments`.

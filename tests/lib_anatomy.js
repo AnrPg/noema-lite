@@ -1,18 +1,18 @@
 /* anatomy@1 — computable anatomy (docs/library/anatomy.md): the curated data's consistency, the published reference values of the
    research brief (A1–A22: Moore 9e, Gray's 42e, ISNCSCI 2019, Nordin & Frankel, Waters 1993, Winter 2009, Beighton 1973; the source
    in each message), the edge cases and their codes, the checker's codes, the sim adapter, the Worker source in a fresh context,
-   speed, the twin index of tools/lib_anatomy.py and the reference activity's own test cases.  Run: node tests/lib_anatomy.js */
+   speed, the golden index of the former twin tools/lib_anatomy.py and the reference activity's own test cases.  Run: node tests/lib_anatomy.js */
 'use strict';
-const path = require('path'), fs = require('fs'), vm = require('vm'), { execFileSync } = require('child_process');
+const path = require('path'), fs = require('fs'), vm = require('vm');
+const want = require('./golden.cjs')('lib_anatomy');   // the golden outputs of the former Python twin (tests/golden.cjs)
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
 let fails = 0, n = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 const near = (a, b, tol) => Number.isFinite(a) && Math.abs(a - b) <= tol;
 globalThis.window = globalThis;
-require(path.join(SRC, '35_simexpr.js'));
-require(path.join(SRC, '46_lib_core.js'));
-require(path.join(SRC, '48_lib_anatomy.js'));
-const M = globalThis.NoemaLibAnatomy;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaLibAnatomy = ENGINES.mod('anatomy@1');
+const M = NoemaLibAnatomy;
 const ev = (at, o, vs) => M.evaluate(Object.assign({ at }, o || {}), vs || [], o && o.completeness !== undefined ? o.completeness : 1);
 const spec = (model, outs) => ({ format: 'noema.sim-spec/v1', engine: 'anatomy@1', model, outputs: outs.map((of, i) => ({ id: 'o' + i, kind: 'scalar', of })) });
 const R = (model, outs, env) => { const s = spec(model, outs), r = M.engine.create(s).run(env || {}); return outs.map((_, i) => r['o' + i]); };
@@ -222,8 +222,8 @@ const codes = (s) => M.checkSpec(s).map(p => p.code);
   ok(worst < 2000 && Number.isFinite(rb[0]), `the worst allowed runs (24 candidates × 4 variants with variant risk and the best finding; a collateral trace with 3 variants) < 2 s (${worst.toFixed(0)} ms)`);
   let threw = false; try { R({ mode: 'lesion', lesions: [{ at: ['radial'], completeness: 'nope(' }] }, ['paralysed']); M.engine.create({}).run({}); } catch (e) { threw = true; }
   ok(!threw, 'a number that does not compute, or a broken spec: no throw');
-  const pyIdx = JSON.parse(execFileSync('python3', ['-c', 'import json,lib_anatomy as M; print(json.dumps(M.INDEX))'], { cwd: path.join(ROOT, 'tools'), encoding: 'utf8', maxBuffer: 1 << 26 }));
-  ok(JSON.stringify(pyIdx) === JSON.stringify(M.index()), 'tools/lib_anatomy.py carries the same INDEX (ids, types, levels, movements, tables, outputs) as the JS module');
+  const pyIdx = want('index', undefined, M.index());
+  ok(JSON.stringify(pyIdx) === JSON.stringify(M.index()), 'the golden tables of the former twin tools/lib_anatomy.py hold the same INDEX (ids, types, levels, movements, tables, outputs) as the JS module');
 }
 
 console.log(`\n${n - fails}/${n} passed`);

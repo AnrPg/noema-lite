@@ -1,0 +1,339 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noema-lite.netlify.app/schemas/noema.curriculum.v1.schema.json",
+  "title": "noema-lite Roadmap (noema.curriculum/v1) and its inbox and claims",
+  "description": "A Roadmap (curriculum): KV a:curriculum:<id>, the app's export (📥 import keeps it), a shared copy (docs/CURRICULUM.md §5, §6b, §8). The connector never writes the record: what Claude does arrives as inbox entries (KV a:curin:<cid>:<seq>, $defs/inboxEntry, §7) and a step handed to a run is claimed (KV a:curclaim:<cid>:<nid>, $defs/claim). Levels (§11): the Roadmap's ladder (levels) and each step's level — optional, additive (a reader that does not know them ignores them, so the format stays v1). Semantic rules (acyclic, every edge names steps, a prerequisite never at a higher level than its step) are in engine/curriculum.js and src/contracts/rules/levels.ts.",
+  "$ref": "#/$defs/curriculum",
+  "$defs": {
+    "nodeId": { "type": "string", "minLength": 1 },
+    "edge": {
+      "type": "object",
+      "required": ["from", "to"],
+      "properties": { "from": { "$ref": "#/$defs/nodeId" }, "to": { "$ref": "#/$defs/nodeId" }, "why": { "type": "string" } }
+    },
+    "plannedChapter": {
+      "type": "object",
+      "required": ["title"],
+      "properties": {
+        "ref": { "type": "string" },
+        "title": { "type": "string" },
+        "goals": { "type": "array", "items": { "type": "string" } },
+        "teachingGoals": { "type": "array", "items": { "type": "string" } },
+        "requiredCoverage": { "type": "array", "items": { "type": "string" } },
+        "coverage": { "type": "array", "items": { "type": "string" } },
+        "material": { "type": "string" },
+        "level": { "$ref": "noema.common.v1.schema.json#/$defs/levelId" }
+      }
+    },
+    "materialFile": {
+      "type": "object",
+      "properties": {
+        "fileId": { "type": "string" },
+        "srcId": { "type": "string" },
+        "name": { "type": "string" },
+        "size": { "type": "number" },
+        "type": { "type": "string" },
+        "pages": { "type": ["integer", "null"] },
+        "range": { "type": ["array", "null"], "items": { "type": "integer" }, "minItems": 2, "maxItems": 2 },
+        "sha256": { "type": ["string", "null"] },
+        "outline": { "type": "array", "items": { "type": "object" } },
+        "excerpt": { "type": "string" }
+      }
+    },
+    "node": {
+      "type": "object",
+      "required": ["id", "title"],
+      "properties": {
+        "id": { "$ref": "#/$defs/nodeId" },
+        "title": { "type": "string" },
+        "summary": { "type": "string" },
+        "role": { "enum": ["foundation", "goal", "intro", "aspect", "subtopic", "related", "synthesis", "application"] },
+        "part": { "type": "string" },
+        "domains": { "type": "array", "items": { "type": "string" } },
+        "kDomain": { "type": ["string", "null"] },
+        "levels": {
+          "description": "The processing levels of Marzano and Kendall's taxonomy the step needs (agent 1) — not the ladder levels.",
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "level": { "$ref": "noema.common.v1.schema.json#/$defs/levelRef" },
+        "chapters": { "type": "array", "items": { "$ref": "#/$defs/plannedChapter" } },
+        "learningGoals": { "type": "array", "items": { "type": "string" } },
+        "coverage": { "type": "string" },
+        "aspect": { "type": "string" },
+        "goalTitle": { "type": "string" },
+        "audit": { "type": "string" },
+        "material": { "type": "object", "properties": { "files": { "type": "array", "items": { "$ref": "#/$defs/materialFile" } } } },
+        "pack": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "string" },
+            "status": { "type": "string" },
+            "version": { "type": ["string", "null"] },
+            "assigned": { "type": "boolean" },
+            "queuedAt": { "type": "string" },
+            "claimedAt": { "type": "string" }
+          }
+        },
+        "replan": {},
+        "planWish": { "type": "string" },
+        "replanAt": { "type": "string" }
+      }
+    },
+    "curriculum": {
+      "type": "object",
+      "required": ["format", "id", "nodes"],
+      "properties": {
+        "format": { "const": "noema.curriculum/v1" },
+        "id": { "type": "string", "minLength": 1 },
+        "goal": { "type": "string" },
+        "title": { "type": "string" },
+        "language": { "type": "string" },
+        "learner": { "type": "string" },
+        "depth": { "type": "string" },
+        "apps": { "type": "array", "items": { "type": "integer" } },
+        "scope": { "type": "string" },
+        "constraints": { "type": "string" },
+        "provider": { "type": "string" },
+        "model": { "type": "string" },
+        "prefetch": { "type": "integer" },
+        "nodeBudget": { "type": "integer" },
+        "created": { "type": "string" },
+        "updated": { "type": "string" },
+        "status": { "type": "string" },
+        "stage": { "type": "string" },
+        "log": {
+          "type": "array",
+          "items": { "type": "object", "properties": { "t": { "type": "number" }, "m": { "type": "string" }, "via": { "type": "string" } } }
+        },
+        "usage": { "type": "object", "additionalProperties": { "type": "number" } },
+        "nodes": { "type": "object", "additionalProperties": { "$ref": "#/$defs/node" } },
+        "edges": { "type": "array", "items": { "$ref": "#/$defs/edge" } },
+        "goalId": { "type": ["string", "null"] },
+        "synthesisId": { "type": ["string", "null"] },
+        "bottlenecks": {
+          "type": "array",
+          "items": { "type": "object", "properties": { "node": { "type": "string" }, "why": { "type": "string" } } }
+        },
+        "paths": {
+          "type": "object",
+          "properties": {
+            "minimal": { "type": "array", "items": { "type": "string" } },
+            "deep": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "coveragePlan": { "type": "array", "items": { "type": "string" } },
+        "audit": { "type": "array", "items": { "type": "string" } },
+        "parts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id"],
+            "properties": {
+              "id": { "type": "string" },
+              "title": { "type": "string" },
+              "summary": { "type": "string" },
+              "at": { "type": "string" },
+              "steps": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "files": { "type": "array", "items": { "type": "object" } },
+        "i18n": {
+          "type": "object",
+          "propertyNames": { "$ref": "noema.common.v1.schema.json#/$defs/locale" },
+          "additionalProperties": { "type": "object" }
+        },
+        "linksApplied": { "type": "array", "items": { "type": "string" } },
+        "levels": { "$ref": "noema.common.v1.schema.json#/$defs/levels" },
+        "levelTest": {
+          "type": "boolean",
+          "description": "a level test (80 %) before the learner moves up a level (docs/CURRICULUM.md §11)"
+        },
+        "proposals": {
+          "description": "restructurings by level proposed by Claude (noema_restructure_levels): pending until the learner (in a shared Roadmap its owner) approves or declines; never shared with members",
+          "type": "array",
+          "items": { "$ref": "#/$defs/proposal" }
+        },
+        "restructuredAt": { "type": "string" }
+      }
+    },
+    "proposal": {
+      "type": "object",
+      "required": ["id", "kind", "at", "plan", "status"],
+      "properties": {
+        "id": { "type": "string" },
+        "kind": { "const": "restructure" },
+        "at": { "type": "string" },
+        "via": { "type": "string" },
+        "plan": { "$ref": "#/$defs/restructurePlan" },
+        "status": { "enum": ["pending", "applied", "declined"] },
+        "decidedAt": { "type": "string" }
+      }
+    },
+    "restructurePlan": {
+      "description": "A new arrangement of a Roadmap by level (src/features/roadmaps/domain/restructure.ts RestructurePlan): steps by id, chapters by ref; ids are kept.",
+      "type": "object",
+      "required": ["why"],
+      "properties": {
+        "why": { "type": "string" },
+        "levels": { "$ref": "noema.common.v1.schema.json#/$defs/levels" },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["step", "level"],
+            "properties": {
+              "step": { "type": "string" },
+              "level": { "oneOf": [{ "$ref": "noema.common.v1.schema.json#/$defs/levelRef" }, { "type": "null" }] }
+            }
+          }
+        },
+        "chapters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["step", "chapter", "level"],
+            "properties": { "step": { "type": "string" }, "chapter": { "type": "string" }, "level": { "type": ["string", "null"] } }
+          }
+        },
+        "split": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["step", "parts"],
+            "properties": {
+              "step": { "type": "string" },
+              "parts": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "type": "object",
+                  "required": ["id", "title", "chapters"],
+                  "properties": {
+                    "id": { "type": "string" },
+                    "title": { "type": "string" },
+                    "level": { "$ref": "noema.common.v1.schema.json#/$defs/levelRef" },
+                    "chapters": { "type": "array", "items": { "type": "string" } }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "merge": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["into", "steps"],
+            "properties": {
+              "into": { "type": "string" },
+              "steps": { "type": "array", "items": { "type": "string" } },
+              "title": { "type": "string" }
+            }
+          }
+        },
+        "links": { "type": "array", "items": { "$ref": "#/$defs/edge" } },
+        "unlink": { "type": "array", "items": { "$ref": "#/$defs/edge" } }
+      }
+    },
+    "inboxEntry": {
+      "description": "KV a:curin:<cid>:<seq>: one thing the connector did for the Roadmap, which the app checks again and applies (docs/CURRICULUM.md §7). Kinds: an agent's answer (dag, audit, expand, plan: task + data), a prepared step (step), a subject attached to a step (assign), a translation (i18n), a new part (extend), links between steps (link), a restructuring by level proposed for the learner's approval (restructure). A kind the app does not know is kept, never lost.",
+      "type": "object",
+      "required": ["v", "kind"],
+      "properties": {
+        "v": { "const": 1 },
+        "kind": { "type": "string", "minLength": 1 },
+        "at": { "type": "string" },
+        "via": { "type": "string" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "kind": { "enum": ["dag", "audit", "expand", "plan"] } }, "required": ["kind"] },
+          "then": { "required": ["task", "data"], "properties": { "task": { "type": "string" }, "data": { "type": "object" } } }
+        },
+        {
+          "if": { "properties": { "kind": { "const": "step" } }, "required": ["kind"] },
+          "then": {
+            "required": ["nid", "packId"],
+            "properties": { "nid": { "type": "string" }, "packId": { "type": "string" }, "version": { "type": ["string", "null"] } }
+          }
+        },
+        {
+          "if": { "properties": { "kind": { "const": "assign" } }, "required": ["kind"] },
+          "then": {
+            "required": ["nid", "packId"],
+            "properties": {
+              "nid": { "type": "string" },
+              "packId": { "type": "string" },
+              "from": { "type": "string" },
+              "title": { "type": "string" },
+              "description": { "type": "string" },
+              "outline": { "type": "array" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "kind": { "const": "i18n" } }, "required": ["kind"] },
+          "then": {
+            "required": ["locale", "data"],
+            "properties": { "locale": { "$ref": "noema.common.v1.schema.json#/$defs/locale" }, "data": { "type": "object" } }
+          }
+        },
+        {
+          "if": { "properties": { "kind": { "const": "extend" } }, "required": ["kind"] },
+          "then": {
+            "required": ["part", "nodes"],
+            "properties": {
+              "part": {
+                "type": "object",
+                "required": ["id", "title"],
+                "properties": {
+                  "id": { "type": "string" },
+                  "title": { "type": "string" },
+                  "summary": { "type": "string" },
+                  "at": { "type": "string" }
+                }
+              },
+              "nodes": { "type": "object", "additionalProperties": { "$ref": "#/$defs/node" } },
+              "edges": { "type": "array", "items": { "$ref": "#/$defs/edge" } },
+              "prepare": { "type": "boolean" },
+              "levels": { "$ref": "noema.common.v1.schema.json#/$defs/levels" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "kind": { "const": "link" } }, "required": ["kind"] },
+          "then": {
+            "required": ["links", "remove"],
+            "properties": {
+              "id": { "type": "string" },
+              "links": { "type": "array", "items": { "$ref": "#/$defs/edge" } },
+              "remove": { "type": "array", "items": { "$ref": "#/$defs/edge" } }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "kind": { "const": "restructure" } }, "required": ["kind"] },
+          "then": {
+            "required": ["id", "plan", "at"],
+            "properties": { "id": { "type": "string" }, "plan": { "$ref": "#/$defs/restructurePlan" } }
+          }
+        }
+      ]
+    },
+    "claim": {
+      "description": "KV a:curclaim:<cid>:<nid>: a step handed to one run of the learner's Claude (a lease: 4 h, 72 h while its upload waits).",
+      "type": "object",
+      "required": ["v", "nid", "at"],
+      "properties": {
+        "v": { "const": 1 },
+        "nid": { "type": "string" },
+        "at": { "type": "string" },
+        "run": { "type": "string" },
+        "waiting": { "type": "boolean" },
+        "packId": { "type": "string" }
+      }
+    }
+  }
+}

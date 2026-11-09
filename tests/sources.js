@@ -4,6 +4,7 @@
 const { chromium } = require(process.env.PW || 'playwright');
 const path = require('path'), fs = require('fs'), { execFileSync } = require('child_process');
 const { start } = require('./mock_supabase');
+const { deepText } = require('./deep');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const SHOTS = '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
@@ -14,7 +15,7 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
 
 (async () => {
   execFileSync('python3', [path.join(ROOT, 'tests/fixtures/make_viewer_files.py'), TF], { stdio: 'ignore' });
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true, shell: false };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true, onboarding: false, shell: false };`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   const browser = await chromium.launch();
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } }); const p = await ctx.newPage(); p.setDefaultTimeout(15000); const E = []; p.on('pageerror', e => E.push(e.message));
@@ -50,8 +51,8 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   ok(!(await p.locator('.srcdeck .newpill').count()) && !(await p.locator('button:has-text("only what’s new")').count()), 'sources added together are not marked ✨ new');
   await p.setInputFiles('.srccard.exp .srcfile input[type=file]', path.join(TF, 'book.pdf'));
   ok(await until(async () => /Preview/.test(await p.locator('.srccard:has-text("Essential Cell Biology") .srcfile').innerText())), '📎 attached: the card shows the file with 👁 Preview');
-  const synced = await until(() => Object.keys(srv.state.files).includes(`${gia}/sources/kytt/ecb/file.pdf`) && /book\.pdf/.test(srv.state.kv[gia]?.['a:srcfiles:kytt']?.value || ''), 15000);
-  if (!synced) console.log('   files:', JSON.stringify(Object.keys(srv.state.files)), 'kv:', JSON.stringify(srv.state.kv[gia]?.['a:srcfiles:kytt']));
+  const synced = await until(() => Object.keys(srv.state.files).includes(`${gia}/sources/kytt/ecb/file.pdf`) && /book\.pdf/.test(srv.srcfiles(gia, 'kytt').ecb?.name || ''), 15000);
+  if (!synced) console.log('   files:', JSON.stringify(Object.keys(srv.state.files)), 'rows:', JSON.stringify(srv.srcfiles(gia, 'kytt')));
   ok(synced, 'the file is in the private cloud folder and the synced index');
   await p.click('.srcdeck .srccard:has-text("Khan") .srcmain'); await wait(300);
   const khan = await p.locator('.srcdeck .srccard:has-text("Khan")').innerText();
@@ -72,7 +73,7 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   await p2.goto(BASE + '/?subject=kytt#/ch/ch01'); await wait(2500); if (await p2.isVisible('.noema-inuse')) { await p2.click('.noema-inuse .btn'); await wait(1000); }   // the first device is still in use: continue here
   await p2.click('.srcref:has-text("ECB")');
   ok(await until(() => p2.locator('.vw-ov .vw-page canvas').count()), 'a device without the file downloads it from the cloud and opens it');
-  await c2.close(); await p.evaluate(() => NoemaCloud.lease.check({ take: true }));   // back on the first device ("Use here")
+  await c2.close(); await p.evaluate(() => NoemaCore.sync.lease.check({ take: true }));   // back on the first device ("Use here")
 
   console.log('— every format in the viewer');
   const files = { 'book.pdf': ['.vw-page', 3], 'figure.png': ['img.vw-img'], 'photo.jpg': ['img.vw-img'], 'anim.gif': ['img.vw-img'], 'diagram.svg': ['img.vw-img'], 'scan.tiff': ['canvas.vw-img'],
@@ -106,10 +107,10 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   const op1 = await p.$eval('.reader .blk > .xbtn', b => +getComputedStyle(b).opacity);
   ok(op0 === 0 && op1 > 0.5, `the icon is hidden and appears on hover (opacity ${op0} → ${op1})`);
   await p.click('.reader .blk >> nth=0 >> .xbtn'); await wait(500);
-  const xs = await p.evaluate(() => ({ open: document.querySelector('.drawer').classList.contains('open'), chip: document.querySelector('.drawer .ctxchip')?.textContent, mode: T.mode, ctx: tutorContextText(), sec: SEC[T.ctx.sec]?.title }));
-  ok(xs.open && /^🔎 /.test(xs.chip) && xs.mode === 'explain', 'click → the tutor dock opens in 💡 Explain mode on that part: ' + xs.chip);
+  const xs = await p.evaluate(() => ({ open: document.querySelector('.drawer').classList.contains('open'), chip: document.querySelector('.drawer .ns-forchip')?.textContent, mode: NoemaTutor.current().session.mode, ctx: NoemaTutor.current().session.context(), sec: SEC[NoemaTutor.current().session.ctx.sec]?.title }));
+  ok(xs.open && /Kinetic energy/.test(xs.chip || '') && xs.mode === 'explain', 'click → the tutor dock opens in 💡 Explain mode on that part: ' + xs.chip);
   ok(/^FOCUS/.test(xs.ctx) && xs.ctx.includes('WIDER CONTEXT') && xs.ctx.includes(xs.sec) && /THE CHAPTER/.test(xs.ctx), 'the AI gets the part itself first, then its section and chapter as wider context');
-  await p.evaluate(() => closeTutor());
+  await p.evaluate(() => NoemaTutor.current().session.close());
   await p.screenshot({ path: SHOTS + '/s7_explain.png' });
 
   console.log('— ❓ Help: setting up Claude (both ways), always there');
@@ -124,9 +125,10 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   await p.keyboard.press('Escape'); await p.evaluate(() => document.querySelectorAll('.modal, .noema-overlay').forEach(o => o.remove()));
 
   console.log('— remove the file');
-  await p.evaluate(() => { DECK.expanded.ecb = true; toggleSourcesDeck(true); }); await wait(200);
-  p.once('dialog', d => d.accept()); await p.click('.srccard:has-text("Essential Cell Biology") button:has-text("Remove file")'); await wait(3500);
-  ok(!Object.keys(srv.state.files).includes(`${gia}/sources/kytt/ecb/file.pdf`) && !/ecb/.test(srv.state.kv[gia]?.['a:srcfiles:kytt']?.value || ''), 'removed from the cloud and the index');
+  await p.evaluate(() => { NoemaCore.studyUi.current().app.sourcesUi.expand('ecb'); NoemaCore.studyUi.current().app.sourcesUi.toggleDeck(true); }); await wait(200);
+  await p.click('.srccard:has-text("Essential Cell Biology") button:has-text("Remove file")'); await wait(200);
+  await p.click('.modal .btn.primary'); await wait(3500);   // the app's own yes / no question (no browser dialog)
+  ok(!Object.keys(srv.state.files).includes(`${gia}/sources/kytt/ecb/file.pdf`) && !srv.srcfiles(gia, 'kytt').ecb, 'removed from the cloud and the index');
 
   console.log('— a package (.noema.zip): the pack + its source files, exactly as split');
   const PK = path.join(ROOT, 'dist/site/testfiles/pkg'); const crypto = require('crypto');
@@ -135,7 +137,7 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   await p.evaluate(() => { Noema.openSubjectPicker(); }); await wait(500);
   ok(/\.zip/.test(await p.getAttribute('label:has-text("Import subject pack") input[type=file]', 'accept')), '📥 Import accepts packages (.zip)');
   await p.setInputFiles('label:has-text("Import subject pack") input[type=file]', path.join(PK, 'pkg-physics.noema.zip'));
-  const pkIdx = () => JSON.parse(srv.state.kv[gia]?.['a:srcfiles:pkg-physics']?.value || '{}');
+  const pkIdx = () => srv.srcfiles(gia, 'pkg-physics');
   ok(await until(() => Object.keys(pkIdx()).length === 3, 20000), 'the package is imported with its 3 source files: ' + Object.keys(pkIdx()).join(', '));
   const want = Object.fromEntries(zipPack.sources.sources.map(x => [x.id, x]));
   const stored = id => srv.state.files[`${gia}/sources/pkg-physics/${id}/file.${id === 'notes' ? 'md' : 'pdf'}`]?.data;
@@ -151,7 +153,7 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   ok(/\/\s*18/.test(await p.locator('.vw-ov').innerText()), 'the part has its own 18 pages (13–30)');
   await p.screenshot({ path: SHOTS + '/s6_package_part.png' }); await p.keyboard.press('Escape'); await wait(200);
   await p.click('.srcref:has-text("Σημ")'); ok(await until(async () => /Notes travel with the package/.test(await p.locator('.vw-ov').innerText())), 'the note (Markdown) from the package opens too'); await p.keyboard.press('Escape');
-  await p.evaluate(() => toggleSourcesDeck(true)); await wait(300);
+  await p.evaluate(() => NoemaCore.studyUi.current().app.sourcesUi.toggleDeck(true)); await wait(300);
   ok(await p.locator('.srcdeck .srccard').count() === 3 && await p.locator('.srcdeck .srccard .srceye').count() === 3, '📚 Sources: one card per part, each with its file (👁)');
   await p.click('.srcdeck .srccard:has-text("μέρος 2") .srcmain'); await wait(300);
   const c2txt = await p.locator('.srcdeck .srccard:has-text("μέρος 2")').innerText();
@@ -161,10 +163,10 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   await p.evaluate(async () => { const b = await (await fetch('/testfiles/pkg/pkg-bad.noema.zip')).blob(); await Noema.importPackFile(Noema.account.id, new File([b], 'pkg-bad.noema.zip')); });
   await wait(1500);
   const badIdx = JSON.parse(await p.evaluate(() => localStorage.getItem(`noema1:${Noema.account.id}:a:srcfiles:pkg-bad`) || '{}'));
-  ok(!badIdx['ecb-1'] && badIdx['ecb-2'] && badIdx['notes'] && /missing or damaged: ecb-1/.test(await p.locator('body').innerText()), 'a damaged file (SHA-256 mismatch) is not attached and the learner is told which');
+  ok(!badIdx['ecb-1'] && badIdx['ecb-2'] && badIdx['notes'] && /missing or damaged: ecb-1/.test(await deepText(p, 'body')), 'a damaged file (SHA-256 mismatch) is not attached and the learner is told which');
   // a plain .json: imported, and the learner is told the files are in the package
   await p.evaluate(async () => { const b = await (await fetch('/testfiles/pkg/pkg-physics.json')).text(); const pk = JSON.parse(b); pk.subject.id = 'pkg-json'; await Noema.importPackFile(Noema.account.id, new File([JSON.stringify(pk)], 'pkg-json.json', { type: 'application/json' })); });
-  ok(await until(async () => /not in this \.json — import the \.noema\.zip/.test(await p.locator('body').innerText()), 5000), 'importing only the .json says the 3 source files are in the .noema.zip package');
+  ok(await until(async () => /not in this \.json — import the \.noema\.zip/.test(await deepText(p, 'body')), 5000), 'importing only the .json says the 3 source files are in the .noema.zip package');
   // ⬇️ export: a package again, with every attached file
   const [dl] = await Promise.all([p.waitForEvent('download', { timeout: 20000 }), p.evaluate(() => Noema.exportPackage(Noema.account.id, Noema.pack))]);
   const dlp = path.join(PK, 'export.zip'); await dl.saveAs(dlp);
@@ -179,8 +181,8 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   ok(await p.locator('.noema-chip:has-text("Spark & Delta (my notes)")').count() === 1, 'a library subject can be renamed (only for you) — the list updates');
   await p.screenshot({ path: SHOTS + '/s5_rename.png' });
   await p.click('.noema-chip:has-text("Spark & Delta")');
-  const renamed = await until(async () => /Spark & Delta \(my notes\)/.test(await p.locator('.subjchip').textContent()), 20000);
-  if (!renamed) console.log('   subjchip:', await p.locator('.subjchip').innerText().catch(e => e.message), await p.evaluate(() => location.href + ' ' + JSON.stringify(Noema.subject?.title)));
+  const renamed = await until(async () => /Spark & Delta \(my notes\)/.test(await p.evaluate(() => document.title)), 20000);   // the open subject's name (the frame's crumbs and the tab's title)
+  if (!renamed) console.log('   title:', await p.evaluate(() => document.title), await p.evaluate(() => location.href + ' ' + JSON.stringify(Noema.subject?.title)));
   ok(renamed, 'the new name is used in the app');
   ok(await until(() => /Spark & Delta/.test(srv.state.kv[gia]?.['a:subjoverride:databricks']?.value || ''), 15000), 'and synced to every device');
   await p.evaluate(() => { Noema.openSubjectPicker(); }); await wait(500);

@@ -9,8 +9,10 @@
    noema_create_roadmap (the learner's Claude read the files in its chat; the app picks the Roadmap up on its next sync).
    Usage: node tests/from_sources.js <prepared-repo-dir> */
 const { chromium } = require(process.env.PW || 'playwright');
+const { deepText } = require('./deep');
 const path = require('path'), fs = require('fs'), http = require('http'), vm = require('vm'), crypto = require('crypto'), { execFileSync } = require('child_process');
 const { start } = require('./mock_supabase');
+const { connectorHandler, removeConnector } = require('./connector_fn');
 const F = require('./fixtures/curriculum_agents');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const SHOTS = '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
@@ -24,7 +26,7 @@ const FX = (p => (p.translations.fr = { chapters: JSON.parse(fs.readFileSync(pat
 /* ---------- 1. without a browser ---------- */
 function unit() {
   console.log('— the plan, without a browser');
-  const ctx = { window: {}, console }; ctx.globalThis = ctx; vm.createContext(ctx);
+  const ctx = { window: {}, console }; ctx.globalThis = ctx; require('./roadmaps_core')(ctx); vm.createContext(ctx);
   for (const f of ['engine/curriculum.js', 'engine/curimport.js', 'engine/sourceplan.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx);
   const P = ctx.window.NoemaSourcePlan;
   const doc = (p, pages, outline = []) => ({ path: p, name: p.split('/').pop(), size: pages * 40000, kind: 'pdf', paged: true, pages, outline, excerpt: '', file: { name: p.split('/').pop(), hint: p, size: pages * 40000 } });
@@ -165,7 +167,7 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
   PLAN = { recommend: 'course', reasons: ['Two short files on one topic: gene expression.', 'About 6 pages: one concise subject.'], title: 'Molecular biology', summary: 'From DNA to RNA.',
     course: { chapters: [{ title: 'Replication', files: ['dna-replication.pdf pp. 1–4'] }, { title: 'Transcription', files: ['Transcription notes.md'] }] },
     roadmap: { steps: [{ ref: 'replication', title: 'DNA replication', role: 'foundation', prerequisites: [], files: ['dna-replication.pdf pp. 1–2'] }, { ref: 'transcription', title: 'Transcription', role: 'aspect', prerequisites: ['replication'], files: ['dna-replication.pdf pp. 3–4', 'Transcription notes.md'] }] } };
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', askSubjectOnStart: true, shell: false };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', askSubjectOnStart: true, onboarding: false, shell: false };`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   const api = vendors(); await new Promise(r => api.listen(APORT, r));
   const browser = await chromium.launch();
@@ -179,11 +181,11 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
 
     console.log('— the wizard: the AI reads the material and proposes');
     await p.click('.cm-mode:has-text("Roadmaps")'); await wait(300);
-    await p.locator('.noema-ovbox').last().locator('.cm-srcbtn').click(); await wait(300);
-    ok(await p.locator('.cm-src h1').innerText() === 'From your sources', 'From your sources opens from 🧭 Roadmaps');
+    await p.locator('noema-roadmap-library .cm-srcbtn').click(); await wait(300);
+    ok(await p.locator('.cm-srcbox h1').innerText() === 'From your sources', 'From your sources opens from 🧭 Roadmaps');
     await p.setInputFiles('.cm-src .cg-drop input[type=file]', FILES); await wait(200);
-    ok(await p.locator('.cm-srcfiles li').count() === 2 && /2 files ·/.test(await p.locator('.cm-srccard').innerText()), 'the two files are listed with their size');
-    ok(await p.inputValue('.cm-srcreader') === 'auto', 'with a key, the AI reads it by default');
+    ok(await p.locator('.cm-srcfiles li').count() === 2 && /2 files ·/.test(await deepText(p, '.cm-src')), 'the two files are listed with their size');
+    ok(await p.inputValue('.cm-srcreader select') === 'auto', 'with a key, the AI reads it by default');
     await p.click('.cm-srcread');
     ok(await until(() => p.locator('.cm-srcchosen').count(), 20000), 'the app decided the shape');
     ok(await p.locator('.cm-srcshape, .cg-badge, .cm-src .cg-steps').count() === 0, 'no shape cards, no numbered steps: one card');
@@ -191,16 +193,16 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
     ok(ag.length === 2 && /Helicase and the fork \(p\. 2\)/.test(ag[0].text) && /dna-replication\.pdf\nPDF, 4 pages/.test(ag[0].text) && /RNA polymerase reads the template/.test(ag[0].text), 'the AI got each file’s pages, outline and first lines (not the files)');
     ok(/"lecture-99\.pdf" is not one of the learner's files/.test(ag[1].repairText) && /course: these files are not used: dna-replication\.pdf/.test(ag[1].repairText), 'its wrong first answer went back with the problems, and the second was taken');
     ok(await p.locator('.cm-srcchosen').getAttribute('data-shape') === 'course' && await p.locator('.cm-srcswitch').innerText() === 'Make it a Roadmap instead', 'it chose one subject silently, with a quiet way to switch');
-    ok(/Two short files on one topic/.test(await p.locator('.cm-srcwhy').textContent()) && !(await p.locator('.cm-srcwhy').isVisible()) && await p.inputValue('.cm-srctitle') === 'Molecular biology', 'its reasons wait in the ⓘ bubble, and its name fills the name field');
-    ok(await p.locator('.cm-srcchosen b').innerText() === 'One subject · 2 chapters', 'one line says what it became: ' + await p.locator('.cm-srcchosen b').innerText());
-    ok(!(await p.locator('.cm-srcmorebody').isVisible()) && !(await p.locator('.cm-src .cg-tipbody').first().isVisible()), 'the options and the explanations are tucked away');
+    ok(/Two short files on one topic/.test(await p.locator('.cm-srcwhy').textContent()) && !(await p.locator('.cm-srcwhy').isVisible()) && await p.inputValue('.cm-srctitle input') === 'Molecular biology', 'its reasons wait in the ⓘ bubble, and its name fills the name field');
+    ok(await p.locator('.cm-srcchosen strong').innerText() === 'One subject · 2 chapters', 'one line says what it became: ' + await p.locator('.cm-srcchosen strong').innerText());
+    ok(!(await p.locator('.cm-srcmore .cm-srclang').isVisible()) && !(await p.locator('.cm-src noema-tip .panel').first().isVisible()), 'the options and the explanations are tucked away');
     await p.screenshot({ path: SHOTS + '/src1_proposal.png', fullPage: true });
     await p.click('.cm-srcswitch'); await wait(200);
-    ok(await p.locator('.cm-srcchosen b').innerText() === 'A Roadmap · 2 steps' && await p.locator('.cm-srcswitch').innerText() === 'Make it one subject instead' && await p.locator('.cm-srcplan li').count() === 2 && /dna-replication\.pdf pp\. 3–4 · Transcription notes\.md/.test(await p.locator('.cm-srcplan li >> nth=1').textContent()), 'flipped to the Roadmap: its steps with their files and pages');
-    await p.fill('.cm-srctitle', 'Gene expression');
+    ok(await p.locator('.cm-srcchosen strong').innerText() === 'A Roadmap · 2 steps' && await p.locator('.cm-srcswitch').innerText() === 'Make it one subject instead' && await p.locator('.cm-srcplan li').count() === 2 && /dna-replication\.pdf pp\. 3–4 · Transcription notes\.md/.test(await p.locator('.cm-srcplan li >> nth=1').textContent()), 'flipped to the Roadmap: its steps with their files and pages');
+    await p.fill('.cm-srctitle input', 'Gene expression');
 
     console.log('— a Roadmap from it');
-    await p.selectOption('.cm-src .cm-provider', 'auto'); await p.click('.cm-srcgo');
+    await p.selectOption('.cm-src .cm-provider select', 'auto'); await p.click('.cm-srcgo');
     ok(await until(() => p.locator('.cg-status.ready').count(), 30000), 'made: only the chapters are planned, then “ready”');
     ok(A.agent.filter(a => a.name !== 'submit_source_plan').every(a => a.name === 'submit_chapter_plans'), 'no DAG creator, auditor or expander ran');
     const c = await p.evaluate(() => NoemaCurriculum.list(Noema.account.id)[0]);
@@ -211,8 +213,8 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
     ok(rep.chapters.length === 4 && rep.chapters[0].material === 'dna-replication.pdf pp. 1–2', 'the planner planned each step from its pages: ' + rep.chapters[0].material);
     
     console.log('— one subject from it, with ✨ Create with Claude filled in');
-    await p.evaluate(() => { document.querySelectorAll('.noema-overlay').forEach(o => o.remove()); NoemaCurMap.fromSources(Noema.account.id); }); await wait(300);
-    await p.setInputFiles('.cm-src .cg-drop input[type=file]', FILES); await p.selectOption('.cm-srcreader', 'estimate'); await p.click('.cm-srcread');
+    await p.evaluate(() => { document.querySelectorAll('.noema-overlay').forEach(o => o.remove()); Noema.fromSources(Noema.account.id); }); await wait(300);
+    await p.setInputFiles('.cm-src .cg-drop input[type=file]', FILES); await p.selectOption('.cm-srcreader select', 'estimate'); await p.click('.cm-srcread');
     ok(await until(() => p.locator('.cm-srcchosen').count(), 10000) && /without AI/.test(await p.locator('.cm-srcwhy').textContent()) && await p.locator('.cm-srcchosen').getAttribute('data-shape') === 'course', 'without AI: an estimate, one subject: ' + await p.locator('.cm-srcwhy').textContent());
     await p.click('.cm-srcgo'); await wait(500);
     ok(await p.evaluate(() => [...document.querySelectorAll('.cg-box input.noema-input')].some(i => i.value === 'dna-replication')) && await p.locator('.cg-files li').count() === 2, 'Create with Claude opens with the name and both files');
@@ -227,21 +229,19 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
 
     console.log('— the Claude app, by copy and paste');
     await wait(1500); await until(() => p.evaluate(() => !!window.NoemaCurMap && !!window.Noema?.account), 15000);
-    await p.evaluate(() => { document.querySelectorAll('.noema-overlay').forEach(o => o.remove()); NoemaCurMap.fromSources(Noema.account.id); }); await wait(300);
-    await p.setInputFiles('.cm-src .cg-drop input[type=file]', FILES); await p.selectOption('.cm-srcreader', 'app'); await p.click('.cm-srcread'); await wait(1500);
+    await p.evaluate(() => { document.querySelectorAll('.noema-overlay').forEach(o => o.remove()); Noema.fromSources(Noema.account.id); }); await wait(300);
+    await p.setInputFiles('.cm-src .cg-drop input[type=file]', FILES); await p.selectOption('.cm-srcreader select', 'app'); await p.click('.cm-srcread'); await until(() => p.locator('.cm-srccopytask').count(), 10000);
     ok(await p.locator('.cm-srccopytask').count() === 1 && await p.locator('.cm-srcchosen').count() === 0, 'with the Claude app: copy the task, paste the answer');
-    await p.fill('.cm-src .cm-paste', JSON.stringify({ ...good, title: 'x' })); await p.click('.cm-srcuse'); await wait(200);
-    ok(/problem/.test(await p.locator('.cm-src span.cg-kstat.bad').innerText()), 'an answer about other files: its problems, to copy back to Claude');
-    await p.fill('.cm-src .cm-paste', 'Here you go:\n' + JSON.stringify(PLAN)); await p.click('.cm-srcuse'); await wait(200);
+    await p.fill('.cm-src .cm-srcanswer textarea', JSON.stringify({ ...good, title: 'x' })); await p.click('.cm-srcuse'); await wait(200);
+    ok(/problem/.test(await p.locator('.cm-src .status.bad').innerText()), 'an answer about other files: its problems, to copy back to Claude');
+    await p.fill('.cm-src .cm-srcanswer textarea', 'Here you go:\n' + JSON.stringify(PLAN)); await p.click('.cm-srcuse'); await wait(200);
     ok(await p.locator('.cm-srcchosen').count() === 1 && await p.locator('.cm-srccopymsg').count() === 1, 'a good answer: the proposal, and the subject can be made in the Claude app (a message to paste)');
     await p.screenshot({ path: SHOTS + '/src2_app.png', fullPage: true });
 
     console.log('— the connector: the learner’s Claude makes the Roadmap (noema_create_roadmap)');
-    const fn = path.join(require('os').tmpdir(), `noema-mcp-src-${process.pid}.mjs`);
-    const MCP = ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js'];   // = tools/build.py MCP_ENGINE
-    ok(MCP.every(f => fs.readFileSync(path.join(ROOT, 'tools/build.py'), 'utf8').includes(`'${f}'`)), 'the connector bundles the From-your-sources code');
-    fs.writeFileSync(fn, `const CFG = ${JSON.stringify({ siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [] })};\nconst DOCS = ${JSON.stringify({ workflow: 'SKILL', content: 'C', visual: 'V' })};\nglobalThis.window = globalThis;\n` + MCP.map(f => fs.readFileSync(path.join(ROOT, f), 'utf8')).join('\n') + '\n' + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));
-    const { default: handler } = await import(fn);
+    const MCP = ['engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js'];   // in tools/build.py CONNECTOR_ENGINE (the contracts, the engines and the content checks are ES modules the connector imports)
+    ok(MCP.every(f => fs.readFileSync(path.join(ROOT, 'src/connector/engine/sources.ts'), 'utf8').includes(`'${f}'`)), 'the connector bundles the From-your-sources code');
+    const handler = await connectorHandler(ROOT, { config: { siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [] }, docs: { workflow: 'SKILL', content: 'C', visual: 'V' } });
     const T = (await (await fetch(BASE + '/auth/v1/token?grant_type=password', { method: 'POST', headers: { apikey: 'k', 'content-type': 'application/json' }, body: JSON.stringify({ email: 'iro@example.com', password: 'secret123' }) })).json()).access_token;
     let rpc = 0; const tool = async (name, args = {}) => { const r = await handler(new Request(BASE + '/mcp', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + T }, body: JSON.stringify({ jsonrpc: '2.0', id: ++rpc, method: 'tools/call', params: { name, arguments: args } }) })); const j = await r.json(); return { text: j.result.content.map(x => x.text || '').join('\n'), err: !!j.result.isError }; };
     const RM = { title: 'Cell biology', summary: 'From membranes to signalling.', files: [{ path: 'lectures/cells.pdf', pages: 80 }, { path: 'notes/signals.md' }],

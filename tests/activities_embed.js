@@ -1,7 +1,7 @@
 /* external-embed@1 (docs/activities-dev/embed.md): an allow-listed third-party page in a frame, opt-in, explore only.
-   1. Node (always): the runtime's copy of the allow-list equals tools/embed_allow.json; the URL grammar and the item / pack rules give the
-      same codes in JS (engine/src/45_activity_embed.js NoemaEmbed) and Python (tools/embed_check.py) on the same cases; the runtime
-      registers only when the deployment switches it on; no provider asks for a sandbox token outside the safe set.
+   1. Node (always): the runtime's allow-list is tools/embed_allow.json; the URL grammar and the item / pack rules give the
+      expected codes (src/runtimes/external-embed/check.ts through build/runtimes-node.cjs, the checks the content checks use) on
+      every case; the runtime is made only when the deployment switches it on; no provider asks for a sandbox token outside the safe set.
    2. Browser (with --browser): a stub host (like skill/noema-pack-builder/scripts/activity_harness.js) with the real runtime on
       http://localhost:<a>, and a LOCAL fake provider on https://127.0.0.1:<b> (a self-signed certificate, made here with openssl)
       standing in for a real one — the internet is never used. Checks: the consent card comes first and nothing is requested from the
@@ -12,27 +12,21 @@
 const path = require('path'), fs = require('fs'), cp = require('child_process'), vm = require('vm'), os = require('os');
 const ROOT = path.resolve(__dirname, '..');
 let n = 0, fails = 0; const ok = (c, m) => { n++; if (!c) fails++; console.log((c ? '✓ ' : '✗ ') + m); return c; };
-const SRC = fs.readFileSync(path.join(ROOT, 'engine', 'src', '45_activity_embed.js'), 'utf8');
+const RTDIR = path.join(ROOT, 'src', 'runtimes', 'external-embed');
+const SRC = ['check.ts', 'runtime.ts'].map(f => fs.readFileSync(path.join(RTDIR, f), 'utf8')).join('\n');
 const ALLOW = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'embed_allow.json'), 'utf8'));
-const E = require(path.join(ROOT, 'engine', 'src', '45_activity_embed.js'));
+const RT = require(path.join(ROOT, 'build', 'runtimes-node.cjs')), E = RT.RUNTIME_CHECKS.embed;   // npm run build
 const codes = list => list.map(m => (m.match(/(?:^|: )([a-z][a-z-]+):/) || [])[1] || m).sort();
-const py = (fn, payload) => {
-  const tmp = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'noema-embed-')), 'cases.json'); fs.writeFileSync(tmp, JSON.stringify(payload));
-  return JSON.parse(cp.execFileSync('python3', ['-I', '-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import embed_check as C
-d = json.load(open(sys.argv[1], encoding='utf-8')); out = {}
-${fn}
-print(json.dumps(out))`, tmp], { encoding: 'utf8' }));
-};
 
 console.log('— the allow-list');
-ok(JSON.stringify(E.PROVIDERS) === JSON.stringify(ALLOW.providers), 'the runtime\'s copy of the allow-list equals tools/embed_allow.json');
+ok(JSON.stringify(E.PROVIDERS) === JSON.stringify(ALLOW.providers) && /from '\.\.\/\.\.\/\.\.\/tools\/embed_allow\.json' with \{ type: 'json' \}/.test(SRC), 'the runtime\'s allow-list is tools/embed_allow.json (imported as it is: one copy)');
 ok(ALLOW.providers.every(p => p.origins.every(o => /^https:\/\/[a-z0-9.-]+(:\d+)?$/.test(o)) && Array.isArray(p.sandbox) && p.sandbox.every(t => E.SANDBOX_OK.has(t))), 'every provider: exact https origins, sandbox tokens from the safe set only');
 ok(!JSON.stringify(ALLOW).match(/allow-top-navigation|allow-popups-to-escape-sandbox|allow-modals|allow-downloads/), 'no provider gets top navigation, escaping popups, modals or downloads');
 ok(ALLOW.providers.every(p => p.supportsResult === false), 'no provider has a result channel: every embed is explore only');
 ok(ALLOW.providers.every(p => ['id', 'name', 'status', 'origins', 'path', 'licenses', 'creditMust', 'credit', 'terms', 'notes'].every(k => k in p) && /^https:\/\//.test(p.terms)), 'every provider has its licence, credit template, terms URL and notes');
 ok(['phet', 'geogebra', 'desmos'].every(id => E.PROVIDERS.find(p => p.id === id)?.status === 'allowed') && ['falstad', 'circuitjs', 'wokwi'].every(id => E.PROVIDERS.find(p => p.id === id)?.status === 'pending'), 'allowed: PhET, GeoGebra, Desmos; pending (terms not confirmed): Falstad, CircuitJS1, Wokwi');
 
-console.log('— URLs: the grammar and the exact match (JS and Python)');
+console.log('— URLs: the grammar and the exact match');
 const PH = 'https://phet.colorado.edu/sims/html/ohms-law/latest/ohms-law_all.html';
 const URLS = [
   ['phet', PH, 'ok'], ['phet', PH + '?locale=el', 'ok'], ['phet', 'https://phet.colorado.edu/sims/html/ohms-law/1.4.21/ohms-law_el.html', 'ok'],
@@ -52,14 +46,12 @@ const URLS = [
   ['phet', PH + '?locale=el&brand=x', 'url-query'], ['phet', PH + '?', 'ok'], ['desmos', 'https://www.desmos.com/calculator/zukjgk9iry', 'url-query'], ['desmos', 'https://www.desmos.com/calculator/zukjgk9iry?embed&x', 'url-query'],
   ['phet', PH + '#x', 'url-hash'], ['phet', PH + 'x'.repeat(2100), 'url-long'],
 ];
-const pyU = py(`for i, (pid, u, _) in enumerate(d):
-    p = next(x for x in C.providers() if x['id'] == pid); m = C.match(u, p); out[i] = 'ok' if m.get('ok') else m['code']`, URLS);
 URLS.forEach(([pid, u, want], i) => {
   const m = E.match(u, E.PROVIDERS.find(p => p.id === pid)), js = m.ok ? 'ok' : m.code;
-  ok(js === want && pyU[i] === want, `${pid} ${JSON.stringify(String(u).slice(0, 70))} → ${want}${js !== want || pyU[i] !== want ? `  (JS ${js}, Python ${pyU[i]})` : ''}`);
+  ok(js === want, `${pid} ${JSON.stringify(String(u).slice(0, 70))} → ${want}${js !== want ? `  (got ${js})` : ''}`);
 });
 
-console.log('— items and packs (JS and Python give the same codes)');
+console.log('— items and packs (the expected codes)');
 const good = () => ({ id: 'ohm-phet', runtime: 'external-embed@1', provider: 'phet', url: PH + '?locale=el', stateVersion: 1,
   credit: 'PhET Interactive Simulations, University of Colorado Boulder · Ohm\'s Law · CC-BY-4.0 · https://phet.colorado.edu', license: 'CC-BY-4.0',
   fallback: { media: 'ohm-still', text: 'Ohm\'s law: the current grows with the voltage and falls with the resistance (I = V / R).' },
@@ -87,41 +79,38 @@ const ITEMS = {
   'not an object': [a => null, ['item']],
 };
 const itemCases = Object.entries(ITEMS).map(([k, [f]]) => { const a = good(); const r = f(a); return [k, r === null ? null : a]; });
-const pyI = py(`for k, a in d:
-    e, w = C.check_item(a); out[k] = [e, w]`, itemCases);
 for (const [k, a] of itemCases) {
-  const js = E.check(a), want = ITEMS[k][1].slice().sort(), jc = codes(js.errors), pc = codes(pyI[k][0]);
-  ok(JSON.stringify(jc) === JSON.stringify(want) && JSON.stringify(pc) === JSON.stringify(want) && js.warnings.length === pyI[k][1].length,
-    `${k}: ${want.join(', ') || 'no errors'}${JSON.stringify(jc) !== JSON.stringify(want) || JSON.stringify(pc) !== JSON.stringify(want) ? `  (JS ${jc.join(',')} | Python ${pc.join(',')})` : ''}`);
+  const js = E.check(a), want = ITEMS[k][1].slice().sort(), jc = codes(js.errors);
+  ok(JSON.stringify(jc) === JSON.stringify(want) && js.warnings.length === (k.startsWith('non-commercial') ? 1 : 0),
+    `${k}: ${want.join(', ') || 'no errors'}${JSON.stringify(jc) !== JSON.stringify(want) ? `  (got ${jc.join(',')})` : ''}`);
 }
 ok(E.check({ ...good(), license: 'CC-BY-NC-4.0' }).warnings.some(w => /^license-nc/.test(w)), 'a non-commercial licence is a warning (the owner decides)');
 const pack = sim => ({ activities: { format: 'noema.activities/v1', items: [good(), { id: 'other', runtime: 'html-app@1' }] },
   chapters: [{ id: 'ch01', exercises: sim ? [{ id: 'ch01-e900', type: 'sim', activity: 'ohm-phet' }] : [{ id: 'ch01-e1', type: 'mcq' }] }] });
-const pyP = py(`for k, p in d:
-    e, w = C.check_pack(p); out[k] = e`, [['block', pack(false)], ['sim', pack(true)]]);
-ok(E.checkPack(pack(false)).errors.length === 0 && pyP.block.length === 0, 'a pack with the embed in a theory block passes (other runtimes are left to their own checks)');
-ok(E.checkPack(pack(true)).errors.some(m => /sim-embed/.test(m)) && pyP.sim.some(m => /sim-embed/.test(m)), 'a sim exercise on an embed is refused (explore only), in JS and Python');
-ok(cp.spawnSync('python3', ['-I', path.join(ROOT, 'tools', 'embed_check.py'), path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'noema-embed-')), 'x.json')], { encoding: 'utf8' }).status !== 0, 'embed_check.py: a missing file fails');
+ok(E.checkPack(pack(false)).errors.length === 0, 'a pack with the embed in a theory block passes (other runtimes are left to their own checks)');
+ok(E.checkPack(pack(true)).errors.some(m => /sim-embed/.test(m)), 'a sim exercise on an embed is refused (explore only)');
 
 { // the folder form: activities/activities.json names no strings; each language's title is in activities/<id>/strings.<locale>.json
   const d = fs.mkdtempSync(path.join(os.tmpdir(), 'noema-embed-reg-')), a = good(), st = a.strings; delete a.strings;
   fs.mkdirSync(path.join(d, 'activities', a.id), { recursive: true });
   fs.writeFileSync(path.join(d, 'activities', 'activities.json'), JSON.stringify({ format: 'noema.activities/v1', items: [a] }));
   for (const [l, t] of Object.entries(st)) fs.writeFileSync(path.join(d, 'activities', a.id, `strings.${l}.json`), JSON.stringify(t));
-  const run = f => cp.spawnSync('python3', ['-I', path.join(ROOT, 'tools', 'embed_check.py'), f], { encoding: 'utf8' });
-  const r1 = run(path.join(d, 'activities', 'activities.json'));
-  fs.writeFileSync(path.join(d, 'pack.json'), JSON.stringify({ activities: { format: 'noema.activities/v1', items: [a] } }));
-  const r2 = run(path.join(d, 'pack.json'));
-  ok(r1.status === 0 && /no errors/.test(r1.stdout) && r2.status === 1 && /strings-title/.test(r2.stdout),
-    'embed_check.py on activities/activities.json reads the strings beside it (a good embed passes); a built pack without strings is still refused ' + JSON.stringify([r1.stdout, r2.stdout]));
+  // the skill's activity_lint.py reads the folder (tools/noema_lib.py load_activities) and checks it with the content checks
+  const r1 = cp.spawnSync('python3', [path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', 'activity_lint.py'), d], { encoding: 'utf8' });
+  const r2 = E.checkPack({ activities: { format: 'noema.activities/v1', items: [a] } });
+  ok(/1 activity/.test(r1.stdout) && !/strings-title/.test(r1.stdout) && r2.errors.some(m => /strings-title/.test(m)),
+    'activity_lint.py on the activities folder reads the strings beside it (no strings-title); a built pack without strings is still refused ' + JSON.stringify([r1.stdout, r1.stderr]));
 }
 
-console.log('— registration (opt-in per deployment)');
-const reg = cfg => { const got = []; const ctx = { ACT: { registerRuntime: d => got.push(d.id) }, window: { NOEMA_CONFIG: cfg }, document: {}, console, Promise, setTimeout, clearTimeout, URL }; vm.createContext(ctx); vm.runInContext(SRC, ctx); return got; };
-ok(reg(undefined).length === 0 && reg({ activities: { 'external-embed@1': 'yes' } }).length === 0, 'not switched on: the runtime does not register (packs that need it show their fallback)');
-ok(JSON.stringify(reg({ activities: { 'external-embed@1': true } })) === '["external-embed@1"]', 'NOEMA_CONFIG.activities["external-embed@1"] === true: it registers');
+async function registration() {
+  console.log('— registration (opt-in per deployment)');
+  const mod = await RT.runtimes.load('external-embed@1');
+  const reg = flags => { const d = mod.create({ t: k => k, message: (type, payload) => ({ p: 'noema.activity', v: 1, type, payload: payload || {} }), setting: () => undefined, setSetting() { }, flags: () => flags || {}, warn() { }, now: () => 0 }); return d ? [d.id] : []; };
+  ok(reg(undefined).length === 0 && reg({ 'external-embed@1': 'yes' }).length === 0 && !RT.runtimes.isOn('external-embed@1', { 'external-embed@1': 'yes' }), 'not switched on: the runtime is not made (packs that need it show their fallback)');
+  ok(JSON.stringify(reg({ 'external-embed@1': true })) === '["external-embed@1"]' && RT.runtimes.isOn('external-embed@1', { 'external-embed@1': true }) && RT.runtimes.switchOf('external-embed@1') === 'opt-in', 'NOEMA_CONFIG.activities["external-embed@1"] === true: it is made (NoemaCore.runtimes, an opt-in runtime)');
+}
 ok(!/innerHTML|insertAdjacentHTML|document\.write|eval\(|new Function/.test(SRC), 'the runtime never writes HTML from strings and never evaluates code');
-ok(!/allow-top-navigation|allow-popups-to-escape/.test(SRC.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '').replace(/\/\*@providers\*\/[\s\S]*?\/\*@end\*\//, '')), 'the runtime\'s code names no top-navigation or escaping-popup token');
+ok(!/allow-top-navigation|allow-popups-to-escape/.test(SRC.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '')), 'the runtime\'s code names no top-navigation or escaping-popup token');
 
 /* ======================================== 2. the browser part ======================================== */
 async function browserPart() {
@@ -161,18 +150,23 @@ if (t === 'hostile') setTimeout(function () {
     { id: 'fakepending', name: 'PendingSim', status: 'pending', origins: [PROV], path: '/.*', query: '.*', hash: null, sandbox: ['allow-scripts', 'allow-same-origin'], licenses: ['CC-BY-4.0'], creditMust: 'P', credit: 'P', terms: PROV + '/t3', supportsResult: false, notes: 'test' },
   ];
   const s32 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8'), ACTPsrc = s32.slice(s32.indexOf('const ACTP = '), s32.indexOf('const ACT = ('));
-  const rt = SRC.replace(/\/\*@providers\*\/[\s\S]*?\/\*@end\*\//, () => '/*@providers*/' + JSON.stringify(TEST_PROVIDERS) + '/*@end*/');
-  const HOST = `<!doctype html><meta charset="utf-8"><style>${fs.readFileSync(path.join(ROOT, 'engine', 'src', '45_activity_embed.css'), 'utf8')}</style>
+  const piece = fs.readFileSync(path.join(ROOT, 'build', 'runtimes.js'), 'utf8');   // the page's lazy piece of the runtimes (npm run build)
+  const HOST = `<!doctype html><meta charset="utf-8"><style>${fs.readFileSync(path.join(RTDIR, 'embed.css'), 'utf8')}</style>
 <body style="margin:0;font-family:system-ui"><div id="box" class="act-box" style="position:relative;width:100%;height:420px"></div><div id="fb"></div><script>
 window.NOEMA_CONFIG = { activities: { 'external-embed@1': true } };
 var S = { settings: (function () { try { return JSON.parse(localStorage.getItem('embedS') || '{}'); } catch (e) { return {}; } })() };
 function save() { localStorage.setItem('embedS', JSON.stringify(S.settings)); }
 function tE(k, v) { return k + (v ? ' ' + JSON.stringify(v) : ''); }
-var RT = null; var ACT = { registerRuntime: function (d) { RT = d; } };
+var RT = null;
 ${ACTPsrc}
-</script><script>${rt}</script><script>
+</script><script>${piece.replace(/<\/script/gi, '<\\/script').replace(/<!--/g, '<\\x21--')}</script><script>
+var HOSTPORT = { t: tE, message: ACTP.out, setting: function (k) { return S.settings[k]; }, setSetting: function (k, v) { S.settings[k] = v; save(); },
+  flags: function () { return NOEMA_CONFIG.activities; }, warn: function () { console.warn.apply(console, arguments); }, now: Date.now };
+window.READY = __noemaRuntimesPiece.plugins.find(function (p) { return p.manifest.id === 'external-embed@1'; }).entry().then(function (m) { RT = m.createWith(HOSTPORT, ${JSON.stringify(TEST_PROVIDERS)}); });
+</script><script>
 window.LOG = []; window.H = null;
-window.run = function (act, init) {
+window.run = async function (act, init) {
+  await window.READY;
   var box = document.getElementById('box'); box.innerHTML = ''; document.getElementById('fb').textContent = ''; window.LOG = [];
   if (window.H) try { window.H.close(); } catch (e) { }
   window.H = RT.mount(box, { act: act, init: init, title: 'activity ' + act.id,
@@ -282,6 +276,7 @@ addEventListener('message', function (e) { LOG.push({ type: 'stray', data: e.dat
 }
 
 (async () => {
+  await registration();
   if (process.argv.includes('--browser')) await browserPart();
   console.log(fails ? `\n${fails} of ${n} failed` : `\nactivities_embed: ${n} checks passed`); process.exit(fails ? 1 : 0);
 })();

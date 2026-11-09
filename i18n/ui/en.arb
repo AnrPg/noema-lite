@@ -1,0 +1,603 @@
+{
+  "@@locale": "en",
+  "ui.button.withCount": "{label}: {n, number}",
+  "@ui.button.withCount": {
+    "description": "Accessible name of an icon button that shows a count, e.g. “Notifications: 3”. {label} is the button’s name."
+  },
+  "ui.chip.remove": "Remove {label}",
+  "@ui.chip.remove": {
+    "description": "Name of the ✕ on a removable chip (a filter, a chapter). {label} is the chip’s words."
+  },
+  "ui.dialog.close": "Close",
+  "@ui.dialog.close": {
+    "description": "The ✕ button of a dialog or sheet."
+  },
+  "ui.field.missing": "Fill this in",
+  "@ui.field.missing": {
+    "description": "The message of a required form field left empty. Short."
+  },
+  "ui.field.required": "(required)",
+  "@ui.field.required": {
+    "description": "After the label of a form field that must be filled in."
+  },
+  "ui.frame.back": "Back",
+  "@ui.frame.back": {
+    "description": "The ← button at the start of the top bar."
+  },
+  "ui.frame.mainNav": "Main",
+  "@ui.frame.mainNav": {
+    "description": "Name of the main navigation (the tabs at the bottom on phones, the side rail on wide screens), read by screen readers."
+  },
+  "ui.frame.skip": "Skip to the content",
+  "@ui.frame.skip": {
+    "description": "The first stop of the keyboard on every page: moves the focus past the top bar and the tabs to the page itself."
+  },
+  "ui.frame.where": "Where you are",
+  "@ui.frame.where": {
+    "description": "Name of the breadcrumbs in the top bar, read by screen readers."
+  },
+  "ui.tabs.count": "waiting: {n, number}",
+  "@ui.tabs.count": {
+    "description": "Read by screen readers after a tab’s name when something waits there, e.g. “Practice, waiting: 3”."
+  },
+  "ui.tip.about": "About: {topic}",
+  "@ui.tip.about": {
+    "description": "Name of the ⓘ button that shows a short explanation. {topic} is what it explains."
+  },
+  "ui.toast.dismiss": "Dismiss",
+  "@ui.toast.dismiss": {
+    "description": "The ✕ of a short message at the bottom of the screen."
+  },
+  "ui.progress.count": "{value, number} / {max, number}",
+  "@ui.progress.count": {
+    "description": "A progress shown as a count, e.g. “3 / 10”."
+  },
+  "ui.progress.working": "In progress",
+  "@ui.progress.working": {
+    "description": "Read by screen readers for a progress bar without a known value."
+  },
+  "ui.level.kind.grade": "Grade",
+  "@ui.level.kind.grade": {
+    "description": "Kind of level ladder: a school grade (class year)."
+  },
+  "ui.level.kind.semester": "Semester",
+  "@ui.level.kind.semester": {
+    "description": "Kind of level ladder: a university semester."
+  },
+  "ui.level.kind.year": "Study year",
+  "@ui.level.kind.year": {
+    "description": "Kind of level ladder: a year of study (e.g. of a degree)."
+  },
+  "ui.level.kind.difficulty": "Difficulty",
+  "@ui.level.kind.difficulty": {
+    "description": "Kind of level ladder: introductory, intermediate, advanced."
+  },
+  "ui.level.kind.custom": "Level",
+  "@ui.level.kind.custom": {
+    "description": "Kind of level ladder: one the author named themselves."
+  },
+  "ui.level.state.done": "done",
+  "@ui.level.state.done": {
+    "description": "A level the learner has completed (lower case: it ends a phrase)."
+  },
+  "ui.level.state.current": "your level",
+  "@ui.level.state.current": {
+    "description": "The level the learner is at now (lower case: it ends a phrase)."
+  },
+  "ui.level.state.ahead": "ahead",
+  "@ui.level.state.ahead": {
+    "description": "A level the learner has not reached yet (lower case: it ends a phrase)."
+  },
+  "ui.level.phrase": "{kind}: {name}, {state}",
+  "@ui.level.phrase": {
+    "description": "What a screen reader says for a level badge, e.g. “Semester: Semester 3, your level”."
+  },
+  "ui.level.phraseOf": "{kind}: {name}, level {n, number} of {of, number}, {state}",
+  "@ui.level.phraseOf": {
+    "description": "What a screen reader says for a level badge with its place on the ladder, e.g. “Difficulty: Intermediate, level 2 of 3, your level”."
+  },
+  "ui.kit.title": "UI kit",
+  "@ui.kit.title": {
+    "description": "Title of the developers’ demo page of the interface components (#/ui-kit)."
+  },
+  "ui.kit.section.basics": "Basics",
+  "@ui.kit.section.basics": {
+    "description": "UI kit demo: a section (tab) with buttons, chips, cards …"
+  },
+  "ui.kit.section.overlays": "Overlays",
+  "@ui.kit.section.overlays": {
+    "description": "UI kit demo: a section (tab) with menus, dialogs and notices."
+  },
+  "ui.kit.section.forms": "Forms",
+  "@ui.kit.section.forms": {
+    "description": "UI kit demo: a section (tab) with form fields, tabs and lists."
+  },
+  "ui.kit.section.look": "Look",
+  "@ui.kit.section.look": {
+    "description": "UI kit demo: a section (tab) with the appearance settings."
+  },
+  "ui.kit.lead.basics": "Buttons, chips, cards, tips, levels and progress, on the design tokens of the character you wear.",
+  "@ui.kit.lead.basics": {
+    "description": "UI kit demo: the line under the title of the Basics section."
+  },
+  "ui.kit.lead.overlays": "Menus, dialogs, sheets and notices. Escape closes the top one; focus goes back where it was.",
+  "@ui.kit.lead.overlays": {
+    "description": "UI kit demo: the line under the title of the Overlays section."
+  },
+  "ui.kit.lead.forms": "Fields, tabs, lists and folds. Every control has its label and works with the keyboard.",
+  "@ui.kit.lead.forms": {
+    "description": "UI kit demo: the line under the title of the Forms section."
+  },
+  "ui.kit.lead.look": "Light or dark, the character, motion and the interface language — right to left too.",
+  "@ui.kit.lead.look": {
+    "description": "UI kit demo: the line under the title of the Look section."
+  },
+  "ui.kit.buttons": "Buttons",
+  "@ui.kit.buttons": {
+    "description": "UI kit demo: heading."
+  },
+  "ui.kit.continue": "Continue",
+  "@ui.kit.continue": {
+    "description": "UI kit demo: an example button."
+  },
+  "ui.kit.practise": "Practise",
+  "@ui.kit.practise": {
+    "description": "UI kit demo: an example button (verb)."
+  },
+  "ui.kit.later": "Later",
+  "@ui.kit.later": {
+    "description": "UI kit demo: an example button."
+  },
+  "ui.kit.delete": "Delete",
+  "@ui.kit.delete": {
+    "description": "UI kit demo: an example button and menu item."
+  },
+  "ui.kit.unavailable": "Not available",
+  "@ui.kit.unavailable": {
+    "description": "UI kit demo: an example of a disabled button."
+  },
+  "ui.kit.saving": "Saving",
+  "@ui.kit.saving": {
+    "description": "UI kit demo: an example of a button that is busy."
+  },
+  "ui.kit.small": "Small",
+  "@ui.kit.small": {
+    "description": "UI kit demo: an example of a small button."
+  },
+  "ui.kit.toForms": "Go to the forms",
+  "@ui.kit.toForms": {
+    "description": "UI kit demo: a link that looks like a button (to the Forms section)."
+  },
+  "ui.kit.search": "Search",
+  "@ui.kit.search": {
+    "description": "UI kit demo: an example icon button."
+  },
+  "ui.kit.notifications": "Notifications",
+  "@ui.kit.notifications": {
+    "description": "UI kit demo: an example icon button (the bell)."
+  },
+  "ui.kit.favourite": "Favourite",
+  "@ui.kit.favourite": {
+    "description": "UI kit demo: an example toggle button (a star)."
+  },
+  "ui.kit.edit": "Edit",
+  "@ui.kit.edit": {
+    "description": "UI kit demo: an example icon button and menu item."
+  },
+  "ui.kit.chips": "Chips",
+  "@ui.kit.chips": {
+    "description": "UI kit demo: heading (small labels and filters in a pill)."
+  },
+  "ui.kit.filters": "Filters",
+  "@ui.kit.filters": {
+    "description": "UI kit demo: name of a group of filter chips."
+  },
+  "ui.kit.onlyDue": "Only due",
+  "@ui.kit.onlyDue": {
+    "description": "UI kit demo: an example filter (only the cards that are due)."
+  },
+  "ui.kit.mistakes": "Mistakes",
+  "@ui.kit.mistakes": {
+    "description": "UI kit demo: an example filter and menu item (the Mistakes gym)."
+  },
+  "ui.kit.done": "Done",
+  "@ui.kit.done": {
+    "description": "UI kit demo: an example chip."
+  },
+  "ui.kit.dueToday": "Due today",
+  "@ui.kit.dueToday": {
+    "description": "UI kit demo: an example chip."
+  },
+  "ui.kit.wrong": "Wrong",
+  "@ui.kit.wrong": {
+    "description": "UI kit demo: an example chip (a wrong answer)."
+  },
+  "ui.kit.new": "New",
+  "@ui.kit.new": {
+    "description": "UI kit demo: an example chip."
+  },
+  "ui.kit.chapter": "Chapter {n, number}",
+  "@ui.kit.chapter": {
+    "description": "UI kit demo: an example chip and label."
+  },
+  "ui.kit.cards": "Cards",
+  "@ui.kit.cards": {
+    "description": "UI kit demo: heading (surfaces for one subject, one Roadmap …)."
+  },
+  "ui.kit.mechanics": "Mechanics",
+  "@ui.kit.mechanics": {
+    "description": "UI kit demo: an example subject (physics)."
+  },
+  "ui.kit.mechanicsText": "Motion, forces and energy.",
+  "@ui.kit.mechanicsText": {
+    "description": "UI kit demo: the example subject’s description."
+  },
+  "ui.kit.mastery": "Mastery",
+  "@ui.kit.mastery": {
+    "description": "UI kit demo: an example progress bar’s name."
+  },
+  "ui.kit.today": "Today",
+  "@ui.kit.today": {
+    "description": "UI kit demo: an example card’s title."
+  },
+  "ui.kit.todayText": "Cards due today: {n, number}",
+  "@ui.kit.todayText": {
+    "description": "UI kit demo: an example card’s text."
+  },
+  "ui.kit.review": "Review",
+  "@ui.kit.review": {
+    "description": "UI kit demo: an example button (review the due cards)."
+  },
+  "ui.kit.tips": "Tips",
+  "@ui.kit.tips": {
+    "description": "UI kit demo: heading (the ⓘ explanations)."
+  },
+  "ui.kit.biteSize": "Bite-size reading",
+  "@ui.kit.biteSize": {
+    "description": "UI kit demo: an example setting’s name."
+  },
+  "ui.kit.biteSizeTip": "Long sections come in short parts, one screen at a time.",
+  "@ui.kit.biteSizeTip": {
+    "description": "UI kit demo: the example setting’s explanation."
+  },
+  "ui.kit.levels": "Levels",
+  "@ui.kit.levels": {
+    "description": "UI kit demo: heading."
+  },
+  "ui.kit.progress": "Progress",
+  "@ui.kit.progress": {
+    "description": "UI kit demo: heading."
+  },
+  "ui.kit.sectionsRead": "Sections read",
+  "@ui.kit.sectionsRead": {
+    "description": "UI kit demo: an example progress bar’s name."
+  },
+  "ui.kit.preparing": "Preparing the step",
+  "@ui.kit.preparing": {
+    "description": "UI kit demo: an example progress without a known value."
+  },
+  "ui.kit.goal": "Daily goal",
+  "@ui.kit.goal": {
+    "description": "UI kit demo: the day’s XP goal (a ring and a setting)."
+  },
+  "ui.kit.goalText": "XP today, out of the day’s goal.",
+  "@ui.kit.goalText": {
+    "description": "UI kit demo: the line next to the goal ring."
+  },
+  "ui.kit.menus": "Menus",
+  "@ui.kit.menus": {
+    "description": "UI kit demo: heading."
+  },
+  "ui.kit.more": "More",
+  "@ui.kit.more": {
+    "description": "UI kit demo: the ⋮ menu button’s name."
+  },
+  "ui.kit.chose": "You chose: {item}",
+  "@ui.kit.chose": {
+    "description": "UI kit demo: a short message after a menu item was chosen."
+  },
+  "ui.kit.editSub": "Change its title and steps",
+  "@ui.kit.editSub": {
+    "description": "UI kit demo: the second line of the Edit menu item."
+  },
+  "ui.kit.share": "Share",
+  "@ui.kit.share": {
+    "description": "UI kit demo: an example menu item."
+  },
+  "ui.kit.export": "Export",
+  "@ui.kit.export": {
+    "description": "UI kit demo: an example menu item."
+  },
+  "ui.kit.locked": "Locked",
+  "@ui.kit.locked": {
+    "description": "UI kit demo: an example of a menu item that cannot be chosen."
+  },
+  "ui.kit.flashcards": "Flashcards",
+  "@ui.kit.flashcards": {
+    "description": "UI kit demo: an example menu item."
+  },
+  "ui.kit.lightning": "Lightning round",
+  "@ui.kit.lightning": {
+    "description": "UI kit demo: an example menu item (true or false against the clock)."
+  },
+  "ui.kit.dialogs": "Dialogs",
+  "@ui.kit.dialogs": {
+    "description": "UI kit demo: heading."
+  },
+  "ui.kit.openDialog": "Rename",
+  "@ui.kit.openDialog": {
+    "description": "UI kit demo: a button that opens an example dialog."
+  },
+  "ui.kit.openSheet": "Open a step",
+  "@ui.kit.openSheet": {
+    "description": "UI kit demo: a button that opens an example sheet (a step of a Roadmap)."
+  },
+  "ui.kit.reset": "Reset my progress",
+  "@ui.kit.reset": {
+    "description": "UI kit demo: a button that asks an example question that cannot be undone, and its confirm button."
+  },
+  "ui.kit.resetQ": "Reset your progress?",
+  "@ui.kit.resetQ": {
+    "description": "UI kit demo: the example question’s title."
+  },
+  "ui.kit.resetText": "Your answers, cards and XP in this subject start again from zero. This cannot be undone.",
+  "@ui.kit.resetText": {
+    "description": "UI kit demo: the example question’s text."
+  },
+  "ui.kit.keep": "Keep it",
+  "@ui.kit.keep": {
+    "description": "UI kit demo: the safe answer of the example question."
+  },
+  "ui.kit.resetDone": "Progress reset",
+  "@ui.kit.resetDone": {
+    "description": "UI kit demo: a short message after confirming (nothing is really reset)."
+  },
+  "ui.kit.kept": "Nothing changed",
+  "@ui.kit.kept": {
+    "description": "UI kit demo: a short message after keeping."
+  },
+  "ui.kit.renameTitle": "Rename the subject",
+  "@ui.kit.renameTitle": {
+    "description": "UI kit demo: the example dialog’s title."
+  },
+  "ui.kit.name": "Name",
+  "@ui.kit.name": {
+    "description": "UI kit demo: a form field’s label."
+  },
+  "ui.kit.cancel": "Cancel",
+  "@ui.kit.cancel": {
+    "description": "UI kit demo: an example button."
+  },
+  "ui.kit.save": "Save",
+  "@ui.kit.save": {
+    "description": "UI kit demo: an example button."
+  },
+  "ui.kit.saved": "Saved",
+  "@ui.kit.saved": {
+    "description": "UI kit demo: a short message."
+  },
+  "ui.kit.stepTitle": "Station 2: Forces",
+  "@ui.kit.stepTitle": {
+    "description": "UI kit demo: the example sheet’s title (a step of a Roadmap)."
+  },
+  "ui.kit.stepText": "Newton’s laws, friction and free-body diagrams. After this step you can explain why things move as they do.",
+  "@ui.kit.stepText": {
+    "description": "UI kit demo: the example sheet’s text."
+  },
+  "ui.kit.study": "Study",
+  "@ui.kit.study": {
+    "description": "UI kit demo: an example button (verb)."
+  },
+  "ui.kit.notices": "Notices",
+  "@ui.kit.notices": {
+    "description": "UI kit demo: heading (short messages at the bottom of the screen)."
+  },
+  "ui.kit.showToast": "Show a toast",
+  "@ui.kit.showToast": {
+    "description": "UI kit demo: a button that shows an example short message."
+  },
+  "ui.kit.showNotice": "Show a notice",
+  "@ui.kit.showNotice": {
+    "description": "UI kit demo: a button that shows an example piece of news."
+  },
+  "ui.kit.showAlert": "Show an alert",
+  "@ui.kit.showAlert": {
+    "description": "UI kit demo: a button that shows an example warning."
+  },
+  "ui.kit.stepReady": "A step of your Roadmap is ready",
+  "@ui.kit.stepReady": {
+    "description": "UI kit demo: an example piece of news."
+  },
+  "ui.kit.storageFull": "This device’s storage is full: back up your data",
+  "@ui.kit.storageFull": {
+    "description": "UI kit demo: an example warning."
+  },
+  "ui.kit.moved": "Moved to the bell: {n, number}",
+  "@ui.kit.moved": {
+    "description": "UI kit demo: how many notices did not fit on screen and wait under the 🔔."
+  },
+  "ui.kit.noticeRule": "At most two notices are on screen; the rest wait under the bell.",
+  "@ui.kit.noticeRule": {
+    "description": "UI kit demo: the rule of the notices."
+  },
+  "ui.kit.forms": "Forms",
+  "@ui.kit.forms": {
+    "description": "UI kit demo: heading."
+  },
+  "ui.kit.nameHint": "As others see it",
+  "@ui.kit.nameHint": {
+    "description": "UI kit demo: the hint under the Name field."
+  },
+  "ui.kit.nameMissing": "Write a name",
+  "@ui.kit.nameMissing": {
+    "description": "UI kit demo: the error of the empty Name field."
+  },
+  "ui.kit.about": "A few words",
+  "@ui.kit.about": {
+    "description": "UI kit demo: a multi-line field’s label (about yourself)."
+  },
+  "ui.kit.xp": "{n, number} XP a day",
+  "@ui.kit.xp": {
+    "description": "UI kit demo: an option of the daily goal."
+  },
+  "ui.kit.sound": "Sound",
+  "@ui.kit.sound": {
+    "description": "UI kit demo: a switch’s label."
+  },
+  "ui.kit.game": "How much game",
+  "@ui.kit.game": {
+    "description": "UI kit demo: a choice’s label (how playful the app is)."
+  },
+  "ui.kit.game.playful": "Playful",
+  "@ui.kit.game.playful": {
+    "description": "UI kit demo: an option of How much game."
+  },
+  "ui.kit.game.playfulSub": "Reactions and celebrations",
+  "@ui.kit.game.playfulSub": {
+    "description": "UI kit demo: the second line of Playful."
+  },
+  "ui.kit.game.calm": "Calm",
+  "@ui.kit.game.calm": {
+    "description": "UI kit demo: an option of How much game."
+  },
+  "ui.kit.game.calmSub": "Only milestones",
+  "@ui.kit.game.calmSub": {
+    "description": "UI kit demo: the second line of Calm."
+  },
+  "ui.kit.game.off": "Off",
+  "@ui.kit.game.off": {
+    "description": "UI kit demo: an option of How much game."
+  },
+  "ui.kit.game.offSub": "No reactions",
+  "@ui.kit.game.offSub": {
+    "description": "UI kit demo: the second line of Off."
+  },
+  "ui.kit.tabs": "Tabs",
+  "@ui.kit.tabs": {
+    "description": "UI kit demo: heading."
+  },
+  "ui.kit.theory": "Theory",
+  "@ui.kit.theory": {
+    "description": "UI kit demo: an example tab (of a chapter)."
+  },
+  "ui.kit.practice": "Practice",
+  "@ui.kit.practice": {
+    "description": "UI kit demo: an example tab (of a chapter; noun)."
+  },
+  "ui.kit.traps": "Traps",
+  "@ui.kit.traps": {
+    "description": "UI kit demo: an example tab (of a chapter: the usual mistakes)."
+  },
+  "ui.kit.theoryText": "The chapter’s sections, one after the other.",
+  "@ui.kit.theoryText": {
+    "description": "UI kit demo: the Theory tab’s text."
+  },
+  "ui.kit.practiceText": "Exercises, flashcards and the chapter’s boss.",
+  "@ui.kit.practiceText": {
+    "description": "UI kit demo: the Practice tab’s text."
+  },
+  "ui.kit.trapsText": "The usual mistakes, and how to avoid them.",
+  "@ui.kit.trapsText": {
+    "description": "UI kit demo: the Traps tab’s text."
+  },
+  "ui.kit.lists": "Lists and folds",
+  "@ui.kit.lists": {
+    "description": "UI kit demo: heading."
+  },
+  "ui.kit.subjects": "Subjects",
+  "@ui.kit.subjects": {
+    "description": "UI kit demo: an example list’s name."
+  },
+  "ui.kit.chapters": "Chapters: {n, number}",
+  "@ui.kit.chapters": {
+    "description": "UI kit demo: the second line of an example subject."
+  },
+  "ui.kit.moreAbout": "More about {name}",
+  "@ui.kit.moreAbout": {
+    "description": "UI kit demo: the name of the ⋮ menu of one list row."
+  },
+  "ui.kit.optics": "Optics",
+  "@ui.kit.optics": {
+    "description": "UI kit demo: an example subject (physics)."
+  },
+  "ui.kit.languages": "Languages",
+  "@ui.kit.languages": {
+    "description": "UI kit demo: an example list row."
+  },
+  "ui.kit.languagesSub": "Not opened yet",
+  "@ui.kit.languagesSub": {
+    "description": "UI kit demo: the second line of an example list row."
+  },
+  "ui.kit.foldA": "Pet friends and fruits",
+  "@ui.kit.foldA": {
+    "description": "UI kit demo: an example fold’s title (a group of characters)."
+  },
+  "ui.kit.foldAText": "A fold keeps a long page short: open only what you need.",
+  "@ui.kit.foldAText": {
+    "description": "UI kit demo: the first fold’s text."
+  },
+  "ui.kit.foldB": "Fairy tales",
+  "@ui.kit.foldB": {
+    "description": "UI kit demo: an example fold’s title (a group of characters)."
+  },
+  "ui.kit.foldBText": "Characters from fairy tales keep their tale’s name.",
+  "@ui.kit.foldBText": {
+    "description": "UI kit demo: the second fold’s text."
+  },
+  "ui.kit.look": "Appearance",
+  "@ui.kit.look": {
+    "description": "UI kit demo: heading."
+  },
+  "ui.kit.scheme": "Light or dark",
+  "@ui.kit.scheme": {
+    "description": "UI kit demo: a choice’s label (colour scheme)."
+  },
+  "ui.kit.asDevice": "As the device",
+  "@ui.kit.asDevice": {
+    "description": "UI kit demo: the option that follows the device’s own setting (for the colour scheme and for motion)."
+  },
+  "ui.kit.scheme.light": "Light",
+  "@ui.kit.scheme.light": {
+    "description": "UI kit demo: an option of Light or dark."
+  },
+  "ui.kit.scheme.dark": "Dark",
+  "@ui.kit.scheme.dark": {
+    "description": "UI kit demo: an option of Light or dark."
+  },
+  "ui.kit.character": "Character",
+  "@ui.kit.character": {
+    "description": "UI kit demo: a choice’s label (the companion character, which sets the colours and fonts)."
+  },
+  "ui.kit.motion": "Motion",
+  "@ui.kit.motion": {
+    "description": "UI kit demo: a choice’s label (animations)."
+  },
+  "ui.kit.motion.reduced": "Less motion",
+  "@ui.kit.motion.reduced": {
+    "description": "UI kit demo: an option of Motion."
+  },
+  "ui.kit.motion.full": "Full",
+  "@ui.kit.motion.full": {
+    "description": "UI kit demo: an option of Motion (all animations)."
+  },
+  "ui.kit.language": "Interface language",
+  "@ui.kit.language": {
+    "description": "UI kit demo: a choice’s label."
+  },
+  "ui.kit.lookNote": "The choices here are this device’s and only for this page.",
+  "@ui.kit.lookNote": {
+    "description": "UI kit demo: a note under the appearance settings."
+  },
+  "ui.study.onlyMyLevel": "Only my level ({level})",
+  "@ui.study.onlyMyLevel": {
+    "description": "A filter chip of a practice round: only the exercises at the learner’s level. {level} is the level’s name (e.g. “B1”, “Intermediate”)."
+  },
+  "ui.study.myLevelTip": "Practise only the exercises at the level you have reached",
+  "@ui.study.myLevelTip": {
+    "description": "Tooltip of the “Only my level” chip."
+  },
+  "ui.study.level": "Level",
+  "@ui.study.level": {
+    "description": "Label of the row of the round’s filters that holds the “Only my level” chip."
+  }
+}

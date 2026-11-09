@@ -7,7 +7,7 @@ finds the cheapest route; its registry entry lists "engines": ["graph@1"] and th
 docs/INTERACTIVE.md §8.1): app.html, strings.<locale>.json and its tests.json (with {"waitFor": …} steps for the engine's answer).
 sim-spec@1 copies rc-lowpass (an RC low-pass filter, a declarative simulation): activities/<NEW_ID>/spec.json, strings.<locale>.json, tests.json.
 h5p@1 copies planets-quiz (an ordinary H5P MultiChoice item): activities/<NEW_ID>/item.h5p, content.<locale>.json (its words in
-the other languages), tests.json; --from FILE.h5p takes your own .h5p file instead (checked at once with h5p_check.py; then write
+the other languages), tests.json; --from FILE.h5p takes your own .h5p file instead (checked at once against the package rules; then write
 content.<locale>.json for every other language the pack is read in: a copy of its content/content.json, translated).
 --from picks the reference: rc-transient (circuit-mna@1: a netlist, sliders bound to its parts, a scope trace) or led-bench
 (circuit-mna@1: a fault-finding bench with hidden faults, instruments, test points and a diagnosis; docs/INTERACTIVE_CIRCUIT.md),
@@ -15,7 +15,7 @@ heatsink (thermal@1: a lumped thermal network, heat flow and temperatures), pid-
 (rf@1: a radio link budget) or sensor-node (twin@1: the digital twin of a battery-powered IoT node) — docs/INTERACTIVE_ENGINES.md;
 their tests.json starts from two of the reference's own cases.
 wasm-module@1 copies wasm-oscillator (a precompiled WebAssembly core with its own spec; docs/INTERACTIVE_WASM.md): module.wasm, spec.json,
-the strings and tests.json — replace module.wasm with YOUR module (check it with wasm_check.py) and keep abi in the registry entry.
+the strings and tests.json — replace module.wasm with YOUR module (check it with activity_lint.py) and keep abi in the registry entry.
 py-module@1 copies py-filter (numpy: two digital low-pass filters; docs/INTERACTIVE_PYTHON.md): activities/<NEW_ID>/main.py (step(inputs, state)),
 spec.json (the controls, readouts and plots the app draws from Python's outputs), strings.<locale>.json, tests.json.
 Each: its entry in activities/activities.json (made if missing); media/<NEW_ID>-still.svg + its media.json entry (the fallback
@@ -121,7 +121,7 @@ print(f'✓ activities/{nid}/ (from {ref}, {runtime}), its activities.json entry
       + ', then activity_lint.py → activity_test.py → activity_preview.py')
 if h5p_file:   # the package rules at once (the same as make_pack.py and the app)
     sys.path.insert(0, HERE); sys.path.append(os.path.join(HERE, '..', '..', '..', 'tools'))
-    import h5p_check
-    r = h5p_check.check(os.path.join(dst, 'item.h5p'))
+    import noema_core
+    r = noema_core.h5p_file(os.path.join(dst, 'item.h5p'))
     print(('✗ ' if r['errors'] else '✓ ') + f'{os.path.basename(h5p_file)}: ' + (r.get('main') or '?') + ''.join('\n   error: ' + e for e in r['errors']) + ''.join('\n   warning: ' + w for w in r['warnings']))
     if r['errors']: sys.exit(1)

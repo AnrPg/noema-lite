@@ -1,16 +1,17 @@
-/* The IoT device twin twin@1 (engine/src/42_engine_twin.js, docs/INTERACTIVE_ENGINES.md §5):
+/* The IoT device twin twin@1 (src/engines/twin/twin.ts, docs/INTERACTIVE_ENGINES.md §5):
    1. battery life of a simple duty cycle = capacity / average current (analytic), self-discharge, the voltage curve;
    2. the radio: rf@1's formulas (the duplicated ones agree), losses, acks and retries;
    3. every fault changes the outputs the expected way (sensor stuck / drift, battery ageing, antenna detached, wake period,
       brown-out); brown-out resets from an aged battery;
    4. determinism, the instruments (measure), the sim-spec adapter, the worker source;
-   5. check() / checkFaults() / checkSpec() codes, the event budget, speed, and JS ↔ Python (tools/twin.py) parity on 40+ cases.
+   5. check() / checkFaults() / checkSpec() codes, the event budget, speed, and the golden outputs of the former Python twin (tools/twin.py, tests/fixtures/parity) on 40+ cases.
    Usage: node tests/twin.js */
 const path = require('path'), fs = require('fs'), cp = require('child_process'), os = require('os');
+const want = require('./golden.cjs')('twin');   // the golden outputs of the former Python twin (tests/golden.cjs)
 const ROOT = path.resolve(__dirname, '..');
-require(path.join(ROOT, 'engine', 'src', '41_engine_rf.js'));
-require(path.join(ROOT, 'engine', 'src', '42_engine_twin.js'));
-const T = globalThis.NoemaTwin, RF = globalThis.NoemaRF;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaRF = ENGINES.mod('rf@1'), NoemaTwin = ENGINES.mod('twin@1');
+const T = NoemaTwin, RF = NoemaRF;
 let n = 0, fails = 0;
 const ok = (c, m) => { n++; if (!c) { fails++; console.log('✗ ' + m); } else console.log('✓ ' + m); };
 const codes = (x, level) => T.check(x).filter(p => !level || p.level === level).map(p => p.code);
@@ -180,13 +181,11 @@ const lossy = () => ({ battery: { capacity: 2000 }, power: { sleep: 0.005, activ
   ];
   const total0 = devices.length + faults.length + specs.length;
   ok(total0 >= 30, `parity corpus: ${devices.length} devices + ${faults.length} fault lists + ${specs.length} specs`);
-  const tmp = path.join(os.tmpdir(), 'noema-twin-parity.json'); fs.writeFileSync(tmp, JSON.stringify({ devices, faults, dv, specs }));
-  const py = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import twin
-d = json.load(open(sys.argv[1], encoding='utf-8')); print(json.dumps({'devices': [twin.check(x) for x in d['devices']], 'faults': [twin.check_faults(d['dv'], f) for f in d['faults']], 'specs': [twin.check_spec(x) for x in d['specs']]}))`, tmp], { encoding: 'utf8' }));
   const js = { devices: devices.map(x => T.check(clone(x))), faults: faults.map(f => T.checkFaults(clone(dv), clone(f))), specs: specs.map(x => T.checkSpec(clone(x))) };
+  const py = want('check', { devices, faults, dv, specs }, js);   // the golden outputs of the former twin tools/twin.py
   let same = 0, total = 0, found = 0;
   for (const k of ['devices', 'faults', 'specs']) js[k].forEach((r, i) => { total++; found += r.length; if (JSON.stringify(r) === JSON.stringify(py[k][i])) same++; else console.log('  ≠ ' + k + '[' + i + ']\n    js ' + JSON.stringify(r) + '\n    py ' + JSON.stringify(py[k][i])); });
-  ok(same === total && found > 40, `JS ↔ Python check()/checkFaults()/checkSpec(): ${same}/${total} identical (${found} findings)`);
+  ok(same === total && found > 40, `the golden outputs of the former Python twin = check()/checkFaults()/checkSpec(): ${same}/${total} identical (${found} findings)`);
 }
 
 // ---------- 6. temperature, the clock, the channel ----------

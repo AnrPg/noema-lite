@@ -1,18 +1,17 @@
-# `rhetoric@1` — debate and oratory (`engine/src/48_lib_rhetoric.js`, `NoemaLibRhetoric`)
+# `rhetoric@1` — debate and oratory (`src/engines/rhetoric/rhetoric.ts`, `NoemaLibRhetoric`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`) for debating, argumentation, classical rhetoric and public speaking,
 built as a **computation engine over structured inputs**: a debate round (speeches, timings, points of information, ballots), an
 argument map, logical forms, a speech text with optional word timings, an outline, and small persuasion models. The outputs are
 numbers (for readouts and the checks grader), series and scenes (a Toulmin diagram, an argument map, a flow sheet, the text with its
-figures, a timing bar). The Python twin is `tools/lib_rhetoric.py` (`ID`, `check_spec`, `exprs`, `keys`): it checks and does not
-compute, with the same problems (code, path, message, level) as the JS `checkSpec`. Tests: `node tests/lib_rhetoric.js` (172
-assertions, including JS ↔ Python parity on the fixtures) and `node tests/enginelib.js` (`tests/fixtures/enginelib/rhetoric.json`, 35
+figures, a timing bar). Tests: `node tests/lib_rhetoric.js` (172
+assertions, including the golden outputs of the former Python twin on the fixtures) and `node tests/enginelib.js` (`tests/fixtures/enginelib/rhetoric.json`, 35
 specs) once the engine is registered. The reference activity is `tools/activities_examples/bp-adjudication` (a British Parliamentary
 round with a three-judge panel: the learner predicts the panel's ranking). The research behind this chapter is the project's
 `engine-library/research/rhetoric.md`.
 
-**Logic is not re-implemented here.** Dung semantics, truth tables and syllogisms come from `logic@1` (`window.NoemaLibLogic`:
-`afSolve`, `parse`, `atomsOf`, `evalProp`, `rowsOf`, `syllogism`; `docs/library/logic.md` §9). `47_lib_logic.js` loads before this
+**Logic is not re-implemented here.** Dung semantics, truth tables and syllogisms come from `logic@1` (its module, imported:
+`afSolve`, `parse`, `atomsOf`, `evalProp`, `rowsOf`, `syllogism`; `docs/library/logic.md` §9). `src/engines/logic/logic.ts` loads before this
 file, and the Worker source of `rhetoric@1` is `NoemaExpr + core + logic@1 (source()) + rhetoric@1`, so the page and the Worker run
 the same code. Pure JS, no vendored dependency, deterministic, bounded; numbers, codes, keys and the model's own short texts (`s`, ≤ 64
 characters) leave the engine. No learner words: figure and fallacy names are indices into fixed lists (§5, §6), which the activity
@@ -66,7 +65,7 @@ labels in its own string tables.
 | `synizesis` | bool (default false) | Greek syllables with synizesis (§7) |
 | `theory` | `{kb ≤ 64 [{f!, kind axiom·ordinary, rank}], rules ≤ 64 [{id!, body [≤ 8], head!, kind strict·defeasible, rank}], contraries ≤ 64 [{u!, v!}], link last·weakest, ordering elitist·democratic, transpose}` | an ASPIC+ theory (§3.1); literals `p`, `¬p` (also `~p`, `!p`, `-p`) |
 
-### 1.2 Checker codes (`checkSpec`, the same in `tools/lib_rhetoric.py`)
+### 1.2 Checker codes (`checkSpec`)
 
 | code | when |
 |---|---|
@@ -409,7 +408,7 @@ test (20 000 characters with every figure, readability and timings, a 24-argumen
 | bipolar map a ⇒ b → c | one supported attack a → c; c out | Cayrol & Lagasquie-Schiex 2005 |
 | ASPIC+ snores / professor | 5 arguments, 1 defeat; last-link justifies accessDenied, weakest-link not; postulates hold | Modgil & Prakken 2014 Ex. 3.23 |
 
-Also asserted: every runtime code of §10 that a model can reach, the checker codes, the JS = Python parity on the 27 fixture specs,
+Also asserted: every runtime code of §10 that a model can reach, the checker codes, the golden outputs of the former Python twin on the 27 fixture specs,
 the adapter, the Worker source (with logic@1) giving identical outputs in a fresh `vm` context, a typical run < 50 ms and the heaviest
 < 2 s.
 

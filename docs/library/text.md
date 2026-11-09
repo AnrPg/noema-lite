@@ -1,11 +1,10 @@
-# `text@1` — texts and verse (`engine/src/48_lib_text.js`, `NoemaLibText`)
+# `text@1` — texts and verse (`src/engines/text/text.ts`, `NoemaLibText`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`) for literature, linguistics, the classics and the digital
 humanities: tokens and types in every script, frequency laws, lexical diversity, concordances, collocations, keyness, stylometry,
 readability, Greek and Latin quantitative metre (every valid scansion of a line, with the assumptions it makes), English
-accentual-syllabic metre and rhyme schemes. The Python twin is `tools/lib_text.py` (`ID`, `check_spec`, `exprs`, `keys`): it checks
-and does not analyse, with the same problems (code, path, message, level) as the JS `checkSpec`. The tests are
-`node tests/lib_text.js` (99 assertions) and `node tests/enginelib.js` (JS ↔ Python parity on `tests/fixtures/enginelib/text.json`,
+accentual-syllabic metre and rhyme schemes. The tests are
+`node tests/lib_text.js` (99 assertions) and `node tests/enginelib.js` (the golden outputs of the former Python twin on `tests/fixtures/enginelib/text.json`,
 24 specs). The reference activity is `tools/activities_examples/hexameter-scansion` (Aeneid 1.1–7: the learner picks a line and
 guesses each foot; the engine lists every valid scansion and draws the best). The research behind this chapter is the project's
 `engine-library/research/maptext.md` (§ text).
@@ -66,7 +65,7 @@ bounded; numbers, codes, keys and the model's own short texts (`s`, ≤ 64 chara
 | `metre` | `{pattern!, lang la·grc·en, mcl both·long·short, synizesis, max 1–64}` | §8–§10; `max` caps the readings listed (default 64) |
 | `lexicon` | ≤ 2000 `{w!, p!}` | English stress overrides: `p` one digit per syllable (1 primary, 2 secondary, 0 none), e.g. `temperate` → `100` |
 
-### 1.2 Checker codes (`checkSpec`, the same in `tools/lib_text.py`)
+### 1.2 Checker codes (`checkSpec`)
 
 | code | when |
 |---|---|

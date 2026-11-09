@@ -1,6 +1,6 @@
 # Where everything went: the new frame, control by control
 
-The redesign (engine/shell.js, engine/src/95_shell.css, the views in engine/src/40_views.js) keeps every function of the
+The redesign (the frame (src/composition/shell/host.ts, src/ui/screens/shell), engine/src/95_shell.css, the study area's pages in src/features/study/ui) keeps every function of the
 older screens. The ones you use every day stay on the page. The rest move into a **⋮** menu (top right), a **▾** menu next
 to the button they belong to, or appear only where they are needed. This file maps each of the 528 controls of the older
 screens (the survey ids in the left column: T = top bar, H = subject home, C = chapter, S = section, …) to its new home.
@@ -38,7 +38,7 @@ test suites run that way. `tests/shell.js` checks the new homes.
 | B9–B10 source filter banner | Unchanged, on every page while a filter is on |
 | B11 step banner (🗺️ Map) | The subject page's one header: a small "Station of …" line above the title (opens the map), the bar counts the station's mastery |
 | N1–N7 🔔 contents | Unchanged rows, in a sheet |
-| N8 🔔 news | What arrives (a step ready, a subject attached, a new part, links added, inbox results: `Noema.notice`) is a short toast while at most 2 are on screen; a 3rd moves them all, and the rest of that burst, into 🔔 as rows with ✕ and **Clear all** (kept on this device, `engine/loader.js` Notices; tests/notices.js) |
+| N8 🔔 news | What arrives (a step ready, a subject attached, a new part, links added, inbox results: `Noema.notice`) is a short toast while at most 2 are on screen; a 3rd moves them all, and the rest of that burst, into 🔔 as rows with ✕ and **Clear all** (kept on this device, the UI root (src/composition/ui-root.ts) and the areas (engine/app/*.js) Notices; tests/notices.js) |
 
 ## 2. A subject (`#/subject`, was `#/`)
 | Old | New home |
@@ -71,6 +71,7 @@ test suites run that way. `tests/shell.js` checks the new homes.
 | C23 ⚠️ Start trap drill | Traps tab › Traps, no timer; new: ⚡ True or false against the clock (`#/lightning/<chapter>`) |
 | C24 pitfalls + 💡 | Traps tab, unchanged |
 | — | New in Practice: Mistakes of this chapter (when there are some) |
+| — | New in Practice › Choose what to practise and in the mixed round: 🎚️ Only my level (a chip; only when the subject has a level ladder with exercises at several levels) |
 
 ## 4. A section (`#/s/<id>`), reading mode
 | Old | New home |
@@ -158,7 +159,15 @@ mastered station and the last 5 seconds of a timed round can bring a big reactio
 | MB1–MB6 bars | Unchanged, above the map |
 | MB "for your Claude app" bar | Gone from the map: a dot on the map's ⋮ while steps wait for material and you have never sent them to the Claude app; ⋮ › Copy the message for Claude |
 | ST1–ST24 station panel | A bottom sheet on phones. 📎 next to the title opens your material (its line is the tooltip); the path (Path C › Foundations) is a quiet subtitle next to the kind of step; the file name and pages are no longer under the title. "I already know this" first explains the test (Proceed / Go back). "Use a subject I have" and "Detach" are in ✏️ (Edit this step), which shows only fields you can change. The step's description is not repeated (its chapters and "After this step you can" say it). 📚 lists the step's sources (your material and the prepared subject's PDFs) and opens them. A locked step that is already prepared has "Read the theory": the subject opens read-only, with a 🔒 line on top, and its exercises, flashcards, drills and runs wait until the step opens |
+| — | **Levels** (a Roadmap with a ladder): the level bar above the map (the ladder, the current level and its progress, *take the level test*, 🪜 *Claude proposes a new arrangement* › Review); the map drawn in **level bands** (one per level, lowest first) instead of the three parts; *A new level* when one is reached. docs/CURRICULUM.md §11 |
 | everything else in §6 (NC, BP, IM, SCu, AT, RC, MS, AP-, NU, PT, SU) | Unchanged dialogs, opened from the places above |
+
+The screens of this section in Lit (`src/features/roadmaps/ui/`, phase 3): `noema-roadmap-library` (CL4–CL7),
+`noema-roadmap-map` (MP, MB, the level bands) with `noema-roadmap-step` (ST: study, prepare here or in the Claude app, look
+over the plan, wait for another member, the placement test, locked), `noema-roadmap-share` (sharing), `noema-roadmap-inbox`
+(Your Claude app: the message, ⟳, by hand), `noema-roadmap-prepare-ahead` (Settings › Prepare many steps ahead),
+`noema-roadmap-from-sources`, and the levels' (`noema-roadmap-levels`, `-level-test`, `-level-reached`, `-restructure`,
+`-step-test`). They keep the `cm-` classes the browser suites read.
 
 ## 10. Keyboard and gestures
 Unchanged, plus: Esc closes a ⋮ menu or a sheet; ↑ / ↓ move inside a ⋮ menu.

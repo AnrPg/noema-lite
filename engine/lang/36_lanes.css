@@ -15,7 +15,7 @@
 .lx-lnode{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1px;width:100%;max-width:190px;min-height:44px;padding:6px 8px;
   border:1px solid var(--line-c);border-radius:12px;background:var(--node-bg);color:var(--node-ink);font:inherit;cursor:pointer;line-height:1.2}
 .lx-lnode:hover,.lx-lnode:focus-visible{border-color:var(--acc,#6b5bd2);outline:none;box-shadow:0 0 0 3px var(--acc-soft,rgba(107,91,210,.18))}
-.lx-lstep{font-size:.68rem;font-weight:700;color:var(--acc,#6b5bd2);letter-spacing:.03em}
+.lx-lstep{font-size:.68rem;font-weight:700;color:var(--acc-text,#6b5bd2);letter-spacing:.03em}
 .lx-ltitle{font-size:.8rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-align:center}
 .lx-lsign{position:absolute;top:3px;inset-inline-end:6px;font-size:.7rem;color:var(--ink3,#888)}
 .lx-lnode.s-locked,.lx-lnode.s-unprepared{opacity:.55}.lx-lnode.s-passed,.lx-lnode.s-known,.lx-lnode.s-mastered{border-color:var(--acc-soft,#cfc8ef)}
@@ -32,8 +32,8 @@
 .lx-ldot:hover,.lx-ldot:focus-visible{outline:none;box-shadow:0 0 0 3px var(--acc-soft,rgba(107,91,210,.25));transform:scale(1.12)}
 .lx-ldot.s-passed,.lx-ldot.s-known{background:var(--t2,#4c9a6a);border-color:var(--t2,#4c9a6a);color:var(--t2i,#fff)}
 .lx-ldot.s-mastered{background:var(--t3,#d7a531);border-color:var(--t3,#d7a531);color:var(--t3i,#fff)}
-.lx-ldot.s-learning{border-color:var(--acc,#6b5bd2);background:linear-gradient(90deg,var(--acc-soft,#e3dff7) 50%,var(--node-bg) 50%);color:var(--acc,#6b5bd2)}
-.lx-ldot.s-open,.lx-ldot.s-ready{border-color:var(--acc,#6b5bd2);color:var(--acc,#6b5bd2)}
+.lx-ldot.s-learning{border-color:var(--acc,#6b5bd2);background:linear-gradient(90deg,var(--acc-soft,#e3dff7) 50%,var(--node-bg) 50%);color:var(--acc-text,#6b5bd2)}
+.lx-ldot.s-open,.lx-ldot.s-ready{border-color:var(--acc,#6b5bd2);color:var(--acc-text,#6b5bd2)}
 .lx-ldot.s-locked{opacity:.6}.lx-ldot.s-unprepared{border-style:dashed;opacity:.6}
 .lx-lhover{position:fixed;z-index:60;max-width:240px;padding:8px 10px;border-radius:10px;background:var(--paper,#fff);color:var(--ink,#222);border:1px solid var(--line,#ddd);box-shadow:0 6px 24px rgba(0,0,0,.14);font-size:.85rem;pointer-events:none}
 .lx-ldots .lx-lrow.lx-lcommon::before{opacity:.28}.lx-ldots .lx-lrow:hover::before{opacity:.8}

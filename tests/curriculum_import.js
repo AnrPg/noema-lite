@@ -5,6 +5,7 @@
    notes is built by Gemini from their text (no Google Search) → 📎 material added / removed in the step editor.
    Usage: node tests/curriculum_import.js <prepared-repo-dir> */
 const { chromium } = require(process.env.PW || 'playwright');
+const { deepText } = require('./deep');
 const path = require('path'), fs = require('fs'), http = require('http'), vm = require('vm'), crypto = require('crypto'), { execFileSync } = require('child_process');
 const { start } = require('./mock_supabase');
 const F = require('./fixtures/curriculum_agents');
@@ -43,7 +44,7 @@ const TREE = `MOLECULAR INFORMATION BIOLOGY
 /* ---------- 1. the parser, without a browser ---------- */
 function unit() {
   console.log('— reading maps (no AI)');
-  const ctx = { window: {}, console }; ctx.globalThis = ctx; vm.createContext(ctx);
+  const ctx = { window: {}, console }; ctx.globalThis = ctx; require('./roadmaps_core')(ctx); vm.createContext(ctx);
   for (const f of ['engine/curriculum.js', 'engine/curimport.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx);
   const I = ctx.window.NoemaCurImport; const T = (g, id) => g.nodes[id].title; const pre = (g, id) => g.edges.filter(e => e.to === id).map(e => T(g, e.from));
   const g = I.parse(TREE);
@@ -179,7 +180,7 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
   fs.writeFileSync(path.join(TF, 'Transcription notes.md'), '# Transcription\n\nRNA polymerase reads the template strand from 3′ to 5′ and builds RNA 5′ → 3′.\n\n## Promoters\n\nThe TATA box sits about 25 bp upstream.\n');
   fs.writeFileSync(path.join(TF, 'translation-extra.md'), '# Ribosomes\n\nThe ribosome reads codons.\n');
   A.pdf = fs.readFileSync(path.join(TF, 'dna-replication.pdf'));
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', geminiBase: '${ABASE}/v1beta', askSubjectOnStart: true, shell: false };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', geminiBase: '${ABASE}/v1beta', askSubjectOnStart: true, onboarding: false, shell: false };`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   const api = vendors(); await new Promise(r => api.listen(APORT, r));
   const browser = await chromium.launch();
@@ -193,7 +194,7 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
 
   console.log('— 📥 import the map with files');
   await p.click('.cm-mode:has-text("Roadmaps")'); await wait(300);
-  await p.locator('.noema-ovbox').last().locator('button:has-text("Import a Roadmap")').click(); await wait(300);
+  await p.locator('noema-roadmap-library .cm-importbtn').click(); await wait(300);
   // ⓘ guides: every example is read by the real parser exactly as its “Read as” says; ▶ Try it loads it
   await p.click('.cg-step >> nth=0 >> .cg-tip summary'); await wait(150);
   const gd1 = await p.locator('.cg-step >> nth=0 >> .cg-tipbody').innerText();
@@ -243,8 +244,8 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
   await p.evaluate(([cid]) => { const c = NoemaCurriculum.get(Noema.account.id, cid); NoemaCurriculum.setMastered(Noema.account.id, c, 'prerequisites', 'manual'); }, [c.id]);
   await p.click(`.cm-node[data-id="${dna}"]`); await wait(300);
   { const clip = await p.locator('.cm-panel .cm-clip').first(), lab = await clip.getAttribute('aria-label').catch(() => '');
-    ok(/your material/i.test(await clip.getAttribute('title').catch(() => '')) && /dna-replication\.pdf/.test(lab || '') && !/dna-replication\.pdf/.test(await p.locator('.cm-panel').innerText()), 'the step panel has 📎 next to the title (“Your material” on hover), the file name no longer under it'); }
-  await p.click('.cm-panel button:has-text("Review & prepare")'); await wait(400);
+    ok(/your material/i.test(await clip.getAttribute('title').catch(() => '')) && /dna-replication\.pdf/.test(lab || '') && !/dna-replication\.pdf/.test(await deepText(p, '.cm-panel')), 'the step panel has 📎 next to the title (“Your material” on hover), the file name no longer under it'); }
+  await p.click('.cm-panel noema-button:has-text("Review & prepare")'); await wait(400);
   ok(/dna-replication\.pdf/.test(await p.locator('.cm-editor .cm-mat').innerText()), 'the review shows the step’s files');
   await p.click('.cm-editor button:has-text("Looks good")');
   ok(await until(async () => (await p.evaluate(([cid, id]) => NoemaCurriculum.get(Noema.account.id, cid).nodes[id].pack?.status, [c.id, dna])) === 'ready', 40000), 'the step is prepared');
@@ -252,8 +253,8 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
   ok(A.files.some(f => f.name === 'dna-replication.pdf') && job.uploads === 1, 'the PDF is uploaded into Claude’s sandbox with the job');
   ok(/THESE FILES ARE THE SOURCES/.test(job.system) && /Do NOT research the theory on the web/.test(job.system) && !job.tools.includes('web_fetch_20250910'), 'Claude builds from the file — no web research of the theory (no web_fetch)');
   ok(/m1: dna-replication\.pdf \(4 pages\)/.test(job.first) && /From the material: dna-replication\.pdf pp\. 1–1/.test(job.first), 'the brief names the file (source id m1) and each chapter’s pages');
-  const ixOk = await until(() => { const ix = JSON.parse(srv.state.kv[iro]?.['a:srcfiles:' + pidDna]?.value || '{}'); return Object.keys(ix).join() === 'm1' && ix.m1.size === A.pdf.length && ix.m1.cloud; }, 15000);
-  if (!ixOk) console.log('   index:', srv.state.kv[iro]?.['a:srcfiles:' + pidDna]?.value);
+  const ixOk = await until(() => { const ix = srv.srcfiles(iro, pidDna); return Object.keys(ix).join() === 'm1' && ix.m1.size === A.pdf.length && ix.m1.cloud; }, 15000);
+  if (!ixOk) console.log('   index:', JSON.stringify(srv.srcfiles(iro, pidDna)));
   ok(ixOk, 'the packaged file is the step subject’s source (👁 at the cited pages)');
 
   console.log('— a step with notes, built by Gemini from their text');
@@ -270,7 +271,7 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
 
   console.log('— 📎 material in the step editor');
   await p.evaluate(() => document.querySelectorAll('.noema-ov').forEach(o => o.remove()));
-  await p.evaluate(([cid]) => NoemaCurMap.map(Noema.account.id, cid), [c.id]); await wait(800);
+  await p.evaluate(([cid]) => Noema.curriculumMap(cid), [c.id]); await wait(800);
   await p.evaluate(([cid, id]) => NoemaCurMap.editStep(Noema.account.id, cid, id), [c.id, tl]); await wait(400);
   await p.setInputFiles('.cm-editor .cm-mat input[type=file]', path.join(TF, 'translation-extra.md'));
   ok(await until(async () => /translation-extra\.md/.test(await p.locator('.cm-editor .cm-mat').innerText()), 8000), 'files can be added to a step before it is prepared');

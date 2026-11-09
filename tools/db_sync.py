@@ -7,9 +7,9 @@ What it stores
   • subjects, sources, chapters, sections, blocks, exercises, playbooks, flashcards, pitfalls : queryable content
   • pack_versions          : every built pack version ever seen (JSON)
   • accounts, backups, user_kv, progress, conversations, messages : per-profile state from accounts/<id>/backups/*.json
-Usage:  python3 tools/db_sync.py [--db PATH] [--no-blobs]
+Usage:  python3 tools/db_sync.py [--db PATH] [--no-blobs]   (it runs python3 tools/build.py --no-validate first: the packs are generated)
 """
-import os, sys, glob, json, sqlite3, hashlib, subprocess, time, tempfile, shutil
+import os, sys, glob, json, sqlite3, hashlib, subprocess, time, tempfile, shutil, fnmatch
 for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux alike
     try: _s.reconfigure(encoding='utf-8', errors='replace')
     except Exception: pass
@@ -52,7 +52,13 @@ CREATE INDEX IF NOT EXISTS ix_blocks_text ON blocks(subject_id, type);
 """
 LEGACY_BACKUP_FORMATS = ('learning-quest-backup',)   # files written before the app was renamed noema-lite
 EXCLUDE_DIRS = {'.git', 'dist', 'data', 'node_modules', '__pycache__', '_to_delete'}
-GENERATED = ('pack.js', 'pack.json', 'engine.js', 'engine.css', 'registry.js')
+# the generated files (the "generated" block of .gitignore): rebuilt from the sources by tools/build.py, so never stored as files
+GENERATED = ('build/*', 'engine/engine.js', 'engine/engine.css', 'engine/langui.js', 'engine/langui.css', 'engine/authoring.js',
+             'engine/activity_author_schemas.js', 'engine/i18n/*', 'library/registry.js',
+             'library/subjects/*/pack.js', 'library/subjects/*/pack.json', 'library/subjects/*/tr.*.js', 'library/subjects/*/tr.*.json',
+             'library/subjects/*/bridge.*.js', 'library/languages/*/course.pack.js', 'library/languages/*/course.profiles.js',
+             'library/languages/*/course.expl.*.js', 'accounts/*/packs/*/pack.js', 'accounts/*/packs/*/pack.json',
+             'accounts/*/packs/*/tr.*.js', 'accounts/*/packs/*/tr.*.json', 'accounts/*/packs/*/bridge.*.js')
 
 def sha(b): return hashlib.sha256(b).hexdigest()
 
@@ -60,8 +66,9 @@ def tracked_files():
     for base, dirs, files in os.walk(ROOT):
         dirs[:] = [d for d in dirs if d not in EXCLUDE_DIRS]
         for f in files:
-            if f in GENERATED or f.endswith('.tmp') or f == 'config.local.js' or f.startswith('.DS_Store'): continue
-            p = os.path.join(base, f); yield os.path.relpath(p, ROOT).replace(os.sep, '/'), p
+            rel = os.path.relpath(os.path.join(base, f), ROOT).replace(os.sep, '/')
+            if any(fnmatch.fnmatchcase(rel, g) for g in GENERATED) or f.endswith('.tmp') or f == 'config.local.js' or f.startswith('.DS_Store'): continue
+            yield rel, os.path.join(base, f)
 
 def block_text(b):
     t = b.get('t')
@@ -77,6 +84,9 @@ def block_text(b):
     return ''
 
 def main():
+    # the packs (pack.json → pack_versions) are generated, never committed: build them first (validation is build.py's own job)
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'tools', 'build.py'), '--no-validate'], cwd=ROOT)
+    if r.returncode: sys.exit('db_sync: python3 tools/build.py failed (see above), nothing synced')
     os.makedirs(os.path.dirname(DB), exist_ok=True)
     # Work on a local temp copy: SQLite locking is unreliable on synced/network/virtual folders (iCloud, Dropbox, VMs).
     work = os.path.join(tempfile.mkdtemp(prefix='noemadb-'), 'work.db')
@@ -137,10 +147,12 @@ def main():
         add_conv(f.split(os.sep)[-5], rec, 'file')
         cur.execute('INSERT OR IGNORE INTO accounts VALUES (?,?,?,?,?,?)', (acc, b['account'].get('name'), b['account'].get('emoji'), b['account'].get('kind'), b['account'].get('email'), json.dumps(b['account'], ensure_ascii=False)))
     for acc, (fname, b) in latest.items():
+        for subj, p in events_progress(b.get('events') or []).items():   # a backup of version 3: the learning log (noema.events/v1)
+            cur.execute('INSERT OR REPLACE INTO progress VALUES (?,?,?,?,?,?,?)', (acc, subj, p['xp'], len(p['read']), len(p['res']), sum(1 for ok in p['res'].values() if ok), p['last']))
         for key, val in b['data'].items():
             cur.execute('INSERT INTO user_kv VALUES (?,?,?,?)', (acc, key, val, fname))
             parts = key.split(':')
-            if len(parts) == 3 and parts[0] == 's' and parts[2] == 'state':
+            if len(parts) == 3 and parts[0] == 's' and parts[2] == 'state':   # a backup from before the learning log
                 try: st = json.loads(val)
                 except Exception: continue
                 res = st.get('res', {})
@@ -171,5 +183,32 @@ def main():
     con.execute('VACUUM'); con.close()
     tmp = DB + '.tmp'; shutil.copyfile(work, tmp); os.replace(tmp, DB); shutil.rmtree(os.path.dirname(work), ignore_errors=True)
     print(f"db: {os.path.relpath(DB, ROOT)} · {summary} · {os.path.getsize(DB)/1e6:.1f} MB")
+
+def events_progress(events):
+    """Per subject, from a backup's learning log: XP, the sections read, the exercises answered (solved or not) and the section
+    opened last — only the events that count, as the app folds them (src/features/study/domain/events/windows.ts): a restore
+    (log.restored) makes the events between its upTo and itself not count, unless a later restore reaches back over it; a
+    subject.reset, the subject's events before it."""
+    evs = sorted((e for e in events if isinstance(e, dict) and isinstance(e.get('hlc'), str)), key=lambda e: (e['hlc'], str(e.get('id', ''))))
+    wins = []
+    for r in reversed([e for e in evs if e.get('type') == 'log.restored']):
+        if any(a < r['hlc'] < b for a, b in wins): continue
+        up = str((r.get('data') or {}).get('upTo', ''))
+        if up < r['hlc']: wins.append((up, r['hlc']))
+    counts = lambda at: not any(a < at < b for a, b in wins)
+    resets = {}
+    for e in evs:
+        if e.get('type') == 'subject.reset' and e.get('subject') and counts(e['hlc']): resets[e['subject']] = max(resets.get(e['subject'], ''), e['hlc'])
+    out = {}
+    for e in evs:
+        subj, t, d, item = e.get('subject'), e.get('type'), e.get('data') or {}, e.get('item')
+        if not subj or not counts(e['hlc']) or e['hlc'] < resets.get(subj, ''): continue
+        p = out.setdefault(subj, {'xp': 0, 'read': set(), 'res': {}, 'last': None})
+        if t == 'xp.earned': p['xp'] += int(d.get('amount') or 0)
+        elif t == 'section.read': p['read'].add(item)
+        elif t == 'section.opened': p['last'] = item
+        elif t == 'answer.given': p['res'][item] = p['res'].get(item, False) or bool(d.get('ok'))
+        elif t == 'answers.imported': p['res'][item] = p['res'].get(item, False) or (d.get('ok') or 0) > 0
+    return out
 
 if __name__ == '__main__': main()

@@ -3,7 +3,9 @@
    then the UI in a real browser (🏋️ practise this word, 🏋️ deepen, the daily session, keyboard, RTL, phone width).
    Usage: node tests/lang_vocab2.js [prepared-repo-dir]   (the browser part needs a built repo: python3 tools/build.py) */
 const fs = require('fs'), path = require('path');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
+require('./built').ensureBuilt(ROOT);   // the generated files it reads (never committed): built first, unless tests/run_e2e.sh did
 const N = require(path.join(ROOT, 'engine', 'langcore.js'));
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
 const wait = ms => new Promise(r => setTimeout(r, ms));
@@ -142,7 +144,7 @@ if (fs.existsSync(path.join(PILOT, 'course.json'))) {
   let chromium; try { ({ chromium } = require(process.env.PW || 'playwright')); } catch (e) { console.log('  (playwright not installed — the browser part is skipped)'); return done(); }
   if (!fs.existsSync(path.join(PILOT, 'course.pack.js')) || !fs.existsSync(path.join(ROOT, 'engine', 'langui.js'))) { console.log('  (not built — run python3 tools/build.py; the browser part is skipped)'); return done(); }
   console.log('— the UI');
-  const SUBJ = 'lang:polyglot-semitic-zh-de', url = 'file://' + ROOT + '/index.html';
+  const SUBJ = 'lang:polyglot-semitic-zh-de', url = await appUrl(ROOT);
   const browser = await chromium.launch(), ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
   await ctx.route(/fonts\.(googleapis|gstatic)\.com/, r => r.fulfill({ status: 200, body: '' }));
   const page = await ctx.newPage(), E = []; page.on('pageerror', e => E.push(e.message));
