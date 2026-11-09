@@ -1,25 +1,18 @@
 /**
- * The tutor's drawer (docs/UI_MAP.md), drawn from the session's state:
- *  · in the frame: face, name, ⋮, ✕ · "How <name> helps you" over one list of the modes · a "For: …" chip (✕ = the whole
- *    subject) · the threads · the conversation · the box to write in. Nothing else;
- *  · classic (an old index.html): face, name and model, 🕘 ⬇️ ↺ ✕ · the context chip and the 🗣 language · the mode chips ·
- *    the starters of an empty conversation, and the history inside the drawer.
- * The thread tracker (noema-tutor-threads) and the drawer's history (noema-tutor-history) are elements of their own.
+ * The tutor's drawer in the frame (docs/UI_MAP.md), drawn from the session's state: face, name, ⋮, ✕ · "How <name> helps
+ * you" over one list of the modes · a "For: …" chip (✕ = the whole subject) · the threads · the conversation · the box to
+ * write in. Nothing else (the conversations are Me › Conversations: ./conversations.ts).
+ * The thread tracker (noema-tutor-threads) is an element of its own.
  */
 import { html, nothing, type TemplateResult } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { CHOOSABLE, MODE_ICON, MODE_WORDS, type ModeId } from '../domain/prompts.ts';
+import { MODE_WORDS, type ModeId } from '../domain/prompts.ts';
 import { THREAD_BUDGET, openThreads, usesThreads, type Thread } from '../domain/threads.ts';
-import { fmtDate, isTutor, kindBadge, modeName, otherApp, type Conversation } from '../domain/conversation.ts';
 import { TutorElement, type MenuItem, type TutorView } from './view.ts';
 
 const MODES_SHOWN = (current: ModeId): ModeId[] =>
   (['socratic', 'explain', 'hint', 'quiz', 'interview', 'debug'] as ModeId[]).filter(k => k !== 'hint' || current === k);
 
-/** a mode's chip label in the classic drawer: its emoji (socratic: the tutor's avatar) and its name */
-export function modeLabel(v: TutorView, k: ModeId): string {
-  return `${MODE_ICON[k] || v.tutor().avatar} ` + v.i18n.t('engine.mode.' + k);
-}
 const shellMode = (v: TutorView, k: ModeId): string => v.L('mode' + MODE_WORDS[k]);
 const shellSub = (v: TutorView, k: ModeId): string => v.L('mode' + MODE_WORDS[k] + 'Sub');
 
@@ -162,7 +155,7 @@ export class NoemaTutorPanel extends TutorElement {
   protected override render(): TemplateResult | typeof nothing {
     const v = this.view;
     if (!v) return nothing;
-    return v.framed() ? this.#framed(v) : this.#classic(v);
+    return this.#framed(v);
   }
 
   /* ---------- in the frame ---------- */
@@ -294,151 +287,6 @@ export class NoemaTutorPanel extends TutorElement {
       <noema-tutor-threads .view=${v}></noema-tutor-threads>
       <div class="msgs">${greet}${this.#messages(v)}</div>
       ${this.#composer(v.L('tutorWrite'), true)}`;
-  }
-
-  /* ---------- classic ---------- */
-  #classic(v: TutorView): TemplateResult {
-    const s = v.session,
-      hist = s.history();
-    const tools: [string, string, () => void][] = [
-      [
-        this.t('engine.tutor.history'),
-        '🕘',
-        () => {
-          s.toggleHistory();
-        },
-      ],
-      [
-        this.t('engine.tutor.export'),
-        '⬇️',
-        () => {
-          v.exportOne(s.current());
-        },
-      ],
-      [
-        this.t('engine.tutor.newConvo'),
-        '↺',
-        () => {
-          s.fresh();
-        },
-      ],
-    ];
-    const label = s.ctxParts();
-    const ctxLabel = label[0] + ' ' + s.ctxTitle();
-    const starters = (): TemplateResult => {
-      const topic = s.ctx ? s.ctxTitle() : v.subjectTitle();
-      const list: [string, ModeId, string][] = [
-        [`${v.tutor().avatar} ` + this.t('engine.tutor.starterSocratic'), 'socratic', this.t('engine.aimsg.startSocratic', { topic })],
-        ['⚡ ' + this.t('engine.tutor.starterQuiz'), 'quiz', this.t('engine.aimsg.startQuiz', { topic })],
-        ['🔧 ' + this.t('engine.tutor.starterDebug'), 'debug', this.t('engine.aimsg.startDebug', { topic })],
-        ['🎤 ' + this.t('engine.tutor.starterInterview'), 'interview', this.t('engine.aimsg.startInterview', { topic })],
-        ['💡 ' + this.t('engine.tutor.starterExplain'), 'explain', this.t('engine.aimsg.startExplain', { topic })],
-      ];
-      const greet = { name: v.accountName(), tutor: v.tutor().name, avatar: v.tutor().avatar, mode: modeLabel(v, s.mode) };
-      return html`<div class="msg ai">
-          ${v.md(v.accountName() ? this.t('engine.tutor.greet', greet) : this.t('engine.tutor.greetAnon', greet))}
-        </div>
-        <div class="starters">
-          ${list.map(
-            ([l, m, msg]) =>
-              html`<button
-                type="button"
-                @click=${() => {
-                  s.setMode(m);
-                  void s.send(msg);
-                }}
-              >
-                ${l}
-              </button>`,
-          )}
-        </div>`;
-    };
-    return html`<div class="dh">
-        <div class="top">
-          ${this.#faceEl()}
-          <div class="grow">
-            <b>${v.tutor().name}</b>
-            <div class="tiny">${this.t('engine.tutor.poweredBy', { model: v.model() || this.t('engine.tutor.autoModel') })}</div>
-          </div>
-          ${tools.map(
-            ([t, icon, run], i) =>
-              html`<button
-                class=${'iconbtn' + (i === 0 && s.showHistory ? ' on' : '')}
-                type="button"
-                title=${t}
-                aria-label=${t}
-                @click=${run}
-              >
-                ${icon}
-              </button>`,
-          )}
-          <button
-            class="iconbtn"
-            type="button"
-            title=${this.t('engine.tutor.close')}
-            aria-label=${this.t('engine.tutor.close')}
-            @click=${() => {
-              s.close();
-            }}
-          >
-            ✕
-          </button>
-        </div>
-        <div class="row">
-          <span class="ctxchip">${ctxLabel}</span>
-          ${
-            s.ctx
-              ? html`<button
-                  class="tiny linkish"
-                  type="button"
-                  style="text-decoration:underline"
-                  @click=${() => {
-                    s.setContext(null);
-                  }}
-                >
-                  ${this.t('engine.tutor.useWhole')}
-                </button>`
-              : nothing
-          }
-          <select
-            class="chatlang"
-            title=${this.t('engine.tutor.chatLangTip')}
-            aria-label=${this.t('engine.tutor.chatLangAria')}
-            @change=${(e: Event) => {
-              v.setChatLang((e.target as HTMLSelectElement).value);
-            }}
-          >
-            ${v
-              .chatLangs()
-              .map(
-                ([x, l]) =>
-                  html`<option value=${x} ?selected=${v.chatLangIs(x) || (!x && !v.chatLang())} lang=${x || nothing}>🗣 ${l}</option>`,
-              )}
-          </select>
-        </div>
-        <div class="modechips">
-          ${MODES_SHOWN(s.mode).map(
-            k =>
-              html`<button
-                type="button"
-                class=${s.mode === k ? 'on' : ''}
-                aria-pressed=${s.mode === k ? 'true' : 'false'}
-                @click=${() => {
-                  s.setMode(k);
-                }}
-              >
-                ${modeLabel(v, k)}
-              </button>`,
-          )}
-        </div>
-      </div>
-      ${s.showHistory ? nothing : html`<noema-tutor-threads .view=${v}></noema-tutor-threads>`}
-      ${
-        s.showHistory
-          ? html`<div class="msgs histbox"><noema-tutor-history .view=${v}></noema-tutor-history></div>`
-          : html`<div class="msgs">${!hist.length && !s.busy && !s.error ? starters() : nothing}${this.#messages(v)}</div>`
-      }
-      ${this.#composer(this.t('engine.tutor.placeholder'), false)}`;
   }
 }
 
@@ -578,192 +426,5 @@ export class NoemaTutorThreads extends TutorElement {
       }
       ${tree}
     </div>`;
-  }
-}
-
-/** The classic drawer's history: this subject's conversations, searchable, each to reopen, rename, export or delete. */
-export class NoemaTutorHistory extends TutorElement {
-  static override properties = {
-    ...TutorElement.properties,
-    query: { state: true },
-    allKinds: { state: true },
-    editing: { state: true },
-    sure: { state: true },
-  };
-  declare query: string;
-  declare allKinds: boolean;
-  declare editing: string | null;
-  declare sure: string | null;
-  constructor() {
-    super();
-    this.query = '';
-    this.allKinds = false;
-    this.editing = null;
-    this.sure = null;
-  }
-  override connectedCallback(): void {
-    super.connectedCallback();
-    this.style.display = 'contents';
-  }
-  protected override updated(): void {
-    const inp = this.querySelector<HTMLInputElement>('input.cvrename');
-    if (inp && document.activeElement !== inp) {
-      inp.focus();
-      inp.select();
-    }
-  }
-  protected override render(): TemplateResult | typeof nothing {
-    const v = this.view;
-    if (!v) return nothing;
-    const s = v.session,
-      i18n = v.i18n;
-    const all = s.conversations(this.allKinds);
-    const others = s.conversations(true).length - s.conversations().length;
-    const q = this.query.trim().toLowerCase();
-    const list = q
-      ? all.filter(c =>
-          (s.displayTitle(c) + ' ' + (c.ctx?.label ?? '') + ' ' + c.msgs.map(m => m.text).join(' ')).toLowerCase().includes(q),
-        )
-      : all;
-    const done = (cv: Conversation, value: string | null): void => {
-      this.editing = null;
-      if (value !== null) s.rename(cv, value);
-    };
-    const card = (cv: Conversation, i: number): TemplateResult => {
-      const app = otherApp(cv);
-      const what = !isTutor(cv.kind)
-        ? kindBadge(cv.kind, i18n)
-        : CHOOSABLE.includes(cv.mode as ModeId)
-          ? modeLabel(v, cv.mode as ModeId)
-          : modeName(cv.mode, i18n);
-      return html`<div class="cvcard" style=${`animation-delay:${String(Math.min(i, 12) * 25)}ms`}>
-        ${
-          this.editing === cv.id
-            ? html`<input
-                class="histsearch cvrename"
-                aria-label=${this.t('engine.cv.rename')}
-                .value=${s.displayTitle(cv)}
-                @keydown=${(e: KeyboardEvent) => {
-                  if (e.key === 'Enter') done(cv, (e.target as HTMLInputElement).value);
-                  if (e.key === 'Escape') done(cv, null);
-                }}
-                @blur=${(e: Event) => {
-                  if (this.editing === cv.id) done(cv, (e.target as HTMLInputElement).value);
-                }}
-              />`
-            : html`<button
-                class="cvmain"
-                type="button"
-                @click=${() => {
-                  s.openConversation(cv);
-                }}
-              >
-                <b class="cvtitle"
-                  >${s.displayTitle(cv)}${!cv.title && s.titling.has(cv.id) ? html`<span class="tiny"> · ${this.t('engine.cv.namingShort')}</span>` : nothing}</b
-                >
-                <small
-                  >${app ? html`<span class="cvfrom">${this.t('engine.cv.fromApp', { app })}</span>` : nothing}${what} ·
-                  ${cv.ctx?.label ?? this.t('engine.cv.wholeCourse')}</small
-                >
-                <small>${fmtDate(cv.updated || cv.created)} · ${this.t('engine.cv.messages', { n: cv.msgs.length })}</small>
-              </button>`
-        }
-        <div class="cvactions">
-          <button
-            class="iconbtn"
-            type="button"
-            title=${this.t('engine.cv.rename')}
-            aria-label=${this.t('engine.cv.rename')}
-            @click=${() => (this.editing = cv.id)}
-          >
-            ✏️
-          </button>
-          <button
-            class="iconbtn"
-            type="button"
-            title=${this.t('engine.cv.exportMd')}
-            aria-label=${this.t('engine.cv.exportMd')}
-            @click=${() => {
-              v.exportOne(cv);
-            }}
-          >
-            ⬇️
-          </button>
-          <button
-            class="iconbtn"
-            type="button"
-            title=${this.t(this.sure === cv.id ? 'engine.cv.deleteAgain' : 'engine.cv.delete')}
-            aria-label=${this.t(this.sure === cv.id ? 'engine.cv.deleteAgain' : 'engine.cv.delete')}
-            @click=${() => {
-              if (this.sure !== cv.id) {
-                this.sure = cv.id;
-                return;
-              }
-              this.sure = null;
-              s.remove(cv);
-            }}
-          >
-            ${this.sure === cv.id ? '❓' : '🗑️'}
-          </button>
-        </div>
-      </div>`;
-    };
-    return html`<div class="histhead">
-        <b class="grow">🕘 ${this.t('engine.cv.title', { n: all.length })}</b>
-        ${
-          all.length
-            ? html`<button
-                class="btn small"
-                type="button"
-                @click=${() => {
-                  v.exportAll();
-                }}
-              >
-                ⬇️ ${this.t('engine.cv.exportAll')}
-              </button>`
-            : nothing
-        }
-        <button
-          class="btn small primary"
-          type="button"
-          @click=${() => {
-            s.toggleHistory(false);
-          }}
-        >
-          ${i18n.dir() === 'rtl' ? '→' : '←'} ${this.t('engine.cv.chat')}
-        </button>
-      </div>
-      <p class="tiny muted">${this.t('engine.cv.tip')}</p>
-      ${
-        others
-          ? html`<label class="row tiny" style="margin:2px 0 4px"
-              ><input
-                type="checkbox"
-                .checked=${this.allKinds}
-                @change=${(e: Event) => (this.allKinds = (e.target as HTMLInputElement).checked)}
-              />${this.t('engine.cv.alsoShow', { n: others })}</label
-            >`
-          : nothing
-      }
-      ${
-        all.length > 3
-          ? html`<input
-              class="histsearch"
-              type="search"
-              placeholder=${this.t('engine.cv.search')}
-              aria-label=${this.t('engine.cv.search')}
-              .value=${this.query}
-              @input=${(e: Event) => (this.query = (e.target as HTMLInputElement).value)}
-            />`
-          : nothing
-      }
-      ${
-        all.length
-          ? list.map(card)
-          : html`<div class="empty">
-              <div class="e" aria-hidden="true">💬</div>
-              <p>${this.t('engine.cv.empty')}</p>
-            </div>`
-      }`;
   }
 }

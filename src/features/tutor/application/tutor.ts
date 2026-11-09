@@ -122,7 +122,6 @@ export class TutorSession {
   mode: ModeId = 'socratic';
   ctx: TutorCtx | null = null;
   busy = false;
-  showHistory = false;
   /** the reply as it streams in (visible text), null when no turn is running */
   stream: string | null = null;
   error: TurnError | null = null;
@@ -220,12 +219,7 @@ export class TutorSession {
   fresh(key = this.key()): void {
     this.hist[key] = [];
     Reflect.deleteProperty(this.tstate, key);
-    this.showHistory = false;
     this.error = null;
-    this.changed();
-  }
-  toggleHistory(on = !this.showHistory): void {
-    this.showHistory = on;
     this.changed();
   }
 
@@ -320,7 +314,6 @@ export class TutorSession {
     const intent = this.#intentOf(key, o.intent);
     const meta = { ...(directive ? { directive } : {}), ...(intent && !hist.length ? { intent } : {}) };
     hist.push({ role: 'user', text, t: this.#d.now(), ...(Object.keys(meta).length ? { meta } : {}) });
-    this.showHistory = false;
     this.error = null;
     this.persist(key);
     this.busy = true;
@@ -540,7 +533,6 @@ export class TutorSession {
     else if (this.mode === 'socratic' && cv.msgs.some(m => m.meta?.noemaState))
       this.tstate[key] = cv.tutorState = rebuildThreadState(cv.msgs);
     else Reflect.deleteProperty(this.tstate, key);
-    this.showHistory = false;
     this.error = null;
     this.changed();
   }

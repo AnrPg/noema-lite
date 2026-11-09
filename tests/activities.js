@@ -627,7 +627,7 @@ const SIMSRC = () => fs.readdirSync(path.join(ROOT, 'src', 'runtimes', 'sim-spec
 }
 { // P6: the words of the outside-page card, the core's embed notes, the Settings line and the xAPI export exist in every UI language
   const keys = new Set();
-  for (const f of ['src/runtimes/external-embed/runtime.ts', 'engine/src/32_activities.js', 'engine/src/70_account.js', 'engine/src/40_views.js']) for (const m of fs.readFileSync(path.join(ROOT, ...f.split('/')), 'utf8').matchAll(/\b(?:T|tE|t)\('((?:engine\.act\.embed|engine\.xapi)\.[a-zA-Z]+)'/g)) keys.add(m[1]);
+  for (const f of ['src/runtimes/external-embed/runtime.ts', 'engine/src/32_activities.js', 'engine/src/70_account.js', 'engine/app/study.js']) for (const m of fs.readFileSync(path.join(ROOT, ...f.split('/')), 'utf8').matchAll(/\b(?:T|tE|t)\('((?:engine\.act\.embed|engine\.xapi)\.[a-zA-Z]+)'/g)) keys.add(m[1]);
   const en = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n', 'engine', 'en.arb'), 'utf8')), dr = fs.readdirSync(path.join(ROOT, 'i18n', 'engine', 'drafts'));
   const miss = [...keys].filter(k => !en[k] || !en['@' + k]?.description).concat(...dr.map(f => { const d = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n', 'engine', 'drafts', f), 'utf8')); return [...keys].filter(k => !d[k]).map(k => f + ':' + k); }));
   ok(keys.size >= 14 && !miss.length, `the ${keys.size} P6 host strings (outside-page card, notes, Settings "Ask again", xAPI export) are in en.arb with descriptions and in all ${dr.length} drafts ${miss.slice(0, 3).join(' ')}`);
@@ -763,7 +763,7 @@ ok(['noema_core.py', 'embed_allow.json', 'h5p_allow.json', 'h5p_import.py'].ever
   ok(!html.includes('44_activity_wasm') && !fs.existsSync(path.join(ROOT, 'engine', 'src', '44_activity_wasm.js')) && !fs.existsSync(path.join(ROOT, 'engine', 'src', '43_page_runtimes.js')) && !/44_activity_wasm/.test(bld) && /^PAGE_SRC = \('43_xapi\.js',\)$/m.test(bld) && /for f in PAGE_SRC: shutil\.copy/.test(bld)
     && /wasm: WASM_CHECKS/.test(fs.readFileSync(path.join(ROOT, 'src', 'runtimes', 'checks.ts'), 'utf8')) && !/44_activity_wasm/.test(fs.readFileSync(path.join(ROOT, 'src', 'connector', 'engine', 'sources.ts'), 'utf8') + fs.readFileSync(path.join(ROOT, 'src', 'composition', 'noema-tools.ts'), 'utf8'))
     && !html.includes('45_activity_embed') && !fs.existsSync(path.join(ROOT, 'engine', 'src', '45_activity_embed.js'))
-    && /\{ name: 'runtimes', build: r => r\.get\(RUNTIMES\) \}/.test(COMPOSE.browser) && /p\.scopeCheckers\(\(\) => globalThis, p\.runtimeChecks\)/.test(COMPOSE.browser)
+    && /\{ name: 'runtimes', build: r => r\.get\(RUNTIMES\) \}/.test(COMPOSE.browser) && /p\.runtimeCheckers\(p\.runtimeChecks\)/.test(COMPOSE.browser)
     && /RUNTIME_CHECKS/.test(fs.readFileSync(path.join(ROOT, 'src', 'composition', 'noema-tools.ts'), 'utf8')) && /RUNTIME_CHECKS/.test(fs.readFileSync(path.join(ROOT, 'src', 'connector', 'engine', 'index.ts'), 'utf8')),
     'wasm-module@1 and external-embed@1 are typed runtimes (src/runtimes): their checks (RUNTIME_CHECKS) reach the content checks of the app, the connector and the tools, their code is NoemaCore.runtimes (build/runtimes.js); no page, bundle or connector loads engine/src/44 any more'); }
 { const src = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8'), rt = fs.readFileSync(path.join(ROOT, 'src', 'runtimes', 'external-embed', 'runtime.ts'), 'utf8');

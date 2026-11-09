@@ -45,15 +45,6 @@ export const MODE_WORDS: Readonly<Record<ModeId, string>> = {
   debug: 'Debug',
   hint: 'Hint',
 };
-/** the emoji of a mode's chip (socratic: the tutor's avatar) */
-export const MODE_ICON: Readonly<Record<ModeId, string>> = {
-  socratic: '',
-  explain: '💡',
-  hint: '🪜',
-  quiz: '⚡',
-  interview: '🎤',
-  debug: '🔧',
-};
 
 /* i18n-ignore-start */ // prompts for the AI
 const learnerOf = (p: Persona, s: PromptSubject): string => `${s.learner} ${p.prior}`.trim();

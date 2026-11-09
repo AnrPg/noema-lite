@@ -53,7 +53,7 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
   ok(/📌 Lessons learned/.test(mdTxt) && /DVs trade a cheap write/.test(mdTxt), 'Markdown export starts with the lessons learned');
   // reopen from history after reload → state restored
   await p.reload(); await wait(800); await p.click('.noema-chip:has-text("Databricks")'); await wait(1500);
-  await p.evaluate(() => { __tut().openTutor(); __tut().toggleHistory(true); }); await wait(300); await p.click('.cvmain'); await wait(400);
+  await p.evaluate(() => { NoemaShell.convos(); }); await p.click('.ns-cvmain'); await p.click('noema-conversations .btn.primary'); await wait(600);   // Me › Conversations: the conversation → Continue
   ok(await p.evaluate(() => { const ts = __tut().threads(); return ts && ts.lessons.length === 1 && __tut().mode === 'socratic'; }), 'thread state restored when a saved conversation is reopened');
   // 🗣 the language of the AI conversations: only what the AI writes changes — the pack does not
   const packBefore = await p.evaluate(() => (s => [s.title, JSON.stringify(s.blocks)].join('|'))(Noema.pack.chapters[4].sections[3]));

@@ -912,7 +912,8 @@ export function createApp(win: Window = window): App {
     let meta = boot.wanted?.(a, subs, wanted) ?? subs.find(s => s.id === wanted) ?? null;
     const ask = (settings()['askSubjectOnStart'] as boolean | undefined) ?? !!N.config['askSubjectOnStart'];
     // the frame opens on Today and needs no subject; the picker at start stays for whoever asked for it (Me › Profile)
-    if ((!meta && !SHELL()) || (ask && !cur.skipPicker && !url.get('subject'))) meta = (await N.pickSubject?.(a.id)) ?? meta;
+    const picked = (!meta && !SHELL()) || (ask && !cur.skipPicker && !url.get('subject')) ? ((await N.pickSubject?.(a.id)) ?? null) : null;
+    meta = picked ?? meta;
     // a language course (docs/LANGUAGES.md §8): with shell: false it takes the whole page; in the frame it opens at #/lang/<course>
     if (meta?.kind === 'language' && !SHELL()) {
       await contractsIn();
@@ -926,6 +927,9 @@ export function createApp(win: Window = window): App {
     }
     // a subject's pages are the frame's whatever the config says (shell: false keeps only a language course's own page)
     if (SHELL() || (meta && !course)) {
+      // a subject chosen at the start (or any subject with shell: false, which has no Today) opens on its home, not on Today
+      if (meta && !course && (picked || !SHELL()) && /^#?\/?$/.test(location.hash))
+        history.replaceState(history.state, '', location.pathname + location.search + '#/subject');
       shell.mount({ engine: !!meta && !course });
       offSplash();
     }
