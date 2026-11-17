@@ -18,6 +18,11 @@ const SHOTS = process.env.SHOTS || '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { rec
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
 const wait = ms => new Promise(r => setTimeout(r, ms));
 const until = async (fn, ms = 15000, step = 150) => { const t = Date.now(); while (Date.now() - t < ms) { try { if (await fn()) return true; } catch (e) { } await wait(step); } return false; };
+/** every running animation of the page (shadow roots included) has finished */
+const settled = page => page.evaluate(() => Promise.race([
+  Promise.all(document.getAnimations().filter(a => a.effect?.getComputedTiming().iterations !== Infinity).map(a => a.finished.catch(() => null))),
+  new Promise(r => setTimeout(r, 3000)),
+]));
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
 
 /** A Roadmap with two study years: a (year 1, prepared) → b (year 2); options: the level test, a pending proposal. */
@@ -141,6 +146,7 @@ const answerAll = async (page, host, pick) => {
   ok(await until(() => dlg(page, 'noema-roadmap-restructure').count()), 'Review opens the proposal');
   const prop = await dlg(page, 'noema-roadmap-restructure').innerText();
   ok(/Energy fits the first year\./.test(prop) && /“Energy”: Year 2 → First year/.test(prop) && /Nothing is lost/.test(prop), 'why, every change in words (levels by their names), and that nothing is lost');
+  await settled(page);   // the dialog fades in: axe measures the contrast of the finished frame, not one mid-fade (slow CI runners)
   await page.screenshot({ path: SHOTS + '/levels_proposal.png' });
   const axeD = await new AxeBuilder({ page }).withTags(TAGS).include('noema-roadmap-restructure').analyze();
   ok(!axeD.violations.length, 'axe: the proposal ' + axeD.violations.map(v => v.id).join(', '));
@@ -166,6 +172,7 @@ const answerAll = async (page, host, pick) => {
   await seed(page, 'lv-e', { levelTest: true, mastered: true });
   await openMap(page, url, 'lv-e');
   { const f = await fit(page, 'noema-roadmap-levels'); ok(f.scroll <= 0 && !f.small.length, `the bar at 320 px: no sideways scrolling (${f.scroll}), targets ≥ 24 px ${f.small.join(', ')}`); }
+  await settled(page);
   const axeBar = await new AxeBuilder({ page }).withTags(TAGS).include({ fromShadowDom: ['noema-roadmap-map', 'noema-roadmap-levels'] }).analyze();
   ok(!axeBar.violations.length, 'axe: the level bar ' + axeBar.violations.map(v => v.id).join(', '));
   await page.locator('noema-roadmap-levels noema-button.take').click();
@@ -174,6 +181,7 @@ const answerAll = async (page, host, pick) => {
   await page.locator('noema-roadmap-level-test noema-roadmap-quiz .opt').nth(0).click(); await wait(100);
   { const f = await fit(page, 'noema-roadmap-level-test'); ok(f.scroll <= 0 && !f.small.length, `the level test at 320 px: no sideways scrolling (${f.scroll}), targets ≥ 24 px ${f.small.join(', ')}`); }
   await page.screenshot({ path: SHOTS + '/levels_test_320.png' });
+  await settled(page);
   const axeT = await new AxeBuilder({ page }).withTags(TAGS).include('noema-roadmap-level-test').analyze();
   ok(!axeT.violations.length, 'axe: the level test with an answer ' + axeT.violations.map(v => v.id).join(', '));
   await page.keyboard.press('Escape'); await wait(300);
