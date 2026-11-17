@@ -14,7 +14,7 @@ let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m)
 const wait = ms => new Promise(r => setTimeout(r, ms));
 const until = async (fn, ms = 30000, step = 250) => { const t = Date.now(); while (Date.now() - t < ms) { try { if (await fn()) return true; } catch (e) { } await wait(step); } return false; };
 /** the words of an element as the learner reads them, through its shadow roots (the screens of src/features/<area>/ui) */
-const PORT = 54337, BASE = `http://localhost:${PORT}`, APORT = 54338, ABASE = `http://localhost:${APORT}`;
+let BASE = '', ABASE = '';   // both servers take a free port from the system (a fixed one can be taken by another suite's server)
 const KEY = 'sk-ant-api03-' + 'k'.repeat(40);
 const FX = JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/pack.json'), 'utf8'));
 
@@ -94,9 +94,11 @@ async function signUp(browser, email, name, viewport = { width: 1300, height: 90
 const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Object.keys(localStorage).find(k => k.includes(':a:curriculum:')).split(':')[1])[0]);
 
 (async () => {
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', geminiBase: '${ABASE}/v1beta', askSubjectOnStart: true, onboarding: false, shell: false };`;
-  const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
-  const api = vendors(); await new Promise(r => api.listen(APORT, r));
+  const api = vendors(); await new Promise(r => api.listen(0, r)); ABASE = `http://localhost:${api.address().port}`;
+  let cfg = '';
+  const srv = await start({ port: 0, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: () => cfg });
+  BASE = `http://localhost:${srv.address().port}`;
+  cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', geminiBase: '${ABASE}/v1beta', askSubjectOnStart: true, onboarding: false, shell: false };`;
   const browser = await chromium.launch();
 
   console.log('— build a curriculum with Claude (4 agents)');
