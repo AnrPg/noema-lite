@@ -60,6 +60,7 @@
   "roadmap.jobs.attached": "“{subject}”现在讲授“{step}”{replan, select, yes { — 那个阶段正在重新规划} other {}}",
   "roadmap.jobs.partAdded": "新部分“{title}”:地图上新增 {n, number} 个阶段",
   "roadmap.jobs.linksAdded": "阶段之间的连接已更改:新增 {added, number},移除 {removed, number}",
+  "roadmap.jobs.chaptersAdded": "“{step}”:新增 {n, number} 章",
   "roadmap.jobs.notHere": "这份路线图不在本设备上。",
   "roadmap.jobs.taskDone": "这项任务已经完成(或路线图已更改) — 请重新复制当前任务。",
   "roadmap.jobs.notJson": "这不是 JSON 回答 — 请原样粘贴 Claude 的回答(JSON 对象)。",

@@ -60,6 +60,7 @@
   "roadmap.jobs.attached": "«{subject}» tani mëson «{step}»{replan, select, yes { — ajo etapë po riplanifikohet} other {}}",
   "roadmap.jobs.partAdded": "Pjesë e re «{title}»: {n, plural, one {# etapë u shtua} other {# etapa u shtuan}} në hartë",
   "roadmap.jobs.linksAdded": "Lidhjet ndërmjet etapave ndryshuan: {added, plural, one {# u shtua} other {# u shtuan}}, {removed, plural, one {# u hoq} other {# u hoqën}}",
+  "roadmap.jobs.chaptersAdded": "«{step}»: {n, plural, one {u shtua # kapitull} other {u shtuan # kapituj}}",
   "roadmap.jobs.notHere": "Ky udhërrëfyes nuk është në këtë pajisje.",
   "roadmap.jobs.taskDone": "Kjo detyrë është kryer tashmë (ose udhërrëfyesi ndryshoi) — kopjoje sërish detyrën aktuale.",
   "roadmap.jobs.notJson": "Kjo nuk është një përgjigje JSON — ngjit saktësisht atë që u përgjigj Claude (objektin JSON).",

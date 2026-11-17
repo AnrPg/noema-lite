@@ -4,7 +4,7 @@ import type { Pack, Translation } from '../engine/api.ts';
 import { curState, stepOfPack } from '../services/curricula.ts';
 import { languagesTodo, trCurl, trPath } from '../services/packfiles.ts';
 import { BUSY, packmetaKey, REPLAYED } from '../services/packsave.ts';
-import { roadmapTodoText } from '../services/roadmap.ts';
+import { roadmapTodoText, scopeOfPack } from '../services/roadmap.ts';
 import { sagaKey } from '../services/sagas.ts';
 import { ID_RE, jitter, LOCALE_RE, MAX_INLINE, message, sha256Hex, str, type Json } from '../util.ts';
 
@@ -169,10 +169,11 @@ export const tool: Tool = {
             subject: { ...p.subject, ...(named.i18n ? { i18n: named.i18n as NonNullable<Pack['subject']['i18n']> } : {}) },
           };
           const st = await stepOfPack(ctx, sid).catch(() => null),
-            rm = st ? roadmapTodoText(ctx.engine, await curState(ctx, st.c, uid), { only: st.nid }) : ''; // 🌐 its step on the Roadmap is translated with it
+            cs = st ? await curState(ctx, st.c, uid) : null,
+            rm = st && cs ? roadmapTodoText(ctx.engine, cs, { only: st.nid }) : ''; // 🌐 its step on the Roadmap is translated with it
           return (
             `✅ Saved: “${p.subject.title}” in ${loc} — ${tr.chapters.length} of ${(p.chapters ?? []).length} chapters.${r.warnings.length ? `\n${r.warnings.length} warning(s):\n- ${r.warnings.slice(0, 20).join('\n- ')}` : ''}\nThe learner sees the subject in this language when their app is in it.` +
-            (await languagesTodo(ctx, q).catch(() => '')) +
+            (await languagesTodo(ctx, q, await scopeOfPack(ctx, q, cs)).catch(() => '')) +
             rm
           );
         },

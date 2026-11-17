@@ -21,6 +21,8 @@ import { tool as createRoadmap } from './create_roadmap.ts';
 import { tool as roadmapMap } from './roadmap_map.ts';
 import { tool as extendRoadmap } from './extend_roadmap.ts';
 import { tool as linkRoadmapSteps } from './link_roadmap_steps.ts';
+import { tool as addRoadmapChapters } from './add_roadmap_chapters.ts';
+import { tool as setRoadmapLanguages } from './set_roadmap_languages.ts';
 import { tool as restructureLevels } from './restructure_levels.ts';
 import { tool as curriculumTask } from './curriculum_task.ts';
 import { tool as langCourses } from './lang_courses.ts';
@@ -62,6 +64,8 @@ export const TOOLS: readonly Tool[] = [
   roadmapMap,
   extendRoadmap,
   linkRoadmapSteps,
+  addRoadmapChapters,
+  setRoadmapLanguages,
   restructureLevels,
   curriculumTask,
   langCourses,

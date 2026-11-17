@@ -79,6 +79,7 @@ run vault node "$ROOT/tests/vault.js" "$T"          # 🗄️ the vault: shared 
 run social node "$ROOT/tests/social.js" "$T"         # 👥 people, study buddies, conversations, study groups (docs/SOCIAL.md)
 run curriculum_i18n node "$ROOT/tests/curriculum_i18n.js"   # a Roadmap in several languages (docs/CURRICULUM.md §10)
 run curriculum_app node "$ROOT/tests/curriculum_app.js" "$T"
+run roadmap_chapters node "$ROOT/tests/roadmap_chapters.js" "$T"   # 📑🌐 chapters added to prepared steps, a Roadmap's languages, plan receipts (docs/CURRICULUM.md §2c, §10b)
 run curriculum_share node "$ROOT/tests/curriculum_share.js" "$T"
 run shelf node "$ROOT/tests/shelf.js" "$T"
 run bridge node "$ROOT/tests/bridge.js" "$T"         # 文A language help: a pack's words in the learner's own language (docs/BRIDGE.md)

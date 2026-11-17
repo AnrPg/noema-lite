@@ -60,6 +60,7 @@
   "roadmap.jobs.attached": "«{subject}» enseña ahora «{step}»{replan, select, yes { — esa etapa se está replanificando} other {}}",
   "roadmap.jobs.partAdded": "Nueva parte «{title}»: {n, plural, one {# etapa añadida} many {# etapas añadidas} other {# etapas añadidas}} al mapa",
   "roadmap.jobs.linksAdded": "Cambiaron los enlaces entre etapas: {added, plural, one {# añadido} many {# añadidos} other {# añadidos}}, {removed, plural, one {# quitado} many {# quitados} other {# quitados}}",
+  "roadmap.jobs.chaptersAdded": "«{step}»: {n, plural, one {# capítulo añadido} many {# capítulos añadidos} other {# capítulos añadidos}}",
   "roadmap.jobs.notHere": "Esta ruta no está en este dispositivo.",
   "roadmap.jobs.taskDone": "Esta tarea ya está hecha (o la ruta cambió) — copia de nuevo la tarea actual.",
   "roadmap.jobs.notJson": "Eso no es una respuesta JSON — pega exactamente lo que respondió Claude (el objeto JSON).",

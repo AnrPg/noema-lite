@@ -145,6 +145,7 @@
           "additionalProperties": { "type": "object" }
         },
         "linksApplied": { "type": "array", "items": { "type": "string" } },
+        "languages": { "$ref": "#/$defs/languages" },
         "levels": { "$ref": "noema.common.v1.schema.json#/$defs/levels" },
         "levelTest": {
           "type": "boolean",
@@ -319,8 +320,48 @@
             "required": ["id", "plan", "at"],
             "properties": { "id": { "type": "string" }, "plan": { "$ref": "#/$defs/restructurePlan" } }
           }
+        },
+        {
+          "if": { "properties": { "kind": { "const": "chapters" } }, "required": ["kind"] },
+          "then": {
+            "required": ["nid", "chapters", "at"],
+            "properties": {
+              "nid": { "type": "string" },
+              "chapters": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["ref", "title"],
+                  "properties": {
+                    "ref": { "type": "string" },
+                    "title": { "type": "string", "minLength": 1 },
+                    "goals": { "type": "array", "items": { "type": "string" } },
+                    "coverage": { "type": "array", "items": { "type": "string" } },
+                    "after": { "type": "string" },
+                    "before": { "type": "string" },
+                    "position": { "enum": ["start", "end"] }
+                  }
+                }
+              },
+              "why": { "type": "string" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "kind": { "const": "languages" } }, "required": ["kind"] },
+          "then": { "required": ["data", "at"], "properties": { "data": { "$ref": "#/$defs/languages" } } }
         }
       ]
+    },
+    "languages": {
+      "description": "🌐 The languages a Roadmap's packs and its own words get (docs/CURRICULUM.md §10b): the full translations and the 文A pairs \"source>native\" (left out: every pair among the Roadmap's language and its translations). None: the pack rules' default.",
+      "type": "object",
+      "required": ["translations"],
+      "properties": {
+        "translations": { "type": "array", "items": { "type": "string" } },
+        "bridges": { "type": "array", "items": { "type": "string" } },
+        "at": { "type": "string" }
+      }
     },
     "claim": {
       "description": "KV a:curclaim:<cid>:<nid>: a step handed to one run of the learner's Claude (a lease: 4 h, 72 h while its upload waits).",

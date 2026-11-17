@@ -42,7 +42,16 @@
         "minExercisesPerPicture": { "type": "integer", "minimum": 0 },
         "minPerKind": { "type": "integer", "minimum": 0 },
         "rules": { "type": "integer", "minimum": 0 },
-        "by": { "type": "string" }
+        "by": { "type": "string" },
+        "languages": {
+          "description": "🌐 The languages this pack gets instead of the pack rules' default — its Roadmap's (docs/CURRICULUM.md §10b): full translations and 文A pairs \"source>native\" (left out: every pair among the pack's language and its translations).",
+          "type": "object",
+          "required": ["translations"],
+          "properties": {
+            "translations": { "type": "array", "items": { "type": "string" } },
+            "bridges": { "type": "array", "items": { "type": "string" } }
+          }
+        }
       }
     },
     "i18nEntry": {

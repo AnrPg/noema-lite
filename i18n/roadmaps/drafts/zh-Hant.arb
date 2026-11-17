@@ -60,6 +60,7 @@
   "roadmap.jobs.attached": "「{subject}」現在講授「{step}」{replan, select, yes { — 那個階段正在重新規劃} other {}}",
   "roadmap.jobs.partAdded": "新部分「{title}」:地圖上新增 {n, number} 個階段",
   "roadmap.jobs.linksAdded": "階段之間的連結已變更:新增 {added, number},移除 {removed, number}",
+  "roadmap.jobs.chaptersAdded": "「{step}」:新增 {n, number} 章",
   "roadmap.jobs.notHere": "這份路線圖不在本裝置上。",
   "roadmap.jobs.taskDone": "這項任務已完成(或路線圖已變更) — 請重新複製目前的任務。",
   "roadmap.jobs.notJson": "這不是 JSON 回答 — 請原樣貼上 Claude 的回答(JSON 物件)。",
