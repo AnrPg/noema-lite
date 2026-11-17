@@ -54,7 +54,6 @@ export interface BridgePorts {
   };
   /** the account's cloud folder and rows (when signed in as that account) */
   readonly cloud: {
-    signedIn(): boolean;
     isAccount(acc: string | null): boolean;
     download(path: string): Promise<unknown>;
     upload(path: string, b: Bridge): Promise<void>;
@@ -72,7 +71,11 @@ export interface BridgePorts {
 }
 
 export type AttachError =
-  { readonly code: 'bridge.invalid'; readonly detail: string } | { readonly code: 'bridge.no_pack'; readonly id: string };
+  | { readonly code: 'bridge.invalid'; readonly detail: string }
+  | { readonly code: 'bridge.no_pack'; readonly id: string }
+  /** the bridge could not be kept where the account keeps it (the cloud for a signed-in account, else this device): nothing
+      was listed, so no index entry or row points at a bridge that is not there */
+  | { readonly code: 'bridge.not_saved'; readonly where: 'cloud' | 'device'; readonly cause: unknown };
 export interface Attached {
   readonly pack: string;
   readonly native: string;
@@ -112,7 +115,9 @@ export interface BridgeService {
 const obj = (v: unknown): Record<string, unknown> => (v && typeof v === 'object' ? (v as Record<string, unknown>) : {});
 
 export function createBridgeService(p: BridgePorts): BridgeService {
-  const mem = new Map<string, Bridge | null>(); // `${acc}|${pack}|${pair}` → bridge
+  // `${acc}|${pack}|${pair}` → a bridge found, with the index's version it was loaded for (null: the library's); a miss is
+  // never kept, so a bridge attached or revised later (on another device, by the connector) is found
+  const mem = new Map<string, { readonly b: Bridge; readonly v: unknown }>();
   const index = (acc: string | null): Record<string, Record<string, BridgeMeta>> =>
     obj(p.read(acc, 'bridges')) as Record<string, Record<string, BridgeMeta>>;
   const accSettings = (acc: string | null): Record<string, unknown> => obj(p.read(acc, 'settings'));
@@ -147,12 +152,15 @@ export function createBridgeService(p: BridgePorts): BridgeService {
     const acc = p.account(acc0),
       pk = pairKey(src, nat, own),
       key = `${acc}|${packId}|${pk}`;
-    if (mem.has(key)) return mem.get(key) ?? null;
-    const ix = index(acc)[packId]?.[pk];
+    const ix = index(acc)[packId]?.[pk],
+      v = ix?.['v'] ?? null,
+      hit = mem.get(key);
+    if (hit && hit.v === v) return hit.b;
     let b: Bridge | null = null;
     if (ix) {
       b = await p.cache.get(key).catch(() => null);
-      if ((!b || summary(b, s => p.hash(s), 0).v !== ix['v']) && p.cloud.signedIn()) {
+      // the cloud folder is the signed-in account's own: never asked for another profile's bridge
+      if ((!b || summary(b, s => p.hash(s), 0).v !== v) && p.cloud.isAccount(acc)) {
         const fresh = obj(await p.cloud.download(`bridges/${packId}.${pk}.json`).catch(() => null));
         if (fresh['format'] === 'noema-bridge') {
           b = fresh as unknown as Bridge;
@@ -164,7 +172,8 @@ export function createBridgeService(p: BridgePorts): BridgeService {
       const reg = p.registry(packId)?.bridgeLocales?.[pk];
       if (reg?.path) b = await p.library(packId, pk, reg.path);
     }
-    mem.set(key, b);
+    if (b) mem.set(key, { b, v });
+    else mem.delete(key);
     return b;
   }
 
@@ -180,8 +189,19 @@ export function createBridgeService(p: BridgePorts): BridgeService {
       pk = pairKey(b.source, nat, own),
       key = `${acc}|${b.pack}|${pk}`,
       source = base(b.source || own);
-    await p.cache.put(key, b).catch(() => undefined); // this device's copy: the index and the cloud keep it too
-    if (p.cloud.isAccount(acc)) await p.cloud.upload(`bridges/${b.pack}.${pk}.json`, b);
+    // kept first, listed after: the cloud keeps a signed-in account's bridge (this device's copy is then only a cache), this
+    // device a local profile's — when that fails, nothing is listed
+    const onDevice = await p.cache.put(key, b).then(
+      () => null,
+      (e: unknown) => e,
+    );
+    if (p.cloud.isAccount(acc)) {
+      try {
+        await p.cloud.upload(`bridges/${b.pack}.${pk}.json`, b);
+      } catch (e) {
+        return err({ code: 'bridge.not_saved', where: 'cloud', cause: e });
+      }
+    } else if (onDevice !== null) return err({ code: 'bridge.not_saved', where: 'device', cause: onDevice });
     const entry = { ...summary(b, s => p.hash(s), p.now()), source };
     const all = index(acc);
     all[b.pack] = { ...(all[b.pack] ?? {}), [pk]: entry as BridgeMeta };

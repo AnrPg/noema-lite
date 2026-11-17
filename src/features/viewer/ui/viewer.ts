@@ -56,6 +56,8 @@ export class NoemaPdfView extends LightElement {
   readonly #drawn = new Map<number, number>();
   #size = { width: 612, height: 792 };
   #io: IntersectionObserver | null = null;
+  #released = false;
+  /** doc: this view's own (released with it) */
   constructor(i18n: I18n, doc: PdfDoc, start: number, onPage: () => void) {
     super(i18n);
     this.doc = doc;
@@ -107,10 +109,22 @@ export class NoemaPdfView extends LightElement {
   }
   override disconnectedCallback(): void {
     super.disconnectedCallback();
+    this.release();
+  }
+  /** whether release() ran (a method: it changes across the awaits of a draw) */
+  isReleased(): boolean {
+    return this.#released;
+  }
+  /** pdf.js's document freed (its worker, its pages' memory) and nothing more drawn; once */
+  release(): void {
+    if (this.#released) return;
+    this.#released = true;
     this.#io?.disconnect();
+    this.#io = null;
+    this.doc.destroy();
   }
   async #draw(n: number): Promise<void> {
-    if (this.#drawn.get(n) === this.scale) return;
+    if (this.#released || this.#drawn.get(n) === this.scale) return;
     const scale = this.scale;
     this.#drawn.set(n, scale);
     const p = await this.doc.page(n),
@@ -125,6 +139,7 @@ export class NoemaPdfView extends LightElement {
     if (!d) return;
     d.style.width = String(vp.width) + 'px';
     d.style.height = String(vp.height) + 'px';
+    if (this.isReleased()) return; // freed while the page was fetched
     await p.render(c.getContext('2d'), scale, ratio);
     d.querySelector('canvas')?.remove();
     d.prepend(c);
@@ -270,8 +285,13 @@ export class NoemaFileViewer extends LightElement {
   }
   #end(): void {
     this.#closed = true;
+    this.#pdf?.release(); // also when it was never shown (closed while its first page was measured)
     for (const u of this.#urls.splice(0)) this.#port.libs.revoke(u);
     this.#o.onClose?.();
+  }
+  /** whether it was closed (a method: it changes across the awaits of a load) */
+  isClosed(): boolean {
+    return this.#closed;
   }
   close(): void {
     if (this.#closed) return;
@@ -333,10 +353,15 @@ export class NoemaFileViewer extends LightElement {
       const libs: ViewerLibs = { ...P.libs, url: b => this.#url(b) };
       const view = await readFile(kind, { blob, bytes: await blob.arrayBuffer(), name, page: o.page ?? undefined }, libs);
       if (view.type === 'pdf') {
+        if (this.isClosed()) {
+          view.doc.destroy(); // closed (or replaced) while the file was read
+          return (this.kind = kind);
+        }
         this.#pdf = new NoemaPdfView(this.i18n, view.doc, view.page, () => {
           this.redraw();
         });
         await this.#pdf.measure();
+        if (this.isClosed()) return (this.kind = kind); // closed while its first page was measured: #end released it
       }
       if (view.type === 'sheet') this.#sheet = view.names[0] ?? '';
       this.#show({ s: 'view', view });

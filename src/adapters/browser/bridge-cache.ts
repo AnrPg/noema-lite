@@ -52,6 +52,10 @@ export function browserBridgeCache(name = 'noema-bridges'): BridgeCacheStore {
       t.onerror = () => {
         rej(t.error ?? new Error('IndexedDB write failed'));
       };
+      // a full device aborts the transaction (QuotaExceededError) without an error on the request
+      t.onabort = () => {
+        rej(t.error ?? new Error('IndexedDB write aborted'));
+      };
     });
   };
   return Object.freeze({

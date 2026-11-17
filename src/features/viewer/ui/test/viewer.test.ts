@@ -1,11 +1,12 @@
 /* 👁 The file viewer in a DOM (happy-dom), its libraries faked: a dialog with its title, a text file, a table, a binary file's
-   hex view, YouTube at a time, ✕ and Escape close it (the addresses it made revoked); and the text it reads for the AI.
+   hex view, YouTube at a time, ✕ and Escape close it (the addresses it made revoked), a PDF's document freed whenever the
+   viewer goes (closed, replaced, or closed while the PDF still loads); and the text it reads for the AI.
    PDF pages, Office files and the site's proxy in a real browser: tests/sources.js. */
 import '../../../../ui/test/dom.ts';
 import assert from 'node:assert/strict';
 import { afterEach, test } from 'node:test';
 import { catalogI18n } from '../../../../adapters/memory/i18n.ts';
-import type { ViewerLibs, ViewerNet } from '../../../../ports/viewer.ts';
+import type { PdfDoc, ViewerLibs, ViewerNet } from '../../../../ports/viewer.ts';
 import { arb } from '../../../../ui/test/services.ts';
 import { extractText } from '../../application/read.ts';
 import { openViewer } from '../viewer.ts';
@@ -91,4 +92,63 @@ test('the text for the AI: a text file in pages, a Markdown outline', async () =
     ['One', 'Two'],
   );
   assert.match(x.pages.join(''), /more/);
+});
+
+test('the text of an e-mail for the AI: its head and its text, never the raw MIME', async () => {
+  const mail =
+    'From: A <a@x>\r\nSubject: Notes\r\nContent-Type: multipart/alternative; boundary="BOUND"\r\n\r\n--BOUND\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n' +
+    btoa(String.fromCharCode(...new TextEncoder().encode('Καλημέρα κόσμε'))) +
+    '\r\n--BOUND--\r\n';
+  const x = await extractText(new Blob([mail]), 'n.eml', libs);
+  assert.equal(x.kind, 'eml');
+  const t = x.pages.join('');
+  assert.match(t, /subject: Notes/);
+  assert.match(t, /Καλημέρα κόσμε/);
+  assert.doesNotMatch(t, /BOUND|base64|Content-Type/);
+});
+
+/** a PDF of n pages whose destroy() is counted; ready: when pdf.js answers */
+function fakePdf(ready: Promise<void> = Promise.resolve()): { libs: ViewerLibs; destroyed: () => number } {
+  let n = 0;
+  const doc: PdfDoc = {
+    numPages: 2,
+    page: () =>
+      Promise.resolve({
+        viewport: (k: number) => ({ width: 600 * k, height: 800 * k }),
+        render: () => Promise.resolve(),
+        text: () => Promise.resolve(''),
+        cleanup: () => undefined,
+      }),
+    outline: () => Promise.resolve([]),
+    destroy: () => {
+      n++;
+    },
+  };
+  return { libs: { ...libs, pdf: () => ready.then(() => doc) }, destroyed: () => n };
+}
+const pdfBlob = (): Blob => new Blob(['%PDF-1.4'], { type: 'application/pdf' });
+
+test('a PDF’s document is freed once when the viewer is closed, and when another file replaces it', async () => {
+  const a = fakePdf();
+  const v = await openViewer({ ...port, libs: a.libs }, { blob: pdfBlob(), name: 'a.pdf' });
+  assert.equal(v.kind, 'pdf');
+  assert.ok(document.querySelector('.vw-pdf'));
+  v.close();
+  assert.equal(a.destroyed(), 1);
+  const b = fakePdf();
+  await openViewer({ ...port, libs: b.libs }, { blob: pdfBlob(), name: 'b.pdf' });
+  await openViewer(port, { blob: new Blob(['x']), name: 'next.txt' });
+  assert.equal(b.destroyed(), 1, 'replaced');
+});
+
+test('a PDF closed while it still loads is freed when pdf.js answers', async () => {
+  let go = (): void => undefined;
+  const c = fakePdf(new Promise<void>(r => (go = r)));
+  const opening = openViewer({ ...port, libs: c.libs }, { blob: pdfBlob(), name: 'c.pdf' });
+  await new Promise(r => setTimeout(r, 0));
+  document.querySelector<HTMLButtonElement>('.vw-close')?.click();
+  go();
+  await opening;
+  assert.equal(c.destroyed(), 1);
+  assert.equal(document.querySelector('.vw-pdf'), null);
 });

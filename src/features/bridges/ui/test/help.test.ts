@@ -27,7 +27,6 @@ function ui(index: Record<string, unknown> = {}) {
     registry: () => null,
     cache: { get: () => Promise.resolve(null), put: () => Promise.resolve(), del: () => Promise.resolve() },
     cloud: {
-      signedIn: () => false,
       isAccount: () => false,
       download: () => Promise.resolve(null),
       upload: () => Promise.resolve(),

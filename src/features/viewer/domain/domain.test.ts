@@ -106,3 +106,26 @@ test('text for the AI, HTML as text, sizes, a Markdown outline', () => {
     ],
   );
 });
+
+test('e-mail in raw 8-bit: each part decoded in its own charset, the bytes never changed first', () => {
+  const enc = new TextEncoder();
+  const join = (...parts: (string | Uint8Array)[]): Uint8Array => {
+    const bs = parts.map(x => (typeof x === 'string' ? enc.encode(x) : x));
+    const out = new Uint8Array(bs.reduce((n, b) => n + b.length, 0));
+    let i = 0;
+    for (const b of bs) {
+      out.set(b, i);
+      i += b.length;
+    }
+    return out;
+  };
+  // UTF-8 "Καλημέρα κόσμε" holds the bytes 0x9A and 0x9C, which Windows-1252 would turn into other characters
+  const utf8 = readMail(
+    join('Subject: Καλημέρα\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: 8bit\r\n\r\n', 'Καλημέρα κόσμε\r\n'),
+  );
+  assert.equal(utf8.text?.trim(), 'Καλημέρα κόσμε');
+  assert.deepEqual(utf8.head, [['subject', 'Καλημέρα']]);
+  // a Windows-1251 part: its own charset
+  const cp = readMail(join('Content-Type: text/plain; charset=windows-1251\r\n\r\n', new Uint8Array([0xcf, 0xf0, 0xe8, 0xe2, 0xe5, 0xf2])));
+  assert.equal(cp.text?.trim(), 'Привет');
+});

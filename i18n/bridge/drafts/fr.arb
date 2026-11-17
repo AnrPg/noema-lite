@@ -56,5 +56,6 @@
   "bridge.tag.partial": "{lang} ({pct} des mots)",
   "bridge.attached": "Aide linguistique en {lang} ajoutée à « {title} »",
   "bridge.attach.invalid": "Ce fichier n’est pas une aide linguistique valide : {detail}",
-  "bridge.attach.noPack": "Cette aide linguistique est pour un sujet que tu n’as pas ({id}). Ajoute d’abord le sujet."
+  "bridge.attach.noPack": "Cette aide linguistique est pour un sujet que tu n’as pas ({id}). Ajoute d’abord le sujet.",
+  "bridge.attach.notSaved": "Cette aide linguistique n’a pas pu être enregistrée, elle n’a donc pas été ajoutée. Vérifie ta connexion et l’espace sur cet appareil, puis importe-la à nouveau."
 }

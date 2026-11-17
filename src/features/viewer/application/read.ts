@@ -299,8 +299,18 @@ export async function extractText(
     const t = decode(new Uint8Array(bytes));
     return { kind, pages: chunkText(t), outline: kind === 'markdown' ? mdOutline(t) : [] };
   }
-  if (kind === 'html' || kind === 'eml') return { kind, pages: chunkText(htmlText(decode(new Uint8Array(bytes)))), outline: [] };
-  if (kind === 'odt' || kind === 'rtf' || kind === 'sheet' || kind === 'pptx' || kind === 'epub' || kind === 'ipynb' || kind === 'legacy')
+  if (kind === 'html') return { kind, pages: chunkText(htmlText(decode(new Uint8Array(bytes)))), outline: [] };
+  // an e-mail as the viewer reads it: its head and its text, not its raw MIME (boundaries, base64)
+  if (
+    kind === 'eml' ||
+    kind === 'odt' ||
+    kind === 'rtf' ||
+    kind === 'sheet' ||
+    kind === 'pptx' ||
+    kind === 'epub' ||
+    kind === 'ipynb' ||
+    kind === 'legacy'
+  )
     return { kind, pages: chunkText(viewText(await readFile(kind, { blob, bytes, name }, libs))), outline: [] };
   return { kind, pages: [], outline: [] };
 }

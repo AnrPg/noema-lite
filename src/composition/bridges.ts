@@ -6,7 +6,7 @@
  *                                      words(acc, source) · available(acc, packId, subject?, source?, own?) ·
  *                                      load(acc, packId, native, source?, own?) → Promise<bridge | null> ·
  *                                      attach(acc, bridge) → Promise<{ pack, native, source, title }> (throws a refused one:
- *                                      .code bridge.invalid | bridge.no_pack, .message in the interface language) ·
+ *                                      .code bridge.invalid | bridge.no_pack | bridge.not_saved, .message in the interface language) ·
  *                                      detach(…) · report(acc, r) · FADE · LEVELS
  *   NoemaShell.bridge (build/ui.js)    its screens (src/composition/bridges-ui.ts)
  *
@@ -113,16 +113,16 @@ export function pageBridges(r: Resolver, g: BridgeGlobals = globalThis as Bridge
       del: k => cache.del(k),
     },
     cloud: {
-      signedIn: () => !!g.NoemaCloud?.session?.(),
       isAccount: signedAs,
       download: async path => {
         const res = await g.NoemaCloud?.downloadObject?.(path);
         return res ? res.json() : null;
       },
+      // a failed upload rejects: attach lists nothing then (the payload is not in the cloud)
       upload: async (path, b) => {
-        await g.NoemaCloud?.uploadObject?.(path, new Blob([JSON.stringify(b)], { type: 'application/json' }), 'application/json').catch(
-          errors.catcher('bridge.upload', { severity: 'warning' }),
-        );
+        const C = g.NoemaCloud;
+        if (!C?.uploadObject) throw new Error('NoemaCloud.uploadObject is missing'); // a log: isAccount said signed in
+        await C.uploadObject(path, new Blob([JSON.stringify(b)], { type: 'application/json' }), 'application/json');
       },
       putRow: (acc, pack, pair, entry) => g.NoemaCloud?.rows?.put(acc, 'bridges', pack, pair, entry),
       deleteRow: (acc, pack, pair) => g.NoemaCloud?.rows?.del(acc, 'bridges', pack, pair),
@@ -160,9 +160,11 @@ export const bridgesBridge: BridgeExtension = {
           new Error(
             e.code === 'bridge.invalid'
               ? i18n.t('bridge.attach.invalid', { detail: e.detail })
-              : i18n.t('bridge.attach.noPack', { id: e.id }),
+              : e.code === 'bridge.no_pack'
+                ? i18n.t('bridge.attach.noPack', { id: e.id })
+                : i18n.t('bridge.attach.notSaved'),
           ),
-          { code: e.code },
+          e.code === 'bridge.not_saved' ? { code: e.code, cause: e.cause } : { code: e.code },
         );
       },
     });

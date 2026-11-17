@@ -2,6 +2,22 @@
    of the site's file proxy. Pure. */
 
 const fromLatin1 = (s: string): Uint8Array => Uint8Array.from(s, c => c.charCodeAt(0));
+/** bytes as a string of one character per byte (U+0000–U+00FF), losslessly: fromLatin1 gives the same bytes back. (Not
+    TextDecoder('latin1'), which is Windows-1252 and changes the bytes 0x80–0x9F.) */
+const toBinary = (bytes: Uint8Array): string => {
+  let out = '';
+  for (let i = 0; i < bytes.length; i += 0x8000) out += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+  return out;
+};
+/** a header written in raw 8-bit (not as encoded words): its UTF-8 read, else as it is */
+const rawHeader = (s: string): string => {
+  if (!/[\x80-\xff]/.test(s)) return s;
+  try {
+    return new TextDecoder('utf-8', { fatal: true }).decode(fromLatin1(s));
+  } catch {
+    return s; // not UTF-8: one character per byte
+  }
+};
 const decodeAs = (bytes: Uint8Array, charset: string): string => {
   try {
     return new TextDecoder(charset).decode(bytes);
@@ -89,7 +105,7 @@ export interface Mail {
   readonly text: string | null;
 }
 export function readMail(bytes: Uint8Array): Mail {
-  const top = split(new TextDecoder('latin1').decode(bytes));
+  const top = split(toBinary(bytes)); // the bytes kept: each part is decoded in its own charset (bodyText)
   let html: string | null = null,
     text: string | null = null;
   const visit = (part: Part): void => {
@@ -102,7 +118,9 @@ export function readMail(bytes: Uint8Array): Mail {
     else if (ct.startsWith('text/plain') && text == null) text = bodyText(part);
   };
   visit(top);
-  const head = (['from', 'to', 'date', 'subject'] as const).filter(k => top.H[k]).map(k => [k, mailWords(top.H[k])] as const);
+  const head = (['from', 'to', 'date', 'subject'] as const)
+    .filter(k => top.H[k])
+    .map(k => [k, mailWords(rawHeader(top.H[k] ?? ''))] as const);
   return { head, html, text };
 }
 

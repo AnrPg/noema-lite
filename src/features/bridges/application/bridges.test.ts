@@ -1,15 +1,32 @@
 /* The 文A bridges' use cases over memory ports: settings and the native language (a:settings.native, D19), the learner's
-   words, the bridges offered, loading (this device's copy, the cloud when the version moved, the library), attaching (checked,
-   kept, indexed; refused ones), detaching and the reports. */
+   words, the bridges offered, loading (this device's copy, the cloud when the version moved — the signed-in account's only —,
+   the library; a revised index entry read again, a miss never kept), attaching (checked, kept, then indexed; refused ones;
+   nothing listed when it could not be kept), detaching and the reports. */
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import type { Bridge } from '../domain/help.ts';
+import { summary } from '../domain/help.ts';
 import { createBridgeService, type BridgePorts, type SubjectRow } from './bridges.ts';
 
-function fakes(o: { signedIn?: boolean; errors?: string[]; subjects?: SubjectRow[]; cloud?: Record<string, unknown> } = {}) {
+/** the version the index keeps of a bridge (the fakes' hash: the length) */
+const summaryV = (b: Bridge): string => summary(b, x => String(x.length), 0).v;
+
+function fakes(
+  o: {
+    /** the account signed in to the cloud (its folder is that account's) */
+    signedIn?: string;
+    errors?: string[];
+    subjects?: SubjectRow[];
+    cloud?: Record<string, unknown>;
+    failPut?: boolean;
+    failUpload?: boolean;
+    library?: boolean;
+  } = {},
+) {
   const kv = new Map<string, unknown>(),
     cache = new Map<string, Bridge>(),
     uploads: string[] = [],
+    downloads: string[] = [],
     rows: string[] = [],
     library: string[] = [];
   let now = 1000;
@@ -26,6 +43,7 @@ function fakes(o: { signedIn?: boolean; errors?: string[]; subjects?: SubjectRow
     cache: {
       get: k => Promise.resolve(cache.get(k) ?? null),
       put: (k, b) => {
+        if (o.failPut) return Promise.reject(new Error('QuotaExceededError'));
         cache.set(k, b);
         return Promise.resolve();
       },
@@ -35,10 +53,13 @@ function fakes(o: { signedIn?: boolean; errors?: string[]; subjects?: SubjectRow
       },
     },
     cloud: {
-      signedIn: () => !!o.signedIn,
-      isAccount: () => !!o.signedIn,
-      download: path => Promise.resolve(o.cloud?.[path] ?? null),
+      isAccount: acc => !!o.signedIn && acc === o.signedIn,
+      download: path => {
+        downloads.push(path);
+        return Promise.resolve(o.cloud?.[path] ?? null);
+      },
       upload: path => {
+        if (o.failUpload) return Promise.reject(new Error('503'));
         uploads.push(path);
         return Promise.resolve();
       },
@@ -47,7 +68,7 @@ function fakes(o: { signedIn?: boolean; errors?: string[]; subjects?: SubjectRow
     },
     library: (pack, nat, path) => {
       library.push(path);
-      return Promise.resolve({ pack, native: nat, entries: [{ k: 'lib' }] });
+      return Promise.resolve(o.library === false ? null : { pack, native: nat, entries: [{ k: 'lib' }] });
     },
     subjects: () => Promise.resolve(o.subjects ?? [{ id: 'p1', title: 'Physics', language: 'en' }]),
     loadSubject: () => Promise.resolve({ subject: { language: 'en' } }),
@@ -55,7 +76,7 @@ function fakes(o: { signedIn?: boolean; errors?: string[]; subjects?: SubjectRow
     hash: s => String(s.length),
     now: () => now++,
   };
-  return { ports, kv, cache, uploads, rows, library, s: createBridgeService(ports) };
+  return { ports, kv, cache, uploads, downloads, rows, library, s: createBridgeService(ports) };
 }
 const bridge = (x: Partial<Bridge> = {}): Bridge => ({
   format: 'noema-bridge',
@@ -89,7 +110,7 @@ test('the learner’s words: per source language, merged', () => {
 });
 
 test('attach: checked, kept on this device and in the cloud, indexed; offered after; detached again', async () => {
-  const { s, cache, uploads, rows, kv } = fakes({ signedIn: true });
+  const { s, cache, uploads, rows, kv } = fakes({ signedIn: 'u1' });
   const r = await s.attach(null, bridge());
   assert.ok(r.ok);
   assert.deepEqual(r.value, { pack: 'p1', native: 'ru', source: 'en', title: 'Physics' });
@@ -120,7 +141,7 @@ test('load: the library’s bridge when the account has none; the cloud’s when
   await f.s.load(null, 'lib', 'ru');
   assert.equal(f.library.length, 1, 'kept in memory');
   const fresh = bridge({ entries: [{ k: 'fresh' }] });
-  const g = fakes({ signedIn: true, cloud: { 'bridges/p1.ru.json': fresh } });
+  const g = fakes({ signedIn: 'u1', cloud: { 'bridges/p1.ru.json': fresh } });
   g.kv.set('u1:bridges', { p1: { ru: { v: 'not-this', status: 'draft' } } });
   g.cache.set('u1|p1|ru', bridge());
   assert.deepEqual((await g.s.load(null, 'p1', 'ru'))?.entries, [{ k: 'fresh' }]);
@@ -134,4 +155,47 @@ test('reports: kept with their time, the last 200', () => {
   assert.equal(all.length, 200);
   assert.equal(all[0]?.k, 'w5');
   assert.match(all[0].at, /^1970-01-01T/);
+});
+
+test('another profile on this device never reads the signed-in account’s cloud folder', async () => {
+  const g = fakes({ signedIn: 'u_cloud', cloud: { 'bridges/p1.ru.json': bridge({ entries: [{ k: 'theirs' }] }) } });
+  g.kv.set('u1:bridges', { p1: { ru: { v: 'gone', status: 'draft' } } }); // listed, its copy missing from this device
+  assert.equal(await g.s.load('u1', 'p1', 'ru'), null);
+  assert.deepEqual(g.downloads, []);
+  assert.equal(g.cache.size, 0, 'nothing kept under the profile’s key');
+});
+
+test('load: a bridge revised in the index is read again; a miss is not kept', async () => {
+  const g = fakes({ signedIn: 'u1', cloud: { 'bridges/p1.ru.json': bridge({ entries: [{ k: 'v2' }] }) } });
+  g.cache.set('u1|p1|ru', bridge({ entries: [{ k: 'v1' }] }));
+  const v1 = summaryV(bridge({ entries: [{ k: 'v1' }] }));
+  g.kv.set('u1:bridges', { p1: { ru: { v: v1, status: 'draft' } } });
+  assert.deepEqual((await g.s.load(null, 'p1', 'ru'))?.entries, [{ k: 'v1' }]);
+  assert.deepEqual(g.downloads, [], 'this device’s copy is current');
+  // the connector saved a new version: the synced index says so
+  g.kv.set('u1:bridges', { p1: { ru: { v: 'v2-stamp', status: 'draft' } } });
+  assert.deepEqual((await g.s.load(null, 'p1', 'ru'))?.entries, [{ k: 'v2' }]);
+  assert.deepEqual(g.downloads, ['bridges/p1.ru.json']);
+  const miss = fakes({ library: false });
+  assert.equal(await miss.s.load(null, 'lib', 'ru'), null);
+  assert.equal(await miss.s.load(null, 'lib', 'ru'), null);
+  assert.equal(miss.library.length, 2, 'a failed load is tried again');
+});
+
+test('attach lists nothing when the bridge could not be kept: the cloud upload fails, or a local profile’s device copy', async () => {
+  const up = fakes({ signedIn: 'u1', failUpload: true });
+  const r1 = await up.s.attach(null, bridge());
+  assert.ok(!r1.ok);
+  assert.equal(r1.error.code, 'bridge.not_saved');
+  assert.deepEqual(up.kv.get('u1:bridges') ?? null, null, 'no index entry');
+  assert.deepEqual(up.rows, [], 'no noema_bridges row');
+  const dev = fakes({ failPut: true });
+  const r2 = await dev.s.attach(null, bridge());
+  assert.ok(!r2.ok && r2.error.code === 'bridge.not_saved');
+  assert.equal(r2.error.where, 'device');
+  assert.equal(dev.kv.get('u1:bridges') ?? null, null);
+  // a signed-in account whose device copy fails: the cloud keeps it, so it is listed
+  const both = fakes({ signedIn: 'u1', failPut: true });
+  assert.ok((await both.s.attach(null, bridge())).ok);
+  assert.deepEqual(both.rows, ['+p1.ru']);
 });
