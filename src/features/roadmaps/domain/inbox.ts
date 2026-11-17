@@ -2,7 +2,8 @@
    Each thing Claude does is a KV row a:curin:<cid>:<seq> (contract noema.curriculum.v1#inboxEntry); the app checks it again,
    applies it, syncs the Roadmap and only then deletes the row, and the connector works on the Roadmap "as it will be" (the
    record + its inbox, in key order: `merged`). Kinds this build knows (KINDS): an agent's answer ({ task, data }), a prepared
-   step, a subject attached to a step, a translation, a new part, links between steps, a restructuring proposal. A kind it does
+   step, a subject attached to a step, a translation, a new part, links between steps, a restructuring proposal, chapters
+   added to a step, the Roadmap's languages. A kind it does
    not know stays in the inbox for a newer app — never deleted unread. */
 import { ladder as ladderSpec, roadmapLevels } from '../../../contracts/rules/levels.ts';
 import type { Edge, KvRow, Level, Proposal, Roadmap, Step } from './model.ts';
@@ -11,9 +12,10 @@ import { hasEdge, order, topo } from './graph.ts';
 import { GRAPH, isApp, needsPlan, prepared, queued } from './work.ts';
 import { checkI18n, setI18n } from './i18n.ts';
 import { checkRestructure, type RestructurePlan } from './restructure.ts';
+import { addChapters, chaptersProblems, checkLanguages, setLanguages, type ChaptersEntry } from './chapters.ts';
 
 export const IN = 'a:curin:';
-export const KINDS = ['step', 'assign', 'i18n', 'extend', 'link', 'restructure'] as const;
+export const KINDS = ['step', 'assign', 'i18n', 'extend', 'link', 'restructure', 'chapters', 'languages'] as const;
 export type Kind = (typeof KINDS)[number];
 
 /** The key of an inbox entry: seq orders the entries (a time in base 36, then something unique). */
@@ -218,7 +220,10 @@ export function merged(c: Roadmap, rows: readonly KvRow[], hooks: MergeHooks): R
   for (const { entry: e } of entriesOf(rows)) {
     if (e.kind === 'step') {
       const n = typeof e.nid === 'string' ? cc.nodes[e.nid] : undefined;
-      if (n && !n.pack?.assigned) n.pack = { ...(n.pack ?? {}), id: String(e.packId), status: 'ready' };
+      if (n && !n.pack?.assigned) {
+        n.pack = { ...(n.pack ?? {}), id: String(e.packId), status: 'ready' };
+        Reflect.deleteProperty(n.pack, 'claimedAt'); // saved: no run prepares it any more
+      }
       continue;
     }
     if (e.kind === 'assign') {
@@ -243,6 +248,16 @@ export function merged(c: Roadmap, rows: readonly KvRow[], hooks: MergeHooks): R
     if (e.kind === 'restructure') {
       const x = e as unknown as RestructureEntry;
       if (!proposeProblems(cc, x).length) propose(cc, x);
+      continue;
+    }
+    if (e.kind === 'chapters') {
+      const x = e as unknown as ChaptersEntry;
+      if (!chaptersProblems(cc, x).length) addChapters(cc, x.nid, x.chapters, Date.parse(x.at) || hooks.now);
+      continue;
+    }
+    if (e.kind === 'languages') {
+      const r = checkLanguages(cc, e.data);
+      if (r.value && typeof e.at === 'string') setLanguages(cc, r.value, e.at);
       continue;
     }
     if (typeof e.task === 'string') hooks.answer?.(cc, e);

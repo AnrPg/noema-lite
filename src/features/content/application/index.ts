@@ -12,7 +12,7 @@ import { checkExercise } from '../domain/exercise.ts';
 import { checkPack, BLOCKS, ID_RE, TYPES, type PackCheckOptions } from '../domain/pack.ts';
 import { checkQuality } from '../domain/quality.ts';
 import { LANGUAGES, PACK_RULES, QUALITY, RULES } from '../domain/rules.ts';
-import { checkTranslation, requiredLocales } from '../domain/translation.ts';
+import { checkTranslation, parsePair, requiredLocales, scopeOf } from '../domain/translation.ts';
 
 export type { CheckEnv, EngineSource, RuntimeCheckers, RuntimeHost } from '../domain/env.ts';
 export { NO_ENGINES } from '../domain/env.ts';
@@ -46,6 +46,8 @@ export function createContentChecks(env: CheckEnv) {
     checkBridge,
     checkTranslation,
     requiredLocales,
+    scopeOf,
+    parsePair,
     ACTIVITY_RULES,
     RULES,
     QUALITY,

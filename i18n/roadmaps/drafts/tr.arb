@@ -60,6 +60,7 @@
   "roadmap.jobs.attached": "“{subject}” artık “{step}” adımını öğretiyor{replan, select, yes { — o adım yeniden planlanıyor} other {}}",
   "roadmap.jobs.partAdded": "Yeni bölüm “{title}”: haritaya {n, plural, one {# adım} other {# adım}} eklendi",
   "roadmap.jobs.linksAdded": "Adımlar arasındaki bağlantılar değişti: {added, plural, one {# eklendi} other {# eklendi}}, {removed, plural, one {# kaldırıldı} other {# kaldırıldı}}",
+  "roadmap.jobs.chaptersAdded": "“{step}”: {n, plural, one {# bölüm eklendi} other {# bölüm eklendi}}",
   "roadmap.jobs.notHere": "Bu yol haritası bu cihazda değil.",
   "roadmap.jobs.taskDone": "Bu görev zaten yapıldı (ya da yol haritası değişti) — güncel görevi yeniden kopyala.",
   "roadmap.jobs.notJson": "Bu bir JSON yanıtı değil — Claude’un yanıtını aynen yapıştır (JSON nesnesini).",

@@ -60,6 +60,7 @@
   "roadmap.jobs.attached": "«{subject}» تُدرّس الآن «{step}»{replan, select, yes { — جارٍ إعادة تخطيط تلك المرحلة} other {}}",
   "roadmap.jobs.partAdded": "جزء جديد «{title}»: أُضيفت مراحل إلى الخريطة ({n, number})",
   "roadmap.jobs.linksAdded": "تغيّرت الروابط بين المراحل: أُضيف {added, number}، أُزيل {removed, number}",
+  "roadmap.jobs.chaptersAdded": "«{step}»: أُضيفت فصول ({n, number})",
   "roadmap.jobs.notHere": "خريطة الطريق هذه ليست على هذا الجهاز.",
   "roadmap.jobs.taskDone": "هذه المهمة انتهت بالفعل (أو تغيّرت خريطة الطريق) — انسخ المهمة الحالية مرة أخرى.",
   "roadmap.jobs.notJson": "هذه ليست إجابة JSON — الصق بالضبط ما أجاب به Claude (كائن JSON).",

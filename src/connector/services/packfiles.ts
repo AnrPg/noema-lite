@@ -181,11 +181,12 @@ export async function activityFileStatus(ctx: ToolContext, sid: string, p: Pack)
 export const brKey = (src: unknown, nat: unknown, own: unknown): string =>
   !src || lang0(src) === lang0(own) ? lang0(nat) : `${lang0(src)}.${lang0(nat)}`;
 
-/** What a new pack (subject.authoring.rules >= 2) still needs at the end of its flow: translations and 文A bridges (the pack rules' languages, CONTENT_SPEC.md). */
-export async function languagesTodo(ctx: ToolContext, p: Pack): Promise<string> {
+/** What a new pack (subject.authoring.rules >= 2) still needs at the end of its flow: translations and 文A bridges — the
+    languages of its Roadmap (scope: services/roadmap.ts scopeOfPack), else the pack rules' languages (CONTENT_SPEC.md). */
+export async function languagesTodo(ctx: ToolContext, p: Pack, scope: unknown = null): Promise<string> {
   if (!(Number(p.subject.authoring?.rules) >= 2)) return '';
   const own = lang0(p.subject.language || 'en'),
-    want = ctx.engine.content.requiredLocales(own),
+    want = ctx.engine.content.requiredLocales(own, scope),
     have = Object.keys(p.translations ?? {}).map(lang0);
   const br = Object.keys((await ctx.bridges.all(p.subject.id))[p.subject.id] ?? {});
   const i18n = p.subject.i18n ?? {};
@@ -205,6 +206,6 @@ export async function languagesTodo(ctx: ToolContext, p: Pack): Promise<string> 
       : '',
   ].filter(Boolean);
   return todo.length
-    ? `\n🌐 Still to do before this subject's flow ends (every new pack gets them, docs/PIPELINES.md §4b): ${todo.join('; ')}.`
+    ? `\n🌐 Still to do before this subject's flow ends (${scope ? 'the languages of its Roadmap' : 'every new pack gets them'}, docs/PIPELINES.md §4b): ${todo.join('; ')}.`
     : `\n🌐 Translations (${want.translations.join(', ') || '—'}), the subject's name in each, and every 文A bridge (${want.bridgePairs.map(x => x.source + '→' + x.native).join(', ')}) are all there.`;
 }

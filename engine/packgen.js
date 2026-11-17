@@ -238,7 +238,7 @@ Each chapter has "diagrams": 0–2 objects — only a diagram with real teaching
     // 3b. translations — every chapter in English, Greek, Russian, German and French too (minus the step's own language; the pack
     //     rules' languages, src/features/content/domain/rules.ts): the same JSON with only the words translated, checked like an imported translation
     run.tr = run.tr || {};
-    for (const loc of window.NoemaCore.content.requiredLocales(c.language || 'en').translations) {
+    for (const loc of window.NoemaCore.content.requiredLocales(c.language || 'en', window.NoemaCore.roadmaps?.languagesOf?.(c)).translations) {   // 🌐 the Roadmap's languages when it names them
       const done = run.tr[loc] = run.tr[loc] || [];
       for (let i = done.length; i < run.chapters.length; i++) {
         if (signal?.aborted) throw new (L().LLMError)('Stopped.', 0, 'aborted');   // i18n-ignore (an internal signal: kind 'aborted')

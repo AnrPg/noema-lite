@@ -70,10 +70,11 @@ def rules():
     """the pack rules: {rules, notes, quality, languages} (src/features/content/domain/rules.ts)"""
     return call('rules')
 
-def required_locales(own):
+def required_locales(own, scope=None):
     """→ (translations, bridges, bridge pairs) every new pack in language OWN gets (rules.ts LANGUAGES minus its own language);
-    a pair is (the language the learner reads, their native language): from the pack's own language and from each translation"""
-    r = call('locales.required', own)
+    a pair is (the language the learner reads, their native language): from the pack's own language and from each translation.
+    scope: the languages of its Roadmap (subject.authoring.languages, docs/CURRICULUM.md §10b) instead of that default."""
+    r = call('locales.required', own, scope)
     return r['translations'], r['bridges'], [(p['source'], p['native']) for p in r['bridgePairs']]
 
 def check_activities(pack, translations=None):

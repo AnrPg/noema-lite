@@ -301,17 +301,29 @@ def coverage(pack, entries, keep=(), chapters=None):
                         if e is not None: res['everyday'][0] += 1
     return res
 
-def required(pack):
-    """The natives every new pack gets a bridge into (the pack rules' "languages", minus the pack's language) and the minimum coverage."""
+def scope_of(pack):
+    """The languages of the pack's Roadmap (subject.authoring.languages, docs/CURRICULUM.md §10b), or None: the pack rules' default."""
+    return ((pack.get('subject') or {}).get('authoring') or {}).get('languages')
+
+def required(pack, scope=None, source=None):
+    """The natives every new pack gets a bridge into from the language read (the pack rules' "languages", minus that language —
+    or only the pairs of its Roadmap's scope) and the minimum coverage."""
     import noema_core
     L = noema_core.rules()['languages']; own = (pack['subject'].get('language') or 'en').split('-')[0].lower()
+    scope = scope if scope is not None else scope_of(pack)
+    if scope:
+        base = (source or pack['subject'].get('sourceLanguage') or own).split('-')[0].lower()
+        pairs = noema_core.required_locales(base, scope)[2]
+        return [n for s, n in pairs if s == own and n != own], L.get('bridgeCoverage') or {}
     return [x for x in L.get('bridges') or [] if x.split('-')[0].lower() != own], L.get('bridgeCoverage') or {}
 
-def require(pack, bdir):
+def require(pack, bdir, scope=None, source=None):
     """check() + a bridge into every required native, each covering enough of the content words and of the everyday ones."""
+    want, mins = required(pack, scope, source)
+    if not want: return [], []   # the Roadmap's languages ask for no bridge from this language
     E, W = check(pack, bdir)
     if E and E[0] == 'no bridges/core.json': return E, W
-    want, mins = required(pack); have = set(natives(bdir))
+    have = set(natives(bdir))
     rel = os.path.relpath(bdir, os.path.dirname(bdir.rstrip(os.sep))) if os.path.basename(bdir).startswith('from-') else ''
     for nat in want:
         if nat not in have: E.append(f'no bridge into {nat} yet (bridges/{rel + "/" if rel else ""}{nat}.json): every new pack gets 文A help in {", ".join(want)}'); continue
@@ -324,13 +336,13 @@ def require_all(subj, translation=None):
     """require() for every pair a new pack needs: from its own language, then from each translation (the pack rules'
     "bridgesFrom") — each translation's bridges come from its own words, so it must exist first. → (errors, warnings)"""
     import noema_core
-    pack, bdir = load(subj); own = (pack['subject'].get('language') or 'en').split('-')[0].lower()
-    E, W = require(pack, bdir)
-    for src in sorted({s for s, _n in noema_core.required_locales(own)[2]} - {own}):
+    pack, bdir = load(subj); own = (pack['subject'].get('language') or 'en').split('-')[0].lower(); scope = scope_of(pack)
+    E, W = require(pack, bdir, scope, own)
+    for src in sorted({s for s, _n in noema_core.required_locales(own, scope)[2]} - {own}):
         try: tp, tdir = load(subj, src, None)
         except SystemExit as e: E.append(f'from {src}: {e}'); continue
         if not os.path.exists(os.path.join(tdir, 'core.json')): E.append(f'from {src}: no bridges/from-{src}/core.json yet — a learner reading the {src} translation gets 文A help too (bridge.py todo SUBJ --from {src})'); continue
-        e2, w2 = require(tp, tdir); E += [f'from {src}: {x}' for x in e2]; W += [f'from {src}: {x}' for x in w2]
+        e2, w2 = require(tp, tdir, scope, own); E += [f'from {src}: {x}' for x in e2]; W += [f'from {src}: {x}' for x in w2]
     return E, W
 
 def todo(pack, entries, keep=(), chapters=None, limit=400):

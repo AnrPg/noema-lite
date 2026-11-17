@@ -13,7 +13,7 @@
 import type { Pack, PackCheckResult } from '../engine/api.ts';
 import { fail, text, type ToolContext, type ToolResult } from '../tool.ts';
 import { message, sha256Hex } from '../util.ts';
-import { attachToStep, curState, findStep, releaseStep, sharedOn, type StepRef } from './curricula.ts';
+import { attachToStep, curState, findInboxStep, findStep, releaseStep, sharedOn, type StepRef } from './curricula.ts';
 import {
   activityFileStatus,
   actCurl,
@@ -28,7 +28,9 @@ import {
   withTranslations,
   type Known,
 } from './packfiles.ts';
-import { roadmapTodoText } from './roadmap.ts';
+import { chapterList, roadmapTodoText, scopeOfPack, writeChapters } from './roadmap.ts';
+import { packExtras, type UploadChapter } from '../../features/roadmaps/domain/index.ts';
+import type { Step } from '../../features/roadmaps/domain/model.ts';
 import { sagaKey } from './sagas.ts';
 import { nameOf } from './supabase.ts';
 
@@ -98,7 +100,8 @@ export async function completePack(
   const need = packaged(p),
     CJ = ctx.engine.curJobs,
     CUR = ctx.engine.curriculum;
-  const step = await findStep(ctx, sid).catch(() => null); // a step of one of the learner's curricula?
+  // a step of one of the learner's curricula? (or of a new part still in the Roadmap's inbox: its claim ends and it shows prepared too)
+  const step = (await findStep(ctx, sid).catch(() => null)) ?? (await findInboxStep(ctx, sid).catch(() => null));
   if (step) step.user = ctx.user;
   const known: Known = new Map(
     step
@@ -182,8 +185,20 @@ export async function completePack(
           });
           if (sharedOn(ctx, step.c))
             more += await s.step('publish', async () => publishStep(ctx, step, await withTranslations(ctx, sid, p), need.length));
-          const st = await curState(ctx, step.c, ctx.uid),
-            left = CJ.work(st).steps.length;
+          let st = await curState(ctx, step.c, ctx.uid);
+          // 📑 the pack teaches chapters its step's plan lacks (the learner asked for more while it was built): the step gains them
+          more += await s.step('chapters', async () => {
+            const n = st.nodes[step.nid];
+            if (!n?.chapters?.length) return '';
+            const extra = packExtras(n as unknown as Step, (p.chapters ?? []) as UploadChapter[]);
+            if (extra === null)
+              return `\n⚠️ The pack's ${(p.chapters ?? []).length} chapters do not line up with the step's ${n.chapters.length} planned ones by title, so no chapter was added to the step: its panel lists the plan. Add each chapter the pack has and the plan lacks with noema_add_roadmap_chapters (step "${step.nid}"; the plan: ${n.chapters.map(ch => `${ch.ref} “${String(ch.title)}”`).join(', ')}).`;
+            if (!extra.length) return '';
+            await writeChapters(ctx, st, step.nid, extra, Date.now().toString(36).padStart(9, '0') + '-ch' + key.slice(-6), 'upload');
+            return `\n📑 The step gained ${extra.length} chapter(s) the pack teaches beyond its plan: ${extra.map(x => `${x.ref} “${x.title}”`).join(', ')}. Its chapters now:\n${chapterList(st, step.nid)}`;
+          });
+          st = await curState(ctx, step.c, ctx.uid);
+          const left = CJ.work(st).steps.length;
           more +=
             `\n🧭 This is the step “${step.c.nodes[step.nid]?.title}” of the curriculum “${step.c.title}”: it appears ready on the learner's map by itself (the app picks it up when it is open or next opened).` +
             (left
@@ -201,7 +216,7 @@ export async function completePack(
           });
         } else
           more += `\n📚 It is not on a step of any of the learner's curricula, so it is on their 📚 Shelf (study it from there, or “Put on a map…”). To attach it to a step of a curriculum, call this tool again with curriculum_id and step.`;
-        more += await languagesTodo(ctx, p).catch(() => '');
+        more += await languagesTodo(ctx, p, await scopeOfPack(ctx, p, step?.c ?? null).catch(() => null)).catch(() => '');
         return (
           summary(p, res) +
           (need.length

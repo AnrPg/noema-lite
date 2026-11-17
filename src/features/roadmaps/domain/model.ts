@@ -22,6 +22,9 @@ export interface PlannedChapter {
   material?: string;
   /** a chapter of a step may sit at its own level (default: the step's first level) */
   level?: string;
+  /** 📑 added after the step was planned (chapters.ts): when, and the ref of the chapter it was put after (null: first) */
+  addedAt?: string;
+  addedAfter?: string | null;
   [k: string]: unknown;
 }
 
@@ -68,6 +71,8 @@ export interface Step {
   replan?: unknown;
   replanAt?: string;
   plannedAt?: string;
+  /** 📑 the last time chapters were added to the step after its plan (chapters.ts) */
+  chaptersAt?: string;
   planWish?: string;
   reviewed?: string;
   addedIn?: string;
@@ -136,6 +141,8 @@ export interface Roadmap {
   levelTest?: boolean;
   /** restructuring plans proposed by Claude (noema_restructure_levels), kept until the learner decides */
   proposals?: Proposal[];
+  /** 🌐 the languages its packs and its own words get (chapters.ts RoadmapLanguages); none: the pack rules' default */
+  languages?: { translations: string[]; bridges?: string[]; at?: string };
   log?: { t: number; m: string; via?: string }[];
   [k: string]: unknown;
 }

@@ -490,6 +490,20 @@
       }
     }
   },
+  "roadmap.jobs.chaptersAdded": "“{step}”: {n, plural, one {# chapter added} other {# chapters added}}",
+  "@roadmap.jobs.chaptersAdded": {
+    "description": "Toast and Roadmap log line: the learner's Claude added chapters to a step of this Roadmap (e.g. extra material the learner asked for while its subject was built). Nothing is removed; the step keeps its subject and progress.",
+    "placeholders": {
+      "step": {
+        "type": "String",
+        "example": "Inductors and transients"
+      },
+      "n": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
   "roadmap.jobs.notHere": "This Roadmap is not on this device.",
   "@roadmap.jobs.notHere": {
     "description": "Error when the learner pastes Claude’s answer for a Roadmap that is not on this device."
