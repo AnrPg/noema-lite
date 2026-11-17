@@ -439,7 +439,7 @@ window.NoemaCurImport = (() => {
 
   /** A .zip of material (a folder per step, or files named after the steps) → its files, each with its path as a hint. */
   async function unzipMaterial(file) {
-    const z = await window.NoemaViewer.loadZip(await file.arrayBuffer()); const out = [];
+    const z = await NoemaCore.viewer.loadZip(await file.arrayBuffer()); const out = [];
     const MIME = { pdf: 'application/pdf', md: 'text/markdown', txt: 'text/plain', docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', pptx: 'application/vnd.openxmlformats-officedocument.presentationml.presentation', png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg' };
     for (const e of Object.values(z.files)) {
       if (e.dir || /(^|\/)(__MACOSX|\.DS_Store|Thumbs\.db)/.test(e.name) || /(^|\/)\./.test(e.name)) continue;

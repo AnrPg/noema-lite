@@ -66,7 +66,7 @@ async function run(name) {
   if (PQ_FILE) {   // h5p@1: the .h5p file in an exported package, a share, and when this device cannot keep it
     const r = await p.evaluate(async ([pk, b64]) => {
       const u = Uint8Array.from(atob(b64), c => c.charCodeAt(0)), acc = Noema.account.id, SF = NoemaSrcFiles, out = { want: u.length };
-      if (!window.JSZip && window.NoemaViewer?.jszip) await NoemaViewer.jszip();
+      if (!window.JSZip && window.NoemaCore?.viewer) await NoemaCore.viewer.jszip();
       const inZip = async blob => { const f = (await JSZip.loadAsync(blob)).file('activities/planets-quiz/item.h5p'); return f ? (await f.async('uint8array')).length : 0; };
       const fresh = id => { const q = JSON.parse(JSON.stringify(pk)); q.subject = { ...q.subject, id }; return q; }, item = q => q.activities.items.find(x => x.id === 'planets-quiz');
       // the one-file bundle: the item holds its .h5p inline (not enumerable) and nothing is kept on this device for the subject

@@ -1,4 +1,4 @@
-/* 文A language help (engine/wordlink.js, engine/bridge.js, docs/BRIDGE.md).
+/* 文A language help (engine/wordlink.js, src/features/bridges: NoemaCore.bridges and NoemaShell.bridge, docs/BRIDGE.md).
    Without a browser: words and folding, the longest entry wins, multi-word entries only across spaces, checkBridge (function
    words, markup, orphan anchors, the wrong pack or language; a section the pack lost only warns), tools/bridge.py check / build on the pilot and
    the same block ids as the app.
@@ -48,8 +48,8 @@ function unit() {
     ok(!C({ ...x, native: 'en' }, tp).errors.length, 'el → en: a translation\'s bridge into the pack\'s own language is fine'); }
   // the app: one bridge per pair, keyed "<native>" from the pack's language and "<source>.<native>" from a translation
   { const store = {}, bx = { console, Intl, URL, URLSearchParams, TextEncoder, TextDecoder, localStorage: { getItem: k => store[k] ?? null, setItem: (k, v) => { store[k] = String(v); } } }; bx.window = bx; vm.createContext(bx);
-    for (const f of ['build/app.js', 'engine/bridge.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), bx);
-    const B = bx.NoemaBridge; store['noema1:u1:a:bridges'] = JSON.stringify({ p1: { ru: { v: 'a', status: 'draft' }, ar: { v: 'b', status: 'draft' }, 'el.ru': { v: 'c', status: 'draft', source: 'el' }, 'el.en': { v: 'd', status: 'reviewed', source: 'el' } } });
+    vm.runInContext(fs.readFileSync(path.join(ROOT, 'build/app.js'), 'utf8'), bx);
+    const B = bx.NoemaCore.bridges; store['noema1:u1:a:bridges'] = JSON.stringify({ p1: { ru: { v: 'a', status: 'draft' }, ar: { v: 'b', status: 'draft' }, 'el.ru': { v: 'c', status: 'draft', source: 'el' }, 'el.en': { v: 'd', status: 'reviewed', source: 'el' } } });
     const subj = { id: 'p1', language: 'en' };
     ok(B.pairKey('en', 'ru', 'en') === 'ru' && B.pairKey('el', 'ru', 'en') === 'el.ru' && B.pairKey(null, 'ar', 'en') === 'ar', 'pairKey: "<native>" from the own language, "<source>.<native>" from a translation');
     const own = B.available('u1', 'p1', subj, 'en', 'en'), tr = B.available('u1', 'p1', subj, 'el', 'en');
@@ -185,9 +185,9 @@ const count = (page, sel) => page.$$eval(sel, x => x.length);
     const res = await page.evaluate(async () => {
       const mk = entries => ({ format: 'noema-bridge', v: 1, pack: 'demo-physics', source: 'en', native: 'el', status: 'draft', coverage: 0.4, chapters: [], of: 1, entries, sections: { 'ch01-s01': { terms: ['kinetic energy'], preview: 'Η κινητική ενέργεια.' } }, anchors: [] });
       let refused = '';
-      try { await NoemaBridge.attach('anr', mk([{ k: 'the', pos: 'DET', senses: [{ id: '1', t: 'ο' }] }])); } catch (e) { refused = e.message; }
-      const got = await NoemaBridge.attach('anr', mk([{ k: 'kinetic energy', pos: 'NOUN', band: 3, key: true, senses: [{ id: '1', t: 'κινητική ενέργεια' }] }, { k: 'energy', pos: 'NOUN', band: 2, senses: [{ id: '1', t: 'ενέργεια' }] }]));
-      return { refused, got, av: NoemaBridge.available('anr', 'demo-physics') };
+      try { await NoemaCore.bridges.attach('anr', mk([{ k: 'the', pos: 'DET', senses: [{ id: '1', t: 'ο' }] }])); } catch (e) { refused = e.message; }
+      const got = await NoemaCore.bridges.attach('anr', mk([{ k: 'kinetic energy', pos: 'NOUN', band: 3, key: true, senses: [{ id: '1', t: 'κινητική ενέργεια' }] }, { k: 'energy', pos: 'NOUN', band: 2, senses: [{ id: '1', t: 'ενέργεια' }] }]));
+      return { refused, got, av: NoemaCore.bridges.available('anr', 'demo-physics') };
     });
     ok(/DET|function/i.test(res.refused), 'a bridge with a function word is refused (' + res.refused.slice(0, 80) + ')');
     ok(res.got?.native === 'el' && res.av.el?.own, 'a correct one is attached to the account and listed as its own');
@@ -205,12 +205,12 @@ const count = (page, sel) => page.$$eval(sel, x => x.length);
       const FP = JSON.parse(fs.readFileSync(path.join(ROOT, `tests/fixtures/bridges/dna-${src}/pack.json`), 'utf8'));
       const natives = ['en', 'el', 'ru', 'ar', 'de', 'fr'].filter(x => x !== src);
       const bs = natives.map(n => JSON.parse(fs.readFileSync(path.join(require('os').tmpdir(), `bridge-${src}-${n}.json`), 'utf8')));
-      const r = await page.evaluate(async ({ FP, bs }) => { await Noema.importPack('anr', FP); for (const x of bs) await NoemaBridge.attach('anr', x); return Object.keys(NoemaBridge.available('anr', FP.subject.id)).sort().join(','); }, { FP, bs });
+      const r = await page.evaluate(async ({ FP, bs }) => { await Noema.importPack('anr', FP); for (const x of bs) await NoemaCore.bridges.attach('anr', x); return Object.keys(NoemaCore.bridges.available('anr', FP.subject.id)).sort().join(','); }, { FP, bs });
       ok(r === natives.slice().sort().join(','), `${src}: the pack is imported with its five bridges (${r})`);
       await page.goto('about:blank'); await page.goto(APP_URL); await wait(900);
       await page.click(`.noema-chip:has-text("${FP.subject.title}")`); await wait(1000);
       for (const nat of [...natives, src]) {
-        await page.evaluate(n => { NoemaBridge.setNative('anr', n); location.hash = '#/'; }, nat); await wait(500);
+        await page.evaluate(n => { NoemaCore.bridges.setNative('anr', n); location.hash = '#/'; }, nat); await wait(500);
         await section(page, 'ch01-s01');
         const got = await page.evaluate(() => ({ n: document.querySelectorAll('.nb-root .nw').length, g: [...document.querySelectorAll('.nb-root .nw-rt')].map(e => e.textContent), dir: getComputedStyle(document.querySelector('.theory, .section, main') || document.body).direction, prep: document.querySelector('.nb-prep .nb-preview')?.textContent || '' }));
         if (nat === src) { ok(got.n === 0, `${src} → ${src}: a learner of the pack's own language gets no help`); continue; }

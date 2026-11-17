@@ -377,10 +377,10 @@ var NoemaXAPI = (() => {   // the page loads this file on its own (the shell's "
     return { files: { 'cmi5.xml': xml }, aus };
   }
 
-  /** files {path: text} → a zip Blob, with the app's zip writer (JSZip, loaded on demand by NoemaViewer like the package export) */
+  /** files {path: text} → a zip Blob, with the app's zip writer (JSZip, loaded on demand by NoemaCore.viewer like the package export) */
   async function zip(files) {
     const W = typeof window !== 'undefined' ? window : globalThis;
-    if (!W.JSZip && W.NoemaViewer && W.NoemaViewer.jszip) await W.NoemaViewer.jszip();
+    if (!W.JSZip && W.NoemaCore && W.NoemaCore.viewer) await W.NoemaCore.viewer.jszip();
     if (!W.JSZip) throw Object.assign(new Error('The package writer is not available.'), { code: 'files.no_writer', params: {} });
     const z = new W.JSZip(); for (const [p, t] of Object.entries(files || {})) z.file(p, t);
     return z.generateAsync({ type: 'blob', mimeType: 'application/zip' });

@@ -269,7 +269,7 @@ def from_dirs(bdir):
     return sorted(os.path.basename(d)[5:] for d in glob.glob(os.path.join(bdir, 'from-*')) if os.path.isdir(d))
 
 def pair_key(src, nat, own):
-    """= engine/bridge.js pairKey: "<native>" from the pack's own language, "<source>.<native>" from a translation."""
+    """= pairKey of src/features/bridges/domain/lookup.ts: "<native>" from the pack's own language, "<source>.<native>" from a translation."""
     b = lambda x: (x or '').split('-')[0].lower()
     return b(nat) if not src or b(src) == b(own) else f'{b(src)}.{b(nat)}'
 
@@ -550,7 +550,7 @@ def anchor(pack, bdir, dry=False):
 def build_library(sdir, pack, root=None):
     """tools/build.py: every bridges/<native>.json of a library subject → bridge.<native>.js, and every
     bridges/from-<locale>/<native>.json (a translation's) → bridge.<locale>.<native>.js + the registry's bridgeLocales
-    (keyed like engine/bridge.js pairKey)."""
+    (keyed like pairKey, src/features/bridges/domain/lookup.ts)."""
     bdir = os.path.join(sdir, 'bridges'); out = {}
     for f in glob.glob(os.path.join(sdir, 'bridge.*.js')): os.remove(f)
     jobs = []

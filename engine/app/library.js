@@ -306,7 +306,7 @@
         list.append(el('div', { class: 'noema-group' }, el('div', { class: 'noema-grouphead' }, `${g.emoji || ''} ${groupTitle(g, acc)}`),
           el('div', { class: 'noema-chips' }, ...items.map(s => { n++; const pct = Math.round(subjectProgress(acc, s) * 100);
             const chip = el('button', { class: 'noema-chip' + (s.id === KV.subj ? ' on' : ''), style: { animationDelay: n * 35 + 'ms' }, title: s.description || '', onclick: () => onPick(s) },
-              el('span', { class: 'e' }, s.emoji || '📘'), el('span', { class: 't' }, s.title), langTag(s), window.NoemaBridge?.tag(s, acc) || null, s.origin !== 'library' ? el('span', { class: 'o', title: s.sharedBy ? tr('loader.chip.sharedBy', { name: s.sharedBy }) : s.publicOwner ? tr('loader.chip.from', { name: s.publicOwner }) : '' }, s.origin === 'private' ? '🔒' : s.sharedBy ? '🤝' : s.publicFrom ? '🌍' : '📥') : null, s.updateAvailable ? el('span', { class: 'o', title: tr('loader.chip.update') }, '✨') : null, pct ? el('span', { class: 'p' }, fmtPct(pct)) : null);
+              el('span', { class: 'e' }, s.emoji || '📘'), el('span', { class: 't' }, s.title), langTag(s), NoemaShell.bridge.tag(s, acc), s.origin !== 'library' ? el('span', { class: 'o', title: s.sharedBy ? tr('loader.chip.sharedBy', { name: s.sharedBy }) : s.publicOwner ? tr('loader.chip.from', { name: s.publicOwner }) : '' }, s.origin === 'private' ? '🔒' : s.sharedBy ? '🤝' : s.publicFrom ? '🌍' : '📥') : null, s.updateAvailable ? el('span', { class: 'o', title: tr('loader.chip.update') }, '✨') : null, pct ? el('span', { class: 'p' }, fmtPct(pct)) : null);
             const edit = el('button', { class: 'noema-editbtn', title: tr('loader.chip.editTip'), 'aria-label': tr('loader.chip.editLabel', { title: s.title }), onclick: e => { e.stopPropagation(); editSubject(acc, s, { onChange }); } }, '✏️');
             const toMap = window.NoemaCurMap?.attachDialog ? el('button', { class: 'noema-mapbtn', title: tr('pick.putOnMap', null, acc), 'aria-label': `${tr('pick.putOnMap', null, acc)} ${s.title}`, onclick: e => { e.stopPropagation(); NoemaCurMap.attachDialog(acc, { subject: s, onDone: onChange }); } }, '🧭') : null;
             return el('span', { class: 'noema-chipwrap' }, chip, edit, s.origin === 'library' ? null : el('button', { class: 'noema-sharebtn', title: tr('loader.edit.share'), 'aria-label': tr('loader.chip.shareLabel', { title: s.title }), onclick: e => { e.stopPropagation(); shareDialog(acc, s); } }, '🔗'), toMap); }))));
@@ -385,8 +385,8 @@
       toastL('🌐 ' + tr('loader.tr.attached', { lang: window.NoemaI18n ? NoemaI18n.fmt.langName(r.locale) : r.locale, title: r.title }), 4000);
       return null;
     }
-    if (p?.format === 'noema-bridge' && window.NoemaBridge) {   // 文A language help for a subject the learner has (docs/BRIDGE.md): attached, the pack is not changed
-      const r = await NoemaBridge.attach(acc, p);
+    if (p?.format === 'noema-bridge') {   // 文A language help for a subject the learner has (docs/BRIDGE.md): attached, the pack is not changed
+      const r = await NoemaCore.bridges.attach(acc, p);
       toastL('文A ' + tr('bridge.attached', { lang: window.NoemaI18n ? NoemaI18n.fmt.langName(r.native) : r.native, title: r.title }), 4000);   // i18n-ignore (the icon)
       return null;
     }
@@ -481,7 +481,7 @@
     openShelf: acc => openShelf(acc || N.account?.id || KV.acc),
     editSubject(s, o) { return editSubject(N.account.id, s, o); }, deleteSubject(s) { return deleteSubject(N.account.id, s); }, setHidden(id, h) { return setHidden(N.account.id, id, h); },
     getPackById: (acc, id) => getPack(acc, { id, origin: 'imported' }), inlineTranslations: (acc, pack) => inlineTranslations(acc, null, pack),
-    bridgeTag: s => window.NoemaBridge?.tag(s) || null,
+    bridgeTag: s => NoemaShell.bridge.tag(s),
     async openSubjectPicker() { const s = await pickSubject(N.account.id, { closable: true }); if (s?.kind === 'language' && SHELL() && NoemaShell.mounted) return NoemaShell.go('#/lang/' + encodeURIComponent(s.courseId)); if (s && s.id !== N.subject?.id) N.switchTo(N.account.id, s.id, SHELL() ? '#/subject' : ''); else if (s && SHELL()) NoemaShell.go('#/subject'); },
   });
   N.boot.openEngine = openEngine;

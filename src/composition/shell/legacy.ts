@@ -156,7 +156,6 @@ export interface LegacyWindow {
   NoemaCloud?: Cloud;
   NoemaConvos?: Convos;
   NoemaReact?: { big(k: string, text?: string): unknown; dayStart(acc: string): void };
-  NoemaMT?: { panel(acc: string | null): HTMLElement };
   NoemaLang?: { SUPPORTED_NATIVES?: readonly string[] };
   NoemaLangUI?: { titleOf?(id: string): string };
   S?: { settings?: Record<string, unknown> };

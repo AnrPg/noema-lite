@@ -5,7 +5,7 @@ medicine student in Greece: the lectures, the exams and the pack are in Greek, a
 gives that learner the words of *this* pack, in the meaning they have *in it*, in their own language, without changing
 the pack and without a dictionary of the whole language.
 
-Code: `engine/wordlink.js` (finding words in a page), `engine/bridge.js` (everything the learner sees),
+Code: `engine/wordlink.js` (finding words in a page), `src/features/bridges` (the service and everything the learner sees; `NoemaCore.bridges`, `NoemaShell.bridge`),
 `engine/src/36_bridge.css`, `checkBridge` in `src/features/content/domain/bridge.ts` (`NoemaCore.content`, shared with the connector and `tools/bridge.py`), the tool
 `tools/bridge.py`, words `i18n/bridge/` (en; drafts el, ru, fr, ar-EG). Test: `tests/bridge.js`. Pilot: Databricks (English) →
 Greek, Russian, Arabic, chapter 1 complete; test packs in Greek, Russian, Arabic, German and French (`tests/fixtures/bridges/`), each with
@@ -141,7 +141,7 @@ A translation's bridge is made from **the translation's words** (its own entries
 |---|---|---|
 | source files | `bridges/core.json`, `bridges/<native>.json` | `bridges/from-<loc>/core.json` (`"source": "<loc>"`), `bridges/from-<loc>/<native>.json` |
 | tool | `bridge.py … SUBJ` | `bridge.py … SUBJ --from <loc>` (the translation's chapters: `translations/<loc>/` of a subject folder, or `<id>.tr.<loc>.json` beside a pack `.json`, or `--translation FILE`) |
-| pair key | `<native>` (as before) | `<loc>.<native>` (`engine/bridge.js` `pairKey`, the connector's `brKey`) |
+| pair key | `<native>` (as before) | `<loc>.<native>` (`pairKey` of `src/features/bridges/domain/lookup.ts`, the connector's `brKey`) |
 | account | `bridges/<pack>.<native>.json` | `bridges/<pack>.<loc>.<native>.json` |
 | index (a row of `noema_bridges` per pack × pair; cached in `a:bridges[pack]`) | `<native>: summary` | `<loc>.<native>: { …summary, source: "<loc>" }` |
 | library | `bridge.<native>.js`, `NOEMA_BRIDGES["<pack>\|<native>"]` | `bridge.<loc>.<native>.js`, `NOEMA_BRIDGES["<pack>\|<loc>.<native>"]`, `bridgeLocales["<loc>.<native>"]` |

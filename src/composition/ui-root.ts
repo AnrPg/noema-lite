@@ -9,6 +9,10 @@
  * and register their pages with NoemaShell.registerPage while the page loads (docs/ARCHITECTURE.md §6.3).
  */
 import { area5Door, type Area5Door } from './area5.ts';
+import { pageBridgeUi } from './bridges-ui.ts';
+import { pageTranslationUi } from './translation-ui.ts';
+import type { BridgeUi } from '../features/bridges/ui/help.ts';
+import type { TranslationUi } from '../features/translation/ui/mt.ts';
 import { systemClock } from '../adapters/browser/clock.ts';
 import { noemaI18n } from '../adapters/browser/i18n.ts';
 import { CHARACTER_GROUPS, isCharacter, type CharacterGroup, type World } from '../features/shell/domain/characters.ts';
@@ -37,7 +41,7 @@ import { runtimeLocales, type I18nRuntimeLocales } from './ui-kit-root.ts';
 export interface App {
   readonly Noema: NoemaCoreObject & NoemaAreas & AppExtras;
   readonly themes: Themes;
-  readonly shell: Host & { readonly area5: Area5Door };
+  readonly shell: Host & { readonly area5: Area5Door; readonly mt: TranslationUi; readonly bridge: BridgeUi };
   start(): Promise<void>;
 }
 interface AppExtras {
@@ -54,6 +58,9 @@ export function createApp(win: Window = window): App {
   const W = legacy;
   const core = phase2((win as unknown as { NoemaCore: NoemaCoreBridge }).NoemaCore);
   guardDom();
+  // 🌐 the translation of shared texts and 文A language help: their screens over NoemaCore.mt / NoemaCore.bridges (NoemaShell.mt, .bridge)
+  const mt = pageTranslationUi(win as never),
+    bridge = pageBridgeUi(win as never);
   const N = createCore(core) as NoemaCoreObject & NoemaAreas & AppExtras;
   const session = {
     get: (): unknown => {
@@ -666,7 +673,7 @@ export function createApp(win: Window = window): App {
         };
         return list.map(c => [c, name(c)] as const).sort((x, y) => I()?.fmt.compare(x[1], y[1]) ?? x[1].localeCompare(y[1]));
       },
-      mtPanel: () => W().NoemaMT?.panel(acc()) ?? null, // 🌐 machine translation of shared texts (engine/mt.js, docs/i18n.md §11)
+      mtPanel: () => mt.panel(acc()), // 🌐 machine translation of shared texts (src/features/translation, docs/i18n.md §11)
       reload: () => {
         location.reload();
       },
@@ -948,5 +955,5 @@ export function createApp(win: Window = window): App {
   themes.apply(); // the first screen already wears the learner's character
   // the screens of area 5 (languages and activities): a lazy piece next to this script, on its Lit and kit
   const area5 = area5Door({ document }, (document.currentScript as HTMLScriptElement | null)?.src);
-  return { Noema: N, themes, shell: Object.assign(shell, { area5 }), start };
+  return { Noema: N, themes, shell: Object.assign(shell, { area5, mt, bridge }), start };
 }

@@ -122,7 +122,7 @@
         runnable: ex => ACT.runnable(ex),
         exercise: (ex, api) => ex.type === 'sim' ? simWidget(ex, api) : null,
       },
-      bridge: { section: o => window.NoemaBridge?.section?.(o), menuItem: () => window.NoemaBridge?.menuItem?.() || null },
+      bridge: { section: o => NoemaShell.bridge.section(o), menuItem: () => NoemaShell.bridge.menuItem() },   // 文A (src/features/bridges/ui)
       subjectActions: { menu: subjectActions },
       search: {
         step() { const R0 = window.NoemaCore?.community?.search?.round?.(), st = R0?.steps?.[R0.i]; return st && st.sj === SUBJ.id ? { kind: st.kind, ids: st.ids, keys: st.keys, title: st.title, back: R0.back } : null; },
@@ -138,7 +138,7 @@
         remove: id => SF().remove(ACCOUNT.id, SUBJ.id, id),
         filePage: (s, p) => SF()?.filePage ? SF().filePage(s, p) : p,
       },
-      openFile: f => NoemaViewer.open(f),
+      openFile: f => NoemaCore.viewer.open(f),   // 👁 (src/features/viewer)
       refitFsrs: last => NoemaCore.study.models.refit(last),
       blockIds: blocks => NoemaCore.catalog.blockIds(blocks),
       trapId: p => NoemaCore.catalog.trapId(p),

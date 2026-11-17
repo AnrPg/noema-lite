@@ -1,6 +1,6 @@
 /**
  * The community screens' host (src/features/community/ui/host.ts) over the app of today: the older scripts' globals
- * (window.Noema of engine/loader.js, NoemaShell, NoemaCloud, NoemaCurriculum, NoemaConvos, NoemaThemes, NoemaMT …),
+ * (window.Noema of engine/loader.js, NoemaShell, NoemaCloud, NoemaCurriculum, NoemaConvos, NoemaThemes, NoemaShell.mt …),
  * read when a screen asks, never at load. This is the one file of the community area that knows those names; the
  * phase-3 shell gives the screens a host over its own services instead.
  */
@@ -244,7 +244,7 @@ export function oldAppHost(win: Win, parts: OldAppHostParts): CommunityHost {
     },
     pdfPages: async file => {
       try {
-        const r = await call<Promise<{ pageCount?: number }>>(g('NoemaViewer'), 'extract', file, file.name, {
+        const r = await call<Promise<{ pageCount?: number }>>(obj(g('NoemaCore')?.['viewer']), 'extract', file, file.name, {
           maxPages: 1,
           outline: false,
         });
@@ -324,10 +324,10 @@ export function oldAppHost(win: Win, parts: OldAppHostParts): CommunityHost {
       return t instanceof HTMLElement ? t : null;
     },
     translatable: (el, o) => {
-      call(g('NoemaMT'), 'mark', el, o);
+      call(obj(g('NoemaShell')?.['mt']), 'mark', el, o);
     },
     translateBar: scope => {
-      const t = call<unknown>(g('NoemaMT'), 'bar', acc(), scope);
+      const t = call<unknown>(obj(g('NoemaShell')?.['mt']), 'bar', acc(), scope);
       return t instanceof HTMLElement ? t : null;
     },
     share: parts.share,

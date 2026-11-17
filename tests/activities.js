@@ -727,13 +727,13 @@ const SIMSRC = () => fs.readdirSync(path.join(ROOT, 'src', 'runtimes', 'sim-spec
 }
 
 // 4. never allow-same-origin
-const files = cp.execSync('git ls-files engine cloud tools skill src/runtimes', { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(f => /\.(js|mjs|py|html|ts)$/.test(f) && !f.startsWith('engine/i18n/') && !f.includes('vendor/'));
+const files = cp.execSync('git ls-files engine cloud tools skill src', { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(f => /\.(js|mjs|py|html|ts)$/.test(f) && !f.startsWith('engine/i18n/') && !f.includes('vendor/'));
 const bad = [];
 for (const f of files) {
   const s = fs.readFileSync(path.join(ROOT, f), 'utf8');
   for (const m of s.matchAll(/sandbox['"]?\s*[:,=]\s*['"`][^'"`]*allow-same-origin/g)) bad.push(f + ': ' + m[0].slice(0, 80));   // a sandbox VALUE with the token
 }
-const okFiles = ['engine/viewer.js'];   // (the source viewer frames an outside web page from its own URL: its own origin, never pack content)
+const okFiles = ['src/features/viewer/ui/viewer.ts'];   // (the source viewer frames an outside web page from its own URL: its own origin, never pack content)
 ok(bad.filter(b => !okFiles.some(f => b.startsWith(f))).length === 0, 'no code gives a frame allow-same-origin ' + JSON.stringify(bad.filter(b => !okFiles.some(f => b.startsWith(f))).slice(0, 3)));
 ok(/frame\.setAttribute\('sandbox', 'allow-scripts'\)/.test(RTSRC('html-app')) && /wf\.setAttribute\('sandbox', 'allow-scripts'\)/.test(RTSRC('html-app')), 'html-app@1 sets sandbox to exactly allow-scripts (the wrapper frame and the mini-app\'s)');
 // h5p@1 in the toolkit, the connector, the site and the bundle (docs/INTERACTIVE_H5P.md)

@@ -73,7 +73,7 @@ export function oldAppReportContext(win: Window, errors: () => readonly PageErro
         M = obj(N?.['subjectMeta']) ?? {};
       const isSubjectPage = g('NoemaShell')?.['isSubjectPage'] as ((k: string) => boolean) | undefined;
       if (!S || !isSubjectPage?.(page) || S['kind'] === 'language') return null;
-      const b = obj(call(g('NoemaBridge'), 'settings'));
+      const b = obj(call(obj(g('NoemaCore')?.['bridges']), 'settings'));
       const bridge = b?.['on'] === false ? null : (b?.['native'] ?? b?.['lang'] ?? null);
       const node = obj(N?.['node']);
       return {

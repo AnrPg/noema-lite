@@ -347,7 +347,7 @@ def build_site(metas):
         for f in m.get('media') or []:
             dst = os.path.join(out, f); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f), dst)
     os.makedirs(os.path.join(out, 'engine', 'app'), exist_ok=True)
-    for f in ('engine.js', 'engine.css', 'tokens.css', 'i18n.js', 'art.js', *APP_AREAS, 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'packgen.js', 'curmap.js', 'authoring.js', 'srcfiles.js', 'viewer.js', 'activity_author_schemas.js'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))   # (the activity author's schemas and references load on #/author, with build/author.js)
+    for f in ('engine.js', 'engine.css', 'tokens.css', 'i18n.js', 'art.js', *APP_AREAS, 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'llm.js', 'wordlink.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'packgen.js', 'curmap.js', 'authoring.js', 'srcfiles.js', 'activity_author_schemas.js'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))   # (the activity author's schemas and references load on #/author, with build/author.js)
     os.makedirs(os.path.join(out, 'engine', 'src'), exist_ok=True)
     for f in PAGE_SRC: shutil.copy(os.path.join(ENGINE, 'src', f), os.path.join(out, 'engine', 'src', f))   # NoemaXAPI for the shell's ⋮
     # the TypeScript bundles of the page (build/: npm run build) with their source maps — build/app.js holds the engine library
@@ -646,13 +646,10 @@ def build_bundle(metas):
 <script>{esc(rd("engine/imglib.js"))}</script>
 <script>{esc(rd("engine/claude.js"))}</script>
 <script>{esc(rd("engine/srcfiles.js"))}</script>
-<script>{esc(rd("engine/viewer.js"))}</script>
 <script>{esc(rd("engine/src/43_xapi.js"))}</script>
 <script>{esc(rd("engine/activity_author_schemas.js"))}</script>
 <script>{esc(rd("engine/llm.js"))}</script>
-<script>{esc(rd("engine/mt.js"))}</script>
 <script>{esc(rd("engine/wordlink.js"))}</script>
-<script>{esc(rd("engine/bridge.js"))}</script>
 <script>{esc(rd("engine/packgen.js"))}</script>
 <script>{esc(rd("engine/curriculum.js"))}</script>
 <script>{esc(rd("engine/curjobs.js"))}</script>

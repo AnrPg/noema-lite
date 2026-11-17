@@ -92,7 +92,7 @@ window.NoemaSrcFiles = (() => {
 
   /* ---------- packages: <id>.noema.zip = pack.json + sources/<file> (docs/SOURCES.md §3) ---------- */
   /* i18n-ignore-start */   // the English .message of each coded error (err.files.*)
-  const loadZip = async buf => { if (!window.JSZip) { if (!window.NoemaViewer?.loadZip) throw coded('The package reader is not available.', 'files.no_reader'); return NoemaViewer.loadZip(buf); } return JSZip.loadAsync(buf); };
+  const loadZip = async buf => { if (!window.JSZip) { if (!window.NoemaCore?.viewer) throw coded('The package reader is not available.', 'files.no_reader'); return NoemaCore.viewer.loadZip(buf); } return JSZip.loadAsync(buf); };
   const hex = buf => [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
   async function sha256(blob) { if (!crypto?.subtle) return null; return hex(await crypto.subtle.digest('SHA-256', await blob.arrayBuffer())); }
   /** Is this file a zip (a package)? */
@@ -227,7 +227,7 @@ window.NoemaSrcFiles = (() => {
   /** A package of a subject: pack.json + every attached source file (also files attached by hand). */
   async function makeBundle(acc, pack, { live = null, base = null } = {}) {   // live: the pack the app holds (its items carry their .h5p, not enumerable); base: a library subject's folder
     const held = new Map([...h5pItems(live || {}), ...h5pItems(pack)].filter(a => 'h5p' in a).map(a => [a.id, a]));   // (read before the JSON copy below drops it)
-    if (!window.JSZip && window.NoemaViewer?.jszip) await NoemaViewer.jszip();
+    if (!window.JSZip && window.NoemaCore?.viewer) await NoemaCore.viewer.jszip();
     if (!window.JSZip) throw coded('The package writer is not available.', 'files.no_writer');   // i18n-ignore (English .message of err.files.no_writer)
     const seen = new WeakSet(); const p = JSON.parse(JSON.stringify(pack, (k, v) => { if (v && typeof v === 'object') { if (seen.has(v)) return undefined; seen.add(v); } return v; })); const z = new JSZip(); const used = new Set(); let n = 0;
     for (const s of (p.sources?.sources || [])) {

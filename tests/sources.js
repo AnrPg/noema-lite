@@ -82,7 +82,7 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
     'book.epub': ['.vw-doc', 'EPUB chapter ok'], 'analysis.ipynb': ['.vw-doc', 'Notebook ok'], 'mail.eml': ['.vw-mailhead', 'Θέμα μαθήματος'], 'bundle.zip': ['.vw-table', 'inside/readme.md'], 'tone.wav': ['audio'],
     'old.doc': ['.vw-pre', 'Legacy document text ok'], 'mystery.bin': ['.vw-pre', '000000'], 'page.html': ['iframe.vw-frame'] };
   for (const [f, [sel, want]] of Object.entries(files)) {
-    await p.evaluate(async f => { const b = await (await fetch('/testfiles/' + f)).blob(); window.__vw = await NoemaViewer.open({ blob: b, name: f, title: f }); }, f);
+    await p.evaluate(async f => { const b = await (await fetch('/testfiles/' + f)).blob(); window.__vw = await NoemaCore.viewer.open({ blob: b, name: f, title: f }); }, f);
     const got = await until(async () => { const n = await p.locator('.vw-ov ' + sel).count(); if (!n) return false; if (typeof want === 'number') return n >= want; if (!want) return true; return (await p.locator('.vw-ov').innerText()).includes(want) || (await p.locator('.vw-ov ' + sel).first().evaluate((e, w) => (e.textContent || '').includes(w), want)); }, 12000);
     ok(got, `${f} → ${await p.evaluate(() => document.querySelector('.vw-ov .vw-sub')?.textContent || '')}`);
     if (['slides.pptx', 'sheet.xlsx', 'chapter.docx'].includes(f)) await p.screenshot({ path: SHOTS + `/s4_${f.replace('.', '_')}.png` });
@@ -93,7 +93,7 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
     ok(await p.locator('.vw-ov a[download]').count() === 1, `${f}: ⬇️ download offered`);
     await p.keyboard.press('Escape'); await wait(100);
   }
-  await p.evaluate(() => NoemaViewer.open({ url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', start: 2220, title: 'Lecture' }));
+  await p.evaluate(() => NoemaCore.viewer.open({ url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', start: 2220, title: 'Lecture' }));
   ok(/youtube-nocookie\.com\/embed\/dQw4w9WgXcQ\?start=2220/.test(await p.$eval('.vw-ov iframe', e => e.src)), 'YouTube lectures play inside, at the cited time');
   await p.keyboard.press('Escape');
 

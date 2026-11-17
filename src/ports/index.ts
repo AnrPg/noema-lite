@@ -11,3 +11,4 @@ export type * from './i18n.ts';
 export type * from './telemetry.ts';
 export * from './notifier.ts';
 export type * from './lifecycle.ts';
+export type * from './viewer.ts';
