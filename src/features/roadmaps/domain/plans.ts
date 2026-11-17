@@ -50,7 +50,9 @@ export function mergePlans(c: Roadmap | null | undefined, other: Roadmap | null 
       if (!o.reviewed) Reflect.deleteProperty(n, 'reviewed');
       changed = true;
     }
-    // 📑 chapters added to the step on the other copy (a prepared step too: its plan is otherwise fixed)
+    // 📑 chapters added to the step on the other copy (a prepared step too: its plan is otherwise fixed); this copy's own
+    // additions are kept aside in case the other copy's plan replaces this one below
+    const own0 = { chapters: n.chapters ?? [], ...(n.chaptersAt ? { chaptersAt: n.chaptersAt } : {}) };
     if (mergeAddedChapters(n, o)) changed = true;
     if (planLocked(n)) continue;
     // 📦 the other copy's plan followed a subject this copy has taken off since: it never comes back over the plan here
@@ -73,6 +75,7 @@ export function mergePlans(c: Roadmap | null | undefined, other: Roadmap | null 
     n.chapters = o.chapters;
     if (o.plannedAt) n.plannedAt = o.plannedAt;
     else Reflect.deleteProperty(n, 'plannedAt');
+    mergeAddedChapters(n, own0); // chapters added here after the plan that wins stay
     if (!n.replanAt || ms(o.plannedAt) > ms(n.replanAt)) {
       Reflect.deleteProperty(n, 'replan');
       Reflect.deleteProperty(n, 'planWish');

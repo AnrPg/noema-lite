@@ -117,7 +117,7 @@ export function checkAddChapters(
       else errors.push(`${at}.ref: the step already has a chapter "${ref}" (“${old.title}”) — choose another ref`);
       return;
     }
-    const twin = have.find(ch => sameTitle(ch.title, title));
+    const twin = [...have, ...fresh].find(ch => sameTitle(ch.title, title));
     if (twin) {
       errors.push(`${at}.title: the step already has “${twin.title}” (ref "${twin.ref}") — the same chapter is not added twice`);
       return;
@@ -151,7 +151,7 @@ export function addChapters(c: Roadmap, nid: string, add: readonly ChapterAdd[],
   let at: string | undefined = n.chaptersAt;
   for (const x of add) {
     if (list.some(ch => ch.ref === x.ref)) continue;
-    const stamp = stampAfter(now, at);
+    const stamp = stampAfter(now, at, n.plannedAt, n.replanAt); // later than the plan it joins, whatever the clocks
     at = stamp;
     const i = placeOf(list, x);
     const ch: PlannedChapter = {
@@ -192,23 +192,28 @@ export function chaptersProblems(c: Roadmap, e: Partial<ChaptersEntry>): string[
   return r.fresh.length ? [] : ['applied'];
 }
 
-/** mergePlans for added chapters: the chapters `other` added to a step that this copy has not got (by ref) come over, each
-    at the place it was added (after the chapter it followed), even on a prepared step. → true when c changed. */
-export function mergeAddedChapters(n: Step, o: Step): boolean {
+/** mergePlans for added chapters: the chapters either copy added to a step (each with its addedAt) that are newer than this
+    copy's plan, rebuilt on the planned chapters in one order every copy agrees on — oldest addition first (then by ref), each
+    after the chapter it was put after — even on a prepared step. `o` may be this step's own earlier state. → true when c changed. */
+export function mergeAddedChapters(n: Step, o: Pick<Step, 'chapters' | 'chaptersAt'>): boolean {
   if (ms(o.chaptersAt) <= 0 || !o.chapters?.length) return false;
-  const mine = n.chapters ?? [],
-    refs = new Set(mine.map(ch => ch.ref)),
-    since = Math.max(ms(n.plannedAt), ms(n.replanAt)), // a plan made here later than the chapter was added replaces it
-    extra = o.chapters.filter(
-      ch => typeof ch.addedAt === 'string' && ms(ch.addedAt) > since && !refs.has(ch.ref) && !mine.some(m => sameTitle(m.title, ch.title)),
-    );
-  if (!extra.length) return false;
-  const list = [...mine];
+  const since = Math.max(ms(n.plannedAt), ms(n.replanAt)), // a plan made later than a chapter was added replaces it
+    mine = n.chapters ?? [],
+    added = new Map<string, PlannedChapter>();
+  for (const ch of [...mine, ...o.chapters])
+    if (typeof ch.addedAt === 'string' && ms(ch.addedAt) > since && !added.has(ch.ref)) added.set(ch.ref, clone(ch));
+  const base = mine.filter(ch => !added.has(ch.ref));
+  const list = [...base];
+  const extra = [...added.values()]
+    .filter(ch => !base.some(b => sameTitle(b.title, ch.title)))
+    .sort((a, b) => ms(a.addedAt) - ms(b.addedAt) || a.ref.localeCompare(b.ref));
   for (const ch of extra) {
-    const prev = typeof ch.addedAfter === 'string' ? ch.addedAfter : ch.addedAfter === null ? '' : undefined;
-    const i = prev === '' ? 0 : prev ? list.findIndex(x => x.ref === prev) + 1 || list.length : list.length;
-    list.splice(i, 0, clone(ch));
+    const prev = ch.addedAfter;
+    const k = typeof prev === 'string' ? list.findIndex(x => x.ref === prev) : -1;
+    list.splice(prev === null ? 0 : k >= 0 ? k + 1 : list.length, 0, ch);
   }
+  const same = list.length === mine.length && list.every((ch, i) => ch.ref === mine[i]?.ref);
+  if (same) return false;
   n.chapters = list;
   n.chaptersAt = stampAfter(0, n.chaptersAt, o.chaptersAt);
   return true;
@@ -228,9 +233,10 @@ export interface UploadChapter {
     too much — then the caller warns instead of guessing). */
 export function packExtras(n: Step, chapters: readonly UploadChapter[]): ChapterAdd[] | null {
   const plan = n.chapters ?? [];
-  if (!plan.length || chapters.length <= plan.length) {
-    const unmatched = chapters.filter(pc => !plan.some(ch => sameTitle(ch.title, pc.title)));
-    return chapters.length <= plan.length || !unmatched.length ? [] : null;
+  if (!plan.length) return [];
+  if (chapters.length <= plan.length) {
+    // no more chapters than the plan: fine when each is a planned one; a chapter the plan lacks means they do not line up
+    return chapters.every(pc => plan.some(ch => sameTitle(ch.title, pc.title))) ? [] : null;
   }
   const match = new Map<number, string>(); // pack index → plan ref
   let j = 0;
@@ -327,13 +333,12 @@ export function checkLanguages(c: Pick<Roadmap, 'language'>, d: unknown): { erro
   }
   return { errors: E, value: E.length ? null : { translations: tr, ...(bridges ? { bridges } : {}) } };
 }
-/** Set a Roadmap's languages (mutates the draft; check first). */
-export function setLanguages(c: Roadmap, v: RoadmapLanguages, now: number): void {
-  c.languages = {
-    translations: [...v.translations],
-    ...(v.bridges ? { bridges: [...v.bridges] } : {}),
-    at: stampAfter(now, languagesOf(c)?.at),
-  };
+/** Set a Roadmap's languages (mutates the draft; check first) as of `at` (the operation's own time: the direct write and the
+    inbox entry carry the same one) → false when the Roadmap has these or newer ones already (a replay changes nothing). */
+export function setLanguages(c: Roadmap, v: RoadmapLanguages, at: string): boolean {
+  if (ms(at) <= ms(languagesOf(c)?.at)) return false;
+  c.languages = { translations: [...v.translations], ...(v.bridges ? { bridges: [...v.bridges] } : {}), at };
+  return true;
 }
 /** The Roadmap's languages, or null: the pack rules' default. */
 export function languagesOf(c: Pick<Roadmap, 'languages'> | null | undefined): RoadmapLanguages | null {

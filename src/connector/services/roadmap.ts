@@ -11,6 +11,7 @@ import {
   levelText,
   pendingProposal,
   setLanguages,
+  stampAfter,
   type ChapterAdd,
   type RoadmapLanguages,
 } from '../../features/roadmaps/domain/index.ts';
@@ -156,16 +157,15 @@ export async function writeChapters(
 /** Set the Roadmap's languages: straight into it and as an inbox entry (like writeChapters). */
 export async function writeLanguages(ctx: ToolContext, c: Curriculum, v: RoadmapLanguages, seq: string): Promise<boolean> {
   const CJ = ctx.engine.curJobs,
-    now = Date.now();
+    at = stampAfter(Date.now(), languagesOf(c as unknown as Roadmap)?.at); // one version for the write and the entry
   const direct = await ctx.kv
     .update<Curriculum | null>('a:curriculum:' + c.id, cur => {
       if (!cur || cur.id !== c.id) return null;
-      setLanguages(cur as unknown as Roadmap, v, now);
-      return cur;
+      return setLanguages(cur as unknown as Roadmap, v, at) ? cur : null;
     })
     .catch(() => false);
-  await ctx.kv.put(CJ.inboxKey(c.id, seq), { v: 1, kind: 'languages', data: v, at: new Date(now).toISOString(), via: 'claude-app' });
-  setLanguages(c as unknown as Roadmap, v, now);
+  await ctx.kv.put(CJ.inboxKey(c.id, seq), { v: 1, kind: 'languages', data: v, at, via: 'claude-app' });
+  setLanguages(c as unknown as Roadmap, v, at);
   return direct;
 }
 

@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { test } from 'node:test';
 import type { Roadmap, Step } from './model.ts';
-import { addChapters, checkAddChapters, checkLanguages, mergeAddedChapters, packExtras } from './chapters.ts';
+import { addChapters, checkAddChapters, checkLanguages, mergeAddedChapters, packExtras, setLanguages } from './chapters.ts';
 import { mergePlans } from './plans.ts';
 import { checkI18n, setI18n, shownNode } from './i18n.ts';
 import { merged } from './inbox.ts';
@@ -145,4 +145,50 @@ test('the languages of a Roadmap are checked', () => {
   });
   const bad = checkLanguages({ language: 'en' }, { translations: ['en', 'x'], bridges: ['ru>el', 'el>el'] }).errors;
   assert.equal(bad.length, 4);
+});
+
+test('review cases: one title twice in a request, insertion order across copies, a newer plan, a pack that does not line up', () => {
+  const c = roadmap();
+  assert.ok(
+    checkAddChapters(c, F.step2.id, [
+      { ref: 'tr1', title: 'Transformers' },
+      { ref: 'tr2', title: 'transformers' },
+    ]).errors.some(e => /already has “Transformers”/.test(e)),
+  );
+  // x after inductor_ode, then y before x: [.., inductor_ode, y, x, ..] on every copy
+  const a = roadmap();
+  addChapters(a, F.step2.id, checkAddChapters(a, F.step2.id, [{ ref: 'x', title: 'X', after: 'inductor_ode' }]).fresh, NOW);
+  addChapters(a, F.step2.id, checkAddChapters(a, F.step2.id, [{ ref: 'y', title: 'Y', before: 'x' }]).fresh, NOW + 1000);
+  const b = roadmap();
+  mergePlans(b, a);
+  assert.deepEqual(refs(b, F.step2.id).slice(1, 4), ['inductor_ode', 'y', 'x']);
+  assert.deepEqual(refs(b, F.step2.id), refs(a, F.step2.id));
+  // an unprepared step: a chapter added here after the other copy's newer plan survives that plan
+  const u = roadmap(),
+    v = roadmap();
+  for (const r of [u, v]) Reflect.deleteProperty(r.nodes[F.step3.id] as Step, 'pack');
+  addChapters(u, F.step3.id, checkAddChapters(u, F.step3.id, [{ ref: 'late', title: 'Late chapter' }]).fresh, NOW + 5000);
+  const vn = v.nodes[F.step3.id] as Step;
+  vn.chapters = [{ ref: 'p1', title: 'New plan chapter' }];
+  vn.plannedAt = new Date(NOW).toISOString();
+  mergePlans(u, v);
+  assert.deepEqual(refs(u, F.step3.id), ['p1', 'late']);
+  // a pack with as many chapters, one of them not in the plan: not lined up (the upload warns)
+  const n = roadmap().nodes[F.step3.id] as Step;
+  const titles = (n.chapters ?? []).map(ch => ch.title);
+  titles[2] = 'Something else entirely';
+  assert.equal(
+    packExtras(
+      n,
+      titles.map(title => ({ title })),
+    ),
+    null,
+  );
+});
+
+test('a delayed languages entry never overrides newer languages', () => {
+  const c = roadmap();
+  assert.ok(setLanguages(c, { translations: ['fr'] }, '2026-11-17T14:00:00.000Z'));
+  assert.ok(!setLanguages(c, { translations: ['el'] }, '2026-11-17T13:00:00.000Z'));
+  assert.deepEqual(c.languages?.translations, ['fr']);
 });

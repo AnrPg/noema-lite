@@ -5,7 +5,8 @@ import { curState, pickCurriculum } from '../services/curricula.ts';
 import { BUSY, REPLAYED } from '../services/packsave.ts';
 import { languagesLine, roadmapTodo, writeLanguages } from '../services/roadmap.ts';
 import { sagaKey } from '../services/sagas.ts';
-import { checkLanguages } from '../../features/roadmaps/domain/index.ts';
+import { checkLanguages, languagesOf } from '../../features/roadmaps/domain/index.ts';
+import type { Roadmap } from '../../features/roadmaps/domain/model.ts';
 import { sha256Hex, str } from '../util.ts';
 
 export const tool: Tool = {
@@ -49,18 +50,29 @@ export const tool: Tool = {
     const v = r.value,
       key = sagaKey('languages', c.id, (await sha256Hex(raw)).slice(0, 32)),
       seq = Date.now().toString(36).padStart(9, '0') + '-' + key.slice(-8);
-    const out = await ctx.sagas.run<string>('languages', key, async s => {
-      const direct = await s.step('write', () => writeLanguages(ctx, c, v, seq));
-      const after = await curState(ctx, pk.c, ctx.uid),
-        rest = roadmapTodo(ctx.engine, after);
-      return (
-        `✅ The languages of “${c.title || c.goal}” (${c.id}) — ${languagesLine(ctx.engine, after)}.${direct ? ' Every device has them at its next sync.' : " The learner's app takes them the next time it opens."}` +
-        `\nNew step tasks name them; put "authoring": { "languages": ${JSON.stringify(v)} } into subject.json of a pack already being built for this Roadmap so its pipeline checks follow them.` +
-        (rest.length
-          ? `\nThe Roadmap's own words still untranslated: ${rest.map(x => `${x.loc} — ${Object.keys(x.todo.nodes).length} step(s)${x.todo.title ? ' and its title' : ''}`).join('; ')}.`
-          : "\n🌐 The Roadmap's own words are translated into all of them.")
-      );
-    });
+    const out = await ctx.sagas.run<string>(
+      'languages',
+      key,
+      async s => {
+        const direct = await s.step('write', () => writeLanguages(ctx, c, v, seq));
+        const after = await curState(ctx, pk.c, ctx.uid),
+          rest = roadmapTodo(ctx.engine, after);
+        return (
+          `✅ The languages of “${c.title || c.goal}” (${c.id}) — ${languagesLine(ctx.engine, after)}.${direct ? ' Every device has them at its next sync.' : " The learner's app takes them the next time it opens."}` +
+          `\nNew step tasks name them; put "authoring": { "languages": ${JSON.stringify(v)} } into subject.json of a pack already being built for this Roadmap so its pipeline checks follow them.` +
+          (rest.length
+            ? `\nThe Roadmap's own words still untranslated: ${rest.map(x => `${x.loc} — ${Object.keys(x.todo.nodes).length} step(s)${x.todo.title ? ' and its title' : ''}`).join('; ')}.`
+            : "\n🌐 The Roadmap's own words are translated into all of them.")
+        );
+      },
+      {
+        // a replay only while these are still the Roadmap's languages (set el, then fr, then el again: the third call writes)
+        stillDone: async () => {
+          const now = languagesOf((await curState(ctx, pk.c, ctx.uid)) as unknown as Roadmap);
+          return !!now && JSON.stringify([now.translations, now.bridges ?? null]) === JSON.stringify([v.translations, v.bridges ?? null]);
+        },
+      },
+    );
     if (out.status === 'done') return text(out.value + (out.replayed ? REPLAYED : ''));
     return fail(BUSY(`The languages of “${c.title || c.goal}”`));
   },

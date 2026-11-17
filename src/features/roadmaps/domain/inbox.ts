@@ -257,7 +257,7 @@ export function merged(c: Roadmap, rows: readonly KvRow[], hooks: MergeHooks): R
     }
     if (e.kind === 'languages') {
       const r = checkLanguages(cc, e.data);
-      if (r.value) setLanguages(cc, r.value, Date.parse(String(e.at)) || hooks.now);
+      if (r.value && typeof e.at === 'string') setLanguages(cc, r.value, e.at);
       continue;
     }
     if (typeof e.task === 'string') hooks.answer?.(cc, e);

@@ -25,19 +25,24 @@ async function submitOne(ctx: ToolContext, c0: Curriculum, tid: string, raw: str
   const no = (t: string): Outcome => ({ ok: false, text: t, stored: [], missing: [] });
   const key = sagaKey('answer', c0.id, (await sha256Hex(tid + '\n' + raw)).slice(0, 40));
   const ids = /^plan:([^@]+)/.exec(tid)?.[1]?.split(',').filter(Boolean) ?? [];
+  const planned = (x: Curriculum, i: string): boolean => !!x.nodes[i]?.chapters?.length && !needsPlan(x.nodes[i] as Step);
+  // the Roadmap as it is now: the stored record read again (the app saves it before it deletes the answers it applied, so an
+  // answer gone from the inbox is in the record by then), with its inbox
+  const fresh = async (): Promise<Curriculum> => {
+    const pk = await pickCurriculum(ctx, c0.id).catch(() => null);
+    return curState(ctx, pk && pk.error === undefined ? pk.c : c0, ctx.uid);
+  };
   const readBack = async (): Promise<{ stored: string[]; missing: string[] }> => {
-    const after = await curState(ctx, c0, ctx.uid);
-    return {
-      stored: ids.filter(i => !needsPlan(after.nodes[i] as Step | undefined)),
-      missing: ids.filter(i => needsPlan(after.nodes[i] as Step | undefined)),
-    };
+    let after = await fresh();
+    if (ids.some(i => !planned(after, i))) after = await fresh(); // the app was between its save and its delete: read again
+    return { stored: ids.filter(i => planned(after, i)), missing: ids.filter(i => !planned(after, i)) };
   };
   const before = await ctx.sagas.finished<string>(key);
   if (before !== undefined) {
     const rb = await readBack(); // the same answer again (its task may be closed by now)
     return { ok: !rb.missing.length, text: before + REPLAYED, ...rb };
   }
-  const c = await curState(ctx, c0, ctx.uid);
+  const c = await fresh();
   const t = CJ.byId(c, tid);
   if (!t) {
     const rb = ids.length ? await readBack() : { stored: [], missing: [] };
@@ -81,7 +86,8 @@ async function submitOne(ctx: ToolContext, c0: Curriculum, tid: string, raw: str
 
 /** What is next once the answers are in. */
 async function nextLine(ctx: ToolContext, c0: Curriculum): Promise<string> {
-  const c = await curState(ctx, c0, ctx.uid),
+  const pk = await pickCurriculum(ctx, c0.id).catch(() => null);
+  const c = await curState(ctx, pk && pk.error === undefined ? pk.c : c0, ctx.uid),
     w = ctx.engine.curJobs.work(c);
   return w.graph || w.toPlan.length
     ? `Next: call noema_curriculum_task with curriculum_id "${c.id}" — ${w.graph ? 'the next agent of the map' : `${w.toPlan.length} step(s) still need their chapter plan`}.`
