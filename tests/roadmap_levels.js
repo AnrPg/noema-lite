@@ -146,9 +146,11 @@ const answerAll = async (page, host, pick) => {
   ok(await until(() => dlg(page, 'noema-roadmap-restructure').count()), 'Review opens the proposal');
   const prop = await dlg(page, 'noema-roadmap-restructure').innerText();
   ok(/Energy fits the first year\./.test(prop) && /“Energy”: Year 2 → First year/.test(prop) && /Nothing is lost/.test(prop), 'why, every change in words (levels by their names), and that nothing is lost');
+  await page.locator('noema-roadmap-restructure .apply').hover();   // the hovered primary button keeps its contrast too
   await settled(page);   // the dialog fades in: axe measures the contrast of the finished frame, not one mid-fade (slow CI runners)
   await page.screenshot({ path: SHOTS + '/levels_proposal.png' });
   const axeD = await new AxeBuilder({ page }).withTags(TAGS).include('noema-roadmap-restructure').analyze();
+  for (const v of axeD.violations) for (const n of v.nodes) console.log('    ', v.id, n.target.join(' '), n.any.map(a => a.message).join('; '));
   ok(!axeD.violations.length, 'axe: the proposal ' + axeD.violations.map(v => v.id).join(', '));
   await page.locator('noema-roadmap-restructure noema-button.apply').click();
   ok(await until(async () => !(await page.$('noema-roadmap-restructure'))), 'Apply closes it');
