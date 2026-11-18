@@ -374,8 +374,8 @@ export function mirroredKv(o: MirroredKvOptions): MirroredKv {
   function failOver(batch: ReadonlyMap<string, Rec>, e: unknown): void {
     warn('IndexedDB refused a write: kept in the journal until the next start', e);
     for (const [k, rec] of batch) {
-      if (legacy.has(k)) {
-        // an older version's key: still safe in localStorage, moved again with the next write
+      if (legacy.get(k) === rec.v && !unsettled.has(k)) {
+        // the move of an older version's key: still safe in localStorage, moved again with the next write
         if (mem.get(k)?.r === rec.r && !pending.has(k)) pending.set(k, rec);
         continue;
       }
@@ -439,6 +439,9 @@ export function mirroredKv(o: MirroredKvOptions): MirroredKv {
     }
     const markRec = stored.get(MARK_DB);
     stored.delete(MARK_DB);
+    // this tab's revisions come after everything persisted (a clock set back since included), before any is made here
+    if (markRec) seen(markRec.r);
+    for (const rec of stored.values()) seen(rec.r);
     // The database belongs to this localStorage (its mark in both): localStorage cleared on its own (a test's reset, a
     // hand-cleared site) drops the database's copy with it, as when everything lived there. A localStorage that cannot
     // be read drops nothing, and the mark is written only where localStorage keeps it.
@@ -458,10 +461,12 @@ export function mirroredKv(o: MirroredKvOptions): MirroredKv {
     }
     for (const [k, rec] of stored) take(k, rec);
     // the journal: writes a closed page or a refused transaction left
+    const journaled = new Set<string>();
     for (const jk of lsKeys(JOURNAL_PREFIX)) {
       const k = jk.slice(JOURNAL_PREFIX.length),
         rec = journalGet(k);
       if (!rec || !isAcc(k)) continue;
+      journaled.add(k);
       if (newer(rec, stored.get(k))) {
         if (take(k, rec)) pending.set(k, rec);
       } else lsDel(jk); // the database has it (or newer)
@@ -475,6 +480,7 @@ export function mirroredKv(o: MirroredKvOptions): MirroredKv {
       if (v === null) continue;
       legacy.set(k, v);
       if (unsettled.has(k)) continue; // this page wrote it since: that write wins, the old copy only leaves
+      if (journaled.has(k)) continue; // a later edit of it, journaled after a failed move: that one wins, the old copy only leaves
       const rec = { v, r: revision() };
       take(k, rec);
       pending.set(k, rec);
@@ -498,6 +504,9 @@ export function mirroredKv(o: MirroredKvOptions): MirroredKv {
     }
   }
 
+  /** whether IndexedDB may hold an account copy (this device used it: its mark is in localStorage) */
+  const dbMayHold = (): boolean => lsGet(MARK_LS) !== null;
+
   /** No IndexedDB here (now or since this start): the account lives in localStorage. The journal (writes a page closed
       before committing, refused writes) is put there first, then what this page wrote before ready; a journal entry
       leaves only once localStorage kept it. */
@@ -517,7 +526,9 @@ export function mirroredKv(o: MirroredKvOptions): MirroredKv {
       if (rec && isAcc(k)) recs.set(k, rec);
     }
     for (const [k, rec] of mem) if (newer(rec, recs.get(k))) recs.set(k, rec);
-    for (const [k, rec] of recs) if (apply(k, rec)) lsDel(JOURNAL_PREFIX + k);
+    // a delete stays journaled while a database copy may exist (this device used IndexedDB: its mark), so a later start
+    // with IndexedDB back does not bring the key back; a value is in localStorage now and moves in from there
+    for (const [k, rec] of recs) if (apply(k, rec) && (rec.v !== null || !dbMayHold())) lsDel(JOURNAL_PREFIX + k);
     mem.clear();
     pending.clear();
     unsettled.clear();
@@ -563,7 +574,11 @@ export function mirroredKv(o: MirroredKvOptions): MirroredKv {
         if (!s.ok) return s;
         try {
           s.value.removeItem(key);
-          if (isAcc(key)) s.value.removeItem(JOURNAL_PREFIX + key);
+          if (isAcc(key)) {
+            if (dbMayHold())
+              journalPut(key, { v: null, r: revision() }); // IndexedDB may still have it: the delete waits for it
+            else s.value.removeItem(JOURNAL_PREFIX + key);
+          }
           return OK_VOID;
         } catch (e) {
           return err(unavailable(e));

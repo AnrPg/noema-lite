@@ -419,3 +419,59 @@ test('journal on close: one too big for localStorage does not stop the smaller o
   assert.equal(journaled(s.ls, 'noema1:acc:a:big'), undefined);
   assert.equal(journaled(s.ls, 'noema1:acc:s:sub:p'), 'small');
 });
+
+test('an edit after a failed move of an older version’s key is journaled, and wins over the old copy on the next start', async () => {
+  const idb = fakeIndexedDB(),
+    ls = fakeWebStorage(Infinity);
+  ls.setItem('noema1:acc:a:old', 'legacy');
+  idb.quota = 0;
+  const s = setup({ idb, ls });
+  await s.kv.ready();
+  s.kv.set('noema1:acc:a:old', 'edited');
+  await s.kv.flushed();
+  assert.equal(journaled(ls, 'noema1:acc:a:old'), 'edited', 'refused: journaled like any write');
+  idb.quota = Infinity;
+  const t = setup({ idb, ls });
+  await t.kv.ready();
+  assert.equal(value(t.kv.get('noema1:acc:a:old')), 'edited');
+  await t.kv.flushed();
+  assert.equal(ls.getItem('noema1:acc:a:old'), null, 'the old copy left once the edit committed');
+});
+
+test('a delete while IndexedDB is away waits for it: the key does not come back when it returns', async () => {
+  const idb = fakeIndexedDB(),
+    ls = fakeWebStorage(Infinity);
+  const s = setup({ idb, ls });
+  await s.kv.ready();
+  s.kv.set('noema1:acc:a:k', 'v');
+  await s.kv.flushed();
+  const away = setup({ idb: null, ls });
+  await away.kv.ready();
+  assert.equal(away.kv.backing(), 'localStorage');
+  away.kv.delete('noema1:acc:a:k');
+  const back = setup({ idb, ls });
+  await back.kv.ready();
+  assert.equal(value(back.kv.get('noema1:acc:a:k')), null);
+  await back.kv.flushed();
+  assert.equal(journaled(ls, 'noema1:acc:a:k'), undefined, 'acknowledged by IndexedDB: the tombstone left');
+  const again = setup({ idb, ls });
+  await again.kv.ready();
+  assert.equal(value(again.kv.get('noema1:acc:a:k')), null);
+});
+
+test('localStorage cleared after a clock set back: the reset still clears the database', async () => {
+  let clock = Date.now() + 3_600_000;
+  const idb = fakeIndexedDB();
+  const s = setup({ idb, now: () => clock });
+  await s.kv.ready();
+  s.kv.set('noema1:acc:a:k', 'v');
+  await s.kv.flushed();
+  clock -= 3_600_000;
+  const t = setup({ idb, ls: fakeWebStorage(Infinity), now: () => clock }); // a cleared localStorage
+  await t.kv.ready();
+  assert.equal(value(t.kv.get('noema1:acc:a:k')), null);
+  await t.kv.flushed();
+  const u = setup({ idb, ls: t.ls, now: () => clock });
+  await u.kv.ready();
+  assert.equal(value(u.kv.get('noema1:acc:a:k')), null, 'and it stays cleared');
+});
