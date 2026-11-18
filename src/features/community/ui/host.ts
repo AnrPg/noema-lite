@@ -182,7 +182,7 @@ export interface CommunityHost {
   domains(): readonly string[];
   /** the language badge of a subject (the frame's) */
   langTag(item: PublicItem): HTMLElement | null;
-  /** 🌐 shared texts translated on request (engine/mt.js): marks an element, the bar that switches it */
+  /** 🌐 shared texts translated on request (NoemaShell.mt, src/features/translation): marks an element, the bar that switches it */
   translatable(el: HTMLElement, o: { readonly language?: string | undefined; readonly kind: string }): void;
   translateBar(scope: HTMLElement): HTMLElement | null;
   /** the share dialog's data and calls (engine/cloud.js) */

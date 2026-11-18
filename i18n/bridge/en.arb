@@ -296,5 +296,9 @@
         "type": "String"
       }
     }
+  },
+  "bridge.attach.notSaved": "This language help could not be saved, so it was not added. Check your connection and the space on this device, then import it again.",
+  "@bridge.attach.notSaved": {
+    "description": "Error when an imported language-help file could not be stored (in the cloud for a signed-in account, else on this device). Nothing was added."
   }
 }

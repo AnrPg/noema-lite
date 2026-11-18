@@ -1,4 +1,4 @@
-Third-party libraries for the file preview (engine/viewer.js), loaded only when a file of that type is opened.
+Third-party libraries for the file preview (src/features/viewer, the lazy piece build/viewer.js), loaded only when a file of that type is opened.
 | file | library | version | licence |
 |---|---|---|---|
 | ../pdfjs/ | pdf.js (pdfjs-dist, legacy build + cmaps, standard fonts, wasm decoders) | 6.4.299 | Apache-2.0 |

@@ -251,7 +251,7 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
     await visit(page, S + 'import a pack: a broken file', async () => { await page.evaluate(() => { document.querySelectorAll('.modal').forEach(m => m.remove()); Noema.openSubjectPicker(); }); await page.waitForSelector('.noema-ovbox input[type=file]', { state: 'attached' }); await page.setInputFiles('.noema-ovbox input[type=file][accept=".zip,.json,.noemapack"]', bad); }, 1200);
     await page.evaluate(() => document.querySelectorAll('.noema-overlay').forEach(o => o.remove()));   // the picker the import ran in
     for (const [n, o] of [['unreachable', { url: 'https://unreachable.invalid/book.pdf' }], ['text', { blob: 'Hello', name: 'a.txt' }], ['csv', { blob: 'a,b\n1,2', name: 'a.csv' }], ['unknown', { blob: '\u0000\u0001binary', name: 'a.bin' }]])
-      await visit(page, S + 'viewer: ' + n, () => page.evaluate(o => { document.querySelectorAll('.modal').forEach(m => m.remove()); if (o.blob) o.blob = new Blob([o.blob]); NoemaViewer.open(o); }, o), 1500);
+      await visit(page, S + 'viewer: ' + n, () => page.evaluate(o => { document.querySelectorAll('.modal').forEach(m => m.remove()); if (o.blob) o.blob = new Blob([o.blob]); NoemaCore.viewer.open(o); }, o), 1500);
     await page.evaluate(() => document.querySelector('.vw-ov')?.remove());
     await visit(page, S + 'subject menu', () => page.evaluate(() => { document.querySelectorAll('.modal').forEach(m => m.remove()); location.hash = '#/'; }), 600);
     await visit(page, S + 'home buttons', () => page.evaluate(() => [...document.querySelectorAll('main .subjmenu, main .menubtn, main [aria-haspopup]')].forEach(b => b.click())), 400);

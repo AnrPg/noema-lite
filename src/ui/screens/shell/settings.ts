@@ -57,7 +57,7 @@ export interface SettingsData {
   localeName(): string;
   /** the supported native languages, as [code, name] */
   natives(): readonly (readonly [string, string])[];
-  /** the machine translation panel (engine/mt.js), when there is one */
+  /** the machine translation panel (NoemaShell.mt, src/features/translation), when there is one */
   mtPanel(): Node | null;
   reload(): void;
   /* the account's actions */

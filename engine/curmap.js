@@ -409,7 +409,7 @@ window.NoemaCurMap = (() => {
   async function openMaterial(acc, cid, id, f) {
     const c = C().get(acc, cid); const rec = await C().materialFile(acc, c, id, f).catch(() => null);
     if (!rec?.blob) { toast('⚠️ ' + CM('roadmap.map.mat.notHere'), 4000); return; }
-    window.NoemaViewer.open({ blob: rec.blob, name: f.name, type: rec.type, title: f.name, subtitle: c.nodes[id]?.title + (f.range ? ' · ' + CM('roadmap.map.mat.pagesRange', { a: f.range[0], b: f.range[1] }) : ''), page: f.range ? f.range[0] : undefined });
+    NoemaCore.viewer.open({ blob: rec.blob, name: f.name, type: rec.type, title: f.name, subtitle: c.nodes[id]?.title + (f.range ? ' · ' + CM('roadmap.map.mat.pagesRange', { a: f.range[0], b: f.range[1] }) : ''), page: f.range ? f.range[0] : undefined });
   }
 
   /** 📚 The sources of a step: the learner's own files (at the step's pages) and the sources of the subject prepared for it. */
@@ -440,10 +440,10 @@ window.NoemaCurMap = (() => {
     });
   }
   async function openSrc(acc, sid, s, av) {
-    if (av.url && !av.meta) return window.NoemaViewer.open({ url: av.url, title: s.title, subtitle: s.subtitle });
+    if (av.url && !av.meta) return NoemaCore.viewer.open({ url: av.url, title: s.title, subtitle: s.subtitle });
     const rec = await window.NoemaSrcFiles.get(acc, sid, s.id).catch(() => null);
     if (!rec?.blob) { toast('⚠️ ' + CM('roadmap.map.mat.notHere'), 4000); return; }
-    window.NoemaViewer.open({ blob: rec.blob, name: rec.name, type: rec.type, title: s.title, subtitle: s.subtitle });
+    NoemaCore.viewer.open({ blob: rec.blob, name: rec.name, type: rec.type, title: s.title, subtitle: s.subtitle });
   }
 
   /* ======================= 📥 import a map you already have ======================= */

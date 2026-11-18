@@ -6,7 +6,8 @@
    of a pack come from the library (its registry entry's bridgeLocales) and from the learner's account (the synced index
    a:bridges, rows of noema_bridges); the account's own one wins. */
 
-const base = (c: string | null | undefined): string => (c ?? '').split('-')[0]?.toLowerCase() ?? '';
+/** the language of a tag: "pt-PT" → "pt" */
+export const base = (c: string | null | undefined): string => (c ?? '').split('-')[0]?.toLowerCase() ?? '';
 
 /** The key of one pair. */
 export const pairKey = (src: string | null | undefined, nat: string, own?: string | null): string =>

@@ -43,7 +43,11 @@ import { languagesBridge } from './languages.ts';
 import { COMMUNITY_APP_BRIDGE, COMMUNITY_SCREENS, type Screens } from './community-app.ts';
 import { buildJobRegistry } from './jobs.ts';
 import { browserLearning, learningBridge } from './learning.ts';
-import { bridgesDomain, ROADMAP_EVENTS, roadmapsSurface } from './roadmaps.ts';
+import { ROADMAP_EVENTS, roadmapsSurface } from './roadmaps.ts';
+import { bridgesBridge } from './bridges.ts';
+import { mtBridge } from './translation.ts';
+import { VIEWER_PIECE, VIEWER_PIECE_KEY, viewerBridge } from './viewer-door.ts';
+import type { ViewerPiece } from './viewer-root.ts';
 import { randomId, registerSync, syncBridge } from './sync.ts';
 import {
   AI,
@@ -99,8 +103,12 @@ export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
   // the Roadmaps domain (graph, tasks, claims, inbox, levels, restructuring) and its services: curriculum.js, curjobs.js,
   // curshare.js, curimport.js, sourceplan.js, curmap.js
   { name: 'roadmaps', build: r => roadmapsSurface(r.get(ROADMAP_EVENTS)) },
-  // the 文A bridges' lookup (engine/bridge.js)
-  { name: 'bridges', build: () => bridgesDomain },
+  // 文A language help (src/features/bridges): the lookup and the service; its screens are NoemaShell.bridge (build/ui.js)
+  bridgesBridge,
+  // 🌐 the machine translation of shared texts (src/features/translation); its screens are NoemaShell.mt (build/ui.js)
+  mtBridge,
+  // 👁 the file viewer (src/features/viewer): the kinds at once, the readers and the screen in build/viewer.js
+  viewerBridge,
   // the content checks (src/features/content): the pack, chapter, quality, translation, bridge and activity rules — the
   // generator (engine/packgen.js), the library, the activity runtimes and the author. Their code comes with the contracts'
   // validators (build/contracts.js, src/features/content/application/lazy.ts): every caller runs after
@@ -213,6 +221,8 @@ export function registerBrowser(c: Container, page: PageLike, scriptUrl: string 
   c.register(COMMUNITY_SCREENS, () => pieceLoader<Screens>(page, script, 'community', '__noemaCommunityPiece'));
   // the study area's pages (src/features/study/ui): build/study.js, loaded before the first subject opens
   c.register(STUDY_PIECE, () => pieceLoader<StudyPiece>(page, script, 'study', '__noemaStudyPiece'));
+  // 👁 the file viewer (src/features/viewer): build/viewer.js, on build/ui.js's Lit, loaded the first time a file is opened or read
+  c.register(VIEWER_PIECE, () => pieceLoader<ViewerPiece>(page, script, 'viewer', VIEWER_PIECE_KEY));
   c.register(CONTRACTS, r => {
     const load = r.get(CHECKS_PIECE);
     return lazyContracts(() =>

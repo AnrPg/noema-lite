@@ -432,7 +432,7 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
       }
       // ---- static site
       if (staticDir) {
-        if (configOverride && p === '/config.js') { res.writeHead(200, { 'Content-Type': 'application/javascript' }); return res.end(configOverride); }
+        if (configOverride && p === '/config.js') { res.writeHead(200, { 'Content-Type': 'application/javascript' }); return res.end(typeof configOverride === 'function' ? configOverride() : configOverride); }
         let fp = path.join(staticDir, decodeURIComponent(p.endsWith('/') ? p + 'index.html' : p));
         if (fs.existsSync(fp) && fs.statSync(fp).isDirectory()) fp = path.join(fp, 'index.html');
         if (fp.startsWith(staticDir) && fs.existsSync(fp) && fs.statSync(fp).isFile()) {

@@ -9,7 +9,7 @@ import { sagaKey } from '../services/sagas.ts';
 import type { ToolContext } from '../tool.ts';
 import { hash36, ID_RE, lang0, MAX_INLINE, message, sha256Hex, str } from '../util.ts';
 
-/** = engine/bridge.js summary(): what the app's index keeps of a bridge. */
+/** = summary() of src/features/bridges/domain/help.ts: what the app's index keeps of a bridge. */
 const bridgeSummary = (b: Bridge): BridgeSummary => ({
   v: hash36(JSON.stringify(b.entries ?? []) + JSON.stringify(b.sections ?? {}) + JSON.stringify(b.anchors ?? [])),
   status: b.status ?? null,

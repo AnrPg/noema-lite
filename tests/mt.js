@@ -1,4 +1,5 @@
-/* 🌐 Machine translation of shared content (engine/mt.js, docs/i18n.md §11) with a mocked provider:
+/* 🌐 Machine translation of shared content (src/features/translation: NoemaCore.mt, the translator; NoemaShell.mt, its screens;
+   docs/i18n.md §11) in the app, with a mocked provider:
      A. defaults (off, no provider without an own key), own keys only (Claude / Gemini; never the app's default key)
      B. cheap language detection (script + stored field + function words)
      C. policy: only public kinds; private / sensitive items and personal data are never sent; off = nothing sent
@@ -6,59 +7,52 @@
      E. caps: characters per day, requests per session, requests per minute; the cost estimate
      F. UI: the per-item toggle (Translate / Show original, machine-translated badge), the bar with the estimate before a bulk
         translation, the consent dialog when it is off, the hint without a key, the Greek UI
-   Usage: node tests/mt.js <prepared-repo-dir>   (served from dist/site, so the built catalogs are used) */
+   Usage: node tests/mt.js <prepared-repo-dir> */
 const { chromium } = require(process.env.PW || 'playwright');
-const path = require('path'), fs = require('fs'), http = require('http');
+const path = require('path');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
-const SITE = fs.existsSync(path.join(ROOT, 'dist', 'site', 'engine', 'mt.js')) ? path.join(ROOT, 'dist', 'site') : ROOT;
-if (SITE === ROOT) require('./built').ensureBuilt(ROOT, 'engine');   // engine/i18n/en.js is generated (never committed)
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
-const TYPES = { '.js': 'text/javascript; charset=utf-8', '.html': 'text/html; charset=utf-8', '.css': 'text/css' };
-const PAGE = `<!doctype html><html><head><meta charset="utf-8"></head><body>
-<script>window.NOEMA_CONFIG = { mtPerMinute: 100 }; localStorage.setItem('noema1:current', JSON.stringify({ acc: 'tester' }));</script>
-<script src="build/app.js"></script><script src="engine/vendor/intl-messageformat.iife.js"></script><script src="engine/i18n/en.js"></script><script src="engine/i18n.js"></script>
-<script src="engine/mt.js"></script></body></html>`;
 
 (async () => {
-  const srv = http.createServer((req, res) => {
-    const u = decodeURIComponent(new URL(req.url, 'http://x').pathname);
-    if (u === '/' || u === '/mt.html') { res.writeHead(200, { 'content-type': TYPES['.html'] }); return res.end(PAGE); }
-    const f = path.join(SITE, path.normalize(u).replace(/^([/\\])+/, ''));
-    if (!f.startsWith(SITE) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) { res.writeHead(404); return res.end(); }
-    res.writeHead(200, { 'content-type': TYPES[path.extname(f)] || 'application/octet-stream' }); fs.createReadStream(f).pipe(res);
-  }).listen(0);
-  const BASE = `http://localhost:${srv.address().port}`;
+  const APP_URL = await appUrl(ROOT);
   const browser = await chromium.launch();
   const page = await browser.newPage();
   page.on('pageerror', e => { console.log('  page error: ' + e.message); fails++; });
-  await page.goto(BASE + '/mt.html');
-  await page.waitForFunction(() => window.NoemaMT && window.NoemaI18n);
+  await page.goto(APP_URL);
+  await page.evaluate(() => { localStorage.clear(); localStorage.setItem('noema1:anr:a:settings', JSON.stringify({ lang: 'en' })); localStorage.setItem('noema1:current', JSON.stringify({ acc: 'anr' })); });
+  const ready = async () => {
+    await page.waitForFunction(() => window.NoemaCore?.mt && window.NoemaShell?.mt && window.NoemaI18n);
+    // the requests per minute out of the way (section E sets them); the test's nodes on a layer of their own over the app
+    await page.evaluate(() => { window.NOEMA_CONFIG = Object.assign(window.NOEMA_CONFIG || {}, { mtPerMinute: 100 }); const d = document.createElement('div'); d.id = 'mtt'; d.style.cssText = 'position:fixed;inset:0;z-index:9000;overflow:auto;background:#fff;padding:8px'; document.body.append(d); window.MT = NoemaCore.mt; window.MTUI = NoemaShell.mt; });
+  };
+  await page.goto('about:blank'); await page.goto(APP_URL); await ready();
   // the mock provider: records every text it receives, answers "[en] <text>"
-  const mock = () => page.evaluate(() => { window.SENT = []; window.CALLS = 0; NoemaMT.useProvider({ label: 'Mock', translate: async (acc, texts, o) => { CALLS++; SENT.push(...texts); return { texts: texts.map(t => `[${o.to}] ${t}`) }; } }); });
+  const mock = () => page.evaluate(() => { window.SENT = []; window.CALLS = 0; MT.useProvider({ label: 'Mock', translate: async (acc, texts, o) => { CALLS++; SENT.push(...texts); return { texts: texts.map(t => `[${o.to}] ${t}`) }; } }); });
 
   console.log('A. defaults and own keys');
-  let r = await page.evaluate(() => ({ s: NoemaMT.settings(), p: NoemaMT.provider() }));
+  let r = await page.evaluate(() => ({ s: MT.settings(), p: MT.provider() }));
   ok(r.s.on === false && r.s.provider === 'auto' && r.s.dailyChars > 0 && r.s.sessionRequests > 0, 'off by default, with caps');
   ok(r.p === null, 'no own key → no provider');
-  r = await page.evaluate(() => { window.DEFAULT_GEMINI_KEY = 'AIza-default-key'; localStorage.setItem('noema-device:geminiKey:tester', 'AIza-default-key'); const a = NoemaMT.provider(); localStorage.setItem('noema-device:geminiKey:tester', 'AIza-mine'); const b = NoemaMT.provider(); window.NoemaClaude = { Key: { get: () => 'sk-ant-api03-mine' } }; const c = NoemaMT.provider(); NoemaMT.setSettings(null, { provider: 'gemini' }); const d = NoemaMT.provider(); NoemaMT.setSettings(null, { provider: 'auto' }); delete window.NoemaClaude; localStorage.removeItem('noema-device:geminiKey:tester'); return [a, b?.id, c?.id, d?.id]; });
+  r = await page.evaluate(() => { window.DEFAULT_GEMINI_KEY = 'AIza-default-key'; localStorage.setItem('noema-device:geminiKey:anr', 'AIza-default-key'); const a = MT.provider(); localStorage.setItem('noema-device:geminiKey:anr', 'AIza-mine'); const b = MT.provider(); const C0 = window.NoemaClaude; window.NoemaClaude = { ...C0, Key: { get: () => 'sk-ant-api03-mine' } }; const c = MT.provider(); MT.setSettings(null, { provider: 'gemini' }); const d = MT.provider(); MT.setSettings(null, { provider: 'auto' }); window.NoemaClaude = C0; localStorage.removeItem('noema-device:geminiKey:anr'); return [a, b?.id, c?.id, d?.id]; });
   ok(r[0] === null, 'the app’s default Gemini key is not the learner’s own');
   ok(r[1] === 'gemini' && r[2] === 'claude' && r[3] === 'gemini', 'own Gemini key → Gemini; with a Claude key → Claude (auto); a chosen provider is respected');
 
   console.log('B. language detection');
-  r = await page.evaluate(() => [NoemaMT.detect('Κινηματική για αρχάριους'), NoemaMT.detect('Механика для начинающих'), NoemaMT.detect('The basics of the cell and its parts'), NoemaMT.detect('Kinematik', 'de'),
-    NoemaMT.detect('日本語のテキスト'), NoemaMT.detect('中文课程'), NoemaMT.detect('Les bases de la cellule et du noyau'), NoemaMT.detect('Mechanik'), NoemaMT.detect('Привет', 'uk'), NoemaMT.detect('Physics', 'el')]);
+  r = await page.evaluate(() => [MT.detect('Κινηματική για αρχάριους'), MT.detect('Механика для начинающих'), MT.detect('The basics of the cell and its parts'), MT.detect('Kinematik', 'de'),
+    MT.detect('日本語のテキスト'), MT.detect('中文课程'), MT.detect('Les bases de la cellule et du noyau'), MT.detect('Mechanik'), MT.detect('Привет', 'uk'), MT.detect('Physics', 'el')]);
   ok(JSON.stringify(r) === JSON.stringify(['el', 'ru', 'en', 'de', 'ja', 'zh', 'fr', null, 'uk', null]), 'script, stored language, function words: ' + JSON.stringify(r));
-  r = await page.evaluate(() => [NoemaMT.differs('Κινηματική', null, 'en'), NoemaMT.differs('Κινηματική', null, 'el'), NoemaMT.differs('Physics', 'en', 'en'), NoemaMT.differs('Physics', 'en', 'el'), NoemaMT.differs('中文', null, 'zh-Hant')]);
+  r = await page.evaluate(() => [MT.differs('Κινηματική', null, 'en'), MT.differs('Κινηματική', null, 'el'), MT.differs('Physics', 'en', 'en'), MT.differs('Physics', 'en', 'el'), MT.differs('中文', null, 'zh-Hant')]);
   ok(JSON.stringify(r) === '[true,false,false,true,false]', 'differs from the UI locale (zh-Hans = zh-Hant)');
 
   console.log('C. the policy check');
   await mock();
   r = await page.evaluate(async () => {
-    const off = await NoemaMT.translate(['Κινηματική για αρχάριους'], { kind: 'explore.pack', to: 'en' });
-    NoemaMT.setSettings(null, { on: true });
-    const note = await NoemaMT.translate(['Οι σημειώσεις μου'], { kind: 'note', to: 'en' });
-    const none = await NoemaMT.translate(['Οι σημειώσεις μου'], { to: 'en' });
-    const items = await NoemaMT.translate([{ text: 'Ιδιωτικό θέμα', private: true }, { text: 'Ευαίσθητο', sensitive: true }, { text: 'Γράψε μου στο maria@example.com' }, { text: 'Τηλέφωνο 210 123 4567 για μαθήματα' }, { text: 'Κλειδί sk-ant-api03-abcdefghijklmnopqrstu' }, { text: 'Ημερομηνία 2026-10-11 και θέμα Φυσική' }], { kind: 'shared.roadmap', to: 'en' });
+    const off = await MT.translate(['Κινηματική για αρχάριους'], { kind: 'explore.pack', to: 'en' });
+    MT.setSettings(null, { on: true });
+    const note = await MT.translate(['Οι σημειώσεις μου'], { kind: 'note', to: 'en' });
+    const none = await MT.translate(['Οι σημειώσεις μου'], { to: 'en' });
+    const items = await MT.translate([{ text: 'Ιδιωτικό θέμα', private: true }, { text: 'Ευαίσθητο', sensitive: true }, { text: 'Γράψε μου στο maria@example.com' }, { text: 'Τηλέφωνο 210 123 4567 για μαθήματα' }, { text: 'Κλειδί sk-ant-api03-abcdefghijklmnopqrstu' }, { text: 'Ημερομηνία 2026-10-11 και θέμα Φυσική' }], { kind: 'shared.roadmap', to: 'en' });
     return { off: off[0], note: note[0].reason, none: none[0].reason, items: items.map(x => x.reason || (x.translated ? 'ok' : '?')), sent: SENT.slice() };
   });
   ok(r.off.reason === 'off' && !r.off.translated && r.off.text === 'Κινηματική για αρχάριους', 'off → nothing sent, the original');
@@ -69,37 +63,37 @@ const PAGE = `<!doctype html><html><head><meta charset="utf-8"></head><body>
   console.log('D. translation and the cache');
   await mock();
   r = await page.evaluate(async () => {
-    NoemaMT.cache.clear();
-    const a = await NoemaMT.translate([{ text: 'Κινηματική για αρχάριους' }, { text: 'Μηχανική', language: 'el' }, { text: 'Physics for everyone', language: 'en' }, { text: 'Κινηματική για αρχάριους' }], { kind: 'explore.pack', to: 'en' });
+    MT.cache.clear();
+    const a = await MT.translate([{ text: 'Κινηματική για αρχάριους' }, { text: 'Μηχανική', language: 'el' }, { text: 'Physics for everyone', language: 'en' }, { text: 'Κινηματική για αρχάριους' }], { kind: 'explore.pack', to: 'en' });
     const calls1 = CALLS, sent1 = SENT.slice();
-    const b = await NoemaMT.translate(['Κινηματική για αρχάριους', 'Μηχανική'], { kind: 'explore.pack', to: 'en' });
-    const c = await NoemaMT.translate(['Μηχανική'], { kind: 'explore.pack', to: 'fr' });
-    return { a, b, c, calls1, sent1, calls: CALLS, size: NoemaMT.cache.size(), stored: !!localStorage.getItem('noema-device:mt:cache:tester') };
+    const b = await MT.translate(['Κινηματική για αρχάριους', 'Μηχανική'], { kind: 'explore.pack', to: 'en' });
+    const c = await MT.translate(['Μηχανική'], { kind: 'explore.pack', to: 'fr' });
+    return { a, b, c, calls1, sent1, calls: CALLS, size: MT.cache.size(), stored: !!localStorage.getItem('noema-device:mt:cache:anr') };
   });
   ok(r.calls1 === 1 && r.sent1.length === 2, 'one request, each text once (duplicates and same-language texts not sent)');
   ok(r.a[0].translated && r.a[0].text === '[en] Κινηματική για αρχάριους' && r.a[3].text === r.a[0].text && r.a[2].reason === 'same' && r.a[2].text === 'Physics for everyone', 'results in order, the original kept beside: ' + JSON.stringify(r.a.map(x => x.text)));
   ok(r.b.every(x => x.cached && x.translated) && r.calls === 2, 'second time: cache hits, nothing sent');
   ok(r.c[0].text === '[fr] Μηχανική' && !r.c[0].cached, 'the cache is per target locale');
   ok(r.size === 3 && r.stored, 'saved on this device (3 entries)');
-  await page.reload(); await page.waitForFunction(() => window.NoemaMT); await mock();
-  r = await page.evaluate(async () => { const x = await NoemaMT.translate(['Μηχανική'], { kind: 'explore.pack', to: 'en' }); return { x: x[0], calls: CALLS }; });
+  await page.reload(); await ready(); await mock();
+  r = await page.evaluate(async () => { const x = await MT.translate(['Μηχανική'], { kind: 'explore.pack', to: 'en' }); return { x: x[0], calls: CALLS }; });
   ok(r.x.cached && r.calls === 0, 'the cache survives a reload');
-  r = await page.evaluate(async () => { const t = 'x'.repeat(2000); const pairs = []; for (let i = 0; i < 150; i++) pairs.push({ text: 'Θέμα ' + i, t: t }); NoemaMT.cache.put(null, 'en', pairs); return NoemaMT.cache.all(); });
+  r = await page.evaluate(async () => { const t = 'x'.repeat(2000); const pairs = []; for (let i = 0; i < 150; i++) pairs.push({ text: 'Θέμα ' + i, t: t }); MT.cache.put(null, 'en', pairs); return MT.cache.all(); });
   ok(Object.values(r).reduce((n, e) => n + e.t.length, 0) <= 250000, 'the cache is size-capped (least recently used out)');
-  await page.evaluate(() => NoemaMT.cache.clear());
+  await page.evaluate(() => MT.cache.clear());
 
   console.log('E. caps and the estimate');
   await mock();
   r = await page.evaluate(async () => {
-    await NoemaMT.translate(['Κάτι νέο'], { kind: 'explore.pack', to: 'en' }); CALLS = 0;   // one request in this minute
-    NoemaMT.setSettings(null, { dailyChars: NoemaMT.usage.day() + 5 });
-    const daily = await NoemaMT.translate(['Ένα αρκετά μεγάλο κείμενο'], { kind: 'explore.pack', to: 'en' });
-    NoemaMT.setSettings(null, { dailyChars: 20000, sessionRequests: NoemaMT.usage.session() });
-    const sess = await NoemaMT.translate(['Ένα αρκετά μεγάλο κείμενο'], { kind: 'explore.pack', to: 'en' });
-    NoemaMT.setSettings(null, { sessionRequests: 1000 }); window.NOEMA_CONFIG.mtPerMinute = NoemaMT.usage.perMinute();
-    const rate = await NoemaMT.translate(['Ένα αρκετά μεγάλο κείμενο'], { kind: 'explore.pack', to: 'en' });
+    await MT.translate(['Κάτι νέο'], { kind: 'explore.pack', to: 'en' }); CALLS = 0;   // one request in this minute
+    MT.setSettings(null, { dailyChars: MT.usage.day() + 5 });
+    const daily = await MT.translate(['Ένα αρκετά μεγάλο κείμενο'], { kind: 'explore.pack', to: 'en' });
+    MT.setSettings(null, { dailyChars: 20000, sessionRequests: MT.usage.session() });
+    const sess = await MT.translate(['Ένα αρκετά μεγάλο κείμενο'], { kind: 'explore.pack', to: 'en' });
+    MT.setSettings(null, { sessionRequests: 1000 }); window.NOEMA_CONFIG.mtPerMinute = MT.usage.perMinute();
+    const rate = await MT.translate(['Ένα αρκετά μεγάλο κείμενο'], { kind: 'explore.pack', to: 'en' });
     window.NOEMA_CONFIG.mtPerMinute = 100;
-    const est = NoemaMT.estimate(['Ένα', 'Δύο κείμενα', 'Ένα'], { to: 'en' });
+    const est = MT.estimate(['Ένα', 'Δύο κείμενα', 'Ένα'], { to: 'en' });
     return { daily: daily[0].reason, sess: sess[0].reason, rate: rate[0].reason, calls: CALLS, est };
   });
   ok(r.daily === 'cap.daily' && r.sess === 'cap.session' && r.rate === 'cap.rate' && r.calls === 0, 'daily characters, session requests, requests per minute: nothing sent over a cap');
@@ -108,11 +102,11 @@ const PAGE = `<!doctype html><html><head><meta charset="utf-8"></head><body>
   console.log('F. the UI');
   await mock();
   await page.evaluate(() => {
-    const d = document.createElement('div'); d.id = 'list'; document.body.append(d);
-    const mk = (tag, text, language, kind = 'explore.pack') => { const n = document.createElement(tag); n.textContent = text; d.append(n); return NoemaMT.mark(n, { language, kind }); };
+    const d = document.createElement('div'); d.id = 'list'; document.getElementById('mtt').append(d);
+    const mk = (tag, text, language, kind = 'explore.pack') => { const n = document.createElement(tag); n.textContent = text; d.append(n); return MTUI.mark(n, { language, kind }); };
     window.N1 = mk('b', 'Κύτταρο και πυρήνας', 'el'); window.N2 = mk('p', 'Μια εισαγωγή στη βιολογία', 'el'); window.N3 = mk('b', 'Cell biology', 'en'); window.N4 = mk('b', 'Γενετική', 'el');
-    window.T1 = NoemaMT.toggle(null, [N1, N2]); d.append(T1); window.T3 = NoemaMT.toggle(null, [N3]);
-    window.BAR = NoemaMT.bar(null, d); document.body.prepend(BAR);
+    window.T1 = MTUI.toggle(null, [N1, N2]); d.append(T1); window.T3 = MTUI.toggle(null, [N3]);
+    window.BAR = MTUI.bar(null, d); document.getElementById('mtt').prepend(BAR);
   });
   r = await page.evaluate(() => ({ t1: !!T1, t3: T3, label: T1.querySelector('button').textContent }));
   ok(r.t1 && r.t3 === null && r.label === '🌐 Translate', 'a toggle only where the language differs from the UI');
@@ -139,47 +133,47 @@ const PAGE = `<!doctype html><html><head><meta charset="utf-8"></head><body>
   ok(r.calls === 1 && JSON.stringify(r.sent) === '["Γενετική"]' && r.n1.startsWith('[en]') && r.n3 === 'Cell biology', 'Translate all: cached texts free, only the new one sent, the English one left');
   ok(r.note === 'Machine translation by Mock: it may contain mistakes.' && r.label === '🌐 Show originals', 'machine-translation note and Show originals');
   // a newly drawn text while the bar is on takes its cached translation
-  await page.evaluate(() => { const n = document.createElement('b'); n.textContent = 'Γενετική'; NoemaMT.mark(n, { language: 'el', kind: 'explore.pack' }); document.getElementById('list').append(n); window.N5 = n; });
+  await page.evaluate(() => { const n = document.createElement('b'); n.textContent = 'Γενετική'; MTUI.mark(n, { language: 'el', kind: 'explore.pack' }); document.getElementById('list').append(n); window.N5 = n; });
   await page.waitForFunction(() => N5.getAttribute('data-mt-state') === 'mt');
   ok(true, 'a redrawn item takes the cached translation');
   await page.click('.mt-all');
   r = await page.evaluate(() => [N1, N2, N4, N5].map(n => n.textContent).join('|'));
   ok(r === 'Κύτταρο και πυρήνας|Μια εισαγωγή στη βιολογία|Γενετική|Γενετική', 'Show originals restores every text');
   // a private item never gets a toggle, never reaches the provider
-  r = await page.evaluate(() => { const n = document.createElement('b'); n.textContent = 'Οι ιδιωτικές μου σημειώσεις'; NoemaMT.mark(n, { language: 'el', kind: 'explore.pack', private: true }); const m = document.createElement('b'); m.textContent = 'Σημείωση'; NoemaMT.mark(m, { language: 'el', kind: 'note' }); return [NoemaMT.toggle(null, [n]), NoemaMT.toggle(null, [m])]; });
+  r = await page.evaluate(() => { const n = document.createElement('b'); n.textContent = 'Οι ιδιωτικές μου σημειώσεις'; MTUI.mark(n, { language: 'el', kind: 'explore.pack', private: true }); const m = document.createElement('b'); m.textContent = 'Σημείωση'; MTUI.mark(m, { language: 'el', kind: 'note' }); return [MTUI.toggle(null, [n]), MTUI.toggle(null, [m])]; });
   ok(r[0] === null && r[1] === null, 'no toggle for a private item or a private kind');
   // consent when it is off
-  await page.evaluate(() => { NoemaMT.setSettings(null, { on: false }); CALLS = 0; const n = document.createElement('b'); n.textContent = 'Οπτική'; n.id = 'n6'; document.body.append(n); NoemaMT.mark(n, { language: 'el', kind: 'shared.roadmap' }); const t = NoemaMT.toggle(null, [n]); t.id = 't6'; document.body.append(t); });
+  await page.evaluate(() => { MT.setSettings(null, { on: false }); CALLS = 0; const n = document.createElement('b'); n.textContent = 'Οπτική'; n.id = 'n6'; document.getElementById('mtt').append(n); MTUI.mark(n, { language: 'el', kind: 'shared.roadmap' }); const t = MTUI.toggle(null, [n]); t.id = 't6'; document.getElementById('mtt').append(t); });
   await page.click('#t6 .mt-btn');
   await page.waitForSelector('.mt-consent-no');
   r = await page.evaluate(() => document.querySelector('.mt-modal').textContent);
   ok(/never to a noema-lite server/.test(r) && /never sent/.test(r), 'the consent dialog says what is sent where');
   await page.click('.mt-consent-no');
-  r = await page.evaluate(() => ({ on: NoemaMT.enabled(), calls: CALLS, t: document.getElementById('n6').textContent }));
+  r = await page.evaluate(() => ({ on: MT.enabled(), calls: CALLS, t: document.getElementById('n6').textContent }));
   ok(!r.on && r.calls === 0 && r.t === 'Οπτική', 'Cancel: still off, nothing sent');
   await page.click('#t6 .mt-btn'); await page.waitForSelector('.mt-consent-yes'); await page.click('.mt-consent-yes');
   await page.waitForFunction(() => document.getElementById('n6').textContent === '[en] Οπτική');
-  ok(await page.evaluate(() => NoemaMT.enabled()), 'Turn on and translate: enabled, translated');
+  ok(await page.evaluate(() => MT.enabled()), 'Turn on and translate: enabled, translated');
   // no key → the hint, the original
-  await page.evaluate(() => { NoemaMT.useProvider(null); const n = document.createElement('b'); n.textContent = 'Θερμοδυναμική'; n.id = 'n7'; document.body.append(n); NoemaMT.mark(n, { language: 'el', kind: 'explore.roadmap' }); const t = NoemaMT.toggle(null, [n]); t.id = 't7'; document.body.append(t); });
+  await page.evaluate(() => { MT.useProvider(null); const n = document.createElement('b'); n.textContent = 'Θερμοδυναμική'; n.id = 'n7'; document.getElementById('mtt').append(n); MTUI.mark(n, { language: 'el', kind: 'explore.roadmap' }); const t = MTUI.toggle(null, [n]); t.id = 't7'; document.getElementById('mtt').append(t); });
   await page.click('#t7 .mt-btn');
   await page.waitForFunction(() => document.querySelector('#t7 .mt-status').textContent.length > 0);
   r = await page.evaluate(() => ({ s: document.querySelector('#t7 .mt-status').textContent, t: document.getElementById('n7').textContent }));
   ok(/^No AI key on this device/.test(r.s) && r.t === 'Θερμοδυναμική', 'no own key: the hint, the original stays');
   // the settings panel
-  r = await page.evaluate(() => { const p = NoemaMT.panel(); document.body.append(p); return { cb: p.querySelector('.mt-enable').checked, prov: p.querySelector('.mt-provider').value, txt: p.textContent }; });
+  r = await page.evaluate(() => { const p = MTUI.panel(); document.getElementById('mtt').append(p); return { cb: p.querySelector('.mt-enable').checked, prov: p.querySelector('.mt-provider').value, txt: p.textContent }; });
   ok(r.cb === true && r.prov === 'auto' && /Machine translation/.test(r.txt) && /Characters per day/.test(r.txt) && /Clear saved translations/.test(r.txt), 'Settings: consent, provider, caps, clear');
-  await page.evaluate(() => { const c = document.querySelector('.mt-panel .mt-enable'); c.click(); });
-  ok(await page.evaluate(() => !NoemaMT.enabled()), 'Settings: unticking turns it off');
-  ok(await page.evaluate(() => { const p = NoemaMT.panel(null, { heading: false }); return !p.querySelector('.ns-label') && !!p.querySelector('.mt-enable') && !!p.querySelector('.mt-clear'); }),
+  await page.evaluate(() => { const c = document.querySelector('#mtt > .mt-panel .mt-enable'); c.click(); });
+  ok(await page.evaluate(() => !MT.enabled()), 'Settings: unticking turns it off');
+  ok(await page.evaluate(() => { const p = MTUI.panel(null, { heading: false }); return !p.querySelector('.ns-label') && !!p.querySelector('.mt-enable') && !!p.querySelector('.mt-clear'); }),
      'Settings without its own heading (the classic engine’s ⚙️ section has one): the same consent, switch, caps');
   // the Greek UI: Greek texts need nothing, English ones do; the words come from the catalog
   await mock();
-  await page.evaluate(() => { NoemaMT.setSettings(null, { on: true }); return NoemaI18n.use('el'); });
-  r = await page.evaluate(() => { const g = document.createElement('b'); g.textContent = 'Κινηματική'; NoemaMT.mark(g, { language: 'el', kind: 'explore.pack' }); const e = document.createElement('b'); e.textContent = 'Kinematics'; NoemaMT.mark(e, { language: 'en', kind: 'explore.pack' }); const t = NoemaMT.toggle(null, [e]); return { g: NoemaMT.toggle(null, [g]), label: t && t.querySelector('button').textContent }; });
+  await page.evaluate(() => { MT.setSettings(null, { on: true }); return NoemaI18n.use('el'); });
+  r = await page.evaluate(() => { const g = document.createElement('b'); g.textContent = 'Κινηματική'; MTUI.mark(g, { language: 'el', kind: 'explore.pack' }); const e = document.createElement('b'); e.textContent = 'Kinematics'; MTUI.mark(e, { language: 'en', kind: 'explore.pack' }); const t = MTUI.toggle(null, [e]); return { g: MTUI.toggle(null, [g]), label: t && t.querySelector('button').textContent }; });
   ok(r.g === null && r.label === '🌐 Μετάφραση', 'Greek UI: no toggle on Greek text; the toggle in Greek: ' + r.label);
 
-  await browser.close(); srv.close();
+  await browser.close();
   console.log(fails ? `\n❌ ${fails} failure(s)` : '\n✅ machine translation: all checks passed');
   process.exit(fails ? 1 : 0);
 })().catch(e => { console.error(e); process.exit(1); });

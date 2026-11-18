@@ -242,7 +242,7 @@
 
   /* ---------- entry tables (cloud/supabase.sql §17): one row per entry ----------
      The files of a subject's sources (noema_source_files: subject × source → its meta, engine/srcfiles.js) and the 文A
-     bridges (noema_bridges: pack × pair → its summary, engine/bridge.js). Each entry is its own row, so this device, the
+     bridges (noema_bridges: pack × pair → its summary, src/features/bridges). Each entry is its own row, so this device, the
      others and the Claude connector writing at the same time never drop each other's entry. This device keeps them in
      local caches (a:srcfiles:<subject>, a:bridges — the modules read those), which are not mirrored into noema_kv: a change
      goes into the outbox meta:rowbox and is sent with the next push; a pull rebuilds the caches from the rows plus what the
@@ -417,7 +417,7 @@
     /** Rows whose key starts with `prefix` (e.g. the Claude app's answers, a:curin:) — read directly, not mirrored locally. */
     async kvRows(prefix) { return (await call('/rest/v1/noema_kv?select=key,value,updated_at&order=key&key=like.' + enc(prefix + '*'))) || []; },
     async kvDelete(key) { await call('/rest/v1/noema_kv?key=eq.' + enc(key), { method: 'DELETE' }); },
-    /** Entry tables (above): engine/srcfiles.js and engine/bridge.js queue their changes here (the signed-in account only). */
+    /** Entry tables (above): engine/srcfiles.js and NoemaCore.bridges (src/composition/bridges.ts) queue their changes here (the signed-in account only). */
     rows: {
       put(acc, table, a, b, m) { rowOp(acc, table, a, b, { op: 'put', meta: m }); },
       del(acc, table, a, b) { rowOp(acc, table, a, b, { op: 'del' }); },

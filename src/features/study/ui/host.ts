@@ -173,7 +173,7 @@ export interface SourceFilesPort {
   filePage(s: SourceInfo, page: number): number;
 }
 
-/** What the file viewer opens (engine/viewer.js NoemaViewer.open). */
+/** What the file viewer opens (NoemaCore.viewer.open, src/features/viewer). */
 export type FileToOpen =
   | { readonly url: string; readonly title: string; readonly subtitle: string; readonly page: number | null; readonly start: number | null }
   | {

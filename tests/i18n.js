@@ -92,8 +92,10 @@ const res = JSON.parse(chk.stdout);
 ok(!res.errors.length, `tools/i18n/check.js: ${res.errors.length} error(s)${res.errors.length ? ' — ' + res.errors.slice(0, 5).join(' | ') : ''}`);
 { // every key the code asks for by its literal name exists in English (else the learner reads the key's last word, e.g. “noteAiBadge”)
   const EN = boot().NOEMA_I18N.en.m, bad = [];
-  const files = ['app/library', 'app/community', 'app/roadmaps', 'app/languages', 'curmap', 'curriculum', 'curshare', 'curjobs', 'curimport', 'packgen', 'cloud', 'claude', 'mt', 'react', 'convos', 'viewer', 'imglib', 'srcfiles', 'langcore'].map(f => `engine/${f}.js`)
-    .concat(...['src', 'lang'].map(d => fs.readdirSync(path.join(ROOT, 'engine', d)).filter(f => f.endsWith('.js')).map(f => `engine/${d}/${f}`)));
+  const files = ['app/library', 'app/community', 'app/roadmaps', 'app/languages', 'curmap', 'curriculum', 'curshare', 'curjobs', 'curimport', 'packgen', 'cloud', 'claude', 'react', 'convos', 'imglib', 'srcfiles', 'langcore'].map(f => `engine/${f}.js`)
+    .concat(...['src', 'lang'].map(d => fs.readdirSync(path.join(ROOT, 'engine', d)).filter(f => f.endsWith('.js')).map(f => `engine/${d}/${f}`)))
+    // the machine translation, the 文A bridge and the viewer are typed src code now (TD-13 C)
+    .concat(...['translation', 'bridges', 'viewer'].map(d => fs.readdirSync(path.join(ROOT, 'src', 'features', d), { recursive: true }).filter(f => f.endsWith('.ts') && !f.endsWith('.test.ts')).map(f => `src/features/${d}/${f}`)));
   for (const f of files) {
     const src = fs.readFileSync(path.join(ROOT, f), 'utf8');
     for (const m of src.matchAll(/\b(?:t|tr|trx|tE|T|LT|LE|rt|lcX|lcU|lcEn|lcXP|lcUP|lcT)\(\s*'([a-z][A-Za-z0-9]*(?:\.[A-Za-z0-9_-]+)+)'(?=\s*[,)])/g)) if (EN[m[1]] == null) bad.push(`${f}: ${m[1]}`);

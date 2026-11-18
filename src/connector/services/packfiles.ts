@@ -177,7 +177,7 @@ export async function activityFileStatus(ctx: ToolContext, sid: string, p: Pack)
 
 /* ---------- the languages a new pack still needs ---------- */
 /** A bridge is one pair (the language read → the native one): the pack's own language → key "<native>", a translation →
-    "<source>.<native>"; its file is bridges/<pack>.<key>.json (= engine/bridge.js pairKey). */
+    "<source>.<native>"; its file is bridges/<pack>.<key>.json (= pairKey, src/features/bridges/domain/lookup.ts). */
 export const brKey = (src: unknown, nat: unknown, own: unknown): string =>
   !src || lang0(src) === lang0(own) ? lang0(nat) : `${lang0(src)}.${lang0(nat)}`;
 

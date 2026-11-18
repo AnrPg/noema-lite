@@ -350,8 +350,8 @@
         const translations = {};
         for (const [loc, t] of Object.entries(pack.translations || {})) if (Array.isArray(t?.chapters)) translations[loc] = { format: 'noema-translation', v: 1, locale: loc, pack: id, ...t };
         delete pack.translations;
-        const B = root.NoemaBridge, bridges = [];
-        if (B) {
+        const B = root.NoemaCore?.bridges, bridges = [];
+        if (B?.load) {   // the app's 文A service (src/composition/bridges.ts); the connector's NoemaCore.bridges is the lookup alone
           const own = pack.subject.language || 'en', srcs = [own, ...Object.keys(translations)];
           for (const src of srcs) for (const [nat, m] of Object.entries(B.available(acc, id, { language: own }, src === own ? null : src, own))) {
             if (!m.own) continue;   // a library bridge belongs to the library's pack, not to the learner's copy
@@ -365,7 +365,7 @@
       try {
         const p = { ...b.pack, translations: b.translations };
         await root.Noema.importPack(acc, p, { curriculum: step.roadmap, node: step.node, curTitle: step.title, via: 'restructure' });
-        for (const x of b.bridges) await root.NoemaBridge?.attach(acc, x);
+        for (const x of b.bridges) await root.NoemaCore?.bridges?.attach?.(acc, x);
         return ok(undefined);
       } catch (e) { return fail(e); }
     },
@@ -402,7 +402,7 @@
   /** ⬇️ A step's bundle for a Claude chat without the connector: the task, the learner's files and the toolkit. */
   App.bundle = async (acc, cid, nid) => {
     const c = C().get(acc, cid); const t = c && stepSpec(c, nid); if (!t) throw new Error(rt('roadmap.stepNotFound'));
-    if (!root.JSZip && root.NoemaViewer?.jszip) await root.NoemaViewer.jszip();
+    if (!root.JSZip && root.NoemaCore?.viewer) await root.NoemaCore.viewer.jszip();
     if (!root.JSZip) throw new Error(rt('roadmap.jobs.noZip'));
     const z = new root.JSZip(), lines = [], missing = [];
     for (const d of t.downloads) {

@@ -24,6 +24,8 @@
      lang-activities.js  src/composition/lang-activities.ts — the screens of area 5 (languages and activities, src/ui/screens/
                    languages-activities.ts), kind "lazy": the shell loads it on the first language page (NoemaShell.area5). It
                    brings no Lit and no kit of its own: those are build/ui.js's (src/composition/ui-shared.ts, uiShared below).
+     viewer.js     src/composition/viewer.ts — 👁 the file viewer (src/features/viewer: its readers, libraries' loader and screen),
+                   kind "lazy" on build/ui.js's Lit: NoemaCore.viewer loads it the first time a file is opened or read.
      roadmaps-node.cjs  src/composition/roadmaps-node.ts — the Roadmaps domain and the bridges' lookup, CommonJS, for the node
                    suites that run the older Roadmap files in a vm (tests/roadmaps_core.js). Not in the site.
      engines-node.cjs  src/engines/node.ts — the engine library with every engine in hand, CommonJS, for the node suites
@@ -75,7 +77,7 @@ const BROWSERS = ['chrome111', 'edge111', 'firefox114', 'safari16.4'];   // Base
     @typedef {{ name: string, in: string, kind: 'page' | 'lazy' | 'worker' | 'sw' | 'harness' | 'dev' | 'node', out: string, budgetKB: number, format?: 'esm' | 'cjs', shared?: 'ui' }} Entry */
 /** lazy = a script of the site and the one-file bundle the page runs only when it needs it (the one-file bundle keeps it as
     text: <script type="text/plain" id="noema-lazy:<name>">) */
-const APP_KB = 552;   // + 8 KB the Roadmaps domain's chapters added to a step and its languages (chapters.ts); + 24 KB (area 4, phase 3): the community's eager half (the search's, the vault's and the reports' models, the host; the screens are build/community.js); + 8 KB the language courses service (NoemaCore.languages). The core of the start path (with build/ui.js): phase 2's core (the learning log, sync, read models, Roadmaps
+const APP_KB = 572;   // + 20 KB (TD-13 C): the 🌐 translator, the 文A bridges' service and the viewer's door (NoemaCore.mt, .bridges, .viewer), from engine/mt.js and engine/bridge.js (64 KB of start-path scripts deleted); + 8 KB the Roadmaps domain's chapters added to a step and its languages (chapters.ts); + 24 KB (area 4, phase 3): the community's eager half (the search's, the vault's and the reports' models, the host; the screens are build/community.js); + 8 KB the language courses service (NoemaCore.languages). The core of the start path (with build/ui.js): phase 2's core (the learning log, sync, read models, Roadmaps
                       // with the agents' prompts that left engine/curriculum.js, community: about 360 KB) and the learning log's event contract
                       // (about 140 KB), the engines' catalogue (about 28 KB) and the language courses before one is loaded (NoemaCore.languages, about 5 KB); the engines, the other contracts and the content checks are lazy pieces.
                       // 520 since the runtimes' manifests (src/runtimes) and the study pages' bridge and route table (src/composition/study-ui.ts) joined it
@@ -92,9 +94,10 @@ export const ENTRIES = [
   { name: 'worker', in: 'src/composition/worker.ts', kind: 'worker', out: 'worker.js', budgetKB: 600 },
   { name: 'sw', in: 'src/composition/sw.ts', kind: 'sw', out: 'sw.js', budgetKB: 24 },
   { name: 'harness', in: 'src/composition/harness.ts', kind: 'harness', out: 'harness.js', budgetKB: 5632 },   // the contracts + the engine library
-  { name: 'ui', in: 'src/composition/ui.ts', kind: 'page', out: 'ui.js', budgetKB: 408 },   // the app's UI root: Lit, the kit, the frame and the shell's screens (src/ui), the Roadmap screens (src/features/roadmaps/ui), the tutor's conversations window (src/features/tutor/ui/conversations.ts; 400 since it joined; 408: the public Roadmaps and the review of a shared Roadmap's changes, from engine/curmap.js)
+  { name: 'ui', in: 'src/composition/ui.ts', kind: 'page', out: 'ui.js', budgetKB: 440 },   // (440, TD-13 C: the 🌐 and 文A screens, NoemaShell.mt and .bridge, from the deleted engine/mt.js and engine/bridge.js) the app's UI root: Lit, the kit, the frame and the shell's screens (src/ui), the Roadmap screens (src/features/roadmaps/ui), the tutor's conversations window (src/features/tutor/ui/conversations.ts; 400 since it joined; 408: the public Roadmaps and the review of a shared Roadmap's changes, from engine/curmap.js)
   { name: 'ui-kit', in: 'src/composition/ui-kit.ts', kind: 'dev', out: 'ui-kit.js', budgetKB: 256 },   // the kit's demo; loaded only on #/ui-kit
   { name: 'lang-activities', in: 'src/composition/lang-activities.ts', kind: 'lazy', shared: 'ui', out: 'lang-activities.js', budgetKB: 256 },   // the screens of languages and activities on build/ui.js's Lit and kit; loaded on the first language page
+  { name: 'viewer', in: 'src/composition/viewer.ts', kind: 'lazy', shared: 'ui', out: 'viewer.js', budgetKB: 64 },   // 👁 the file viewer (src/features/viewer: readers, libraries' loader, screen) on build/ui.js's Lit; loaded the first time a file is opened or read (NoemaCore.viewer)
   { name: 'engines-node', in: 'src/engines/node.ts', kind: 'node', format: 'cjs', out: 'engines-node.cjs', budgetKB: 4096 },
   { name: 'noema-tools', in: 'src/composition/noema-tools.ts', kind: 'node', format: 'cjs', out: 'noema-tools.cjs', budgetKB: 5632 },   // the engine library + the content checks + the runtimes' checks (src/runtimes) + engine/src/38
   { name: 'runtimes-node', in: 'src/runtimes/node.ts', kind: 'node', format: 'cjs', out: 'runtimes-node.cjs', budgetKB: 512 },   // the runtimes' checks and code for the node suites

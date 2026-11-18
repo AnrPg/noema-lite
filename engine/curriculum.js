@@ -33,7 +33,7 @@ window.NoemaCurriculum = (() => {
   /** The text of the pages that belong to each step (the learner's files), for the in-app planner (API key / Gemini):
       it plans from what the pages really contain, not only from their outline. budget: characters for the whole request. */
   async function materialPages(acc, c, ids, { budget = 120000 } = {}) {
-    const withFiles = ids.filter(id => c.nodes[id]?.material?.files?.length && !c.nodes[id].pack?.assigned); if (!withFiles.length || !window.NoemaViewer?.extract) return '';
+    const withFiles = ids.filter(id => c.nodes[id]?.material?.files?.length && !c.nodes[id].pack?.assigned); if (!withFiles.length || !window.NoemaCore?.viewer) return '';
     const per = Math.floor(budget / withFiles.length), parts = [];
     for (const id of withFiles) {
       const n = c.nodes[id]; let left = per; const chunks = [];
@@ -42,7 +42,7 @@ window.NoemaCurriculum = (() => {
         const rec = await materialFile(acc, c, id, f).catch(() => null);
         if (!rec?.blob) { chunks.push(`#### ${f.name}\n(not available on this device — plan it from its outline above)`); continue; }
         const from = f.range ? f.range[0] : 1, count = f.range ? f.range[1] - f.range[0] + 1 : 300;
-        let x; try { x = await window.NoemaViewer.extract(rec.blob, f.name, { from, maxPages: Math.min(count, 300), outline: false }); } catch (e) { chunks.push(`#### ${f.name}\n(its text could not be read)`); continue; }
+        let x; try { x = await NoemaCore.viewer.extract(rec.blob, f.name, { from, maxPages: Math.min(count, 300), outline: false }); } catch (e) { chunks.push(`#### ${f.name}\n(its text could not be read)`); continue; }
         let t = (x.pages || []).map((pg, i) => x.kind === 'pdf' ? `[p. ${(x.first || from) + i}] ${pg}` : pg).join('\n');
         if (t.length > left) t = t.slice(0, left) + '\n[… the rest of these pages is not included — plan it from the outline above]';
         left -= t.length; chunks.push(`#### ${f.name}${f.range ? ` — pages ${f.range[0]}–${f.range[1]}` : ''}\n${t.trim() || '(no text — scanned pages or pictures only)'}`);
@@ -721,7 +721,7 @@ window.NoemaCurriculum.Edit = (() => {
     onLog(`📎 ${file.name}…`);
     await SF.put(acc, C.curStore(cid), fileId, file, { name: file.name });
     const info = { name: file.name, size: file.size, type: file.type || '', pages: null, outline: [], sha256: null, added: new Date().toISOString() };
-    try { const x = await window.NoemaViewer.extract(file, file.name, { maxPages: 1 }); info.pages = x.pageCount || null; info.outline = (x.outline || []).slice(0, 150); } catch (e) { console.warn('[material]', e); }
+    try { const x = await NoemaCore.viewer.extract(file, file.name, { maxPages: 1 }); info.pages = x.pageCount || null; info.outline = (x.outline || []).slice(0, 150); } catch (e) { console.warn('[material]', e); }
     if (file.size < 300 * 1048576) info.sha256 = await SF.sha256(file).catch(() => null);
     c = C.get(acc, cid); c.files = { ...(c.files || {}), [fileId]: info }; C.save(acc, c);
     return fileId;
@@ -743,7 +743,7 @@ window.NoemaCurriculum.Edit = (() => {
       if ([...have, ...added].some(x => x.fileId === fileId && String(x.range) === String(range))) continue;
       let k = have.length + added.length + 1; const used = new Set([...have, ...added].map(x => x.srcId)); while (used.has('m' + k)) k++;
       let excerpt = '';
-      try { const blob = it.file || (await window.NoemaSrcFiles.get(acc, C.curStore(cid), fileId))?.blob; if (blob) { const x = await window.NoemaViewer.extract(blob, info.name, { maxPages: 6, outline: false, from: range ? range[0] : 1 }); excerpt = (x.pages || []).join('\n').slice(0, 1500); } } catch (e) { console.warn('[material]', e); }
+      try { const blob = it.file || (await window.NoemaSrcFiles.get(acc, C.curStore(cid), fileId))?.blob; if (blob) { const x = await NoemaCore.viewer.extract(blob, info.name, { maxPages: 6, outline: false, from: range ? range[0] : 1 }); excerpt = (x.pages || []).join('\n').slice(0, 1500); } } catch (e) { console.warn('[material]', e); }
       const outline = (info.outline || []).filter(o => !range || !o.page || (o.page >= range[0] && o.page <= range[1])).slice(0, 80);
       added.push({ srcId: 'm' + k, fileId, name: info.name, size: info.size, type: info.type, pages: info.pages, range, outline, excerpt, sha256: info.sha256, added: new Date().toISOString() });
     }

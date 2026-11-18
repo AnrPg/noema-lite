@@ -176,7 +176,7 @@ Each chapter has "diagrams": 0–2 objects — only a diagram with real teaching
         const rec = await window.NoemaCurriculum.materialFile(acc, c, nodeId, f).catch(() => null);
         if (!rec?.blob) { onLog('   ⚠️ ' + rt('roadmap.gen.fileUnavailable', { name: f.name })); continue; }
         // only the pages that belong to this step (a textbook may serve several steps)
-        const x = await window.NoemaViewer.extract(rec.blob, f.name, f.range ? { from: f.range[0], maxPages: f.range[1] - f.range[0] + 1, outline: false } : { maxPages: 1500, outline: false }).catch(e => { onLog(`   ⚠️ ${f.name}: ${e.message}`); return null; });
+        const x = await NoemaCore.viewer.extract(rec.blob, f.name, f.range ? { from: f.range[0], maxPages: f.range[1] - f.range[0] + 1, outline: false } : { maxPages: 1500, outline: false }).catch(e => { onLog(`   ⚠️ ${f.name}: ${e.message}`); return null; });
         if (x?.pages?.length) run.material.push({ srcId: f.srcId, name: f.name, pdf: x.kind === 'pdf', pages: x.pages, first: x.first || 1, range: f.range || null, pageCount: x.pageCount || null });
       }
       if (!run.material.length) throw new Error(rt('roadmap.gen.noFileRead'));

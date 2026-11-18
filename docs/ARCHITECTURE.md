@@ -187,6 +187,14 @@ NoemaCore.social                        people (src/features/social): state, onC
 NoemaCore.reports · engineRequests      problem reports ⚑ and engine requests (src/features/reports); promised calls
                                         reject with a NoemaError
 NoemaCore.languages                     the language courses before any is loaded (src/features/languages, §6.5)
+NoemaCore.mt                            🌐 the machine translation of shared texts (src/features/translation, docs/i18n.md §11):
+                                        translate · estimate · detect · differs · check · provider · settings · cache · usage;
+                                        its screens are NoemaShell.mt (build/ui.js: mark · toggle · bar · panel · consent)
+NoemaCore.bridges                       文A the bridges' lookup and service (src/features/bridges, docs/BRIDGE.md): settings ·
+                                        native · words · available · load · attach · detach · report; its screens are
+                                        NoemaShell.bridge (build/ui.js: section · tag · menuItem · panel)
+NoemaCore.viewer                        👁 the file viewer (src/features/viewer): kindOf · KINDS · youtube at once; open ·
+                                        extract · jszip · loadZip run the lazy piece build/viewer.js
 ```
 
 **The learning log.** What the learner does is an event (`noema.events/v1`,
@@ -268,6 +276,7 @@ screens: about 240 KB). Pieces of kind `lazy` stay out of it:
 | `build/runtimes.js` | `src/composition/runtimes.ts` | the code of every typed activity runtime (§6.4) | the first time an activity needs one (`ACT.runtime(id)`) |
 | `build/contracts.js` | `src/composition/contracts.ts` | the compiled data contracts (`src/contracts`, about 1.4 MB) and the content checks built on them (`src/features/content`, about 120 KB) | before the shell opens a subject or a language course (`ui-root.ts` awaits `NoemaCore.contracts.ready()`, which brings both), after the first screen on Today, and before the Roadmaps start their jobs; a check before that is a bug and throws (`src/contracts/lazy.ts`, `src/features/content/application/lazy.ts`) |
 | `build/author.js` | `src/composition/author.ts` | the activity author (`src/features/author`, `src/ui/screens/author`: `noema-schema-form`, `noema-author`; about 115 KB) | the first time `#/author` opens (`src/composition/shell/author-page.ts`, after the engines, the schema kernel and the content checks) |
+| `build/viewer.js` | `src/composition/viewer.ts` | 👁 the file viewer (`src/features/viewer`: the readers, the vendor libraries' loader `src/adapters/browser/viewer-libs.ts`, the screen) on `build/ui.js`'s Lit (about 38 KB) | the first time a file is opened or read (`NoemaCore.viewer.open` / `extract`) |
 
 The learning log checks every event it reads or makes, and it opens before the first screen: its contract
 (`noema.events.v1#event`, `tools/contracts.mjs` `START_CONTRACTS`) is compiled a second time into

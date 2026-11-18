@@ -160,7 +160,10 @@ the engine's modals):
   editor, a step's sources, import, export, settings; plus the Roadmap modals left in `engine/app/roadmaps.js`;
 - `engine/app/library.js` and `engine/app/community.js`: the parts of the library, the subject picker, the Subjects page,
   import and the Shelf still drawn by hand;
-- `engine/viewer.js` (the file viewer), `engine/bridge.js` (the 文A bridge's UI) and `engine/mt.js` (the translation
-  toggles and marks): their logic to typed `src` code, their UI to Lit.
+- ~~`engine/viewer.js` (the file viewer), `engine/bridge.js` (the 文A bridge's UI) and `engine/mt.js` (the translation
+  toggles and marks): their logic to typed `src` code, their UI to Lit.~~ **TD-13 C ✅ closed (2026-11-17):** replaced by
+  `src/features/viewer`, `src/features/bridges` and `src/features/translation` (domain + application with unit tests, Lit
+  screens in light DOM) — `NoemaCore.viewer` (the lazy piece `build/viewer.js`), `NoemaCore.bridges` / `NoemaShell.bridge`,
+  `NoemaCore.mt` / `NoemaShell.mt`; the three old files are deleted.
 Each keeps its features and the CSS classes the suites read; the old code is deleted. Postponed to save the owner's
 weekly usage; start only when the owner says so (suggested split: three helpers along the three items).

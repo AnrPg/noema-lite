@@ -1,7 +1,7 @@
 /**
  * The Roadmap screens' data port (src/features/roadmaps/ui/data.ts) over the app as it is today: the Roadmaps of
  * engine/curriculum.js (window.NoemaCurriculum, its generator .Gen), the Claude-app inbox of engine/curjobs.js
- * (NoemaCurJobs.App.decide), sharing and the public Roadmaps (NoemaCurShare), shared texts translated (NoemaMT), the packs (Noema.loadSubject), the notices, and the levels of
+ * (NoemaCurJobs.App.decide), sharing and the public Roadmaps (NoemaCurShare), shared texts translated (NoemaShell.mt), the packs (Noema.loadSubject), the notices, and the levels of
  * NoemaCore.roadmaps. The one place the screens meet those globals: the lead swaps this file for NoemaCore.study / sync.
  *
  * The app's root (ui-root.ts) defines the Roadmap elements and provides this port on the page's body beside the kit's
@@ -120,10 +120,12 @@ interface Globals {
     courseBrief(p: SourcePlan): string;
     courseMessage(p: SourcePlan, inv: readonly SourceItem[], o: { language: string; goal: string }): string;
   };
-  NoemaMT?: {
-    mark(el: HTMLElement, o: { language: string | null; kind: string }): HTMLElement;
-    toggle(acc: string, nodes: readonly HTMLElement[]): HTMLElement | null;
-    bar(acc: string, root: HTMLElement): HTMLElement;
+  NoemaShell?: {
+    mt?: {
+      mark(el: HTMLElement, o: { language: string | null; kind: string }): HTMLElement;
+      toggle(acc: string, nodes: readonly HTMLElement[]): HTMLElement | null;
+      bar(acc: string, root: HTMLElement): HTMLElement;
+    };
   };
   NoemaLLM?: { available(acc: string): { claude: boolean; gemini: boolean }; pick(acc: string, provider: string): string | null };
   NoemaClaude?: { Key?: { get?: (acc: string) => string | null } };
@@ -393,10 +395,10 @@ export function legacyRoadmapsData(win: Window): RoadmapsData {
     },
     translate: {
       mark(el, o) {
-        g().NoemaMT?.mark(el, { language: o.language ?? null, kind: o.kind });
+        g().NoemaShell?.mt?.mark(el, { language: o.language ?? null, kind: o.kind });
       },
-      toggle: (acc, els) => g().NoemaMT?.toggle(acc, els) ?? null,
-      bar: (acc, root) => g().NoemaMT?.bar(acc, root) ?? null,
+      toggle: (acc, els) => g().NoemaShell?.mt?.toggle(acc, els) ?? null,
+      bar: (acc, root) => g().NoemaShell?.mt?.bar(acc, root) ?? null,
     },
     art: {
       mascot() {

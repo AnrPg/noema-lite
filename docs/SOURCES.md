@@ -54,7 +54,7 @@ How files get there:
 **Pages of split PDFs.** Chapters cite the book's page numbers; a part has `"firstPage"` (the book page it starts at), so
 "σ. 410" in a part with `firstPage` 403 opens page 8 of that part. Citations below `firstPage` are taken as pages of the part.
 
-## 4. 👁 The viewer (`engine/viewer.js`)
+## 4. 👁 The viewer (`src/features/viewer`, `NoemaCore.viewer`)
 Full-screen overlay with ⬇️ download, ↗ open in a new tab, Esc to close. Libraries are vendored in
 `engine/vendor/` and loaded only for the type that needs them (licences in `engine/vendor/viewer/README.md`).
 

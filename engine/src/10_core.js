@@ -181,7 +181,7 @@ COURSE.forEach(c => c.flashcards.forEach((f, k) => {
 let saveT;
 function flushSave() {
   clearTimeout(saveT);
-  const { srcOn, apiKey, mt: _mt, ...glob } = S.settings;   // a:settings.mt is engine/mt.js's own (written there): never written back from this copy
+  const { srcOn, apiKey, mt: _mt, ...glob } = S.settings;   // a:settings.mt is the translation service's own (src/features/translation) (written there): never written back from this copy
   if (JSON.stringify(srcOn ?? null) !== JSON.stringify(subjectSrcOn())) LOG.setSubjectSetting(SUBJ.id, 'srcOn', srcOn ?? null);
   Noema.geminiKey.set(ACCOUNT.id, apiKey);   // this device only; the default key is not stored
   let cur = {}; try { cur = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}') || {}; } catch (e) { NoemaCore.errors.report(e, { where: 'engine.settings.read', severity: 'warning' }); }

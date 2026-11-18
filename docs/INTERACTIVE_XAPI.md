@@ -33,7 +33,7 @@ Code: `engine/src/43_xapi.js` → `window.NoemaXAPI` (and `module.exports` for n
 | `exportFile(input, opts)` | `{format: 'noema.xapi-export/v1', xapiVersion, profile, pack: {id, activityBase}, registration, statements}` — schema `src/contracts/schemas/noema.xapi-export.v1.schema.json` |
 | `cmi5Package(course, opts)` | `{files: {'cmi5.xml': xml}, aus: [{id, chapter, exercise?}]}` |
 | `subjectRecord({attempts, answers, pack, chapters, accountId, site, now})` | `{name: '<id>.xapi.json', file}` (the app's export), or `null` when nothing is recorded |
-| `subjectCmi5({pack, chapters, site})` / `zip(files)` | `{name: '<id>.cmi5.zip', files}` · a zip Blob of `files` (browser: JSZip through `NoemaViewer`) |
+| `subjectCmi5({pack, chapters, site})` / `zip(files)` | `{name: '<id>.cmi5.zip', files}` · a zip Blob of `files` (browser: JSZip through `NoemaCore.viewer`) |
 | `validate(stmt)` / `validateAll(list)` | `[problem]` — the xAPI subset + the cmi5 rules (also across statements) |
 | `duration(ms)`, `uuid5(name, ns?)` | ISO 8601 duration to 0.01 s; RFC 4122 UUID v5 (SHA-1) |
 

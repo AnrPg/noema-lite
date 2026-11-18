@@ -9,7 +9,7 @@
      3. the build   a Roadmap goes through 📥 Import a map (NoemaCurImport.create: every file stored once, linked to its steps
                     with their pages; the chapter planner plans each step FROM its pages), a subject through ✨ Create with
                     Claude (the chapter plan is the brief) — so every route is the one that already exists.
-   Runs without a browser too (tests): inventory needs NoemaViewer, the rest only plain objects. */
+   Runs without a browser too (tests): inventory needs NoemaCore.viewer, the rest only plain objects. */
 window.NoemaSourcePlan = (() => {
   const C = () => window.NoemaCurriculum, L = () => window.NoemaLLM, I = () => window.NoemaCurImport;
   /** The Roadmaps domain (src/features/roadmaps/domain): the levels a plan proposes (planLevels) and their rules. */
@@ -38,7 +38,7 @@ window.NoemaSourcePlan = (() => {
   /** files → [{ path, name, size, type, kind, pages (a PDF's pages, else parts of ~3000 characters), paged, outline, excerpt }],
       in the order of their paths (numbers counted as numbers: “2 …” before “10 …”). */
   async function inventory(files, { onLog = () => { } } = {}) {
-    const V = window.NoemaViewer, out = [];
+    const V = window.NoemaCore?.viewer, out = [];
     const list = [...files].sort((a, b) => natural(relPath(a), relPath(b)));
     for (const [k, f] of list.entries()) {
       const path = relPath(f), kind = V ? V.kindOf(f.name, f.type || '') : 'unknown';

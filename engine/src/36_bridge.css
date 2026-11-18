@@ -1,4 +1,4 @@
-/* 文A language help (engine/bridge.js, docs/BRIDGE.md): quiet — a faint dotted line, small glosses, a small card */
+/* 文A language help (src/features/bridges/ui, docs/BRIDGE.md): quiet — a faint dotted line, small glosses, a small card */
 .nb-root .nw{cursor:pointer;border-radius:3px;text-decoration:underline dotted color-mix(in srgb,var(--ink3) 55%,transparent);text-decoration-thickness:1px;text-underline-offset:3px}
 .nb-root .nw:hover,.nb-root .nw:focus-visible{background:var(--bg2);text-decoration-color:var(--ink2);outline:none}
 .nb-root[data-nb-level="tap"] .nw,.nb-root .nw.nw-known{text-decoration:none}
