@@ -32,6 +32,8 @@ class KeyRange {
 interface Db {
   version: number;
   stores: Map<string, Map<string, unknown>>;
+  /** readwrite transactions run one after the other, as in IndexedDB (their scopes overlap: one store each here) */
+  rwTail: Promise<void>;
 }
 
 export interface FakeIndexedDB {
@@ -61,7 +63,16 @@ export function fakeIndexedDB(): FakeIndexedDB {
       transaction(names: string[], mode: 'readonly' | 'readwrite' = 'readonly') {
         for (const n of names)
           if (!db.stores.has(n)) throw Object.assign(new Error(`No objectStore named ${n}`), { name: 'NotFoundError' });
-        const staged = new Map(names.map(n => [n, new Map(db.stores.get(n))] as const));
+        // a readwrite transaction starts once the one before it is done, and reads the stores as they are then
+        const turn = mode === 'readwrite' ? db.rwTail : Promise.resolve();
+        let release = (): void => undefined;
+        if (mode === 'readwrite')
+          db.rwTail = new Promise<void>(r => {
+            release = r;
+          });
+        let stagedMap: Map<string, Map<string, unknown>> | null = null;
+        const staged = (): Map<string, Map<string, unknown>> =>
+          (stagedMap ??= new Map(names.map(n => [n, new Map(db.stores.get(n))] as const)));
         let pending = 0,
           finished = false;
         const t = {
@@ -72,31 +83,35 @@ export function fakeIndexedDB(): FakeIndexedDB {
           abort() {
             if (finished) throw Object.assign(new Error('The transaction has finished.'), { name: 'InvalidStateError' });
             finished = true;
+            release();
             setTimeout(() => t.onabort?.(), 0);
           },
           objectStore(n: string) {
-            const s = staged.get(n);
-            if (!s) throw Object.assign(new Error(`not in this transaction: ${n}`), { name: 'NotFoundError' });
+            if (!names.includes(n)) throw Object.assign(new Error(`not in this transaction: ${n}`), { name: 'NotFoundError' });
+            const store = (): Map<string, unknown> => staged().get(n) as Map<string, unknown>;
             const run = (f: () => unknown): Req => {
               const r = new Req();
               if (finished) throw Object.assign(new Error('The transaction is not active.'), { name: 'TransactionInactiveError' });
               pending++;
-              queueMicrotask(() => {
-                pending--;
-                if (finished) return;
-                try {
-                  r.result = f();
-                  r.onsuccess?.({ target: r });
-                } catch (e) {
-                  r.error = e;
-                  t.error = e;
-                  r.onerror?.({ target: r });
-                  t.onerror?.({ target: r });
-                  finished = true;
-                  setTimeout(() => t.onabort?.(), 0);
-                  return;
-                }
-                check();
+              void turn.then(() => {
+                queueMicrotask(() => {
+                  pending--;
+                  if (finished) return;
+                  try {
+                    r.result = f();
+                    r.onsuccess?.({ target: r });
+                  } catch (e) {
+                    r.error = e;
+                    t.error = e;
+                    r.onerror?.({ target: r });
+                    t.onerror?.({ target: r });
+                    finished = true;
+                    release();
+                    setTimeout(() => t.onabort?.(), 0);
+                    return;
+                  }
+                  check();
+                });
               });
               return r;
             };
@@ -104,24 +119,24 @@ export function fakeIndexedDB(): FakeIndexedDB {
               if (mode !== 'readwrite') throw Object.assign(new Error('The transaction is read-only.'), { name: 'ReadOnlyError' });
             };
             return {
-              get: (k: string) => run(() => structuredClone(s.get(k))),
+              get: (k: string) => run(() => structuredClone(store().get(k))),
               put: (v: unknown, k: string) =>
                 run(() => {
                   write();
                   let total = 0;
-                  for (const [name, m] of db.stores) total += (staged.get(name) ?? m).size;
-                  if (!s.has(k) && total + 1 > state.quota)
+                  for (const [name, m] of db.stores) total += (staged().get(name) ?? m).size;
+                  if (!store().has(k) && total + 1 > state.quota)
                     throw Object.assign(new Error('The quota has been exceeded.'), { name: 'QuotaExceededError' });
-                  s.set(k, structuredClone(v));
+                  store().set(k, structuredClone(v));
                   return k;
                 }),
               delete: (k: string) =>
                 run(() => {
                   write();
-                  s.delete(k);
+                  store().delete(k);
                 }),
               openCursor(range?: KeyRange) {
-                const keys = [...s.keys()].filter(k => !range || range.includes(k)).sort();
+                const keys = [...store().keys()].filter(k => !range || range.includes(k)).sort();
                 const r = new Req();
                 let i = 0;
                 const step = (): void => {
@@ -130,7 +145,7 @@ export function fakeIndexedDB(): FakeIndexedDB {
                     pending--;
                     if (finished) return;
                     const k = keys[i++];
-                    r.result = k === undefined ? null : { key: k, value: structuredClone(s.get(k)), continue: step };
+                    r.result = k === undefined ? null : { key: k, value: structuredClone(store().get(k)), continue: step };
                     r.onsuccess?.({ target: r });
                     check();
                   });
@@ -143,12 +158,15 @@ export function fakeIndexedDB(): FakeIndexedDB {
         };
         // commit when nothing is pending after the work's microtasks have run (a macrotask later)
         const check = (): void => {
-          setTimeout(() => {
-            if (finished || pending > 0) return;
-            finished = true;
-            for (const [n, m] of staged) db.stores.set(n, m);
-            t.oncomplete?.();
-          }, 0);
+          void turn.then(() =>
+            setTimeout(() => {
+              if (finished || pending > 0) return;
+              finished = true;
+              for (const [n, m] of staged()) db.stores.set(n, m);
+              release();
+              t.oncomplete?.();
+            }, 0),
+          );
         };
         check();
         return t;
@@ -165,7 +183,7 @@ export function fakeIndexedDB(): FakeIndexedDB {
         let db = dbs.get(name);
         const isNew = !db || db.version < version;
         if (!db) {
-          db = { version, stores: new Map() };
+          db = { version, stores: new Map(), rwTail: Promise.resolve() };
           dbs.set(name, db);
         }
         const c = connection(name, db);
