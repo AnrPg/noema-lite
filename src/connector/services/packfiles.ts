@@ -105,6 +105,32 @@ export const trNamed = (p: Pack): string[] =>
     .map(([loc]) => loc);
 export const trCurl = async (ctx: ToolContext, sid: string, loc: string): Promise<string> =>
   `# translation ${loc}\ncurl -sS -X PUT -H "Content-Type: application/json" -H "x-upsert: true" -H "apikey: ${ctx.sb.key}" --data-binary @work/${sid}/build/${sid}.tr.${loc}.json "${await ctx.storage.uploadUrl(trPath(ctx.uid, sid, loc))}"`;
+/** A pack version as text (a string; anything else as JSON; none: —). */
+export const verStr = (v: unknown): string => (typeof v === 'string' ? v : v == null ? '—' : JSON.stringify(v));
+
+/** The translation file in the account → its SHA-256 over the exact bytes (a byte-order mark included, as make_pack.py
+    hashes the file) and its JSON (null: not JSON) — or null when there is none. */
+export async function readTr(
+  ctx: ToolContext,
+  sid: string,
+  loc: string,
+): Promise<{ sha: string; text: string; json: (Record<string, unknown> & { version?: unknown; locale?: unknown }) | null } | null> {
+  const b = await ctx.storage.bytes(trPath(ctx.uid, sid, loc));
+  if (!b) return null;
+  const text = new TextDecoder().decode(b); // drops a BOM: JSON.parse would refuse it
+  let json: unknown = null;
+  try {
+    json = JSON.parse(text) as unknown;
+  } catch {
+    json = null;
+  }
+  return {
+    sha: await sha256Hex(b),
+    text,
+    json: json && typeof json === 'object' && !Array.isArray(json) ? (json as Record<string, unknown>) : null,
+  };
+}
+
 /** Every translation the pack names is in the account, is the very file the pack was built with, and matches it →
     { missing: [loc], stale: [{ loc, why }], bad: ["loc: errors"] }.
     stale: the stored file is an older one — the pack was rebuilt (make_pack.py stamps translations.<loc>.sha256, the SHA-256
@@ -117,26 +143,26 @@ export async function translationStatus(
 ): Promise<{ missing: string[]; stale: { loc: string; why: string }[]; bad: string[] }> {
   const out = { missing: [] as string[], stale: [] as { loc: string; why: string }[], bad: [] as string[] };
   for (const loc of trNamed(p)) {
-    const raw = await ctx.storage.text(trPath(ctx.uid, sid, loc));
-    let f: { version?: unknown } | null = null;
-    try {
-      f = raw == null ? null : (JSON.parse(raw) as { version?: unknown });
-    } catch {
-      f = null;
-    }
-    if (raw == null) {
+    const got = await readTr(ctx, sid, loc),
+      f = got?.json ?? null;
+    if (!got) {
       out.missing.push(loc);
       continue;
     }
     const want = p.translations?.[loc]?.sha256;
     if (typeof want === 'string' && want) {
-      const got = await sha256Hex(raw);
-      if (got !== want) {
-        out.stale.push({ loc, why: `the file in the account (sha256 ${got.slice(0, 12)}…) is not the one this pack was built with (${want.slice(0, 12)}…)` });
+      if (got.sha !== want) {
+        out.stale.push({
+          loc,
+          why: `the file in the account (sha256 ${got.sha.slice(0, 12)}…) is not the one this pack was built with (${want.slice(0, 12)}…)`,
+        });
         continue;
       }
     } else if (f && f.version && p.version && f.version !== p.version) {
-      out.stale.push({ loc, why: `the file in the account was made for pack version ${String(f.version)}; the pack is now ${String(p.version)}` });
+      out.stale.push({
+        loc,
+        why: `the file in the account was made for pack version ${verStr(f.version)}; the pack is now ${verStr(p.version)}`,
+      });
       continue;
     }
     const r = f ? ctx.engine.content.checkTranslation(f, p) : { errors: ['not valid JSON'] };

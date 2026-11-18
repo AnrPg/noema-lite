@@ -55,6 +55,14 @@ export class Storage {
       return null;
     }
   }
+  /** The object's exact bytes (past the CDN; a byte-order mark kept), or null when it is missing. */
+  async bytes(path: string): Promise<Uint8Array | null> {
+    try {
+      return new Uint8Array(await (await this.readFresh(path)).arrayBuffer());
+    } catch {
+      return null;
+    }
+  }
   /** The object as JSON (past the CDN), or null when it is missing or not JSON. */
   async json<T = unknown>(path: string): Promise<T | null> {
     const t = await this.text(path);
