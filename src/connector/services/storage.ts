@@ -73,10 +73,11 @@ export class Storage {
       return null;
     }
   }
-  /** Write (or replace) a JSON object. noCache: readers after this one must not get an older copy from the CDN. */
+  /** Write (or replace) a JSON object (text, or exact bytes — a byte-order mark kept). noCache: readers after this one must
+      not get an older copy from the CDN. */
   async writeJson(
     path: string,
-    body: string,
+    body: string | Uint8Array,
     { noCache = false, bucket = PRIVATE }: { noCache?: boolean; bucket?: string } = {},
   ): Promise<void> {
     await this.sb.request(`/storage/v1/object/${bucket}/${path}`, {

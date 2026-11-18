@@ -117,7 +117,7 @@ export const tool: Tool = {
         async s => {
           // 1. the file (inline or with subject_json: written here; uploaded: it is in place). Undone if the pack cannot name it.
           if (raw) {
-            const prev = await ctx.storage.text(trPath(uid, sid, loc));
+            const prev = await ctx.storage.bytes(trPath(uid, sid, loc)); // the exact bytes: a restored file keeps its stamp's SHA-256
             await s.step(
               'file',
               async () => {

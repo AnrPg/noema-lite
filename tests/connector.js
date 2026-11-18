@@ -293,6 +293,12 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
     for (const x of [A, B, A]) await tool('noema_save_translation', { subject_id: 'tr-physics', locale: 'ru', translation_json: x });
     ok(JSON.parse(Buffer.from(srv.state.files[`${uid}/packs/tr-physics.json`].data).toString()).translations.ru.sha256 === sha(A) && Buffer.from(srv.state.files[`${uid}/packs/tr-physics.tr.ru.json`].data).toString() === A,
       'saving A, B, then A again: not replayed from the first save — the pack names A and the account holds A');
+    // a save whose pack write fails takes its file back byte for byte: the BOM-prefixed fr file still matches the pack's stamp
+    srv.state.failWrite = /packs\/tr-physics\.json$/;
+    const s3 = await tool('noema_save_translation', { subject_id: 'tr-physics', locale: 'fr', subject_json: JSON.stringify({ title: 'Physique' }) });
+    delete srv.state.failWrite;
+    ok(s3.isError && /taken back/.test(s3.content[0].text) && Buffer.compare(Buffer.from(srv.state.files[`${uid}/packs/tr-physics.tr.fr.json`].data), trC) === 0 && !(await tool('noema_finish_upload', { subject_id: 'tr-physics' })).isError,
+      'a failed save restores the exact bytes of the earlier file (BOM kept), so it still matches the pack: ' + s3.content[0].text.split('\n')[0].slice(0, 120));
     // a stored file with the wrong locale: refused with a fresh link, not a dead end
     srv.state.files[`${uid}/packs/tr-physics.tr.ru.json`] = { ...srv.state.files[`${uid}/packs/tr-physics.tr.ru.json`], data: Buffer.from(A.replace('"locale":"ru"', '"locale":"el"')) };
     const s2t = (await tool('noema_save_translation', { subject_id: 'tr-physics', locale: 'ru' })).content[0].text;
