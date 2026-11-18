@@ -4,7 +4,7 @@
 1. Every flow names only steps of steps.json, every step's needs come earlier in each flow that has them, every command a
    check runs exists. 2. detect picks the right flow. 3. A whole subject goes through flow 4 in a temporary folder:
    start_subject → map → write → blind re-solve → review → make_pack, each step checked; a change makes the steps after it stale."""
-import glob, json, os, shutil, subprocess, sys, tempfile
+import glob, hashlib, json, os, shutil, subprocess, sys, tempfile
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TOOLS = os.path.join(ROOT, "tools"); SCRIPTS = os.path.join(ROOT, "skill", "noema-pack-builder", "scripts")
 sys.path.insert(0, TOOLS)
@@ -131,7 +131,8 @@ try:
     pk = json.load(open(os.path.join(d, "build", "demo-coulomb.json"), encoding="utf-8"))
     ok(pk["chapters"][0]["map"]["format"] == "noema.map/v1" and pk["chapters"][0]["review"]["blind"]["solved"] == 40, "the pack carries chapter.map (Info window) and chapter.review")
     t_el = json.load(open(os.path.join(d, "build", "demo-coulomb.tr.el.json"), encoding="utf-8"))
-    ok(pk["translations"] == {l: {"file": True, "chapters": 1} for l in ("el", "ru", "de", "fr")} and t_el["format"] == "noema-translation" and t_el["version"] == pk["version"] and t_el["chapters"][0]["id"] == "ch01",
+    ok({l: {k: v for k, v in t.items() if k != "sha256"} for l, t in pk["translations"].items()} == {l: {"file": True, "chapters": 1} for l in ("el", "ru", "de", "fr")}
+       and all(t["sha256"] == hashlib.sha256(open(os.path.join(d, "build", f"{pk['subject']['id']}.tr.{l}.json"), "rb").read()).hexdigest() for l, t in pk["translations"].items()) and t_el["format"] == "noema-translation" and t_el["version"] == pk["version"] and t_el["chapters"][0]["id"] == "ch01",
        "make_pack.py: each translation in its own file (build/<id>.tr.<locale>.json), the pack only names them")
     ok(t_el.get("subject", {}).get("title") == "Νόμος του Coulomb" and pk["subject"]["i18n"]["ru"]["title"] == "Закон Кулона", "the translation file carries the subject's name in its language (subject.i18n.<locale>)")
     # one bridge file per pair: built one after another (their uploads may all wait for the end), none overwrites another

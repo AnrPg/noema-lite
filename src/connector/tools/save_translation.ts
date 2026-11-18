@@ -8,6 +8,10 @@ import { roadmapTodoText, scopeOfPack } from '../services/roadmap.ts';
 import { sagaKey } from '../services/sagas.ts';
 import { ID_RE, jitter, LOCALE_RE, MAX_INLINE, message, sha256Hex, str, type Json } from '../util.ts';
 
+/** A fresh upload link for the translation file (valid 2 h, a new one on every call) — never a dead end. */
+const reupload = async (ctx: Parameters<Tool['handler']>[1], sid: string, loc: string): Promise<string> =>
+  `upload the file make_pack.py wrote with the pack — run in your sandbox:\n\n${await trCurl(ctx, sid, loc)}\n\nThen call noema_save_translation with subject_id "${sid}" and locale "${loc}" again (or noema_finish_upload, when the pack is waiting for it).`;
+
 export const tool: Tool = {
   definition: {
     name: 'noema_save_translation',
@@ -47,6 +51,7 @@ export const tool: Tool = {
     const p = await ctx.storage.json<Pack>(packPath);
     if (!p) return fail(`No pack "${sid}" in this account (noema_list_subjects). Save the pack first (noema_finish_upload).`);
     let f: Translation | null,
+      stored: string | null = null,
       raw = str(args.translation_json);
     if (raw) {
       if (raw.length > MAX_INLINE)
@@ -59,7 +64,12 @@ export const tool: Tool = {
         return fail('translation_json is not valid JSON: ' + message(e));
       }
     } else {
-      f = await ctx.storage.json<Translation>(trPath(uid, sid, loc));
+      stored = await ctx.storage.text(trPath(uid, sid, loc));
+      try {
+        f = stored == null ? null : (JSON.parse(stored) as Translation);
+      } catch {
+        return fail(`The ${loc} translation in the account is not valid JSON. ${await reupload(ctx, sid, loc)}`);
+      }
       if (!f)
         return text(
           `Upload the translation — run in your sandbox (URL valid 2 h):\n\n${await trCurl(ctx, sid, loc)}\n\nThen call noema_save_translation with subject_id "${sid}" and locale "${loc}" again.`,
@@ -81,8 +91,14 @@ export const tool: Tool = {
     }
     const tr: Translation = f;
     const r = ctx.engine.content.checkTranslation(tr, p);
-    if (r.errors.length) return fail(`${r.errors.length} error(s):\n- ${r.errors.slice(0, 40).join('\n- ')}`);
-    const key = sagaKey('translation', sid, loc, (await sha256Hex(raw || JSON.stringify(tr))).slice(0, 32));
+    if (r.errors.length)
+      return fail(
+        `${r.errors.length} error(s):\n- ${r.errors.slice(0, 40).join('\n- ')}` +
+          // the file in the account (not one passed inline) may be an older one, left from before the pack was updated: a fresh link
+          (!str(args.translation_json) ? `\n\nIf the file in the account is an older one (made before the pack was updated), ${await reupload(ctx, sid, loc)}` : ''),
+      );
+    const fileSha = await sha256Hex(raw || stored || JSON.stringify(tr)); // the pack names the exact file (noema_finish_upload: a stored file that differs is stale)
+    const key = sagaKey('translation', sid, loc, fileSha.slice(0, 32));
     try {
       const out = await ctx.sagas.run<string>(
         'translation',
@@ -118,7 +134,7 @@ export const tool: Tool = {
             const withOurs = (cur: Pack): Pack => ({
               ...cur,
               v: 3,
-              translations: { ...seenT, ...(cur.translations ?? {}), [loc]: { file: true, chapters: tr.chapters.length } },
+              translations: { ...seenT, ...(cur.translations ?? {}), [loc]: { file: true, chapters: tr.chapters.length, sha256: fileSha } },
               subject: {
                 ...cur.subject,
                 i18n: {
@@ -131,6 +147,7 @@ export const tool: Tool = {
             const ours = (got: Pack | null): boolean =>
               !!got &&
               got.translations?.[loc]?.chapters === tr.chapters.length &&
+              got.translations?.[loc]?.sha256 === fileSha &&
               (!tr.subject?.title || got.subject.i18n?.[loc]?.title === tr.subject.title) &&
               Object.keys(seenT).every(l => got.translations?.[l]) &&
               Object.keys(seenS).every(l => got.subject.i18n?.[l]);

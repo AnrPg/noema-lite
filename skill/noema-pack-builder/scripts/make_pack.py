@@ -7,7 +7,7 @@
 Every source with "file": "sources/<name>" must have that file in SUBJECT_DIR/sources/ (exactly the files the learner
 gave — or the parts of a split PDF, one source per part), and every file there must belong to a source.
 Exit code 1 (and a list of errors) when anything is wrong — fix and run again. Never deliver a pack that fails."""
-import os, sys, json, datetime
+import os, sys, json, datetime, hashlib
 for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux alike
     try: _s.reconfigure(encoding='utf-8', errors='replace')
     except Exception: pass
@@ -108,10 +108,12 @@ tr = pack_i18n(pack, translations, external=True)   # pack format v3; each trans
 pack['version'] = content_hash({'s': meta, 'src': sources, 'c': chapters, 'm': {k: v.get('sha') or v.get('url') for k, v in media.items()}, **({'t': tr} if tr else {}), **({'a': hash_part(acts)} if acts and acts['items'] else {})})
 counts['sourceFiles'] = len(files)
 jout = os.path.join(sdir, 'build', meta['id'] + '.json'); os.makedirs(os.path.dirname(jout), exist_ok=True)
-with open(jout, 'w', encoding='utf-8') as f: json.dump(pack, f, ensure_ascii=False, separators=(',', ':'))
 trfiles = {loc: translation_file(pack, loc, chs) for loc, chs in translations.items()}
 for loc, t in trfiles.items():   # build/<id>.tr.<locale>.json: what noema_finish_upload asks for, one file per language
-    with open(os.path.join(sdir, 'build', f"{meta['id']}.tr.{loc}.json"), 'w', encoding='utf-8') as f: json.dump(t, f, ensure_ascii=False, separators=(',', ':'))
+    b = json.dumps(t, ensure_ascii=False, separators=(',', ':')).encode('utf-8')
+    with open(os.path.join(sdir, 'build', f"{meta['id']}.tr.{loc}.json"), 'wb') as f: f.write(b)
+    pack['translations'][loc]['sha256'] = hashlib.sha256(b).hexdigest()   # the exact file this pack goes with: a stored one that differs is stale (noema_finish_upload re-issues its upload)
+with open(jout, 'w', encoding='utf-8') as f: json.dump(pack, f, ensure_ascii=False, separators=(',', ':'))
 os.makedirs(out_dir, exist_ok=True)
 out = os.path.join(out_dir, meta['id'] + '.noema.zip')
 write_bundle(out, pack, files, {**{f'translations/{loc}.json': t for loc, t in trfiles.items()}, **h5p_files})
