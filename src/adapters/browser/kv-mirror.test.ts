@@ -20,6 +20,7 @@ function setup(
     ls?: Ls;
     channel?: () => ChannelLike | null;
     lsBroken?: () => boolean;
+    now?: () => number;
   } = {},
 ) {
   const ls = o.ls ?? fakeWebStorage(o.lsQuota ?? Infinity);
@@ -37,6 +38,7 @@ function setup(
     },
     channel: o.channel ?? (() => null),
     warn: () => undefined,
+    ...(o.now ? { now: o.now } : {}),
   });
   return { ls, idb, kv, full };
 }
@@ -49,6 +51,9 @@ test('which keys are the account’s', () => {
     assert.ok(!isAccountKey(k), k);
   assert.ok(!isAccountKey('noema1:acc1:a:settings'), 'read before ready: stays in localStorage');
   assert.ok(!isAccountKey('noema-device:geminiKey:acc1'));
+  // a profile whose id is one of the device's words is still an account
+  for (const k of ['noema1:cloud:a:curriculum:c1', 'noema1:current:s:sub:p', 'noema1:migrated:meta:mtime', 'noema1:accounts:a:x'])
+    assert.ok(isAccountKey(k), k);
 });
 
 test('an account far larger than localStorage’s cap is kept, and read back by the next start', async () => {
@@ -327,4 +332,90 @@ test('a page that closes: what is not committed yet is journaled, read on the ne
   assert.equal(value(t.kv.get('noema1:acc:s:sub:last')), 'answer 41');
   await s.kv.flushed();
   assert.equal(journaled(s.ls, 'noema1:acc:s:sub:last'), undefined, 'committed: the journal entry is gone');
+});
+
+test('a clock set back after saving ahead: later saves still win and survive the next start', async () => {
+  let clock = Date.now() + 3_600_000; // an hour ahead
+  const idb = fakeIndexedDB(),
+    ls = fakeWebStorage(Infinity);
+  const a = setup({ idb, ls, now: () => clock });
+  await a.kv.ready();
+  a.kv.set('noema1:acc:a:k', 'ahead');
+  await a.kv.flushed();
+  clock -= 3_600_000; // the clock is corrected
+  const b = setup({ idb, ls, now: () => clock });
+  await b.kv.ready();
+  b.kv.set('noema1:acc:a:k', 'after');
+  await b.kv.flushed();
+  const c = setup({ idb, ls, now: () => clock });
+  await c.kv.ready();
+  assert.equal(value(c.kv.get('noema1:acc:a:k')), 'after');
+});
+
+test('IndexedDB gone on the next start: the journal is put in localStorage first (values and deletes)', async () => {
+  const ls = fakeWebStorage(Infinity);
+  const s = setup({ ls });
+  await s.kv.ready();
+  ls.setItem('noema1:acc:a:gone', 'old');
+  s.kv.set('noema1:acc:a:kept', 'last');
+  s.kv.delete('noema1:acc:a:gone');
+  s.kv.journal(); // the page closes before the commit
+  for (const idb of [null, 'broken'] as const) {
+    const ls2 = fakeWebStorage(Infinity);
+    for (let i = 0; i < ls.length; i++) {
+      const k = ls.key(i);
+      if (k !== null) ls2.setItem(k, ls.getItem(k) ?? '');
+    }
+    const broken = fakeIndexedDB();
+    if (idb === 'broken')
+      (broken.factory as { open: unknown }).open = () => {
+        throw new Error('blocked');
+      };
+    const t = setup({ ls: ls2, idb: idb === null ? null : broken });
+    await t.kv.ready();
+    assert.equal(t.kv.backing(), 'localStorage', String(idb));
+    assert.equal(value(t.kv.get('noema1:acc:a:kept')), 'last', String(idb));
+    assert.equal(value(t.kv.get('noema1:acc:a:gone')), null, String(idb) + ': the delete holds');
+    assert.equal(journaled(ls2, 'noema1:acc:a:kept'), undefined, 'the journal entry left once localStorage kept it');
+    t.kv.set('noema1:acc:a:kept', 'edited');
+    assert.equal(value(t.kv.get('noema1:acc:a:kept')), 'edited');
+  }
+});
+
+test('an older version’s copy left by a failed move leaves localStorage once a newer write commits', async () => {
+  const idb = fakeIndexedDB(),
+    ls = fakeWebStorage(Infinity);
+  ls.setItem('noema1:acc:a:old', 'legacy');
+  idb.quota = 0;
+  const s = setup({ idb, ls });
+  await s.kv.ready();
+  assert.equal(ls.getItem('noema1:acc:a:old'), 'legacy', 'the move failed: it stays where it was');
+  idb.quota = Infinity;
+  s.kv.delete('noema1:acc:a:old');
+  await s.kv.flushed();
+  assert.equal(ls.getItem('noema1:acc:a:old'), null, 'superseded: it left');
+  const t = setup({ idb, ls });
+  await t.kv.ready();
+  assert.equal(value(t.kv.get('noema1:acc:a:old')), null, 'the delete holds after the next start');
+});
+
+test('keys() never lists the store’s own bookkeeping', async () => {
+  const s = setup();
+  await s.kv.ready();
+  s.kv.set('noema1:acc:a:k', 'v');
+  s.kv.journal();
+  s.ls.setItem(JOURNAL_PREFIX + 'noema1:acc:a:k', JSON.stringify({ v: 'v', r: '0' }));
+  const all = value(s.kv.keys());
+  assert.ok(!all.some(k => k.startsWith(JOURNAL_PREFIX) || k === 'noema-device:kv-mark'), all.join(','));
+  assert.ok(all.includes('noema1:acc:a:k'));
+});
+
+test('journal on close: one too big for localStorage does not stop the smaller ones', async () => {
+  const s = setup({ lsQuota: 2000 });
+  await s.kv.ready();
+  s.kv.set('noema1:acc:a:big', 'b'.repeat(5000));
+  s.kv.set('noema1:acc:s:sub:p', 'small');
+  s.kv.journal();
+  assert.equal(journaled(s.ls, 'noema1:acc:a:big'), undefined);
+  assert.equal(journaled(s.ls, 'noema1:acc:s:sub:p'), 'small');
 });

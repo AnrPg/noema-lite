@@ -77,13 +77,15 @@ export interface MirroredKv extends KeyValueStore {
   journal(): void;
 }
 
-/** An account's key: `noema1:<account>:…` — but not the device's own `noema1:` keys (the profiles, the migrations' marks,
-    the cloud session) nor an account's `a:settings`, which the first screen reads before ready (its language, its
-    character) and which stays small. */
+/** An account's key: `noema1:<account>:<kind>:…` — but not the device's own `noema1:` keys (`noema1:accounts`,
+    `noema1:accounts:removed`, `noema1:migrated:<name>`, `noema1:cloud:session`, `noema1:current`: one word after the
+    prefix, where an account's keys always have a kind and a name, so a profile called "cloud" is still an account) nor
+    an account's `a:settings`, which the first screen reads before ready (its language, its character) and stays small. */
 export function isAccountKey(key: string): boolean {
   const m = /^noema1:([^:]+):(.*)$/.exec(key);
   if (!m) return false;
-  return !['accounts', 'migrated', 'cloud', 'current'].includes(m[1] ?? '') && m[2] !== 'a:settings';
+  const rest = m[2] ?? '';
+  return rest.includes(':') && rest !== 'a:settings';
 }
 
 /** A key's value (null: deleted) and its revision. */
@@ -120,6 +122,8 @@ export function mirroredKv(o: MirroredKvOptions): MirroredKv {
   let pending = new Map<string, Rec>();
   /** this tab's writes not yet committed (their revision): what the journal keeps when the page closes */
   const unsettled = new Map<string, string>();
+  /** keys an older version left in localStorage, moved to the database but not committed yet (their value there) */
+  const legacy = new Map<string, string>();
   let mode: 'indexeddb' | 'localStorage' | 'loading' = 'loading';
   let db: IDBDatabase | null = null;
   let loading: Promise<void> | null = null;
@@ -139,11 +143,12 @@ export function mirroredKv(o: MirroredKvOptions): MirroredKv {
     } else count++;
     return `${pad(lastWall, 15)}-${pad(count, 6)}-${tab}`;
   }
-  /** a revision seen from elsewhere: this tab's next one is later (a clock more than 5 minutes ahead is not followed) */
+  /** a revision seen from elsewhere: this tab's next one is later — even when it came from a clock that ran ahead and was
+      set back since (the database keeps the highest revision, so a lower one would never be written) */
   function seen(r: string): void {
     const wall = Number(r.slice(0, 15)),
       c = Number(r.slice(16, 22));
-    if (!Number.isFinite(wall) || wall > now() + 5 * 60_000) return;
+    if (!Number.isFinite(wall)) return;
     if (wall > lastWall) {
       lastWall = wall;
       count = Number.isFinite(c) ? c : 0;
@@ -250,6 +255,12 @@ export function mirroredKv(o: MirroredKvOptions): MirroredKv {
     if (j && j.r <= r) lsDel(JOURNAL_PREFIX + k);
     const u = unsettled.get(k);
     if (u !== undefined && u <= r) unsettled.delete(k);
+    // an older version's copy of it, superseded by what was just committed: it leaves localStorage
+    const old = legacy.get(k);
+    if (old !== undefined) {
+      if (lsGet(k) === old) lsDel(k);
+      legacy.delete(k);
+    }
   }
 
   /* ---------- the other tabs ---------- */
@@ -363,6 +374,11 @@ export function mirroredKv(o: MirroredKvOptions): MirroredKv {
   function failOver(batch: ReadonlyMap<string, Rec>, e: unknown): void {
     warn('IndexedDB refused a write: kept in the journal until the next start', e);
     for (const [k, rec] of batch) {
+      if (legacy.has(k)) {
+        // an older version's key: still safe in localStorage, moved again with the next write
+        if (mem.get(k)?.r === rec.r && !pending.has(k)) pending.set(k, rec);
+        continue;
+      }
       if (k !== MARK_DB && unsettled.get(k) !== rec.r) continue; // a newer write of this key (here or in another tab) takes care of it
       if (k !== MARK_DB && journalPut(k, rec)) continue;
       if (rec.v !== null && k !== MARK_DB) o.onQuota(k); // nowhere to keep it now: the learner is told
@@ -418,15 +434,7 @@ export function mirroredKv(o: MirroredKvOptions): MirroredKv {
       stored = await readAll(db);
     } catch (e) {
       warn('IndexedDB unavailable: the account stays in localStorage', e);
-      mode = 'localStorage';
-      // what was written before ready goes where the keys are now
-      for (const [k, rec] of mem) {
-        if (rec.v === null) lsDel(k);
-        else lsSet(k, rec.v);
-      }
-      mem.clear();
-      pending.clear();
-      unsettled.clear();
+      toLocalStorage();
       return;
     }
     const markRec = stored.get(MARK_DB);
@@ -458,13 +466,14 @@ export function mirroredKv(o: MirroredKvOptions): MirroredKv {
         if (take(k, rec)) pending.set(k, rec);
       } else lsDel(jk); // the database has it (or newer)
     }
-    // the keys an older version kept in localStorage: newer than anything here (that version wrote nowhere else)
-    const moved = new Map<string, string>();
+    // the keys an older version kept in localStorage: newer than anything here (that version wrote nowhere else). They
+    // leave localStorage once a write at least as new is committed (settled), so a copy left by a failed move never
+    // comes back over a later edit.
     for (const k of lsKeys('noema1:')) {
       if (!isAcc(k)) continue;
       const v = lsGet(k);
       if (v === null) continue;
-      moved.set(k, v);
+      legacy.set(k, v);
       if (unsettled.has(k)) continue; // this page wrote it since: that write wins, the old copy only leaves
       const rec = { v, r: revision() };
       take(k, rec);
@@ -482,12 +491,37 @@ export function mirroredKv(o: MirroredKvOptions): MirroredKv {
     try {
       await writeBatch(db, batch);
       for (const [k, rec] of batch) settled(k, rec.r);
-      for (const [k, v] of moved) if (lsGet(k) === v) lsDel(k); // only once it is safely in the database
     } catch (e) {
       // the database is full or failing: an older version's keys stay where they are; the rest goes to the journal
       warn('the first write to IndexedDB failed: the keys stay in localStorage', e);
-      for (const [k, rec] of batch) if (!moved.has(k) && k !== MARK_DB) journalPut(k, rec);
+      failOver(batch, e);
     }
+  }
+
+  /** No IndexedDB here (now or since this start): the account lives in localStorage. The journal (writes a page closed
+      before committing, refused writes) is put there first, then what this page wrote before ready; a journal entry
+      leaves only once localStorage kept it. */
+  function toLocalStorage(): void {
+    mode = 'localStorage';
+    const apply = (k: string, rec: Rec): boolean => {
+      if (rec.v === null) {
+        lsDel(k);
+        return true;
+      }
+      return lsSet(k, rec.v).ok;
+    };
+    const recs = new Map<string, Rec>();
+    for (const jk of lsKeys(JOURNAL_PREFIX)) {
+      const k = jk.slice(JOURNAL_PREFIX.length),
+        rec = journalGet(k);
+      if (rec && isAcc(k)) recs.set(k, rec);
+    }
+    for (const [k, rec] of mem) if (newer(rec, recs.get(k))) recs.set(k, rec);
+    for (const [k, rec] of recs) if (apply(k, rec)) lsDel(JOURNAL_PREFIX + k);
+    mem.clear();
+    pending.clear();
+    unsettled.clear();
+    legacy.clear();
   }
 
   /** a write of this tab: memory, the batch, the other tabs */
@@ -514,7 +548,12 @@ export function mirroredKv(o: MirroredKvOptions): MirroredKv {
       return ok(null);
     },
     set(key, value) {
-      if (!isAcc(key) || mode === 'localStorage') return lsSet(key, value);
+      if (!isAcc(key)) return lsSet(key, value);
+      if (mode === 'localStorage') {
+        const r = lsSet(key, value);
+        if (r.ok) lsDel(JOURNAL_PREFIX + key); // newer than any journal entry of it
+        return r;
+      }
       write(key, value);
       return OK_VOID;
     },
@@ -524,6 +563,7 @@ export function mirroredKv(o: MirroredKvOptions): MirroredKv {
         if (!s.ok) return s;
         try {
           s.value.removeItem(key);
+          if (isAcc(key)) s.value.removeItem(JOURNAL_PREFIX + key);
           return OK_VOID;
         } catch (e) {
           return err(unavailable(e));
@@ -536,7 +576,10 @@ export function mirroredKv(o: MirroredKvOptions): MirroredKv {
       const s = ls();
       if (!s.ok && mode !== 'indexeddb') return s;
       const out = new Set<string>();
-      for (const k of lsKeys(prefix)) if (!isAcc(k) || mode !== 'indexeddb') out.add(k);
+      for (const k of lsKeys(prefix)) {
+        if (k === MARK_LS || k.startsWith(JOURNAL_PREFIX)) continue; // the store's own bookkeeping
+        if (!isAcc(k) || mode !== 'indexeddb') out.add(k);
+      }
       if (mode !== 'localStorage')
         for (const [k, rec] of mem) {
           if (!k.startsWith(prefix)) continue;
@@ -560,17 +603,17 @@ export function mirroredKv(o: MirroredKvOptions): MirroredKv {
       flush();
       for (const [k, r] of unsettled) {
         const rec = mem.get(k);
-        if (rec?.r === r && !journalPut(k, rec)) return; // a full localStorage: the transaction still has its chance
+        if (rec?.r === r && !journalPut(k, rec)) continue; // too big for what is left: the transaction still has its chance, the smaller ones may fit
       }
     },
   };
 
   // no IndexedDB at all here (a test context, blocked site data): localStorage from the start, as before
   try {
-    if (!o.indexedDB()) mode = 'localStorage';
+    if (!o.indexedDB()) toLocalStorage();
   } catch (e) {
     warn('IndexedDB unavailable: the account stays in localStorage', e);
-    mode = 'localStorage';
+    toLocalStorage();
   }
   try {
     const g = globalThis as { addEventListener?: (t: string, f: () => void) => void; document?: { visibilityState?: string } };
