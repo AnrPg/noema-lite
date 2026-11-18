@@ -256,6 +256,27 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   await fetch(trUrl, { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...TRF, pack: 'tr-physics' }) });
   const t3 = await tool('noema_finish_upload', { subject_id: 'tr-physics' });
   ok(!t3.isError && srv.state.kv[uid]['a:packmeta:tr-physics'] && JSON.stringify(JSON.parse(srv.state.kv[uid]['a:packmeta:tr-physics'].value).contentLocales) === '["fr"]', 'with the translation file uploaded the subject is saved, fr listed in contentLocales: ' + t3.content[0].text.split('\n')[0].slice(0, 110));
+  // 🔁 the pack is rebuilt and uploaded again: the stored fr file is the old one → finish_upload hands out a fresh link for it, and that one upload is all it takes
+  { const sha = b => require('crypto').createHash('sha256').update(b).digest('hex');
+    const up = async (pk) => { const s = await tool('noema_start_upload', { subject_id: 'tr-physics' }); await fetch(s.content[0].text.match(/https?:\/\/\S+token=\S+/)[0], { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify(pk) }); };
+    const trB = JSON.stringify({ ...TRF, pack: 'tr-physics', version: 'rebuilt-2' });
+    await up({ ...tp, version: 'rebuilt-2', translations: { fr: { file: true, chapters: TRF.chapters.length, sha256: sha(trB) } } });
+    const r1 = await tool('noema_finish_upload', { subject_id: 'tr-physics' }), r1t = r1.content[0].text;
+    const u1 = (r1t.match(/--data-binary @work\/tr-physics\/build\/tr-physics\.tr\.fr\.json "([^"]+)"/) || [])[1];
+    ok(r1.isError && /older files that no longer match the updated pack — fr: the file in the account \(sha256/.test(r1t) && !!u1 && u1 !== trUrl && /NOT saved/.test(r1t),
+      'stale translation (stamped sha256 differs): finish_upload returns a fresh upload command for it, nothing else: ' + r1t.split('\n')[0].slice(0, 200));
+    const r1b = await tool('noema_finish_upload', { subject_id: 'tr-physics' }), u1b = (r1b.content[0].text.match(/tr-physics\.tr\.fr\.json "([^"]+)"/) || [])[1];
+    ok(r1b.isError && !!u1b && u1b !== u1, 'every call re-issues a fresh link (an expired one is never a dead end)');
+    await fetch(u1, { method: 'PUT', headers: { 'content-type': 'application/json' }, body: trB });
+    const r2 = await tool('noema_finish_upload', { subject_id: 'tr-physics' });
+    ok(!r2.isError && /Translated physics/.test(r2.content[0].text), 'after that one upload, finish_upload saves the subject: ' + r2.content[0].text.split('\n')[0].slice(0, 120));
+    // an older pack without the stamp: the file's pack version tells it is stale
+    await up({ ...tp, version: 'rebuilt-3' });
+    const r3 = await tool('noema_finish_upload', { subject_id: 'tr-physics' }), r3t = r3.content[0].text;
+    ok(r3.isError && /fr: the file in the account was made for pack version rebuilt-2; the pack is now rebuilt-3/.test(r3t) && /curl -sS -X PUT[^\n]*tr-physics\.tr\.fr\.json "http/.test(r3t),
+      'stale translation in a pack without the stamp (version differs): a fresh upload command too');
+    await fetch(r3t.match(/tr-physics\.tr\.fr\.json "([^"]+)"/)[1], { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...TRF, pack: 'tr-physics', version: 'rebuilt-3' }) });
+    ok(!(await tool('noema_finish_upload', { subject_id: 'tr-physics' })).isError, '… and after it the subject is saved'); }
   const ru = { ...TRF, pack: 'tr-physics', locale: 'ru', chapters: TRF.chapters.map(c => ({ ...c, title: 'Энергия' })) };
   const t4 = await tool('noema_save_translation', { subject_id: 'tr-physics', locale: 'ru', translation_json: JSON.stringify(ru) });
   const saved = JSON.parse(Buffer.from(srv.state.files[`${uid}/packs/tr-physics.json`].data).toString());
@@ -264,7 +285,7 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   ok(!t5.isError && /tr-physics\.tr\.el\.json/.test(t5.content[0].text) && !!elUrl, 'noema_save_translation without the JSON returns an upload command');
   await fetch(elUrl, { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...ru, locale: 'el', chapters: TRF.chapters.map(c => ({ ...c, exercises: c.exercises.slice(1) })) }) });
   const t6 = await tool('noema_save_translation', { subject_id: 'tr-physics', locale: 'el' });
-  ok(t6.isError && /missing/.test(t6.content[0].text) && !JSON.parse(Buffer.from(srv.state.files[`${uid}/packs/tr-physics.json`].data).toString()).translations.el, 'an uploaded translation with an exercise missing is refused and the pack does not name it: ' + t6.content[0].text.split('\n')[1]);
+  ok(t6.isError && /missing/.test(t6.content[0].text) && /curl -sS -X PUT[^\n]*tr-physics\.tr\.el\.json "http/.test(t6.content[0].text) && !JSON.parse(Buffer.from(srv.state.files[`${uid}/packs/tr-physics.json`].data).toString()).translations.el, 'an uploaded translation with an exercise missing (an older file) is refused with a fresh upload link, and the pack does not name it: ' + t6.content[0].text.split('\n')[1]);
   const t7 = await tool('noema_save_translation', { subject_id: 'tr-physics', locale: 'en', translation_json: JSON.stringify({ ...ru, locale: 'en' }) });
   ok(t7.isError, 'a translation into the pack’s own language is refused: ' + t7.content[0].text.split('\n').slice(0, 2).join(' '));
   // 🌐 the subject's name in the translation's language (subject.i18n), added to a translation already saved

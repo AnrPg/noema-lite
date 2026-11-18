@@ -5,7 +5,7 @@
    and the checks that every one is there, with the commands that upload the missing ones. */
 import type { Pack, PackActivity, PackSource } from '../engine/api.ts';
 import type { ToolContext } from '../tool.ts';
-import { extOf, lang0, safeSeg } from '../util.ts';
+import { extOf, lang0, safeSeg, sha256Hex } from '../util.ts';
 import type { SourceFileMeta } from './rows.ts';
 
 /** The pack's own source files (make_pack.py packages them: file "sources/<name>" + size + sha256). */
@@ -105,17 +105,45 @@ export const trNamed = (p: Pack): string[] =>
     .map(([loc]) => loc);
 export const trCurl = async (ctx: ToolContext, sid: string, loc: string): Promise<string> =>
   `# translation ${loc}\ncurl -sS -X PUT -H "Content-Type: application/json" -H "x-upsert: true" -H "apikey: ${ctx.sb.key}" --data-binary @work/${sid}/build/${sid}.tr.${loc}.json "${await ctx.storage.uploadUrl(trPath(ctx.uid, sid, loc))}"`;
-/** Every translation the pack names is in the account and matches it → { missing: [loc], bad: ["loc: errors"] } */
-export async function translationStatus(ctx: ToolContext, sid: string, p: Pack): Promise<{ missing: string[]; bad: string[] }> {
-  const out = { missing: [] as string[], bad: [] as string[] };
+/** Every translation the pack names is in the account, is the very file the pack was built with, and matches it →
+    { missing: [loc], stale: [{ loc, why }], bad: ["loc: errors"] }.
+    stale: the stored file is an older one — the pack was rebuilt (make_pack.py stamps translations.<loc>.sha256, the SHA-256
+    of build/<id>.tr.<loc>.json) or, in a pack without the stamp, the file says another pack version or no longer fits the
+    pack. Its fix is always the same: upload the file the rebuild wrote (trCurl, a fresh link on every call). */
+export async function translationStatus(
+  ctx: ToolContext,
+  sid: string,
+  p: Pack,
+): Promise<{ missing: string[]; stale: { loc: string; why: string }[]; bad: string[] }> {
+  const out = { missing: [] as string[], stale: [] as { loc: string; why: string }[], bad: [] as string[] };
   for (const loc of trNamed(p)) {
-    const f = await ctx.storage.json(trPath(ctx.uid, sid, loc));
-    if (!f) {
+    const raw = await ctx.storage.text(trPath(ctx.uid, sid, loc));
+    let f: { version?: unknown } | null = null;
+    try {
+      f = raw == null ? null : (JSON.parse(raw) as { version?: unknown });
+    } catch {
+      f = null;
+    }
+    if (raw == null) {
       out.missing.push(loc);
       continue;
     }
-    const r = ctx.engine.content.checkTranslation(f, p);
-    if (r.errors.length) out.bad.push(`${loc}: ${r.errors.slice(0, 6).join('; ')}`);
+    const want = p.translations?.[loc]?.sha256;
+    if (typeof want === 'string' && want) {
+      const got = await sha256Hex(raw);
+      if (got !== want) {
+        out.stale.push({ loc, why: `the file in the account (sha256 ${got.slice(0, 12)}…) is not the one this pack was built with (${want.slice(0, 12)}…)` });
+        continue;
+      }
+    } else if (f && f.version && p.version && f.version !== p.version) {
+      out.stale.push({ loc, why: `the file in the account was made for pack version ${String(f.version)}; the pack is now ${String(p.version)}` });
+      continue;
+    }
+    const r = f ? ctx.engine.content.checkTranslation(f, p) : { errors: ['not valid JSON'] };
+    if (!r.errors.length) continue;
+    // without the stamp, a file that no longer fits the pack is most likely the one before the rebuild: re-upload it first
+    if (typeof want === 'string' && want) out.bad.push(`${loc}: ${r.errors.slice(0, 6).join('; ')}`);
+    else out.stale.push({ loc, why: `the file in the account does not fit the pack (${r.errors.slice(0, 3).join('; ')})` });
   }
   return out;
 }

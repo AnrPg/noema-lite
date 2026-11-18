@@ -137,10 +137,12 @@ export async function completePack(
     return fail(
       `The pack is valid, but ${ts.bad.length} of its translations do not match it — fix them (same ids, sections, answers and code as the pack), rebuild with make_pack.py and upload them again:\n- ${ts.bad.join('\n- ')}`,
     );
-  if (ts.missing.length)
+  // missing, or an older file left from before the pack was rebuilt: one fresh upload link each (valid 2 h, a new one on every call)
+  const up = [...ts.missing, ...ts.stale.map(x => x.loc)];
+  if (up.length)
     return fail(
-      `The pack is valid, but ${ts.missing.length} of its translations are not in the account yet: ${ts.missing.join(', ')}. The subject is NOT saved yet. Upload them — run in your sandbox, from the folder that contains work/ (make_pack.py wrote them to work/${sid}/build/):\n\n` +
-        (await Promise.all(ts.missing.map(loc => trCurl(ctx, sid, loc)))).join('\n\n') +
+      `The pack is valid, but ${up.length} of its translations ${ts.missing.length ? `are not in the account yet: ${ts.missing.join(', ')}` : ''}${ts.missing.length && ts.stale.length ? ' or ' : ''}${ts.stale.length ? `are older files that no longer match the updated pack — ${ts.stale.map(x => `${x.loc}: ${x.why}`).join('; ')}` : ''}. The subject is NOT saved yet. Upload the files make_pack.py wrote with this pack — run in your sandbox, from the folder that contains work/ (they are in work/${sid}/build/ and inside ${sid}.noema.zip); nothing else needs to change:\n\n` +
+        (await Promise.all(up.map(loc => trCurl(ctx, sid, loc)))).join('\n\n') +
         `\n\nThen call noema_finish_upload with subject_id "${sid}" again.`,
     );
 

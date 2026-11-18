@@ -113,6 +113,11 @@
               "type": "integer",
               "minimum": 1,
               "x-message": "a translation in its own file says {\"file\": true, \"chapters\": <how many chapters it translates>}"
+            },
+            "sha256": {
+              "description": "the SHA-256 of the exact translation file this pack was built with (make_pack.py; noema_save_translation): a stored file that differs is an older one, and noema_finish_upload hands out a fresh upload link for it",
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
             }
           }
         },
