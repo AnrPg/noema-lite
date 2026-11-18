@@ -1771,5 +1771,16 @@
   "engine.author.f.lib.wpmHi": "Palabras por minuto máximas",
   "engine.author.f.lib.wpmLo": "Palabras por minuto mínimas",
   "engine.author.f.benchPart": "Parte medida",
-  "engine.author.f.lib.eq": "Equilibrio (índice)"
+  "engine.author.f.lib.eq": "Equilibrio (índice)",
+  "engine.space.title": "Espacio en este dispositivo",
+  "engine.space.used": "{used} usados de {quota}",
+  "engine.space.usedOnly": "{used} usados",
+  "engine.space.unknown": "Este navegador no indica cuánto espacio usa la app.",
+  "engine.space.kept": "Se guarda siempre",
+  "engine.space.mayEvict": "Puede borrarse",
+  "engine.space.keptLine": "El navegador ha prometido no borrar tus datos por su cuenta.",
+  "engine.space.notKeptLine": "Cuando el dispositivo se queda sin espacio, el navegador puede borrar los datos de la app. Pídele que los guarde o añade la app a la pantalla de inicio.",
+  "engine.space.keep": "Guardar mis datos en este dispositivo",
+  "engine.space.refused": "El navegador se ha negado. Suele ayudar añadir la app a la pantalla de inicio.",
+  "engine.space.info": "Tus asignaturas, rutas y progreso se guardan en la base de datos del navegador en este dispositivo, que crece con el espacio libre. Cuando has iniciado sesión, la nube también guarda una copia."
 }

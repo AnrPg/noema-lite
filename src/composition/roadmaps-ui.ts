@@ -139,7 +139,7 @@ interface Globals {
     toast?: (text: string, ms?: number) => void;
     shelf?: (acc: string) => Promise<unknown[]>;
   };
-  NoemaCore?: { roadmaps?: { levels?: LevelService } };
+  NoemaCore?: { roadmaps?: { levels?: LevelService }; storage: { kv: { get(key: string): string | null } } };
   NoemaI18n?: { t(key: string): string };
   marked?: { parseInline(md: string): string };
   DOMPurify?: { sanitize(html: string): string };
@@ -353,7 +353,7 @@ export function legacyRoadmapsData(win: Window): RoadmapsData {
       defaultProvider(acc) {
         let pref = '';
         try {
-          const s = JSON.parse(win.localStorage.getItem(`noema1:${acc}:a:settings`) ?? '{}') as { curProvider?: unknown };
+          const s = JSON.parse(g().NoemaCore?.storage.kv.get(`noema1:${acc}:a:settings`) ?? '{}') as { curProvider?: unknown };
           pref = typeof s.curProvider === 'string' ? s.curProvider : '';
         } catch {
           pref = '';

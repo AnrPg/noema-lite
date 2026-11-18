@@ -1771,5 +1771,16 @@
   "engine.author.f.lib.wpmHi": "अधिकतम शब्द प्रति मिनट",
   "engine.author.f.lib.wpmLo": "न्यूनतम शब्द प्रति मिनट",
   "engine.author.f.benchPart": "मापा गया भाग",
-  "engine.author.f.lib.eq": "संतुलन (सूचकांक)"
+  "engine.author.f.lib.eq": "संतुलन (सूचकांक)",
+  "engine.space.title": "इस डिवाइस पर जगह",
+  "engine.space.used": "{quota} में से {used} इस्तेमाल",
+  "engine.space.usedOnly": "{used} इस्तेमाल",
+  "engine.space.unknown": "यह ब्राउज़र नहीं बताता कि ऐप कितनी जगह इस्तेमाल करता है।",
+  "engine.space.kept": "हमेशा रखा जाएगा",
+  "engine.space.mayEvict": "मिटाया जा सकता है",
+  "engine.space.keptLine": "ब्राउज़र ने वादा किया है कि वह आपका डेटा अपने आप नहीं मिटाएगा।",
+  "engine.space.notKeptLine": "डिवाइस में जगह कम होने पर ब्राउज़र ऐप का डेटा मिटा सकता है। उससे डेटा रखने को कहें, या ऐप को होम स्क्रीन पर जोड़ें।",
+  "engine.space.keep": "मेरा डेटा इस डिवाइस पर रखें",
+  "engine.space.refused": "ब्राउज़र ने मना कर दिया। ऐप को होम स्क्रीन पर जोड़ने से अक्सर मदद मिलती है।",
+  "engine.space.info": "आपके विषय, Roadmap और प्रगति इस डिवाइस पर ब्राउज़र के अपने डेटाबेस में रखे जाते हैं, जो खाली जगह के साथ बढ़ता है। साइन इन होने पर क्लाउड में भी एक कॉपी रहती है।"
 }

@@ -7,12 +7,12 @@
   const LJ = N.LANGJOBS, K = LJ.KIND;
   const jparse = (s, d = null) => { try { return s == null ? d : JSON.parse(s); } catch (e) { return d; } };
   const PRE = acc => `noema1:${acc}:a:langcourse:`;
-  const kvSet = (k, v) => { const s = JSON.stringify(v); if (window.Noema?.kv) Noema.kv.set(k, s); else localStorage.setItem(k, s); };
-  const getRec = (acc, cid) => jparse(localStorage.getItem(PRE(acc) + cid));
+  const kvSet = (k, v) => { const s = JSON.stringify(v); if (window.Noema?.kv) Noema.kv.set(k, s); else NoemaCore.storage.kv.set(k, s); };
+  const getRec = (acc, cid) => jparse(NoemaCore.storage.kv.get(PRE(acc) + cid));
   const putRec = (acc, rec) => kvSet(PRE(acc) + rec.id, rec);
   function records(acc) {
     const p = PRE(acc), out = [];
-    for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && k.startsWith(p)) { const r = jparse(localStorage.getItem(k)); if (r?.format === LJ.FORMAT) out.push(r); } }
+    for (const k of NoemaCore.storage.kv.keys(p)) { const r = jparse(NoemaCore.storage.kv.get(k)); if (r?.format === LJ.FORMAT) out.push(r); }
     return out.sort((a, b) => String(b.updated || '').localeCompare(String(a.updated || '')));
   }
   const cloudAcc = acc => { try { const s = window.NoemaCloud?.session?.(); return !!s && acc === 'u_' + s.user.id; } catch (e) { return false; } };
@@ -70,7 +70,7 @@
   const PKP = (acc, cid) => `noema1:${acc}:a:langpack:${cid}:`;
   function packRecords(acc, cid) {
     const p = PKP(acc, cid), out = [];
-    for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && k.startsWith(p)) { const r = jparse(localStorage.getItem(k)); if (r?.code) out.push(r); } }
+    for (const k of NoemaCore.storage.kv.keys(p)) { const r = jparse(NoemaCore.storage.kv.get(k)); if (r?.code) out.push(r); }
     return out.sort((a, b) => String(a.code).localeCompare(String(b.code)));
   }
   const PACKS = {};   // acc|course → the packages laid over the open course (again after a merge rebuilds it)
@@ -91,7 +91,7 @@
   /** Remove a language a package added: the record (synced — every device drops it), the file, the device copy. */
   async function removePackage(acc, cid, code) {
     const key = PKP(acc, cid) + code;
-    if (window.Noema?.kv?.del) Noema.kv.del(key); else localStorage.removeItem(key);
+    if (window.Noema?.kv?.del) Noema.kv.del(key); else NoemaCore.storage.kv.delete(key);
     await devPut(devKey(acc, 'langpack', cid + ':' + code), null);
     if (UI.acc === acc && UI.id === cid && UI.L) {   // the learner's choice of languages forgets it; adding it again makes it active again
       UI.prefs.addedSeen = (UI.prefs.addedSeen || []).filter(c => c !== code);

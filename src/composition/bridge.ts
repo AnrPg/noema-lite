@@ -67,6 +67,10 @@ export interface StorageBridge {
   };
   estimate(): Promise<QuotaEstimate | null>;
   persist(): Promise<boolean>;
+  /** Resolves once the account's keys are loaded into memory (the app awaits it before it reads an account). */
+  ready(): Promise<void>;
+  /** Keys another tab changed. */
+  onChange(listener: (keys: readonly string[]) => void): Unsubscribe;
 }
 export interface ComputeBridge {
   run<O = unknown>(job: string, input: unknown, options?: RunOptions): Promise<O>;
@@ -166,6 +170,12 @@ export function buildBridge(r: Resolver, extensions: readonly BridgeExtension[] 
         if (x.ok) return x.value;
         failed(x.error, 'storage.persist');
         return false;
+      },
+      async ready() {
+        await storage.ready?.();
+      },
+      onChange(listener: (keys: readonly string[]) => void) {
+        return storage.onKvChange?.(listener) ?? ((): void => undefined);
       },
     } satisfies StorageBridge),
     notify: r.get(NOTIFIER),

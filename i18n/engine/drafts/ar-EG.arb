@@ -1771,5 +1771,16 @@
   "engine.author.f.lib.wpmHi": "أعلى عدد كلمات في الدقيقة",
   "engine.author.f.lib.wpmLo": "أدنى عدد كلمات في الدقيقة",
   "engine.author.f.benchPart": "الجزء المقيس",
-  "engine.author.f.lib.eq": "التوازن (الرقم)"
+  "engine.author.f.lib.eq": "التوازن (الرقم)",
+  "engine.space.title": "المساحة على هذا الجهاز",
+  "engine.space.used": "{used} مستخدمة من {quota}",
+  "engine.space.usedOnly": "{used} مستخدمة",
+  "engine.space.unknown": "هذا المتصفح لا يذكر المساحة التي يستخدمها التطبيق.",
+  "engine.space.kept": "محفوظة دائمًا",
+  "engine.space.mayEvict": "قد تُمسح",
+  "engine.space.keptLine": "وعد المتصفح بألا يمسح بياناتك من تلقاء نفسه.",
+  "engine.space.notKeptLine": "عندما تقل المساحة على الجهاز قد يمسح المتصفح بيانات التطبيق. اطلب منه الاحتفاظ ببياناتك، أو أضف التطبيق إلى الشاشة الرئيسية.",
+  "engine.space.keep": "احتفظ ببياناتي على هذا الجهاز",
+  "engine.space.refused": "رفض المتصفح. إضافة التطبيق إلى الشاشة الرئيسية تساعد عادةً.",
+  "engine.space.info": "تُحفظ موادك وخرائط الطريق وتقدّمك في قاعدة بيانات المتصفح على هذا الجهاز، وهي تكبر مع المساحة الفارغة. وعند تسجيل الدخول تحتفظ السحابة بنسخة أيضًا."
 }

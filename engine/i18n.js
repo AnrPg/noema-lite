@@ -141,7 +141,7 @@
 
   /* ---------- the current locale ---------- */
   /** The last account's settings (a:settings: lang, numerals) — read before any account is open, so the first screen is right. */
-  const accountSettings = () => { try { const c = JSON.parse(localStorage.getItem('noema1:current') || '{}') || {}; return c.acc ? JSON.parse(localStorage.getItem(`noema1:${c.acc}:a:settings`) || '{}') || {} : {}; } catch (e) { return {}; } };
+  const accountSettings = () => { try { const c = JSON.parse(NoemaCore.storage.kv.get('noema1:current') || '{}') || {}; return c.acc ? JSON.parse(NoemaCore.storage.kv.get(`noema1:${c.acc}:a:settings`) || '{}') || {} : {}; } catch (e) { return {}; } };
   const state = { locale: 'en', digits: {} };
   try { const a = accountSettings(); state.locale = lang(a.lang); if (a.numerals) state.digits = { 'ar-EG': a.numerals }; } catch (e) { state.locale = browser(); }
   const listeners = [];

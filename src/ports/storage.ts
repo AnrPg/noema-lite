@@ -2,8 +2,10 @@
  * Storage port: what this device keeps (docs/ARCHITECTURE.md §4).
  *
  * Two stores and two signals:
- *  • `kv` — a small, synchronous key → text store (localStorage in the browser). Keys are the app's namespaced keys
- *    (`noema1:<account>:a:…`, `noema1:<account>:s:<subject>:…`, `noema-device:…`); values are text (JSON is the caller's).
+ *  • `kv` — a synchronous key → text store. Keys are the app's namespaced keys (`noema1:<account>:a:…`,
+ *    `noema1:<account>:s:<subject>:…`, `noema-device:…`); values are text (JSON is the caller's). In the browser the
+ *    account's keys live in IndexedDB behind an in-memory copy (no 5 MB cap; src/adapters/browser/kv-mirror.ts) and the
+ *    device's small keys in localStorage. Nothing else in the app touches localStorage for account data.
  *  • `docs` — an asynchronous document store with named collections and transactions (IndexedDB in the browser): packs,
  *    restore points, folder handles, conversations, and — in phase 2 — the event log and the outbox.
  *  • `onFull` — the storage-full signal: raised whenever a write fails because the browser's storage for this site is
@@ -86,6 +88,11 @@ export interface Storage {
   persist(): AsyncResult<boolean>;
   /** The storage-full signal. */
   onFull(listener: (event: StorageFullEvent) => void): Unsubscribe;
+  /** Resolves once `kv` holds every stored key (the browser loads the account's keys from IndexedDB into memory); the
+      app awaits it before it reads an account. Stores that are ready at once may leave it out. */
+  ready?(): Promise<void>;
+  /** Keys another tab changed (the browser's tabs share the store); stores of one page may leave it out. */
+  onKvChange?(listener: (keys: readonly string[]) => void): Unsubscribe;
 }
 
 /** The names browsers give a full storage (Chrome, Firefox, Safari, old WebKit codes). */

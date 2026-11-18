@@ -164,9 +164,9 @@ function render() {
 function frameSummary(v) {
   try {
     const b = v.querySelector('.lx-lessonbtn'), nid = b?.dataset.node, n = nid && UI.C.nodes[nid];
-    const k = `noema1:${UI.acc}:meta:langsum`, all = JSON.parse(localStorage.getItem(k) || '{}') || {};
+    const k = `noema1:${UI.acc}:meta:langsum`, all = JSON.parse(NoemaCore.storage.kv.get(k) || '{}') || {};
     all[UI.id] = { at: Date.now(), title: courseTitle(), next: n ? { node: nid, step: stepLabel(n), title: n.title } : null, lang: UI.lang };
-    localStorage.setItem(k, JSON.stringify(all));
+    NoemaCore.storage.kv.set(k, JSON.stringify(all));
   } catch (e) { }
 }
 /** A row of flag buttons for a card: one per course language, with the state of the concept in it. */

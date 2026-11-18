@@ -14,7 +14,7 @@
   const SKEY = 'noema1:cloud:session';
   let CFG = null, BASE = '', KEY = '';   // KEY = the project's publishable key (sb_publishable_…) or legacy anon JWT
   const st = { convoPending: new Set(), seq: 0, autoAcc: null };
-  const jget = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } };
+  const jget = (k, d) => { try { const v = NoemaCore.storage.kv.get(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } };
   const caught = (where, severity = 'warning') => NoemaCore.errors.catcher(where, { severity });   // a background step that failed: into the error journal (src/ports/error-reporter.ts)
   const jset = (k, v) => NoemaCore.storage.kv.set(k, JSON.stringify(v));   // a full storage: the core warns the learner
   /** Something waits to be sent: the sync loop's wait starts (NoemaCore.sync). */
@@ -22,7 +22,7 @@
   /** The sync's state as the old UI shows it (engine/shell.js, engine/src/70_account.js): error = its words in the UI language. */
   const status = () => { const s = NoemaCore.sync.status(); return { signedIn: !!session(), syncing: s.syncing, lastSync: s.lastSync, error: s.error ? errText(s.error) : null, errorInfo: s.errorInfo, pending: s.pending }; };
   function session() { return jget(SKEY, null); }
-  function setSession(s) { if (s) { s.expires_at = s.expires_at || Math.floor(Date.now() / 1000) + (s.expires_in || 3600); jset(SKEY, { access_token: s.access_token, refresh_token: s.refresh_token, expires_at: s.expires_at, user: { id: s.user.id, email: s.user.email, user_metadata: s.user.user_metadata || {} } }); } else localStorage.removeItem(SKEY); }
+  function setSession(s) { if (s) { s.expires_at = s.expires_at || Math.floor(Date.now() / 1000) + (s.expires_in || 3600); jset(SKEY, { access_token: s.access_token, refresh_token: s.refresh_token, expires_at: s.expires_at, user: { id: s.user.id, email: s.user.email, user_metadata: s.user.user_metadata || {} } }); } else NoemaCore.storage.kv.delete(SKEY); }
   function errMsg(j, r) { return (j && (j.msg || j.message || j.error_description || j.error)) || `HTTP ${r.status}`; }   // i18n-ignore (the server's own English; codeOf names it)
 
   /* ---------- errors: every error a learner may read has a stable code (the contract: docs/i18n.md §6) ----------
@@ -95,7 +95,7 @@
   const uid = () => session()?.user.id;
   const accId = () => 'u_' + uid();
   const enc = s => encodeURIComponent(s);
-  // rows other writers append for the app to read and delete; never mirrored into localStorage
+  // rows other writers append for the app to read and delete; never mirrored into the device's store
   const inboxKey = k => k.startsWith('a:curin:') || k.startsWith('a:curclaim:') || k.startsWith('a:inbox:') || k.startsWith('a:langin:') || k.startsWith('a:langclaim:');   // + language courses through Claude (docs/LANGUAGES.md §10.1)
 
   /** Two JSON copies of a curriculum record → `base` with the newer chapter plans of `other` (string), or null when nothing changes. */
@@ -104,7 +104,7 @@
     try { const c = JSON.parse(base), o = JSON.parse(other); return window.NoemaCurriculum.mergePlans(c, o) ? JSON.stringify(c) : null; } catch (e) { return null; }
   }
 
-  /* ---------- sync bookkeeping (per account, in localStorage so it survives reloads and is shared by the tabs) ---------- */
+  /* ---------- sync bookkeeping (per account, in the device's store so it survives reloads and is shared by the tabs) ---------- */
   const meta = (acc, name) => jget('noema1:' + acc + ':meta:' + name, {});
   const metaSave = (acc, name, v) => jset('noema1:' + acc + ':meta:' + name, v);
   const metaSet = (acc, name, f) => { const m = meta(acc, name); f(m); metaSave(acc, name, m); };
@@ -112,7 +112,7 @@
   const clean = (acc, k, mark) => { metaSet(acc, 'unsynced', m => { if (mark === undefined || m[k] === mark) delete m[k]; }); };   // only if not changed again meanwhile
   const put = (full, v) => { if (NoemaCore.storage.kv.set(full, v)) return true; st.full = true; return false; };   // a full storage: the core warns the learner (storage-full signal)
   const FULL = () => coded('This device’s storage is full: some changes from your other devices could not be saved here.', 'cloud.storage_full');   // i18n-ignore (English .message of err.cloud.storage_full)
-  /** keys (full localStorage keys) another device changed → the open subject folds them into what it holds in memory (engine/src/10_core.js);
+  /** keys (full device-store keys) another device changed → the open subject folds them into what it holds in memory (engine/src/10_core.js);
       NoemaCore.sync's pulls tell it through onRemote (startAutoSync), a combined copy of a push here */
   const notify = (acc, keys) => { try { dispatchEvent(new CustomEvent('noema:remote', { detail: { acc, keys } })); } catch (e) { NoemaCore.errors.report(e, { where: 'cloud.event.remote', severity: 'debug' }); } };
   const isoAfter = prev => new Date(Math.max(Date.now(), (Date.parse(prev || '') || 0) + 1)).toISOString();   // a version stamp never equal to the one it replaces
@@ -171,7 +171,7 @@
 
   /** The cloud copy `cur` (null = deleted there) of a key this device changed too → combine into this device's copy. Returns the full key if it changed here. */
   async function resolve(acc, k, cur) {
-    const pre = 'noema1:' + acc + ':', full = pre + k, local = localStorage.getItem(full), mark = meta(acc, 'unsynced')[k];
+    const pre = 'noema1:' + acc + ':', full = pre + k, local = NoemaCore.storage.kv.get(full), mark = meta(acc, 'unsynced')[k];
     if (!cur) { metaSet(acc, 'base', b => { delete b[k]; }); if (local == null) clean(acc, k, mark); return null; }   // deleted there: what this device has is uploaded again
     if (local == null || local === cur.value) {   // deleted here but changed there (keep the data), or the same content
       if (local == null && !put(full, cur.value)) return null;
@@ -180,7 +180,7 @@
     const mt = jget(pre + 'meta:mtime', {});
     const { value, lost } = mergeValue(k, local, cur.value, (mt[k] || 0) > (Date.parse(cur.updated_at) || 0));
     if (lost) await restorePoint(acc);
-    if (localStorage.getItem(full) !== local) return null;   // changed again meanwhile: the next round combines that
+    if (NoemaCore.storage.kv.get(full) !== local) return null;   // changed again meanwhile: the next round combines that
     if (value !== local && !put(full, value)) return null;
     metaSet(acc, 'base', b => { b[k] = cur.updated_at; });
     if (value === cur.value) clean(acc, k, mark); else markDirty(acc, k);
@@ -188,7 +188,7 @@
   }
   /** Upload one changed key, only over the cloud version this copy comes from; otherwise combine and try again. */
   async function pushKey(acc, k, mark, keepalive, tries = 0) {
-    const b = meta(acc, 'base')[k], full = 'noema1:' + acc + ':' + k; let v = localStorage.getItem(full);
+    const b = meta(acc, 'base')[k], full = 'noema1:' + acc + ':' + k; let v = NoemaCore.storage.kv.get(full);
     if (v != null && k.startsWith('a:curriculum:') && !tries) {   // an older copy saved on this device keeps the cloud's chapter plans (they are stamped, so merging is safe)
       const row = ((await call('/rest/v1/noema_kv?select=value&key=eq.' + enc(k))) || [])[0];
       const m = row && mergeCurriculum(k, v, row.value); if (m && put(full, m)) { v = m; notify(acc, [full]); }
@@ -273,7 +273,7 @@
   /** The tables → this device's caches. Returns the full keys that changed here. */
   async function pullRows(acc) {
     const pre = 'noema1:' + acc + ':', changed = [], first = !meta(acc, 'rowsync').at;
-    const localKeys = () => { const out = []; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && k.startsWith(pre) && tabled(k.slice(pre.length))) out.push(k.slice(pre.length)); } return out; };
+    const localKeys = () => NoemaCore.storage.kv.keys(pre).map(k => k.slice(pre.length)).filter(tabled);
     for (const [t, d] of Object.entries(ROWS)) {
       const rows = (await call(`/rest/v1/${d.path}?select=${d.a},${d.b},meta&order=${d.a},${d.b}`)) || [];
       const have = {}, there = new Set();
@@ -287,9 +287,9 @@
         if (op.op === 'put') d.set(have[k], op.a, op.b, op.meta); else d.del(have[k], op.a, op.b);
       }
       for (const k of new Set([...Object.keys(have), ...mine])) {
-        const v = have[k] && Object.keys(have[k]).length ? JSON.stringify(have[k]) : null, cur = localStorage.getItem(pre + k);
+        const v = have[k] && Object.keys(have[k]).length ? JSON.stringify(have[k]) : null, cur = NoemaCore.storage.kv.get(pre + k);
         if (v === cur) continue;
-        if (v == null) localStorage.removeItem(pre + k); else if (!put(pre + k, v)) continue;
+        if (v == null) NoemaCore.storage.kv.delete(pre + k); else if (!put(pre + k, v)) continue;
         changed.push(pre + k);
       }
     }
@@ -330,7 +330,7 @@
           if (Array.isArray(w) && w[0]) seenAt = w[0].updated_at;   // refused: an older app wrote it again meanwhile, the next pull looks at that one
         }
         keys.push(...await NoemaCore.sync.settings.importLegacy(acc, JSON.stringify(isObj(o) ? o : {}), r.updated_at));   // field by field, as old as the row
-      } else { const had = localStorage.getItem(pre + r.key); await NoemaCore.sync.legacyProgress(acc, r.key, r.value); if (localStorage.getItem(pre + r.key) !== had) keys.push(pre + r.key); }   // the learning log's migration
+      } else { const had = NoemaCore.storage.kv.get(pre + r.key); await NoemaCore.sync.legacyProgress(acc, r.key, r.value); if (NoemaCore.storage.kv.get(pre + r.key) !== had) keys.push(pre + r.key); }   // the learning log's migration
       metaSet(acc, 'legacy', m => { m[r.key] = seenAt; });
     }
     for (const h of heads || []) {
@@ -338,7 +338,7 @@
       seen.add(h.key);
       if (base[h.key] === h.updated_at) continue;   // the cloud still has the version this copy comes from
       const r = got.get(h.key); if (!r) continue;   // deleted between the two requests: the next pull sees it
-      const local = localStorage.getItem(pre + r.key);
+      const local = NoemaCore.storage.kv.get(pre + r.key);
       // changed here too (or a copy that never synced with this version): combine; else simply take the cloud's
       if (r.key in dirty || (base[r.key] === undefined && local != null && local !== r.value)) { conflicts.push(r); continue; }
       // a curriculum keeps the chapter plans only this copy has (an older app or the connector may write a stale copy whole)
@@ -348,7 +348,7 @@
       base[r.key] = r.updated_at; if (m) markDirty(acc, r.key);
     }
     for (const k of Object.keys(base)) if (!seen.has(k)) {   // deleted on another device
-      if (!(k in dirty)) { if (localStorage.getItem(pre + k) != null) { localStorage.removeItem(pre + k); keys.push(pre + k); } }
+      if (!(k in dirty)) { if (NoemaCore.storage.kv.get(pre + k) != null) { NoemaCore.storage.kv.delete(pre + k); keys.push(pre + k); } }
       delete base[k];   // changed here since: it is uploaded again (keeping data beats losing it)
     }
     metaSave(acc, 'base', base);

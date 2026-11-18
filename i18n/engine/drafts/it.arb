@@ -1771,5 +1771,16 @@
   "engine.author.f.lib.wpmHi": "Parole al minuto massime",
   "engine.author.f.lib.wpmLo": "Parole al minuto minime",
   "engine.author.f.benchPart": "Parte misurata",
-  "engine.author.f.lib.eq": "Equilibrio (indice)"
+  "engine.author.f.lib.eq": "Equilibrio (indice)",
+  "engine.space.title": "Spazio su questo dispositivo",
+  "engine.space.used": "{used} usati su {quota}",
+  "engine.space.usedOnly": "{used} usati",
+  "engine.space.unknown": "Questo browser non dice quanto spazio usa l’app.",
+  "engine.space.kept": "Conservati per sempre",
+  "engine.space.mayEvict": "Possono essere cancellati",
+  "engine.space.keptLine": "Il browser ha promesso di non cancellare i tuoi dati da solo.",
+  "engine.space.notKeptLine": "Quando il dispositivo resta senza spazio, il browser può cancellare i dati dell’app. Chiedigli di conservarli o aggiungi l’app alla schermata Home.",
+  "engine.space.keep": "Conserva i miei dati su questo dispositivo",
+  "engine.space.refused": "Il browser ha rifiutato. Di solito aiuta aggiungere l’app alla schermata Home.",
+  "engine.space.info": "Materie, Roadmap e progressi sono conservati nel database del browser su questo dispositivo, che cresce con lo spazio libero. Quando hai effettuato l’accesso, anche il cloud ne tiene una copia."
 }

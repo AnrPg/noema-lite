@@ -54,7 +54,7 @@ window.NoemaCurMap = (() => {
   }
   /* ---------- 💬 the Claude app (the learner's Claude plan) — engine/curjobs.js ---------- */
   const J = () => window.NoemaCurJobs;
-  const prefs = acc => { try { return JSON.parse(localStorage.getItem(`noema1:${acc}:a:settings`) || '{}'); } catch (e) { return {}; } };
+  const prefs = acc => { try { return JSON.parse(NoemaCore.storage.kv.get(`noema1:${acc}:a:settings`) || '{}'); } catch (e) { return {}; } };
   const cloudOn = acc => !!(window.NoemaCloud?.session?.() && acc === 'u_' + window.NoemaCloud.session().user.id);
   /** The AI choice of a new / imported curriculum: the Claude app first (usually the cheapest), then the keys. */
   function providerPick(acc, { what = 'build' } = {}) {   // what: 'build' (a new Roadmap) | 'plan' (an imported one)
