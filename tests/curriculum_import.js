@@ -222,7 +222,7 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
   ok(imp1, 'imported: only the chapters are planned, then “ready”');
   const names = A.agent.map(a => a.name);
   ok(names.length && names.every(n => n === 'submit_chapter_plans') && names.length === 3, 'no AI mapping: no DAG creator / auditor / expander — only 3 chapter-planner batches');
-  ok(A.forced >= 1 && A.forced <= 3 && A.agent.every(a => a.choice === 'auto') && /Always answer by calling the tool "submit_chapter_plans"/.test(A.agent[0].sys) && await p.evaluate(() => localStorage.getItem('noema-device:claude-json-mode:claude-sonnet-9')) === 'auto', 'a model that refuses a forced tool call: the app switches to tool_choice auto (each parallel batch at most once) and remembers it (no error)');
+  ok(A.forced >= 1 && A.forced <= 3 && A.agent.every(a => a.choice === 'auto') && /Always answer by calling the tool "submit_chapter_plans"/.test(A.agent[0].sys) && await p.evaluate(() => NoemaCore.storage.kv.get('noema-device:claude-json-mode:claude-sonnet-9')) === 'auto', 'a model that refuses a forced tool call: the app switches to tool_choice auto (each parallel batch at most once) and remembers it (no error)');
   { const nA = A.agent.length;
     await p.evaluate(() => NoemaLLM.json({ acc: Noema.account.id, provider: 'claude', system: 's', prompt: 'node IDs: dna_replication.', schema: NoemaCurriculum.schemas.S_PLAN, name: 'submit_chapter_plans' }));
     ok(A.agent.length === nA + 1 && A.agent.at(-1).model === 'claude-sonnet-9', 'a Claude call without a model (re-plan, placement test, AI reading) gets the newest Sonnet — no “model: Field required”'); }
@@ -258,7 +258,7 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
   ok(ixOk, 'the packaged file is the step subject’s source (👁 at the cited pages)');
 
   console.log('— a step with notes, built by Gemini from their text');
-  await p.evaluate(([cid, dna]) => { const a = Noema.account.id; const k = `noema1:${a}:a:settings`; const s = JSON.parse(localStorage.getItem(k) || '{}'); s.apiKey = 'AIza-test-key'; localStorage.setItem(k, JSON.stringify(s)); const c = NoemaCurriculum.get(a, cid); c.provider = 'gemini'; NoemaCurriculum.save(a, c); NoemaCurriculum.setMastered(a, NoemaCurriculum.get(a, cid), dna, 'manual'); }, [c.id, dna]);
+  await p.evaluate(([cid, dna]) => { const a = Noema.account.id; const k = `noema1:${a}:a:settings`; const s = JSON.parse(NoemaCore.storage.kv.get(k) || '{}'); s.apiKey = 'AIza-test-key'; NoemaCore.storage.kv.set(k, JSON.stringify(s)); const c = NoemaCurriculum.get(a, cid); c.provider = 'gemini'; NoemaCurriculum.save(a, c); NoemaCurriculum.setMastered(a, NoemaCurriculum.get(a, cid), dna, 'manual'); }, [c.id, dna]);
   const g0 = A.gem.length;
   await p.evaluate(([cid, id]) => NoemaCurriculum.Gen.request(NoemaCurriculum.get(Noema.account.id, cid), id), [c.id, tr]);
   ok(await until(async () => (await p.evaluate(([cid, id]) => NoemaCurriculum.get(Noema.account.id, cid).nodes[id].pack?.status, [c.id, tr])) === 'ready', 40000), 'the step is prepared with Gemini');
@@ -326,7 +326,7 @@ c.save()`, path.join(TF, 'textbook.pdf')]);
   const chapPrompts = A.gem.slice(g1).filter(x => /Write chapter/.test(x.first)).map(x => x.first).join('\n');
   ok(/\[textbook\.pdf p\. 3\]/.test(chapPrompts) && /Book page 5/.test(chapPrompts) && !/Book page (2|6|7)\b/.test(chapPrompts), 'Gemini gets exactly pages 3–5 of the textbook (not the pages of the other step)');
   const pidM = await p.evaluate(([cid]) => NoemaCurriculum.packId(NoemaCurriculum.get(Noema.account.id, cid), 'membranes'), [c2.id]);
-  const mIdx = await p.evaluate(id => JSON.parse(localStorage.getItem(`noema1:${Noema.account.id}:a:srcfiles:${id}`) || '{}'), pidM);
+  const mIdx = await p.evaluate(id => JSON.parse(NoemaCore.storage.kv.get(`noema1:${Noema.account.id}:a:srcfiles:${id}`) || '{}'), pidM);
   ok(mIdx.m1?.ref?.src === tbId && !Object.keys(srv.state.files).some(k => k.includes(`/sources/${pidM}/`)) && await p.evaluate(async id => (await NoemaSrcFiles.get(Noema.account.id, id, 'm1'))?.blob.size, pidM) === fs.statSync(path.join(TF, 'textbook.pdf')).size, 'the step’s subject points at the curriculum’s copy (👁 works, no second copy)');
 
   console.log('— ✨ the AI reads a map written in prose (no new topics allowed)');

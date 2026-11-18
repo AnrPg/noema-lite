@@ -841,7 +841,7 @@ async function python(name) {
     const p = await ctx.newPage(); p.setDefaultTimeout(15000); p.on('pageerror', e => E.push(e.message));
     await p.goto(url); await p.evaluate(n => { localStorage.clear(); if (n) localStorage.setItem('noema-test:newUI', '1'); }, !!newUI); await p.reload(); await wait(800);
     // the website ships no profiles (build.py site leaves accounts/ out) and asks "Who is studying?": one local profile on this device
-    if (!await p.evaluate(() => !!window.Noema?.account)) { await p.evaluate(() => localStorage.setItem('noema1:accounts', JSON.stringify([{ id: 'learner', name: 'Learner', emoji: '🦉', pin: null, created: Date.now() }]))); await p.reload(); await wait(800); }
+    if (!await p.evaluate(() => !!window.Noema?.account)) { await p.evaluate(() => NoemaCore.storage.kv.set('noema1:accounts', JSON.stringify([{ id: 'learner', name: 'Learner', emoji: '🦉', pin: null, created: Date.now() }]))); await p.reload(); await wait(800); }
     await p.evaluate(async pk => { await Noema.importPack(Noema.account.id, pk); }, PACK);
     await p.goto(url + (url.includes('?') ? '&' : '?') + 'subject=demo-activities'); await wait(1500);
     return p;

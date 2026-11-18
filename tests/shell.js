@@ -42,7 +42,7 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   ok(await page.evaluate(() => document.documentElement.dataset.m) === 'robot', 'picking one dresses the app at once');
   await page.screenshot({ path: SHOTS + '/sh_a1_onboarding.png' });
   await page.click('[data-onbdone]'); await wait(600);
-  const set0 = await page.evaluate(() => JSON.parse(localStorage.getItem(`noema1:${Noema.account.id}:a:settings`) || '{}'));
+  const set0 = await page.evaluate(() => JSON.parse(NoemaCore.storage.kv.get(`noema1:${Noema.account.id}:a:settings`) || '{}'));
   ok(set0.character === 'robot' && set0.world === 'know' && set0.onboarded > 0, 'the choices are saved in the account settings: ' + JSON.stringify({ c: set0.character, w: set0.world }));
   ok(!(await page.$('.ns-onb')), 'the questions are gone; they do not come back');
   ok(JSON.stringify(await page.$$eval('.ns-tab', l => l.map(x => x.dataset.tab))) === '["today","learn","discover","vault","progress"]', 'tabs: Today · Knowledge · Discover · Vault · Progress (no Languages for “knowledge”)');
@@ -75,7 +75,7 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   ok(await page.$('.chapters .chcard') && !(await page.$('.chlist')), 'chapters as cards by default');
   ok(await page.$$eval('.subjhead', l => l.length === 1 && !l[0].querySelector('.subjemo')) && !(await page.$('.nodebanner')), 'one plain header (title, one line, one bar): no emoji tile, no second banner');
   await page.click('.chviewseg [data-v="list"]'); await wait(300);
-  ok(await page.$('.chlist .chrow') && await page.evaluate(() => localStorage.getItem('noema-chview')) === 'list', 'the list stays as a second view, remembered');
+  ok(await page.$('.chlist .chrow') && await page.evaluate(() => NoemaCore.storage.kv.get('noema-chview')) === 'list', 'the list stays as a second view, remembered');
   await page.click('.chviewseg [data-v="cards"]'); await wait(200);
   const pm = await menuItems(page, '.ns-practicebtn');
   ok(has(pm, ['Mixed practice', 'Flashcards', 'Debug drills', 'Mistakes gym', 'Lightning round', 'Ask Cobalt']), 'Practice ▾: ' + pm.join(' · '));
@@ -135,7 +135,7 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   ok(has(mm, ['Show as a list', 'Add a step', 'Share', 'Settings', 'Export (.json)', 'What the signs mean']), 'the map’s ⋮: ' + mm.join(' · '));
   ok(!(await page.isVisible('noema-roadmap-map .cm-legend')) && !(await page.$('noema-roadmap-map .cm-legendbtn')) && !(await page.$('noema-roadmap-map .cm-sharetool')), 'the legend and the share/settings buttons moved into ⋮');
   await page.click('.cm-vbtn[data-list="true"]'); await wait(300);
-  ok(await page.$$eval('.cm-list .cm-listnode', l => l.length) === 5 && await page.evaluate(() => localStorage.getItem('noema-mapview')) === 'list', 'Map ↔ List (remembered)');
+  ok(await page.$$eval('.cm-list .cm-listnode', l => l.length) === 5 && await page.evaluate(() => NoemaCore.storage.kv.get('noema-mapview')) === 'list', 'Map ↔ List (remembered)');
   await page.click('.cm-listnode[data-id="a"]'); await wait(300);
   ok(await page.$('.cm-panel.on'), 'a station opens its panel');
   ok((await page.$eval('.cm-panel.on .cm-editbtn', b => [b.textContent, b.title].join('|'))) === '✏️|Edit this step' && !(await page.$$eval('.cm-panel.on p', l => l.some(p => p.textContent.trim() === 'Python basics'))), 'the panel: no description (its contents say it), ✏️ edits the step');
@@ -185,9 +185,9 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   { await page.evaluate(() => document.querySelector('.ns-gcard[data-char="owl"] [data-choose]').click()); await wait(400);
     const engine = await page.evaluate(() => typeof flushSave === 'function'); await page.evaluate(() => { try { flushSave(); } catch (e) { } });
     await page.reload(); await wait(1200);
-    const kept = await page.evaluate(() => ({ stored: JSON.parse(localStorage.getItem(`noema1:${Noema.account.id}:a:settings`)).character, html: document.documentElement.dataset.m, cur: NoemaThemes.current(), fab: document.querySelector('#ns-fab .nm').textContent }));
+    const kept = await page.evaluate(() => ({ stored: JSON.parse(NoemaCore.storage.kv.get(`noema1:${Noema.account.id}:a:settings`)).character, html: document.documentElement.dataset.m, cur: NoemaThemes.current(), fab: document.querySelector('#ns-fab .nm').textContent }));
     ok(engine && kept.stored === 'owl' && kept.html === 'owl' && kept.cur === 'owl' && kept.fab === 'Hootie', 'a chosen character survives the open subject’s saves and a reload: ' + JSON.stringify(kept));
-    await page.evaluate(() => { const k = `noema1:${Noema.account.id}:a:settings`, s = JSON.parse(localStorage.getItem(k)); s.character = 'robot'; Noema.kv.set(k, JSON.stringify(s)); dispatchEvent(new CustomEvent('noema:remote', { detail: { acc: Noema.account.id, keys: [k] } })); });
+    await page.evaluate(() => { const k = `noema1:${Noema.account.id}:a:settings`, s = JSON.parse(NoemaCore.storage.kv.get(k)); s.character = 'robot'; Noema.kv.set(k, JSON.stringify(s)); dispatchEvent(new CustomEvent('noema:remote', { detail: { acc: Noema.account.id, keys: [k] } })); });
     await wait(500);
     const remote = await page.evaluate(() => ({ html: document.documentElement.dataset.m, fab: document.querySelector('#ns-fab .nm').textContent }));
     ok(remote.html === 'robot' && remote.fab === 'Cobalt', 'a character chosen on another device dresses this page at once: ' + JSON.stringify(remote));
@@ -325,7 +325,7 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
     const zip = require('fs').readFileSync(await dl.path());
     ok(dl.suggestedFilename() === (await page.evaluate(() => SUBJ.id)) + '.cmi5.zip' && zip.readUInt32LE(0) === 0x04034b50 && zip.includes('cmi5.xml'), `the cmi5 package is a .zip with cmi5.xml: ${dl.suggestedFilename()}`); }
   await pick(page, `.ns-sgrp[data-k="c:${cid}/f"] .ns-menubtn`, 'Hide from the subject list'); await wait(400);
-  ok(await page.evaluate(() => JSON.parse(localStorage.getItem(`noema1:${Noema.account.id}:a:settings`)).hiddenSubjects.includes(SUBJ.id)) && await page.$(`.ns-sgrp[data-k="c:${cid}/f"][open] .ns-hid`), 'hide: marked, and the open groups stay open');
+  ok(await page.evaluate(() => JSON.parse(NoemaCore.storage.kv.get(`noema1:${Noema.account.id}:a:settings`)).hiddenSubjects.includes(SUBJ.id)) && await page.$(`.ns-sgrp[data-k="c:${cid}/f"][open] .ns-hid`), 'hide: marked, and the open groups stay open');
   await pick(page, `.ns-sgrp[data-k="c:${cid}/f"] .ns-menubtn`, 'Show in the subject list'); await wait(400);
   await page.setViewportSize({ width: 760, height: 844 }); await wait(300);
   { const fr = await page.$eval('.ns-view > .ns-fitrow', r => ({ stack: r.classList.contains('stack'), labels: [...r.children].map(b => b.textContent.trim()), tips: [...r.children].map(b => b.getAttribute('aria-description')) }));
@@ -346,7 +346,7 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   await page.setInputFiles('.ns-pfsheet input[type="file"]', { name: 'me.png', mimeType: 'image/png', buffer: Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAAEklEQVR4nGP4z8CAB+GTG8HSALfKY52fTcuYAAAAAElFTkSuQmCC', 'base64') });
   await until(() => page.$('.ns-pfsheet img.ns-avatar'), 4000);
   await page.click('.ns-pfsheet [data-act="save"]'); await wait(600);
-  { const p = await page.evaluate(() => JSON.parse(localStorage.getItem(`noema1:${Noema.account.id}:a:mypage`)));
+  { const p = await page.evaluate(() => JSON.parse(NoemaCore.storage.kv.get(`noema1:${Noema.account.id}:a:mypage`)));
     ok(p.bio === 'I study physics\nand Greek.' && p.show.progress && p.show.topics && !p.show.achievements && /^data:image\/jpeg;base64,/.test(p.avatar) && !p.published, 'saved: a few words, the picture (small, JPEG), what you switched on, still private');
     ok(await page.$('.ns-pfpart[data-part="progress"]') && await page.$('.ns-pfpart[data-part="topics"]') && !(await page.$('.ns-pfpart[data-part="achievements"]')) && (await page.$eval('.ns-pfbiotext', x => x.textContent)) === 'I study physics\nand Greek.' && await page.$('.ns-pfhead img.ns-avatar'), 'the page shows the picture, the words and only the parts switched on'); }
   await page.evaluate(() => { scrollTo(0, 0); document.getElementById('ns-top').classList.remove('hide'); }); await wait(200);
@@ -375,20 +375,20 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   await page.setViewportSize({ width: 1280, height: 860 }); await page.reload(); await wait(1200);
   // Today: × on the big “continue” hides it for today; the next subject you started takes its place, or nothing
   const goTitle = () => page.$eval('.ns-go h2', x => x.textContent).catch(() => null);
-  const g0 = await goTitle(), n0 = await page.evaluate(() => JSON.parse(localStorage.getItem(`noema1:${Noema.account.id}:meta:recent`) || '[]').length);
+  const g0 = await goTitle(), n0 = await page.evaluate(() => JSON.parse(NoemaCore.storage.kv.get(`noema1:${Noema.account.id}:meta:recent`) || '[]').length);
   ok(g0 && await page.$eval('.ns-goclose', b => b.getAttribute('aria-label') === NoemaShell.L('hideToday') && !/hideToday/.test(b.getAttribute('aria-label'))), 'Today: the continue card has a quiet × (“Hide for today”, in the menus’ language)');
   await page.click('.ns-goclose'); await wait(400);
   const g1 = await goTitle();
   ok(n0 > 1 ? g1 && g1 !== g0 : !g1, `× shows the next subject you started instead, or nothing (${g0} → ${g1})`);
   await page.reload(); await wait(1200);
   ok(await goTitle() === g1, 'it stays hidden for the rest of the day, after a reload too');
-  await page.evaluate(() => localStorage.removeItem(`noema1:${Noema.account.id}:meta:todayHide`));
+  await page.evaluate(() => NoemaCore.storage.kv.delete(`noema1:${Noema.account.id}:meta:todayHide`));
   ok(await page.evaluate(() => document.querySelector('.ns-railme .ns-mename').textContent === Noema.account.name && !!Noema.account.name), 'under the avatar: the account’s name, not “Me”');
   await page.click('.ns-railme'); await wait(250);
   ok(await page.$eval('.ns-pop.ns-mepop', p => { const r = p.getBoundingClientRect(); return r.bottom <= innerHeight && r.left >= 0 && r.top >= 0; }), 'wide screens: “Me” at the rail’s foot opens the same menu, upwards');
   if (!(await page.$('.ns-pop.ns-mepop'))) { await page.click('.ns-railme'); await wait(250); }
   await page.click('.ns-pop.ns-mepop button:last-of-type'); await until(() => page.$('.noema-accgrid'), 25000);   // Log out (whatever the menus' language)
-  ok(await page.$('.noema-accgrid') && await page.evaluate(() => JSON.parse(localStorage.getItem('noema1:current') || '{}').loggedOut), 'Log out: the list of profiles opens, even with only one profile');
+  ok(await page.$('.noema-accgrid') && await page.evaluate(() => JSON.parse(NoemaCore.storage.kv.get('noema1:current') || '{}').loggedOut), 'Log out: the list of profiles opens, even with only one profile');
 
   ok(!E.length, 'no errors in the console' + (E.length ? ': ' + E.slice(0, 5).join(' | ') : ''));
   await browser.close();

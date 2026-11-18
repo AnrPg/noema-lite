@@ -26,7 +26,7 @@ const COURSE = 'polyglot-semitic-zh-de', PORT = 54333, URL = `http://localhost:$
     if (await p.isVisible('.noema-inuse')) { await p.click('.noema-inuse button:has-text("Use here")'); await wait(1000); }
     return { ctx, p };
   };
-  const open = async p => { const acc = await p.evaluate(() => window.ACCOUNT?.id || Object.keys(localStorage).map(k => k.split(':')[1]).find(Boolean));
+  const open = async p => { const acc = await p.evaluate(() => window.ACCOUNT?.id || NoemaCore.storage.kv.keys().map(k => k.split(':')[1]).find(Boolean));
     await p.goto(URL + '?account=' + encodeURIComponent(acc) + '&subject=lang:' + COURSE); await wait(1500);
     if (await p.isVisible('.noema-inuse')) { await p.click('.noema-inuse button:has-text("Use here")'); await wait(1000); } };
   const rows = () => { const uid = Object.keys(srv.state.users)[0]; return srv.state.kv[uid] || {}; };

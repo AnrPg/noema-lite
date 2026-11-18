@@ -260,7 +260,7 @@ console.log('— 3 · the app');
     else { const idx = it.options.indexOf(it.answer); await page.click(`.lx-stage .lx-opts .lx-opt >> nth=${idx}`); }
     await wait(60); await next();
   }
-  const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('noema1:anr:s:lang:polyglot-semitic-zh-de:lang:ar:script') || 'null'));
+  const stored = await page.evaluate(() => JSON.parse(NoemaCore.storage.kv.get('noema1:anr:s:lang:polyglot-semitic-zh-de:lang:ar:script') || 'null'));
   ok(intros >= 4 && asked >= intros && /0 to practise again/.test(await page.locator('.lx-result').innerText()) && stored && Object.keys(stored.items).length >= intros, `learn: ${intros} letters introduced, ${asked} questions, stored in lang:ar:script`);
 
   // every widget, right and wrong

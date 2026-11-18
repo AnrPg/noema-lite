@@ -105,6 +105,13 @@ export function mirroredKv(o: MirroredKvOptions): MirroredKv {
   let loading: Promise<void> | null = null;
   let inFlight: Promise<void> = Promise.resolve();
   const listeners = new Set<(keys: readonly string[]) => void>();
+  // no IndexedDB at all here (a test context, blocked site data): localStorage from the start, as before
+  try {
+    if (!o.indexedDB()) mode = 'localStorage';
+  } catch (e) {
+    warn('IndexedDB unavailable: the account stays in localStorage', e);
+    mode = 'localStorage';
+  }
 
   const ls = (): Result<WebStorageLike> => {
     try {
@@ -320,6 +327,7 @@ export function mirroredKv(o: MirroredKvOptions): MirroredKv {
   }
 
   async function load(): Promise<void> {
+    if (mode === 'localStorage') return;
     let stored: Map<string, string>;
     try {
       db = await openDb();

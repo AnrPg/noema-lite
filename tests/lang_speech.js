@@ -396,14 +396,14 @@ let BROWSER = null;
   // ---------- no recognition in the browser: speak → shadowing ----------
   const ctx2 = await newCtx({ viewport: { width: 1280, height: 900 } }, { voices: VOICES, sr: false });
   const p2 = await ctx2.newPage(); p2.on('pageerror', e => E.push(e.message));
-  await p2.goto(url); await p2.evaluate(s => { for (const [k, v] of Object.entries(s)) localStorage.setItem(k, v); }, await page.evaluate(() => Object.fromEntries(Object.keys(localStorage).map(k => [k, localStorage.getItem(k)]))));
+  await p2.goto(url); await p2.evaluate(s => { for (const [k, v] of Object.entries(s)) NoemaCore.storage.kv.set(k, v); }, await page.evaluate(() => Object.fromEntries(NoemaCore.storage.kv.keys().map(k => [k, NoemaCore.storage.kv.get(k)]))));
   await p2.goto(url + '?account=anr&subject=' + SUBJ + '#/listen/de/speak'); await wait(1200);
   ok(await p2.locator('.lx-stage .lx-exshadow[data-from=speak]').count() === 1 && /speech recognition is not available/.test(await p2.locator('.lx-stage .lx-q').innerText()), 'a browser without recognition: “say it” is offered as shadowing');
 
   // ---------- phone width ----------
   const phone = await newCtx({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }, { voices: VOICES, sr: true });
   const pp = await phone.newPage(); pp.on('pageerror', e => E.push(e.message));
-  await pp.goto(url); await pp.evaluate(s => { for (const [k, v] of Object.entries(s)) localStorage.setItem(k, v); }, await page.evaluate(() => Object.fromEntries(Object.keys(localStorage).map(k => [k, localStorage.getItem(k)]))));
+  await pp.goto(url); await pp.evaluate(s => { for (const [k, v] of Object.entries(s)) NoemaCore.storage.kv.set(k, v); }, await page.evaluate(() => Object.fromEntries(NoemaCore.storage.kv.keys().map(k => [k, NoemaCore.storage.kv.get(k)]))));
   const wide = async () => pp.evaluate(() => document.documentElement.scrollWidth - innerWidth);
   for (const hsh of ['#/', '#/listen/ar', '#/listen/ar/dictation', '#/listen/he/speak', '#/listen/zh/tones', '#/listen/de/shadow', '#/settings', '#/w/ar/' + encodeURIComponent(arW)]) {
     await pp.goto(url + '?account=anr&subject=' + SUBJ + hsh); await wait(1100);

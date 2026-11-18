@@ -68,7 +68,7 @@ async function runThrough(page, wrongIn = []) {
 
   // ---------- S00: the types of languages, the overview, the quiz ----------
   ok(await page.locator('.lx-native-ask').count() === 1, 'D19: a course asks once for the native language while it is not known');
-  await page.evaluate(() => { const k = 'noema1:anr:a:settings'; localStorage.setItem(k, JSON.stringify({ ...JSON.parse(localStorage.getItem(k) || '{}'), native: { code: 'tr' } })); });   // D19: a Turkish native speaker
+  await page.evaluate(() => { const k = 'noema1:anr:a:settings'; NoemaCore.storage.kv.set(k, JSON.stringify({ ...JSON.parse(NoemaCore.storage.kv.get(k) || '{}'), native: { code: 'tr' } })); });   // D19: a Turkish native speaker
   await page.click('.lx-lessonbtn .lx-continue'); await wait(300);
   ok(await page.locator('.lx-typology [data-type]').count() === 4 && /Isolating[\s\S]*🇨🇳/.test(await page.locator('.lx-typology').innerText()), 'S00 begins with the four types; each course language under its type');
   await page.click('.lx-stage .lx-next'); await wait(200);
@@ -113,7 +113,7 @@ async function runThrough(page, wrongIn = []) {
     ok(mine.join() === 'tr' && await page.locator('details[data-cmp="others"]:not([open])').count() >= 1, 'R1: a Turkish native (a supported native) sees the Turkish notes among their languages, the other languages folded (' + (mine.join(', ') || 'none') + ')'); }
   await page.goto(url + '?account=anr&subject=' + SUBJ + '#/settings'); await wait(700);
   await page.selectOption('.lx-nativesel', 'ja'); await wait(300);
-  ok(await page.evaluate(() => JSON.parse(localStorage.getItem('noema1:anr:a:settings')).native?.code === 'ja'), 'Settings: the native language is set (Japanese), for the account');
+  ok(await page.evaluate(() => JSON.parse(NoemaCore.storage.kv.get('noema1:anr:a:settings')).native?.code === 'ja'), 'Settings: the native language is set (Japanese), for the account');
   await page.goto(url + '?account=anr&subject=' + SUBJ + '#/fn/fn.definite/de'); await wait(900);
   { const mine = await page.locator('[data-cmp="yours"] [data-for]').evaluateAll(els => els.map(e => e.dataset.for));
     ok(mine.length && mine.every(x => x === 'ja'), '… and only its notes open on the grammar page (' + mine.join(', ') + ')'); }

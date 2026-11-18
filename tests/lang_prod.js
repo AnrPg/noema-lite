@@ -240,7 +240,7 @@ let BROWSER = null;   // closed in the end whatever happened (a failed step must
   ok(await page.locator('.lx-ref').count() === 1 && await page.locator('.lx-typebox .lx-keyhelp').count() === 1 && AI.calls.length === 0, 'another answer without a key: the course’s answer + how to add a key');
 
   // ---------- with a key: AI-judged, its text checked against the form index ----------
-  await page.evaluate(() => localStorage.setItem('noema-device:geminiKey:anr', 'TEST-KEY'));
+  await page.evaluate(() => NoemaCore.storage.kv.set('noema-device:geminiKey:anr', 'TEST-KEY'));
   await runOne('de', deS); await wait(200);
   await page.fill('.lx-typed', 'Ich esse karotte.'); await page.press('.lx-typed', 'Enter'); await wait(700);
   const judge = AI.calls.find(x => x.sys.includes('[noema:lang-judge]'));
@@ -353,7 +353,7 @@ let BROWSER = null;   // closed in the end whatever happened (a failed step must
   // ---------- phone width ----------
   const phone = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }); await mockGemini(phone);
   const pp = await phone.newPage(); pp.on('pageerror', e => E.push(e.message));
-  await pp.goto(url); await pp.evaluate(s => { for (const [k, v] of Object.entries(s)) localStorage.setItem(k, v); }, await page.evaluate(() => Object.fromEntries(Object.keys(localStorage).map(k => [k, localStorage.getItem(k)]))));
+  await pp.goto(url); await pp.evaluate(s => { for (const [k, v] of Object.entries(s)) NoemaCore.storage.kv.set(k, v); }, await page.evaluate(() => Object.fromEntries(NoemaCore.storage.kv.keys().map(k => [k, NoemaCore.storage.kv.get(k)]))));
   const wide = async () => pp.evaluate(() => document.documentElement.scrollWidth - innerWidth);
   for (const hsh of ['#/', '#/write/ar', '#/read/he', '#/write/de/translate', '#/write/zh/clock']) {
     await pp.goto(url + '?account=anr&subject=' + SUBJ + hsh); await wait(900);

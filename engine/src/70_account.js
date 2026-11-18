@@ -32,7 +32,7 @@ function deviceSpaceSection() {
   const btn = h('button', { class: 'btn small', type: 'button', 'data-space': 'keep', hidden: true, onclick: keep });
   btn.textContent = tE('engine.space.keep');
   const sec = accSection({ line: 'download' }, tE('engine.space.title'), { status: { ok: false, text: '…' }, info: tE('engine.space.info'),   // i18n-ignore (a placeholder)
-    body: h('div', { class: 'act-pyset', 'data-space': 'section' }, h('div', { class: 'row' }, line), h('div', { class: 'row' }, note), h('div', { class: 'row' }, btn)) });
+    body: h('div', { class: 'act-spaceset', 'data-space': 'section' }, h('div', { class: 'row' }, line), h('div', { class: 'row' }, note), h('div', { class: 'row' }, btn)) });
   const pill = sec.querySelector('summary .pill');
   async function draw() {
     const e = await ST.estimate().catch(() => null);

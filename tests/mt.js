@@ -34,7 +34,7 @@ let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m)
   let r = await page.evaluate(() => ({ s: MT.settings(), p: MT.provider() }));
   ok(r.s.on === false && r.s.provider === 'auto' && r.s.dailyChars > 0 && r.s.sessionRequests > 0, 'off by default, with caps');
   ok(r.p === null, 'no own key → no provider');
-  r = await page.evaluate(() => { window.DEFAULT_GEMINI_KEY = 'AIza-default-key'; localStorage.setItem('noema-device:geminiKey:anr', 'AIza-default-key'); const a = MT.provider(); localStorage.setItem('noema-device:geminiKey:anr', 'AIza-mine'); const b = MT.provider(); const C0 = window.NoemaClaude; window.NoemaClaude = { ...C0, Key: { get: () => 'sk-ant-api03-mine' } }; const c = MT.provider(); MT.setSettings(null, { provider: 'gemini' }); const d = MT.provider(); MT.setSettings(null, { provider: 'auto' }); window.NoemaClaude = C0; localStorage.removeItem('noema-device:geminiKey:anr'); return [a, b?.id, c?.id, d?.id]; });
+  r = await page.evaluate(() => { window.DEFAULT_GEMINI_KEY = 'AIza-default-key'; NoemaCore.storage.kv.set('noema-device:geminiKey:anr', 'AIza-default-key'); const a = MT.provider(); NoemaCore.storage.kv.set('noema-device:geminiKey:anr', 'AIza-mine'); const b = MT.provider(); const C0 = window.NoemaClaude; window.NoemaClaude = { ...C0, Key: { get: () => 'sk-ant-api03-mine' } }; const c = MT.provider(); MT.setSettings(null, { provider: 'gemini' }); const d = MT.provider(); MT.setSettings(null, { provider: 'auto' }); window.NoemaClaude = C0; NoemaCore.storage.kv.delete('noema-device:geminiKey:anr'); return [a, b?.id, c?.id, d?.id]; });
   ok(r[0] === null, 'the app’s default Gemini key is not the learner’s own');
   ok(r[1] === 'gemini' && r[2] === 'claude' && r[3] === 'gemini', 'own Gemini key → Gemini; with a Claude key → Claude (auto); a chosen provider is respected');
 
@@ -68,7 +68,7 @@ let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m)
     const calls1 = CALLS, sent1 = SENT.slice();
     const b = await MT.translate(['Κινηματική για αρχάριους', 'Μηχανική'], { kind: 'explore.pack', to: 'en' });
     const c = await MT.translate(['Μηχανική'], { kind: 'explore.pack', to: 'fr' });
-    return { a, b, c, calls1, sent1, calls: CALLS, size: MT.cache.size(), stored: !!localStorage.getItem('noema-device:mt:cache:anr') };
+    return { a, b, c, calls1, sent1, calls: CALLS, size: MT.cache.size(), stored: !!NoemaCore.storage.kv.get('noema-device:mt:cache:anr') };
   });
   ok(r.calls1 === 1 && r.sent1.length === 2, 'one request, each text once (duplicates and same-language texts not sent)');
   ok(r.a[0].translated && r.a[0].text === '[en] Κινηματική για αρχάριους' && r.a[3].text === r.a[0].text && r.a[2].reason === 'same' && r.a[2].text === 'Physics for everyone', 'results in order, the original kept beside: ' + JSON.stringify(r.a.map(x => x.text)));

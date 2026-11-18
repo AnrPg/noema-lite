@@ -186,7 +186,7 @@ function messages(body, res, J) {
   ok(await until(async () => /The key works/.test(await p.locator('.accsec:has-text("Claude (optional)")').innerText()), 6000) && await p.locator('select[aria-label="Claude model"] option').count() === 4, 'the Claude key on this device is shown and checked; its models are listed');
   await p.selectOption('select[aria-label="Claude model"]', 'claude-opus-9'); await p.fill('input[aria-label="Spending limit per Roadmap step"]', '5'); await p.selectOption('select[aria-label="AI for new Roadmaps"]', 'claude');
   await p.click('button:has-text("Save settings")'); await wait(500);
-  ok(await p.evaluate(() => [JSON.parse(localStorage.getItem(`noema1:${Noema.account.id}:a:claudeModel`)), JSON.parse(localStorage.getItem(`noema1:${Noema.account.id}:a:settings`)).curProvider]).then(x => x[0] === 'claude-opus-9' && x[1] === 'claude'), 'saved: the Claude model and the AI for new curricula');
+  ok(await p.evaluate(() => [JSON.parse(NoemaCore.storage.kv.get(`noema1:${Noema.account.id}:a:claudeModel`)), JSON.parse(NoemaCore.storage.kv.get(`noema1:${Noema.account.id}:a:settings`)).curProvider]).then(x => x[0] === 'claude-opus-9' && x[1] === 'claude'), 'saved: the Claude model and the AI for new curricula');
   await p.evaluate(() => NoemaCurMap.create(Noema.account.id)); await wait(400);
   ok(await p.locator('.cm-provider').inputValue() === 'claude' && await p.locator('.cg-budget').inputValue() === '5', 'a new curriculum starts with them (Claude, $5 per step)');
   await p.locator('.noema-ovbox button:has-text("Close")').last().click(); await wait(300);

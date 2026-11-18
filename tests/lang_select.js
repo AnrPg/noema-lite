@@ -70,8 +70,8 @@ console.log('A. the chosen languages in langcore');
   ok(await p.$eval('.noema-study-ok', b => b.disabled), 'nothing chosen yet: the button waits');
   await p.click('.lx-study-ask .noema-study-lang[data-lang="de"]'); ok(/Study 1 language/.test(await p.innerText('.noema-study-ok')), 'one chosen: “Study 1 language”');
   await p.click('.noema-study-ok'); await wait(600);
-  const st1 = await U(() => ({ langs: NoemaLangUI.UI.C.languages.join(), set: JSON.parse(localStorage.getItem('noema1:anr:a:settings')).studyLangs, course: JSON.parse(localStorage.getItem('noema1:anr:s:lang:polyglot-semitic-zh-de:settings')).languages,
-    zh: Object.keys(localStorage).filter(k => k.includes(':lang:zh:node:')).length, ask: !!document.querySelector('.lx-study-ask'), chips: document.querySelectorAll('.lx-top .lx-flagchip').length }));
+  const st1 = await U(() => ({ langs: NoemaLangUI.UI.C.languages.join(), set: JSON.parse(NoemaCore.storage.kv.get('noema1:anr:a:settings')).studyLangs, course: JSON.parse(NoemaCore.storage.kv.get('noema1:anr:s:lang:polyglot-semitic-zh-de:settings')).languages,
+    zh: NoemaCore.storage.kv.keys().filter(k => k.includes(':lang:zh:node:')).length, ask: !!document.querySelector('.lx-study-ask'), chips: document.querySelectorAll('.lx-top .lx-flagchip').length }));
   ok(st1.langs === 'de' && st1.set.join() === 'de' && st1.course.join() === 'de' && !st1.ask, 'German only: the course is rebuilt with German, the answer is stored for the app (and the course’s settings say it)');
   ok(st1.zh > 0, 'the Chinese progress stays stored (' + st1.zh + ' keys)');
   ok(st1.chips === 1 && await p.locator('.lx-polyhome .lx-polydrills, .lx-polyhome .lx-today').count() === 0 && await p.locator('.lx-tolanes').count() === 0, 'the home: one language chip, no today’s languages, no compare lane or polyglot drills, no parallel lanes');
@@ -94,7 +94,7 @@ console.log('A. the chosen languages in langcore');
   await p.click('.lx-studylangs .lx-check[data-lang="ar"] input'); await wait(400);
   await p.click('.lx-studylangs .lx-check[data-lang="he"] input'); await wait(400);
   await p.click('.lx-studylangs .lx-check[data-lang="de"] input'); await wait(400);
-  const st2 = await U(() => ({ langs: NoemaLangUI.UI.C.languages.join(), set: JSON.parse(localStorage.getItem('noema1:anr:a:settings')).studyLangs.join() }));
+  const st2 = await U(() => ({ langs: NoemaLangUI.UI.C.languages.join(), set: JSON.parse(NoemaCore.storage.kv.get('noema1:anr:a:settings')).studyLangs.join() }));
   ok(st2.langs === 'ar,he' && st2.set === 'ar,he', 'ticked Arabic and Hebrew, unticked German: the course teaches Arabic and Hebrew (' + st2.langs + ')');
   await p.click('.lx-studylangs .lx-check[data-lang="ar"] input'); await wait(300);
   await p.click('.lx-studylangs .lx-check[data-lang="he"] input'); await wait(300);
@@ -113,7 +113,7 @@ console.log('A. the chosen languages in langcore');
   await open('#/settings'); await p.click('.lx-studylangs .lx-check[data-lang="zh"] input'); await wait(500);
   ok(await U(() => NoemaLangUI.UI.C.languages.join() === 'ar,he,zh' && Object.keys(NoemaLangUI.UI.L.langs.zh.items).length === 10), 'Chinese ticked again: its 10 words are back');
   // a course with none of the chosen languages asks for its own
-  await U(() => { const k = 'noema1:anr:a:settings', s = JSON.parse(localStorage.getItem(k)); s.studyLangs = ['fr']; localStorage.setItem(k, JSON.stringify(s)); });
+  await U(() => { const k = 'noema1:anr:a:settings', s = JSON.parse(NoemaCore.storage.kv.get(k)); s.studyLangs = ['fr']; NoemaCore.storage.kv.set(k, JSON.stringify(s)); });
   await open();
   ok(await p.locator('.lx-study-ask').count() === 1 && await p.locator('.lx-hero').count() === 0 && /None of the languages you chose/.test(await p.innerText('.lx-study-ask')), 'the answer has none of this course’s languages: the course asks, nothing else');
   await p.click('.lx-study-ask .noema-study-lang[data-lang="zh"]'); await p.click('.noema-study-ok'); await wait(600);

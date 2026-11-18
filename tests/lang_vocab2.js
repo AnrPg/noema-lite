@@ -157,7 +157,7 @@ if (fs.existsSync(path.join(PILOT, 'course.json'))) {
     const { C, L } = NoemaLangUI.UI, d = NoemaLang.dayNumber() - 2;
     for (const c of ['de', 'ar']) for (const id of C.lang[c].byNode['fd.06']) for (const t of ['r', 'p']) { NoemaLang.review(C, L, c, id, t, 'good', d); NoemaLang.review(C, L, c, id, t, 'good', d + 1); }
     const due = C.lang.de.byNode['fd.06'][0]; L.langs.de.items[due] = { seen: d, r: NoemaLang.sm2(null, 'good', d + 1) };
-    const kv = NoemaLang.toKV(C, L); for (const [k, v] of Object.entries(kv)) localStorage.setItem(`noema1:anr:s:lang:polyglot-semitic-zh-de:${k}`, JSON.stringify(v));
+    const kv = NoemaLang.toKV(C, L); for (const [k, v] of Object.entries(kv)) NoemaCore.storage.kv.set(`noema1:anr:s:lang:polyglot-semitic-zh-de:${k}`, JSON.stringify(v));
   });
   const ids = await page.evaluate(() => NoemaLangUI.UI.C.lang.de.byNode['fd.06']);
   const wid = ids.find(id => /Bruder/.test(id)) || ids[3];

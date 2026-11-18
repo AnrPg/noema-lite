@@ -98,7 +98,7 @@ async function answer(page, right) {
   ok(langs.size === 4 && new Set(firstThree).size >= 3, 'the same idea is learned in every language one after the other: ' + firstThree.join(' → '));
   ok(/0 to practise again/.test(await page.locator('.lx-result').innerText()), 'all right → nothing to practise again');
   await page.screenshot({ path: SHOTS + '/lx2_done.png' });
-  const keys = await page.evaluate(p => Object.keys(localStorage).filter(k => k.startsWith(p)), `noema1:anr:s:${SUBJ}:`);
+  const keys = await page.evaluate(p => NoemaCore.storage.kv.keys().filter(k => k.startsWith(p)), `noema1:anr:s:${SUBJ}:`);
   ok(keys.some(k => k.endsWith(':lang:de:node:veg.1')) && keys.some(k => k.endsWith(':lang:zh:node:veg.1')), `state stored per language and node (${keys.length} keys)`);
 
   // ---------- wrong answers come back once ----------
@@ -121,7 +121,7 @@ async function answer(page, right) {
   // ---------- a node learned in German opens the next one in German only ----------
   await page.evaluate(() => { const { C, L } = NoemaLangUI.UI, d = NoemaLang.dayNumber() - 10;
     for (const id of C.lang.de.byNode['veg.1']) for (const t of ['r', 'p']) { NoemaLang.review(C, L, 'de', id, t, 'good', d); NoemaLang.review(C, L, 'de', id, t, 'good', d + 1); }
-    const kv = NoemaLang.toKV(C, L); for (const [k, v] of Object.entries(kv)) localStorage.setItem(`noema1:anr:s:lang:polyglot-semitic-zh-de:${k}`, JSON.stringify(v)); });
+    const kv = NoemaLang.toKV(C, L); for (const [k, v] of Object.entries(kv)) NoemaCore.storage.kv.set(`noema1:anr:s:lang:polyglot-semitic-zh-de:${k}`, JSON.stringify(v)); });
   await page.goto(url + '?account=anr&subject=' + SUBJ + '#/'); await page.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(900);
   const chipsOf = i => page.evaluate(i => [...document.querySelectorAll('.lx-node')[i].querySelectorAll('.lx-ns')].map(x => x.title).join(' | '), i);   // the words of a state are in the chip's tooltip (QA)
   const veg2 = await chipsOf(1);

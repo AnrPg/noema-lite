@@ -185,7 +185,7 @@ const tokC = (c, t) => (t.l ? [t.l] : (t.parts || []).map(p => p.l).filter(Boole
     for (const c of C.languages) { let n = 0; for (const nid of C.order) { if (C.nodes[nid].kind !== 'lesson' || !C.lang[c].applies[nid]) continue; if (n++ > 8) break;
       for (const id of C.lang[c].byNode[nid]) { NoemaLang.review(C, L, c, id, 'r', 'good', d); NoemaLang.review(C, L, c, id, 'r', 'good', d + 3); } NoemaLang.recordCheck(C, L, c, nid, 1, d); } }
     for (const [c, id] of [['ar', 'ar:madina'], ['he', 'he:medina'], ['ar', 'ar:bayt'], ['he', 'he:bayit']]) if (C.lang[c].lex[id]) NoemaLang.review(C, L, c, id, 'r', 'good', d);
-    const kv = NoemaLang.toKV(C, L); for (const [k, v] of Object.entries(kv)) localStorage.setItem(`noema1:anr:s:lang:polyglot-semitic-zh-de:${k}`, JSON.stringify(v));
+    const kv = NoemaLang.toKV(C, L); for (const [k, v] of Object.entries(kv)) NoemaCore.storage.kv.set(`noema1:anr:s:lang:polyglot-semitic-zh-de:${k}`, JSON.stringify(v));
   });
   await open();
   // ---- colours ----
