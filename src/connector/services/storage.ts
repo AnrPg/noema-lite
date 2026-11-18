@@ -55,6 +55,14 @@ export class Storage {
       return null;
     }
   }
+  /** The object's exact bytes (past the CDN; a byte-order mark kept), or null when it is missing. */
+  async bytes(path: string): Promise<Uint8Array | null> {
+    try {
+      return new Uint8Array(await (await this.readFresh(path)).arrayBuffer());
+    } catch {
+      return null;
+    }
+  }
   /** The object as JSON (past the CDN), or null when it is missing or not JSON. */
   async json<T = unknown>(path: string): Promise<T | null> {
     const t = await this.text(path);
@@ -65,10 +73,11 @@ export class Storage {
       return null;
     }
   }
-  /** Write (or replace) a JSON object. noCache: readers after this one must not get an older copy from the CDN. */
+  /** Write (or replace) a JSON object (text, or exact bytes — a byte-order mark kept). noCache: readers after this one must
+      not get an older copy from the CDN. */
   async writeJson(
     path: string,
-    body: string,
+    body: string | Uint8Array,
     { noCache = false, bucket = PRIVATE }: { noCache?: boolean; bucket?: string } = {},
   ): Promise<void> {
     await this.sb.request(`/storage/v1/object/${bucket}/${path}`, {

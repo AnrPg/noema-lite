@@ -421,7 +421,7 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
         const f = cdn && !fr ? (cdn[k] = cdn[k] || files[k]) : files[k];
         res.writeHead(200, Object.assign({ 'Content-Type': f.type || 'application/octet-stream' }, cors)); return res.end(f.data);
       }
-      if ((m = p.match(/^\/storage\/v1\/object\/noema-private\/(.+)$/))) { const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid) return json(res, 403, { message: 'new row violates row-level security policy' }); files[k] = { data: buf, type: req.headers['content-type'] }; return json(res, 200, { Key: 'noema-private/' + k }); }
+      if ((m = p.match(/^\/storage\/v1\/object\/noema-private\/(.+)$/))) { const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid) return json(res, 403, { message: 'new row violates row-level security policy' }); if (server.state.failWrite && server.state.failWrite.test(k)) return json(res, 500, { message: 'test: write refused' }); files[k] = { data: buf, type: req.headers['content-type'] }; return json(res, 200, { Key: 'noema-private/' + k }); }
       // ---- /api/img: the picture fetcher Netlify function (cloud/img/proxy.mjs), run in-process; local hosts allowed in tests
       if (p === '/api/img' || p === '/api/file' || p === '/api/imgsearch') {
         globalThis.NOEMA_IMG_ALLOW_LOCAL = true; require(path.join(__dirname, '..', 'engine', 'imglib.js'));   // as tools/build.py prepends it

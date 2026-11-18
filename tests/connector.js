@@ -276,7 +276,33 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
     ok(r3.isError && /fr: the file in the account was made for pack version rebuilt-2; the pack is now rebuilt-3/.test(r3t) && /curl -sS -X PUT[^\n]*tr-physics\.tr\.fr\.json "http/.test(r3t),
       'stale translation in a pack without the stamp (version differs): a fresh upload command too');
     await fetch(r3t.match(/tr-physics\.tr\.fr\.json "([^"]+)"/)[1], { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...TRF, pack: 'tr-physics', version: 'rebuilt-3' }) });
-    ok(!(await tool('noema_finish_upload', { subject_id: 'tr-physics' })).isError, '… and after it the subject is saved'); }
+    ok(!(await tool('noema_finish_upload', { subject_id: 'tr-physics' })).isError, '… and after it the subject is saved');
+    // the rebuilt file starts with a byte-order mark: its stamp is over the exact bytes, and the same bytes uploaded are not stale
+    const trC = Buffer.concat([Buffer.from([0xef, 0xbb, 0xbf]), Buffer.from(JSON.stringify({ ...TRF, pack: 'tr-physics', version: 'rebuilt-4' }))]);
+    await up({ ...tp, version: 'rebuilt-4', translations: { fr: { file: true, chapters: TRF.chapters.length, sha256: sha(trC) } } });
+    // locale-only noema_save_translation on the older stored file (it still fits the pack): never taken over the rebuilt one's stamp
+    const s1 = await tool('noema_save_translation', { subject_id: 'tr-physics', locale: 'fr' }), s1t = s1.content[0].text;
+    ok(s1.isError && /older file: made for pack version rebuilt-3/.test(s1t) && /tr-physics\.tr\.fr\.json "http/.test(s1t) && JSON.parse(Buffer.from(srv.state.files[`${uid}/packs/tr-physics.json`].data).toString()).translations.fr.sha256 === sha(trC),
+      'save_translation (locale only) on the older stored file: refused with a fresh link, the rebuilt pack\'s stamp kept: ' + s1t.split('\n')[0].slice(0, 160));
+    const r4t = (await tool('noema_finish_upload', { subject_id: 'tr-physics' })).content[0].text;
+    await fetch(r4t.match(/tr-physics\.tr\.fr\.json "([^"]+)"/)[1], { method: 'PUT', headers: { 'content-type': 'application/json' }, body: trC });
+    const r4 = await tool('noema_finish_upload', { subject_id: 'tr-physics' });
+    ok(!r4.isError, 'a translation file with a byte-order mark matches its stamp (hashed over the exact bytes): ' + r4.content[0].text.split('\n')[0].slice(0, 120));
+    // A, then B, then A again (inline): the third save is done again, so the pack names A and the account holds A
+    const A = JSON.stringify({ ...TRF, pack: 'tr-physics', locale: 'ru', chapters: TRF.chapters.map(c => ({ ...c, title: 'Энергия A' })) }), B = A.replace('Энергия A', 'Энергия B');
+    for (const x of [A, B, A]) await tool('noema_save_translation', { subject_id: 'tr-physics', locale: 'ru', translation_json: x });
+    ok(JSON.parse(Buffer.from(srv.state.files[`${uid}/packs/tr-physics.json`].data).toString()).translations.ru.sha256 === sha(A) && Buffer.from(srv.state.files[`${uid}/packs/tr-physics.tr.ru.json`].data).toString() === A,
+      'saving A, B, then A again: not replayed from the first save — the pack names A and the account holds A');
+    // a save whose pack write fails takes its file back byte for byte: the BOM-prefixed fr file still matches the pack's stamp
+    srv.state.failWrite = /packs\/tr-physics\.json$/;
+    const s3 = await tool('noema_save_translation', { subject_id: 'tr-physics', locale: 'fr', subject_json: JSON.stringify({ title: 'Physique' }) });
+    delete srv.state.failWrite;
+    ok(s3.isError && /taken back/.test(s3.content[0].text) && Buffer.compare(Buffer.from(srv.state.files[`${uid}/packs/tr-physics.tr.fr.json`].data), trC) === 0 && !(await tool('noema_finish_upload', { subject_id: 'tr-physics' })).isError,
+      'a failed save restores the exact bytes of the earlier file (BOM kept), so it still matches the pack: ' + s3.content[0].text.split('\n')[0].slice(0, 120));
+    // a stored file with the wrong locale: refused with a fresh link, not a dead end
+    srv.state.files[`${uid}/packs/tr-physics.tr.ru.json`] = { ...srv.state.files[`${uid}/packs/tr-physics.tr.ru.json`], data: Buffer.from(A.replace('"locale":"ru"', '"locale":"el"')) };
+    const s2t = (await tool('noema_save_translation', { subject_id: 'tr-physics', locale: 'ru' })).content[0].text;
+    ok(/says locale "el"/.test(s2t) && /tr-physics\.tr\.ru\.json "http/.test(s2t), 'a stored file that names another locale: refused with a fresh upload link'); }
   const ru = { ...TRF, pack: 'tr-physics', locale: 'ru', chapters: TRF.chapters.map(c => ({ ...c, title: 'Энергия' })) };
   const t4 = await tool('noema_save_translation', { subject_id: 'tr-physics', locale: 'ru', translation_json: JSON.stringify(ru) });
   const saved = JSON.parse(Buffer.from(srv.state.files[`${uid}/packs/tr-physics.json`].data).toString());
