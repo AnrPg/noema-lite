@@ -20,8 +20,10 @@ const variants = css`
     background: var(--u-acc);
     color: var(--u-acc-ink);
   }
+  /* hover: a soft ring outside the button. Tinting the fill toward its text colour lowered the contrast below
+     4.5 : 1 in the lighter themes (white on #568052 is 4.56 : 1; 10 % white over it fails), so the fill stays. */
   .primary:hover:not([disabled]) {
-    box-shadow: inset 0 0 0 100px color-mix(in srgb, var(--u-acc-ink) 10%, transparent);
+    box-shadow: 0 0 0 3px var(--u-acc-soft);
   }
   .secondary {
     background: var(--u-paper);

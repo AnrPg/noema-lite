@@ -60,6 +60,7 @@
   "roadmap.jobs.attached": "「{subject}」が「{step}」を教えるようになりました{replan, select, yes { — そのステップを計画し直しています} other {}}",
   "roadmap.jobs.partAdded": "新しいパート「{title}」:{n, number} ステップをマップに追加しました",
   "roadmap.jobs.linksAdded": "ステップ間のつながりが変わりました:追加 {added, number}、削除 {removed, number}",
+  "roadmap.jobs.chaptersAdded": "「{step}」:{n, number} 章を追加しました",
   "roadmap.jobs.notHere": "このロードマップはこの端末にありません。",
   "roadmap.jobs.taskDone": "このタスクはもう終わっています(またはロードマップが変わりました) — 現在のタスクをもう一度コピーしてください。",
   "roadmap.jobs.notJson": "これは JSON の回答ではありません — Claude の回答(JSON オブジェクト)をそのまま貼り付けてください。",

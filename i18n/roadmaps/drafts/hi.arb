@@ -60,6 +60,7 @@
   "roadmap.jobs.attached": "“{subject}” अब “{step}” पढ़ाता है{replan, select, yes { — उस पड़ाव की योजना दोबारा बन रही है} other {}}",
   "roadmap.jobs.partAdded": "नया भाग “{title}”: नक्शे में {n, plural, one {# पड़ाव जोड़ा गया} other {# पड़ाव जोड़े गए}}",
   "roadmap.jobs.linksAdded": "पड़ावों के बीच कड़ियाँ बदलीं: {added, plural, one {# जोड़ी गई} other {# जोड़ी गईं}}, {removed, plural, one {# हटाई गई} other {# हटाई गईं}}",
+  "roadmap.jobs.chaptersAdded": "“{step}”: {n, plural, one {# अध्याय जोड़ा गया} other {# अध्याय जोड़े गए}}",
   "roadmap.jobs.notHere": "यह रोडमैप इस डिवाइस पर नहीं है।",
   "roadmap.jobs.taskDone": "यह काम पहले ही हो चुका है (या रोडमैप बदल गया) — मौजूदा काम फिर से कॉपी करें।",
   "roadmap.jobs.notJson": "यह JSON जवाब नहीं है — Claude ने जो जवाब दिया, वही ठीक-ठीक चिपकाएँ (JSON ऑब्जेक्ट)।",

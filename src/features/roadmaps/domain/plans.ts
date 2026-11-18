@@ -4,6 +4,7 @@
 import type { Roadmap, Step } from './model.ts';
 import { clone, ms } from './model.ts';
 import { planLocked } from './work.ts';
+import { mergeAddedChapters, mergeLanguages } from './chapters.ts';
 
 /** 👥 What a step's plan is (a shared Roadmap keeps the group's plan aside while the learner's own subject teaches the step). */
 export const PLAN_KEYS = ['chapters', 'learningGoals', 'plannedAt', 'replanAt'] as const;
@@ -49,6 +50,10 @@ export function mergePlans(c: Roadmap | null | undefined, other: Roadmap | null 
       if (!o.reviewed) Reflect.deleteProperty(n, 'reviewed');
       changed = true;
     }
+    // 📑 chapters added to the step on the other copy (a prepared step too: its plan is otherwise fixed); this copy's own
+    // additions are kept aside in case the other copy's plan replaces this one below
+    const own0 = { chapters: n.chapters ?? [], ...(n.chaptersAt ? { chaptersAt: n.chaptersAt } : {}) };
+    if (mergeAddedChapters(n, o)) changed = true;
     if (planLocked(n)) continue;
     // 📦 the other copy's plan followed a subject this copy has taken off since: it never comes back over the plan here
     if ((o.pack?.assigned || o.groupPlan) && ms(n.assignedAt as string | undefined) > ms(o.assignedAt as string | undefined)) continue;
@@ -70,6 +75,7 @@ export function mergePlans(c: Roadmap | null | undefined, other: Roadmap | null 
     n.chapters = o.chapters;
     if (o.plannedAt) n.plannedAt = o.plannedAt;
     else Reflect.deleteProperty(n, 'plannedAt');
+    mergeAddedChapters(n, own0); // chapters added here after the plan that wins stay
     if (!n.replanAt || ms(o.plannedAt) > ms(n.replanAt)) {
       Reflect.deleteProperty(n, 'replan');
       Reflect.deleteProperty(n, 'planWish');
@@ -83,6 +89,8 @@ export function mergePlans(c: Roadmap | null | undefined, other: Roadmap | null 
       changed = true;
     }
   }
+  // 🌐 the Roadmap's languages: the copy that set them later wins
+  if (mergeLanguages(c, other)) changed = true;
   // 🪜 the ladder and the proposals: the copy that decided later wins (a proposal is decided once, on one device)
   if (mergeProposals(c, other)) changed = true;
   if (

@@ -74,7 +74,7 @@ const OPS: Readonly<Record<string, Op>> = {
   'balance.check': (chapter, subject, min) => C.checkBalance(chapter, subject, { min: typeof min === 'number' ? min : undefined }),
   'translation.check': (t, pack) => C.checkTranslation(t, pack),
   'bridge.check': (b, pack) => C.checkBridge(b, pack),
-  'locales.required': own => C.requiredLocales(own),
+  'locales.required': (own, scope) => C.requiredLocales(own, scope),
   'exercise.check': (e, media) => C.checkExercise(e, media),
 };
 

@@ -128,8 +128,8 @@ def local_check(kind, d, run):
             r = subprocess.run([sys.executable, find("make_pack.py"), d, td], capture_output=True, text=True)
         tail = (r.stdout + r.stderr).strip().splitlines()[-25:]
         return r.returncode == 0, tail
-    if kind == "translations":   # a full translation of every chapter into en, el, ru, de, fr minus the pack's language (the pack rules' languages)
-        s = rj(os.path.join(d, "subject.json")) or {}; need = noema_core.required_locales(s.get("language", "en"))[0]
+    if kind == "translations":   # a full translation of every chapter into en, el, ru, de, fr minus the pack's language (the pack rules' languages), or only its Roadmap's (subject.authoring.languages)
+        s = rj(os.path.join(d, "subject.json")) or {}; need = noema_core.required_locales(s.get("language", "en"), (s.get("authoring") or {}).get("languages"))[0]
         chs = sorted(chapters_of(d, "chapters")); ok = bool(chs)
         if not chs: return False, ["no chapters yet"]
         for loc in need:

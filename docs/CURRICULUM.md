@@ -76,6 +76,21 @@ left → right. Each step shows its state: **✅ mastered · open (green open pa
 * **🗑 Remove the step**: its prerequisites become prerequisites of the steps after it (the order is kept); its
   prepared material can be deleted or kept as a normal subject.
 
+## 2c. 📑 Chapters added to a step after its plan (`src/features/roadmaps/domain/chapters.ts`)
+
+A pack may teach more than its step's plan: the learner asks for extra material while it is built. `noema_add_roadmap_chapters`
+adds chapters to any step — a prepared one too — at a named place (`after` / `before` a chapter ref, or `position` start / end):
+nothing is removed or reordered, and the pack, the prepared state, the links, the progress and the other steps never change. A
+repeated request changes nothing; a ref already used for another chapter, an unknown place, an empty title or a title the step
+already has are refused with the reason. It returns the step's chapter list. The chapters go straight into the Roadmap (a
+compare-and-swap write) and as an inbox entry `kind: "chapters"`; each added chapter carries `addedAt` and `addedAfter`, and
+`mergePlans` brings a chapter one copy added and the other lacks into it, even on a prepared step (a plan made later than the
+chapter was added replaces it). `noema_save_roadmap_translation` accepts the added chapters at once.
+
+An upload reconciles by itself (`services/packsave.ts`): when a pack has chapters its step's plan lacks, matched by title in order
+(`packExtras`), the step gains them (goals from the chapter's objectives, coverage from its sections titles) and the result names
+them; when the titles do not line up, nothing is guessed — the result warns and points at `noema_add_roadmap_chapters`.
+
 ## 3. Mastery and unlocking
 
 A step is **mastered** when **every section is read and ≥ 80 % of its exercises are solved**
@@ -360,6 +375,16 @@ coverage item of the planned chapter, in order. **Everything the step's panel sh
   reloads the next time it comes to the front.
 * **Edits.** Renaming a step or changing its summary, goals or chapters (✏️ `Edit.update`) and a new chapter plan
   (`applyPlans`) drop that step's translations of those fields (`dropI18n`); they are made again with the next translation.
+
+## 10b. 🌐 The languages of a Roadmap (`c.languages`)
+
+By default every pack gets the pack rules' languages (full translations en, el, ru, de, fr; 文A bridges for every pair). A Roadmap
+may name its own: `noema_set_roadmap_languages` stores `c.languages = { translations: ["el"], bridges?: ["en>el", "el>en"], at }`
+(bridges left out: every pair among the Roadmap's language and its translations; the later copy wins in `mergePlans`; inbox entry
+`kind: "languages"`). Then the Roadmap's "still untranslated" lists, `noema_finish_upload` / `noema_save_translation`'s
+"still to do", the step task and the pipeline checks ask only for those: the step task tells Claude to put
+`"authoring": { "languages": … }` into subject.json, and `tools/pipeline.py` (translations) and `tools/bridge.py require` read it
+(`requiredLocales(own, scope)`, one source in `src/features/content/domain/translation.ts`).
 
 ## 11. 🪜 Levels (grade, semester, year, difficulty)
 A Roadmap may say for whom each step is — only when its material says so (a school syllabus by grade, a university

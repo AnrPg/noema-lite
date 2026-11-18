@@ -103,11 +103,47 @@ export interface RequiredLocales {
   readonly bridges: string[];
   readonly bridgePairs: { readonly source: string; readonly native: string }[];
 }
-/** the languages every new pack gets (rules.ts LANGUAGES), minus the pack's own: the translations, the bridges' native
-    languages, and every 文A pair (content language → native): from the pack's own language and from each translation */
-export function requiredLocales(own?: unknown): RequiredLocales {
+/** 🌐 The languages one Roadmap (or one pack) asks for instead of the default (docs/CURRICULUM.md §10b): the full translations,
+    and the 文A pairs (content language → native) — "en>el" (or "en→el") or { source, native }. Bridges left out: every pair
+    among the pack's own language and its translations. */
+export interface LanguageScope {
+  readonly translations: readonly string[];
+  readonly bridges?: readonly { readonly source: string; readonly native: string }[];
+}
+const PAIR = /^\s*([a-zA-Z]{2,3}(?:-[A-Za-z0-9]+)*)\s*(?:>|→|->|=>)\s*([a-zA-Z]{2,3}(?:-[A-Za-z0-9]+)*)\s*$/;
+/** One 文A pair as written in a scope → { source, native } (lower-case base languages), or null when it is not one. */
+export function parsePair(x: unknown): { source: string; native: string } | null {
+  if (isObj(x) && typeof x.source === 'string' && typeof x.native === 'string') return { source: lang0(x.source), native: lang0(x.native) };
+  const m = typeof x === 'string' ? PAIR.exec(x) : null;
+  return m ? { source: lang0(m[1]), native: lang0(m[2]) } : null;
+}
+/** The scope as stored on a Roadmap or in subject.authoring.languages, read as it comes → a clean scope, or null (none). */
+export function scopeOf(v: unknown): LanguageScope | null {
+  if (!isObj(v) || !Array.isArray(v.translations)) return null;
+  const translations = [...new Set(v.translations.filter((l): l is string => typeof l === 'string' && LOCALE_RE.test(l)).map(lang0))];
+  const out: { translations: string[]; bridges?: { source: string; native: string }[] } = { translations };
+  if (Array.isArray(v.bridges)) out.bridges = v.bridges.map(parsePair).filter((p): p is { source: string; native: string } => !!p);
+  return out;
+}
+/** the languages a new pack gets, minus its own: the translations, the bridges' native languages, and every 文A pair (content
+    language → native). Without a scope: rules.ts LANGUAGES — from the pack's own language and from each translation. With one
+    (a Roadmap's languages, docs/CURRICULUM.md §10b): only what it names. */
+export function requiredLocales(own?: unknown, scope?: unknown): RequiredLocales {
   const o = lang0(own || 'en'),
-    translations = LANGUAGES.translations.filter(l => lang0(l) !== o);
+    sc = scopeOf(scope); // pairs written "en>el" or { source, native } are read into { source, native } here
+  if (sc) {
+    const translations = sc.translations.filter(l => l !== o),
+      langs = [o, ...translations];
+    const seen = new Set<string>(),
+      pairs = (sc.bridges ?? langs.flatMap(src => langs.map(n => ({ source: src, native: n })))).filter(p => {
+        const k = p.source + '>' + p.native;
+        if (p.source === p.native || seen.has(k)) return false;
+        seen.add(k);
+        return true;
+      });
+    return { translations, bridges: [...new Set(pairs.map(p => p.native))], bridgePairs: pairs };
+  }
+  const translations = LANGUAGES.translations.filter(l => lang0(l) !== o);
   const from = [o, ...(LANGUAGES.bridgesFrom.includes('translations') ? translations.map(lang0) : [])];
   const bridgePairs = from.flatMap(src => LANGUAGES.bridges.filter(n => lang0(n) !== src).map(n => ({ source: src, native: lang0(n) })));
   return { translations, bridges: LANGUAGES.bridges.filter(l => lang0(l) !== o), bridgePairs };

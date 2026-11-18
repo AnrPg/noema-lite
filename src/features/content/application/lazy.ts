@@ -32,6 +32,8 @@ const NAMES = Object.keys({
   checkBridge: true,
   checkTranslation: true,
   requiredLocales: true,
+  scopeOf: true,
+  parsePair: true,
   ACTIVITY_RULES: true,
   RULES: true,
   QUALITY: true,

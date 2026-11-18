@@ -9,6 +9,7 @@ export * from './work.ts';
 export * from './inbox.ts';
 export * from './i18n.ts';
 export * from './plans.ts';
+export * from './chapters.ts';
 export * from './status.ts';
 export * from './levels.ts';
 export * from './restructure.ts';

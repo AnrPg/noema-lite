@@ -374,6 +374,40 @@
         }
       }
     },
+    "noema_add_roadmap_chapters": {
+      "description": "Add chapters to a step of a Roadmap at any time — also to a PREPARED step whose pack ended up with more chapters than its plan (the learner asked for extra material while it was built). Each chapter gets its ref, title, teaching goals, coverage and its place (after or before a chapter ref of the step, or position start / end). Only the step's chapter list grows: nothing is removed or reordered, and the pack, the prepared state, the links, the learner's progress and the other steps never change. The same request again changes nothing (a chapter already there with the same ref and title is reported, not added twice); a ref the step already uses for another chapter, a place that names no chapter of the step, an empty title or the same title twice are refused with the reason. Returns the step's chapters as they now are, to check. Then translate the new chapters with noema_save_roadmap_translation (it accepts them at once). First call noema_roadmap_map for the step's \"@id\" and its chapter refs.",
+      "type": "object",
+      "required": ["step", "chapters_json"],
+      "properties": {
+        "curriculum_id": {
+          "type": "string",
+          "description": "the Roadmap (noema_curricula / noema_roadmap_map)"
+        },
+        "step": {
+          "type": "string",
+          "description": "the step: its \"@id\" (or id, or title)"
+        },
+        "chapters_json": {
+          "type": "string",
+          "description": "ONE JSON object: { \"chapters\": [{ \"ref\": \"transformers\", \"title\": \"…\", \"goals\": [\"…\" teaching goals], \"coverage\": [\"…\" what it must cover], \"after\": \"<chapter ref>\" (or \"before\": \"<chapter ref>\", or \"position\": \"start\" | \"end\"; default end) }], \"why\": \"one line: why the step gains them (optional)\" } — a place may name a chapter added before it in the same list"
+        }
+      }
+    },
+    "noema_set_roadmap_languages": {
+      "description": "Set the languages of a Roadmap: which full translations its packs and its own words get, and which 文A bridge pairs (the language read → the learner's own). Without it every pack gets the default (English, Greek, Russian, German, French and every bridge pair). Once set, the \"still to do\" lists of noema_finish_upload, noema_save_translation and noema_curriculum_task, the step tasks and the pipeline checks (subject.authoring.languages) ask only for these — an English + Greek Roadmap shows no Russian, German or French work. Call it when the learner names the languages (e.g. right after noema_create_roadmap); calling it again replaces them.",
+      "type": "object",
+      "required": ["languages_json"],
+      "properties": {
+        "curriculum_id": {
+          "type": "string",
+          "description": "the Roadmap (noema_curricula / noema_roadmap_map)"
+        },
+        "languages_json": {
+          "type": "string",
+          "description": "ONE JSON object: { \"translations\": [\"el\"] (languages besides the Roadmap's own), \"bridges\": [\"en>el\", \"el>en\"] (optional: the 文A pairs \"language read>native\"; left out = every pair among the Roadmap's language and its translations) }"
+        }
+      }
+    },
     "noema_restructure_levels": {
       "description": "🪜 Propose a new arrangement of a Roadmap by level (skill §0c): give it a ladder of levels (school grades, semesters, years of study, a difficulty ladder or the course's own), move steps and chapters to other levels, split a step that spans levels, merge steps of one level, move steps on the map. It is only a PROPOSAL: the learner sees it in the app with every change listed and approves or declines it (in a shared Roadmap, its owner); nothing changes before that. Approved, it keeps every id — a step keeps its id (a split's first part, a merge's target), chapters, sections and exercises keep theirs — so the learner's progress follows the material, and translations and 文A bridges move with their chapters. A subject the learner attached to a step never changes (it may only change level); in a shared Roadmap a prepared step is not split or merged. First call noema_roadmap_map for the step ids, chapter refs and levels. action \"status\" shows the proposal waiting and the last decisions.",
       "type": "object",
@@ -707,7 +741,7 @@
       "required": ["id"]
     },
     "noema_curriculum_submit": {
-      "description": "Submit your answer to a map / chapter-plan task from noema_curriculum_task. It is checked exactly as noema-lite checks its own agents; problems come back as a list — fix all of them and submit again. Accepted answers reach the learner's app by themselves.",
+      "description": "Submit your answer to a map / chapter-plan task from noema_curriculum_task — or several plan answers at once (answers_json). Each is checked exactly as noema-lite checks its own agents; problems come back as a list — fix all of them and submit again. Accepted answers reach the learner's app by themselves. The receipt names every step whose chapter plan is stored (read back after writing) and any that is not.",
       "type": "object",
       "properties": {
         "curriculum_id": {
@@ -720,9 +754,13 @@
         "result_json": {
           "type": "string",
           "description": "ONE JSON object matching the task's JSON Schema"
+        },
+        "answers_json": {
+          "type": "string",
+          "description": "instead of task_id + result_json: several answers in one call, a JSON list [{ \"task_id\": \"plan:a,b\", \"result\": { …the answer object… } }, …] — each checked and stored in order (the ones before it count), with one receipt for all"
         }
       },
-      "required": ["curriculum_id", "task_id", "result_json"]
+      "required": ["curriculum_id"]
     }
   }
 }
