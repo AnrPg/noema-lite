@@ -475,3 +475,22 @@ test('localStorage cleared after a clock set back: the reset still clears the da
   await u.kv.ready();
   assert.equal(value(u.kv.get('noema1:acc:a:k')), null, 'and it stays cleared');
 });
+
+test('a journaled edit the database already has: the older version’s copy leaves too, and never comes back', async () => {
+  const idb = fakeIndexedDB(),
+    ls = fakeWebStorage(Infinity);
+  const s = setup({ idb, ls });
+  await s.kv.ready();
+  s.kv.set('noema1:acc:a:k', 'edited');
+  await s.kv.flushed();
+  // what a failed move and a page closed after the commit leave: the journal entry and the old copy
+  ls.setItem(JOURNAL_PREFIX + 'noema1:acc:a:k', JSON.stringify({ v: 'edited', r: '000000000000001-000000-x' }));
+  ls.setItem('noema1:acc:a:k', 'legacy');
+  for (let i = 0; i < 2; i++) {
+    const t = setup({ idb, ls });
+    await t.kv.ready();
+    await t.kv.flushed();
+    assert.equal(value(t.kv.get('noema1:acc:a:k')), 'edited', 'start ' + String(i + 1));
+  }
+  assert.equal(ls.getItem('noema1:acc:a:k'), null);
+});

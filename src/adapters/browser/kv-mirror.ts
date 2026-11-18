@@ -480,7 +480,15 @@ export function mirroredKv(o: MirroredKvOptions): MirroredKv {
       if (v === null) continue;
       legacy.set(k, v);
       if (unsettled.has(k)) continue; // this page wrote it since: that write wins, the old copy only leaves
-      if (journaled.has(k)) continue; // a later edit of it, journaled after a failed move: that one wins, the old copy only leaves
+      if (journaled.has(k)) {
+        // a later edit of it, journaled after a failed move, wins; when the database already has it (committed), the old
+        // copy leaves now, else once that edit commits (settled)
+        if (!pending.has(k)) {
+          lsDel(k);
+          legacy.delete(k);
+        }
+        continue;
+      }
       const rec = { v, r: revision() };
       take(k, rec);
       pending.set(k, rec);
