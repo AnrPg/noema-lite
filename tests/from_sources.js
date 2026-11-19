@@ -140,7 +140,7 @@ function vendors() {
         // ✨ Create with Claude (the skill in the sandbox): answer with a package
         const first = b.messages[0].content; const sid = first[0].text.match(/Subject id: (\S+)/)[1];
         A.node.push({ sid, first: first[0].text, uploads: first.filter(x => x.type === 'container_upload').length });
-        const pack = JSON.parse(JSON.stringify(FX)); pack.subject = { ...pack.subject, id: sid, title: 'Molecular biology', owner: null }; pack.version = sid + '-v1'; pack.sources = { sources: [] };
+        const pack = JSON.parse(JSON.stringify(FX)); pack.subject = { ...pack.subject, id: sid, title: 'Molecular biology', owner: null }; pack.version = sid + '-v1'; pack.sources = { sources: [] }; pack.builtAt = '2026-11-01T00:00:00Z';   /* built before Q0: tests/gradual.js tests the rules */
         const JSZip = require(path.join(ROOT, 'engine/vendor/viewer/jszip.min.js')); const z = new JSZip(); z.file('pack.json', JSON.stringify(pack));
         const fid = 'file_pkg_' + A.node.length; A.zips[fid] = { name: sid + '.noema.zip', buf: await z.generateAsync({ type: 'nodebuffer' }) };
         return J(res, 200, { id: 'm', type: 'message', role: 'assistant', model: b.model, stop_reason: 'end_turn', usage: { input_tokens: 9000, output_tokens: 3000 }, container: { id: 'cont_' + sid },
@@ -259,7 +259,7 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
     const st = await tool('noema_curriculum_task', { curriculum_id: cid2 });
     const sid2 = (st.text.match(/subject_id: (cur-[a-z0-9-]+)/) || [])[1];
     ok(sid2 && /prepare ONE step/.test(st.text) && /“Membranes”: lectures\/cells\.pdf pp\. 1–40/.test(st.text) && !/research it yourself/.test(st.text) && /Why it matters \(membranes\)/.test(st.text), 'then the first step in study order (all were queued), from its pages in the chat, with its planned chapters');
-    const pk = JSON.parse(JSON.stringify(FX)); pk.subject = { ...pk.subject, id: sid2, title: 'Membranes', owner: null }; pk.version = sid2 + '-v1';
+    const pk = JSON.parse(JSON.stringify(FX)); pk.subject = { ...pk.subject, id: sid2, title: 'Membranes', owner: null }; pk.version = sid2 + '-v1'; pk.builtAt = '2026-11-01T00:00:00Z';   /* built before Q0: tests/gradual.js tests the rules */
     const upUrl = (await tool('noema_start_upload', { subject_id: sid2 })).text.match(/https?:\/\/\S+upload\/sign\S+/)[0];
     await fetch(upUrl, { method: 'PUT', headers: { 'content-type': 'application/json', 'x-upsert': 'true' }, body: JSON.stringify(pk) });
     const fin = await tool('noema_finish_upload', { subject_id: sid2 });

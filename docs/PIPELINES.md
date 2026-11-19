@@ -22,8 +22,8 @@ python3 scripts/pipeline.py detect --sources 2              # → 4  Sources →
 python3 scripts/start_subject.py work demo "Demo" --lang en
 python3 scripts/pipeline.py start 4 work/demo               # writes work/demo/run.json
 python3 scripts/pipeline.py next work/demo                  # the next step: what to do, the doc, how it is checked
-python3 scripts/pipeline.py check work/demo map             # runs the check; on success records it with the hashes of
-                                                            # what it produced
+python3 scripts/pipeline.py check work/demo map             # runs the check; on success records the hash of every
+                                                            # entity it saw (status then names only what changed)
 python3 scripts/pipeline.py done work/demo upload --note "noema_finish_upload ok"   # a connector call or a judgement
 python3 scripts/pipeline.py status work/demo                # every step: todo / done / stale / failed / planned / deferred
 python3 scripts/pipeline.py defer work/demo upload --note "curl: 403 from the storage"   # the network blocks the upload: it waits
@@ -31,9 +31,16 @@ python3 scripts/pipeline.py pending work                    # every subject whos
 ```
 
 - A step is refused while a step it `needs` is not done.
-- When a file a done step produced changes, that step **and every step after it** becomes `stale` and is checked again
-  (a change to a chapter after the review re-opens write → blind_solve → review → checks; the map stays done).
-- **A blocked upload never stops the flow** (§1b).
+- **Resumable, entity by entity.** A check records the hash of every entity it saw: each section, exercise, playbook, flashcard,
+  pitfall, map point and concept (by id), each translation of them, subject.json. A step is `stale` only when something it
+  depends on (its own files and those of the steps before it) changed since it passed, and `status` / `next` name exactly what:
+  `changed since: chapters/ch03: ch03-e004 — redo only these`. Everything else stays done; the map stays done when only a
+  chapter changed.
+- **Only the changed parts are redone, and they must be.** `translate` passes again only once every translation of each
+  changed section or exercise is updated (in every language it needs); `review` only once `review/chNN.json` covers the
+  changed exercises (solved blind again). A change that does not touch them (a tag, a typo in a comment): `--same ID,ID`.
+  A failed check keeps what the step saw when it last passed, so what is still to redo is never lost.
+- **Repairing a refused or uploaded pack (§1c).** **A blocked upload never stops the flow** (§1b).
 - `status` exits 1 while a strict step is open (a deferred upload too). `review` gates are a judgement recorded with `done --note`; `planned`
   steps are listed and not required.
 
@@ -50,6 +57,25 @@ lists every subject still waiting, with the files ready to send (pack, translati
 and they are retried together; each that goes up is recorded with `pipeline.py done <dir> upload --note "…"`. If the
 network still blocks them, the learner gets each `<id>.noema.zip` (📥 Import subject pack) and the bridge files, with a
 note of what is waiting. Only a step marked `deferrable` in `steps.json` may wait — today only `upload`.
+
+## 1c. Repairing a pack without redoing it
+
+Every check that refuses a pack (make_pack.py, the pipeline, the upload: noema_finish_upload / noema_save_pack) says where and
+how: the chapter, the section, block or exercise and its field, the words found, the rule and the fix
+(`ch01-e009 (ch01-s01): uses “current” (introduced in ch01-s02; pairs: “ampere”) …`). The upload's refusal groups them by
+chapter and names the only files to edit.
+
+1. The work folder is still there: edit only the named entities in `chapters/chNN.json`, `map/chNN.json` (concepts, known),
+   `translations/<locale>/chNN.json`. It is gone (another session), or the pack is already saved: get it back with
+   `noema_get_pack_url` → curl → `python3 scripts/unpack.py PACK.json work --repair` (chapters, `map/`, `review/`,
+   `translations/` as files; no chapter is a base, so every rule holds again).
+2. `pipeline.py status` / `next`: only the steps touched by the fix are stale, each with the entities that changed; the rest
+   passes at once when checked (a repaired folder: `pipeline.py start 4 DIR`, then each check).
+3. `make_pack.py`, then the upload with the same subject id.
+
+`noema_check_pack` (connector, optional) runs the upload's checks on demand on an uploaded file or inline JSON and lists every
+issue by chapter, saving nothing. Nothing depends on it: make_pack.py, the pipeline's gates and the upload run every rule
+whether it was called or not.
 
 ## 2. Flows
 
@@ -98,9 +124,17 @@ exercises of the sources (`sourceQuestions`, Q3) and passes every check of §4 l
 
 ## 4. The quality rules (per chapter)
 
-On for every pack with `subject.authoring.rules` ≥ 2 (`start_subject.py` writes 2). **Errors** when `authoring.by` is
+On for every pack with `subject.authoring.rules` ≥ 2 (`start_subject.py` writes 3; the Q0 checks are errors from 3 on,
+warnings at 2). **Errors** when `authoring.by` is
 `claude` or `gemini`, warnings for `learner` or `import` packs; older packs without `rules` are not checked (TD-11). The
 connector refuses a pack built since 2026-10-22 without `rules` ≥ 2, so leaving the field out does not skip the checks.
+
+**Q0 first — the gradual introduction** (`tools/CONTENT_SPEC.md` Q0, `src/features/content/domain/gradual.ts`): nothing
+is used before it is taught, every section teaches one idea, in depth. The map's `concepts` (every concept the chapter
+introduces: `terms`, `in` = its section, `def`, `needs`) and `known` (every concept it uses without introducing it,
+`from` = `chNN`, `@<step id>` or `everyday`) are the ladder; the checker reads the whole text against it, so a concept used
+too early is found even when nobody meant to use it (a word, a unit after a number such as mAh, an acronym). The `map`
+step of the flow already refuses a map without them.
 
 The chapter's **knowledge map** `map/chNN.json` comes first (format in `tools/CONTENT_SPEC.md`):
 
@@ -118,6 +152,11 @@ The chapter's **knowledge map** `map/chNN.json` comes first (format in `tools/CO
 
 | Check | Rule |
 | --- | --- |
+| concept.map (Q0) | the map lists the concepts the chapter introduces (`terms`, `in`, `def`, `needs`) and those it only uses (`known`, with `from`) |
+| concept.order (Q0) | no term, unit or symbol before the section that introduces it — in the theory, exercises (with their answer unit), cards, pitfalls and playbooks; no concept before what it `needs`; none that a later chapter introduces |
+| concept.undeclared (Q0) | every `terms`-block term, unit after a number (A, mAh, V, W, J, Ω, Hz, dB…) and acronym is in `concepts` or `known` |
+| theory.focus (Q0) | every section states its one idea in `focus` and introduces ≤ 3 new concepts |
+| theory.depth (Q0) | ≥ 400 words of teaching text per section (+150 per new concept after the first), a `reveal`, every new concept defined there (bold or `terms`) |
 | fit.types, fit.focus | every type and focus tag in `fits` ≥ 3 exercises |
 | mode.coverage | every paradigm in `fits.modes` ≥ 2 exercises |
 | mix.difficulty | difficulty 1 / 2 / 3 = 20 / 25 / 55 % (± 5) |

@@ -53,7 +53,7 @@ try:
     sj = json.load(open(os.path.join(d, "subject.json"), encoding="utf-8"))
     sj["description"] = "Forces between charges."; sj["i18n"] = {"el": {"title": "Νόμος του Coulomb", "appTitle": "Coulomb Quest", "description": "Δυνάμεις μεταξύ φορτίων."}, "ru": {"title": "Закон Кулона", "appTitle": "Coulomb Quest", "description": "Силы между зарядами."}, "de": {"title": "Coulombsches Gesetz", "appTitle": "Coulomb Quest", "description": "Kräfte zwischen Ladungen."}, "fr": {"title": "Loi de Coulomb", "appTitle": "Coulomb Quest", "description": "Les forces entre les charges."}}   # the subject's name in each translation
     json.dump(sj, open(os.path.join(d, "subject.json"), "w", encoding="utf-8"), ensure_ascii=False)
-    ok(sj["authoring"]["rules"] == 2 and sj["authoring"]["by"] == "claude" and os.path.isdir(os.path.join(d, "map")) and os.path.isdir(os.path.join(d, "review")), "start_subject.py: authoring.rules 2, by claude, map/ and review/")
+    ok(sj["authoring"]["rules"] == 3 and sj["authoring"]["by"] == "claude" and os.path.isdir(os.path.join(d, "map")) and os.path.isdir(os.path.join(d, "review")), "start_subject.py: authoring.rules 3, by claude, map/ and review/")
     ok(P("start", "4", d).returncode == 0 and P("status", d).returncode == 1, "start 4 → run.json; status fails while strict steps are open")
     ok(P("check", d, "map").returncode == 1, "map: refused before start_subject is checked (needs)")
     ok(P("check", d, "start_subject").returncode == 0, "start_subject: checked")
@@ -77,11 +77,16 @@ try:
     points = [{"id": f"ch01-k{i + 1:02d}", "text": f"Point {i + 1}", "level": ["foundation", "core", "advanced"][i % 3], "cite": {"src": "s1"}} for i in range(20)]
     m = {"format": "noema.map/v1", "chapter": "ch01", "points": points, "learnables": [{"id": f"ch01-l{i + 1:02d}", "kp": [points[i]["id"]], "goal": "g"} for i in range(20)],
          "fits": {"types": T9, "focus": TG, "modes": M6}, "unfit": {**{x: "nothing to argue about here" for x in Q["vocab"]["modes"][6:]}, **{t: "this short sample chapter has no use for it" for t in ("flaw", "case", "predict", "tree", "inquiry", "debate")}},
-         "sourceQuestions": [{"id": "ch01-q01", "text": "The full question.", "answer": "Its checked answer.", "answerFrom": "claude", "check": "solved twice, compared", "cite": {"src": "s1", "loc": "Q1"}}]}
+         "sourceQuestions": [{"id": "ch01-q01", "text": "The full question.", "answer": "Its checked answer.", "answerFrom": "claude", "check": "solved twice, compared", "cite": {"src": "s1", "loc": "Q1"}}],
+         # Q0: what the chapter introduces (and where), and what it uses without introducing it
+         "concepts": [{"id": "inverse-square", "terms": ["inverse square", "square of the distance"], "in": "ch01-s01", "def": "A quantity that falls with the square of the distance: twice as far, a quarter as strong.", "needs": ["force", "distance"]}],
+         "known": [{"id": k, "terms": [k], "from": "everyday"} for k in ("force", "distance", "charge", "gravity", "mass", "spring")]}
     json.dump(m, open(os.path.join(d, "map", "ch01.json"), "w"))
     r = P("check", d, "map"); ok(r.returncode == 0, "map: a complete knowledge map passes" + ("" if r.returncode == 0 else "\n" + r.stdout))
+    DEPTH = [{"t": "p", "text": f"Step {k + 1} of the picture: imagine the influence of one charge spreading out evenly in every direction, like light from a small lamp in a dark room. The same total influence is shared over a sphere whose surface grows with the square of its radius, so each patch of that surface gets a smaller share as the sphere grows wider and wider."} for k in range(8)]
     ch = {"id": "ch01", "num": 1, "title": "Coulomb", "subtitle": "Force and distance", "emoji": "⚡", "sourcePages": "1-3", "mantra": "Square the distance.", "objectives": ["You can explain the inverse square law"],
-          "sections": [{"id": "ch01-s01", "title": "The law", "blocks": [{"t": "table", "kind": "compare", "head": ["", "Gravity", "Coulomb"], "rows": [["Acts on", "masses", "charges"], ["Sign", "attracts", "attracts or repels"]]}, {"t": "table", "kind": "summary", "head": ["Force", "Falls with"], "rows": [["Gravity", "r squared"], ["Coulomb", "r squared"], ["Spring", "grows with x"]]}, {"t": "table", "kind": "breakdown", "head": ["Force", "Carrier", "Range", "Strength"], "rows": [["Gravity", "mass", "infinite", "weakest"], ["Coulomb", "charge", "infinite", "strong"]]}, {"t": "p", "text": "The force between two charges falls with the square of the distance."}, {"t": "p", "text": "Double the distance, a quarter of the force."}, {"t": "p", "text": "Halve it, four times the force."}]}],
+          "sections": [{"id": "ch01-s01", "title": "The law", "focus": "How the force between two charges falls with distance.", "blocks": [{"t": "table", "kind": "compare", "head": ["", "Gravity", "Coulomb"], "rows": [["Acts on", "masses", "charges"], ["Sign", "attracts", "attracts or repels"]]}, {"t": "table", "kind": "summary", "head": ["Force", "Falls with"], "rows": [["Gravity", "r squared"], ["Coulomb", "r squared"], ["Spring", "grows with x"]]}, {"t": "table", "kind": "breakdown", "head": ["Force", "Carrier", "Range", "Strength"], "rows": [["Gravity", "mass", "infinite", "weakest"], ["Coulomb", "charge", "infinite", "strong"]]}, {"t": "p", "text": "The force between two charges follows an **inverse square** rule: it falls with the square of the distance."}, {"t": "p", "text": "Double the distance, a quarter of the force."}, {"t": "p", "text": "Halve it, four times the force."},
+                                                                          {"t": "reveal", "label": "Think first: what happens at three times the distance?", "text": "The force drops to one ninth, because three squared is nine."}] + DEPTH}],
           "debug": [], "pitfalls": [], "flashcards": [{"id": "ch01-f001", "q": "Force at twice the distance?", "a": "A quarter."}], "exercises": exs}
     json.dump(ch, open(os.path.join(d, "chapters", "ch01.json"), "w"))
     r = P("check", d, "write"); ok(r.returncode == 0, "write: the chapter is valid" + ("" if r.returncode == 0 else "\n" + r.stdout))
@@ -113,8 +118,8 @@ try:
     loc = lambda nat, part=1.0: {"format": "noema-bridge-locale", "v": 1, "native": nat, "status": "draft", "t": {f"{w['word']}#1": {"t": "x"} for w in words[:max(1, int(len(words) * part))]}}
     for nat in ("el", "ru", "de", "fr"): json.dump(loc(nat), open(os.path.join(d, "bridges", nat + ".json"), "w"))
     r = P("check", d, "bridges"); ok(r.returncode == 1 and "no bridge into ar" in r.stdout, "bridges: el, ru, de and fr are not enough — ar too")
-    json.dump(loc("ar", 0.5), open(os.path.join(d, "bridges", "ar.json"), "w"))
-    r = P("check", d, "bridges"); ok(r.returncode == 1 and "ar: covers" in r.stdout and "everyday words" in r.stdout, "bridges: a bridge with half the words is below the minimum (all and everyday words)")
+    json.dump(loc("ar", 0.3), open(os.path.join(d, "bridges", "ar.json"), "w"))
+    r = P("check", d, "bridges"); ok(r.returncode == 1 and "ar: covers" in r.stdout and "everyday words" in r.stdout, "bridges: a bridge with a third of the words is below the minimum (all and everyday words)")
     json.dump(loc("ar"), open(os.path.join(d, "bridges", "ar.json"), "w"))
     r = P("check", d, "bridges"); ok(r.returncode == 1 and "from el: no bridges/from-el/core.json" in r.stdout and all(f"from {l}:" in r.stdout for l in ("ru", "de", "fr")) and "no bridge into" not in r.stdout.replace("from el", "").split("from")[0], "bridges: en → el, ru, ar, de, fr are not enough — a learner reading the el, ru, de or fr translation gets help too")
     for src in ("el", "ru", "de", "fr"):   # the translation's own words (here the same text, ch copied), its own pairs
@@ -156,10 +161,34 @@ try:
     ex = json.load(open(os.path.join(d, "chapters", "ch01.json"))); ex["exercises"][4]["q"] = "As in Q14 of the source, what happens?"; json.dump(ex, open(os.path.join(d, "chapters", "ch01.json"), "w"))
     st = P("status", d).stdout
     ok("write          stale" in st and "checks         stale" in st and "map            done" in st, "a change to the chapter makes write and every later step stale, not the map")
+    ok("changed since: chapters/ch01: ch01-e005 — redo only these" in st and st.count("changed since:") == 7 and "ch01-e004" not in st and "ch01-s01" not in st,
+       "status: each stale step names exactly what changed since it was done (one exercise), nothing else is to redo" + ("" if "ch01-e005 — redo" in st else "\n" + st))
+    r = P("next", d); ok("only what changed since it was done" in r.stdout and "ch01-e005" in r.stdout, "next: names only the changed exercise")
     r = P("check", d, "checks"); ok(r.returncode == 1 and r.stdout.startswith("first: review"), "checks: refused while an earlier step is stale")
-    ok(all(P("check", d, x).returncode == 0 for x in ("write", "blind_solve", "review", "translate", "bridges")), "write, blind_solve, review, translate, bridges: checked again")
+    ok(P("check", d, "write").returncode == 0, "write: checked again")
+    ok(P("check", d, "blind_solve").returncode == 0, "blind_solve: checked again")
+    r = P("check", d, "review"); ok(r.returncode == 1 and "ch01: exercises changed since the review (ch01-e005)" in r.stdout, "review: a changed exercise must be solved blind again (only it)" + ("" if "e005" in r.stdout else "\n" + r.stdout))
+    rv["blind"]["mismatches"].append({"id": "ch01-e005", "fixed": True, "note": "re-solved after the change"}); json.dump(rv, open(os.path.join(d, "review", "ch01.json"), "w"))
+    ok(all(P("check", d, x).returncode == 0 for x in ("blind_solve", "review")), "blind_solve, review: pass once the review covers the changed exercise")
+    r = P("check", d, "translate"); ok(r.returncode == 1 and all(f"{l}: ch01 ch01-e005 changed since it was translated" in r.stdout for l in ("el", "ru", "de", "fr")) and "ch01-e004" not in r.stdout,
+       "translate: each translation of the changed exercise must be updated (only it, in every language)" + ("" if r.returncode else "\n" + r.stdout))
+    for l in ("el", "ru", "de"):
+        f = os.path.join(d, "translations", l, "ch01.json"); tc = json.load(open(f)); tc["exercises"][4]["q"] = f"[{l}] what happens?"; json.dump(tc, open(f, "w"))
+    r = P("check", d, "translate"); ok(r.returncode == 1 and "fr: ch01 ch01-e005" in r.stdout and "el: ch01" not in r.stdout, "translate: a failed check remembers what is still to redo (fr)")
+    ok(P("check", d, "translate", "--same", "ch01-e005").returncode == 0, "translate: --same accepts a change that does not touch the translation")
+    ok(P("check", d, "bridges").returncode == 0, "bridges: checked again")
     r = P("check", d, "checks"); ok(r.returncode == 1 and "[self.contained]" in r.stdout, "checks: make_pack.py refuses the pointer to the source (self.contained)" + ("" if "[self.contained]" in r.stdout else "\n" + r.stdout + r.stderr))
     ok(P("next", d).stdout.startswith("next: checks"), "next: the first step that is not done")
+    # repair: the work folder is gone (or the upload refused the pack) — the pack itself gives every file back, fixed in place
+    rep = os.path.join(work, "repair"); shutil.copy(os.path.join(d, "build", "demo-coulomb.json"), os.path.join(work, "got.json"))
+    for l in ("el", "ru", "de", "fr"): shutil.copy(os.path.join(d, "build", f"demo-coulomb.tr.{l}.json"), os.path.join(work, f"demo-coulomb.tr.{l}.json"))
+    r = subprocess.run([sys.executable, os.path.join(sk, "unpack.py"), os.path.join(work, "got.json"), rep, "--repair"], capture_output=True, text=True); rd = os.path.join(rep, "demo-coulomb")
+    ok(r.returncode == 0 and "repair: fix only what the errors name" in r.stdout and json.load(open(os.path.join(rd, "map", "ch01.json")))["format"] == "noema.map/v1"
+       and json.load(open(os.path.join(rd, "review", "ch01.json")))["blind"]["solved"] == 40 and "map" not in json.load(open(os.path.join(rd, "chapters", "ch01.json")))
+       and json.load(open(os.path.join(rd, ".unpacked.json")))["chapters"] == [] and os.path.exists(os.path.join(rd, "translations", "fr", "ch01.json")),
+       "unpack.py --repair: chapters, map/, review/, translations/ back as files; no chapter is a base (every rule holds again)" + ("" if r.returncode == 0 else "\n" + r.stdout + r.stderr))
+    ok(P("start", "4", rd).returncode == 0 and all(P("check", rd, x).returncode == 0 for x in ("start_subject", "map", "write", "blind_solve", "review")),
+       "repair: the steps whose parts are right pass at once (nothing is made again)")
 finally:
     shutil.rmtree(work, ignore_errors=True)
 print(f"\n{n} checks passed")

@@ -74,6 +74,16 @@ export interface QualityCheck {
   readonly minWords?: number;
   readonly ratio?: number;
   readonly rubricMin?: number;
+  /** the check is an error only for packs with subject.authoring.rules >= minRules (older packs get it as a warning) */
+  readonly minRules?: number;
+  /** concept.* / theory.*: at most this many new concepts per section */
+  readonly maxNew?: number;
+  /** theory.depth: words of teaching text a section needs for each new concept after the first */
+  readonly perConcept?: number;
+  /** concept.undeclared: the units the checker knows by itself (a number, an SI prefix and the symbol, or the name) */
+  readonly units?: readonly { readonly sym: string; readonly name: string; readonly what: string }[];
+  /** concept.undeclared: words in capitals that are emphasis, not acronyms */
+  readonly stop?: readonly string[];
 }
 export interface Quality {
   readonly version: number;
@@ -83,6 +93,9 @@ export interface Quality {
   readonly checks: readonly QualityCheck[];
   readonly notes: readonly string[];
   readonly since: string;
+  /** Q0 (gradual introduction): the connector holds packs built since `since` to authoring.rules >= `rules` and treats
+      them as Claude-made (errors), whatever authoring.by says — so a pack cannot skip Q0 by an older rules number or by */
+  readonly gradual: { readonly rules: number; readonly since: string };
 }
 export const QUALITY: Quality = {
   version: 2,
@@ -158,6 +171,158 @@ export const QUALITY: Quality = {
     pictures: ['img_hotspot', 'img_sequence', 'img_reveal', 'img_drag', 'img_label', 'img_select', 'img_occlusion'],
   },
   checks: [
+    {
+      id: 'concept.map',
+      level: 'error',
+      minRules: 3,
+      what: "Q0: the knowledge map lists every concept the chapter introduces (map.concepts: id, terms — the words, units and symbols the learner will meet —, in = the section that introduces it, def = its definition in one or two sentences, needs = the concepts it is built on) and every concept it uses without introducing it (map.known: id, terms, from = 'chNN' an earlier chapter, '@<step id>' an earlier Roadmap step, or 'everyday' — what any learner of the course already knows)",
+    },
+    {
+      id: 'concept.order',
+      level: 'error',
+      minRules: 3,
+      what: 'Q0: no concept, term, unit or symbol is used before it is introduced: not in an earlier section, not in an earlier chapter, not in an exercise, card or playbook of an earlier section; a concept is introduced after everything it needs; a concept is named in the section that introduces it',
+    },
+    {
+      id: 'concept.undeclared',
+      level: 'error',
+      minRules: 3,
+      what: 'Q0: every term of a terms block, every unit after a number (A, mAh, V, W, J, Ω, Hz…) and every acronym is a concept of map.concepts or map.known, so the order check sees it',
+      units: [
+        { sym: 'A', name: 'ampere', what: 'current' },
+        { sym: 'Ah', name: 'ampere-hour', what: 'charge (battery capacity)' },
+        { sym: 'C', name: 'coulomb', what: 'charge' },
+        { sym: 'V', name: 'volt', what: 'voltage' },
+        { sym: 'W', name: 'watt', what: 'power' },
+        { sym: 'Wh', name: 'watt-hour', what: 'energy' },
+        { sym: 'J', name: 'joule', what: 'energy' },
+        { sym: 'Ω', name: 'ohm', what: 'resistance' },
+        { sym: 'F', name: 'farad', what: 'capacitance' },
+        { sym: 'H', name: 'henry', what: 'inductance' },
+        { sym: 'Hz', name: 'hertz', what: 'frequency' },
+        { sym: 'Wb', name: 'weber', what: 'magnetic flux' },
+        { sym: 'N', name: 'newton', what: 'force' },
+        { sym: 'Pa', name: 'pascal', what: 'pressure' },
+        { sym: 'mol', name: 'mole', what: 'amount of substance' },
+        { sym: 'Da', name: 'dalton', what: 'molecular mass' },
+        { sym: 'dB', name: 'decibel', what: 'a ratio on a log scale' },
+        { sym: 'dBm', name: 'decibel-milliwatt', what: 'power on a log scale' },
+        { sym: 'bps', name: 'bits per second', what: 'data rate' },
+        { sym: 'eV', name: 'electronvolt', what: 'energy' },
+      ],
+      stop: [
+        'NOT',
+        'AND',
+        'OR',
+        'NO',
+        'ALL',
+        'ONLY',
+        'NEVER',
+        'ALWAYS',
+        'NONE',
+        'TRUE',
+        'FALSE',
+        'BOTH',
+        'EACH',
+        'MUST',
+        'ONE',
+        'TWO',
+        'OK',
+        'VS',
+        'TODO',
+        'FAQ',
+        'BEFORE',
+        'AFTER',
+        'WRONG',
+        'RIGHT',
+        'SAME',
+        'DIFFERENT',
+        'IS',
+        'ARE',
+        'DOES',
+        'WHY',
+        'HOW',
+        'WHAT',
+        'EXCEPT',
+        'LEAST',
+        'MOST',
+        'MORE',
+        'LESS',
+        'NEW',
+        'THIS',
+        'THAT',
+        'THESE',
+        'THOSE',
+        'ANY',
+        'ACROSS',
+        'THROUGH',
+        'TO',
+        'OTHER',
+        'AT',
+        'IN',
+        'ON',
+        'OF',
+        'BY',
+        'FOR',
+        'IF',
+        'BUT',
+        'NOR',
+        'CAN',
+        'CANNOT',
+        'WILL',
+        'FIRST',
+        'LAST',
+        'ALSO',
+        'NOW',
+        'THEN',
+        'WHEN',
+        'WHERE',
+        'WHICH',
+        'WHO',
+        'YES',
+        'ONCE',
+        'FEWER',
+        'HIGHER',
+        'LOWER',
+        'LARGER',
+        'SMALLER',
+        'CORRECT',
+        'INCORRECT',
+        'BEST',
+        'WORST',
+        'DO',
+        'DON',
+        'WITHOUT',
+        'WITH',
+        'INSIDE',
+        'OUTSIDE',
+        'BETWEEN',
+        'NEITHER',
+        'EITHER',
+        'STILL',
+        'EXACTLY',
+        'IT',
+        'WE',
+        'YOU',
+        'THE',
+        'AN',
+      ],
+    },
+    {
+      id: 'theory.focus',
+      level: 'error',
+      minRules: 3,
+      maxNew: 3,
+      what: 'Q0: one focus per page: every section says its one idea in section.focus (one sentence) and introduces at most 3 new concepts (map.concepts with in = that section); more is split into more sections',
+    },
+    {
+      id: 'theory.depth',
+      level: 'error',
+      minRules: 3,
+      minWords: 400,
+      perConcept: 150,
+      what: "Q0: every section teaches in depth: >= 400 words of teaching text (p, list, callout, reveal, ask, terms, compare, flow — not tables, code or diagrams) and 150 more for each new concept after the first, in short blocks (rule 0); a reveal 'think first'; every concept it introduces defined there (in a terms block or in bold at its first use)",
+    },
     {
       id: 'map.present',
       level: 'error',
@@ -352,6 +517,7 @@ export const QUALITY: Quality = {
     },
   ],
   notes: [
+    'Q0 (gradual introduction, the first quality rule): the checks with minRules 3 (concept.map, concept.order, concept.undeclared, theory.focus, theory.depth) are errors for packs with subject.authoring.rules >= 3 (start_subject.py writes 3 since 2026-11-19) made by Claude or Gemini; packs with rules 2 get them as warnings, so older packs keep working. The connector (noema_finish_upload, noema_save_pack) refuses a pack built since gradual.since (or with no builtAt) without rules >= 3, and holds it to errors whatever authoring.by says: Q0 cannot be skipped.',
     "Strictness: subject.authoring.rules >= 2 turns these checks on (start_subject.py writes 2). Errors when subject.authoring.by is 'claude' or 'gemini', warnings when it is 'learner' or 'import'. Packs without authoring.rules are not checked (made before 2026-10-21; TD-11).",
     "The connector (noema_finish_upload, noema_save_pack) refuses a pack built since 'since' (pack.builtAt, or no builtAt at all) that has no subject.authoring.rules >= 2, so a pack cannot skip the checks by leaving the field out. Older packs keep working unchanged.",
     'autoUnfit: a value that cannot fit the chapter needs no reason in unfit — the code types without subject.features.code, calc without .math, picture types when the chapter has no picture (pictures only where they teach, docs/VISUAL.md §5).',
@@ -359,6 +525,7 @@ export const QUALITY: Quality = {
     'Counts are never checked: about 2 versions per learnable is the core set; there is no upper limit (docs/PIPELINES.md §4, a mild suggestion only).',
   ],
   since: '2026-10-22T00:00:00Z',
+  gradual: { rules: 3, since: '2026-11-19T12:00:00Z' },
 };
 
 export interface Languages {

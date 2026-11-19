@@ -64,11 +64,15 @@ rule below (Q1–Q8) applies to it** — self-contained, explained, testing the 
 (docs/INTERACTIVE_AUTHORING.md "Importing H5P quizzes").
 
 ## Pedagogy rules (non-negotiable)
-> **0. ADHD-friendly, everywhere — the first rule, it shapes every block, card and exercise.** Paragraphs of 1–3 short
+> **Before everything: Q0, the gradual introduction (below).** Nothing is used before it is taught, every page (section)
+> teaches one idea, in depth. It decides the order of everything else.
+>
+> **0. ADHD-friendly, everywhere — it shapes every block, card and exercise.** Paragraphs of 1–3 short
 > sentences; **one idea per block**; a concrete example or analogy for every abstract idea; lists and tables instead of
 > long prose; a `reveal` "think first" prompt before the key point; a `hook` that says why the section matters; short
 > question stems; no walls of text (a block over ~60 words is split). Read every section back as a tired learner would:
-> if the eye cannot find the point in a few seconds, rewrite it.
+> if the eye cannot find the point in a few seconds, rewrite it. Short blocks are not short pages: a page goes deep on its one
+> idea through many short blocks (Q0).
 
 1. **Coverage**: teach AND test every concept, number, caveat, trap, worked example and test question of the sources. Repeated material is taught once (best version). Every source exercise/test question becomes ≥1 exercise with its solution as the explanation.
 2. **Diagnostic thinking first**: wherever the source describes failures, errors, anomalies, misconceptions, differential diagnoses or "first thing to check", build a `debug` playbook with an ordered `askYourself` list (first-person questions), an `ask` block in the section, ≥1 `scenario` and ≥1 `order` exercise. Long playbooks get a `mnemonic`.
@@ -79,9 +83,41 @@ rule below (Q1–Q8) applies to it** — self-contained, explained, testing the 
 7. Diagrams redrawn cleanly (≤70 chars wide). Every diagram is explained in detail right after it (Q7b). Explanations teach (why right + why the tempting wrong answer is wrong). Every exercise type used several times per chapter.
 8. **Visual learning (docs/VISUAL.md §5–6) — only pictures with high teaching value.** A picture is used only when it teaches something the text alone cannot (where things are, what they look like, how they connect, how a quantity behaves); **no picture is better than a decorative or weak one**, and pictures are never added to meet a count. Look for them in three places: (a) the pictures of the sources (`tools/extract_images.py`), (b) the web — high-quality, information-rich photographs and diagrams, any licence for personal study, always with the source recorded (`tools/fetch_image.py`), (c) redrawn diagrams and **function graphs** where the subject has them (`tools/svgkit.py`). Verify each picture is correct, relevant and sharp. **Explain every picture in detail** right after it: what it shows, how to read it and what it teaches (Q7b). **Every picture gets ≥ 3 exercises of ≥ 2 visual types** and a `figure`; a chapter that has pictures has ≥ 3 visual exercises and every picture exercise type ≥ 3 times (the pack rules, `src/features/content/domain/rules.ts`). A chapter without a picture that teaches has none. Enforced by `"authoring": {"minVisualPerChapter": 3, "minExercisesPerPicture": 3, "minPerKind": 3}`.
 
-## Quality rules Q1–Q8 (binding for every chapter Claude or Gemini writes)
+## Quality rules Q0–Q8 (binding for every chapter Claude or Gemini writes; Q0 first)
 The learner never reads the sources. The app is the only place they learn from, so every lesson and exercise must stand
 on its own and train real understanding. Lineage stays, but as data, not as text the learner must decode.
+
+**Q0 · Gradual introduction — nothing before it is taught; one focus per page; every page in depth. The first rule:
+it comes before every other one, and a chapter that breaks it is not written yet** (checks `concept.map`,
+`concept.order`, `concept.undeclared`, `theory.focus`, `theory.depth`; errors for packs with `subject.authoring.rules` ≥ 3,
+which `start_subject.py` writes). The learner meets every idea for the first time in this app, so:
+1. **Introduce before use.** No term, quantity, unit, symbol or acronym appears — in the theory, an exercise (its question,
+   options, distractors, explanation or answer unit), a card, a pitfall or a playbook — before the section that
+   introduces it. An exercise may use only what its own section or an earlier one taught. A concept is introduced only
+   after every concept it is built on (`needs`). Units come after the quantity they measure: never "ampere-hours" before
+   current, never "amperes" before you have said what current is and that the ampere is its unit.
+2. **One focus per page.** Each section teaches ONE idea, stated in `section.focus` (one sentence), and introduces at most
+   **3** new concepts (usually one); everything else it mentions was taught before. More ideas → more sections. A summary
+   table never shows a quantity that has not been taught yet (put it at the end of the chapter, or leave the row out).
+3. **Depth.** Each section has ≥ **400 words** of teaching text (p, list, callout, reveal, ask, terms, compare, flow — not
+   tables, code or drawings), plus **150** for each new concept after the first, in short blocks (rule 0: depth means more
+   short blocks, never longer ones): what it is (the definition, in **bold** at its first use or in a `terms` block), why
+   it is so (the mechanism), how big it is in real life, a worked example written out, what it is confused with, an edge
+   case, a `reveal` "think first".
+4. **Declare the concepts in the map** (below): `map.concepts` lists every concept the chapter introduces — its `terms`
+   (every word, unit and symbol the learner will meet; a trailing `*` marks a stem for inflected languages, e.g.
+   `ρεύμα*`), the section that introduces it (`in`), its definition (`def`) and what it builds on (`needs`) — and
+   `map.known` every concept it uses without introducing it, with where the learner met it (`from`: `chNN` an earlier
+   chapter, `@<step id>` an earlier Roadmap step, or `everyday`). The checker reads the whole text against this list: a
+   word, a unit after a number (A, mAh, V, W, J, Ω, Hz, dB…) or an acronym that is in neither list, or that shows up before
+   its section, is an error. Plan the chapter as a ladder: list its concepts in teaching order first, then the sections
+   (one idea each), then the exercises of each section from what that section and the earlier ones taught.
+- ✗ The real case: section 1 of "Charge, voltage and current" defined charge in one sentence, converted ampere-hours to
+  coulombs, showed a table of charge, current, voltage, power and energy, and its exercises asked about amperes, volts and
+  joules — current came only in section 2, voltage in section 4, energy in chapter 2 (`tests/gradual.js`).
+- ✓ Section 1: charge only (what it is, its two kinds, the coulomb, how many electrons, why it is conserved), ≥ 400
+  words. Section 2: current as charge per second, the ampere as its unit. Section 3: the battery label — ampere-hours, now
+  that both charge and current are known — with the mAh → C exercises there.
 
 **Q1 · Self-contained.** No exercise, card, playbook or theory block points at the structure of a source: no question
 numbers ("Q2", "Round 1 Q14", "Exercise 3"), no pages / paragraphs / sections ("p. 1", "σ. 23", "§2"), no "the source",
@@ -237,6 +273,10 @@ some learnable's `kp`.
             "modes": ["contradiction", "reverse", "whatif", "causal", "distinguish", "translate"] },
   "unfit": { "dialectic": "pure syntax, nothing to argue" },
   "sequenceWhy": { "heart-frontal": "a photo: nothing on it shows the path of the blood" },
+  "concepts": [ { "id": "merge", "terms": ["MERGE", "upsert"], "in": "ch03-s02", "needs": ["delta-log"],
+                  "def": "One statement that inserts, updates or deletes target rows from the rows of a source that match them." } ],
+  "known": [ { "id": "delta-log", "terms": ["transaction log", "Delta log"], "from": "@delta_basics" },
+             { "id": "row", "terms": ["row", "table"], "from": "everyday" } ],
   "sourceQuestions": [ { "id": "ch03-q01", "text": "full text…", "answer": "the solution…", "answerFrom": "source|claude",
                        "check": "how it was double-checked (answerFrom claude)", "cite": {"src": "r1", "loc": "Q14"} } ] }
 ```
@@ -244,9 +284,12 @@ some learnable's `kp`.
 - `cats` ⊂ pitfall · confusable · falsefriend · detail · sequence · multipart · nomenclature · acronym · formula · edge ·
   recent · hard-understand · hard-remember; `with` names the other point(s) of a confusable / false-friend pair.
 - Every exercise type, focus tag and mode is either in `fits` or has a reason in `unfit`.
+- `concepts` / `known` (Q0): every concept the chapter introduces, in teaching order (`terms` = every word, unit and symbol
+  the learner meets; `in` = its section; `def`; `needs`), and every one it uses without introducing it (`from`: `chNN`,
+  `@<step id>` or `everyday`). Written with the points, before the sections; the checker reads every text against it.
 - `sequenceWhy` (Q5c): for every picture with an `img_sequence`, why tracing the order on it teaches something the
   picture does not already show (rarely true for a diagram with arrows).
-- Steps: (1) list every point of the pages; (2) one pass per category; (3) list the source questions; (4) group the points
+- Steps: (0) list the concepts in teaching order, each after what it needs (Q0); (1) list every point of the pages; (2) one pass per category; (3) list the source questions; (4) group the points
   into learnables, foundation → advanced; (5) decide what fits; (6) plan the facades of every learnable.
 
 ### Fields this adds to an exercise
@@ -287,7 +330,7 @@ Math (subjects with `features.math`): `$…$` inline, `$$…$$` display (KaTeX).
   "sources": [{"id": "ecb", "pages": "σ. 23–42"}, {"id": "karp", "pages": "9.2, 9.5"}],   // EVERY source this chapter uses (ids of sources.json) with pages / sections / video times — shown as chips that open the file there
   "mantra": "One sentence mental model for the whole chapter.",
   "objectives": ["You can explain …", "You can write …", "You can debug …"],     // 4–8
-  "sections": [ Section ],          // 6–16 sections
+  "sections": [ Section ],          // one per idea (Q0): as many as the concepts need, usually 6–16
   "debug": [ Playbook ],            // as many as the source supports (min 3)
   "pitfalls": [ {"title": "...", "text": "...", "fix": "..."} ],
   "flashcards": [ {"id": "ch05-f001", "q": "...", "a": "...", "section": "ch05-s03"} ],   // 20–50, crisp; id chNN-fNNN, unique (cards without one get the id of their position at build time)
@@ -298,7 +341,8 @@ Math (subjects with `features.math`): `$…$` inline, `$$…$$` display (KaTeX).
 ## Section
 ```json
 { "id": "ch05-s03", "title": "Time Travel & RESTORE", "hook": "One line: why should I care?",
-  "blocks": [ Block, ... ] }       // 5–20 blocks
+  "focus": "The one idea this page teaches, in one sentence (Q0).",
+  "blocks": [ Block, ... ] }       // 8–24 short blocks: >= 400 words of teaching text (Q0)
 ```
 
 ## Blocks (`t` = type)
@@ -363,6 +407,12 @@ IDs: `chNN-eNNN`, unique, sequential.
 Checked per chapter by the content checks (`src/features/content`: one rule list, `domain/rules.ts`, and one checker for
 the app, the Gemini generator, the connector's `noema_finish_upload` and — through the one Node bridge `build/noema-tools.cjs`
 that `tools/noema_core.py` calls — `validate.py` / `make_pack.py` / `build.py`; the steps in order: `docs/PIPELINES.md`). For packs with `subject.authoring.rules` ≥ 2 (written by `start_subject.py`):
+* **first, Q0 — nothing before it is taught** (`subject.authoring.rules` ≥ 3, which `start_subject.py` writes; warnings
+  for packs with 2): the concept list in the map (`concept.map`); no term, unit after a number or acronym before the
+  section that introduces it, in the theory, the exercises, the cards and the playbooks, nor before what it needs, nor
+  from a later chapter (`concept.order`); every term of a `terms` block, unit and acronym in the list
+  (`concept.undeclared`); one `focus` per section and ≤ 3 new concepts (`theory.focus`); ≥ 400 words of teaching text
+  per section + 150 per extra new concept, a `reveal`, every new concept defined where it is introduced (`theory.depth`);
 * **only what fits**: the chapter's map (`map/chNN.json` `fits`) declares the exercise types, focus tags and paradigms
   (`mode`) that make sense for it; every other value has a reason in `unfit` (code types without `features.code`,
   `calc` without `features.math` and the picture types without a picture are unfit by themselves);

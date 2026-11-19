@@ -1,6 +1,7 @@
 /* noema_save_pack — save a small pack inline (the same checks and saga as noema_finish_upload) */
 import { argStr, fail, type Tool } from '../tool.ts';
 import type { Pack } from '../engine/api.ts';
+import { refusal } from '../services/issues.ts';
 import { completePack } from '../services/packsave.ts';
 import { MAX_INLINE, message, str } from '../util.ts';
 
@@ -40,7 +41,7 @@ export const tool: Tool = {
       return fail('pack_json is not valid JSON: ' + message(e));
     }
     const res = ctx.engine.content.checkPack(p, undefined, { requireQuality: true });
-    if (res.errors.length) return fail(`${res.errors.length} error(s):\n- ${res.errors.slice(0, 40).join('\n- ')}`);
+    if (res.errors.length) return fail(refusal(res.errors));
     if ((ctx.env.config.library ?? []).some(s => s.id === p.subject.id))
       return fail(`"${p.subject.id}" is a library subject id — use a new id.`);
     await ctx.storage.writeJson(`${ctx.uid}/packs/${p.subject.id}.json`, raw, { noCache: true });

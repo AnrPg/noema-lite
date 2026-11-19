@@ -64,7 +64,11 @@ if int(auth.get('rules', 0)) >= 2:
             if os.path.exists(f):
                 try: c[k] = json.load(open(f, encoding='utf-8'))
                 except Exception as e: errs.append(f'ERROR {sub}/{c["id"]}.json: invalid JSON ({e})')
-    balance = lambda cid: {'quality': 'warn' if cid in base_chapters else level, 'features': feats}
+    # Q0 (gradual introduction) reads the concepts of the other chapters: no concept a later chapter introduces is used early
+    slim = [{'id': c['id'], 'map': {'concepts': (c.get('map') or {}).get('concepts') or []}} for c in chapters]
+    pos = {c['id']: i for i, c in enumerate(chapters)}
+    balance = lambda cid: {'quality': 'warn' if cid in base_chapters else level, 'features': feats, 'rules': int(auth.get('rules', 0)),
+                           'before': slim[:pos.get(cid, 0)], 'after': slim[pos.get(cid, 0) + 1:]}
 else:
     # older subjects: every exercise type, difficulty and focus tag >= minPerKind times per chapter (CONTENT_SPEC.md, the quantity rules);
     # chapters of an older pack being extended (unpack.py) only warn

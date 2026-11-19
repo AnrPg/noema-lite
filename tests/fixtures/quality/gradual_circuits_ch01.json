@@ -1,0 +1,764 @@
+{
+ "about": "The real case (2026-11-19): chapter 1 of the step 'Circuits from first principles' of the Roadmap 'Build your own gadgets' as it was published — its six sections and three of its exercises, verbatim. Section 1 is about charge, yet it converts mAh to coulombs, and its exercises ask about amperes, volts and joules; current and the ampere are introduced only in section 2, voltage in section 4, energy in chapter 2. tests/gradual.js gives it the concept list an honest author would write for the text as it is and expects Q0 to catch it.",
+ "chapter": {
+  "id": "ch01",
+  "title": "Charge, voltage and current as physical quantities",
+  "sections": [
+   {
+    "id": "ch01-s01",
+    "title": "Charge and the coulomb",
+    "hook": "Every circuit is charge being pushed around: get its units straight first.",
+    "blocks": [
+     {
+      "t": "p",
+      "text": "Electric charge comes in two kinds, positive and negative. Like charges repel, unlike charges attract."
+     },
+     {
+      "t": "p",
+      "text": "The unit is the **coulomb (C)**. One electron carries −e with e = 1.602×10⁻¹⁹ C, so 1 C is about 6.24×10¹⁸ electrons."
+     },
+     {
+      "t": "callout",
+      "kind": "key",
+      "title": "Charge is quantised and conserved",
+      "text": "Charge never appears or vanishes in a circuit. Everything you will do with Kirchhoff's current law is this one sentence."
+     },
+     {
+      "t": "p",
+      "text": "Battery makers do not quote coulombs but **ampere-hours**: 1 Ah = 1 A × 3600 s = 3600 C, so 1 mAh = 3.6 C."
+     },
+     {
+      "t": "reveal",
+      "label": "Think first: how many coulombs are stored in a 2000 mAh cell?",
+      "text": "2000 mAh = 2 Ah = 2 × 3600 C = 7200 C. Note that this is charge, not energy: energy needs the voltage too (chapter 2)."
+     },
+     {
+      "t": "table",
+      "kind": "breakdown",
+      "head": [
+       "Quantity",
+       "Symbol",
+       "Unit",
+       "Defined as",
+       "Typical size in gadgets"
+      ],
+      "rows": [
+       [
+        "Charge",
+        "Q",
+        "C (A·s)",
+        "∫ I dt",
+        "7200 C in a 2000 mAh cell"
+       ],
+       [
+        "Current",
+        "I",
+        "A",
+        "dQ/dt",
+        "20 mA through an LED"
+       ],
+       [
+        "Voltage",
+        "V",
+        "V (J/C)",
+        "dW/dQ",
+        "3.3 V on a microcontroller rail"
+       ],
+       [
+        "Power",
+        "P",
+        "W (J/s)",
+        "dW/dt = V·I",
+        "0.4 W for a small display"
+       ],
+       [
+        "Energy",
+        "W (or E)",
+        "J (W·s)",
+        "∫ P dt",
+        "27 kJ in a 2000 mAh 3.7 V cell"
+       ]
+      ],
+      "caption": "The five basic quantities of this course"
+     },
+     {
+      "t": "terms",
+      "items": [
+       {
+        "term": "coulomb",
+        "def": "unit of charge, 1 C = 1 A·s"
+       },
+       {
+        "term": "elementary charge",
+        "def": "magnitude of an electron's charge, 1.602×10⁻¹⁹ C"
+       },
+       {
+        "term": "ampere-hour (Ah)",
+        "def": "battery charge unit, 3600 C"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "ch01-s02",
+    "title": "Current and its direction",
+    "hook": "Half of all sign mistakes come from not knowing what the arrow means.",
+    "blocks": [
+     {
+      "t": "p",
+      "text": "Current is the rate at which charge crosses a surface: $I = \\frac{dQ}{dt}$. For a constant current, $Q = I\\,t$."
+     },
+     {
+      "t": "p",
+      "text": "Inversely, the charge that passed between two instants is the area under the current: $Q = \\int I\\,dt$. This is the idea behind a battery's 'coulomb counter'."
+     },
+     {
+      "t": "p",
+      "text": "**Conventional current** points the way positive charge would move. In a metal the movers are electrons, so the real motion is opposite to the arrow."
+     },
+     {
+      "t": "diagram",
+      "text": "   battery           wire           lamp\n    ┌─────┐   conventional I  ───►\n  + │     │───────────────────►──────┐\n    │     │                          [ lamp ]\n  − │     │───────◄──────────────────┘\n    └─────┘   electrons move  ◄───\n",
+      "caption": "Conventional current (top) and electron motion (bottom) in the same loop"
+     },
+     {
+      "t": "p",
+      "text": "The sketch shows one loop: the top wire leaves the battery's + terminal and the arrow ► is conventional current. In the same loop the electrons really drift the other way, ◄."
+     },
+     {
+      "t": "p",
+      "text": "Both descriptions are the same physics. The lesson: pick the conventional arrow and use it everywhere, as every datasheet and every diode symbol does."
+     },
+     {
+      "t": "table",
+      "kind": "compare",
+      "head": [
+       "",
+       "Conventional current",
+       "Electron flow"
+      ],
+      "rows": [
+       [
+        "Direction in a wire",
+        "from + toward −",
+        "from − toward +"
+       ],
+       [
+        "Used by",
+        "datasheets, simulators, all equations in this course",
+        "some physics teaching, vacuum tubes"
+       ],
+       [
+        "Real carriers",
+        "an abstraction: positive charge",
+        "exact for metals; in semiconductors holes move the other way"
+       ]
+      ]
+     },
+     {
+      "t": "callout",
+      "kind": "pitfall",
+      "title": "Through versus across",
+      "text": "Current flows **through** a part; voltage exists **across** it. 'The voltage through the resistor' is a category error that hides real mistakes."
+     },
+     {
+      "t": "reveal",
+      "label": "Think first: in salt water, Na⁺ ions move right and Cl⁻ ions move left. Which way is the conventional current?",
+      "text": "To the right, for both: positive charge moving right and negative charge moving left both carry positive charge rightward."
+     }
+    ]
+   },
+   {
+    "id": "ch01-s03",
+    "title": "Drift velocity versus signal speed",
+    "hook": "Why does a lamp light instantly if electrons crawl at a tenth of a millimetre per second?",
+    "blocks": [
+     {
+      "t": "p",
+      "text": "In a wire of cross-section $A$ with $n$ free electrons per m³, a current needs $I = n\\,q\\,v_d\\,A$. So the drift speed is $v_d = \\frac{I}{nqA}$."
+     },
+     {
+      "t": "p",
+      "text": "Copper has $n \\approx 8.5\\times10^{28}\\,\\mathrm{m^{-3}}$. For 1 A in 1 mm²: $v_d = 1/(8.5\\times10^{28}\\cdot1.6\\times10^{-19}\\cdot10^{-6}) \\approx 7.4\\times10^{-5}$ m/s, about 0.07 mm/s."
+     },
+     {
+      "t": "callout",
+      "kind": "analogy",
+      "title": "A pipe full of marbles",
+      "text": "Push one marble in at one end and one pops out at the other almost at once, although each marble moved a tiny step. The wire is already full of charge carriers everywhere."
+     },
+     {
+      "t": "p",
+      "text": "The disturbance travels as an electromagnetic wave guided by the wire: about 0.5 to 0.99 of the speed of light, depending on the insulation. On FR-4 board about 15 cm per nanosecond."
+     },
+     {
+      "t": "table",
+      "kind": "compare",
+      "head": [
+       "",
+       "Drift velocity",
+       "Signal speed",
+       "Thermal speed"
+      ],
+      "rows": [
+       [
+        "Typical value in copper",
+        "~0.07 mm/s (1 A, 1 mm²)",
+        "~10⁸ m/s",
+        "~10⁶ m/s, random"
+       ],
+       [
+        "What moves",
+        "the average motion of electrons",
+        "the electromagnetic field pattern",
+        "each electron's random motion"
+       ],
+       [
+        "Direction",
+        "along the field (opposite for electrons)",
+        "along the wire",
+        "none: averages to zero"
+       ]
+      ]
+     },
+     {
+      "t": "p",
+      "text": "Energy is not carried by electrons marching to the lamp. It flows in the fields around the wire, and the electrons are the medium that sets those fields up."
+     },
+     {
+      "t": "p",
+      "text": "In 50 Hz mains with 1 A rms in 1 mm², electrons only swing about ±0.33 µm: they never leave the wire."
+     },
+     {
+      "t": "reveal",
+      "label": "Think first: you halve the wire cross-section but keep 1 A. What happens to the drift speed?",
+      "text": "It doubles, because $v_d \\propto 1/A$: the same charge per second has to squeeze through less area."
+     }
+    ]
+   },
+   {
+    "id": "ch01-s04",
+    "title": "Voltage, reference nodes and 'ground'",
+    "hook": "'5 V' means nothing until you say 5 V relative to what.",
+    "blocks": [
+     {
+      "t": "p",
+      "text": "Voltage is energy per charge: $V = \\frac{dW}{dQ}$, 1 V = 1 J/C. The voltage between A and B is the work needed to move 1 C from B to A."
+     },
+     {
+      "t": "p",
+      "text": "It is always a **difference between two points**. When someone says 'node A is at 5 V', they silently mean 'relative to the reference node'."
+     },
+     {
+      "t": "diagram",
+      "text": "  Reference at battery −            Reference moved to node A\n\n  +9 V ─┬─ R1 ─ A ─ R2 ─┬─ 0 V       +4.5 V ─┬─ R1 ─ A(0 V) ─ R2 ─┬─ −4.5 V\n   9 V  battery 9 V     │               battery 9 V                      │\n        └───────────────┘                    └──────────────────────────┘\n  V(A) = 4.5 V ;  V(R1) = 4.5 V       V(A) = 0 ;  V(R1) = 4.5 V (unchanged)\n",
+      "caption": "The same loop, two reference choices"
+     },
+     {
+      "t": "p",
+      "text": "A 9 V battery feeds two equal resistors in series. On the left the reference is the battery's minus: node A reads 4.5 V. On the right we declare A to be 0 V: the battery's plus is now +4.5 V and its minus −4.5 V."
+     },
+     {
+      "t": "p",
+      "text": "Look at the last line: every node voltage changed, but the voltage across R1 is still 4.5 V, and so are currents and powers. Moving the reference never changes the physics."
+     },
+     {
+      "t": "callout",
+      "kind": "pitfall",
+      "title": "Three different 'grounds'",
+      "text": "**Earth** is a safety connection to the soil (the PE wire). **Chassis** is the metal case. **Circuit reference (0 V)** is the node you chose. One drawn symbol can mean any of them, and a battery gadget has no earth connection at all."
+     },
+     {
+      "t": "callout",
+      "kind": "warn",
+      "title": "Why a bird is safe on a power line",
+      "text": "Both feet touch the same wire, so the voltage between them is almost zero and almost no current crosses the bird. The danger is a path between two different potentials."
+     },
+     {
+      "t": "reveal",
+      "label": "Think first: you move the reference to a different node. Does a resistor's current change?",
+      "text": "No. Current depends on the voltage across the resistor, a difference, and differences do not depend on where zero is placed."
+     },
+     {
+      "t": "table",
+      "kind": "summary",
+      "head": [
+       "Word",
+       "Means",
+       "Typical symbol use"
+      ],
+      "rows": [
+       [
+        "Earth (PE)",
+        "connection to the soil for safety",
+        "green/yellow wire, third pin of a mains plug"
+       ],
+       [
+        "Chassis",
+        "the metal enclosure",
+        "bonded to earth in mains gear, floating in battery gear"
+       ],
+       [
+        "Circuit reference",
+        "the 0 V node you choose",
+        "GND pin of a board, negative rail of a battery"
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "id": "ch01-s05",
+    "title": "The passive sign convention",
+    "hook": "Fix the signs once, and a negative answer becomes information instead of panic.",
+    "blocks": [
+     {
+      "t": "p",
+      "text": "For any two-terminal part, you choose a voltage polarity (+ and −) and a current arrow. These are references, not claims about reality."
+     },
+     {
+      "t": "p",
+      "text": "If the current arrow **enters the + terminal**, you have the **passive sign convention**. Then $p = v\\cdot i$ is the power **absorbed** by the part."
+     },
+     {
+      "t": "diagram",
+      "text": "        i                   i\n   ──────►──┐             ┌──►──────\n        +   │             │   +\n          [ part ]  v     [ part ]  v\n        −   │             │   −\n   ──────────┘             └──────────\n  passive: i enters +     active: i leaves +\n  p = v·i absorbed        p = v·i delivered\n",
+      "caption": "Passive versus active reference"
+     },
+     {
+      "t": "p",
+      "text": "Left: the arrow flows into the plus terminal, so $v\\cdot i > 0$ means the part is absorbing energy (a resistor always does). Right: the arrow leaves plus, so the same product is power delivered, which is how a source is often drawn."
+     },
+     {
+      "t": "p",
+      "text": "Ohm's law $v = iR$ is only valid in the passive convention. With the opposite arrow it becomes $v = -iR$, a favourite source of lost minus signs."
+     },
+     {
+      "t": "table",
+      "kind": "summary",
+      "head": [
+       "Reading (passive convention)",
+       "Meaning",
+       "Example"
+      ],
+      "rows": [
+       [
+        "p = v·i > 0",
+        "the part absorbs power",
+        "resistor, charging battery"
+       ],
+       [
+        "p = v·i < 0",
+        "the part delivers power",
+        "battery discharging, solar cell"
+       ],
+       [
+        "i < 0",
+        "real current opposes the drawn arrow",
+        "not an error"
+       ],
+       [
+        "v < 0",
+        "the − terminal is really higher",
+        "reverse-biased diode drawn with forward polarity"
+       ]
+      ]
+     },
+     {
+      "t": "ask",
+      "title": "Ask yourself before writing any equation",
+      "questions": [
+       "Does every part have a voltage polarity and a current arrow drawn?",
+       "Does the arrow enter the + terminal of each load (passive)?",
+       "Which sign does Ohm's law need for THIS pair of references?"
+      ]
+     },
+     {
+      "t": "reveal",
+      "label": "Think first: a 3.7 V cell shows v = +3.7 V and i = −0.5 A in the passive convention. Is it charging or discharging?",
+      "text": "p = 3.7 × (−0.5) = −1.85 W: it delivers power, so it is discharging. The real current leaves the + terminal."
+     }
+    ]
+   },
+   {
+    "id": "ch01-s06",
+    "title": "Water analogy, DC and AC",
+    "hook": "A good analogy is a loan: useful, but you must know when to give it back.",
+    "blocks": [
+     {
+      "t": "table",
+      "kind": "compare",
+      "head": [
+       "Electric",
+       "Water",
+       "Where the analogy breaks"
+      ],
+      "rows": [
+       [
+        "voltage",
+        "pressure difference",
+        "pressure has no sign convention or reference choice"
+       ],
+       [
+        "current",
+        "flow rate (L/s)",
+        "charge is never 'used up': what leaves returns"
+       ],
+       [
+        "resistor",
+        "narrow pipe",
+        "pipe friction is nonlinear, a metal resistor is linear"
+       ],
+       [
+        "battery",
+        "pump",
+        "a pump cannot reverse polarity and leak: a battery can be charged and shorted"
+       ]
+      ]
+     },
+     {
+      "t": "p",
+      "text": "Use it for first intuition: more resistance, less flow for the same pressure. Drop it when you need exact behaviour, such as fields, induced voltages or open circuits."
+     },
+     {
+      "t": "p",
+      "text": "**DC** keeps its sign. **AC** alternates sign, like mains: 230 V **RMS**, 50 Hz in Europe, so the peak is $230\\sqrt2 \\approx 325$ V."
+     },
+     {
+      "t": "p",
+      "text": "**Pulsating DC** (rectified mains, PWM) never changes sign but is not constant. It is a DC part plus an AC part, and a meter reading depends on which part it sees."
+     },
+     {
+      "t": "table",
+      "kind": "summary",
+      "head": [
+       "Waveform",
+       "Sign",
+       "Example"
+      ],
+      "rows": [
+       [
+        "DC",
+        "constant",
+        "battery, USB 5 V"
+       ],
+       [
+        "AC",
+        "alternates",
+        "mains 230 V RMS, 50 Hz"
+       ],
+       [
+        "Pulsating DC",
+        "one sign, varying",
+        "PWM 0–5 V, rectified mains"
+       ]
+      ]
+     },
+     {
+      "t": "reveal",
+      "label": "Think first: what is the peak voltage of 230 V RMS mains?",
+      "text": "$230\\sqrt2 \\approx 325$ V, and peak-to-peak is about 650 V. Insulation must withstand the peak, not the RMS figure."
+     }
+    ]
+   }
+  ],
+  "exercises": [
+   {
+    "type": "tf",
+    "q": "A constant current of 1 A moves exactly 1 coulomb past a point every second.",
+    "answer": true,
+    "explain": "That is the definition of the ampere as one coulomb per second. Students sometimes remember it as 'amps are energy', which is wrong: energy needs voltage as well.",
+    "section": "ch01-s01",
+    "difficulty": 1,
+    "tags": [
+     "concept"
+    ],
+    "think": "recall",
+    "lr": "ch01-l01",
+    "quick": true,
+    "cite": {
+     "src": "osx-current",
+     "loc": "—"
+    },
+    "id": "ch01-e001"
+   },
+   {
+    "type": "calc",
+    "q": "A cell is labelled 2000 mAh. How many coulombs of charge does that label correspond to?",
+    "answer": 7200,
+    "tolerance": 1,
+    "unit": "C",
+    "explain": "2000 mAh = 2 Ah, and 1 Ah = 3600 A·s. So the charge is 2 × 3600 = 7200 C; forgetting the 3600 s per hour is the classic slip.",
+    "section": "ch01-s01",
+    "difficulty": 1,
+    "tags": [
+     "calc"
+    ],
+    "think": "apply",
+    "lr": "ch01-l01",
+    "quick": true,
+    "mode": "translate",
+    "cite": {
+     "src": "osx-current",
+     "loc": "—"
+    },
+    "id": "ch01-e002"
+   },
+   {
+    "type": "match",
+    "q": "Match each unit to the quantity it measures.",
+    "pairs": [
+     [
+      "coulomb",
+      "charge"
+     ],
+     [
+      "ampere",
+      "charge per second"
+     ],
+     [
+      "volt",
+      "energy per charge"
+     ],
+     [
+      "joule",
+      "energy"
+     ]
+    ],
+    "explain": "The four units chain together: A = C/s and V = J/C. Remembering the chain means you can rebuild any of them from the others.",
+    "section": "ch01-s01",
+    "difficulty": 3,
+    "tags": [
+     "compare"
+    ],
+    "think": "discriminate",
+    "lr": "ch01-l01",
+    "quick": true,
+    "mode": "translate",
+    "cite": {
+     "src": "osx-current",
+     "loc": "—"
+    },
+    "id": "ch01-e009"
+   }
+  ],
+  "flashcards": [],
+  "pitfalls": [],
+  "debug": []
+ },
+ "concepts": [
+  {
+   "id": "charge",
+   "terms": [
+    "charge",
+    "electric charge"
+   ],
+   "units": [
+    "C"
+   ],
+   "symbols": [
+    "Q"
+   ],
+   "in": "ch01-s01",
+   "def": "A property of particles that comes in two kinds, positive and negative; like charges repel.",
+   "needs": []
+  },
+  {
+   "id": "coulomb",
+   "terms": [
+    "coulomb"
+   ],
+   "in": "ch01-s01",
+   "def": "The unit of charge, about 6.24×10¹⁸ electron charges.",
+   "needs": [
+    "charge"
+   ]
+  },
+  {
+   "id": "elementary-charge",
+   "terms": [
+    "elementary charge"
+   ],
+   "in": "ch01-s01",
+   "def": "The magnitude of the charge of one electron, 1.602×10⁻¹⁹ C.",
+   "needs": [
+    "charge"
+   ]
+  },
+  {
+   "id": "ampere-hour",
+   "terms": [
+    "ampere-hour",
+    "milliampere-hour"
+   ],
+   "units": [
+    "Ah"
+   ],
+   "in": "ch01-s01",
+   "def": "A battery's charge in practical units: one ampere for one hour, 3600 C.",
+   "needs": [
+    "current",
+    "hour"
+   ]
+  },
+  {
+   "id": "current",
+   "terms": [
+    "current",
+    "ampere",
+    "amp"
+   ],
+   "units": [
+    "A"
+   ],
+   "symbols": [
+    "I"
+   ],
+   "in": "ch01-s02",
+   "def": "The rate at which charge crosses a surface, I = dQ/dt; 1 A = 1 C/s.",
+   "needs": [
+    "charge",
+    "second"
+   ]
+  },
+  {
+   "id": "conventional-current",
+   "terms": [
+    "conventional current",
+    "electron flow"
+   ],
+   "in": "ch01-s02",
+   "def": "The direction positive charge would move; electrons in a metal move the other way.",
+   "needs": [
+    "current"
+   ]
+  },
+  {
+   "id": "drift-velocity",
+   "terms": [
+    "drift velocity",
+    "drift speed"
+   ],
+   "in": "ch01-s03",
+   "def": "The slow average speed of the charge carriers in a wire.",
+   "needs": [
+    "current"
+   ]
+  },
+  {
+   "id": "voltage",
+   "terms": [
+    "voltage",
+    "volt",
+    "potential difference"
+   ],
+   "units": [
+    "V"
+   ],
+   "symbols": [
+    "V"
+   ],
+   "in": "ch01-s04",
+   "def": "Energy per charge between two points, 1 V = 1 J/C.",
+   "needs": [
+    "charge",
+    "energy"
+   ]
+  },
+  {
+   "id": "reference-node",
+   "terms": [
+    "reference node",
+    "ground"
+   ],
+   "in": "ch01-s04",
+   "def": "The node chosen as 0 V; every other node voltage is measured from it.",
+   "needs": [
+    "voltage"
+   ]
+  },
+  {
+   "id": "passive-sign",
+   "terms": [
+    "passive sign convention"
+   ],
+   "in": "ch01-s05",
+   "def": "Current enters the + terminal, so p = v·i is the power the part absorbs.",
+   "needs": [
+    "voltage",
+    "current",
+    "power"
+   ]
+  },
+  {
+   "id": "dc-ac",
+   "terms": [
+    "direct current",
+    "alternating current",
+    "DC",
+    "AC"
+   ],
+   "in": "ch01-s06",
+   "def": "Direct current keeps one direction; alternating current reverses periodically.",
+   "needs": [
+    "current"
+   ]
+  }
+ ],
+ "known": [
+  {
+   "id": "second",
+   "terms": [
+    "second"
+   ],
+   "units": [
+    "s"
+   ],
+   "from": "everyday"
+  },
+  {
+   "id": "hour",
+   "terms": [
+    "hour"
+   ],
+   "units": [
+    "h"
+   ],
+   "from": "everyday"
+  }
+ ],
+ "ch02": {
+  "id": "ch02",
+  "map": {
+   "concepts": [
+    {
+     "id": "power",
+     "terms": [
+      "power",
+      "watt"
+     ],
+     "units": [
+      "W"
+     ],
+     "in": "ch02-s01",
+     "def": "The rate of energy transfer."
+    },
+    {
+     "id": "energy",
+     "terms": [
+      "energy",
+      "joule",
+      "watt-hour"
+     ],
+     "units": [
+      "J",
+      "Wh"
+     ],
+     "in": "ch02-s02",
+     "def": "What a source gives and a load takes."
+    }
+   ]
+  }
+ }
+}

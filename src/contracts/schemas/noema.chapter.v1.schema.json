@@ -76,6 +76,7 @@
         "id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$" },
         "title": { "$ref": "#/$defs/text" },
         "hook": { "type": "string" },
+        "focus": { "type": "string", "description": "Q0: the one idea this page teaches, in one sentence (theory.focus)" },
         "level": { "$ref": "#/$defs/level" },
         "blocks": { "type": "array", "items": { "$ref": "#/$defs/block" }, "minItems": 1 }
       }
@@ -777,6 +778,36 @@
         },
         "unfit": { "type": "object", "additionalProperties": { "type": "string" } },
         "sequenceWhy": { "type": "object", "additionalProperties": { "type": "string" } },
+        "concepts": {
+          "description": "Q0 (tools/CONTENT_SPEC.md): every concept the chapter introduces, in the order it teaches them: the words, units and symbols the learner meets (terms; a trailing * is a stem for inflected languages), the section that introduces it (in), its definition (def) and the concepts it is built on (needs). The checker reads the text against it: nothing is used before it is introduced (src/features/content/domain/gradual.ts).",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "terms": { "type": "array", "items": { "type": "string" } },
+              "units": { "type": "array", "items": { "type": "string" } },
+              "symbols": { "type": "array", "items": { "type": "string" } },
+              "in": { "type": "string" },
+              "def": { "type": "string" },
+              "needs": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "known": {
+          "description": "Q0: every concept the chapter uses without introducing it, and where the learner met it: from = 'chNN' (an earlier chapter), '@<step id>' (an earlier Roadmap step) or 'everyday'.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "terms": { "type": "array", "items": { "type": "string" } },
+              "units": { "type": "array", "items": { "type": "string" } },
+              "symbols": { "type": "array", "items": { "type": "string" } },
+              "from": { "type": "string" }
+            }
+          }
+        },
         "sourceQuestions": {
           "type": "array",
           "items": {

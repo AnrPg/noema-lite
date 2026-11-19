@@ -58,7 +58,8 @@ export interface PackCheckOptions {
   readonly strict?: boolean;
   /** the minimum of the quantity rules per chapter: a number → errors; default the pack's subject.authoring.minPerKind (none → warnings, 0 = off) */
   readonly balance?: number | null;
-  /** the connector: a pack built since QUALITY.since (or with no builtAt) must have subject.authoring.rules >= QUALITY.version */
+  /** the connector: a pack built since QUALITY.since (or with no builtAt) must have subject.authoring.rules >= QUALITY.version;
+      one built since QUALITY.gradual.since rules >= QUALITY.gradual.rules, its quality issues errors whatever authoring.by says */
   readonly requireQuality?: boolean;
 }
 
@@ -132,9 +133,19 @@ export function checkPack(p: unknown, expectId: unknown, opts: PackCheckOptions,
     E.push(
       `subject.authoring.rules must be ${QUALITY.version} (and authoring.by "claude"): new packs meet the quality rules of tools/CONTENT_SPEC.md — start the subject with start_subject.py and rebuild with make_pack.py`,
     );
+  // Q0 cannot be skipped through the connector: a pack built since QUALITY.gradual.since needs rules >= 3 and is held to
+  // the errors of a Claude-made pack, whatever authoring.by says (only Claude uploads through the connector)
+  const fresh = opts.requireQuality === true && (!p.builtAt || s(p.builtAt) >= QUALITY.gradual.since);
+  if (fresh && !(Number(auth.rules) >= QUALITY.gradual.rules))
+    E.push(
+      `subject.authoring.rules must be ${QUALITY.gradual.rules}: new packs meet Q0, the gradual introduction (tools/CONTENT_SPEC.md) — start the subject with start_subject.py and rebuild with make_pack.py`,
+    );
   if (qual) {
-    const hard = auth.by === 'claude' || auth.by === 'gemini';
-    for (const c of chapters) for (const i of checkQuality(c, sj)) (i.level === 'error' && hard ? E : W).push(i.msg);
+    const hard = fresh || auth.by === 'claude' || auth.by === 'gemini';
+    chapters.forEach((c, k) => {
+      for (const i of checkQuality(c, sj, { before: chapters.slice(0, k), after: chapters.slice(k + 1) }))
+        (i.level === 'error' && hard ? E : W).push(i.msg);
+    });
   } else {
     const per = opts.balance ?? (auth.minPerKind as number | null | undefined);
     if (per !== 0) for (const c of chapters) for (const i of checkBalance(c, sj, { min: per ?? undefined })) (per ? E : W).push(i.msg);
