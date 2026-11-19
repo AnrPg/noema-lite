@@ -3,6 +3,7 @@
    (quality.test.ts), composed into qualitySpec. checkQuality(chapter, subject) runs them all and gives every issue with its
    level (error | warn) and its message "<chapter>: [<rule>] <what>". chapter.map = map/chNN.json, chapter.review = review/chNN.json. */
 import { all, spec, type RuleIssue, type Spec } from '../../../contracts/rules/spec.ts';
+import { conceptMap, conceptOrder, conceptUndeclared, theoryDepth, theoryFocus } from './gradual.ts';
 import { QUALITY, type QualityCheck } from './rules.ts';
 import { has, isObj, isStr, list, obj, objs, qv, s, type Obj } from './util.ts';
 
@@ -23,6 +24,14 @@ export interface QualityContext {
   readonly unfit: Obj;
   readonly pictures: boolean;
   readonly sourceQuestions: ReadonlyMap<unknown, Obj>;
+  /** the pack's chapters before / after this one (pack.ts checks the whole pack); null when one chapter is checked alone */
+  readonly before: readonly Obj[] | null;
+  readonly after: readonly Obj[] | null;
+}
+/** where a chapter sits in its pack (Q0 reads the concepts of the other chapters) */
+export interface QualityPlace {
+  readonly before?: readonly unknown[];
+  readonly after?: readonly unknown[];
 }
 
 const V = QUALITY.vocab;
@@ -71,7 +80,7 @@ export function* strings(x: unknown, skip: ReadonlySet<string>): Generator<strin
 const isPicType = (t: unknown): boolean => s(t ?? '').startsWith('img_');
 
 /** the context of a chapter (its map may be missing: map.present says so, the other rules read an empty map) */
-export function qualityContext(chapter: unknown, subject: unknown): QualityContext {
+export function qualityContext(chapter: unknown, subject: unknown, place?: QualityPlace): QualityContext {
   const ch = obj(chapter),
     cid = ch.id == null ? '?' : s(ch.id);
   const exercises = objs(ch.exercises),
@@ -99,6 +108,8 @@ export function qualityContext(chapter: unknown, subject: unknown): QualityConte
     unfit: obj(map.unfit),
     pictures: exercises.some(e => isPicType(e.type)) || sections.some(x => objs(x.blocks).some(b => b.t === 'figure')),
     sourceQuestions: new Map(objs(map.sourceQuestions).map(q => [q.id, q])),
+    before: place?.before ? objs(place.before) : null,
+    after: place?.after ? objs(place.after) : null,
   };
 }
 
@@ -460,6 +471,12 @@ export const reviewDone = rule('review.done', (c, add) => {
 
 /** every rule, in the order the issues are listed */
 export const QUALITY_RULES: readonly Spec<QualityContext>[] = [
+  // Q0 first: the gradual introduction of concepts (gradual.ts)
+  conceptMap(C('concept.map')),
+  conceptOrder(C('concept.order')),
+  conceptUndeclared(C('concept.undeclared')),
+  theoryFocus(C('theory.focus')),
+  theoryDepth(C('theory.depth')),
   mapPresent,
   mapRefs,
   mapExhaustive,
@@ -488,8 +505,17 @@ export interface QualityIssue {
   readonly rule: string;
   readonly msg: string;
 }
-/** checkQuality(chapter, subject) → [{level, rule, msg}] (msg: "<chapter>: [<rule>] <what>") */
-export function checkQuality(chapter: unknown, subject: unknown): QualityIssue[] {
-  const c = qualityContext(chapter, subject);
-  return qualitySpec.issues(c).map(i => ({ level: C(i.rule).level, rule: i.rule, msg: `${i.at}: [${i.rule}] ${i.message}` }));
+/** checkQuality(chapter, subject, place?) → [{level, rule, msg}] (msg: "<chapter>: [<rule>] <what>"). A check with minRules
+    is an error only for packs whose subject.authoring.rules reaches it; older packs get it as a warning. */
+export function checkQuality(chapter: unknown, subject: unknown, place?: QualityPlace): QualityIssue[] {
+  const c = qualityContext(chapter, subject, place),
+    rules = Number(obj(obj(subject).authoring).rules) || 0;
+  return qualitySpec.issues(c).map(i => {
+    const chk = C(i.rule);
+    return {
+      level: chk.minRules && rules < chk.minRules ? 'warn' : chk.level,
+      rule: i.rule,
+      msg: `${i.at}: [${i.rule}] ${i.message}`,
+    };
+  });
 }

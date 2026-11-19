@@ -98,9 +98,17 @@ exercises of the sources (`sourceQuestions`, Q3) and passes every check of §4 l
 
 ## 4. The quality rules (per chapter)
 
-On for every pack with `subject.authoring.rules` ≥ 2 (`start_subject.py` writes 2). **Errors** when `authoring.by` is
+On for every pack with `subject.authoring.rules` ≥ 2 (`start_subject.py` writes 3; the Q0 checks are errors from 3 on,
+warnings at 2). **Errors** when `authoring.by` is
 `claude` or `gemini`, warnings for `learner` or `import` packs; older packs without `rules` are not checked (TD-11). The
 connector refuses a pack built since 2026-10-22 without `rules` ≥ 2, so leaving the field out does not skip the checks.
+
+**Q0 first — the gradual introduction** (`tools/CONTENT_SPEC.md` Q0, `src/features/content/domain/gradual.ts`): nothing
+is used before it is taught, every section teaches one idea, in depth. The map's `concepts` (every concept the chapter
+introduces: `terms`, `in` = its section, `def`, `needs`) and `known` (every concept it uses without introducing it,
+`from` = `chNN`, `@<step id>` or `everyday`) are the ladder; the checker reads the whole text against it, so a concept used
+too early is found even when nobody meant to use it (a word, a unit after a number such as mAh, an acronym). The `map`
+step of the flow already refuses a map without them.
 
 The chapter's **knowledge map** `map/chNN.json` comes first (format in `tools/CONTENT_SPEC.md`):
 
@@ -118,6 +126,11 @@ The chapter's **knowledge map** `map/chNN.json` comes first (format in `tools/CO
 
 | Check | Rule |
 | --- | --- |
+| concept.map (Q0) | the map lists the concepts the chapter introduces (`terms`, `in`, `def`, `needs`) and those it only uses (`known`, with `from`) |
+| concept.order (Q0) | no term, unit or symbol before the section that introduces it — in the theory, exercises (with their answer unit), cards, pitfalls and playbooks; no concept before what it `needs`; none that a later chapter introduces |
+| concept.undeclared (Q0) | every `terms`-block term, unit after a number (A, mAh, V, W, J, Ω, Hz, dB…) and acronym is in `concepts` or `known` |
+| theory.focus (Q0) | every section states its one idea in `focus` and introduces ≤ 3 new concepts |
+| theory.depth (Q0) | ≥ 400 words of teaching text per section (+150 per new concept after the first), a `reveal`, every new concept defined there (bold or `terms`) |
 | fit.types, fit.focus | every type and focus tag in `fits` ≥ 3 exercises |
 | mode.coverage | every paradigm in `fits.modes` ≥ 2 exercises |
 | mix.difficulty | difficulty 1 / 2 / 3 = 20 / 25 / 55 % (± 5) |

@@ -87,8 +87,8 @@ def local_check(kind, d, run):
     if kind == "subject":
         s = rj(os.path.join(d, "subject.json"))
         if not s: return False, ["no subject.json: run start_subject.py"]
-        if int((s.get("authoring") or {}).get("rules", 0)) < 2: return False, ["subject.json authoring.rules must be 2 (start_subject.py writes it)"]
-        return True, ["subject.json with authoring.rules 2"]
+        if int((s.get("authoring") or {}).get("rules", 0)) < 2: return False, ["subject.json authoring.rules must be >= 2 (start_subject.py writes 3)"]
+        return True, [f"subject.json with authoring.rules {(s.get('authoring') or {}).get('rules')}"]
     if kind == "map":
         maps = chapters_of(d, "map")
         if not maps: return False, ["no map/chNN.json yet: write the knowledge map of every chapter before its exercises"]
@@ -97,8 +97,12 @@ def local_check(kind, d, run):
             m = rj(f)
             if m is None: ok = False; L.append(f"{cid}: map/{cid}.json is not valid JSON"); continue
             feats = {k for k, v in ((rj(os.path.join(d, "subject.json")) or {}).get("features") or {}).items() if v}
+            rules = int(((rj(os.path.join(d, "subject.json")) or {}).get("authoring") or {}).get("rules", 0))
+            # Q0 (rules >= 3): the concept list is part of the map — every concept the chapter introduces (terms, in, def,
+            # needs) and every one it uses without introducing it (known); its sections exist only once the chapter is written
             iss = [x for x in check_quality({"id": cid, "map": m, "exercises": [], "sections": []}, feats)
-                   if x[1] in ("map.present", "map.refs", "map.exhaustive") or (x[1] == "fit.declared" and "unknown value" in x[2])]
+                   if x[1] in ("map.present", "map.refs", "map.exhaustive") or (x[1] == "fit.declared" and "unknown value" in x[2])
+                   or (rules >= 3 and x[1] == "concept.map" and "is not a section of the chapter" not in x[2])]
             for _, _, msg in iss: L.append(msg)
             ok = ok and not iss
             L.append(f"{cid}: {len(m.get('points') or [])} knowledge points, {len(m.get('learnables') or [])} learnables, {len(m.get('sourceQuestions') or [])} source questions")

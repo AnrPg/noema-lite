@@ -106,7 +106,7 @@
   },
   "map": {
    "title": "Knowledge map (before any exercise)",
-   "what": "For every chapter map/chNN.json: EVERY knowledge point of the material (exhaustive; points an earlier DAG node taught get taughtIn), its level and categories (13 hunts), confusable pairs (with), the learnables, fits/unfit (every type, focus tag and paradigm that fits, a reason for each that does not) and every question of the sources.",
+   "what": "For every chapter map/chNN.json, FIRST its concept ladder (Q0): concepts = every concept the chapter introduces in teaching order (terms incl. units and symbols, in = its section, def, needs), known = every concept it only uses (from chNN, @step or everyday); then EVERY knowledge point of the material (exhaustive; points an earlier DAG node taught get taughtIn), its level and categories (13 hunts), confusable pairs (with), the learnables, fits/unfit (every type, focus tag and paradigm that fits, a reason for each that does not) and every question of the sources.",
    "needs": [
     "start_subject"
    ],
@@ -142,7 +142,7 @@
   },
   "write": {
    "title": "Theory and exercises",
-   "what": "chapters/chNN.json from the map: self-contained theory and exercises (no pointers to the source structure), several versions (facades) of each learnable in different types, every exercise with lr, think, cite (and mode where it uses a paradigm).",
+   "what": "chapters/chNN.json from the map, Q0 first: nothing used before the section that introduces it (theory, exercises, cards), one focus per section (section.focus, <= 3 new concepts), >= 400 words of teaching text per section; then self-contained theory and exercises (no pointers to the source structure), several versions (facades) of each learnable in different types, every exercise with lr, think, cite (and mode where it uses a paradigm).",
    "needs": [
     "map"
    ],

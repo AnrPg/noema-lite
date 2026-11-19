@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Validate a chapter JSON file (tools/CONTENT_SPEC.md + docs/VISUAL.md).
-Usage: validate.py chNN.json [--media media_meta.json] [--activities registry.json] [--min-visual N] [--quality error|warn]
+Usage: validate.py chNN.json [--media media_meta.json] [--activities registry.json] [--min-visual N] [--quality error|warn] [--rules N]
                    [--balance N | --balance-warn N] [--features code,math] [--source chNN.json]
        validate.py subject.json --subject [--translations el,fr]
   --media         {id: {w, h, regions}} of the subject's pictures (build.py passes it) → checks references & coordinates
@@ -12,6 +12,8 @@ Usage: validate.py chNN.json [--media media_meta.json] [--activities registry.js
                   map (chapter.map), fits, the mix of difficulty and thinking, learnables with >= 2 versions, self-contained
                   texts, explanations, the review (chapter.review). error: issues of level "error" are errors (Claude/Gemini-made
                   packs); warn: every issue is a warning (learner-made or imported packs)
+  --rules         subject.authoring.rules (start_subject.py writes 3): from 3 on, the Q0 checks of gradual introduction
+                  (concept.*, theory.focus, theory.depth) are errors too; below it they are warnings
   --features      the subject's features that are on (code, math): they make spotbug, write, calc, syntax required
   --source        the file is a TRANSLATION (translations/<locale>/chNN.json) of this chapter (as built: base + patches):
                   same ids, same structure, same answers — only the words differ (CONTENT_SPEC.md "Packs in several languages")

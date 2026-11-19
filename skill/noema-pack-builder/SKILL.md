@@ -11,6 +11,19 @@ original source files** (every PDF, document, slide deck the user gave you — e
 each part of a split PDF is its own file). The noema-lite app (https://noema-lite.netlify.app) imports it and the
 learner opens each source file at the pages the chapters cite.
 
+> **THE FIRST RULE — gradual introduction (Q0, `references/CONTENT_SPEC.md`). It comes before every other rule.**
+> The learner meets every idea for the first time here. **Nothing is used before it is taught**: no term, quantity, unit,
+> symbol or acronym appears in a section, an exercise (question, options, explanation, answer unit), a card or a
+> playbook before the section that introduces it, and no concept comes before the concepts it is built on — never
+> "ampere-hours" before current, never "amperes" before you have said what current is and that the ampere is its unit.
+> **One focus per page**: each section teaches one idea (`section.focus`), with at most 3 new concepts (usually one).
+> **Depth**: ≥ 400 words of teaching text per section (+150 per extra new concept), in many short blocks — definition,
+> mechanism, real sizes, a worked example, what it is confused with, an edge case, a "think first" reveal.
+> Plan every chapter as a ladder: `map.concepts` in teaching order (terms, units, symbols, `in`, `def`, `needs`) and
+> `map.known` (what it uses from earlier chapters, earlier Roadmap steps `@id`, or everyday life) **before** the sections;
+> then one section per rung; then each section's exercises only from what it and the earlier ones taught.
+> `make_pack.py` reads every text against this list (`concept.*`, `theory.focus`, `theory.depth`) and refuses the pack.
+
 **The contract is in `references/`. Read both files before writing any content:**
 - `references/CONTENT_SPEC.md` — subject, chapters, sections, blocks, exercises, playbooks, quantities, pedagogy.
 - `references/VISUAL.md` — pictures, regions, the 7 picture-exercise types, figures, picture sourcing & licences.
@@ -152,8 +165,16 @@ original is not packaged next to its parts). In each chapter write `"sources": [
 timestamps (the app shows them as chips and opens the file at that page), and keep `sourcePages` as one
 short human line built from the same parts joined by " · ".
 
-## 3c. Knowledge map — before writing each chapter (CONTENT_SPEC "Quality rules Q1–Q8")
+## 3c. Knowledge map — before writing each chapter (CONTENT_SPEC "Quality rules Q0–Q8")
 For every chapter, before any theory or exercise, write `work/<id>/map/chNN.json` (format in CONTENT_SPEC):
+0. **The concept ladder (Q0) first.** `concepts`: every concept the chapter introduces, in the order it will teach them,
+   each with `terms` (every word, unit and symbol the learner will meet: `["current", "ampere"]`, `units: ["A"]`,
+   `symbols: ["I"]`; a trailing `*` is a stem for inflected languages, `ρεύμα*`), `in` (the section that introduces
+   it), `def` (its definition) and `needs` (the concepts it is built on — each must come earlier). `known`: every
+   concept the chapter uses without introducing it, `from` an earlier chapter (`ch02`), an earlier Roadmap step
+   (`@circuits_from_first_principles`, from `noema_roadmap_map`) or `everyday` — and nothing the learner has not met. A
+   quantity comes before its unit, a unit before the battery label that uses it. The sections follow the ladder: one
+   section per idea, ≤ 3 new concepts each.
 1. `points`: **every** knowledge point and concept of the chapter's pages — exhaustive, never a selection — each with
    its `level` (foundation / core / advanced), `cite`, and categories (`cats`: pitfall, confusable, falsefriend, detail,
    sequence, multipart, nomenclature, acronym, formula, edge, recent, hard-understand, hard-remember — one pass per
@@ -173,6 +194,12 @@ For every chapter, before any theory or exercise, write `work/<id>/map/chNN.json
    the most, `scores` 0–3) and `debate` (any side, then its strongest objection). Schemas: CONTENT_SPEC.md "Types".
 
 ## 4. Write the chapters
+> **Q0 before everything** (above): each section introduces only its rung of the ladder, after what it needs, says its one
+> idea in `focus`, and teaches it in depth (≥ 400 words in short blocks, the term in **bold** where it is defined or in a
+> `terms` block, a `reveal`). Each exercise and card sits in a section and uses only what that section and the earlier
+> ones taught — check the question, every option, the explanation and the answer unit. A summary table shows only
+> quantities already taught. Read each section back as a learner who knows only the earlier sections.
+
 > **ADHD-friendly first — it shapes everything you write** (CONTENT_SPEC.md rule 0): 1–3 short sentences per paragraph,
 > one idea per block, a concrete example or analogy for every abstract idea, lists and tables over prose, a `reveal`
 > "think first" before the key point, a `hook` per section, short question stems, no block over ~60 words.
@@ -445,6 +472,8 @@ pack is not changed. Contract and rules: `references/BRIDGE.md` (or `noema_bridg
    The connector's prompt `language_help` runs these steps.
 
 ## Quality bar (check before saving)
+- **Q0 first**: nothing is used before it is taught (theory, exercises, cards, units, acronyms); one focus per section,
+  ≤ 3 new concepts; ≥ 400 words of teaching text per section; the map's `concepts` and `known` complete (make_pack.py checks it).
 - Every source detail is taught **and** tested; nothing invented; obvious source errors corrected and noted.
 - ADHD-friendly throughout: short paragraphs, one idea per block, examples, think-first reveals.
 - Every type and focus tag that fits ≥ 3 times per chapter, the difficulty and `think` mix, every learnable in ≥ 2 types (make_pack.py checks it).

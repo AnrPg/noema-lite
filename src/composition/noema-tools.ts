@@ -5,7 +5,7 @@
  * library in hand (src/engines/node.ts) and the activity runtimes' own checkers (src/runtimes RUNTIME_CHECKS).
  *
  *   node noema-tools.cjs batch                      stdin: [[op, ...args], …] → stdout: [{ok: true, value} | {ok: false, error}, …]
- *   node noema-tools.cjs validate CHAPTER.json [--media M.json] [--activities A.json] [--min-visual N] [--quality error|warn]
+ *   node noema-tools.cjs validate CHAPTER.json [--media M.json] [--activities A.json] [--min-visual N] [--quality error|warn] [--rules N]
  *                                 [--balance N | --balance-warn N] [--features code,math] [--source SRC.json]
  *   node noema-tools.cjs validate subject.json --subject [--translations el,fr]
  *   node noema-tools.cjs check-pack PACK.json [--strict] [--expect ID] [--require-quality] [--balance N]
@@ -155,6 +155,7 @@ function validate(a: readonly string[]): number {
     balance: int(flag(a, '--balance')),
     balanceWarn: int(flag(a, '--balance-warn')),
     features: list(flag(a, '--features')),
+    rules: int(flag(a, '--rules')),
     ...(flag(a, '--source') !== undefined ? { source: json('--source') } : {}),
   };
   const r = C.checkChapter(doc, opts),

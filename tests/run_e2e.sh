@@ -61,6 +61,7 @@ run reports node "$ROOT/tests/reports.js" "$T"         # ⚑ problem reports: th
 run enginereq node "$ROOT/tests/enginereq.js" "$T"       # ⚙ requests for new engines: #/engines, the form, the answers, the connector tools (docs/INTERACTIVE_LIBRARY.md §3)
 run validate_visual python3 "$ROOT/tests/validate_visual.py"
 run pack_rules node "$ROOT/tests/pack_rules.js"   # the pack and quality rules: the golden issues, validate.py through the bridge (CONTENT_SPEC.md, docs/PIPELINES.md §4)
+run gradual node "$ROOT/tests/gradual.js"   # Q0, the gradual introduction: the real circuits chapter it was made for, each rule on its own (tools/CONTENT_SPEC.md Q0)
 run pipelines python3 "$ROOT/tests/pipelines.py"   # the content flows, step by step (tools/pipelines/, docs/PIPELINES.md)
 run quality_fixtures python3 "$ROOT/tests/quality_fixtures.py"   # the Q1–Q8 good/bad exercise samples (tools/CONTENT_SPEC.md)
 run validate_pack_i18n python3 "$ROOT/tests/validate_pack_i18n.py"   # packs in several languages: subject.i18n, translated chapters (docs/i18n.md §10)

@@ -134,7 +134,10 @@ export function checkPack(p: unknown, expectId: unknown, opts: PackCheckOptions,
     );
   if (qual) {
     const hard = auth.by === 'claude' || auth.by === 'gemini';
-    for (const c of chapters) for (const i of checkQuality(c, sj)) (i.level === 'error' && hard ? E : W).push(i.msg);
+    chapters.forEach((c, k) => {
+      for (const i of checkQuality(c, sj, { before: chapters.slice(0, k), after: chapters.slice(k + 1) }))
+        (i.level === 'error' && hard ? E : W).push(i.msg);
+    });
   } else {
     const per = opts.balance ?? (auth.minPerKind as number | null | undefined);
     if (per !== 0) for (const c of chapters) for (const i of checkBalance(c, sj, { min: per ?? undefined })) (per ? E : W).push(i.msg);

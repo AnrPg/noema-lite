@@ -83,7 +83,8 @@ function goodQ() {
 }
 const qd = fs.mkdtempSync(path.join(os.tmpdir(), 'quality-'));
 let qi = 0;   // the golden answers, one per call of same() in this order
-const same = (name, ch) => { const js = P.checkQuality(ch, {}).map(i => [i.level, i.rule, i.msg]), py = GOLDEN[qi++];
+const Q0 = new Set(P.QUALITY.checks.filter(c => c.minRules).map(c => c.id));   // Q0, the gradual introduction (newer than the twin): tests/gradual.js
+const same = (name, ch) => { const js = P.checkQuality(ch, {}).filter(i => !Q0.has(i.rule)).map(i => [i.level, i.rule, i.msg]), py = GOLDEN[qi++];
   ok(JSON.stringify(js) === JSON.stringify(py), `${name}: the golden issues (${js.length})${JSON.stringify(js) === JSON.stringify(py) ? '' : '\n   JS     ' + JSON.stringify(js) + '\n   golden ' + JSON.stringify(py)}`); return js; };
 const g = goodQ();
 ok(same('a chapter that meets every quality rule', g).length === 0, 'a chapter that meets every quality rule has no issues');
