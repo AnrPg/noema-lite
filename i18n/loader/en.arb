@@ -2388,9 +2388,21 @@
   "@loader.viewer.openSite": {
     "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Link that opens a web address (YouTube, a web page) in a new tab (an ↗ is shown before it)."
   },
-  "loader.viewer.webNote": "Web page — if it stays empty, the site does not allow previews: use ↗ Open.",
+  "loader.viewer.webNote": "If the page stays blank, the site does not allow previews here: use ↗ Open.",
   "@loader.viewer.webNote": {
-    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Note above a web page shown in a frame. “↗ Open” is the link at the top (loader.viewer.openSite)."
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Slim note above a web page shown in a frame, only when the app could not find out whether the site allows previews, or the page is slow to load. The learner can hide it (✕). “↗ Open” is the link at the top (loader.viewer.openSite). One short line."
+  },
+  "loader.viewer.webBlocked": "This site does not allow previews inside the app.",
+  "@loader.viewer.webBlocked": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Shown in place of a web page whose site refuses to be shown inside other apps (it is opened in a new tab instead, with the button loader.viewer.webOpen below)."
+  },
+  "loader.viewer.webOpen": "Open in a new tab",
+  "@loader.viewer.webOpen": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Button under loader.viewer.webBlocked: opens the web page in a new browser tab (an ↗ is shown before it)."
+  },
+  "loader.viewer.hideNote": "Hide this note",
+  "@loader.viewer.hideNote": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Tooltip and screen-reader label of the small ✕ that hides the note loader.viewer.webNote."
   },
   "loader.viewer.noDownload": "The file could not be downloaded for a preview.",
   "@loader.viewer.noDownload": {

@@ -89,4 +89,8 @@ export interface ViewerNet {
   direct(url: string): Promise<FetchedFile>;
   /** the site's /api/file, when there is a site (null: none) */
   proxy(): ((url: string) => Promise<FetchedFile>) | null;
+  /** may a web page be shown in a frame here (the site's /api/frame reads its X-Frame-Options / CSP frame-ancestors)?
+      'unknown': no site, no answer in time, or the page did not tell */
+  frame(url: string): Promise<FrameAnswer>;
 }
+export type FrameAnswer = 'yes' | 'no' | 'unknown';

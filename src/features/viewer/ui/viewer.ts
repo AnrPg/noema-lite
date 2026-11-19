@@ -5,7 +5,8 @@
  *   openViewer(port, { blob | url, name, type, kind, page, start, title, subtitle, onClose }) → Promise<{ close, kind }>
  *
  * A file is read by its kind (application/read.ts) and always offered for ⬇️ download and in a new tab; a YouTube address
- * plays inside (at `start`), a web page is framed (some sites refuse: ↗ opens it), any other address is fetched (straight,
+ * plays inside (at `start`), a web page is framed unless the site refuses (/api/frame: then a card with ↗; no answer: a
+ * note that can be hidden), any other address is fetched (straight,
  * else through the site's /api/file) and read. Escape or ✕ closes it.
  */
 import { html, nothing, type TemplateResult } from 'lit';
@@ -13,7 +14,7 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import type { I18n, MessageParams } from '../../../ports/i18n.ts';
 import { defineOnce, LightElement } from '../../translation/ui/light.ts';
 import { fetchFile } from '../application/fetch.ts';
-import type { PdfDoc, Raster, ViewerLibs, ViewerNet } from '../../../ports/viewer.ts';
+import type { FrameAnswer, PdfDoc, Raster, ViewerLibs, ViewerNet } from '../../../ports/viewer.ts';
 import { readFile, ViewerRefusal, type View } from '../application/read.ts';
 import { kindOf, nameOfUrl, youtube, type ShownKind } from '../domain/kinds.ts';
 import { fmtSize } from '../domain/text.ts';
@@ -240,11 +241,17 @@ function rasters(doc: Document, images: readonly Raster[]): HTMLElement {
   return wrap;
 }
 
+/** how long the viewer waits for the site's answer before it frames the page anyway, and for a framed page to load */
+const FRAME_CHECK_MS = 6000,
+  FRAME_SLOW_MS = 15000;
+
 type Body =
   | { readonly s: 'loading' }
   | { readonly s: 'view'; readonly view: View }
   | { readonly s: 'youtube'; readonly src: string }
-  | { readonly s: 'web'; readonly src: string }
+  /* a web page: 'check' while the site asks whether it may be framed; 'no' → a card with ↗; 'yes' → the frame;
+     'unknown' (no answer, or the page loads too slowly) → the frame with a note the learner can hide */
+  | { readonly s: 'web'; readonly src: string; readonly frame: 'check' | FrameAnswer; readonly note: boolean }
   | { readonly s: 'fail'; readonly text: string; readonly link: string | null };
 
 /** The overlay: its head (title, kind and size, the PDF's tools, ⬇️ ↗, ✕) and the file. */
@@ -308,6 +315,28 @@ export class NoemaFileViewer extends LightElement {
     this.redraw();
   }
 
+  /** asks whether the page may be framed here; a frame that has not loaded after FRAME_SLOW_MS gets the note */
+  async #checkFrame(src: string): Promise<void> {
+    const answer = await Promise.race([
+      this.#port.net.frame(src).catch((): FrameAnswer => 'unknown'),
+      new Promise<FrameAnswer>(res =>
+        setTimeout(() => {
+          res('unknown');
+        }, FRAME_CHECK_MS),
+      ),
+    ]);
+    const b = this.body;
+    if (this.isClosed() || b.s !== 'web' || b.src !== src) return;
+    this.#show({ ...b, frame: answer, note: answer === 'unknown' });
+    if (answer !== 'yes') return;
+    setTimeout(() => {
+      const now = this.body;
+      if (!this.isClosed() && now.s === 'web' && now.src === src && now.frame === 'yes' && !this.#frameLoaded)
+        this.#show({ ...now, note: true });
+    }, FRAME_SLOW_MS);
+  }
+  #frameLoaded = false;
+
   /** reads the file (or the address) and shows it → its kind */
   async load(): Promise<ShownKind> {
     const o = this.#o,
@@ -323,8 +352,9 @@ export class NoemaFileViewer extends LightElement {
           return (this.kind = 'youtube');
         }
         if (kindOf(name) === 'unknown' || kindOf(name) === 'html') {
-          // a web page: framed (a site that refuses to be framed opens with ↗)
-          this.#show({ s: 'web', src: o.url });
+          // a web page: framed, unless the site refuses to be framed (then a card with ↗)
+          this.#show({ s: 'web', src: o.url, frame: 'check', note: false });
+          void this.#checkFrame(o.url);
           return (this.kind = 'web');
         }
         const got = await fetchFile(o.url, P.net);
@@ -547,14 +577,42 @@ export class NoemaFileViewer extends LightElement {
           title=${this.#o.title ?? T('file')}
         ></iframe>`;
       case 'web':
-        return html`<p class="vw-note">${T('webNote')}</p>
+        if (b.frame === 'check') return html`<div class="vw-loading">⏳ ${T('opening')}</div>`;
+        if (b.frame === 'no')
+          return html`<div class="vw-center vw-col vw-blocked">
+            <p class="vw-note">${T('webBlocked')}</p>
+            <a class="vw-btn" href=${b.src} target="_blank" rel="noopener">↗ ${T('webOpen')}</a>
+          </div>`;
+        return html`<div class="vw-web">
+          ${
+            b.note
+              ? html`<div class="vw-hint" role="note">
+                  <span>${T('webNote')}</span>
+                  <button
+                    class="vw-x"
+                    type="button"
+                    title=${T('hideNote')}
+                    aria-label=${T('hideNote')}
+                    @click=${(): void => {
+                      this.#show({ ...b, note: false });
+                    }}
+                  >
+                    ✕
+                  </button>
+                </div>`
+              : nothing
+          }
           <iframe
             class="vw-frame"
             src=${b.src}
             sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
             referrerpolicy="no-referrer"
             title=${this.#o.title ?? T('file')}
-          ></iframe>`;
+            @load=${(): void => {
+              this.#frameLoaded = true;
+            }}
+          ></iframe>
+        </div>`;
       case 'fail':
         return html`<div class="vw-center vw-col">
           <p class="vw-note">⚠️ ${b.text}</p>

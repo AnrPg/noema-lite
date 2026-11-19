@@ -249,6 +249,20 @@ export function browserViewer(couldNotLoad: (file: string) => string): ViewerAda
             wrapResponse(await fetch(site + '/api/file?url=' + encodeURIComponent(url), { headers: { accept: 'application/json' } }))
         : null;
     },
+    frame: async url => {
+      const site = (G().NOEMA_CONFIG?.siteUrl || (location.protocol.startsWith('http') ? location.origin : '')).replace(/\/$/, '');
+      if (!site) return 'unknown';
+      try {
+        const r = await fetch(site + '/api/frame?url=' + encodeURIComponent(url), {
+          headers: { accept: 'application/json' },
+          signal: AbortSignal.timeout(6000),
+        });
+        const v = r.ok ? ((await r.json()) as { frame?: unknown }).frame : null;
+        return v === 'yes' || v === 'no' ? v : 'unknown';
+      } catch {
+        return 'unknown'; // no network, no function (a static server), too slow
+      }
+    },
   };
   return { libs, net, jszip, loadZip };
 }
