@@ -51,12 +51,22 @@ export interface CheckEnv {
   readonly wasm: WasmChecks | null;
   readonly embed: EmbedChecks | null;
   readonly h5p: H5PChecks | null;
+  /** the engine catalogue's suggestions for a description (the audit names the engines that fit a chapter), or null */
+  readonly suggest?:
+    ((text: string) => readonly { readonly id: string; readonly score: number; readonly hits: readonly string[] }[]) | null;
 }
 /** the engine library as a root has it (src/engines/library.ts EngineLibrary, NoemaCore.engines): its expression language and
     its loaded engines */
 export interface EngineSource {
   readonly expr: ExprChecker | null;
   loaded(id: string): unknown;
+  /** its catalogue (src/engines/catalog.ts), where it is there */
+  readonly catalog?: {
+    suggest(
+      text: unknown,
+      opts?: { readonly limit?: number },
+    ): readonly { readonly id: string; readonly score: number; readonly hits: readonly string[] }[];
+  };
 }
 /** the runtimes' checkers as a root has them when a check runs (src/runtimes RUNTIME_CHECKS, and the runtimes still loaded as
     scripts: the page, or the scope that ran them); null where one is not loaded */
@@ -73,6 +83,7 @@ export function envOf(engines: EngineSource, host: RuntimeHost): CheckEnv {
   return {
     expr: engines.expr,
     engine: (id: string) => engines.loaded(id) as EngineChecks | null,
+    suggest: engines.catalog ? (text: string) => engines.catalog?.suggest(text, { limit: 6 }) ?? [] : null,
     get wasm() {
       return host().wasm;
     },
