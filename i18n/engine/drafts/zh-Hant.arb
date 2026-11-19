@@ -1771,5 +1771,16 @@
   "engine.author.f.lib.wpmHi": "每分鐘最多詞數",
   "engine.author.f.lib.wpmLo": "每分鐘最少詞數",
   "engine.author.f.benchPart": "被測部件",
-  "engine.author.f.lib.eq": "均衡（編號）"
+  "engine.author.f.lib.eq": "均衡（編號）",
+  "engine.space.title": "本裝置上的空間",
+  "engine.space.used": "已用 {used}，共 {quota}",
+  "engine.space.usedOnly": "已用 {used}",
+  "engine.space.unknown": "此瀏覽器不顯示應用程式使用了多少空間。",
+  "engine.space.kept": "永久保留",
+  "engine.space.mayEvict": "可能被清除",
+  "engine.space.keptLine": "瀏覽器已承諾不會自行清除你的資料。",
+  "engine.space.notKeptLine": "裝置空間不足時，瀏覽器可能會清除應用程式的資料。請讓它保留你的資料，或將應用程式加入主畫面。",
+  "engine.space.keep": "在本裝置上保留我的資料",
+  "engine.space.refused": "瀏覽器拒絕了。將應用程式加入主畫面通常會有幫助。",
+  "engine.space.info": "你的科目、路線圖和學習進度保存在本裝置瀏覽器自己的資料庫中，空間隨裝置可用空間增長。登入後，雲端也會保留一份副本。"
 }

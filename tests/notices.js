@@ -75,7 +75,7 @@ const badge = (page, sel) => page.$eval(sel, b => b.style.display === 'none' ? 0
 
   console.log('C. the classic screens\' bell');
   const p2 = await ctx.newPage(); p2.on('pageerror', e => E.push('PAGEERROR ' + e.message));
-  await p2.goto(url); await p2.evaluate(() => { localStorage.removeItem('noema-test:newUI'); }); await p2.reload();
+  await p2.goto(url); await p2.evaluate(() => { NoemaCore.storage.kv.delete('noema-test:newUI'); }); await p2.reload();
   await until(() => p2.$('.noema-chip')); await p2.click('.noema-chip:has-text("Demo Physics")');
   ok(await until(() => p2.$('#bellbtn')), 'a subject opens in the classic screens, with its 🔔');
   await p2.evaluate(() => { for (let i = 1; i <= 3; i++) Noema.notice('📦 news ' + i, 4000); });
@@ -90,7 +90,7 @@ const badge = (page, sel) => page.$eval(sel, b => b.style.display === 'none' ? 0
   ok(await p2.$$eval('.nx-notice', l => l.length) === 0 && await badge(p2, '#bellbtn .bellbadge') === 0, 'Clear all empties the classic bell');
 
   console.log('D. deleting a profile deletes its news');
-  ok(await p2.evaluate(() => { const id = Noema.account.id; Noema.notice('a', 10); Noema.notice('b', 10); Noema.notice('c', 10); const before = !!localStorage.getItem('noema-notices:' + id); Noema.wipeAccountData(id); return before && !localStorage.getItem('noema-notices:' + id); }), 'wipeAccountData removes the profile\'s news from this device');
+  ok(await p2.evaluate(() => { const id = Noema.account.id; Noema.notice('a', 10); Noema.notice('b', 10); Noema.notice('c', 10); const before = !!NoemaCore.storage.kv.get('noema-notices:' + id); Noema.wipeAccountData(id); return before && !NoemaCore.storage.kv.get('noema-notices:' + id); }), 'wipeAccountData removes the profile\'s news from this device');
 
   ok(!E.length, 'no page errors' + (E.length ? ': ' + E.join(' | ') : ''));
   await browser.close();

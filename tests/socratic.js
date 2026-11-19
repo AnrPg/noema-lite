@@ -70,7 +70,7 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
   const lastSys = systems[systems.length - 1];
   await p.screenshot({ path: '/tmp/noema_shots/s3_lang.png' });
   ok(/LANGUAGE: always write to the learner in Greek \(Ελληνικά\), although the course material and the notes below are in English/.test(lastSys), 'Ελληνικά → the tutor is told to answer in Greek (the notes stay English)');
-  ok(await p.evaluate(() => JSON.parse(localStorage.getItem(`noema1:${ACCOUNT.id}:a:settings`)).chatLang) === 'el', 'the choice is a setting of the profile (synced like the others)');
+  ok(await p.evaluate(() => JSON.parse(NoemaCore.storage.kv.get(`noema1:${ACCOUNT.id}:a:settings`)).chatLang) === 'el', 'the choice is a setting of the profile (synced like the others)');
   ok(await p.evaluate(() => (s => [s.title, JSON.stringify(s.blocks)].join('|'))(Noema.pack.chapters[4].sections[3])) === packBefore, 'the course material is unchanged');
   const sysJ = []; await ctx.route('**/generativelanguage.googleapis.com/**:generateContent*', async route => { const b = JSON.parse(route.request().postData() || '{}'); sysJ.push(b.systemInstruction?.parts?.[0]?.text || ''); return route.fulfill({ json: { candidates: [{ content: { parts: [{ text: '{"score":70,"verdict":"Σχεδόν","covered":[],"missing":[],"mistakes":[],"feedback":"ok","hit":[0]}' }] } }] } }); });
   await p.evaluate(() => NoemaTutor.current().ai.grade(Noema.pack.chapters[0].exercises.find(e => e.type === 'free') || { type: 'free', q: 'Q', model: 'M', rubric: ['r'], section: Noema.pack.chapters[0].sections[0].id }, 'my answer'));

@@ -1774,5 +1774,16 @@
   "engine.author.f.lib.eq": "Gleichgewicht (Index)",
   "engine.tutor.thinking": "Der Tutor schreibt…",
   "engine.tutor.copyPrompt": "Prompt kopieren",
-  "engine.tutor.promptCopied": "Prompt kopiert – füge ihn in deinen KI-Chat ein."
+  "engine.tutor.promptCopied": "Prompt kopiert – füge ihn in deinen KI-Chat ein.",
+  "engine.space.title": "Speicher auf diesem Gerät",
+  "engine.space.used": "{used} von {quota} belegt",
+  "engine.space.usedOnly": "{used} belegt",
+  "engine.space.unknown": "Dieser Browser sagt nicht, wie viel Speicher die App belegt.",
+  "engine.space.kept": "Dauerhaft gesichert",
+  "engine.space.mayEvict": "Kann gelöscht werden",
+  "engine.space.keptLine": "Der Browser hat zugesagt, deine Daten nicht von selbst zu löschen.",
+  "engine.space.notKeptLine": "Wenn der Speicher des Geräts knapp wird, kann der Browser die Daten der App löschen. Bitte ihn, deine Daten zu behalten, oder füge die App zum Home-Bildschirm hinzu.",
+  "engine.space.keep": "Meine Daten auf diesem Gerät behalten",
+  "engine.space.refused": "Der Browser hat abgelehnt. Meist hilft es, die App zum Home-Bildschirm hinzuzufügen.",
+  "engine.space.info": "Deine Fächer, Lernpfade und dein Fortschritt liegen in der Datenbank des Browsers auf diesem Gerät, die mit dem freien Speicher wächst. Wenn du angemeldet bist, hat auch die Cloud eine Kopie."
 }

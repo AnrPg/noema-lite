@@ -863,6 +863,10 @@ export function createApp(win: Window = window): App {
     win.customElements.upgrade(shell.preview); // the 5-minute try's bar was made before its element was defined
     const I18 = I();
     if (I18) await race(I18.ready, 4000).catch((e: unknown) => core.errors.report(e, { where: 'loader.i18n.ready', severity: 'warning' }));
+    // the account's keys into memory from IndexedDB (src/adapters/browser/kv-mirror.ts): nothing reads an account before
+    await core.storage.ready().catch(core.errors.catcher('loader.storage.ready', { severity: 'warning' }));
+    // and the browser is asked to keep the site's data under storage pressure (Safari evicts unpersisted sites)
+    void core.storage.persist().catch(core.errors.catcher('loader.storage.persist', { severity: 'info' }));
     // the data of the app's earlier versions on this device (its keys, its database), once (shell/migrate.ts)
     N.migrate.prefix();
     await N.migrate.idb().catch(core.errors.catcher('loader.migrate.idb', { severity: 'warning' }));

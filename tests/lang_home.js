@@ -61,7 +61,7 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
   await p.goto(url + '?account=anr#/lang/polyglot-semitic-zh-de'); await p.waitForSelector('.lx-fhome', { timeout: 25000 }).catch(() => { }); await wait(300);
   ok(await q('.lx-fhome .ns-item[data-act^="lang-"]') === 0 && !/Your languages|Οι γλώσσες σου/i.test(await p.locator('.lx-fhome').innerText()), 'the combined home has no “Your languages” section');
   // search: no stray text, a way back, only the languages' own saved searches
-  await p.evaluate(() => { const k = Object.keys(localStorage).find(x => /:searches$/.test(x)) || 'noema1:anr:a:searches'; localStorage.setItem(k, JSON.stringify([{ id: 'k1', name: 'KNOW-ONE', p: { q: 'okazaki' } }, { id: 'l1', name: 'LANG-ONE', p: { q: 'shalom', w: 'lang' } }])); });
+  await p.evaluate(() => { const k = NoemaCore.storage.kv.keys().find(x => /:searches$/.test(x)) || 'noema1:anr:a:searches'; NoemaCore.storage.kv.set(k, JSON.stringify([{ id: 'k1', name: 'KNOW-ONE', p: { q: 'okazaki' } }, { id: 'l1', name: 'LANG-ONE', p: { q: 'shalom', w: 'lang' } }])); });
   await p.goto(url + '?account=anr#/lang/he'); await wait(800); await p.evaluate(() => { location.hash = '#/search'; }); await wait(1500);
   const sp = await p.locator('.ns-searchview').innerText().catch(() => '');
   ok(!/null/.test(sp) && /LANG-ONE/.test(sp) && !/KNOW-ONE/.test(sp), 'search opened from the languages: no “null” text, only the language searches are listed');

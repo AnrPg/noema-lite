@@ -517,7 +517,7 @@ async function browser() {
 
     // the new frame: the one way in is the subject’s ⋮ › Create an activity; the crumbs end with the page’s title
     await p.emulateMedia({ colorScheme: 'light' });
-    await p.evaluate(() => localStorage.setItem('noema-test:newUI', '1'));
+    await p.evaluate(() => NoemaCore.storage.kv.set('noema-test:newUI', '1'));
     await p.goto(SITE_URL); await wait(1200);
     if (await until(() => p.$('[data-pick="know"]'), 3000)) { await p.click('[data-pick="know"]'); await wait(300); await p.click('[data-onbdone]'); await wait(600); }   // the first-time questions
     await p.goto(SITE_URL + '#/shelf'); await until(() => p.$('[data-subject="demo-physics"]')); await p.click('[data-subject="demo-physics"]'); await until(() => p.$('.subjhead'));
@@ -531,7 +531,7 @@ async function browser() {
     ok(crumbs.length >= 2 && crumbs[crumbs.length - 1].includes(EN.title), 'the crumbs end with the page’s title ' + JSON.stringify(crumbs));
     await p.setViewportSize({ width: 320, height: 700 }); await wait(400);
     ok(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), '320 px in the frame: no horizontal scroll');
-    await p.evaluate(() => localStorage.removeItem('noema-test:newUI'));
+    await p.evaluate(() => NoemaCore.storage.kv.delete('noema-test:newUI'));
     ok(!E.length, 'no page errors ' + E.slice(0, 3).join(' | '));
     await browser.close();
   }

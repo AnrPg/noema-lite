@@ -126,7 +126,7 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
     r = await tool('noema_curricula'); ok(!/need their chapter plan/.test(r.text), 'the connector still sees every step planned');
     // the merged copy goes out NEWER than the stale row it replaces (devices that saw that row take it), and stays due after a reload
     const stale = Date.now() + 2 * 864e5; old.stage = 'plan'; srv.state.kv[uid][ck] = { value: JSON.stringify(old), updated_at: new Date(stale).toISOString() };
-    const dueAfterPull = await p.evaluate(async k => { await NoemaCloud.pull(); return k in JSON.parse(localStorage.getItem('noema1:' + Noema.account.id + ':meta:unsynced') || '{}'); }, ck);
+    const dueAfterPull = await p.evaluate(async k => { await NoemaCloud.pull(); return k in JSON.parse(NoemaCore.storage.kv.get('noema1:' + Noema.account.id + ':meta:unsynced') || '{}'); }, ck);
     ok(dueAfterPull, 'a pull that merges plans in marks the copy as waiting to sync (so it is pushed even after a reload)');
     await p.evaluate(() => NoemaCloud.push());
     ok(Date.parse(kvOf(uid)[ck].updated_at) > stale && planned(JSON.parse(kvOf(uid)[ck].value)), 'pushed with a later timestamp than the stale row, every plan kept');

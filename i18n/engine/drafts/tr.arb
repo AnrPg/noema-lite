@@ -1771,5 +1771,16 @@
   "engine.author.f.lib.wpmHi": "Dakikada en çok sözcük",
   "engine.author.f.lib.wpmLo": "Dakikada en az sözcük",
   "engine.author.f.benchPart": "Ölçülen parça",
-  "engine.author.f.lib.eq": "Denge (sıra)"
+  "engine.author.f.lib.eq": "Denge (sıra)",
+  "engine.space.title": "Bu cihazdaki alan",
+  "engine.space.used": "{quota} alanın {used} kadarı kullanılıyor",
+  "engine.space.usedOnly": "{used} kullanılıyor",
+  "engine.space.unknown": "Bu tarayıcı uygulamanın ne kadar alan kullandığını söylemiyor.",
+  "engine.space.kept": "Kalıcı olarak saklanıyor",
+  "engine.space.mayEvict": "Silinebilir",
+  "engine.space.keptLine": "Tarayıcı verilerini kendiliğinden silmeyeceğine söz verdi.",
+  "engine.space.notKeptLine": "Cihazda yer azaldığında tarayıcı uygulamanın verilerini silebilir. Verilerini saklamasını iste ya da uygulamayı Ana Ekran’a ekle.",
+  "engine.space.keep": "Verilerimi bu cihazda sakla",
+  "engine.space.refused": "Tarayıcı kabul etmedi. Uygulamayı Ana Ekran’a eklemek genellikle işe yarar.",
+  "engine.space.info": "Konuların, Yol haritaların ve ilerlemen bu cihazda tarayıcının kendi veritabanında saklanır; bu alan cihazın boş alanıyla birlikte büyür. Oturum açtığında bulutta da bir kopyası tutulur."
 }

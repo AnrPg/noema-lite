@@ -292,7 +292,7 @@ ok(!ws.errors.length && ws.warnings.some(w => /generator 5 \(agree\): makes no e
   await page.goto(url + '?account=anr&subject=' + SUBJ + '#/fn/' + encodeURIComponent(fid) + '/de'); await wait(300);
   await page.click('.lx-gram .lx-feas .lx-practise'); await wait(200);
   const nItems = await runAll(page, () => true);
-  const rec = await page.evaluate(f => ({ log: NoemaLangUI.UI.L.langs.de.fns[f]?.log, st: NoemaLang.functionState(NoemaLangUI.UI.C, NoemaLangUI.UI.L, 'de', f), key: Object.keys(localStorage).some(k => k.endsWith(':lang:de:fn:' + f)), res: document.querySelector('.lx-practicedone')?.innerText || '' }), fid);
+  const rec = await page.evaluate(f => ({ log: NoemaLangUI.UI.L.langs.de.fns[f]?.log, st: NoemaLang.functionState(NoemaLangUI.UI.C, NoemaLangUI.UI.L, 'de', f), key: NoemaCore.storage.kv.keys().some(k => k.endsWith(':lang:de:fn:' + f)), res: document.querySelector('.lx-practicedone')?.innerText || '' }), fid);
   ok(nItems > 3 && rec.log?.[0]?.n === nItems && rec.log[0].c === nItems && rec.st === 'practicing' && rec.key && /Practice done/.test(rec.res), `▶ practise ${fid}: ${nItems} items answered, recorded (practiceFunction, stored key) → ${rec.st}`);
   await page.screenshot({ path: SHOTS + '/lx_grammar_done.png' });
 

@@ -144,12 +144,12 @@ async function signUp(browser, email, name) {
   ok(up.join() === 'heart-test' && /published a new version of/.test(await Cc.p.locator('.sharebar').innerText()), '🔔 Carl is told (bell + banner): Update or Keep mine');
   await Cc.p.click('.sharebar .nx-keep'); await wait(500);
   up = await Cc.p.evaluate(() => Noema.notes.refresh().then(l => l.filter(x => x.kind === 'subjupdate').length));
-  ok(up === 0 && await Cc.p.evaluate(() => JSON.parse(localStorage.getItem(`noema1:${ACCOUNT.id}:a:packmeta:heart-test`)).version) === 'heart-test-v1', '“Keep mine”: he keeps v1 and is not asked again about v2');
+  ok(up === 0 && await Cc.p.evaluate(() => JSON.parse(NoemaCore.storage.kv.get(`noema1:${ACCOUNT.id}:a:packmeta:heart-test`)).version) === 'heart-test-v1', '“Keep mine”: he keeps v1 and is not asked again about v2');
   await republish('heart-test-v3'); await wait(700);
   await A.p.check('.nx-warn input').catch(() => { }); await A.p.click('.nx-share .nx-republish'); await wait(900);
   await Cc.p.evaluate(() => Noema.notes.refresh()); await wait(300);
   await Cc.p.click('.sharebar .nx-take'); await wait(2000);
-  const cm = await Cc.p.evaluate(async () => ({ meta: JSON.parse(localStorage.getItem(`noema1:${ACCOUNT.id}:a:packmeta:heart-test`)), pack: (await Noema.loadSubject(ACCOUNT.id, 'heart-test')).version }));
+  const cm = await Cc.p.evaluate(async () => ({ meta: JSON.parse(NoemaCore.storage.kv.get(`noema1:${ACCOUNT.id}:a:packmeta:heart-test`)), pack: (await Noema.loadSubject(ACCOUNT.id, 'heart-test')).version }));
   ok(cm.meta.version === 'heart-test-v3' && cm.pack === 'heart-test-v3' && cm.meta.publicFrom === anna && !(await Cc.p.evaluate(() => Noema.notes.pending.some(x => x.kind === 'subjupdate'))), '⬆️ Update: he has v3 — the same subject (his progress stays), still from Anna');
   await A.p.click('.nx-share .ctl.x').catch(() => { });
   // withdrawing removes the shared copies of the files

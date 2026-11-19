@@ -1771,5 +1771,16 @@
   "engine.author.f.lib.wpmHi": "Palavras por minuto máximas",
   "engine.author.f.lib.wpmLo": "Palavras por minuto mínimas",
   "engine.author.f.benchPart": "Parte medida",
-  "engine.author.f.lib.eq": "Equilíbrio (índice)"
+  "engine.author.f.lib.eq": "Equilíbrio (índice)",
+  "engine.space.title": "Espaço neste dispositivo",
+  "engine.space.used": "{used} usados de {quota}",
+  "engine.space.usedOnly": "{used} usados",
+  "engine.space.unknown": "Este navegador não indica quanto espaço a app usa.",
+  "engine.space.kept": "Guardados para sempre",
+  "engine.space.mayEvict": "Podem ser apagados",
+  "engine.space.keptLine": "O navegador prometeu não apagar os teus dados por si.",
+  "engine.space.notKeptLine": "Quando o dispositivo fica sem espaço, o navegador pode apagar os dados da app. Pede-lhe que os guarde ou adiciona a app ao ecrã principal.",
+  "engine.space.keep": "Guardar os meus dados neste dispositivo",
+  "engine.space.refused": "O navegador recusou. Adicionar a app ao ecrã principal costuma ajudar.",
+  "engine.space.info": "As tuas disciplinas, Roadmaps e progresso ficam na base de dados do navegador neste dispositivo, que cresce com o espaço livre. Com sessão iniciada, a nuvem também guarda uma cópia."
 }

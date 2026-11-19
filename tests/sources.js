@@ -162,7 +162,7 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   // a damaged package: the good files are attached, the damaged one is not (and the learner is told)
   await p.evaluate(async () => { const b = await (await fetch('/testfiles/pkg/pkg-bad.noema.zip')).blob(); await Noema.importPackFile(Noema.account.id, new File([b], 'pkg-bad.noema.zip')); });
   await wait(1500);
-  const badIdx = JSON.parse(await p.evaluate(() => localStorage.getItem(`noema1:${Noema.account.id}:a:srcfiles:pkg-bad`) || '{}'));
+  const badIdx = JSON.parse(await p.evaluate(() => NoemaCore.storage.kv.get(`noema1:${Noema.account.id}:a:srcfiles:pkg-bad`) || '{}'));
   ok(!badIdx['ecb-1'] && badIdx['ecb-2'] && badIdx['notes'] && /missing or damaged: ecb-1/.test(await deepText(p, 'body')), 'a damaged file (SHA-256 mismatch) is not attached and the learner is told which');
   // a plain .json: imported, and the learner is told the files are in the package
   await p.evaluate(async () => { const b = await (await fetch('/testfiles/pkg/pkg-physics.json')).text(); const pk = JSON.parse(b); pk.subject.id = 'pkg-json'; await Noema.importPackFile(Noema.account.id, new File([JSON.stringify(pk)], 'pkg-json.json', { type: 'application/json' })); });
@@ -188,7 +188,7 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   await p.evaluate(() => { Noema.openSubjectPicker(); }); await wait(500);
   await p.hover('.noema-chipwrap:has-text("Κυτταροσκελετός")'); await p.click('.noema-chipwrap:has-text("Κυτταροσκελετός") .noema-editbtn'); await wait(300);
   p.once('dialog', d => d.accept()); await p.click('.noema-ovbox button:has-text("Delete the subject")'); await wait(1500);
-  ok(!(await p.locator('.noema-chip:has-text("Κυτταροσκελετός")').count()) && !Object.keys(srv.state.files).some(k => k.endsWith('/packs/kytt.json')) && !(await p.evaluate(() => localStorage.getItem(`noema1:${Noema.account.id}:a:packmeta:kytt`))), 'an own subject can be deleted (device + cloud + metadata)');
+  ok(!(await p.locator('.noema-chip:has-text("Κυτταροσκελετός")').count()) && !Object.keys(srv.state.files).some(k => k.endsWith('/packs/kytt.json')) && !(await p.evaluate(() => NoemaCore.storage.kv.get(`noema1:${Noema.account.id}:a:packmeta:kytt`))), 'an own subject can be deleted (device + cloud + metadata)');
   await p.hover('.noema-chipwrap:has-text("Spark & Delta")'); await p.click('.noema-chipwrap:has-text("Spark & Delta") .noema-editbtn'); await wait(300);
   await p.click('.noema-ovbox button:has-text("Restore the original")'); await wait(500);
   ok(await p.locator('.noema-chip:has-text("Databricks")').count() === 1, '↩ the original name comes back');

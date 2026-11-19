@@ -91,7 +91,7 @@ async function signUp(browser, email, name, viewport = { width: 1300, height: 90
   await p.click('button:has-text("Create account")'); await wait(1300);
   return { p, E, ctx };
 }
-const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Object.keys(localStorage).find(k => k.includes(':a:curriculum:')).split(':')[1])[0]);
+const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || NoemaCore.storage.kv.keys().find(k => k.includes(':a:curriculum:')).split(':')[1])[0]);
 
 (async () => {
   const api = vendors(); await new Promise(r => api.listen(0, r)); ABASE = `http://localhost:${api.address().port}`;
@@ -213,7 +213,7 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
   ok(await p.locator('.noema-ovbox .cm-chedit').count() === 0 && await p.locator('.noema-ovbox [disabled]:is(input, textarea, select)').count() === 0 && /fixed/.test(await p.locator('.noema-ovbox').last().innerText()), 'a prepared step: its chapters are fixed, so the window shows only what can change…');
   await p.fill('.noema-ovbox input[placeholder="Name of the step"]', 'Sets, events and Venn diagrams'); await p.click('.noema-ovbox button:has-text("Save")'); await wait(400);
   c = await cur(p);
-  ok(c.nodes.sets_and_events.title === 'Sets, events and Venn diagrams' && /Sets, events and Venn/.test(await p.evaluate(id => localStorage.getItem(`noema1:${Noema.account.id}:a:subjoverride:${id}`), c.nodes.sets_and_events.pack.id)), '…but it can still be renamed (its subject too)');
+  ok(c.nodes.sets_and_events.title === 'Sets, events and Venn diagrams' && /Sets, events and Venn/.test(await p.evaluate(id => NoemaCore.storage.kv.get(`noema1:${Noema.account.id}:a:subjoverride:${id}`), c.nodes.sets_and_events.pack.id)), '…but it can still be renamed (its subject too)');
   await p.click('.cm-node[data-id="prob_basics"]'); await wait(200); await p.click('.cm-panel .cm-editbtn'); await wait(300);
   const opts = await p.$$eval('select[aria-label="Add prerequisite"] option', o => o.map(x => x.value));
   ok(!opts.includes('distributions') && !opts.includes('likelihood') && opts.includes('calculus_basics'), 'only steps that keep the graph acyclic can be added as prerequisites');
@@ -241,7 +241,7 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
 
   console.log('— the Gemini path (free key, pack generated in the browser)');
   const V = await signUp(browser, 'finn@example.com', 'Finn'); const q = V.p;
-  await q.evaluate(() => { const k = `noema1:${Noema.account.id}:a:settings`; const s = JSON.parse(localStorage.getItem(k) || '{}'); s.apiKey = 'AIza-test-key'; localStorage.setItem(k, JSON.stringify(s)); });
+  await q.evaluate(() => { const k = `noema1:${Noema.account.id}:a:settings`; const s = JSON.parse(NoemaCore.storage.kv.get(k) || '{}'); s.apiKey = 'AIza-test-key'; NoemaCore.storage.kv.set(k, JSON.stringify(s)); });
   await q.click('.cm-mode:has-text("Roadmaps")'); await q.locator('noema-roadmap-library .cm-new').click(); await wait(300);
   await q.selectOption('.cm-provider', 'auto');
   ok(/✅ Gemini/.test(await q.locator('.cm-keys').first().innerText()) && /➖ Claude/.test(await q.locator('.cm-keys').first().innerText()), 'without a Claude key the Gemini key is used');

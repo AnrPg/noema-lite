@@ -268,7 +268,7 @@ const { connectorHandler, removeConnector } = require('./connector_fn');
     ok(await p.evaluate(() => Object.keys(NoemaLangUI.UI.C.lang.de.lex).length) === 10, 'the app merges the three nodes: the German words are in the open course');
 
     console.log('— C3. ▶ with the Claude key (mocked API) and 📋 copy / 📥 paste');
-    await p.evaluate(a => { localStorage.setItem('noema-device:anthropicKey:' + a, 'sk-ant-' + 'a'.repeat(32)); localStorage.setItem(`noema1:${a}:a:claudeModel`, JSON.stringify('claude-test')); }, ACC);
+    await p.evaluate(a => { NoemaCore.storage.kv.set('noema-device:anthropicKey:' + a, 'sk-ant-' + 'a'.repeat(32)); NoemaCore.storage.kv.set(`noema1:${a}:a:claudeModel`, JSON.stringify('claude-test')); }, ACC);
     await p.evaluate(() => { location.hash = '#/'; }); await wait(200); await p.evaluate(() => { location.hash = '#/claude'; }); await wait(400);
     const gD = clone(mini.langs.de.grammar['fn.definite']), dataNow = await p.evaluate(() => NoemaLangUI.UI.C.data);
     const sD = sentencesFor(dataNow, 'de', ['fn.definite']).filter(s => s.functions.includes('fn.definite'));

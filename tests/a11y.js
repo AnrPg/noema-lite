@@ -62,7 +62,7 @@ function firstChapter() {
       const settings = { lang: 'en', world: 'know', character: pg.character, onboarded: Date.now(), ...(pg.settings || {}) };
       // after the UI kit (the older screens did not start there): back to them, so the account's settings can be written
       if (!(await page.evaluate(() => !!window.Noema?.account))) { await page.goto(url); await page.reload(); await wait(900); }
-      await page.evaluate(s => { const id = window.Noema?.account?.id; if (id) localStorage.setItem(`noema1:${id}:a:settings`, JSON.stringify(s)); localStorage.setItem('noema-ui:appearance', JSON.stringify({ scheme: 'system', character: s.character, motion: 'system' })); }, settings);
+      await page.evaluate(s => { const id = window.Noema?.account?.id; if (id) NoemaCore.storage.kv.set(`noema1:${id}:a:settings`, JSON.stringify(s)); NoemaCore.storage.kv.set('noema-ui:appearance', JSON.stringify({ scheme: 'system', character: s.character, motion: 'system' })); }, settings);
       await page.goto(url + pg.at); await page.reload();
       let ready = !pg.ready || await page.waitForSelector(pg.ready, { timeout: 25000 }).then(() => true, () => false);
       await wait(pg.wait || 1500);

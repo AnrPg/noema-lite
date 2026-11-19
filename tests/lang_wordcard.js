@@ -110,7 +110,7 @@ ok(!bad.length, `every word of the pilot course gets its parameters (${bad.slice
     const pg = await c2.newPage(); pg.on('pageerror', e => E.push(e.message));
     // the learner's settings before the app starts (the interface language is read once, at start)
     await pg.goto(url); await pg.evaluate(l => { localStorage.clear(); localStorage.setItem('noema-test:newUI', '1'); localStorage.setItem('noema1:current', JSON.stringify({ acc: 'anr' }));
-      localStorage.setItem('noema1:anr:a:settings', JSON.stringify({ lang: l, world: 'both', character: 'robot', onboarded: Date.now(), studyLangs: ['ar', 'he', 'zh', 'de'] })); }, lang);
+      NoemaCore.storage.kv.set('noema1:anr:a:settings', JSON.stringify({ lang: l, world: 'both', character: 'robot', onboarded: Date.now(), studyLangs: ['ar', 'he', 'zh', 'de'] })); }, lang);
     await pg.goto(url + '?account=anr#/lang/he/c/person.teacher');
     const shown = await pg.waitForSelector('details.lx-others', { timeout: 30000 }).then(() => true, () => false); await wait(800);
     if (shown) { await pg.evaluate(() => { const d = document.querySelector('details.lx-others'); if (!d.open) d.querySelector('summary').click(); }); await wait(600); }

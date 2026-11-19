@@ -11307,5 +11307,27 @@
   "engine.author.f.lib.eq": "Equilibrium (index)",
   "@engine.author.f.lib.eq": {
     "description": "Label of the field “eq” of a library engine’s model or outputs in the activity author (engines: philo): the index of an equilibrium. Short."
-  }
+  },
+  "engine.space.title": "Space on this device",
+  "@engine.space.title": {"description": "Title of a section in Me › Data and sync: how much of the device's storage the app uses, and whether the browser keeps it for good. Short."},
+  "engine.space.used": "{used} used of {quota}",
+  "@engine.space.used": {"description": "One line in the section “Space on this device”: the app's data on this device and the space the browser allows. {used} and {quota} are sizes such as “12.4 MB”."},
+  "engine.space.usedOnly": "{used} used",
+  "@engine.space.usedOnly": {"description": "One line in the section “Space on this device” when the browser does not say how much space it allows. {used} is a size such as “12.4 MB”."},
+  "engine.space.unknown": "This browser does not say how much space the app uses.",
+  "@engine.space.unknown": {"description": "One line in the section “Space on this device” when the browser gives no figures."},
+  "engine.space.kept": "Kept for good",
+  "@engine.space.kept": {"description": "Short pill next to the title “Space on this device”: the browser promised not to delete the app's data by itself."},
+  "engine.space.mayEvict": "May be cleared",
+  "@engine.space.mayEvict": {"description": "Short pill next to the title “Space on this device”: the browser may delete the app's data when the device runs low on space."},
+  "engine.space.keptLine": "The browser has promised not to clear your data by itself.",
+  "@engine.space.keptLine": {"description": "Sentence in the section “Space on this device” when persistent storage is granted."},
+  "engine.space.notKeptLine": "When the device runs low on space, the browser may clear the app’s data. Ask it to keep your data, or add the app to the Home Screen.",
+  "@engine.space.notKeptLine": {"description": "Sentence in the section “Space on this device” when persistent storage is not granted yet."},
+  "engine.space.keep": "Keep my data on this device",
+  "@engine.space.keep": {"description": "Button in the section “Space on this device”: asks the browser for persistent storage, so it never clears the app's data by itself."},
+  "engine.space.refused": "The browser said no. Adding the app to the Home Screen usually helps.",
+  "@engine.space.refused": {"description": "Message after the button “Keep my data on this device” when the browser refused persistent storage."},
+  "engine.space.info": "Your subjects, Roadmaps and progress are kept in the browser’s own database on this device, which grows with the device’s free space. When you are signed in, the cloud keeps a copy too.",
+  "@engine.space.info": {"description": "Tooltip (ⓘ) of the section “Space on this device”."}
 }

@@ -1771,5 +1771,16 @@
   "engine.author.f.lib.wpmHi": "最大語数/分",
   "engine.author.f.lib.wpmLo": "最小語数/分",
   "engine.author.f.benchPart": "測定するパーツ",
-  "engine.author.f.lib.eq": "均衡（番号）"
+  "engine.author.f.lib.eq": "均衡（番号）",
+  "engine.space.title": "この端末の容量",
+  "engine.space.used": "{quota} のうち {used} を使用",
+  "engine.space.usedOnly": "{used} を使用",
+  "engine.space.unknown": "このブラウザーはアプリの使用容量を表示しません。",
+  "engine.space.kept": "ずっと保持",
+  "engine.space.mayEvict": "消去される場合あり",
+  "engine.space.keptLine": "ブラウザーはデータを勝手に消去しないと約束しています。",
+  "engine.space.notKeptLine": "端末の空き容量が少なくなると、ブラウザーがアプリのデータを消去することがあります。保持を頼むか、アプリをホーム画面に追加してください。",
+  "engine.space.keep": "この端末にデータを保持する",
+  "engine.space.refused": "ブラウザーに断られました。アプリをホーム画面に追加すると、たいてい解決します。",
+  "engine.space.info": "科目、ロードマップ、学習の進み具合は、この端末のブラウザー内データベースに保存され、空き容量に応じて大きくなります。サインイン中はクラウドにもコピーがあります。"
 }

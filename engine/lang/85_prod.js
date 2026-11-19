@@ -17,7 +17,7 @@ function keyHelp(onSaved) {
     ...LTE('lang.prod.keyHow', { link: h('a', { href: 'https://aistudio.google.com/apikey', target: '_blank', rel: 'noopener' }, 'aistudio.google.com/apikey') }),   // i18n-ignore (a URL)
     h('div', { class: 'row' }, inp, h('button', { class: 'btn small primary', onclick: () => {
       const v = inp.value.trim(); if (!v) return inp.focus();
-      try { window.Noema?.geminiKey ? Noema.geminiKey.set(UI.acc, v) : localStorage.setItem('noema-device:geminiKey:' + UI.acc, v); } catch (e) { }
+      try { window.Noema?.geminiKey ? Noema.geminiKey.set(UI.acc, v) : NoemaCore.storage.kv.set('noema-device:geminiKey:' + UI.acc, v); } catch (e) { }
       box.replaceWith(h('div', { class: 'tiny lx-keyok' }, '✅ ' + LT('lang.prod.keySaved'))); onSaved?.();
     } }, LT('lang.prod.keySave'))));
   return box;

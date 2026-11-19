@@ -21,6 +21,37 @@ function embedConsentRow() {
     h('button', { class: 'btn small ghost', type: 'button', onclick: () => { S.settings.embedOk = {}; save(); row.remove(); toast(tE('engine.act.embed.forgotten')); } }, tE('engine.act.embed.forget')));
   return row;
 }
+/** Settings › Data and sync: "Space on this device" — what the app keeps here and what the browser allows (NoemaCore.storage.estimate),
+    and whether it promised to keep it (persist); a button asks it to. The account itself is in IndexedDB, which grows with the
+    device's free space (src/adapters/browser/kv-mirror.ts). */
+function deviceSpaceSection() {
+  const ST = window.NoemaCore?.storage;
+  if (!ST?.estimate) return null;
+  const line = h('span', { class: 'tiny' }, '…');   // i18n-ignore (a placeholder)
+  const note = h('span', { class: 'tiny muted' });
+  const btn = h('button', { class: 'btn small', type: 'button', 'data-space': 'keep', hidden: true, onclick: keep });
+  btn.textContent = tE('engine.space.keep');
+  const sec = accSection({ line: 'download' }, tE('engine.space.title'), { status: { ok: false, text: '…' }, info: tE('engine.space.info'),   // i18n-ignore (a placeholder)
+    body: h('div', { class: 'act-spaceset', 'data-space': 'section' }, h('div', { class: 'row' }, line), h('div', { class: 'row' }, note), h('div', { class: 'row' }, btn)) });
+  const pill = sec.querySelector('summary .pill');
+  async function draw() {
+    const e = await ST.estimate().catch(() => null);
+    const kept = !!e?.persisted;
+    pill.className = 'pill ' + (kept ? 'c' : 'warnpill'); pill.textContent = tE(kept ? 'engine.space.kept' : 'engine.space.mayEvict');
+    line.textContent = e?.usage == null ? tE('engine.space.unknown') : e.quota ? tE('engine.space.used', { used: fmtBytes(e.usage), quota: fmtBytes(e.quota) }) : tE('engine.space.usedOnly', { used: fmtBytes(e.usage) });
+    note.textContent = tE(kept ? 'engine.space.keptLine' : 'engine.space.notKeptLine');
+    btn.hidden = kept;
+  }
+  async function keep() {
+    btn.disabled = true;
+    const yes = await ST.persist().catch(() => false);
+    btn.disabled = false;
+    if (!yes) toast(tE('engine.space.refused'), 5000);
+    draw();
+  }
+  draw();
+  return sec;
+}
 /** Settings › Data and sync: "Prepare Python for offline" — the core, numpy, scipy and the allow-listed extras, with progress and what is
     on the device (one line; the details per part in its ⓘ). Only where Python activities can run (the website, the runtime switched on).
     The service is the runtime's own (src/runtimes/py-module: ACT.runtime('py-module@1') → .py), loaded when the section is drawn. */
@@ -268,6 +299,7 @@ const ACC_VIEWS = {
           } })), guideBtn('restore', '♻️ ' + tE('engine.bk.howRestore'))] }),
       accSection('🕘', tE('engine.bk.secPoints'), { status: { ok: true, text: nf(pts0.length) }, info: tE('engine.bk.pointsInfo'), body: rpBox }),
       embedConsentRow(),
+      deviceSpaceSection() || '',   // what the app keeps on this device, and whether the browser keeps it for good
       pyOfflineSection() || '');   // Prepare Python for offline: only where Python activities can run
     drawFs(); drawRP();
   },

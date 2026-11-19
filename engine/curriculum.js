@@ -76,16 +76,16 @@ window.NoemaCurriculum = (() => {
 
   /* ======================= persistence (KV → cloud) ======================= */
   const kvKey = (acc, name) => `noema1:${acc}:a:${name}`;
-  const kvSet = (acc, name, obj) => { const k = kvKey(acc, name); if (N()?.kv) N().kv.set(k, JSON.stringify(obj)); else localStorage.setItem(k, JSON.stringify(obj)); };
-  const kvGet = (acc, name, d = null) => { try { const v = localStorage.getItem(kvKey(acc, name)); return v ? JSON.parse(v) : d; } catch (e) { return d; } };
+  const kvSet = (acc, name, obj) => { const k = kvKey(acc, name); if (N()?.kv) N().kv.set(k, JSON.stringify(obj)); else NoemaCore.storage.kv.set(k, JSON.stringify(obj)); };
+  const kvGet = (acc, name, d = null) => { try { const v = NoemaCore.storage.kv.get(kvKey(acc, name)); return v ? JSON.parse(v) : d; } catch (e) { return d; } };
   function save(acc, c) { c.updated = new Date().toISOString(); kvSet(acc, 'curriculum:' + c.id, c); emit(acc, c); }
   function list(acc) {
     const pre = kvKey(acc, 'curriculum:'); const out = [];
-    for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && k.startsWith(pre)) { try { out.push(JSON.parse(localStorage.getItem(k))); } catch (e) { } } }
+    for (const k of NoemaCore.storage.kv.keys(pre)) { try { out.push(JSON.parse(NoemaCore.storage.kv.get(k))); } catch (e) { } }
     return out.filter(c => c && c.format === 'noema.curriculum/v1').sort((a, b) => (b.updated || '').localeCompare(a.updated || ''));
   }
   const get = (acc, id) => kvGet(acc, 'curriculum:' + id);
-  function remove(acc, id) { window.NoemaSrcFiles?.removeAll(acc, 'curfiles-' + id).catch(() => { }); const k = kvKey(acc, 'curriculum:' + id); if (N()?.kv) { N().kv.del(k); N().kv.del(kvKey(acc, 'curprog:' + id)); N().kv.del(kvKey(acc, 'curgen:' + id)); } else localStorage.removeItem(k); }
+  function remove(acc, id) { window.NoemaSrcFiles?.removeAll(acc, 'curfiles-' + id).catch(() => { }); const k = kvKey(acc, 'curriculum:' + id); if (N()?.kv) { N().kv.del(k); N().kv.del(kvKey(acc, 'curprog:' + id)); N().kv.del(kvKey(acc, 'curgen:' + id)); } else NoemaCore.storage.kv.delete(k); }
   const listeners = new Set(); const emit = (acc, c) => listeners.forEach(f => { try { f(acc, c); } catch (e) { } }); const onChange = f => { listeners.add(f); return () => listeners.delete(f); };
 
   /* ======================= building: the four agents ======================= */
@@ -337,8 +337,8 @@ window.NoemaCurriculum.Gen = (() => {
   const listeners = new Set(); const emit = () => listeners.forEach(f => { try { f(); } catch (e) { } });
   let acc = null, busy = null, timer = null, ctl = null; const priority = [];
   const key = (cid, nid) => cid + '/' + nid;
-  const paused = () => { try { return localStorage.getItem('noema-device:curgen:paused') === '1'; } catch (e) { return false; } };
-  function setPaused(v) { try { localStorage.setItem('noema-device:curgen:paused', v ? '1' : '0'); } catch (e) { } if (v) ctl?.abort(); else kick(); emit(); }
+  const paused = () => { try { return NoemaCore.storage.kv.get('noema-device:curgen:paused') === '1'; } catch (e) { return false; } };
+  function setPaused(v) { try { NoemaCore.storage.kv.set('noema-device:curgen:paused', v ? '1' : '0'); } catch (e) { } if (v) ctl?.abort(); else kick(); emit(); }
 
   /* ---- locks ---- */
   const STALE = 15 * 60 * 1000;
@@ -587,14 +587,14 @@ window.NoemaCurriculum.Edit = (() => {
     if (n.pack?.id && window.Noema && (n.pack.assigned || C.stepsOf(acc, n.pack.id).length)) toShelf(acc, cid, id, n.pack.id);   // 📦 a subject the learner attached (or that other steps use) stays — 📚 on the Shelf when no step uses it any more
     else if (n.pack?.id && window.Noema) {
       if (deleteMaterial) await window.Noema.deleteSubject({ id: n.pack.id, curriculum: null }).catch(() => { });
-      else { const k = `noema1:${acc}:a:packmeta:${n.pack.id}`; try { const m = JSON.parse(localStorage.getItem(k) || 'null'); if (m) { delete m.curriculum; delete m.node; window.Noema.kv.set(k, JSON.stringify(m)); } } catch (e) { } }   // keep it as a normal subject
+      else { const k = `noema1:${acc}:a:packmeta:${n.pack.id}`; try { const m = JSON.parse(NoemaCore.storage.kv.get(k) || 'null'); if (m) { delete m.curriculum; delete m.node; window.Noema.kv.set(k, JSON.stringify(m)); } } catch (e) { } }   // keep it as a normal subject
     }
     return { ok: true };
   }
   /** A subject made for this step (its metadata names the step) becomes a normal subject — 📚 on the Shelf. */
   function toShelf(acc, cid, nid, subjectId) {
     const k = `noema1:${acc}:a:packmeta:${subjectId}`;
-    try { const m = JSON.parse(localStorage.getItem(k) || 'null'); if (m && m.curriculum === cid && (!nid || m.node === nid)) { delete m.curriculum; delete m.node; window.Noema?.kv ? window.Noema.kv.set(k, JSON.stringify(m)) : localStorage.setItem(k, JSON.stringify(m)); } } catch (e) { }
+    try { const m = JSON.parse(NoemaCore.storage.kv.get(k) || 'null'); if (m && m.curriculum === cid && (!nid || m.node === nid)) { delete m.curriculum; delete m.node; window.Noema?.kv ? window.Noema.kv.set(k, JSON.stringify(m)) : NoemaCore.storage.kv.set(k, JSON.stringify(m)); } } catch (e) { }
   }
   /** 📦 Can a subject be attached to this step? → null | 'missing' | 'generating' (the reason, as a code). */
   const assignBlock = (c, n) => !n ? 'missing' : n.pack?.status === 'generating' ? 'generating' : null;

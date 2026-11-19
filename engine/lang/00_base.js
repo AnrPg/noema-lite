@@ -123,16 +123,16 @@ function wordView(code, text, { lex = null, sub = true, marks = null, link = fal
 }
 /* ---------- the learner's native language (D19, docs/language-packs.md §2.2) and words met before they are learned (D20) ---------- */
 /** The account's settings (a:settings: synced; the native language lives there, for every course). */
-const accSettings = () => { try { return JSON.parse(localStorage.getItem(`noema1:${UI.acc}:a:settings`) || '{}') || {}; } catch (e) { return {}; } };
+const accSettings = () => { try { return JSON.parse(NoemaCore.storage.kv.get(`noema1:${UI.acc}:a:settings`) || '{}') || {}; } catch (e) { return {}; } };
 function putAccSettings(patch) {
   if (window.NoemaThemes?.putSettings) return NoemaThemes.putSettings(patch, UI.acc);
   const k = `noema1:${UI.acc}:a:settings`, s = Object.assign(accSettings(), patch); Object.keys(patch).forEach(x => patch[x] === undefined && delete s[x]);
-  if (window.Noema?.kv) Noema.kv.set(k, JSON.stringify(s)); else try { localStorage.setItem(k, JSON.stringify(s)); } catch (e) { }
+  if (window.Noema?.kv) Noema.kv.set(k, JSON.stringify(s)); else try { NoemaCore.storage.kv.set(k, JSON.stringify(s)); } catch (e) { }
 }
 let nativeMemo = null;
 /** The learner's native language: a:settings.native, else the course's settings.knows entry at level native → {code?, name, type, family, branch, supported} | null. */
 const nativeL = () => {
-  const raw = (localStorage.getItem(`noema1:${UI.acc}:a:settings`) || '') + '|' + JSON.stringify(UI.L?.settings.knows || null);
+  const raw = (NoemaCore.storage.kv.get(`noema1:${UI.acc}:a:settings`) || '') + '|' + JSON.stringify(UI.L?.settings.knows || null);
   if (nativeMemo && nativeMemo.raw === raw && nativeMemo.C === UI.C) return nativeMemo.v;
   const v = N.nativeOf(UI.C, accSettings().native, UI.L?.settings.knows); nativeMemo = { raw, C: UI.C, v }; return v;
 };
@@ -242,10 +242,7 @@ const STATE_LABEL = new Proxy({}, { get: (o, s) => s === 'na' ? '—' : typeof s
 const P = () => `noema1:${UI.acc}:s:lang:${UI.id}:`;
 function loadLearner() {
   const kv = {}, p = P();
-  for (let i = 0; i < localStorage.length; i++) {
-    const k = localStorage.key(i);
-    if (k && k.startsWith(p)) { try { kv[k.slice(p.length)] = JSON.parse(localStorage.getItem(k)); } catch (e) { } }
-  }
+  for (const k of NoemaCore.storage.kv.keys(p)) { try { kv[k.slice(p.length)] = JSON.parse(NoemaCore.storage.kv.get(k)); } catch (e) { } }
   UI.prefs = kv.prefs || {};
   const L = N.fromKV(UI.C, kv);
   L.settings.languages = UI.C.languages.slice();   // D21: the course's settings say what it teaches now (the others' progress stays stored)
@@ -258,7 +255,7 @@ function save(now = false) {
     const kv = N.toKV(UI.C, UI.L); kv.prefs = UI.prefs;
     for (const [k, v] of Object.entries(kv)) {
       const key = P() + k, val = JSON.stringify(v);
-      if (window.Noema?.kv) Noema.kv.set(key, val); else localStorage.setItem(key, val);   // Noema.kv marks the key for cloud sync
+      if (window.Noema?.kv) Noema.kv.set(key, val); else NoemaCore.storage.kv.set(key, val);   // Noema.kv marks the key for cloud sync
     }
   };
   if (now) go(); else saveTimer = setTimeout(go, 250);
@@ -270,7 +267,7 @@ function foldRemote(e) {
   const p = P(), keys = (e.detail.keys || []).filter(k => k.startsWith(p)); if (!keys.length) return;
   const kv = N.toKV(UI.C, UI.L); kv.prefs = UI.prefs;
   for (const full of keys) {
-    const k = full.slice(p.length), raw = localStorage.getItem(full); if (raw == null) continue;
+    const k = full.slice(p.length), raw = NoemaCore.storage.kv.get(full); if (raw == null) continue;
     let stored; try { stored = JSON.parse(raw); } catch (x) { continue; }
     if (kv[k] === undefined) { kv[k] = stored; continue; }
     const m = window.NoemaCloud?.mergeValue ? NoemaCloud.mergeValue('s:lang:' + UI.id + ':' + k, JSON.stringify(kv[k]), raw, true).value : raw;
@@ -294,7 +291,7 @@ const activeLangs = () => (UI.L.settings.languages || UI.C.languages).filter(c =
    table and bridge knows only them; the progress of the others stays stored (one key per language and node, §5.6) and is back as
    soon as they are chosen again. Before the learner answers, a course teaches what it taught before (its settings.languages, else all). */
 /** The stored settings of the open course (before the learner state is loaded). */
-const storedCourseSettings = () => { try { return JSON.parse(localStorage.getItem(P() + 'settings') || '{}') || {}; } catch (e) { return {}; } };
+const storedCourseSettings = () => { try { return JSON.parse(NoemaCore.storage.kv.get(P() + 'settings') || '{}') || {}; } catch (e) { return {}; } };
 /** The account's answer (codes) or null when the learner has not answered yet. */
 const studyAnswer = () => { const s = accSettings().studyLangs; return Array.isArray(s) ? s : null; };
 /** N.studyLangs for the open course: {langs, chosen, none}. */

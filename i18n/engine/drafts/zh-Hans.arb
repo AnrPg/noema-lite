@@ -1771,5 +1771,16 @@
   "engine.author.f.lib.wpmHi": "每分钟最多词数",
   "engine.author.f.lib.wpmLo": "每分钟最少词数",
   "engine.author.f.benchPart": "被测部件",
-  "engine.author.f.lib.eq": "均衡（编号）"
+  "engine.author.f.lib.eq": "均衡（编号）",
+  "engine.space.title": "本设备上的空间",
+  "engine.space.used": "已用 {used}，共 {quota}",
+  "engine.space.usedOnly": "已用 {used}",
+  "engine.space.unknown": "此浏览器不显示应用使用了多少空间。",
+  "engine.space.kept": "永久保留",
+  "engine.space.mayEvict": "可能被清除",
+  "engine.space.keptLine": "浏览器已承诺不会自行清除你的数据。",
+  "engine.space.notKeptLine": "设备空间不足时，浏览器可能会清除应用的数据。请让它保留你的数据，或将应用添加到主屏幕。",
+  "engine.space.keep": "在本设备上保留我的数据",
+  "engine.space.refused": "浏览器拒绝了。将应用添加到主屏幕通常会有帮助。",
+  "engine.space.info": "你的科目、路线图和学习进度保存在本设备浏览器自己的数据库中，空间随设备可用空间增长。登录后，云端也会保留一份副本。"
 }

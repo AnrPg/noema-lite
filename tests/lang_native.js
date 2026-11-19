@@ -80,7 +80,7 @@ function preparedReal() {
   const url = await appUrl(ROOT);
   const open = async (hash = '') => { await page.goto('about:blank'); await page.goto(url + '?account=anr&subject=' + SUBJ + hash);   // a fresh start each time (a hash alone would not reload)
     await page.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(900); };
-  const setNative = n => page.evaluate(n => { const k = 'noema1:anr:a:settings'; const s = JSON.parse(localStorage.getItem(k) || '{}'); if (n) s.native = n; else delete s.native; localStorage.setItem(k, JSON.stringify(s)); }, n);
+  const setNative = n => page.evaluate(n => { const k = 'noema1:anr:a:settings'; const s = JSON.parse(NoemaCore.storage.kv.get(k) || '{}'); if (n) s.native = n; else delete s.native; NoemaCore.storage.kv.set(k, JSON.stringify(s)); }, n);
   const uniq = a => [...new Set(a)];
   const notesFor = (sec = 'yours', root = '.lx-gram') => page.locator(`${root} [data-cmp="${sec}"] [data-for]`).evaluateAll(els => els.map(e => e.dataset.for)).then(uniq);
   const setCourse = s => page.evaluate(s => { const U = NoemaLangUI.UI; Object.assign(U.L.settings, s); NoemaLangUI.save(true); }, s);
@@ -94,7 +94,7 @@ function preparedReal() {
   ok(!(await notesFor()).length && !(await page.locator('.lx-notesbox details').count()) && !/From other languages/.test(await page.locator('.lx-gram').innerText()), 'until it is known: no comparison notes at all, no fold of other languages');
   await open();
   await page.selectOption('.lx-native-ask .lx-nativesel', 'el'); await wait(1200);
-  ok(await page.evaluate(() => JSON.parse(localStorage.getItem('noema1:anr:a:settings')).native?.code) === 'el' && !(await page.locator('.lx-native-ask').count()), 'the answer is an account setting (a:settings.native); the question is gone');
+  ok(await page.evaluate(() => JSON.parse(NoemaCore.storage.kv.get('noema1:anr:a:settings')).native?.code) === 'el' && !(await page.locator('.lx-native-ask').count()), 'the answer is an account setting (a:settings.native); the question is gone');
 
   console.log('— a Greek native, the Greek facade on');
   await open('#/fn/' + FN + '/de'); await wait(600);
@@ -160,15 +160,15 @@ function preparedReal() {
   await page.selectOption('.lx-settings .lx-nativesel, .lx-view .lx-nativesel', '*'); await wait(100);
   await page.fill('.lx-nativeother input', 'Kirundi'); await page.selectOption('.lx-nativeother select >> nth=0', 'agglutinating');
   await page.click('.lx-nativeother button'); await wait(500);
-  ok(await page.evaluate(() => JSON.stringify(JSON.parse(localStorage.getItem('noema1:anr:a:settings')).native)) === '{"name":"Kirundi","type":"agglutinating"}', 'another language: its name and type are stored');
+  ok(await page.evaluate(() => JSON.stringify(JSON.parse(NoemaCore.storage.kv.get('noema1:anr:a:settings')).native)) === '{"name":"Kirundi","type":"agglutinating"}', 'another language: its name and type are stored');
   await open('#/fn/' + FN + '/de'); ok((await notesFor()).join() === 'type:agglutinating', '… and the notes for its type are shown');
 
   console.log('— Me › Language and appearance');
-  await page.goto(url); await page.evaluate(() => { localStorage.setItem('noema-test:newUI', '1'); const k = 'noema1:anr:a:settings'; localStorage.setItem(k, JSON.stringify({ ...JSON.parse(localStorage.getItem(k) || '{}'), onboarded: Date.now(), world: 'both', character: 'owl' })); });
+  await page.goto(url); await page.evaluate(() => { NoemaCore.storage.kv.set('noema-test:newUI', '1'); const k = 'noema1:anr:a:settings'; NoemaCore.storage.kv.set(k, JSON.stringify({ ...JSON.parse(NoemaCore.storage.kv.get(k) || '{}'), onboarded: Date.now(), world: 'both', character: 'owl' })); });
   await page.goto(url + '?account=anr#/me/look'); await page.waitForSelector('.ns-native', { timeout: 15000 }).catch(() => { }); await wait(400);
   ok(await page.locator('.ns-native').count() === 1 && /Kirundi/.test(await page.locator('.ns-native').innerText()), 'the account page shows the native language (one for every course)');
   await page.selectOption('.ns-native', 'fr'); await wait(300);
-  ok(await page.evaluate(() => JSON.parse(localStorage.getItem('noema1:anr:a:settings')).native?.code) === 'fr', '… and changes it');
+  ok(await page.evaluate(() => JSON.parse(NoemaCore.storage.kv.get('noema1:anr:a:settings')).native?.code) === 'fr', '… and changes it');
   ok(!E.length, 'no page errors ' + JSON.stringify(E.slice(0, 3)));
 
   console.log('— the real el facade, status “preview”, on a deploy-preview host');

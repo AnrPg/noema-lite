@@ -53,7 +53,7 @@ function unit() {
     await p.click('text=Sign in / create a cloud account'); await p.click('text=No account yet? Create one');
     await p.fill('input[placeholder="Display name"]', name); await p.fill('input[type=email]', email); await p.fill('input[type=password]', 'secret123');
     await p.click('button:has-text("Create account")'); await wait(1300);
-    await p.evaluate(() => { localStorage.setItem('noema-test:newUI', '1'); NoemaThemes?.putSettings?.({ onboarded: Date.now(), world: 'know' }); });
+    await p.evaluate(() => { NoemaCore.storage.kv.set('noema-test:newUI', '1'); NoemaThemes?.putSettings?.({ onboarded: Date.now(), world: 'know' }); });
     await p.reload(); await wait(900);
     if (await p.$('.ns-onb')) { await p.click('[data-pick="know"]').catch(() => { }); await wait(200); await p.click('[data-onbdone]').catch(() => { }); await wait(400); }
   };
@@ -99,7 +99,7 @@ function unit() {
     ok(!(await p.locator('.nr-hl, .nr-tip').count()), 'nothing of the report is left on the page');
 
     console.log('— a block of the theory read in French (a translation of the pack)');
-    await p.evaluate(() => { const k = `noema1:${Noema.account.id}:a:settings`; const s = JSON.parse(localStorage.getItem(k) || '{}'); s.lang = 'fr'; localStorage.setItem(k, JSON.stringify(s)); });
+    await p.evaluate(() => { const k = `noema1:${Noema.account.id}:a:settings`; const s = JSON.parse(NoemaCore.storage.kv.get(k) || '{}'); s.lang = 'fr'; NoemaCore.storage.kv.set(k, JSON.stringify(s)); });
     await p.goto(BASE + '/#/s/ch01-s01'); await p.reload(); await wait(2500);
     await p.evaluate(() => scrollTo(0, 0)); await wait(200);
     ok(await p.locator('#ns-report').getAttribute('aria-label') === 'Signaler un problème', 'the button speaks French');
@@ -113,7 +113,7 @@ function unit() {
     ok(f2[0] === 'library/subjects/demo-physics/translations/fr/ch01.json', 'the place to fix it is the French translation file');
 
     console.log('— an interface word');
-    await p.evaluate(() => { const k = `noema1:${Noema.account.id}:a:settings`; const s = JSON.parse(localStorage.getItem(k) || '{}'); s.lang = 'en'; localStorage.setItem(k, JSON.stringify(s)); });
+    await p.evaluate(() => { const k = `noema1:${Noema.account.id}:a:settings`; const s = JSON.parse(NoemaCore.storage.kv.get(k) || '{}'); s.lang = 'en'; NoemaCore.storage.kv.set(k, JSON.stringify(s)); });
     await p.goto(BASE + '/#/'); await p.reload(); await wait(1500);
     await openReport(); await p.click('.nr-kind[data-k="translation"]'); await p.click('.nr-point'); await wait(300);
     const vb = await p.locator('.ns-tab[data-tab="vault"] .lb').boundingBox();

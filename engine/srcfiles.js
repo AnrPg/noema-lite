@@ -23,11 +23,11 @@ window.NoemaSrcFiles = (() => {
   const FT = (k, p) => window.NoemaI18n ? NoemaI18n.t(k, p) : k;
   const errText = e => window.NoemaI18n ? NoemaI18n.err(e) : String((e && e.message) || e);
 
-  function index(acc, subj) { try { return JSON.parse(localStorage.getItem(idxKey(acc, subj)) || '{}'); } catch (e) { return {}; } }
+  function index(acc, subj) { try { return JSON.parse(NoemaCore.storage.kv.get(idxKey(acc, subj)) || '{}'); } catch (e) { return {}; } }
   /** Write the index of a subject: this device's cache, and each changed entry to its row (signed in: engine/cloud.js sends it). */
   function setIndex(acc, subj, ix) {
     const was = index(acc, subj), v = JSON.stringify(ix);
-    if (kv()) { if (Object.keys(ix).length) kv().set(idxKey(acc, subj), v); else kv().del(idxKey(acc, subj)); } else localStorage.setItem(idxKey(acc, subj), v);
+    if (kv()) { if (Object.keys(ix).length) kv().set(idxKey(acc, subj), v); else kv().del(idxKey(acc, subj)); } else NoemaCore.storage.kv.set(idxKey(acc, subj), v);
     if (!cloudOn(acc)) return;
     for (const [src, m] of Object.entries(ix)) if (JSON.stringify(was[src]) !== JSON.stringify(m)) NoemaCloud.rows.put(acc, 'source_files', subj, src, m);
     for (const src of Object.keys(was)) if (!(src in ix)) NoemaCloud.rows.del(acc, 'source_files', subj, src);

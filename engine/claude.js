@@ -26,10 +26,10 @@ window.NoemaClaude = (() => {
   /* ---------- the key: on THIS device only (never synced to the cloud, never in backups) ---------- */
   const kk = acc => 'noema-device:anthropicKey:' + acc;
   const Key = {
-    get(acc) { try { return sessionStorage.getItem(kk(acc)) || localStorage.getItem(kk(acc)) || ''; } catch (e) { return ''; } },
-    set(acc, key, remember) { try { this.forget(acc); (remember ? localStorage : sessionStorage).setItem(kk(acc), key.trim()); } catch (e) { } },
-    remembered(acc) { try { return !!localStorage.getItem(kk(acc)); } catch (e) { return false; } },
-    forget(acc) { try { localStorage.removeItem(kk(acc)); sessionStorage.removeItem(kk(acc)); } catch (e) { } },
+    get(acc) { try { return sessionStorage.getItem(kk(acc)) || NoemaCore.storage.kv.get(kk(acc)) || ''; } catch (e) { return ''; } },
+    set(acc, key, remember) { try { this.forget(acc); if (remember) NoemaCore.storage.kv.set(kk(acc), key.trim()); else sessionStorage.setItem(kk(acc), key.trim()); } catch (e) { } },
+    remembered(acc) { try { return !!NoemaCore.storage.kv.get(kk(acc)); } catch (e) { return false; } },
+    forget(acc) { try { NoemaCore.storage.kv.delete(kk(acc)); sessionStorage.removeItem(kk(acc)); } catch (e) { } },
     looksValid: k => /^sk-ant-[A-Za-z0-9_-]{20,}$/.test(String(k || '').trim()),
   };
 
@@ -96,12 +96,12 @@ window.NoemaClaude = (() => {
     const zr = await fetch(SITE() + '/downloads/noema-pack-builder.zip', { cache: 'no-cache' });
     if (!zr.ok) throw coded('Could not load the skill from noema-lite (' + zr.status + ').', 'ai.skill_unavailable', { status: zr.status });   // i18n-ignore (English .message)
     const zip = await zr.arrayBuffer(); const ver = await sha(zip);
-    const sk = await skKey(key); let cached = null; try { cached = JSON.parse(localStorage.getItem(sk) || 'null'); } catch (e) { }
+    const sk = await skKey(key); let cached = null; try { cached = JSON.parse(NoemaCore.storage.kv.get(sk) || 'null'); } catch (e) { }
     let field = 'files[]';
     const form = () => { const f = new FormData(); f.append(field, new Blob([zip], { type: 'application/zip' }), SKILL_NAME + '.zip'); return f; };
     // the multipart field is "files[]" in the API reference and "files" in some examples: try both
     const post = async (path, extra) => { try { return await api(key, path, { method: 'POST', form: extra(form()) }); } catch (e) { if (e.status !== 400 || field === 'files') throw e; field = 'files'; return api(key, path, { method: 'POST', form: extra(form()) }); } };
-    const remember = id => { try { localStorage.setItem(sk, JSON.stringify({ id, ver })); } catch (e) { } return id; };
+    const remember = id => { try { NoemaCore.storage.kv.set(sk, JSON.stringify({ id, ver })); } catch (e) { } return id; };
     let id = cached?.id;
     if (id) { try { await api(key, '/v1/skills/' + id, { retries: 2 }); } catch (e) { if (e.status === 404) id = null; else throw e; } }
     if (!id) {   // maybe uploaded from another device or browser: find it by name

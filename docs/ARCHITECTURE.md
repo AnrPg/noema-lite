@@ -77,7 +77,7 @@ fake of its service (`src/adapters/testing/`).
 
 | Port | Purpose | Adapters |
 |---|---|---|
-| Storage | key-value store (sync), document store (IndexedDB-like, with transactions), quota, the **storage-full signal** | browser (localStorage + IndexedDB `noema-lite` v2 with the collection `sync`, the same DB the loader opens), memory |
+| Storage | key-value store (sync), document store (IndexedDB-like, with transactions), quota, the **storage-full signal** | browser (the key-value store: an account's keys `noema1:<account>:…` in IndexedDB `noema-kv` behind an in-memory copy loaded before the app reads an account — no 5 MB cap; localStorage only for the device's small keys and `a:settings`, which the first screen reads — `src/adapters/browser/kv-mirror.ts`; documents: IndexedDB `noema-lite` with the collection `sync`, the same DB the loader opens), memory |
 | Remote | rows with compare-and-swap versions that are always strictly later, objects, rpc; an append-only **log** (idempotent by id, read by cursor) and last-writer-wins **registers** (by clock stamp, one from the future clamped) — docs/SYNC.md | supabase (PostgREST + Storage), memory |
 | Auth | session, sign in/up/out, refresh, change events | supabase (GoTrue), memory |
 | Clock | now, today (`LocalDay`), time zone, timers, `onDayChange` | browser (system), memory (manual) |

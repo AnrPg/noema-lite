@@ -541,7 +541,7 @@
 
   /* ---------- a Roadmap: its map (noema-roadmap-map) as the whole page, the rest in ⋮ ---------- */
   const VIEW_KEY = 'noema-mapview';   // the page's map as a list or as the treasure map (a device preference)
-  const savedView = () => { try { return localStorage.getItem(VIEW_KEY) === 'list' ? 'list' : 'treasure'; } catch (e) { return 'treasure'; } };
+  const savedView = () => { try { return NoemaCore.storage.kv.get(VIEW_KEY) === 'list' ? 'list' : 'treasure'; } catch (e) { return 'treasure'; } };
   PAGES.map = ([cid, nid]) => {
     const c = CU()?.get(acc(), cid);
     if (!c) { page({ tab: 'learn', crumbs: [[L('knowledge'), '#/learn']], back: '#/learn' }, h('p', { class: 'ns-muted' }, L('rmMissing'))); return; }
@@ -549,10 +549,10 @@
     CU().Gen.start(a);
     if (c.shared && !c.shared.ended) window.NoemaCurShare?.refresh(a, cid).then(() => NoemaCurShare.prefetch(a, cid)).catch(caught('shell.map.shared', 'info'));   // 👥 who prepared what, the owner's newest map
     const m = APP.wireMap(Object.assign(document.createElement('noema-roadmap-map'), { account: a, roadmapId: cid, view: savedView(), focusStep: nid || '', legendInMenu: true, className: 'ns-map' }), cid);
-    m.addEventListener('roadmap-view', e => { try { localStorage.setItem(VIEW_KEY, e.detail.view === 'list' ? 'list' : 'map'); } catch (x) { /* blocked site data: the view is not remembered */ } });
+    m.addEventListener('roadmap-view', e => { try { NoemaCore.storage.kv.set(VIEW_KEY, e.detail.view === 'list' ? 'list' : 'map'); } catch (x) { /* blocked site data: the view is not remembered */ } });
     const copy = (text, done) => navigator.clipboard.writeText(text).then(() => N().toast(done, 4000), () => prompt(N().tr('roadmap.map.copyThis'), text));
     const copyPart = () => copy(J().growMessage(CU().get(a, cid) || c), '📋 ' + L('addPartCopied'));
-    const copyMsg = () => { try { localStorage.setItem('noema:appUsed:' + a, '1'); } catch (e) { /* blocked site data */ } copy(J().message(CU().get(a, cid) || c, { count: 1 }), L('copiedForClaude')); };
+    const copyMsg = () => { try { NoemaCore.storage.kv.set('noema:appUsed:' + a, '1'); } catch (e) { /* blocked site data */ } copy(J().message(CU().get(a, cid) || c, { count: 1 }), L('copiedForClaude')); };
     const menu = () => { const cur = CU().get(a, cid) || c, w = J().work(cur), waiting = w.toPlan.length + w.steps.length + (w.graph ? 1 : 0); return [
       cur.provider === 'claudeapp' && !w.done ? { label: L('copyForClaude'), sub: L('copyForClaudeSub', { n: waiting }), icon: 'chat', run: copyMsg } : null,
       member ? null : { label: L('addStep'), icon: 'plus', run: () => CM()?.editStep(a, cid, null, { mode: 'add', onDone: id => { if (id) m.select(id); } }) },

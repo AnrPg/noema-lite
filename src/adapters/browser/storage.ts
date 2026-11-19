@@ -10,6 +10,7 @@ import { err, ok, OK_VOID, type AsyncResult, type Result } from '../../kernel/re
 import { textOf } from '../../kernel/text.ts';
 import type { Unsubscribe } from '../../ports/common.ts';
 import { EVENT_COLLECTIONS } from '../local/event-store.ts';
+import { mirroredKv, type MirroredKv } from './kv-mirror.ts';
 import {
   isQuotaError,
   type DocKey,
@@ -48,7 +49,14 @@ export interface BrowserStorageOptions {
   readonly indexedDB?: () => IDBFactory | undefined;
   readonly storageManager?: () => StorageManagerLike | undefined;
   readonly now?: () => number;
+  /** Where the account's keys (`noema1:<account>:…`) live: 'indexeddb' (the page's own store, src/adapters/browser/kv-mirror.ts;
+      the default when no localStorage is passed) or 'localStorage' (every key there: tests, a tab's sessionStorage). */
+  readonly accountKeys?: 'indexeddb' | 'localStorage';
 }
+
+/** The page's one mirrored store (every browserStorage() of the page shares it, so they never disagree). */
+let pageMirror: MirroredKv | null = null;
+const pageListeners = new Set<(e: StorageFullEvent) => void>();
 
 /** The app's IndexedDB as the UI root opens it (src/composition/shell/core.ts IDB: same name, version and stores, so both can use it at once; also
     engine/lang/95_claude.js). Version 2 added `sync` (the outbox, the settings registers and the sync cursors:
@@ -86,7 +94,7 @@ export function browserStorage(o: BrowserStorageOptions = {}): Storage {
     }
   };
 
-  const kv: KeyValueStore = {
+  const plainKv: KeyValueStore = {
     get(key) {
       const s = ls();
       if (!s.ok) return s;
@@ -136,6 +144,20 @@ export function browserStorage(o: BrowserStorageOptions = {}): Storage {
     },
   };
 
+  const mirrored = (o.accountKeys ?? (o.localStorage ? 'localStorage' : 'indexeddb')) === 'indexeddb';
+  if (mirrored) {
+    pageMirror ??= mirroredKv({
+      localStorage: getLS,
+      indexedDB: getIDB,
+      onQuota: key => {
+        const event = Object.freeze({ store: 'kv' as const, key, at: now() });
+        for (const l of [...pageListeners]) l(event);
+        return new NoemaError('storage.quota', 'the browser storage for this site is full', { params: { key }, retryable: true });
+      },
+    });
+  }
+  const kv: KeyValueStore = mirrored && pageMirror ? pageMirror : plainKv;
+
   const docs = idbDocuments({
     name: o.dbName ?? APP_DB.name,
     version: o.dbVersion ?? APP_DB.version,
@@ -167,13 +189,29 @@ export function browserStorage(o: BrowserStorageOptions = {}): Storage {
         return err(new NoemaError('storage.failed', 'the persist request failed', { cause: e }));
       }
     },
+    async ready() {
+      if (mirrored && pageMirror) await pageMirror.ready();
+    },
+    onKvChange(listener) {
+      return mirrored && pageMirror ? pageMirror.onChange(listener) : () => undefined;
+    },
     onFull(listener): Unsubscribe {
       listeners.add(listener);
+      if (mirrored) pageListeners.add(listener);
       return () => {
         listeners.delete(listener);
+        pageListeners.delete(listener);
       };
     },
   };
+}
+
+/** The page's mirrored store, when one was made (tests, diagnostics). */
+export const pageKv = (): MirroredKv | null => pageMirror;
+/** Forget the page's mirrored store (tests only). */
+export function resetPageKv(): void {
+  pageMirror = null;
+  pageListeners.clear();
 }
 
 interface IdbOptions {

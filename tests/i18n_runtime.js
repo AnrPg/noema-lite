@@ -428,7 +428,7 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
     await visit(page, 'language tutor (no key, sent)', () => page.evaluate(() => { const ta = document.querySelector('.lx-tutor textarea, .drawer textarea'); if (ta) { ta.value = 'Hallo'; ta.dispatchEvent(new Event('input', { bubbles: true })); } document.querySelector('.lx-tutor .send, .drawer .send, .lx-tutor button.primary')?.click(); }), 1200);
     await page.evaluate(() => { try { NoemaLangUI.prod.closeLangTutor(); } catch (e) { } });
     // the language tutor with a Gemini key, when Gemini fails
-    await page.evaluate(() => localStorage.setItem('noema-device:geminiKey:anr', 'TESTKEY'));
+    await page.evaluate(() => NoemaCore.storage.kv.set('noema-device:geminiKey:anr', 'TESTKEY'));
     for (const [name, res] of [['429', { status: 429, body: '{"error":{"code":429,"message":"Resource has been exhausted","status":"RESOURCE_EXHAUSTED"}}' }], ['500', { status: 500, body: '{"error":{"code":500,"message":"Internal error","status":"INTERNAL"}}' }], ['offline', null]]) {
       await page.context().unroute('**/generativelanguage.googleapis.com/**').catch(() => { });
       await page.context().route('**/generativelanguage.googleapis.com/**', r => res ? r.fulfill({ status: res.status, contentType: 'application/json', body: res.body }) : r.abort('internetdisconnected'));
@@ -437,7 +437,7 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
         await page.evaluate(() => { const ta = document.querySelector('.lx-tutor textarea'); if (ta) { ta.value = 'Hallo'; ta.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true })); } }); }, 2500);
     }
     await page.context().unroute('**/generativelanguage.googleapis.com/**').catch(() => { });
-    await page.evaluate(() => { localStorage.removeItem('noema-device:geminiKey:anr'); try { NoemaLangUI.prod.closeLangTutor(); } catch (e) { } });
+    await page.evaluate(() => { NoemaCore.storage.kv.delete('noema-device:geminiKey:anr'); try { NoemaLangUI.prod.closeLangTutor(); } catch (e) { } });
     await visit(page, 'new language dialog', async () => { await page.evaluate(() => { location.hash = '#/lang'; }); await wait(900); await page.click('.ns-view button:has-text("·")', { timeout: 2000 }).catch(() => page.evaluate(() => [...document.querySelectorAll('.ns-view button')].pop()?.click())); }, 900);
     extra.push('Frame course', 'Hallo');
     await visit(page, 'new language: created', async () => { await page.fill('.lj-box input', 'Frame course').catch(() => { }); await page.click('.lj-lang[data-lang=es]').catch(() => { }); await page.click('.lj-create').catch(() => { }); }, 1500);

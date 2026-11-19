@@ -26,7 +26,6 @@ interface Win {
   readonly location: Location;
   readonly history: History;
   readonly document: Document;
-  readonly localStorage: Storage;
   readonly addEventListener: Window['addEventListener'];
   readonly [name: string]: unknown;
 }
@@ -68,12 +67,11 @@ export function oldAppHost(win: Win, parts: OldAppHostParts): CommunityHost {
     const w = call<string>(obj(g('NoemaThemes')), 'world');
     return w === 'lang' || w === 'both' ? w : 'know';
   };
+  /** the device's store (NoemaCore.storage.kv: an account's keys are in IndexedDB, never read from localStorage directly) */
   const lsGet = (k: string): string | null => {
-    try {
-      return win.localStorage.getItem(k);
-    } catch {
-      return null; // site data blocked: as if nothing was stored
-    }
+    const kv = obj(obj(g('NoemaCore'))?.['storage'])?.['kv'];
+    const v = call<string | null>(obj(kv), 'get', k);
+    return typeof v === 'string' ? v : null;
   };
   const accountKey = (name: string): string => {
     const kv = obj(N()?.['kv']);
@@ -191,8 +189,7 @@ export function oldAppHost(win: Win, parts: OldAppHostParts): CommunityHost {
     getAccountSetting: name => lsGet(accountKey(name)),
     setAccountSetting: (name, value) => {
       const kv = obj(N()?.['kv']);
-      if (fn(kv, 'set')) call(kv, 'set', accountKey(name), value);
-      else win.localStorage.setItem(accountKey(name), value); // (engine/loader.js is always there in the app: its kv syncs it)
+      if (fn(kv, 'set')) call(kv, 'set', accountKey(name), value); // Noema.kv: the device's store, marked for the sync
     },
 
     /* ---------- the frame ---------- */

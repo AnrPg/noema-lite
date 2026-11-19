@@ -1771,5 +1771,16 @@
   "engine.author.f.lib.wpmHi": "Fjalë për minutë më së shumti",
   "engine.author.f.lib.wpmLo": "Fjalë për minutë më së paku",
   "engine.author.f.benchPart": "Pjesa që matet",
-  "engine.author.f.lib.eq": "Ekuilibri (indeksi)"
+  "engine.author.f.lib.eq": "Ekuilibri (indeksi)",
+  "engine.space.title": "Hapësira në këtë pajisje",
+  "engine.space.used": "{used} të përdorura nga {quota}",
+  "engine.space.usedOnly": "{used} të përdorura",
+  "engine.space.unknown": "Ky shfletues nuk tregon sa hapësirë përdor aplikacioni.",
+  "engine.space.kept": "Ruhen përgjithmonë",
+  "engine.space.mayEvict": "Mund të fshihen",
+  "engine.space.keptLine": "Shfletuesi ka premtuar të mos i fshijë vetë të dhënat e tua.",
+  "engine.space.notKeptLine": "Kur pajisjes i mbaron hapësira, shfletuesi mund t’i fshijë të dhënat e aplikacionit. Kërkoji t’i ruajë, ose shtoje aplikacionin në ekranin bazë.",
+  "engine.space.keep": "Ruaji të dhënat e mia në këtë pajisje",
+  "engine.space.refused": "Shfletuesi refuzoi. Zakonisht ndihmon të shtosh aplikacionin në ekranin bazë.",
+  "engine.space.info": "Lëndët, Roadmap-et dhe përparimi yt ruhen në bazën e të dhënave të shfletuesit në këtë pajisje, që rritet me hapësirën e lirë. Kur ke hyrë në llogari, një kopje ruhet edhe në cloud."
 }

@@ -9,8 +9,8 @@ window.NoemaLLM = (() => {
   const CLAUDE = () => (CFG().anthropicBase || 'https://api.anthropic.com').replace(/\/$/, '');
   const GEMINI = () => (CFG().geminiBase || 'https://generativelanguage.googleapis.com/v1beta').replace(/\/$/, '');
   const wait = ms => new Promise(r => setTimeout(r, ms));
-  const deviceKey = acc => { try { return localStorage.getItem('noema-device:geminiKey:' + acc) || ''; } catch (e) { return ''; } };   // the Gemini key: this device only (loader.js GeminiKey)
-  const settingsOf = acc => { try { return JSON.parse(localStorage.getItem(`noema1:${acc}:a:settings`) || '{}'); } catch (e) { return {}; } };
+  const deviceKey = acc => { try { return NoemaCore.storage.kv.get('noema-device:geminiKey:' + acc) || ''; } catch (e) { return ''; } };   // the Gemini key: this device only (loader.js GeminiKey)
+  const settingsOf = acc => { try { return JSON.parse(NoemaCore.storage.kv.get(`noema1:${acc}:a:settings`) || '{}'); } catch (e) { return {}; } };
 
   /* ---------- which vendors can this learner use? ---------- */
   const keys = acc => ({ claude: window.NoemaClaude?.Key.get(acc) || '', gemini: deviceKey(acc) || settingsOf(acc).apiKey || window.Noema?.local?.geminiKey || window.DEFAULT_GEMINI_KEY || '' });
@@ -48,8 +48,8 @@ window.NoemaLLM = (() => {
   /* i18n-ignore-start */   // below: prompts for the model, and the English .message of each coded error (i18n/errors/en.arb has the same words)
   const MODES = ['forced', 'auto', 'text'];
   const modeKey = m => 'noema-device:claude-json-mode:' + m;
-  const modeOf = m => { try { const v = localStorage.getItem(modeKey(m)); return MODES.includes(v) ? v : 'forced'; } catch (e) { return 'forced'; } };
-  const setMode = (m, v) => { try { localStorage.setItem(modeKey(m), v); } catch (e) { } };
+  const modeOf = m => { try { const v = NoemaCore.storage.kv.get(modeKey(m)); return MODES.includes(v) ? v : 'forced'; } catch (e) { return 'forced'; } };
+  const setMode = (m, v) => { try { NoemaCore.storage.kv.set(modeKey(m), v); } catch (e) { } };
   async function claudeCall(acc, { model, system, messages, tool, maxTokens = 16000, signal, onProgress }) {
     const key = keys(acc).claude; if (!key) throw new LLMError('No Claude API key on this device.', 401, 'nokey', 'ai.no_key.device');
     let mode = modeOf(model);
@@ -151,7 +151,7 @@ window.NoemaLLM = (() => {
   /** A Claude call needs a model: the one chosen in ⚙️ Settings → Claude, else the newest Sonnet the key can use. */
   const modelCache = {};
   async function claudeModel(acc) {
-    try { const v = JSON.parse(localStorage.getItem(`noema1:${acc}:a:claudeModel`) || 'null'); if (v) return v; } catch (e) { }
+    try { const v = JSON.parse(NoemaCore.storage.kv.get(`noema1:${acc}:a:claudeModel`) || 'null'); if (v) return v; } catch (e) { }
     const CL = window.NoemaClaude, key = CL?.Key.get(acc); if (!key) throw new LLMError('Add a Claude API key first (⚙️ Settings → Claude).', 401, 'nokey', 'ai.no_key.claude');
     if (!modelCache[key]) modelCache[key] = CL.models(key).then(ms => CL.defaultModel(ms)).catch(e => { delete modelCache[key]; throw e; });
     return modelCache[key];
@@ -211,7 +211,7 @@ window.NoemaLLM = (() => {
   /** → { code, auto, name, address }. pref: the chatLang setting ('' = automatic); without it, the settings of the account (acc, else the open one) are read.
       uiLocale: the UI language (default: NoemaI18n.locale). */
   function replyLang(acc, pref, uiLocale) {
-    if (pref == null && !acc) { try { acc = window.Noema?.account?.id || JSON.parse(localStorage.getItem('noema1:current') || '{}').acc; } catch (e) { } }   // the open account
+    if (pref == null && !acc) { try { acc = window.Noema?.account?.id || JSON.parse(NoemaCore.storage.kv.get('noema1:current') || '{}').acc; } catch (e) { } }   // the open account
     const set = (pref != null ? pref : acc ? settingsOf(acc).chatLang : '') || '';
     const ui = uiLocale || window.NoemaI18n?.locale || 'en', code = set || (/^(en-XA|ar-XB)$/.test(ui) ? 'en' : ui);
     return { code, auto: !set, name: langLabel(code), address: ADDRESS[baseOf(code)] || '' };

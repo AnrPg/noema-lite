@@ -57,7 +57,7 @@ async function unit() {
     await p.click('text=Sign in / create a cloud account'); await p.click('text=No account yet? Create one');
     await p.fill('input[placeholder="Display name"]', name); await p.fill('input[type=email]', email); await p.fill('input[type=password]', 'secret123');
     await p.click('button:has-text("Create account")'); await wait(1300);
-    await p.evaluate(() => { localStorage.setItem('noema-test:newUI', '1'); NoemaThemes?.putSettings?.({ onboarded: Date.now(), world: 'know' }); });
+    await p.evaluate(() => { NoemaCore.storage.kv.set('noema-test:newUI', '1'); NoemaThemes?.putSettings?.({ onboarded: Date.now(), world: 'know' }); });
     await p.reload(); await wait(900);
     if (await p.$('.ns-onb')) { await p.click('[data-pick="know"]').catch(() => { }); await wait(200); await p.click('[data-onbdone]').catch(() => { }); await wait(400); }
   };

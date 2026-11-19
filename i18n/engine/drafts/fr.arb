@@ -2537,5 +2537,16 @@
   "engine.author.f.lib.eq": "Équilibre (indice)",
   "engine.tutor.thinking": "Le tuteur écrit…",
   "engine.tutor.copyPrompt": "Copier le prompt",
-  "engine.tutor.promptCopied": "Prompt copié — collez-le dans votre chat IA."
+  "engine.tutor.promptCopied": "Prompt copié — collez-le dans votre chat IA.",
+  "engine.space.title": "Espace sur cet appareil",
+  "engine.space.used": "{used} utilisés sur {quota}",
+  "engine.space.usedOnly": "{used} utilisés",
+  "engine.space.unknown": "Ce navigateur n’indique pas l’espace utilisé par l’app.",
+  "engine.space.kept": "Conservé durablement",
+  "engine.space.mayEvict": "Peut être effacé",
+  "engine.space.keptLine": "Le navigateur a promis de ne pas effacer tes données de lui-même.",
+  "engine.space.notKeptLine": "Quand l’appareil manque d’espace, le navigateur peut effacer les données de l’app. Demande-lui de les garder, ou ajoute l’app à l’écran d’accueil.",
+  "engine.space.keep": "Garder mes données sur cet appareil",
+  "engine.space.refused": "Le navigateur a refusé. Ajouter l’app à l’écran d’accueil aide en général.",
+  "engine.space.info": "Tes matières, tes parcours et ta progression sont gardées dans la base de données du navigateur sur cet appareil, qui grandit avec l’espace libre. Une fois la session ouverte, le cloud en garde aussi une copie."
 }

@@ -155,15 +155,15 @@ const noHScroll = page => page.evaluate(() => document.scrollingElement.scrollWi
   ok(await inCourse(page) && await hash(page) === BASE, 'a reload without an address reopens the course you were in, inside the frame');
   await page.goto(url + '#/'); await page.reload(); await until(() => page.$('.ns-hello'));
   ok(await hash(page) === '#/' && await page.$('.ns-langgo'), '#/ stays Today');
-  await page.evaluate(() => { localStorage.removeItem('noema1:current'); localStorage.removeItem('noema1:anr:meta:lastLang'); });
+  await page.evaluate(() => { NoemaCore.storage.kv.delete('noema1:current'); NoemaCore.storage.kv.delete('noema1:anr:meta:lastLang'); });
   await page.goto(url + '?account=anr&subject=lang:' + COURSE);
   ok(await inCourse(page) && await hash(page) === BASE, '?subject=lang:<course> opens it at #/lang/<course>');
   await page.click('.ns-tab[data-tab="learn"]'); await wait(400); await page.click('.ns-shelflink'); await wait(600);
   await page.click('[data-subject="demo-physics"]'); await until(() => page.$('.subjhead'));
-  ok(await page.evaluate(() => JSON.parse(localStorage.getItem('noema1:current')).subj) === 'demo-physics', 'a subject opened afterwards is the one a reload reopens');
+  ok(await page.evaluate(() => JSON.parse(NoemaCore.storage.kv.get('noema1:current')).subj) === 'demo-physics', 'a subject opened afterwards is the one a reload reopens');
   await page.goto(url + BASE); await inCourse(page); await page.click('.ns-tab[data-tab="today"]'); await wait(600);
   await page.click('.ns-go:not(.ns-langgo)'); await until(() => page.$('.subjhead'));
-  ok(await hash(page) === '#/subject' && await page.evaluate(() => JSON.parse(localStorage.getItem('noema1:current')).subj) === 'demo-physics', 'Today › Continue the subject after a course: the subject again');
+  ok(await hash(page) === '#/subject' && await page.evaluate(() => JSON.parse(NoemaCore.storage.kv.get('noema1:current')).subj) === 'demo-physics', 'Today › Continue the subject after a course: the subject again');
 
   console.log('F. + New language');
   await page.goto(url + '#/lang'); await until(() => page.$('.ns-langitem'));
@@ -177,7 +177,7 @@ const noHScroll = page => page.evaluate(() => document.scrollingElement.scrollWi
   await page.click('.ns-tab[data-tab="lang"]'); await until(() => page.$$eval('.ns-langitem', l => l.length === 2));
   ok(/Your own course/.test(await page.$eval('.ns-langitem:has-text("Frame course")', b => b.innerText).catch(() => '')), 'the tab lists both courses, the new one as your own');
   await page.click(`.ns-langitem[data-course="${COURSE}"]`); ok(await inCourse(page) && await until(async () => await page.locator('.lx-subbar:not([hidden]) .lx-flagchip[data-lang]').count() === 4), 'back to the library course: another course opens in the same page');
-  const tabs = await page.evaluate(() => JSON.parse(localStorage.getItem('noema1:anr:a:settings')).world);
+  const tabs = await page.evaluate(() => JSON.parse(NoemaCore.storage.kv.get('noema1:anr:a:settings')).world);
   ok(tabs === 'both', 'what I learn is unchanged (both)');
 
   console.log('H. main’s calm style: one primary action, the rest in ⋮ / ▾ / sheets, plain chrome, the character’s look');

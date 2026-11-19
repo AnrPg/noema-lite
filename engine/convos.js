@@ -125,7 +125,7 @@
       for (const k of Object.keys(Noema.kv.accountData(acc))) {
         const m = k.match(/^s:([^:]+):convos$/); if (!m || done[m[1]]) continue;
         const sid = m[1]; let list = [];
-        try { list = JSON.parse(localStorage.getItem(`noema1:${acc}:${k}`) || '[]'); } catch (e) { }
+        try { list = JSON.parse(NoemaCore.storage.kv.get(`noema1:${acc}:${k}`) || '[]'); } catch (e) { }
         const meta = (subjects || []).find(s => s.id === sid) || { id: sid, title: sid };
         for (const cv of list) {
           if (!cv.msgs?.length) continue;
