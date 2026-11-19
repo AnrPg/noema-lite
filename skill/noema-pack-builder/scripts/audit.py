@@ -21,10 +21,12 @@ def from_dir(d):
         for k in ('map', 'review'):
             f = os.path.join(d, k, c['id'] + '.json')
             if os.path.exists(f): c[k] = json.load(open(f, encoding='utf-8'))
-    media, _ = load_media(d, embed=False)
+    media, _ = load_media(d)   # embedded, as make_pack.py packs them (a local picture needs its data)
     acts, _ = load_activities(d)
     p = {'format': 'noema-pack', 'v': 3, 'subject': meta, 'sources': sources, 'chapters': chapters, 'media': media}
-    if acts and acts.get('items'): p['activities'] = {'format': 'noema.activities/v1', 'items': acts['items']}
+    if acts and acts.get('items'):   # the registry as make_pack.py writes it: its parts and what it requires
+        p['activities'] = {'format': 'noema.activities/v1', 'items': acts['items'], **({'parts': acts['parts']} if acts.get('parts') else {})}
+        p['requires'] = noema_core.requires(acts)
     tr = load_translations(d, chapters)
     if tr: pack_i18n(p, tr, external=False)
     return p

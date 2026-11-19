@@ -131,7 +131,7 @@ export function auditChapter(
   const byLr = new Map<string, Obj[]>();
   for (const e of exs) if (isStr(e.lr)) byLr.set(e.lr, [...(byLr.get(e.lr) ?? []), e]);
   const thin = lrs.filter(l => (byLr.get(l)?.length ?? 0) < B.exercisesPerLearnable);
-  const oneType = lrs.filter(l => new Set((byLr.get(l) ?? []).map(e => e.type)).size === 1);
+  const oneType = lrs.filter(l => new Set((byLr.get(l) ?? []).map(e => e.type)).size < 2); // none or one: retrieve it in two ways at least
   const selfx = exs.filter(e => e.type === 'free' || e.type === 'write' || e.mode === 'feynman').length;
   const rScore = avg([
     lrs.length ? clamp(100 - pct(thin.length, lrs.length)) : 0,
@@ -143,7 +143,7 @@ export function auditChapter(
   const rTodo = [
     ...(thin.length ? [`learnables with fewer than ${B.exercisesPerLearnable} exercises: ${thin.slice(0, 10).join(', ')}`] : []),
     ...(oneType.length
-      ? [`learnables practised in one type only (retrieve it in another way too): ${oneType.slice(0, 10).join(', ')}`]
+      ? [`learnables practised in fewer than 2 exercise types (retrieve each in two ways at least): ${oneType.slice(0, 10).join(', ')}`]
       : []),
     ...(cards.length < B.flashcardsPerSection * secs.length
       ? [

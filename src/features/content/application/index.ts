@@ -36,7 +36,7 @@ export function createContentChecks(env: CheckEnv) {
         q.subject = { ...sj, authoring: { ...auth, rules: Math.max(QUALITY.gradual.rules, Number(auth.rules) || 0), by: 'claude' } };
         delete q.builtAt;
       }
-      const rules = checkPack(q, undefined, { requireQuality: true }, x => act.checkActivities(x));
+      const rules = checkPack(q, undefined, { requireQuality: true, strict: true }, x => act.checkActivities(x)); // strict: every chapter and exercise contract too (an ungradable exercise is never 'high')
       return auditPack(q, rules, env.suggest ?? null);
     },
     auditReport,

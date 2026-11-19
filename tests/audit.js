@@ -35,5 +35,10 @@ ok(b.measures.interactivity.score > c.measures.interactivity.score && b.measures
 const lad = copy(F.chapter); lad.map = { concepts: copy(F.concepts), known: copy(F.known) };
 const g = P.auditPack(pack({ authoring: { rules: 3, by: 'claude' } }, lad)).chapters[0];
 ok(g.measures.gradual.facts[0].startsWith(`${F.concepts.length} concepts`) && g.measures.gradual.todo.some(t => /introduced/.test(t)), 'gradual with the ladder: its Q0 issues (what is used before it is taught) are the to-do list');
+const bad = copy(lad); const mq = { ...copy(bad.exercises[0]), id: 'ch01-e777', type: 'mcq', options: ['a', 'b'], answer: 99, why: ['x', 'y'] }; delete mq.answer_; bad.exercises.push(mq);
+const strictErr = P.auditPack(pack({ authoring: { rules: 3, by: 'claude' } }, bad)).errors.filter(e => e.includes('ch01-e777') && !e.includes('['));
+ok(strictErr.length > 0 && !P.checkPack(pack({ authoring: { rules: 3, by: 'claude' } }, bad), undefined, { requireQuality: true }).errors.some(e => e.includes('ch01-e777') && !e.includes('[')), 'strict: an exercise that cannot be graded (an MCQ answer outside its options) is an error of the audit');
+const lr = copy(lad); lr.map.learnables = [{ id: 'ch01-l99', kp: [], goal: 'g' }];
+ok(P.auditPack(pack({ authoring: { rules: 3 } }, lr)).chapters[0].measures.retention.todo.some(t => /fewer than 2 exercise types.*ch01-l99/.test(t)), 'retention: a learnable with no exercise at all counts as practised in fewer than 2 types');
 ok(P.auditPack({}).chapters.length === 0 && P.auditPack(null).verdict === 'poor', 'not a pack → nothing to praise');
 console.log(`\n${n} checks passed`);
