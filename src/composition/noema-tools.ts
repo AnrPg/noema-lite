@@ -70,7 +70,7 @@ const OPS: Readonly<Record<string, Op>> = {
   'lint.html': html => C.lintHtml(html),
   'lint.python': (src, packages) => C.lintPython(src, packages),
   'h5p.file': file => h5pFile(str(file)),
-  'quality.check': (chapter, subject) => C.checkQuality(chapter, subject),
+  'quality.check': (chapter, subject, place) => C.checkQuality(chapter, subject, isObj(place) ? place : undefined),
   'balance.check': (chapter, subject, min) => C.checkBalance(chapter, subject, { min: typeof min === 'number' ? min : undefined }),
   'translation.check': (t, pack) => C.checkTranslation(t, pack),
   'bridge.check': (b, pack) => C.checkBridge(b, pack),

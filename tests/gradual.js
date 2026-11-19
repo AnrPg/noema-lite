@@ -87,6 +87,14 @@ ok(has(bad(ch => { ch.map.concepts[0].in = 'ch01-s09'; }), 'concept.map', /in "c
 ok(has(bad(ch => { ch.map.known[0].from = 'the previous lesson'; }), 'concept.map', /from must be/), "concept.map: known.from is chNN, @<step id> or 'everyday'");
 const fromLater = copy(good); fromLater.map.known.push({ id: 'x', terms: ['xylophone'], from: 'ch03' });
 ok(has(q0(fromLater, SJ, { before: [], after: [] }), 'concept.map', /from ch03, which is not an earlier chapter/), 'concept.map: known from a chapter that is not earlier');
+// review fixes: LaTeX units, symbol tables, prefixed declared units, hooks/pitfalls/playbooks
+ok(has(bad(ch => { ch.sections[0].blocks.push({ t: 'p', text: 'A small lamp takes $0.5\\,\\mathrm{W}$ of it.' }); }), 'concept.undeclared', /unit W/), 'concept.undeclared: a LaTeX measurement ($0.5\\,\\mathrm{W}$) is a unit after a number too');
+ok(has(bad(ch => { ch.sections[0].blocks.push({ t: 'p', text: 'It is about $2\\text{ mA}$ in a small lamp.' }); }), 'concept.order', /ch01-s01 \(a paragraph\): uses “current”/), 'concept.order: $2\\text{ mA}$ uses current');
+ok(has(bad(ch => { ch.map.concepts[1].symbols = ['I']; ch.sections[0].blocks.push({ t: 'table', kind: 'summary', head: ['Quantity', 'Symbol'], rows: [['the one we count', 'Q'], ['the flow', 'I']] }); }), 'concept.order', /ch01-s01 \(a table block\): uses “current”/), 'concept.order: a bare symbol in a table cell (I) is a use');
+ok(!bad(ch => { ch.map.concepts[2].units = ['mAh']; }).length, 'concept.undeclared: a concept that declares units ["mAh"] covers 2000 mAh');
+ok(has(bad(ch => { ch.debug = [{ id: 'pb1', title: 'Dim lamp', askYourself: ['Is the LED in backwards?'] }]; }), 'concept.undeclared', /pb1: the acronym LED/), 'concept.undeclared: playbooks are scanned');
+ok(has(bad(ch => { ch.pitfalls = [{ title: 'Watts', text: 'A 5 W lamp gets hot.', fix: 'Check it.' }]; }), 'concept.undeclared', /pitfall 1: uses the unit W/), 'concept.undeclared: pitfalls are scanned');
+ok(has(bad(ch => { ch.sections[0].hook = 'Your USB charger counts it.'; }), 'concept.undeclared', /acronym USB/), 'concept.undeclared: section hooks are scanned');
 // inflected languages: a stem with *
 const el = copy(good); el.map.concepts[1].terms = ['ρεύμα*']; el.sections[0].blocks.push({ t: 'p', text: 'Η ένταση του ρεύματος θα έρθει αργότερα.' });
 ok(has(q0(el), 'concept.order', /ch01-s01 \(a paragraph\): uses “ρεύμα\*”/), 'a stem (ρεύμα*) finds the inflected form (ρεύματος)');

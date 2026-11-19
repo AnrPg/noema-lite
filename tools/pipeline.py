@@ -81,7 +81,7 @@ def local_check(kind, d, run):
     """→ (ok, lines). The checks pipeline.py runs itself, with the same code as make_pack.py and the app (the quality rules of
     src/features/content, through noema_core.py)."""
     import noema_core
-    check_quality = lambda ch, feats: [(x["level"], x["rule"], x["msg"]) for x in noema_core.check_quality(ch, {"features": {f: True for f in feats}})]
+    check_quality = lambda ch, feats, place=None: [(x["level"], x["rule"], x["msg"]) for x in noema_core.check_quality(ch, {"features": {f: True for f in feats}}, place)]
     L = []
     if kind == "run": return True, ["run.json is here"]
     if kind == "subject":
@@ -93,6 +93,9 @@ def local_check(kind, d, run):
         maps = chapters_of(d, "map")
         if not maps: return False, ["no map/chNN.json yet: write the knowledge map of every chapter before its exercises"]
         ok = True
+        # Q0 reads the other chapters' concepts: a need may be a concept another chapter introduces (its order is checked
+        # when the pack is built)
+        order = sorted(maps); slim = {c: {"id": c, "map": {"concepts": (rj(maps[c]) or {}).get("concepts") or []}} for c in order}
         for cid, f in maps.items():
             m = rj(f)
             if m is None: ok = False; L.append(f"{cid}: map/{cid}.json is not valid JSON"); continue
@@ -100,7 +103,8 @@ def local_check(kind, d, run):
             rules = int(((rj(os.path.join(d, "subject.json")) or {}).get("authoring") or {}).get("rules", 0))
             # Q0 (rules >= 3): the concept list is part of the map — every concept the chapter introduces (terms, in, def,
             # needs) and every one it uses without introducing it (known); its sections exist only once the chapter is written
-            iss = [x for x in check_quality({"id": cid, "map": m, "exercises": [], "sections": []}, feats)
+            k = order.index(cid); place = {"before": [slim[c] for c in order[:k]], "after": [slim[c] for c in order[k + 1:]]}
+            iss = [x for x in check_quality({"id": cid, "map": m, "exercises": [], "sections": []}, feats, place)
                    if x[1] in ("map.present", "map.refs", "map.exhaustive") or (x[1] == "fit.declared" and "unknown value" in x[2])
                    or (rules >= 3 and x[1] == "concept.map" and "is not a section of the chapter" not in x[2])]
             for _, _, msg in iss: L.append(msg)

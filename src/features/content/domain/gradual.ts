@@ -52,7 +52,7 @@ const termRe = (t: string): RegExp | null => {
   const tail = stem ? '\\p{L}*' : caps ? 's?' : '(?:s|es)?';
   return new RegExp(`(?<!${L})${core}${tail}(?!${L})`, caps ? 'u' : 'iu');
 };
-const unitRe = (u: string): RegExp => new RegExp(`\\d\\s?${PREFIX}${esc(u)}(?![\\p{L}\\p{N}])`, 'u');
+const unitRe = (u: string): RegExp => new RegExp(`\\d\\s{0,3}${PREFIX}${esc(u)}(?![\\p{L}\\p{N}])`, 'u');
 const symRe = (x: string): RegExp => new RegExp(`(?<![A-Za-z\\\\])${esc(x)}(?![A-Za-z])`, 'u');
 const strsOf = (v: unknown): string[] => list(v).filter((x): x is string => isStr(x));
 
@@ -106,10 +106,22 @@ const unitField = (e: Obj): string =>
         .join(' ')
     : '';
 
+/** the text with LaTeX unit wrappers and spacing undone ($2\,\mathrm{mA}$ → 2 mA), for the unit patterns */
+const delatex = (t: string): string =>
+  t
+    .replace(/\\(?:mathrm|text|textrm|rm|mathit|operatorname)\s*\{([^}]*)\}/g, ' $1')
+    .replace(/\\[,;:! ]|~/g, ' ')
+    .replace(/\$/g, ' ');
+/** a table cell that is exactly a declared symbol (symbol tables, unit tables: "I", "Q", "V") */
+const cellSym = (en: Entry, b: Obj): boolean =>
+  b.t === 'table' &&
+  en.symbols.length > 0 &&
+  [...list(b.head), ...list(b.rows).flatMap(r => list(r))].some(x => isStr(x) && en.symbols.includes(x.trim()));
 const uses = (en: Entry, t: string): boolean => {
   const p = plain(t);
   if (en.re.some(r => r.test(p))) return true;
-  if (en.units.some(u => unitRe(u).test(t))) return true;
+  const u = delatex(t);
+  if (en.units.some(x => unitRe(x).test(u))) return true;
   const m = mathOf(t);
   return m.length > 0 && en.symbols.some(x => symRe(x).test(m));
 };
@@ -215,7 +227,7 @@ export const conceptOrder = (chk: QualityCheck): Spec<GradualContext> =>
       bs.forEach((b, bi) => {
         const t = textOf(b);
         for (const en of own) {
-          if (!uses(en, t)) continue;
+          if (!uses(en, t) && !cellSym(en, b)) continue;
           if (!first.has(en.id)) first.set(en.id, [si, bi]);
           if (en.sec > si && !told.has(en.id + '@' + s(x.id))) {
             told.add(en.id + '@' + s(x.id));
@@ -288,11 +300,20 @@ export const conceptUndeclared = (chk: QualityCheck): Spec<GradualContext> =>
     const lex = lexicon(c).filter(e => e.kind !== 'later');
     const covers = (t: string): boolean => lex.some(en => uses(en, t));
     const units = k.units ?? [];
-    const symCovered = (u: string): boolean => lex.some(en => en.units.includes(u));
+    // a declared unit covers its base symbol with or without an SI prefix (units: ["mAh"] covers 2000 mAh)
+    const symCovered = (u: string): boolean => {
+      const re = new RegExp(`^${PREFIX}${esc(u)}$`, 'u');
+      return lex.some(en => en.units.some(x => re.test(x)));
+    };
     const all: [string, string][] = [
-      ...c.sections.map((x): [string, string] => [s(x.id), objs(x.blocks).map(textOf).join('\n') + '\n' + s(x.title ?? '')]),
+      ...c.sections.map((x): [string, string] => [
+        s(x.id),
+        objs(x.blocks).map(textOf).join('\n') + '\n' + s(x.title ?? '') + '\n' + s(x.hook ?? ''),
+      ]),
       ...c.exercises.map((e): [string, string] => [s(e.id), textOf(e) + '\n' + unitField(e)]),
       ...objs(c.chapter.flashcards).map((e, i): [string, string] => [s(e.id ?? `card ${i + 1}`), textOf(e)]),
+      ...objs(c.chapter.pitfalls).map((e, i): [string, string] => [`pitfall ${i + 1}`, textOf(e)]),
+      ...objs(c.chapter.debug).map((e, i): [string, string] => [s(e.id ?? `playbook ${i + 1}`), textOf(e)]),
     ];
     // terms blocks
     for (const x of c.sections)
@@ -304,7 +325,7 @@ export const conceptUndeclared = (chk: QualityCheck): Spec<GradualContext> =>
     const told = new Set<string>();
     for (const u of units) {
       if (symCovered(u.sym)) continue;
-      const hit = all.find(([, t]) => unitRe(u.sym).test(t));
+      const hit = all.find(([, t]) => unitRe(u.sym).test(delatex(t)));
       if (hit && !told.has(u.sym)) {
         told.add(u.sym);
         add(

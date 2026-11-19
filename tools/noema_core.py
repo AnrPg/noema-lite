@@ -91,9 +91,10 @@ def requires(reg):
     """pack.requires for a registry: the core + each runtime and engine it uses"""
     return call('activities.requires', (reg or {}).get('items') or [], (reg or {}).get('parts')) if reg and reg.get('items') else []
 
-def check_quality(chapter, subject):
-    """the quality rules Q1–Q8 of one chapter → [{level, rule, msg}]"""
-    return call('quality.check', chapter, subject)
+def check_quality(chapter, subject, place=None):
+    """the quality rules Q0–Q8 of one chapter → [{level, rule, msg}]; place = {before, after}: the pack's other chapters
+    (at least {id, map}), which Q0 reads for the concepts they introduce"""
+    return call('quality.check', chapter, subject, place)
 
 def h5p_file(path):
     """the checks of one .h5p file → {errors, warnings, main} (main: its main library, or None)"""
