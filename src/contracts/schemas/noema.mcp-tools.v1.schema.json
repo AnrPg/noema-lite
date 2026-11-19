@@ -110,6 +110,28 @@
       },
       "required": ["pack_json"]
     },
+    "noema_check_pack": {
+      "description": "Optional, on demand: run every check a pack's upload runs (the pack contract and all quality rules Q0–Q8, as noema_finish_upload and noema_save_pack do) and list every issue by chapter, with where it is (section, block, exercise, field, the words found) and the file to fix. Saves nothing. Use it to see all issues at once after an upload was refused, or before uploading; the upload checks again and refuses a failing pack anyway. Pass subject_id (the file uploaded with noema_start_upload's curl) or pack_json (a small pack inline). Fix only the chapters and maps it names, rebuild with make_pack.py and upload again — nothing else needs redoing.",
+      "type": "object",
+      "properties": {
+        "subject_id": {
+          "type": "string",
+          "description": "the pack uploaded with noema_start_upload's curl (not yet saved, or saved)"
+        },
+        "pack_json": {
+          "type": "string",
+          "description": "or: the whole noema-pack JSON document as a string"
+        },
+        "warnings": {
+          "type": "boolean",
+          "description": "also list the warnings (default false: errors only)"
+        },
+        "limit": {
+          "type": "number",
+          "description": "at most this many issues (default 300)"
+        }
+      }
+    },
     "noema_pipeline": {
       "description": "Which content flow is this, and its steps in order (docs/PIPELINES.md). Call it FIRST for any content work: a Roadmap from sources or a goal, a new part of a Roadmap that exists, one Roadmap step, one subject, an addition, a translation, a language bridge, an import, a language-course task or a new language. action \"detect\" with the facts of the request gives the flow; \"steps\" gives each step: what to do, how it is checked (the local command python3 scripts/pipeline.py check …, a connector call, or a judgement) and its doc; \"flows\" lists every flow. In the sandbox the same steps run with scripts/pipeline.py (start → next → check), which records run.json; never skip a strict step.",
       "type": "object",
