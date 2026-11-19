@@ -257,7 +257,11 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .vw-pre{margin:0;padding:16px;white-space:pre-wrap;word-break:break-word;font:13px/1.55 var(--mono,monospace)}
 .vw-code{background:var(--bg2);border-radius:10px;padding:10px}.vw-out{color:var(--ink2);font-size:12.5px}
 .vw-doc{max-width:860px;margin:0 auto;padding:20px 18px 60px;line-height:1.65}.vw-doc img{max-width:100%;height:auto}.vw-doc table{border-collapse:collapse}.vw-doc td,.vw-doc th{border:1px solid var(--line);padding:4px 8px}
-.vw-frame{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}.vw-note+.vw-frame{top:44px;height:calc(100% - 44px)}
+.vw-frame{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
+.vw-web{position:absolute;inset:0;display:flex;flex-direction:column}.vw-web>.vw-frame{position:static;flex:1;height:auto;min-height:0}
+.vw-hint{display:flex;align-items:center;gap:8px;padding:4px 6px;padding-inline-start:14px;font-size:12.5px;color:var(--ink2);background:var(--bg2);border-bottom:1px solid var(--line)}.vw-hint>span{flex:1;min-width:0}
+.vw-x{flex:none;width:26px;height:26px;border:0;border-radius:8px;background:none;color:var(--ink2);font:inherit;font-size:13px;cursor:pointer;opacity:.7}.vw-x:hover,.vw-x:focus-visible{opacity:1;background:var(--line)}
+.vw-blocked{padding-top:14vh;text-align:center}.vw-blocked .vw-note{max-width:420px}
 .vw-scroll{overflow:auto;padding:12px}.vw-table{border-collapse:collapse;font-size:13px}.vw-table td,.vw-table th{border:1px solid var(--line);padding:4px 8px;vertical-align:top}.vw-table th{background:var(--bg2);position:sticky;top:0}
 .vw-sheet{display:grid;grid-template-rows:auto 1fr;height:100%}.vw-tabs{display:flex;gap:4px;flex-wrap:wrap;padding:8px 12px;border-bottom:1px solid var(--line)}.vw-tab{padding:4px 10px;border-radius:8px;border:1px solid var(--line);background:var(--card);font:inherit;cursor:pointer;color:inherit}.vw-tab.on{background:var(--violet-bg);border-color:var(--violet)}
 .vw-sheet table{border-collapse:collapse;font-size:13px}.vw-sheet td{border:1px solid var(--line);padding:3px 7px}

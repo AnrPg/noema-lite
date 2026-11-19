@@ -3,6 +3,8 @@
    (engine/imglib.js, prepended by tools/build.py; JSON { results, errors }).
    /api/img also takes a PAGE: Wikimedia / Wikipedia file pages are turned into the picture file, and any other web page
    into its main picture (og:image…), so “give the image url, not the page” is no longer needed.
+   GET /api/frame?url=<web page> — may this site's pages show the page in a frame (👁 previews)? → JSON { frame: 'yes' | 'no' | 'unknown' }
+   (its X-Frame-Options and CSP frame-ancestors, read after its redirects; nothing of the page is sent back).
    /api/file (for 👁 previews of web sources): PDFs, office documents, e-books, text, audio/video, archives — ≤ 25 MB.
    Used only when a browser cannot download a web picture itself (the image host sends no CORS header):
    "Create with Claude" inside the app, and importing packs whose web pictures are fetched by the app.
@@ -47,6 +49,45 @@ export function fail(req, status, code, params, message) {
   return out(status, message, h);
 }
 
+/** One CSP source expression of frame-ancestors (CSP 3 §6.7.2.12) against the origin that wants to frame the page. */
+function sourceMatches(src, us, page) {
+  if (src === "'none'") return false;
+  if (src === "'self'") return us.origin === page.origin;
+  if (src === '*') return /^https?:$/.test(us.protocol);
+  const scheme = src.match(/^([a-z][a-z0-9+.-]*):$/);
+  if (scheme) return scheme[1] + ':' === us.protocol || (scheme[1] === 'http' && us.protocol === 'https:');
+  const m = src.match(/^(?:([a-z][a-z0-9+.-]*):\/\/)?(\*|\*\.[^:/]+|[^:/*]+)(?::(\d+|\*))?(?:\/.*)?$/);
+  if (!m) return false;
+  const [, sch, host, port] = m, usPort = us.port || (us.protocol === 'https:' ? '443' : '80');
+  if (sch && !(sch + ':' === us.protocol || (sch === 'http' && us.protocol === 'https:'))) return false;
+  if (!sch && !(page.protocol === us.protocol || (page.protocol === 'http:' && us.protocol === 'https:'))) return false;
+  const h = us.hostname.toLowerCase();
+  if (host !== '*' && (host.startsWith('*.') ? !h.endsWith(host.slice(1)) : h !== host)) return false;
+  if (port && port !== '*' && port !== usPort) return false;
+  if (!port) {   // no port: the default one of the source's scheme (http's 80 also matches https's 443)
+    const sc = sch || page.protocol.slice(0, -1);
+    if (usPort !== (sc === 'http' ? '80' : '443') && !(sc === 'http' && usPort === '443')) return false;
+  }
+  return true;
+}
+
+/** May `us` (an origin, URL) frame the page at `page` (URL) that answered with these headers? CSP frame-ancestors wins over
+    X-Frame-Options (every policy that has the directive must allow it); X-Frame-Options DENY / SAMEORIGIN refuse another origin. */
+export function frameAllowed(headers, us, page) {
+  let csp = false;
+  for (const policy of (headers.get('content-security-policy') || '').split(',')) {
+    const d = policy.split(';').map(x => x.trim()).find(x => /^frame-ancestors(\s|$)/i.test(x));
+    if (!d) continue;
+    csp = true;
+    if (!d.split(/\s+/).slice(1).some(src => sourceMatches(src.toLowerCase(), us, page))) return false;
+  }
+  if (csp) return true;
+  const xfo = (headers.get('x-frame-options') || '').toLowerCase();
+  if (/deny/.test(xfo)) return false;
+  if (/sameorigin/.test(xfo)) return us.origin === page.origin;
+  return true;
+}
+
 export default async function handler(req) {
   const me = new URL(req.url);
   const fileMode = me.pathname.endsWith('/api/file'); const LIMIT = fileMode ? MAX_FILE : MAX;
@@ -62,6 +103,24 @@ export default async function handler(req) {
     if (!q) return fail(req, 400, 'img.no_query', {}, 'q parameter missing');
     const r = await IMG().searchImages(q, { n, sources: sources.length ? sources : null });
     return new Response(JSON.stringify(r), { status: 200, headers: { 'content-type': 'application/json; charset=utf-8', 'access-control-allow-origin': '*', 'cache-control': 'public, max-age=3600' } });
+  }
+  if (me.pathname.endsWith('/api/frame')) {
+    const answer = frame => new Response(JSON.stringify({ frame }), { status: 200, headers: { 'content-type': 'application/json; charset=utf-8', 'access-control-allow-origin': '*', 'cache-control': 'public, max-age=3600' } });
+    let page;
+    try { page = new URL(me.searchParams.get('url') || ''); } catch (e) { return fail(req, 400, 'img.bad_url', {}, 'url parameter missing or invalid'); }
+    let us; try { us = new URL(from || me.origin); } catch (e) { us = new URL(me.origin); }
+    for (let hop = 0; hop < 6; hop++) {
+      if (!/^https?:$/.test(page.protocol) || page.username || page.password) return fail(req, 400, 'img.scheme', {}, 'only plain http(s) urls');
+      if (blockedHost(page.hostname) && !globalThis.NOEMA_IMG_ALLOW_LOCAL) return fail(req, 400, 'img.blocked', {}, 'this address is not allowed');
+      let r;
+      try { r = await fetch(page, { redirect: 'manual', signal: AbortSignal.timeout(8000), headers: { 'user-agent': IMG()?.BROWSER_UA || 'Mozilla/5.0', accept: 'text/html,application/xhtml+xml,*/*;q=0.8' } }); }
+      catch (e) { return answer('unknown'); }
+      r.body?.cancel().catch(() => {});   // only the headers are read
+      if (r.status >= 300 && r.status < 400 && r.headers.get('location')) { page = new URL(r.headers.get('location'), page); continue; }
+      if (!frameAllowed(r.headers, us, page)) return answer('no');
+      return answer(r.ok ? 'yes' : 'unknown');   // a refusal of this server (403 to robots …) says nothing about the learner's browser
+    }
+    return answer('unknown');
   }
   let target;
   try { target = new URL(IMG() && !fileMode ? IMG().resolvePictureUrl(me.searchParams.get('url') || '') : me.searchParams.get('url') || ''); } catch (e) { return fail(req, 400, 'img.bad_url', {}, 'url parameter missing or invalid'); }

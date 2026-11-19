@@ -38,7 +38,12 @@ const libs: ViewerLibs = {
   },
   revoke: u => revoked.push(u),
 };
-const net: ViewerNet = { direct: () => Promise.reject(new Error('offline')), proxy: () => null };
+let frameAnswer: 'yes' | 'no' | 'unknown' = 'unknown';
+const net: ViewerNet = {
+  direct: () => Promise.reject(new Error('offline')),
+  proxy: () => null,
+  frame: () => Promise.resolve(frameAnswer),
+};
 const port = { i18n: catalogI18n({ en: CAT }), libs, net, document };
 
 test('a text file: a modal dialog with its title, the text; ✕ closes it', async () => {
@@ -81,6 +86,42 @@ test('YouTube: the privacy-friendly embed at its time', async () => {
   const v = await openViewer(port, { url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', start: 2220, title: 'Lecture' });
   assert.equal(v.kind, 'youtube');
   assert.match(document.querySelector('iframe.vw-yt')?.getAttribute('src') ?? '', /youtube-nocookie\.com\/embed\/dQw4w9WgXcQ\?start=2220/);
+  v.close();
+});
+
+const settle = (): Promise<void> => new Promise(r => setTimeout(r, 20));
+
+test('a web page: framed when the site allows it, no note', async () => {
+  frameAnswer = 'yes';
+  const v = await openViewer(port, { url: 'https://openstax.org/books/x/pages/9-1', title: 'OpenStax' });
+  assert.equal(v.kind, 'web');
+  await settle();
+  assert.equal(document.querySelector('.vw-web iframe.vw-frame')?.getAttribute('src'), 'https://openstax.org/books/x/pages/9-1');
+  assert.equal(document.querySelector('.vw-hint'), null);
+  v.close();
+});
+
+test('a web page whose site refuses frames: a card with ↗, no frame', async () => {
+  frameAnswer = 'no';
+  const v = await openViewer(port, { url: 'https://github.com/x/y', title: 'Repo' });
+  await settle();
+  assert.equal(document.querySelector('.vw-ov iframe'), null);
+  assert.match(document.querySelector('.vw-blocked')?.textContent ?? '', /does not allow previews inside the app/);
+  assert.equal(document.querySelector('.vw-blocked a')?.getAttribute('href'), 'https://github.com/x/y');
+  v.close();
+});
+
+test('a web page with no answer: framed with a note above it (never over it) that ✕ hides', async () => {
+  frameAnswer = 'unknown';
+  const v = await openViewer(port, { url: 'https://example.org/', title: 'Page' });
+  await settle();
+  const hint = document.querySelector('.vw-web > .vw-hint');
+  assert.ok(hint, 'the note is in the column, before the frame');
+  assert.equal(hint.nextElementSibling?.tagName, 'IFRAME');
+  (document.querySelector('.vw-hint .vw-x') as HTMLButtonElement).click();
+  await settle();
+  assert.equal(document.querySelector('.vw-hint'), null);
+  assert.ok(document.querySelector('.vw-web iframe.vw-frame'), 'the frame stays');
   v.close();
 });
 
