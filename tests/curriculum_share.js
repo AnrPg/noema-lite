@@ -22,6 +22,7 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 const until = async (fn, ms = 20000, step = 250) => { const t = Date.now(); while (Date.now() - t < ms) { try { if (await fn()) return true; } catch (e) { } await wait(step); } return false; };
 const PORT = 54371, BASE = `http://localhost:${PORT}`;
 const FX = (p => (p.translations.fr = { chapters: JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/tr.fr.json'), 'utf8')).chapters }, p))(JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/pack.json'), 'utf8')));   // the French chapter inline, as an older pack carries it
+FX.builtAt = '2026-11-01T00:00:00Z';   // built before Q0 (QUALITY.gradual.since): these suites test the app's flows, tests/gradual.js and tests/audit.js the rules
 
 async function signUp(browser, email, name, { phone = false } = {}) {
   const ctx = await browser.newContext({ viewport: phone ? { width: 390, height: 844 } : { width: 1300, height: 900 }, ...(phone ? { isMobile: true, hasTouch: true } : {}) });

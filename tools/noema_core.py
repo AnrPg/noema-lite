@@ -91,6 +91,10 @@ def requires(reg):
     """pack.requires for a registry: the core + each runtime and engine it uses"""
     return call('activities.requires', (reg or {}).get('items') or [], (reg or {}).get('parts')) if reg and reg.get('items') else []
 
+def audit_pack(pack):
+    """the deep audit: every rule at today's strictness + the learning report per chapter → {audit, report (text)}"""
+    return call('pack.audit', pack)
+
 def check_quality(chapter, subject, place=None):
     """the quality rules Q0–Q8 of one chapter → [{level, rule, msg}]; place = {before, after}: the pack's other chapters
     (at least {id, map}), which Q0 reads for the concepts they introduce"""

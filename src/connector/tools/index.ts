@@ -10,6 +10,7 @@ import { tool as startSourceUpload } from './start_source_upload.ts';
 import { tool as finishUpload } from './finish_upload.ts';
 import { tool as savePack } from './save_pack.ts';
 import { tool as checkPack } from './check_pack.ts';
+import { tool as qualityAudit } from './quality_audit.ts';
 import { tool as pipeline } from './pipeline.ts';
 import { tool as bridgeGuide } from './bridge_guide.ts';
 import { tool as saveBridge } from './save_bridge.ts';
@@ -54,6 +55,7 @@ export const TOOLS: readonly Tool[] = [
   finishUpload,
   savePack,
   checkPack,
+  qualityAudit,
   pipeline,
   bridgeGuide,
   saveBridge,

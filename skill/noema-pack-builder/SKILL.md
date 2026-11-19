@@ -284,6 +284,10 @@ everything waiting goes up together at the end (below).
   3. Then each bridge with `noema_save_bridge` (see *Language help* below).
   Small packs (≤ 1.5 MB) can use `noema_save_pack` instead of step 1 (step 2's file uploads still apply).
   The subject appears in the user's noema-lite picker (cloud account) with its files — tell them.
+- **Before the upload (and for any older pack): the deep audit.** `python3 scripts/audit.py work/<id>` (connector:
+  `noema_quality_audit`) — every rule at today's strictness plus five measures per chapter (depth, gradual introduction,
+  retention, interactivity with the engines that fit, variety), each with what to add, and the judgement questions to answer
+  by reading every section. Aim for verdict `high` (no error, ≥ 85); fix in place, as below.
 - **If the upload refuses the pack — repair it, never start over.** The refusal lists the errors by chapter (section, block
   or exercise, field, the words found, the fix) and names the only files to edit. Fix those entities in place
   (`chapters/chNN.json`, `map/chNN.json`, `translations/<locale>/chNN.json`; work folder gone or pack already saved:

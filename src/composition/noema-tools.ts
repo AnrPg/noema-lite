@@ -57,6 +57,10 @@ const OPS: Readonly<Record<string, Op>> = {
   },
   'subject.check': (subject, translated) => C.checkSubject(subject, Array.isArray(translated) ? translated.map(String) : []),
   'pack.check': (pack, expectId, opts) => C.checkPack(pack, expectId ?? undefined, isObj(opts) ? opts : {}),
+  'pack.audit': pack => {
+    const a = C.auditPack(pack);
+    return { audit: a, report: C.auditReport(a) };
+  },
   'activities.check': (pack, translations) => C.checkActivities(pack, Array.isArray(translations) ? translations.map(String) : null),
   /** the .h5p packages of the pack's h5p@1 items, read from base (each item's entry is a path below it) */
   'activities.packages': (pack, base) =>

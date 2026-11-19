@@ -138,6 +138,9 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   ok(/Fix only what is listed/.test(fb.content[0].text) && /## Errors — ch\d+ \(\d+\) — edit only ch\d+'s files: chapters\/ch\d+\.json/.test(fb.content[0].text), 'a refusal: the errors by chapter, with the files to edit and nothing else to redo');
   const cpk = await tool('noema_check_pack', { subject_id: 'broken-pack' });
   ok(names.includes('noema_check_pack') && /^✗ \d+ error\(s\)/.test(cpk.content[0].text) && /section nope not found/.test(cpk.content[0].text) && !srv.state.kv[uid]['a:packmeta:broken-pack'], 'noema_check_pack: every issue of an uploaded pack by chapter; saves nothing');
+  const qa = (await tool('noema_quality_audit', { subject_id: 'physics-by-claude' })).content[0].text;
+  ok(names.includes('noema_quality_audit') && /^Quality audit: \d+\/100 — (high|needs work|poor)\./.test(qa) && /## depth \d+\/100/.test(qa) && /# Judgement/.test(qa) && JSON.parse((await tool('noema_quality_audit', { subject_id: 'physics-by-claude', format: 'json' })).content[0].text).chapters.length > 0,
+    'noema_quality_audit: a saved pack at today\'s rules, the learning report per chapter and the judgement questions (text or JSON); saves nothing');
   ok(/## Warnings/.test((await tool('noema_check_pack', { pack_json: JSON.stringify(strictQ), warnings: true })).content[0].text) && (await tool('noema_check_pack', {})).isError, 'noema_check_pack: inline too, warnings on request; nothing to check → an error');
   // noema_pipeline: the same flows as tools/pipeline.py
   const pd = (await tool('noema_pipeline', { action: 'detect', facts: { sources: 2 } })).content[0].text;

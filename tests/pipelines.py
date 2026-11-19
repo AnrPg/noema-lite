@@ -189,6 +189,9 @@ try:
        "unpack.py --repair: chapters, map/, review/, translations/ back as files; no chapter is a base (every rule holds again)" + ("" if r.returncode == 0 else "\n" + r.stdout + r.stderr))
     ok(P("start", "4", rd).returncode == 0 and all(P("check", rd, x).returncode == 0 for x in ("start_subject", "map", "write", "blind_solve", "review")),
        "repair: the steps whose parts are right pass at once (nothing is made again)")
+    r = subprocess.run([sys.executable, os.path.join(sk, "audit.py"), rd], capture_output=True, text=True)
+    ok(r.stdout.startswith("Quality audit: ") and "## depth" in r.stdout and "## interactivity" in r.stdout and "# Judgement" in r.stdout and r.returncode in (0, 1),
+       "audit.py (as the skill ships it): the deep audit of a subject folder — today's rules and the five measures per chapter" + ("" if r.stdout.startswith("Quality") else "\n" + r.stdout + r.stderr))
 finally:
     shutil.rmtree(work, ignore_errors=True)
 print(f"\n{n} checks passed")
