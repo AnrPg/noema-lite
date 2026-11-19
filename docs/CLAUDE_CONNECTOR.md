@@ -90,6 +90,8 @@ and not needed, because the connector's `noema_get_toolkit` hands Claude the sam
   introduction — holding such a pack to errors whatever `authoring.by` says; a refusal lists the errors by chapter with the
   files to edit, docs/PIPELINES.md §1c), `noema_save_pack` (small packs inline; same file check), `noema_check_pack`
   (optional, on demand: the same checks on an uploaded file or inline JSON, every issue by chapter, saves nothing),
+  `noema_quality_audit` (the deep audit of any of the learner's packs: today's rules + the learning report per chapter,
+  docs/PIPELINES.md §1c; saves nothing),
   `noema_start_source_upload` (one extra file), `noema_save_translation` (one full translation of a pack, `noema-translation`,
   beside it: inline or through an upload URL; its `"subject"` — the name, tagline, hero in that language — is merged into
   `subject.i18n.<locale>` and the synced card; every new pack gets en, el, ru, de, fr — docs/PIPELINES.md §4b; `noema_finish_upload`

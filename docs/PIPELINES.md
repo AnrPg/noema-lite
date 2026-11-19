@@ -73,6 +73,17 @@ chapter and names the only files to edit.
    passes at once when checked (a repaired folder: `pipeline.py start 4 DIR`, then each check).
 3. `make_pack.py`, then the upload with the same subject id.
 
+**The deep audit** — `python3 scripts/audit.py work/<id>` (or a `PACK.json`), the connector's `noema_quality_audit` (same
+code, `src/features/content/domain/audit.ts`): every rule at **today's** strictness, whatever the pack's `authoring.rules`,
+`by` or `builtAt` say (an older pack is measured against the newest requirements), plus a learning report per chapter, five
+measures scored 0–100, each with its numbers and what to add: **depth** (teaching words per section and per new concept,
+think-first blocks, focus), **gradual** (the concept ladder and its Q0 issues), **retention** (exercises per learnable in more
+than one type, flashcards, pitfalls, self-explanation), **interactivity** (activities, simulations, picture exercises — and the
+engines of the library that fit the chapter, or `noema_request_engine`), **variety** (exercise types, kinds of thinking,
+paradigms, focus tags, block kinds). Then the judgement questions only a reader can answer (correctness, from zero, one idea
+per page, why before how, examples, misconceptions, pictures that teach, exercises that need thinking, retention, engagement),
+answered in `review/chNN.json`. Verdict `high` = no rule error and ≥ 85 (exit 0). It saves nothing.
+
 `noema_check_pack` (connector, optional) runs the upload's checks on demand on an uploaded file or inline JSON and lists every
 issue by chapter, saving nothing. Nothing depends on it: make_pack.py, the pipeline's gates and the upload run every rule
 whether it was called or not.

@@ -146,7 +146,7 @@ const findIn = (en: Entry, e: Obj): string | null => {
 
 /** the words a block teaches with (not tables, code or drawings) */
 const TEACH = new Set(['p', 'list', 'callout', 'reveal', 'ask', 'terms', 'compare', 'flow']);
-const words = (b: Obj): number =>
+export const teachingWords = (b: Obj): number =>
   TEACH.has(s(b.t))
     ? plain(textOf(b))
         .split(/\s+/)
@@ -392,7 +392,7 @@ export const theoryDepth = (chk: QualityCheck): Spec<GradualContext> =>
       const bs = objs(x.blocks),
         news = own.filter(e => e.where === x.id);
       const need = base + per * Math.max(0, news.length - 1),
-        have = bs.reduce((n, b) => n + words(b), 0);
+        have = bs.reduce((n, b) => n + teachingWords(b), 0);
       if (have < need)
         add(
           `${s(x.id)}: ${have} words of teaching text, needs >= ${need} (${base} + ${per} per new concept after the first): go deeper on its one idea`,

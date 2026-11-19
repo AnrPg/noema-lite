@@ -10,6 +10,10 @@ import type { ContentChecks } from './index.ts';
 /** every name of ContentChecks, each forwarded by the facade (`satisfies`: none missing, none extra) */
 const NAMES = Object.keys({
   checkPack: true,
+  auditPack: true,
+  auditReport: true,
+  AUDIT_BARS: true,
+  JUDGEMENT: true,
   checkChapter: true,
   checkSubject: true,
   checkActivities: true,
