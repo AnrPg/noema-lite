@@ -17,7 +17,7 @@ const pw = require(process.env.PW || 'playwright');
 const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const path = require('path');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
-const PACK = JSON.parse(require('fs').readFileSync(process.argv[3], 'utf8')); PACK.subject = { ...PACK.subject, id: 'demo-activities', title: 'Demo Activities' };
+const PACK = JSON.parse(require('fs').readFileSync(process.argv[3], 'utf8')); PACK.subject = { ...PACK.subject, id: 'demo-activities', title: 'Demo Activities' }; PACK.builtAt = '2026-11-01T00:00:00Z'; /* built before Q0 (QUALITY.gradual.since): these suites test the app's flows, tests/gradual.js and tests/audit.js the rules */
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; return c; };
 const wait = ms => new Promise(r => setTimeout(r, ms));
 const until = async (fn, ms = 10000) => { const t = Date.now(); while (Date.now() - t < ms) { try { if (await fn()) return true; } catch (e) { } await wait(150); } return false; };
