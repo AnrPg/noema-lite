@@ -161,10 +161,34 @@ try:
     ex = json.load(open(os.path.join(d, "chapters", "ch01.json"))); ex["exercises"][4]["q"] = "As in Q14 of the source, what happens?"; json.dump(ex, open(os.path.join(d, "chapters", "ch01.json"), "w"))
     st = P("status", d).stdout
     ok("write          stale" in st and "checks         stale" in st and "map            done" in st, "a change to the chapter makes write and every later step stale, not the map")
+    ok("changed since: chapters/ch01: ch01-e005 — redo only these" in st and st.count("changed since:") == 7 and "ch01-e004" not in st and "ch01-s01" not in st,
+       "status: each stale step names exactly what changed since it was done (one exercise), nothing else is to redo" + ("" if "ch01-e005 — redo" in st else "\n" + st))
+    r = P("next", d); ok("only what changed since it was done" in r.stdout and "ch01-e005" in r.stdout, "next: names only the changed exercise")
     r = P("check", d, "checks"); ok(r.returncode == 1 and r.stdout.startswith("first: review"), "checks: refused while an earlier step is stale")
-    ok(all(P("check", d, x).returncode == 0 for x in ("write", "blind_solve", "review", "translate", "bridges")), "write, blind_solve, review, translate, bridges: checked again")
+    ok(P("check", d, "write").returncode == 0, "write: checked again")
+    ok(P("check", d, "blind_solve").returncode == 0, "blind_solve: checked again")
+    r = P("check", d, "review"); ok(r.returncode == 1 and "ch01: exercises changed since the review (ch01-e005)" in r.stdout, "review: a changed exercise must be solved blind again (only it)" + ("" if "e005" in r.stdout else "\n" + r.stdout))
+    rv["blind"]["mismatches"].append({"id": "ch01-e005", "fixed": True, "note": "re-solved after the change"}); json.dump(rv, open(os.path.join(d, "review", "ch01.json"), "w"))
+    ok(all(P("check", d, x).returncode == 0 for x in ("blind_solve", "review")), "blind_solve, review: pass once the review covers the changed exercise")
+    r = P("check", d, "translate"); ok(r.returncode == 1 and all(f"{l}: ch01 ch01-e005 changed since it was translated" in r.stdout for l in ("el", "ru", "de", "fr")) and "ch01-e004" not in r.stdout,
+       "translate: each translation of the changed exercise must be updated (only it, in every language)" + ("" if r.returncode else "\n" + r.stdout))
+    for l in ("el", "ru", "de"):
+        f = os.path.join(d, "translations", l, "ch01.json"); tc = json.load(open(f)); tc["exercises"][4]["q"] = f"[{l}] what happens?"; json.dump(tc, open(f, "w"))
+    r = P("check", d, "translate"); ok(r.returncode == 1 and "fr: ch01 ch01-e005" in r.stdout and "el: ch01" not in r.stdout, "translate: a failed check remembers what is still to redo (fr)")
+    ok(P("check", d, "translate", "--same", "ch01-e005").returncode == 0, "translate: --same accepts a change that does not touch the translation")
+    ok(P("check", d, "bridges").returncode == 0, "bridges: checked again")
     r = P("check", d, "checks"); ok(r.returncode == 1 and "[self.contained]" in r.stdout, "checks: make_pack.py refuses the pointer to the source (self.contained)" + ("" if "[self.contained]" in r.stdout else "\n" + r.stdout + r.stderr))
     ok(P("next", d).stdout.startswith("next: checks"), "next: the first step that is not done")
+    # repair: the work folder is gone (or the upload refused the pack) — the pack itself gives every file back, fixed in place
+    rep = os.path.join(work, "repair"); shutil.copy(os.path.join(d, "build", "demo-coulomb.json"), os.path.join(work, "got.json"))
+    for l in ("el", "ru", "de", "fr"): shutil.copy(os.path.join(d, "build", f"demo-coulomb.tr.{l}.json"), os.path.join(work, f"demo-coulomb.tr.{l}.json"))
+    r = subprocess.run([sys.executable, os.path.join(sk, "unpack.py"), os.path.join(work, "got.json"), rep, "--repair"], capture_output=True, text=True); rd = os.path.join(rep, "demo-coulomb")
+    ok(r.returncode == 0 and "repair: fix only what the errors name" in r.stdout and json.load(open(os.path.join(rd, "map", "ch01.json")))["format"] == "noema.map/v1"
+       and json.load(open(os.path.join(rd, "review", "ch01.json")))["blind"]["solved"] == 40 and "map" not in json.load(open(os.path.join(rd, "chapters", "ch01.json")))
+       and json.load(open(os.path.join(rd, ".unpacked.json")))["chapters"] == [] and os.path.exists(os.path.join(rd, "translations", "fr", "ch01.json")),
+       "unpack.py --repair: chapters, map/, review/, translations/ back as files; no chapter is a base (every rule holds again)" + ("" if r.returncode == 0 else "\n" + r.stdout + r.stderr))
+    ok(P("start", "4", rd).returncode == 0 and all(P("check", rd, x).returncode == 0 for x in ("start_subject", "map", "write", "blind_solve", "review")),
+       "repair: the steps whose parts are right pass at once (nothing is made again)")
 finally:
     shutil.rmtree(work, ignore_errors=True)
 print(f"\n{n} checks passed")

@@ -93,6 +93,9 @@ export interface Quality {
   readonly checks: readonly QualityCheck[];
   readonly notes: readonly string[];
   readonly since: string;
+  /** Q0 (gradual introduction): the connector holds packs built since `since` to authoring.rules >= `rules` and treats
+      them as Claude-made (errors), whatever authoring.by says — so a pack cannot skip Q0 by an older rules number or by */
+  readonly gradual: { readonly rules: number; readonly since: string };
 }
 export const QUALITY: Quality = {
   version: 2,
@@ -514,7 +517,7 @@ export const QUALITY: Quality = {
     },
   ],
   notes: [
-    'Q0 (gradual introduction, the first quality rule): the checks with minRules 3 (concept.map, concept.order, concept.undeclared, theory.focus, theory.depth) are errors for packs with subject.authoring.rules >= 3 (start_subject.py writes 3 since 2026-11-19) made by Claude or Gemini; packs with rules 2 get them as warnings, so older packs keep working.',
+    'Q0 (gradual introduction, the first quality rule): the checks with minRules 3 (concept.map, concept.order, concept.undeclared, theory.focus, theory.depth) are errors for packs with subject.authoring.rules >= 3 (start_subject.py writes 3 since 2026-11-19) made by Claude or Gemini; packs with rules 2 get them as warnings, so older packs keep working. The connector (noema_finish_upload, noema_save_pack) refuses a pack built since gradual.since (or with no builtAt) without rules >= 3, and holds it to errors whatever authoring.by says: Q0 cannot be skipped.',
     "Strictness: subject.authoring.rules >= 2 turns these checks on (start_subject.py writes 2). Errors when subject.authoring.by is 'claude' or 'gemini', warnings when it is 'learner' or 'import'. Packs without authoring.rules are not checked (made before 2026-10-21; TD-11).",
     "The connector (noema_finish_upload, noema_save_pack) refuses a pack built since 'since' (pack.builtAt, or no builtAt at all) that has no subject.authoring.rules >= 2, so a pack cannot skip the checks by leaving the field out. Older packs keep working unchanged.",
     'autoUnfit: a value that cannot fit the chapter needs no reason in unfit — the code types without subject.features.code, calc without .math, picture types when the chapter has no picture (pictures only where they teach, docs/VISUAL.md §5).',
@@ -522,6 +525,7 @@ export const QUALITY: Quality = {
     'Counts are never checked: about 2 versions per learnable is the core set; there is no upper limit (docs/PIPELINES.md §4, a mild suggestion only).',
   ],
   since: '2026-10-22T00:00:00Z',
+  gradual: { rules: 3, since: '2026-11-19T12:00:00Z' },
 };
 
 export interface Languages {

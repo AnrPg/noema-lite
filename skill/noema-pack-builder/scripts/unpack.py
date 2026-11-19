@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
-"""Turn an existing pack back into a subject folder, for ADDITIVE updates.
-  python3 unpack.py PACK.noema.zip|PACK.json WORKDIR   → WORKDIR/<id>/ (subject.json, sources.json, chapters/, media/, activities/, sources/, translations/)
+"""Turn an existing pack back into a subject folder: to REPAIR it (--repair) or for additive updates.
+  python3 unpack.py PACK.noema.zip|PACK.json WORKDIR [--repair]
+      → WORKDIR/<id>/ (subject.json, sources.json, chapters/, map/, review/, media/, activities/, sources/, translations/)
+--repair: a pack the upload refused, or one whose work folder is gone (noema_get_pack_url → curl): every chapter is yours to
+fix in place and is held to every rule again. Fix only what the errors name (chapters/chNN.json, map/chNN.json …), then
+pipeline.py start + check (each step passes at once where nothing is wrong; status names what changed), make_pack.py, upload.
 A .noema.zip package also gives back the original source files (sources/). From a plain .json the files are not there:
 the learner already has them, so make_pack.py keeps those sources as they are.
 Existing chapters become the base files: never renumber or delete their ids — add new chapters (next chNN)
@@ -10,6 +14,7 @@ for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux 
     try: _s.reconfigure(encoding='utf-8', errors='replace')
     except Exception: pass
 a = sys.argv[1:]
+repair = '--repair' in a; a = [x for x in a if x != '--repair']
 if len(a) < 2: print(__doc__); sys.exit(1)
 import zipfile
 bundle = None
@@ -20,7 +25,7 @@ if zipfile.is_zipfile(a[0]):
 else: p = json.load(open(a[0], encoding='utf-8'))
 if p.get('format') != 'noema-pack': sys.exit('not a noema-pack file')
 sid = p['subject']['id']; d = os.path.join(a[1], sid)
-for sub in ('chapters', 'patches', 'media', 'sources', 'coverage'): os.makedirs(os.path.join(d, sub), exist_ok=True)
+for sub in ('chapters', 'patches', 'media', 'sources', 'coverage', 'map', 'review'): os.makedirs(os.path.join(d, sub), exist_ok=True)
 subj = {k: v for k, v in p['subject'].items() if k not in ('owner',)}
 subj.setdefault('authoring', {'minVisualPerChapter': 3, 'minExercisesPerPicture': 3})
 json.dump(subj, open(os.path.join(d, 'subject.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
@@ -34,9 +39,13 @@ for s in SRC.get('sources', []):
         open(dst, 'wb').write(bundle.read(f)); restored.append(f)
     else: kept.append(s['id'])
 json.dump(SRC, open(os.path.join(d, 'sources.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
-json.dump({'from': os.path.basename(a[0]), 'sourcesWithFiles': kept, 'chapters': [c['id'] for c in p['chapters']]}, open(os.path.join(d, '.unpacked.json'), 'w', encoding='utf-8'))
+# the chapters of an additive update are its base (make_pack.py keeps their checks as warnings); a repair has no base: every
+# chapter is checked as new
+json.dump({'from': os.path.basename(a[0]), 'sourcesWithFiles': kept, 'chapters': [] if repair else [c['id'] for c in p['chapters']], 'repair': repair}, open(os.path.join(d, '.unpacked.json'), 'w', encoding='utf-8'))
 for c in p['chapters']:
     c = {k: v for k, v in c.items() if not k.startswith('_')}
+    for k in ('map', 'review'):   # the knowledge map and the review go back to their own files (map/chNN.json, review/chNN.json; make_pack.py reads them with the quality rules, rules >= 2)
+        if isinstance(c.get(k), dict) and int((subj.get('authoring') or {}).get('rules', 0) or 0) >= 2: json.dump(c.pop(k), open(os.path.join(d, k, c['id'] + '.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     json.dump(c, open(os.path.join(d, 'chapters', c['id'] + '.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 def tr_chapters(loc, t):   # inline, or in its own file: translations/<locale>.json in the package, or <id>.tr.<locale>.json beside the .json
     if isinstance(t.get('chapters'), list): return t['chapters']
@@ -105,4 +114,8 @@ if acts:
     for pn, pd in ((p.get('activities') or {}).get('parts') or {}).items():   # activities/_parts/<name>.json: the parts the specs reuse ("use", docs/INTERACTIVE.md §12.8)
         if re.fullmatch(r'[a-z0-9][a-z0-9-]{0,60}', str(pn)) and isinstance(pd, dict):
             os.makedirs(os.path.join(d, 'activities', '_parts'), exist_ok=True); json.dump(pd, open(os.path.join(d, 'activities', '_parts', pn + '.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+if repair:
+    print(f'repair: fix only what the errors name, in place (chapters/chNN.json, map/chNN.json, translations/<locale>/chNN.json …); then\n'
+          f'  python3 pipeline.py start 4 {d}   (once) and python3 pipeline.py next {d} → check each step (the parts that are right pass at once)\n'
+          f'  python3 make_pack.py {d} <out> → upload again (noema_start_upload → curl → noema_finish_upload, same subject id)')
 print(f'unpacked {sid}: {len(p["chapters"])} chapters, {len(items)} pictures, {len(acts)} activities, {len(restored)} source file(s) → {d}' + (f'  ({len(kept)} source file(s) stay in the learner\'s account: {", ".join(kept)})' if kept else ''))

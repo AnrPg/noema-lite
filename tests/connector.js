@@ -87,6 +87,7 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   const fx = path.join(ROOT, 'tests/fixtures/demo-physics');
   const pack = (p => (p.translations.fr = { chapters: JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/tr.fr.json'), 'utf8')).chapters }, p))(JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/pack.json'), 'utf8')));   // the French chapter inline, as an older pack carries it
   pack.subject = { ...pack.subject, id: 'physics-by-claude', title: 'Physics by Claude', owner: null };
+  pack.builtAt = '2026-11-01T00:00:00Z';   // built before Q0 (QUALITY.gradual.since): this suite tests the saving, tests/gradual.js the rules
   ok((await tool('noema_start_upload', { subject_id: 'databricks' })).isError, 'library ids are protected');
   const su1 = await tool('noema_start_upload', { subject_id: 'physics-by-claude' });
   const url = (su1.content[0].text.match(/https?:\/\/\S+token=\S+/) || [])[0];
@@ -132,6 +133,12 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   const strictQ = JSON.parse(JSON.stringify(small)); strictQ.subject.id = 'claude-quality'; strictQ.subject.authoring = { rules: 2, by: 'claude' };
   const sq = await tool('noema_save_pack', { pack_json: JSON.stringify(strictQ) });
   ok(sq.isError && /\[map\.present\]/.test(sq.content[0].text), 'a pack Claude wrote is held to the quality rules (no knowledge map → refused)');
+  // a refused pack is repaired in place: the refusal groups the errors by chapter and names the files; noema_check_pack (optional,
+  // on demand) lists every issue and saves nothing — the upload checks again whether it was called or not
+  ok(/Fix only what is listed/.test(fb.content[0].text) && /## Errors — ch\d+ \(\d+\) — edit only ch\d+'s files: chapters\/ch\d+\.json/.test(fb.content[0].text), 'a refusal: the errors by chapter, with the files to edit and nothing else to redo');
+  const cpk = await tool('noema_check_pack', { subject_id: 'broken-pack' });
+  ok(names.includes('noema_check_pack') && /^✗ \d+ error\(s\)/.test(cpk.content[0].text) && /section nope not found/.test(cpk.content[0].text) && !srv.state.kv[uid]['a:packmeta:broken-pack'], 'noema_check_pack: every issue of an uploaded pack by chapter; saves nothing');
+  ok(/## Warnings/.test((await tool('noema_check_pack', { pack_json: JSON.stringify(strictQ), warnings: true })).content[0].text) && (await tool('noema_check_pack', {})).isError, 'noema_check_pack: inline too, warnings on request; nothing to check → an error');
   // noema_pipeline: the same flows as tools/pipeline.py
   const pd = (await tool('noema_pipeline', { action: 'detect', facts: { sources: 2 } })).content[0].text;
   ok(/^Flow 4: Sources → one subject/.test(pd) && /pipeline\.py check work\/<id> map/.test(pd) && /call noema_finish_upload/.test(pd), 'noema_pipeline detect: 2 files, one topic → flow 4 with its checks');

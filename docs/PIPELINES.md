@@ -22,8 +22,8 @@ python3 scripts/pipeline.py detect --sources 2              # → 4  Sources →
 python3 scripts/start_subject.py work demo "Demo" --lang en
 python3 scripts/pipeline.py start 4 work/demo               # writes work/demo/run.json
 python3 scripts/pipeline.py next work/demo                  # the next step: what to do, the doc, how it is checked
-python3 scripts/pipeline.py check work/demo map             # runs the check; on success records it with the hashes of
-                                                            # what it produced
+python3 scripts/pipeline.py check work/demo map             # runs the check; on success records the hash of every
+                                                            # entity it saw (status then names only what changed)
 python3 scripts/pipeline.py done work/demo upload --note "noema_finish_upload ok"   # a connector call or a judgement
 python3 scripts/pipeline.py status work/demo                # every step: todo / done / stale / failed / planned / deferred
 python3 scripts/pipeline.py defer work/demo upload --note "curl: 403 from the storage"   # the network blocks the upload: it waits
@@ -31,9 +31,16 @@ python3 scripts/pipeline.py pending work                    # every subject whos
 ```
 
 - A step is refused while a step it `needs` is not done.
-- When a file a done step produced changes, that step **and every step after it** becomes `stale` and is checked again
-  (a change to a chapter after the review re-opens write → blind_solve → review → checks; the map stays done).
-- **A blocked upload never stops the flow** (§1b).
+- **Resumable, entity by entity.** A check records the hash of every entity it saw: each section, exercise, playbook, flashcard,
+  pitfall, map point and concept (by id), each translation of them, subject.json. A step is `stale` only when something it
+  depends on (its own files and those of the steps before it) changed since it passed, and `status` / `next` name exactly what:
+  `changed since: chapters/ch03: ch03-e004 — redo only these`. Everything else stays done; the map stays done when only a
+  chapter changed.
+- **Only the changed parts are redone, and they must be.** `translate` passes again only once every translation of each
+  changed section or exercise is updated (in every language it needs); `review` only once `review/chNN.json` covers the
+  changed exercises (solved blind again). A change that does not touch them (a tag, a typo in a comment): `--same ID,ID`.
+  A failed check keeps what the step saw when it last passed, so what is still to redo is never lost.
+- **Repairing a refused or uploaded pack (§1c).** **A blocked upload never stops the flow** (§1b).
 - `status` exits 1 while a strict step is open (a deferred upload too). `review` gates are a judgement recorded with `done --note`; `planned`
   steps are listed and not required.
 
@@ -50,6 +57,25 @@ lists every subject still waiting, with the files ready to send (pack, translati
 and they are retried together; each that goes up is recorded with `pipeline.py done <dir> upload --note "…"`. If the
 network still blocks them, the learner gets each `<id>.noema.zip` (📥 Import subject pack) and the bridge files, with a
 note of what is waiting. Only a step marked `deferrable` in `steps.json` may wait — today only `upload`.
+
+## 1c. Repairing a pack without redoing it
+
+Every check that refuses a pack (make_pack.py, the pipeline, the upload: noema_finish_upload / noema_save_pack) says where and
+how: the chapter, the section, block or exercise and its field, the words found, the rule and the fix
+(`ch01-e009 (ch01-s01): uses “current” (introduced in ch01-s02; pairs: “ampere”) …`). The upload's refusal groups them by
+chapter and names the only files to edit.
+
+1. The work folder is still there: edit only the named entities in `chapters/chNN.json`, `map/chNN.json` (concepts, known),
+   `translations/<locale>/chNN.json`. It is gone (another session), or the pack is already saved: get it back with
+   `noema_get_pack_url` → curl → `python3 scripts/unpack.py PACK.json work --repair` (chapters, `map/`, `review/`,
+   `translations/` as files; no chapter is a base, so every rule holds again).
+2. `pipeline.py status` / `next`: only the steps touched by the fix are stale, each with the entities that changed; the rest
+   passes at once when checked (a repaired folder: `pipeline.py start 4 DIR`, then each check).
+3. `make_pack.py`, then the upload with the same subject id.
+
+`noema_check_pack` (connector, optional) runs the upload's checks on demand on an uploaded file or inline JSON and lists every
+issue by chapter, saving nothing. Nothing depends on it: make_pack.py, the pipeline's gates and the upload run every rule
+whether it was called or not.
 
 ## 2. Flows
 

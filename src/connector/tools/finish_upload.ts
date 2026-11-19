@@ -1,6 +1,7 @@
 /* noema_finish_upload — step 3 of saving a pack: check it and everything that travels with it, then save it (saga "pack") */
 import { argStr, fail, type Tool } from '../tool.ts';
 import type { Pack } from '../engine/api.ts';
+import { refusal } from '../services/issues.ts';
 import { completePack } from '../services/packsave.ts';
 import { ID_RE, message } from '../util.ts';
 
@@ -39,10 +40,7 @@ export const tool: Tool = {
       return fail(`No uploaded file found for "${sid}" (${message(e).slice(0, 120)}). Run the curl command from noema_start_upload first.`);
     }
     const res = ctx.engine.content.checkPack(p, sid, { requireQuality: true });
-    if (res.errors.length)
-      return fail(
-        `The pack has ${res.errors.length} error(s) — fix them, rebuild with make_pack.py and upload again:\n- ${res.errors.slice(0, 40).join('\n- ')}`,
-      );
+    if (res.errors.length) return fail(refusal(res.errors));
     return completePack(ctx, sid, p, res, { curriculum_id: argStr(args, 'curriculum_id'), step: argStr(args, 'step') }, raw);
   },
 };

@@ -7,9 +7,12 @@
                                                                               or the course folder of a language flow)
   python3 pipeline.py status DIR                              every step: todo / done / stale / failed / planned
   python3 pipeline.py next DIR                                the next step: what to do, the doc, how it is checked
-  python3 pipeline.py check DIR STEP                          run the step's check; on success record it with the hashes of
-                                                              what it produced (a later change makes it, and every step
-                                                              after it, stale)
+  python3 pipeline.py check DIR STEP [--same ID,ID]           run the step's check; on success record the hash of every entity
+                                                              it saw (section, exercise, card, pitfall, playbook, map point,
+                                                              concept, each translation of them): a later change makes stale
+                                                              only what changed — status/next name it, the rest stays done.
+                                                              translate and review pass only once each changed
+                                                              entity is redone (--same: ids the change does not touch)
   python3 pipeline.py done DIR STEP [--note "…"]              record a connector call (mcp) or a judgement (manual)
   python3 pipeline.py defer DIR upload --note "why"           the upload failed (network): record it as waiting and go on
                                                               with the rest of the flow — it is retried at the end
@@ -68,6 +71,62 @@ def produced(d, st, run):
     return out
 
 def hashes(files): return {os.path.basename(os.path.dirname(f)) + "/" + os.path.basename(f): hashlib.sha256(open(f, "rb").read()).hexdigest()[:16] for f in files}
+
+# ── what a step saw: every entity of the subject folder, hashed one by one ───────────────────────────────────────────────
+# A check records the hash of every section, exercise, flashcard, pitfall, playbook, map point and concept (by id) and of each
+# translated one; later only what changed since is stale — for that step and the steps after it, never the untouched rest.
+FAMILIES = ("subject.json", "map/", "chapters/", "review/", "translations/", "media/media.json", "activities/activities.json")
+LISTS = ("sections", "exercises", "debug", "flashcards", "pitfalls", "points", "concepts", "known", "learnables", "sourceQuestions")
+
+def _h(x): return hashlib.sha256(json.dumps(x, ensure_ascii=False, sort_keys=True).encode("utf-8")).hexdigest()[:16]
+
+def entities(d):
+    """{"chapters/ch03#ch03-e004": hash, "translations/el/ch03#ch03-s02": hash, "map/ch03#concepts:current": hash, "chapters/ch03#flashcards[2]": …,
+    "chapters/ch03#": the rest of the file, "subject.json#": …}"""
+    out = {}
+    for f in ["subject.json", "media/media.json", "activities/activities.json"] + [os.path.relpath(x, d) for x in sorted(
+            glob.glob(os.path.join(d, "map", "ch*.json")) + glob.glob(os.path.join(d, "chapters", "ch*.json"))
+            + glob.glob(os.path.join(d, "review", "ch*.json")) + glob.glob(os.path.join(d, "translations", "*", "ch*.json")))]:
+        full = os.path.join(d, f)
+        if not os.path.isfile(full): continue
+        base = f[:-5] if f.endswith(".json") else f
+        x = rj(full)
+        if not isinstance(x, dict): out[base + "#"] = hashlib.sha256(open(full, "rb").read()).hexdigest()[:16]; continue
+        rest = {}
+        for k, v in x.items():
+            if k in LISTS and isinstance(v, list) and not f.startswith(("subject", "media", "activities")):
+                for i, e in enumerate(v):
+                    eid = e.get("id") if isinstance(e, dict) and isinstance(e.get("id"), str) else None
+                    key = (eid if k in ("sections", "exercises", "debug") and eid else (f"{k}:{eid}" if eid else f"{k}[{i}]"))
+                    out[f"{base}#{key}"] = _h(e)
+            else: rest[k] = v
+        out[base + "#"] = _h(rest)
+    return out
+
+def families_upto(flow, sid):
+    """the folders a step depends on: what it and the steps before it in the flow produce (+ subject.json, always)"""
+    S = steps(); fl = flows()[flow]["steps"]; fam = {"subject.json"}
+    for x in fl[:fl.index(sid) + 1]:
+        for t in S[x].get("produces") or []:
+            fam.add(t.split("{")[0] if "{" in t else t)
+    return tuple(f for f in FAMILIES if any(f.startswith(g) or g.startswith(f) for g in fam))
+
+def changed_since(d, run, sid, now_=None):
+    """the entities changed, removed or added (in the step's folders) since the step was checked: [] when it saw everything as it is"""
+    seen = (run["steps"].get(sid) or {}).get("seen")
+    if seen is None: return None
+    fam = families_upto(run["flow"], sid); cur = now_ if now_ is not None else entities(d)
+    mine = lambda k: k.startswith(fam) or k.split("#")[0] + ".json" in fam
+    keys = sorted({k for k in list(seen) + list(cur) if mine(k)})
+    return [k for k in keys if seen.get(k) != cur.get(k)]
+
+def scope(keys, limit=12):
+    """["chapters/ch03#ch03-e004", …] → "ch03: ch03-e004, ch03-s02 · translations/el ch03: …" (what to redo, by file)"""
+    by = {}
+    for k in keys:
+        f, _, e = k.partition("#"); by.setdefault(f, []).append(e or "(the rest of the file)")
+    parts = [f"{f}: " + ", ".join(v[:limit]) + (f" … +{len(v) - limit}" if len(v) > limit else "") for f, v in by.items()]
+    return " · ".join(parts)
 
 def vars_(d, run):
     v = dict(run.get("vars") or {}); v.setdefault("course", d); v.setdefault("lang", ""); v.setdefault("locale", "en")
@@ -184,18 +243,51 @@ def load_run(d):
 
 def save_run(d, run): json.dump(run, open(os.path.join(d, "run.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
-def states(d, run):
-    """Each step's state; a done step whose files changed, and every step after it, becomes stale."""
-    S = steps(); out = {}; stale = False
+def states(d, run, why=None):
+    """Each step's state. A step checked with its entities ("seen") is stale only when something it depends on (its folders and
+    those of the steps before it) changed since — `why` gets those entities, so only they are redone. An older run.json
+    without them: a done step whose files changed, and every step after it, becomes stale."""
+    S = steps(); out = {}; stale = False; cur = entities(d)
     for sid in flows()[run["flow"]]["steps"]:
         r = run["steps"].get(sid) or {}; st = S[sid]
         if st.get("gate") == "planned" and r.get("status") != "done": out[sid] = "planned"; continue
         s = r.get("status", "todo")
-        if s == "done" and r.get("hashes") is not None and hashes(produced(d, st, run)) != r["hashes"]: s = "stale"
-        if s in ("done", "deferred") and stale: s = "stale"
-        if s == "stale": stale = True
+        ch = changed_since(d, run, sid, cur) if s in ("done", "deferred") else None
+        if ch is not None:
+            if ch and s == "done": s = "stale"
+            if ch and why is not None: why[sid] = ch
+        else:
+            if s == "done" and r.get("hashes") is not None and hashes(produced(d, st, run)) != r["hashes"]: s = "stale"
+            if s in ("done", "deferred") and stale: s = "stale"
+            if s == "stale": stale = True
         out[sid] = s
     return out
+
+def follow_up(d, run, sid, same):
+    """A step that redoes work per entity must redo exactly what changed: each translation of a section or exercise changed
+    since `translate` was checked, and the review (blind re-solve) of each chapter whose exercises changed since `review`.
+    `same`: ids the learner-facing change does not touch (pipeline.py check … --same ID,ID: a typo in a comment, a tag)."""
+    ch = changed_since(d, run, sid)
+    if not ch: return []
+    seen = run["steps"][sid]["seen"]; cur = entities(d); bad = []
+    src = [k for k in ch if k.startswith("chapters/") and k.split("#")[1] not in same]
+    if sid == "translate":
+        s = rj(os.path.join(d, "subject.json")) or {}
+        import noema_core
+        need = noema_core.required_locales(s.get("language", "en"), (s.get("authoring") or {}).get("languages"))[0]
+        for k in src:
+            f, _, e = k.partition("#"); c = f.split("/")[1]
+            if k not in cur: continue   # removed: make_pack.py checks that no translation keeps it
+            for loc in need:
+                t = f"translations/{loc}/{c}#{e}"
+                if cur.get(t) is not None and cur.get(t) == seen.get(t): bad.append(f"{loc}: {c} {e or '(the chapter itself)'} changed since it was translated — update translations/{loc}/{c}.json ({e or 'title, objectives…'})")
+    if sid == "review":
+        for c in sorted({k.split("/")[1].split("#")[0] for k in src if "-e" in k.split("#")[1]}):
+            r = f"review/{c}#"
+            if cur.get(r) is not None and cur.get(r) == seen.get(r):
+                ids = [k.split("#")[1] for k in src if k.startswith(f"chapters/{c}#") and "-e" in k.split("#")[1]]
+                bad.append(f"{c}: exercises changed since the review ({', '.join(ids[:12])}) — solve them blind again and update review/{c}.json for them (the rest stays)")
+    return bad
 
 def pending(root):
     """Every run under root (root itself, root/*, root/*/*) whose upload step is not done yet, with what is ready to upload."""
@@ -245,18 +337,20 @@ def main(a):
         return 1 if rows else 0
     run = load_run(d); S = steps()
     if cmd == "status":
-        st = states(d, run); bad = False
+        why = {}; st = states(d, run, why); bad = False
         for sid, s in st.items():
             mark = {"done": "✓", "stale": "↻", "failed": "✗", "planned": "·", "deferred": "⏸"}.get(s, "○")
             note = f"  ({(run['steps'].get(sid) or {}).get('note', '')})" if s == "deferred" else ""
             print(f"{mark} {sid:<14} {s:<8} {S[sid]['title']}{note}"); bad = bad or (s != "done" and S[sid].get("gate") == "strict")
+            if sid in why: print(f"    changed since: {scope(why[sid])} — redo only these")
         return 1 if bad else 0
     if cmd == "next":
-        st = states(d, run)
+        why = {}; st = states(d, run, why)
         for sid, s in st.items():
             if s in ("done", "planned", "deferred"): continue
             x = S[sid]; ck = x.get("check") or {}
             print(f"next: {sid} — {x['title']} ({s})\n{x['what']}\ndoc: {x.get('doc', '')}\ncheck: python3 pipeline.py " + ("check" if ("local" in ck or "run" in ck) else "done") + f" {a[1]} {sid}")
+            if sid in why: print(f"only what changed since it was done (everything else stays as it is): {scope(why[sid])}")
             return 0
         waiting = [sid for sid, s in st.items() if s == "deferred"]
         if waiting: print(f"every other step is done; waiting: {', '.join(waiting)} — retry at the end of the run, all together (python3 pipeline.py pending <root>)"); return 0
@@ -286,10 +380,16 @@ def main(a):
             if "local" in ck or "run" in ck: print(f"{sid} is checked by its command: python3 pipeline.py check {a[1]} {sid}"); return 1
             note = a[a.index("--note") + 1] if "--note" in a else ""
             if not note.strip(): print("--note: what was done (the connector's answer, or what you checked)"); return 1
-            run["steps"][sid] = {"status": "done", "at": now(), "note": note}; save_run(d, run); print(f"✓ {sid}"); return 0
+            run["steps"][sid] = {"status": "done", "at": now(), "note": note, "seen": entities(d)}; save_run(d, run); print(f"✓ {sid}"); return 0
         ok, lines = run_check(d, sid, run)
+        same = {x for x in (a[a.index("--same") + 1].split(",") if "--same" in a else []) if x}
+        if ok and (run["steps"].get(sid) or {}).get("status") in ("done", "failed") and (run["steps"].get(sid) or {}).get("seen") is not None:
+            fu = follow_up(d, run, sid, same)
+            if fu: ok = False; lines += fu + ["(only these: the rest is done. A change that does not touch them: --same ID,ID)"]
         for l in lines: print("  " + l)
-        run["steps"][sid] = {"status": "done" if ok else "failed", "at": now(), **({"hashes": hashes(produced(d, S[sid], run))} if ok else {})}
+        prev = run["steps"].get(sid) or {}
+        # a failed check keeps what the step saw when it last passed, so the next check still knows what changed since
+        run["steps"][sid] = {"status": "done" if ok else "failed", "at": now(), **({"hashes": hashes(produced(d, S[sid], run)), "seen": entities(d)} if ok else {k: prev[k] for k in ("seen",) if k in prev})}
         save_run(d, run); print(("✓ " if ok else "✗ ") + sid); return 0 if ok else 1
     print(__doc__); return 1
 

@@ -20,10 +20,10 @@ const real = () => { const ch = copy(F.chapter); ch.map = { concepts: copy(F.con
 let iss = q0(real(), SJ, { before: [], after: [F.ch02] });
 ok(iss.length && iss.every(i => i.level === 'error'), `the real chapter: ${iss.length} Q0 errors for a pack with authoring.rules 3`);
 ok(has(iss, 'concept.order', /ampere-hour \(ch01-s01\) needs current .* comes only later \(ch01-s02\)/), 'ampere-hours in the section on charge, before current is introduced');
-ok(has(iss, 'concept.order', /ch01-e002 \(ch01-s01\): uses “current” \(introduced in ch01-s02\)/), 'the 2000 mAh exercise sits in section 1, before current and the ampere');
-ok(has(iss, 'concept.order', /ch01-e009 \(ch01-s01\): uses “current” .*“voltage” \(introduced in ch01-s04\)/), 'the unit-matching exercise names amperes and volts in section 1');
+ok(has(iss, 'concept.order', /ch01-e002 \(ch01-s01\): uses “current” \(introduced in ch01-s02; (q|explain|unit): “[^”]+”\)/), 'the 2000 mAh exercise sits in section 1, before current and the ampere');
+ok(has(iss, 'concept.order', /ch01-e009 \(ch01-s01\): uses “current” .*“voltage” \(introduced in ch01-s04; /), 'the unit-matching exercise names amperes and volts in section 1');
 ok(has(iss, 'concept.order', /uses “energy” \(energy\), which ch02 introduces later/) && has(iss, 'concept.order', /voltage \(ch01-s04\) needs energy .* ch02 introduces later/), 'joules and energy belong to chapter 2, yet voltage is defined with them in chapter 1');
-ok(has(iss, 'concept.order', /ch01-s01 \(a reveal block\): uses “voltage”/), 'the think-first reveal of section 1 already leans on voltage');
+ok(has(iss, 'concept.order', /ch01-s01 \(a reveal block, blocks\[\d+\]\): uses “voltage”/), 'the think-first reveal of section 1 already leans on voltage');
 ok(has(iss, 'concept.undeclared', /unit W \(watt, power\)/) && has(iss, 'concept.undeclared', /acronym LED/), 'the summary table quotes watts and an LED: neither is in the concept list');
 ok(has(iss, 'theory.focus', /ch01-s01: introduces 4 new concepts/), 'section 1 throws four new concepts at once');
 ok(has(iss, 'theory.depth', /ch01-s01: 141 words of teaching text, needs >= 850/) && has(iss, 'theory.depth', /ch01-s06: \d+ words .*needs >= 400/), 'section 1 has 141 words for four concepts; every section is too short');
@@ -37,6 +37,12 @@ const pk = sj => ({ format: 'noema-pack', subject: { id: 'circ-demo', title: 'Ci
 const cp = P.checkPack(pk(SJ));
 ok(cp.errors.some(e => e.includes('[concept.order] uses “energy” (energy), which ch02 introduces later')), 'checkPack (the connector, make_pack): the whole pack, so a later chapter’s concepts are seen');
 ok(!P.checkPack(pk({ authoring: { rules: 3, by: 'learner' } })).errors.some(e => /\[concept\.|\[theory\.(focus|depth)/.test(e)), 'checkPack: a learner-made pack gets warnings, never errors');
+
+// the connector (requireQuality): a new pack cannot skip Q0 by an older rules number or by authoring.by
+const fresh = sj => ({ ...pk(sj), builtAt: '2026-11-19T13:00:00+00:00' });
+ok(P.checkPack(fresh({ authoring: { rules: 2, by: 'claude' } }), null, { requireQuality: true }).errors.some(e => e.includes('authoring.rules must be 3')), 'connector: a pack built since Q0 with authoring.rules 2 is refused');
+ok(P.checkPack(fresh({ authoring: { rules: 3, by: 'learner' } }), null, { requireQuality: true }).errors.some(e => e.includes('[concept.order]')), 'connector: by "learner" does not turn Q0 into warnings for a new pack');
+ok(!P.checkPack({ ...pk({ authoring: { rules: 2, by: 'claude' } }), builtAt: '2026-11-01T10:00:00+00:00' }, null, { requireQuality: true }).errors.some(e => /authoring\.rules must be 3|\[concept\./.test(e)), 'connector: a pack built before Q0 keeps uploading (Q0 as warnings)');
 
 // ---------- a gradual chapter passes ----------
 const say = (topic, k) => Array.from({ length: k }, (_, i) => ({ t: 'p', text: `Picture ${i + 1}: think about ${topic} on a small bench, with a battery, a switch and a lamp you can touch. Ask what you would see, then what you would measure, then what would change if you made one part bigger, and write the answer down before reading on. Each answer builds the picture one piece at a time.` }));
@@ -67,10 +73,10 @@ ok(iss.length === 0, 'a gradual chapter (charge → current → ampere-hours, on
 
 // ---------- each rule on its own ----------
 const bad = f => { const ch = copy(good); f(ch); return q0(ch); };
-ok(has(bad(ch => { ch.exercises[0].section = 'ch01-s01'; }), 'concept.order', /ch01-e001 \(ch01-s01\): uses “ampere-hour” \(introduced in ch01-s03\)/), 'concept.order: an exercise moved before the section that teaches its concept');
+ok(has(bad(ch => { ch.exercises[0].section = 'ch01-s01'; }), 'concept.order', /ch01-e001 \(ch01-s01\): uses “ampere-hour” \(introduced in ch01-s03; q: “2000 mAh”\)/), 'concept.order: an exercise moved before the section that teaches its concept');
 ok(has(bad(ch => { ch.exercises[0].q = 'How many coulombs is 2000 mAh?'; ch.exercises[0].section = 'ch01-s01'; ch.exercises[0].explain = 'Multiply by 3.6 and you have it. It is just arithmetic, nothing more.'; }), 'concept.order', /uses “ampere-hour”/), 'concept.order: the unit alone (mAh after a number) is enough to see the concept');
 ok(has(bad(ch => { ch.exercises[0].unit = 'A'; ch.exercises[0].section = 'ch01-s01'; ch.exercises[0].q = 'Which number?'; ch.exercises[0].explain = 'It is that number. Nothing else is asked here at all.'; }), 'concept.order', /uses “current”/), 'concept.order: an exercise whose answer unit is A, in the section on charge');
-ok(has(bad(ch => { ch.sections[0].blocks.push({ t: 'p', text: 'Later we will see how current moves it.' }); }), 'concept.order', /ch01-s01 \(a paragraph\): uses “current”/), 'concept.order: a theory paragraph that names a concept two sections early');
+ok(has(bad(ch => { ch.sections[0].blocks.push({ t: 'p', text: 'Later we will see how current moves it.' }); }), 'concept.order', /ch01-s01 \(a paragraph, blocks\[\d+\]\): uses “current”/), 'concept.order: a theory paragraph that names a concept two sections early');
 ok(has(bad(ch => { ch.map.concepts[1].needs = ['charge', 'ampere-hour']; }), 'concept.order', /current \(ch01-s02\) needs ampere-hour/), 'concept.order: a concept that needs one taught after it');
 ok(has(bad(ch => { ch.map.concepts[1].in = 'ch01-s03'; }), 'concept.order', /ch01-s02 \([^)]*\): uses “current”/), 'concept.order: the map places it later than the text uses it');
 ok(has(bad(ch => { ch.sections[0].blocks.push({ t: 'p', text: 'A small lamp takes about 0.5 W.' }); }), 'concept.undeclared', /unit W \(watt, power\)/), 'concept.undeclared: a unit after a number that no concept lists');
@@ -89,13 +95,13 @@ const fromLater = copy(good); fromLater.map.known.push({ id: 'x', terms: ['xylop
 ok(has(q0(fromLater, SJ, { before: [], after: [] }), 'concept.map', /from ch03, which is not an earlier chapter/), 'concept.map: known from a chapter that is not earlier');
 // review fixes: LaTeX units, symbol tables, prefixed declared units, hooks/pitfalls/playbooks
 ok(has(bad(ch => { ch.sections[0].blocks.push({ t: 'p', text: 'A small lamp takes $0.5\\,\\mathrm{W}$ of it.' }); }), 'concept.undeclared', /unit W/), 'concept.undeclared: a LaTeX measurement ($0.5\\,\\mathrm{W}$) is a unit after a number too');
-ok(has(bad(ch => { ch.sections[0].blocks.push({ t: 'p', text: 'It is about $2\\text{ mA}$ in a small lamp.' }); }), 'concept.order', /ch01-s01 \(a paragraph\): uses “current”/), 'concept.order: $2\\text{ mA}$ uses current');
-ok(has(bad(ch => { ch.map.concepts[1].symbols = ['I']; ch.sections[0].blocks.push({ t: 'table', kind: 'summary', head: ['Quantity', 'Symbol'], rows: [['the one we count', 'Q'], ['the flow', 'I']] }); }), 'concept.order', /ch01-s01 \(a table block\): uses “current”/), 'concept.order: a bare symbol in a table cell (I) is a use');
+ok(has(bad(ch => { ch.sections[0].blocks.push({ t: 'p', text: 'It is about $2\\text{ mA}$ in a small lamp.' }); }), 'concept.order', /ch01-s01 \(a paragraph, blocks\[\d+\]\): uses “current”/), 'concept.order: $2\\text{ mA}$ uses current');
+ok(has(bad(ch => { ch.map.concepts[1].symbols = ['I']; ch.sections[0].blocks.push({ t: 'table', kind: 'summary', head: ['Quantity', 'Symbol'], rows: [['the one we count', 'Q'], ['the flow', 'I']] }); }), 'concept.order', /ch01-s01 \(a table block, blocks\[\d+\]\): uses “current”/), 'concept.order: a bare symbol in a table cell (I) is a use');
 ok(!bad(ch => { ch.map.concepts[2].units = ['mAh']; }).length, 'concept.undeclared: a concept that declares units ["mAh"] covers 2000 mAh');
 ok(has(bad(ch => { ch.debug = [{ id: 'pb1', title: 'Dim lamp', askYourself: ['Is the LED in backwards?'] }]; }), 'concept.undeclared', /pb1: the acronym LED/), 'concept.undeclared: playbooks are scanned');
 ok(has(bad(ch => { ch.pitfalls = [{ title: 'Watts', text: 'A 5 W lamp gets hot.', fix: 'Check it.' }]; }), 'concept.undeclared', /pitfall 1: uses the unit W/), 'concept.undeclared: pitfalls are scanned');
 ok(has(bad(ch => { ch.sections[0].hook = 'Your USB charger counts it.'; }), 'concept.undeclared', /acronym USB/), 'concept.undeclared: section hooks are scanned');
 // inflected languages: a stem with *
 const el = copy(good); el.map.concepts[1].terms = ['ρεύμα*']; el.sections[0].blocks.push({ t: 'p', text: 'Η ένταση του ρεύματος θα έρθει αργότερα.' });
-ok(has(q0(el), 'concept.order', /ch01-s01 \(a paragraph\): uses “ρεύμα\*”/), 'a stem (ρεύμα*) finds the inflected form (ρεύματος)');
+ok(has(q0(el), 'concept.order', /ch01-s01 \(a paragraph, blocks\[\d+\]\): uses “ρεύμα\*”/), 'a stem (ρεύμα*) finds the inflected form (ρεύματος)');
 console.log(`\n${n} checks passed`);

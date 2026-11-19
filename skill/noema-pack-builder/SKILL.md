@@ -284,6 +284,13 @@ everything waiting goes up together at the end (below).
   3. Then each bridge with `noema_save_bridge` (see *Language help* below).
   Small packs (≤ 1.5 MB) can use `noema_save_pack` instead of step 1 (step 2's file uploads still apply).
   The subject appears in the user's noema-lite picker (cloud account) with its files — tell them.
+- **If the upload refuses the pack — repair it, never start over.** The refusal lists the errors by chapter (section, block
+  or exercise, field, the words found, the fix) and names the only files to edit. Fix those entities in place
+  (`chapters/chNN.json`, `map/chNN.json`, `translations/<locale>/chNN.json`; work folder gone or pack already saved:
+  `noema_get_pack_url` → curl → `python3 scripts/unpack.py PACK.json work --repair`), then `pipeline.py status work/<id>`:
+  each stale step names exactly the entities that changed — redo only those (their translations in every language, their
+  blind re-solve in `review/chNN.json`; the checks insist), the rest passes as it is. Then `make_pack.py` and upload again
+  (same id). `noema_check_pack` shows every issue at once if you want it; it is optional, the upload checks anyway.
 - **Fallback — if the network blocks the upload** (the `curl` is refused, 403, a timeout, no connection): **do not stop.**
   `python3 scripts/pipeline.py defer work/<id> upload --note "curl: 403 from the storage"` and go on with the rest of the
   flow — translations and bridges never need the pack uploaded first; in a Roadmap, the next step too (the step whose upload

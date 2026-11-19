@@ -52,7 +52,7 @@ const termRe = (t: string): RegExp | null => {
   const tail = stem ? '\\p{L}*' : caps ? 's?' : '(?:s|es)?';
   return new RegExp(`(?<!${L})${core}${tail}(?!${L})`, caps ? 'u' : 'iu');
 };
-const unitRe = (u: string): RegExp => new RegExp(`\\d\\s{0,3}${PREFIX}${esc(u)}(?![\\p{L}\\p{N}])`, 'u');
+const unitRe = (u: string): RegExp => new RegExp(`\\d[\\d.,]*\\s{0,3}${PREFIX}${esc(u)}(?![\\p{L}\\p{N}])`, 'u');
 const symRe = (x: string): RegExp => new RegExp(`(?<![A-Za-z\\\\])${esc(x)}(?![A-Za-z])`, 'u');
 const strsOf = (v: unknown): string[] => list(v).filter((x): x is string => isStr(x));
 
@@ -117,13 +117,31 @@ const cellSym = (en: Entry, b: Obj): boolean =>
   b.t === 'table' &&
   en.symbols.length > 0 &&
   [...list(b.head), ...list(b.rows).flatMap(r => list(r))].some(x => isStr(x) && en.symbols.includes(x.trim()));
-const uses = (en: Entry, t: string): boolean => {
+/** the words of the text that use the concept (the first one found), or null */
+const find = (en: Entry, t: string): string | null => {
   const p = plain(t);
-  if (en.re.some(r => r.test(p))) return true;
+  for (const r of en.re) {
+    const m = r.exec(p);
+    if (m) return m[0];
+  }
   const u = delatex(t);
-  if (en.units.some(x => unitRe(x).test(u))) return true;
+  for (const x of en.units) {
+    const m = unitRe(x).exec(u);
+    if (m) return m[0].trim();
+  }
   const m = mathOf(t);
-  return m.length > 0 && en.symbols.some(x => symRe(x).test(m));
+  if (m) for (const x of en.symbols) if (symRe(x).test(m)) return x;
+  return null;
+};
+const uses = (en: Entry, t: string): boolean => find(en, t) !== null;
+/** where in an exercise, card or playbook the concept is used: the field and the words */
+const findIn = (en: Entry, e: Obj): string | null => {
+  for (const [k, v] of Object.entries(e)) {
+    if (SKIP.has(k)) continue;
+    const w = k === 'unit' ? find(en, unitField(e)) : find(en, textOf(v));
+    if (w) return `${k}: “${w}”`;
+  }
+  return null;
 };
 
 /** the words a block teaches with (not tables, code or drawings) */
@@ -227,12 +245,13 @@ export const conceptOrder = (chk: QualityCheck): Spec<GradualContext> =>
       bs.forEach((b, bi) => {
         const t = textOf(b);
         for (const en of own) {
-          if (!uses(en, t) && !cellSym(en, b)) continue;
+          const w = find(en, t) ?? (cellSym(en, b) ? (en.symbols.find(y => JSON.stringify(b).includes(`"${y}"`)) ?? en.symbols[0]) : null);
+          if (w === null) continue;
           if (!first.has(en.id)) first.set(en.id, [si, bi]);
           if (en.sec > si && !told.has(en.id + '@' + s(x.id))) {
             told.add(en.id + '@' + s(x.id));
             add(
-              `${s(x.id)} (${bi ? blockName(b) : 'its title or hook'}): uses “${en.label}” (${en.id}), which is introduced only in ${en.where}; introduce it first, or move this`,
+              `${s(x.id)} (${bi ? `${blockName(b)}, blocks[${bi - 1}]` : 'its title or hook'}): uses “${en.label}” (${en.id}) — the text says “${w}” — which is introduced only in ${en.where}; introduce it first, or move this`,
             );
           }
         }
@@ -278,7 +297,7 @@ export const conceptOrder = (chk: QualityCheck): Spec<GradualContext> =>
       const late = own.filter(en => en.sec > si && uses(en, t));
       if (late.length)
         add(
-          `${name} (${s(e.section ?? 'the chapter')}): uses ${late.map(en => `“${en.label}” (introduced in ${en.where})`).join(', ')} before it is introduced; move it after that section or rewrite it`,
+          `${name} (${s(e.section ?? 'the chapter')}): uses ${late.map(en => `“${en.label}” (introduced in ${en.where}; ${findIn(en, e) ?? 'its text'})`).join(', ')} before it is introduced; move it after that section or rewrite it`,
         );
     }
     // the concepts of a later chapter
