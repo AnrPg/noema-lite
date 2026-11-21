@@ -43,6 +43,8 @@ import { tool as requestEngine } from './request_engine.ts';
 import { tool as engineRequests } from './engine_requests.ts';
 import { tool as engineRequestUpdate } from './engine_request_update.ts';
 import { tool as curriculumSubmit } from './curriculum_submit.ts';
+import { tool as lessonUpdateTask } from './lesson_update_task.ts';
+import { tool as lessonUpdateSubmit } from './lesson_update_submit.ts';
 
 export const TOOLS: readonly Tool[] = [
   whoami,
@@ -61,6 +63,8 @@ export const TOOLS: readonly Tool[] = [
   saveBridge,
   saveTranslation,
   saveRoadmapTranslation,
+  lessonUpdateTask,
+  lessonUpdateSubmit,
   imageSearch,
   imageFetch,
   curricula,

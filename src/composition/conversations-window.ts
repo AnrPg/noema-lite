@@ -71,6 +71,14 @@ export function conversationsWindow(
           resume: r => {
             goConvo(r);
           },
+          // the stored record is the chat as a request takes it (its active path, each turn's files)
+          useInLesson: S.lessonUpdates
+            ? r => {
+                const ctx = r.context as { readonly chapterId?: string } | null | undefined;
+                S.lessonUpdates?.send(r, { subject: r.subject?.id ?? null, chapter: ctx?.chapterId ?? null });
+              }
+            : undefined,
+          useInLessonLabel: () => i18n.t('lu.menu'),
           modeOf: r => {
             if (!isTutor(r.kind)) return C.KIND_NAME?.[r.kind ?? ''] ?? (kindBadge(r.kind ?? '', i18n) || (r.kind ?? ''));
             const m = r.mode ?? '',

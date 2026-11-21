@@ -9,6 +9,7 @@
  * and register their pages with NoemaShell.registerPage while the page loads (docs/ARCHITECTURE.md §6.3).
  */
 import { area5Door, type Area5Door } from './area5.ts';
+import { lessonUpdatesDoor } from './lesson-updates-door.ts';
 import { pageBridgeUi } from './bridges-ui.ts';
 import { pageTranslationUi } from './translation-ui.ts';
 import type { BridgeUi } from '../features/bridges/ui/help.ts';
@@ -60,7 +61,9 @@ export function createApp(win: Window = window): App {
   guardDom();
   // 🌐 the translation of shared texts and 文A language help: their screens over NoemaCore.mt / NoemaCore.bridges (NoemaShell.mt, .bridge)
   const mt = pageTranslationUi(win as never),
-    bridge = pageBridgeUi(win as never);
+    bridge = pageBridgeUi(win as never),
+    // 💬→📖 a chat with the tutor used to improve a lesson (docs/LESSON_UPDATES.md)
+    lessonUpdates = lessonUpdatesDoor(win as never, { document }, (document.currentScript as HTMLScriptElement | null)?.src);
   const N = createCore(core) as NoemaCoreObject & NoemaAreas & AppExtras;
   const session = {
     get: (): unknown => {
@@ -959,5 +962,5 @@ export function createApp(win: Window = window): App {
   themes.apply(); // the first screen already wears the learner's character
   // the screens of area 5 (languages and activities): a lazy piece next to this script, on its Lit and kit
   const area5 = area5Door({ document }, (document.currentScript as HTMLScriptElement | null)?.src);
-  return { Noema: N, themes, shell: Object.assign(shell, { area5, mt, bridge }), start };
+  return { Noema: N, themes, shell: Object.assign(shell, { area5, mt, bridge, lessonUpdates }), start };
 }

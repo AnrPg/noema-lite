@@ -111,6 +111,11 @@ whether it was called or not.
 `--queue` (3), `--extend` (5), `--bridge` (6), `--translate` (7), `--import` (8), `--lang-task` (L1), `--new-language`
 (L2). The language flows only run the language tools as they are; their rules are `docs/LANGUAGE_RULES.md`.
 
+**A lesson improved from a chat with the tutor** (a request `lu…`, docs/LESSON_UPDATES.md) is not a flow of its own:
+`noema_lesson_update_task` hands over the chat, the chapter and the format, and `noema_lesson_update_submit` runs the
+`checks` step's rules on the lesson after the update (nothing new may fail, every translation and bridge kept whole); the
+learner approves it in the app.
+
 **H5P packages among the sources** (`.h5p` quizzes from H5P.org, Moodle, Lumi) change no flow: they are sources like a PDF
 (one `sources.json` entry each, the file packaged). In the `write` step `python3 scripts/h5p_import.py FILE.h5p --out
 <subject> --chapter chNN --src <source id>` turns their questions into the pack's own exercise types; what it writes counts as

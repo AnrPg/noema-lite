@@ -639,6 +639,16 @@ export class NoemaTutorPanel extends TutorElement {
             s.fresh();
           },
         },
+        s.history().length && v.useInLesson
+          ? {
+              label: v.i18n.t('lu.menu'),
+              icon: '📖',
+              run: () => {
+                const cv = s.current();
+                if (cv) v.useInLesson?.(cv);
+              },
+            }
+          : null,
         s.history().length
           ? {
               label: v.L('chatExport'),
