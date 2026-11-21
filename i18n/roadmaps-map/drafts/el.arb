@@ -16,6 +16,8 @@
   "roadmap.map.lib.import": "Εισαγωγή Οδικού χάρτη",
   "roadmap.map.lib.exploreTip": "Οδικοί χάρτες που μοιράζονται άλλοι — μπες σε έναν και ετοιμάστε μαζί τους σταθμούς του",
   "roadmap.map.lib.explore": "Εξερεύνηση Οδικών χαρτών",
+  "roadmap.map.lib.exploreShort": "Εξερεύνηση",
+  "roadmap.map.lib.importSub": "Από την εφαρμογή Claude, αρχείο ή επικολλημένο κείμενο",
   "roadmap.map.lib.eachStep": "Κάθε σταθμός (κόμβος) γίνεται ένα θέμα με θεωρία, ασκήσεις, κάρτες μνήμης, εξάσκηση και τον δάσκαλο.",
   "roadmap.map.lib.sharedBy": "από {who}",
   "roadmap.map.lib.itsOwner": "τον κάτοχό του",

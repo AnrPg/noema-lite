@@ -64,6 +64,14 @@
   "@roadmap.map.lib.explore": {
     "description": "Button: browse public Roadmaps other learners share."
   },
+  "roadmap.map.lib.exploreShort": "Explore",
+  "@roadmap.map.lib.exploreShort": {
+    "description": "Short button label on the Roadmaps page: browse public Roadmaps other learners share (its tooltip says more). The page title already says Roadmaps, so one word is enough."
+  },
+  "roadmap.map.lib.importSub": "From your Claude app, a file or pasted text",
+  "@roadmap.map.lib.importSub": {
+    "description": "Second line of the “Import a Roadmap” item in the ⋮ menu of the Roadmaps page."
+  },
   "roadmap.map.lib.eachStep": "Each step (node) becomes a subject with theory, exercises, flashcards, drills and the tutor.",
   "@roadmap.map.lib.eachStep": {
     "description": "Small note in the Roadmaps library."

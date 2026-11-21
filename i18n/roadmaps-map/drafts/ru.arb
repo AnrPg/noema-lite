@@ -16,6 +16,8 @@
   "roadmap.map.lib.import": "Импорт дорожной карты",
   "roadmap.map.lib.exploreTip": "Дорожные карты, которыми делятся другие, — присоединяйся и готовьте этапы вместе",
   "roadmap.map.lib.explore": "Обзор дорожных карт",
+  "roadmap.map.lib.exploreShort": "Обзор",
+  "roadmap.map.lib.importSub": "Из приложения Claude, файла или вставленного текста",
   "roadmap.map.lib.eachStep": "Каждый этап (узел) становится предметом с теорией, упражнениями, карточками, тренировками и наставником.",
   "roadmap.map.lib.sharedBy": "от {who}",
   "roadmap.map.lib.itsOwner": "владельца",

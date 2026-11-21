@@ -16,6 +16,8 @@
   "roadmap.map.lib.import": "Lernpfad importieren",
   "roadmap.map.lib.exploreTip": "Lernpfade, die andere Lernende teilen — tritt einem bei und bereitet seine Schritte gemeinsam vor",
   "roadmap.map.lib.explore": "Lernpfade entdecken",
+  "roadmap.map.lib.exploreShort": "Entdecken",
+  "roadmap.map.lib.importSub": "Aus deiner Claude-App, einer Datei oder eingefügtem Text",
   "roadmap.map.lib.eachStep": "Jeder Schritt (Knoten) wird ein Fach mit Theorie, Übungen, Lernkarten, Drills und dem Tutor.",
   "roadmap.map.lib.sharedBy": "geteilt von {who}",
   "roadmap.map.lib.itsOwner": "seinem Besitzer",

@@ -239,6 +239,7 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
   /* ---------- C. an imported map with the learner's PDF ---------- */
   console.log('— C. an imported map with a PDF, planned and prepared by the Claude app');
   await p.click('.cm-ovtop button:has-text("Roadmaps")'); await wait(300);
+  await p.click('noema-roadmap-library .cm-waysmenu'); await wait(150);   // 📥 Import lives in the ⋮ next to Explore
   await p.click('noema-roadmap-library .cm-importbtn'); await wait(300);
   await p.fill('.cm-maptext', '# Cell biology\nBasics → Membranes → Transport\n📎 Files\nMembranes: membranes.pdf pp. 2-3'); await wait(600);
   await p.setInputFiles('.cm-import .cg-drop input[type=file]', [path.join(TF, 'membranes.pdf')]); await wait(800);

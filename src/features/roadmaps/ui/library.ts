@@ -126,8 +126,36 @@ export class NoemaRoadmapLibrary extends RoadmapElement {
       h2 {
         font-size: 1.15rem;
       }
-      .ways {
+      /* the ways to a Roadmap: make one (New, the primary; From your sources) at the start, find one (Explore; ⋮ Import) at
+         the end — one row while it fits, else one under the other (the width of the library, not of the window) */
+      .ways-box {
+        container-type: inline-size;
         margin: 14px 0;
+      }
+      .ways,
+      .make,
+      .find {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .find {
+        margin-inline-start: auto;
+      }
+      @container (max-width: 640px) {
+        .ways,
+        .make {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .find {
+          margin-inline-start: 0;
+        }
+        .make noema-button,
+        .find noema-button {
+          display: flex;
+          flex: 1;
+        }
       }
       .cm-invites {
         display: grid;
@@ -321,21 +349,38 @@ export class NoemaRoadmapLibrary extends RoadmapElement {
     return html`
       ${this.heading === 2 ? html`<h2>🧭 ${this.t('roadmap.map.lib.title')}</h2>` : html`<h1>🧭 ${this.t('roadmap.map.lib.title')}</h1>`}
       <p class="tiny">${this.t('roadmap.map.lib.lead')}</p>
-      <div class="row ways">
-        <noema-button class="cm-new" @click=${go('roadmap-new')}>➕ ${this.t('roadmap.map.lib.new')}</noema-button>
-        <noema-button class="cm-srcbtn" variant="secondary" title=${this.t('roadmap.map.src.lead')} @click=${go('roadmap-from-sources')}
-          >📚 ${this.t('roadmap.map.src.title')}</noema-button
-        >
-        <noema-button class="cm-importbtn" variant="secondary" @click=${go('roadmap-import')}
-          >📥 ${this.t('roadmap.map.lib.import')}</noema-button
-        >
-        <noema-button
-          class="cm-explorebtn"
-          variant="secondary"
-          title=${this.t('roadmap.map.lib.exploreTip')}
-          @click=${go('roadmap-explore')}
-          >🌍 ${this.t('roadmap.map.lib.explore')}</noema-button
-        >
+      <div class="ways-box">
+        <div class="ways">
+          <div class="make">
+            <noema-button class="cm-new" variant="primary" icon="plus" @click=${go('roadmap-new')}
+              >${this.t('roadmap.map.lib.new')}</noema-button
+            >
+            <noema-button class="cm-srcbtn" icon="doc" title=${this.t('roadmap.map.src.lead')} @click=${go('roadmap-from-sources')}
+              >${this.t('roadmap.map.src.title')}</noema-button
+            >
+          </div>
+          <div class="find">
+            <noema-button
+              class="cm-explorebtn"
+              variant="quiet"
+              icon="globe"
+              title=${this.t('roadmap.map.lib.exploreTip')}
+              @click=${go('roadmap-explore')}
+              >${this.t('roadmap.map.lib.exploreShort')}</noema-button
+            >
+            <noema-menu
+              class="cm-waysmenu"
+              label=${this.t('roadmap.map.new.more')}
+              @noema-select=${(e: CustomEvent<{ value: string }>): void => {
+                if (e.detail.value === 'import') this.emit('roadmap-import');
+              }}
+            >
+              <noema-menu-item class="cm-importbtn" value="import" icon="download" sub=${this.t('roadmap.map.lib.importSub')}
+                >${this.t('roadmap.map.lib.import')}</noema-menu-item
+              >
+            </noema-menu>
+          </div>
+        </div>
       </div>
       <p class="tiny">${this.t('roadmap.map.lib.eachStep')}</p>
       ${

@@ -16,6 +16,8 @@
   "roadmap.map.lib.import": "Importar una ruta",
   "roadmap.map.lib.exploreTip": "Rutas que comparten otros estudiantes: únete a una y preparad sus pasos juntos",
   "roadmap.map.lib.explore": "Explorar rutas",
+  "roadmap.map.lib.exploreShort": "Explorar",
+  "roadmap.map.lib.importSub": "Desde tu app de Claude, un archivo o texto pegado",
   "roadmap.map.lib.eachStep": "Cada paso (nodo) se convierte en una asignatura con teoría, ejercicios, tarjetas, prácticas y el tutor.",
   "roadmap.map.lib.sharedBy": "compartida por {who}",
   "roadmap.map.lib.itsOwner": "su propietario",

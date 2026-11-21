@@ -290,13 +290,16 @@ describe('the library', () => {
     const lib = find('noema-roadmap-library') as HTMLElement;
     assert.match(text(lib), /1\/4 mastered · 1 open · 1 prepared/);
     assert.match(text(lib), /Shelf \(3\)/);
-    const got = events('roadmap-open', 'roadmap-new', 'roadmap-from-sources');
+    const got = events('roadmap-open', 'roadmap-new', 'roadmap-from-sources', 'roadmap-explore', 'roadmap-import');
     find('.cm-card', lib)?.click();
     click('.cm-new', lib);
     click('.cm-srcbtn', lib);
+    click('.cm-explorebtn', lib);
+    // 📥 Import: an item of the ⋮ next to Explore
+    find('.cm-waysmenu', lib)?.dispatchEvent(new CustomEvent('noema-select', { detail: { value: 'import' } }));
     assert.deepEqual(
       got.map(e => e.type),
-      ['roadmap-open', 'roadmap-new', 'roadmap-from-sources'],
+      ['roadmap-open', 'roadmap-new', 'roadmap-from-sources', 'roadmap-explore', 'roadmap-import'],
     );
     assert.deepEqual(got[0]?.detail, { roadmap: 'r2', status: 'ready' });
   });
