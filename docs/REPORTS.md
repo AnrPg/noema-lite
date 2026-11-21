@@ -5,7 +5,7 @@ a screenshot and enough data to find **exactly one place to change**, for a pers
 
 | Part | Where |
 |---|---|
-| The button | the same button on every screen (speech bubble with "!"): at the foot of the side rail from 760 px wide; on phones a small round button at the bottom left, above the tabs, across from the tutor |
+| The button | from 760 px wide the button at the foot of the side rail (speech bubble with "!"); on phones the first item of every page's ⋮ (a page without its own ⋮ gets one with just this item) |
 | The kinds and statuses, the brief, the repository's files, the row as sent | `src/features/reports/domain/report.ts` (pure TypeScript; the connector imports it) |
 | Sending (and the outbox while offline), the admins' check, list, answer, delete | `src/features/reports/application/reports.ts` over the port `ReportServer` (`src/ports/reports.ts`; Supabase: `src/adapters/supabase/reports.ts`); the page reads it as `NoemaCore.reports` |
 | The dialog, the locator, the admins' page | `src/features/reports/ui/` (`dialog.ts` the dialog, `locate.ts` `collect`, `shot.ts` `shoot` and `pointAt`, `admin.ts` the page `#/admin`, `styles.ts`); ⚑ calls `NoemaCore.community.report.open()`; the rail button's own style is `engine/src/96_report.css` |

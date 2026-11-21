@@ -258,9 +258,29 @@ export function createHost(core: HostCore) {
   }
   function chrome(c: Chrome = {}): void {
     chromeNow = c;
+    // on phones every page's ⋮ starts with "Report a problem" (from 760 px wide it is the side bar's button; 96_report.css)
+    const own = !!c.menu && (typeof c.menu === 'function' || c.menu.length > 0);
+    const report = !!community();
+    const items = (): readonly MenuEntry[] => {
+      const base = typeof c.menu === 'function' ? c.menu() : (c.menu ?? []);
+      if (!report) return base;
+      const item: MenuEntry = {
+        label: RL('button'),
+        icon: 'report',
+        cls: 'ns-reportitem',
+        run: () => {
+          void community()?.report.open();
+        },
+      };
+      return base.some(x => x && x !== '-') ? [item, '-', ...base] : [item];
+    };
     const menu =
-      c.menu && (typeof c.menu === 'function' || c.menu.length)
-        ? menuButton(kit, c.menu, { label: c.menuLabel ?? L('more'), dot: !!c.menuDot })
+      own || report
+        ? menuButton(kit, items, {
+            label: c.menuLabel ?? L('more'),
+            dot: !!c.menuDot,
+            cls: 'ns-iconbtn' + (own ? '' : ' ns-reportonly'),
+          })
         : null;
     parts.acts.replaceChildren(...[...(c.acts ?? []), menu].filter((x): x is Node => !!x)); // menu: a list, or a function that makes it when opened
     setModel({

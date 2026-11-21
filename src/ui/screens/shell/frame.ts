@@ -1,6 +1,7 @@
 /**
- * The frame every screen lives in (docs/UI_MAP.md): on phones a top bar that slides away while reading and bottom tabs;
- * on wider screens a left rail with "Me" and ⚑ at its foot (on phones ⚑ is a small round button at the bottom left). The top bar: ← back, where you are (crumbs), the page's own
+ * The frame every screen lives in (docs/UI_MAP.md): on phones a top bar and bottom tabs that slide away while scrolling down
+ * and come back on a scroll up;
+ * on wider screens a left rail with "Me" and ⚑ at its foot (on phones ⚑ is the first item of every page's ⋮). The top bar: ← back, where you are (crumbs), the page's own
  * actions and its ⋮, 🔎, 🔔 and Me. The character's still landscape behind, its face as the brand, the tutor's button
  * (with its name) in the corner.
  *
@@ -98,26 +99,33 @@ export class NoemaShellFrame extends ShellElement {
     return this.querySelector('#ns-top');
   }
   showTop(): void {
-    this.top?.classList.remove('hide');
+    this.#bars(true);
   }
-  /** phones: the top bar slides away while reading and comes back after a deliberate scroll up */
+  /** phones: the top bar and the tabs slide away while scrolling down and come back on any small scroll up */
   #scrolled(): void {
     const top = this.top;
-    if (!top || innerWidth >= RAIL_PX) return;
+    if (!top || innerWidth >= RAIL_PX) {
+      this.#bars(true);
+      return;
+    }
     const y = scrollY,
       d = y - this.#lastY;
     this.#lastY = y;
     if (d > 4 && y > 80) {
       this.#upRun = 0;
-      top.classList.add('hide');
+      this.#bars(false);
     } else if (d < 0) {
       this.#upRun -= d;
-      if (this.#upRun > 60 && top.classList.contains('hide')) {
-        top.classList.remove('hide');
+      if (this.#upRun > 12 && top.classList.contains('hide')) {
+        this.#bars(true);
         this.#shownAt = Date.now();
       }
     }
-    if (y < 10) top.classList.remove('hide');
+    if (y < 10) this.#bars(true);
+  }
+  #bars(show: boolean): void {
+    this.top?.classList.toggle('hide', !show);
+    document.body.classList.toggle('ns-barshid', !show);
   }
   /** a tap on the bar just as it came back is not a tap on what it covers */
   #guard = (e: Event): void => {

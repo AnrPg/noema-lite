@@ -16,7 +16,7 @@ test suites run that way. `tests/shell.js` checks the new homes.
 | **Top bar** | ← back · crumbs (where you are; tap a crumb to go there) · the page's own buttons · **⋮** · 🔎 search (also `/`, Ctrl K; the page `#/search`, docs/SEARCH.md) · 🔔 · **Me** (your emoji, with the sync dot) |
 | **The character** (bottom right) | Ask the tutor. Full body on navigation pages, a small face while you read or practise |
 | **Share bar** (under the top bar) | Pending shares, invitations and updates: Accept / Join / Reject / Update / Keep mine / Later |
-| Phones | The top bar slides away while you read and comes back after a deliberate scroll up |
+| Phones | The top bar and the bottom tabs slide away while you scroll down and come back on any small scroll up (the tutor follows them down) |
 
 ## 1. Top bar of a subject (T1–T14), banners (B1–B11), 🔔 (N1–N7)
 | Old | New home |
