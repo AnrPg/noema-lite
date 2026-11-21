@@ -122,6 +122,10 @@ problems come back to fix), and `noema_create_roadmap` (a new Roadmap from the m
 docs/FROM_SOURCES.md §5), `noema_roadmap_map` + `noema_extend_roadmap` (a new part of a Roadmap that exists, from new
 material, joined to its steps by `"@<step id>"` — docs/FROM_SOURCES.md §6), `noema_link_roadmap_steps` (prerequisite
 links between steps already on a Roadmap, prepared ones too, and wrong links removed; only the map changes — §6).
+**💬→📖 Lessons improved from a chat** (docs/LESSON_UPDATES.md): `noema_lesson_update_task` (a learner's request `lu…`, or
+the list of open ones: the chat, the chapter, its translations and bridges, the format) and `noema_lesson_update_submit`
+(the additive update, gated by the same checks as the app; the proposal waits under the learner's 🔔 until they approve
+it).
 **🪜 Levels** (docs/CURRICULUM.md §11): `noema_create_roadmap` and `noema_extend_roadmap` take the ladder Claude proposes
 with the map (`"levels"`: a preset — `"grade:5-9"`, `"semester:6"`, `"year:4"`, `"difficulty"` — or the course's own list)
 and each step's `"level"` (an id or `{ "from", "to" }`), checked by the level rules (a prerequisite never above its step; a
@@ -193,6 +197,7 @@ never writes anything twice:
 | `bridge` — `noema_save_bridge` | pack + pair + SHA-256 | the bridge file (undone if a later step fails) → its row → the upload cleared |
 | `roadmap` — `noema_create_roadmap` | SHA-256 of the plan | the Roadmap record (made once: a retry reuses its id) |
 | `extend` / `links` / `restructure` — `noema_extend_roadmap`, `noema_link_roadmap_steps`, `noema_restructure_levels` | Roadmap + SHA-256 | the inbox entry (its key fixed by the saga) |
+| `lesson` — `noema_lesson_update_submit` | request + SHA-256 of the update | the proposal file → its card `a:lessonup:<id>` |
 | `answer` — `noema_curriculum_submit` | Roadmap + task + SHA-256 of the answer | the inbox entry |
 | `lang-answer` — `noema_lang_submit` | course + task + SHA-256 | the inbox entry → the task's claim released |
 | `langpack` — `noema_lang_package_finish` | course + language + SHA-256 of the package | the package's record |

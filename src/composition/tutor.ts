@@ -19,13 +19,14 @@ import type { I18n } from '../ports/i18n.ts';
 import type { AsyncResult } from '../kernel/result.ts';
 import { TutorJobs } from '../features/tutor/application/jobs.ts';
 import { TutorSession, type TutorAi } from '../features/tutor/application/tutor.ts';
-import type { Conversation } from '../features/tutor/domain/conversation.ts';
+import { toRecord, type Conversation } from '../features/tutor/domain/conversation.ts';
 import type { CourseLookup, Persona, ReplyLanguage } from '../features/tutor/domain/prompts.ts';
 import { defineTutorUi, explainable, type NoemaTutorPanel, type TutorView } from '../features/tutor/ui/index.ts';
 import type { Chapter, Drill, Exercise, Section } from '../features/study/domain/pack.ts';
 import type { AiPort, TutorContext, TutorPort } from '../features/study/ui/parts.ts';
 import { fmt as inlineMd } from '../features/study/ui/text.ts';
 import { OPEN_CONVO, W, copyText, download, mdElement, type ShellApi } from './tutor-page.ts';
+import { lessonChat } from '../features/lesson-updates/domain/brief.ts';
 
 /** S.settings of the open subject's page: the Gemini key and model, the 🗣 choice */
 export interface TutorSettings {
@@ -312,6 +313,15 @@ export function mountTutor(host: TutorPageHost, i18n: I18n): TutorUi {
     toast: (t, ms) => {
       host.toast(t, ms);
     },
+    useInLesson: shell()?.lessonUpdates
+      ? cv => {
+          const rec = toRecord(cv, id => host.sectionOf(id));
+          shell()?.lessonUpdates?.send(lessonChat(cv, rec.context), {
+            subject: host.subject().id,
+            chapter: rec.context?.chapterId ?? null,
+          });
+        }
+      : undefined,
     readFile,
   };
 

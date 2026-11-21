@@ -33,6 +33,7 @@ const COMPONENT: Readonly<Record<string, readonly string[]>> = {
   engine: ['engine'],
   vault: ['vault'],
   social: ['social'],
+  lu: ['lessonup'],
   roadmap: ['roadmaps', 'roadmaps-map'],
   lang: ['lang'],
   lc: ['langcore'],

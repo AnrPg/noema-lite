@@ -294,6 +294,31 @@
       },
       "required": ["curriculum_id", "locale", "translation_json"]
     },
+    "noema_lesson_update_task": {
+      "description": "A chat with the tutor that the learner sent to improve a lesson (\"Use this chat in a lesson\" in the app): without request_id, the requests that wait (newest first); with it, the brief — the chat (the version the learner kept) as the SOURCE, links to its attachments, the chapter it is about and the other chapters of the subject as they are, the rules (Q0 and Q1–Q9 for each chapter with its addition, every text in each language of the pack) and the format of the answer. Write an ADDITIVE update — one part per chapter that gets something: each piece in the lesson whose topic it is — and send it with noema_lesson_update_submit; the learner reviews and approves it in the app.",
+      "type": "object",
+      "properties": {
+        "request_id": {
+          "type": "string",
+          "description": "The request (lu…), from the list or from the message the learner pasted"
+        }
+      }
+    },
+    "noema_lesson_update_submit": {
+      "description": "Send the update of the lessons made from a chat (noema_lesson_update_task gives the brief and the format \"noema-lesson-update\": one part per chapter that gets something). It is checked like a pack, part by part in the order of the chapters: every rule for each chapter WITH its addition (Q0 nothing before it is taught, one focus and ≤ 3 new concepts a section, Q1–Q9, the exercise mix), every translation (each added text in each language of the pack), the 文A bridges; a repetition of the lesson must be a choice of kind \"duplicate\". An addition that uses a term before the section that teaches it is placed after that section by itself (the learner sees it). Every problem comes back at once: fix them and send the whole update again. Accepted: the learner reviews it in the app (a diff, their choices) and nothing reaches the lesson until they approve it.",
+      "type": "object",
+      "properties": {
+        "request_id": {
+          "type": "string",
+          "description": "The request (lu…) the update answers"
+        },
+        "update_json": {
+          "type": "string",
+          "description": "ONE JSON object of format \"noema-lesson-update\" (no prose around it)"
+        }
+      },
+      "required": ["request_id", "update_json"]
+    },
     "noema_image_search": {
       "description": "Search pictures for a pack on the whole web and in open collections at once: Bing Images and DuckDuckGo Images (any site — what a Google image search shows too), Wikimedia Commons, Openverse, NASA, iNaturalist, Wellcome Collection, Art Institute of Chicago. Returns candidates (image url, page, size, licence, credit). The packs are for the learner's personal study: any licence is fine, the source is recorded. Look at the best ones with noema_image_fetch.",
       "type": "object",

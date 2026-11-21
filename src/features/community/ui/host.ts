@@ -258,7 +258,10 @@ export interface ProfileHost {
 /** 🔔 One thing the bell lists of sharing: a share or an invitation (no kind / 'curriculum'), an update, a piece of news. */
 export interface NoteItem {
   readonly id: string;
-  readonly kind?: 'curriculum' | 'curupdate' | 'stepupdate' | 'subjupdate' | 'notice';
+  readonly kind?: 'curriculum' | 'curupdate' | 'stepupdate' | 'subjupdate' | 'lessonupdate' | 'notice';
+  /** lessonupdate: the line under the text, and the request it is about */
+  readonly sub?: string;
+  readonly request?: string;
   readonly title: string;
   readonly from_name?: string;
   readonly from_email?: string;
