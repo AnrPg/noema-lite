@@ -1,0 +1,279 @@
+{
+  "@@locale": "en",
+  "lu.menu": "Use this chat in a lesson",
+  "@lu.menu": {
+    "description": "Tutor ⋮ menu item and a button under an open conversation: use this chat to improve a lesson."
+  },
+  "lu.tutor": "Tutor",
+  "@lu.tutor": {
+    "description": "Fallback name of the tutor when the character has none."
+  },
+  "lu.you": "Me",
+  "@lu.you": {
+    "description": "Fallback name of the learner in the chat sent to Claude."
+  },
+  "lu.close": "Close",
+  "@lu.close": {
+    "description": "Button: close the window."
+  },
+  "lu.copyMessage": "Copy the message for Claude",
+  "@lu.copyMessage": {
+    "description": "Button: copy the message to paste into a Claude chat."
+  },
+  "lu.pasteAnswer": "Paste Claude’s answer",
+  "@lu.pasteAnswer": {
+    "description": "Button: open the box where Claude's answer is pasted."
+  },
+  "lu.copied": "Copied",
+  "@lu.copied": {
+    "description": "Toast after copying."
+  },
+  "lu.copyFailed": "Could not copy. Select the text and copy it yourself.",
+  "@lu.copyFailed": {
+    "description": "Toast when the clipboard refused."
+  },
+  "lu.applied": "“{chapter}” now has the changes",
+  "@lu.applied": {
+    "description": "Toast: the lesson now has the changes. {chapter} = chapter title."
+  },
+  "lu.undone": "“{chapter}” is back as it was",
+  "@lu.undone": {
+    "description": "Toast: the lesson is back as it was. {chapter} = chapter title."
+  },
+  "lu.declined": "Nothing changed in “{chapter}”",
+  "@lu.declined": {
+    "description": "Toast: the proposal was declined; nothing changed. {chapter} = chapter title."
+  },
+  "lu.send.title": "Use this chat in a lesson",
+  "@lu.send.title": {
+    "description": "Title of the window that sends a chat to improve a lesson."
+  },
+  "lu.send.lead": "Claude reads this chat and proposes what to add to the lesson: clearer explanations, examples, the mistakes you made, new exercises.",
+  "@lu.send.lead": {
+    "description": "Lead line of the send window."
+  },
+  "lu.send.notOwn": "This subject is not one of yours, so pick one of your own lessons.",
+  "@lu.send.notOwn": {
+    "description": "Shown when the chat is about a subject the learner cannot change (a library subject)."
+  },
+  "lu.send.noOwn": "Only your own subjects can be improved, and you have none yet. Create one from your sources first.",
+  "@lu.send.noOwn": {
+    "description": "Shown when the learner has no subject of their own to improve."
+  },
+  "lu.send.subject": "Subject",
+  "@lu.send.subject": {
+    "description": "Label of the subject picker."
+  },
+  "lu.send.chapter": "Lesson",
+  "@lu.send.chapter": {
+    "description": "Label of the chapter (lesson) picker."
+  },
+  "lu.send.note": "A note for Claude (optional)",
+  "@lu.send.note": {
+    "description": "Label of an optional note for Claude."
+  },
+  "lu.send.noteHint": "For example: add the example about pressure, or I still mix up these two terms.",
+  "@lu.send.noteHint": {
+    "description": "Hint under the note field."
+  },
+  "lu.send.files": "{n, plural, one {# attached file goes with it} other {# attached files go with it}}",
+  "@lu.send.files": {
+    "description": "How many files of the chat go with it."
+  },
+  "lu.send.safe": "Nothing changes in the lesson until you see the changes and approve them.",
+  "@lu.send.safe": {
+    "description": "Reassurance under the form."
+  },
+  "lu.send.go": "Send",
+  "@lu.send.go": {
+    "description": "Button: send the request."
+  },
+  "lu.send.sent": "Ready for Claude: “{chapter}”",
+  "@lu.send.sent": {
+    "description": "Confirmation after sending. {chapter} = lesson title."
+  },
+  "lu.send.step1Connector": "Copy the message and paste it into a Claude chat that has the noema-lite connector.",
+  "@lu.send.step1Connector": {
+    "description": "Step 1 with the noema-lite connector in Claude."
+  },
+  "lu.send.step2Connector": "When Claude is done, the changes wait for you under the 🔔.",
+  "@lu.send.step2Connector": {
+    "description": "Step 2 with the connector."
+  },
+  "lu.send.step1Copy": "Copy the message (it holds the chat and the lesson) and paste it into a Claude chat.",
+  "@lu.send.step1Copy": {
+    "description": "Step 1 without the connector (a local profile)."
+  },
+  "lu.send.step2Copy": "Paste Claude’s answer back here to see the changes.",
+  "@lu.send.step2Copy": {
+    "description": "Step 2 without the connector."
+  },
+  "lu.review.title": "Changes to “{chapter}”",
+  "@lu.review.title": {
+    "description": "Title of the review window. {chapter} = lesson title."
+  },
+  "lu.review.from": "From the chat “{chat}” · {subject}",
+  "@lu.review.from": {
+    "description": "Where the proposal comes from. {chat} = conversation title, {subject} = subject title."
+  },
+  "lu.review.chat": "with the tutor",
+  "@lu.review.chat": {
+    "description": "Name of a conversation without a title."
+  },
+  "lu.review.waiting": "Claude has not answered yet. With the connector the changes show up here by themselves; otherwise paste Claude’s answer below.",
+  "@lu.review.waiting": {
+    "description": "No proposal yet."
+  },
+  "lu.review.closed": "This request is closed.",
+  "@lu.review.closed": {
+    "description": "The request is over (declined or undone)."
+  },
+  "lu.review.pasteLabel": "Claude’s answer",
+  "@lu.review.pasteLabel": {
+    "description": "Label of the box for Claude's answer."
+  },
+  "lu.review.check": "Check and show the changes",
+  "@lu.review.check": {
+    "description": "Button: check the pasted answer and show the changes."
+  },
+  "lu.review.replaced": "replaces {n, plural, one {# block} other {# blocks}}",
+  "@lu.review.replaced": {
+    "description": "How many existing blocks the update replaces."
+  },
+  "lu.review.placed": "Moved from “{from}” to “{to}”, after the section that teaches what it uses",
+  "@lu.review.placed": {
+    "description": "The checks moved an addition later because it used a term too early. {from}, {to} = section titles."
+  },
+  "lu.review.recommended": "recommended",
+  "@lu.review.recommended": {
+    "description": "Badge next to the recommended option of a choice."
+  },
+  "lu.review.changes": "What changes",
+  "@lu.review.changes": {
+    "description": "Heading above the before/after view."
+  },
+  "lu.review.newSection": "new section",
+  "@lu.review.newSection": {
+    "description": "Badge on a new section."
+  },
+  "lu.review.same": "{n, plural, one {# block as it is} other {# blocks as they are}}",
+  "@lu.review.same": {
+    "description": "A run of unchanged blocks, folded."
+  },
+  "lu.review.added": "Added",
+  "@lu.review.added": {
+    "description": "Screen-reader label of an added block."
+  },
+  "lu.review.removed": "Removed",
+  "@lu.review.removed": {
+    "description": "Screen-reader label of a removed block."
+  },
+  "lu.review.checking": "Checking the changes…",
+  "@lu.review.checking": {
+    "description": "While the changes are checked."
+  },
+  "lu.review.isApplied": "These changes are in the lesson.",
+  "@lu.review.isApplied": {
+    "description": "The update is in the lesson."
+  },
+  "lu.review.details": "Details for Claude",
+  "@lu.review.details": {
+    "description": "Summary of a fold with the checks' own (English) messages."
+  },
+  "lu.review.copyProblems": "Copy for Claude",
+  "@lu.review.copyProblems": {
+    "description": "Button: copy the problems to paste back to Claude."
+  },
+  "lu.review.problemsForClaude": "The app’s checks refused this lesson update. Please fix these problems and answer again with ONLY the corrected JSON:",
+  "@lu.review.problemsForClaude": {
+    "description": "Text put before the problems copied for Claude."
+  },
+  "lu.review.approve": "Approve",
+  "@lu.review.approve": {
+    "description": "Button: apply the changes to the lesson."
+  },
+  "lu.review.decline": "Decline",
+  "@lu.review.decline": {
+    "description": "Button: do not apply the changes."
+  },
+  "lu.review.undo": "Undo",
+  "@lu.review.undo": {
+    "description": "Button: put the lesson back as it was before the changes."
+  },
+  "lu.kind.exercises": "Exercise",
+  "@lu.kind.exercises": {
+    "description": "Tag on an added exercise."
+  },
+  "lu.kind.flashcards": "Card",
+  "@lu.kind.flashcards": {
+    "description": "Tag on an added flashcard."
+  },
+  "lu.kind.pitfalls": "Trap",
+  "@lu.kind.pitfalls": {
+    "description": "Tag on an added pitfall (a common trap)."
+  },
+  "lu.bell.ready": "Claude’s changes to “{chapter}” are ready for you",
+  "@lu.bell.ready": {
+    "description": "🔔 row and news: Claude's changes to a lesson wait for review. {chapter} = lesson title."
+  },
+  "lu.bell.from": "from the chat “{chat}”",
+  "@lu.bell.from": {
+    "description": "🔔 row, second line. {chat} = conversation title."
+  },
+  "lu.err.no_account": "Sign in to a profile first.",
+  "@lu.err.no_account": {
+    "description": "Error: no account."
+  },
+  "lu.err.not_own": "Only your own subjects can be improved.",
+  "@lu.err.not_own": {
+    "description": "Error: not own."
+  },
+  "lu.err.no_chapter": "That lesson is no longer in the subject.",
+  "@lu.err.no_chapter": {
+    "description": "Error: no chapter."
+  },
+  "lu.err.empty_chat": "This chat has nothing to use yet.",
+  "@lu.err.empty_chat": {
+    "description": "Error: empty chat."
+  },
+  "lu.err.not_found": "This request is no longer there.",
+  "@lu.err.not_found": {
+    "description": "Error: not found."
+  },
+  "lu.err.changed": "The lesson changed since Claude prepared this. Ask Claude to prepare it again.",
+  "@lu.err.changed": {
+    "description": "Error: changed."
+  },
+  "lu.err.invalid": "The changes did not pass the lesson checks, so nothing was changed. Copy the details for Claude.",
+  "@lu.err.invalid": {
+    "description": "Error: invalid."
+  },
+  "lu.err.closed": "This request is already closed.",
+  "@lu.err.closed": {
+    "description": "Error: closed."
+  },
+  "lu.err.no_backup": "The copy of the lesson from before is not on this device or in the account.",
+  "@lu.err.no_backup": {
+    "description": "Error: no backup."
+  },
+  "lu.review.adds": "Adds {list}",
+  "@lu.review.adds": {
+    "description": "What the update adds; {list} = e.g. “1 block of theory and 2 exercises”."
+  },
+  "lu.n.sections": "{n, plural, one {# new section} other {# new sections}}",
+  "@lu.n.sections": {
+    "description": "Count in the “Adds …” line."
+  },
+  "lu.n.blocks": "{n, plural, one {# block of theory} other {# blocks of theory}}",
+  "@lu.n.blocks": {
+    "description": "Count in the “Adds …” line."
+  },
+  "lu.n.exercises": "{n, plural, one {# exercise} other {# exercises}}",
+  "@lu.n.exercises": {
+    "description": "Count in the “Adds …” line."
+  },
+  "lu.n.cards": "{n, plural, one {# card} other {# cards}}",
+  "@lu.n.cards": {
+    "description": "Count in the “Adds …” line (flashcards and traps)."
+  }
+}

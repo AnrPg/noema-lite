@@ -4,6 +4,7 @@
  * session and the drawer are in build/study.js (src/composition/tutor.ts); Me › Conversations in build/ui.js
  * (src/composition/conversations-window.ts).
  */
+import type { ChatRecord } from '../features/lesson-updates/domain/brief.ts';
 import type { PageConvos } from '../adapters/browser/conversations.ts';
 import type { MessageParams, I18n } from '../ports/i18n.ts';
 import type { ConvoRow } from '../features/tutor/ui/conversations.ts';
@@ -59,6 +60,10 @@ export interface ShellApi {
   tv(): { tutor: string };
   convos?: (openId?: string) => void;
   goConvo?: (r: ConvoRow) => void;
+  /** 💬→📖 "Use this chat in a lesson" (src/composition/lesson-updates.ts) */
+  lessonUpdates?: {
+    send(record: ChatRecord, ctx?: { readonly subject?: string | null; readonly chapter?: string | null }): void;
+  };
   readonly engine?: { resumeConvo?: () => void } | null;
 }
 

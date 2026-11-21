@@ -429,6 +429,19 @@ the existing sources keep the files the learner already has, and only NEW source
 by them). Add new chapters (next `chNN`) or `patches/*.json` with `appendBlocks` / `appendExercises`
 (reserve a fresh id range, e.g. `chNN-e7NN`), register the new source in `sources.json` (its file in `work/<id>/sources/`), rebuild, save.
 
+## Improving a lesson from a chat with the tutor (a request `lu…`)
+The learner pressed *Use this chat in a lesson* in the app and pasted a message naming a request. With the connector:
+`noema_lesson_update_task(request_id)` gives the chat (the turns the learner saw, their files), the chapter as it is, every
+language of the pack and the format `noema-lesson-update`; answer with `noema_lesson_update_submit(request_id, update_json)`.
+Without the connector the message itself is the whole brief: answer with ONLY the JSON, in one code block. The update is
+ADDITIVE and touches ONE chapter: clearer explanations, examples, the misconceptions the learner hit, new exercises
+(`lr`, `think`, `cite: {"src": "chat:<request id>"}`), cards, pitfalls and the knowledge-map entries they need, every text
+in the pack's language and in each of its translations (same structure), bridge entries for new words. Every rule of the
+pack still holds (Q0 first: a term is never used before the section that teaches it; one focus per section, ≤ 3 new
+concepts; Q1–Q9; recall ≤ 25 %). A section already full or an addition that repeats the lesson is a `choice` for the
+learner (options with their own ops, one `recommended`), never decided silently. Refused problems come back to fix; the
+learner approves the result in the app (docs/LESSON_UPDATES.md).
+
 ## Translations — every pack in English, Greek, Russian, German and French (flow step `translate`)
 A pack is written in one language (`subject.language`). **Every new pack also gets full translations into English, Greek,
 Russian, German and French — each of them that is not its own language** (the learner's rule; the pack rules' `languages`,

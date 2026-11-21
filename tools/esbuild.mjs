@@ -24,6 +24,8 @@
      lang-activities.js  src/composition/lang-activities.ts — the screens of area 5 (languages and activities, src/ui/screens/
                    languages-activities.ts), kind "lazy": the shell loads it on the first language page (NoemaShell.area5). It
                    brings no Lit and no kit of its own: those are build/ui.js's (src/composition/ui-shared.ts, uiShared below).
+     lesson-updates.js  src/composition/lesson-updates-piece.ts — 💬→📖 the windows and the service of lesson updates, kind "lazy"
+                   on build/ui.js's Lit: NoemaShell.lessonUpdates loads it the first time one is opened.
      viewer.js     src/composition/viewer.ts — 👁 the file viewer (src/features/viewer: its readers, libraries' loader and screen),
                    kind "lazy" on build/ui.js's Lit: NoemaCore.viewer loads it the first time a file is opened or read.
      roadmaps-node.cjs  src/composition/roadmaps-node.ts — the Roadmaps domain and the bridges' lookup, CommonJS, for the node
@@ -97,7 +99,8 @@ export const ENTRIES = [
   { name: 'ui', in: 'src/composition/ui.ts', kind: 'page', out: 'ui.js', budgetKB: 440 },   // (440, TD-13 C: the 🌐 and 文A screens, NoemaShell.mt and .bridge, from the deleted engine/mt.js and engine/bridge.js) the app's UI root: Lit, the kit, the frame and the shell's screens (src/ui), the Roadmap screens (src/features/roadmaps/ui), the tutor's conversations window (src/features/tutor/ui/conversations.ts; 400 since it joined; 408: the public Roadmaps and the review of a shared Roadmap's changes, from engine/curmap.js)
   { name: 'ui-kit', in: 'src/composition/ui-kit.ts', kind: 'dev', out: 'ui-kit.js', budgetKB: 256 },   // the kit's demo; loaded only on #/ui-kit
   { name: 'lang-activities', in: 'src/composition/lang-activities.ts', kind: 'lazy', shared: 'ui', out: 'lang-activities.js', budgetKB: 256 },   // the screens of languages and activities on build/ui.js's Lit and kit; loaded on the first language page
-  { name: 'viewer', in: 'src/composition/viewer.ts', kind: 'lazy', shared: 'ui', out: 'viewer.js', budgetKB: 64 },   // 👁 the file viewer (src/features/viewer: readers, libraries' loader, screen) on build/ui.js's Lit; loaded the first time a file is opened or read (NoemaCore.viewer)
+  { name: 'viewer', in: 'src/composition/viewer.ts', kind: 'lazy', shared: 'ui', out: 'viewer.js', budgetKB: 64 },
+  { name: 'lesson-updates', in: 'src/composition/lesson-updates-piece.ts', kind: 'lazy', shared: 'ui', out: 'lesson-updates.js', budgetKB: 96 },   // 💬→📖 a chat used to improve a lesson (docs/LESSON_UPDATES.md): the windows, the service, the gate; loaded the first time one is opened (NoemaShell.lessonUpdates)   // 👁 the file viewer (src/features/viewer: readers, libraries' loader, screen) on build/ui.js's Lit; loaded the first time a file is opened or read (NoemaCore.viewer)
   { name: 'engines-node', in: 'src/engines/node.ts', kind: 'node', format: 'cjs', out: 'engines-node.cjs', budgetKB: 4096 },
   { name: 'noema-tools', in: 'src/composition/noema-tools.ts', kind: 'node', format: 'cjs', out: 'noema-tools.cjs', budgetKB: 5632 },   // the engine library + the content checks + the runtimes' checks (src/runtimes) + engine/src/38
   { name: 'runtimes-node', in: 'src/runtimes/node.ts', kind: 'node', format: 'cjs', out: 'runtimes-node.cjs', budgetKB: 512 },   // the runtimes' checks and code for the node suites
