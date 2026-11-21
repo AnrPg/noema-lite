@@ -535,7 +535,7 @@ body.ns-on .drawer .ns-dh .iconbtn{font-size:1.1rem;border:0;background:none;box
 .ns-modesel .sub{flex:1;min-width:0;color:var(--ink2);font-size:.9rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .ns-modesel .caret{flex:none;margin-inline-start:6px;font-size:.8rem;color:var(--ink2)}
 .ns-modesel:hover,.ns-modesel[aria-expanded="true"]{border-color:var(--acc)}
-.ns-forrow{padding:14px 18px 0}
+.ns-forrow{padding:14px 18px 12px}
 .ns-forchip{display:inline-flex;align-items:center;gap:8px;max-width:100%;padding-block:6px;padding-inline:14px 8px;border-radius:999px;background:var(--acc-soft);color:var(--t1i);font-size:.9rem}
 .ns-forchip:not(:has(button)){padding-inline-end:14px}
 .ns-forchip button{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;border:0;background:none;color:inherit;font-size:.95rem;cursor:pointer}
@@ -545,6 +545,68 @@ body.ns-on .drawer .msg.ns-greet{font-size:1.02rem}
 body.ns-on .drawer .composer{padding:12px 18px 14px;gap:10px;align-items:center}
 body.ns-on .drawer .composer textarea{min-height:48px;border-radius:var(--br,14px);background:var(--bg)}
 body.ns-on .drawer .composer .send{width:56px;height:48px}
+/* the tutor's conversation: tools under each message (faint until hovered), ‹ 2/3 › versions, editing in place, files,
+   ↓ to the latest, ■ stop — line icons with their words in the tooltip (docs/CONVERSATIONS.md "Branches", "Attachments") */
+.drawer .threadbar .tb-fold{flex:none;display:grid;place-items:center;width:28px;height:28px;margin-inline-start:auto;border:0;border-radius:8px;background:none;color:var(--ink3);cursor:pointer;padding:0}
+.drawer .threadbar .tb-fold svg.i{width:16px;height:16px}
+@media (hover:hover){.drawer .threadbar .tb-fold:hover{background:color-mix(in srgb,var(--ink) 8%,transparent);color:var(--ink)}}
+.threadbar.folded{padding-block:3px}
+.threadbar.peek{animation:slideIn .25s}
+@media (prefers-reduced-motion:reduce){.threadbar.peek{animation:none}}
+.threadbar.folded .tb-txt{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink2)}
+.drawer .msgs{overflow-anchor:none;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 14px);mask-image:linear-gradient(to bottom,transparent 0,#000 14px)}
+/* the "For: …" chip: the whole topic in two lines at most (all of it on hover) */
+.ns-forchip{white-space:normal;overflow:visible;align-items:flex-start;line-height:1.35}
+.ns-fortext{min-width:0;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden;overflow-wrap:anywhere}
+.ns-forchip button{margin-top:-2px}
+/* an answer uses the drawer's width; the learner's own messages stay narrower, on their side */
+.drawer .msg.ai{max-width:100%}
+/* formulas in the talk: a display one centred, breaking after = and + to fit; one still too wide is drawn smaller (panel.ts
+   fitMath) — never a sideways scroll (docs/UI_MAP.md "Small screens") */
+.msg .mathblock{margin:8px 0;text-align:center;max-width:100%;overflow:hidden}
+.msg .mathblock>.katex{font-size:1.05em;white-space:normal;max-width:100%}
+.msg .mathblock>.katex-display{margin:0;padding:2px 0}
+.drawer .msgs>.ns-msgbar{display:flex;align-items:center;gap:2px;margin-top:-8px;min-height:28px;color:var(--ink3);opacity:.55;transition:opacity .15s}
+.drawer .msgs>.ns-msgbar.me{align-self:flex-end}
+.drawer .msgs>.ns-msgbar.ai{align-self:flex-start}
+.drawer .msgs>.ns-msgbar:hover,.drawer .msgs>.ns-msgbar:focus-within,.drawer .msgs>.msg:hover+.ns-msgbar{opacity:1}
+@media (hover:none){.drawer .msgs>.ns-msgbar{opacity:.8}}
+.ns-mb{display:grid;place-items:center;width:28px;height:28px;border:0;border-radius:8px;background:none;color:inherit;cursor:pointer;padding:0}
+.ns-mb svg.i{width:16px;height:16px}
+@media (hover:hover){.ns-mb:hover:not(:disabled){background:var(--bg2);color:var(--ink)}}
+.ns-mb:disabled{opacity:.35;cursor:default}
+.ns-ver{display:inline-flex;align-items:center;font-size:.8rem;font-variant-numeric:tabular-nums}
+.ns-vn{min-width:2.4em;text-align:center}
+.ns-stopped{font-size:.78rem;margin-inline-start:4px}
+.drawer svg.i.flip:dir(rtl){scale:-1 1}
+.msg.ns-edit{align-self:stretch;max-width:100%;display:flex;flex-direction:column;gap:8px;background:var(--bg2);color:var(--ink)}
+.msg.ns-edit textarea{width:100%;resize:none;min-height:60px;max-height:240px;padding:9px 11px;border-radius:var(--br,12px);border:1.5px solid var(--acc,var(--violet));background:var(--bg);color:var(--ink);font:inherit;line-height:1.45;outline:none}
+.ns-editrow{display:flex;justify-content:flex-end;gap:8px}
+.ns-files{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.ns-files:last-child{margin-bottom:0}
+.ns-file{position:relative;display:inline-flex;align-items:center;gap:6px;max-width:100%;padding:5px 9px;border-radius:10px;background:color-mix(in srgb,currentColor 10%,transparent);font-size:.85rem}
+.ns-file svg.i{width:16px;height:16px}
+.ns-file .nm{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:16em}
+.ns-file.gone{opacity:.6;font-style:italic}
+.ns-file.img{padding:0;background:none}
+.ns-file.img img{display:block;max-width:min(220px,100%);max-height:180px;border-radius:10px;object-fit:cover}
+.ns-fx{display:grid;place-items:center;width:22px;height:22px;border:0;border-radius:50%;background:var(--bg);color:var(--ink);cursor:pointer;padding:0;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.ns-fx svg.i{width:13px;height:13px}
+.ns-file.img .ns-fx{position:absolute;top:4px;inset-inline-end:4px}
+.ns-pending{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 18px 0;border-top:1px solid var(--line)}
+.ns-pending+.composer{border-top:0}
+.ns-pending .ns-files{margin:0}
+.ns-adding{font-size:.82rem;color:var(--ink2)}
+.composer .ns-attach{flex:none;display:grid;place-items:center;width:40px;height:40px;border:0;border-radius:var(--br,12px);background:none;color:var(--ink2);cursor:pointer}
+@media (hover:hover){.composer .ns-attach:hover{background:var(--bg2);color:var(--ink)}}
+.composer .send svg.i{width:18px;height:18px;fill:currentColor}
+.composer .send:disabled{opacity:.5}
+.drawer .msgs>.ns-tail{flex:none;margin-top:-12px}
+.ns-jumpwrap{position:sticky;bottom:4px;align-self:center;height:0;display:flex;justify-content:center;overflow:visible;margin-top:-12px}
+.ns-jump{position:relative;transform:translateY(-100%);display:grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--paper,var(--bg));color:var(--ink);box-shadow:0 4px 14px -6px rgba(0,0,0,.35);cursor:pointer}
+.ns-jump svg.i{width:18px;height:18px}
+.ns-jump.live::after{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:var(--acc,var(--violet));transform:translate(13px,-13px)}
+@media (prefers-reduced-motion:reduce){.drawer .msgs>.ns-msgbar{transition:none}}
 @media (max-width:759px){
   body.ns-on .drawer{top:auto;inset-inline-start:0;inset-inline-end:0;width:100%;height:88dvh;border-inline-start:0;border-top:1px solid var(--line);border-radius:22px 22px 0 0;transform:translateY(105%)}
   body.ns-on .drawer.open{transform:none}

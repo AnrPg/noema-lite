@@ -27,18 +27,44 @@
   const newId = (t = Date.now()) => 'cv_' + t.toString(36).padStart(10, '0') + rnd(6);
   const msgId = (t = Date.now()) => 'm_' + t.toString(36).padStart(10, '0') + rnd(4);
 
+  /** the files of a message: references to their bytes on the device (by content hash), never the bytes */
+  const attachments = a => Array.isArray(a) ? a.filter(x => x && typeof x.id === 'string' && typeof x.mediaType === 'string').slice(0, 10).map(x => ({ id: x.id.slice(0, 80), name: String(x.name || '').slice(0, 200), mediaType: x.mediaType.slice(0, 100), size: Number(x.size) || 0, kind: ['image', 'pdf', 'audio', 'video', 'text'].includes(x.kind) ? x.kind : 'text' })) : [];
+  const message = (m, at) => {
+    const att = attachments(m.attachments);
+    return {
+      id: m.id || msgId((m.createdAt ? Date.parse(m.createdAt) : m.t) || at),
+      role: m.role === 'model' ? 'assistant' : (m.role || 'user'),
+      content: String(m.content ?? m.text ?? ''),
+      createdAt: m.createdAt || iso(m.t || at),
+      ...(att.length ? { attachments: att } : {}),
+      ...(m.meta ? { meta: m.meta } : {}),
+    };
+  };
+  /** Two copies of one conversation (this device's and another's): the newer one's active path, plus every turn only the
+      older one has, kept as a branch — turns are never deleted, so nothing either device wrote is lost. A turn written by an
+      older version without a stable id is matched by its speaker, time and words. → the newer record, or null when it
+      already has every turn. */
+  function mergeNodes(older, newer) {
+    if (!older || !newer || older.deleted || newer.deleted) return null;
+    const sig = m => `${m.role}|${m.createdAt}|${m.content}`;
+    const has = new Set(), sigs = new Set();
+    for (const m of [...(newer.messages || []), ...(newer.branches || [])]) { has.add(m.id); sigs.add(sig(m)); }
+    const extra = [];
+    (older.messages || []).forEach((m, i) => { if (!has.has(m.id) && !sigs.has(sig(m))) extra.push({ ...m, parent: i ? older.messages[i - 1].id : null }); });
+    for (const m of older.branches || []) if (!has.has(m.id) && !sigs.has(sig(m))) extra.push(m);
+    if (!extra.length) return null;
+    const known = new Set([...has, ...extra.map(m => m.id)]);
+    const kept = extra.filter(m => !m.parent || known.has(m.parent)).map(({ seq, ...m }) => m);   // a turn whose parent neither copy has cannot be placed
+    return kept.length ? { ...newer, branches: [...(newer.branches || []), ...kept] } : null;
+  }
+
   /** Normalise anything (older app versions, partial objects) into a valid canonical record. */
   function normalize(r, defaults = {}) {
     const now = Date.now();
     const created = r.createdAt ? Date.parse(r.createdAt) : (r.created || now);
-    const msgs = (r.messages || r.msgs || []).map((m, i) => ({
-      seq: i,
-      id: m.id || msgId((m.createdAt ? Date.parse(m.createdAt) : m.t) || created + i),
-      role: m.role === 'model' ? 'assistant' : (m.role || 'user'),
-      content: String(m.content ?? m.text ?? ''),
-      createdAt: m.createdAt || iso(m.t || created + i),
-      ...(m.meta ? { meta: m.meta } : {}),
-    }));
+    const msgs = (r.messages || r.msgs || []).map((m, i) => ({ seq: i, ...message(m, created + i) }));
+    // the turns off the active path (an edited message, another answer): each with its parent (docs/CONVERSATIONS.md "Branches")
+    const branches = r.deleted ? [] : (Array.isArray(r.branches) ? r.branches : []).filter(m => m && m.id).map(m => ({ ...message(m, created), parent: typeof m.parent === 'string' ? m.parent : null }));
     /* where the conversation began: the button (via) and the exact part — block id, exercise, card, drill, a language word … — short strings only */
     const origin = o => o && typeof o === 'object' && o.via ? Object.fromEntries(Object.entries(o).filter(([k, v]) => /^[a-zA-Z]{1,20}$/.test(k) && v != null && ['string', 'number'].includes(typeof v)).map(([k, v]) => [k, typeof v === 'string' ? v.slice(0, 200) : v]).slice(0, 12)) : null;
     const ctx = r.context || (r.ctx ? { type: r.ctx.kind || 'course', id: r.ctx.id || null, label: r.ctx.label || null } : { type: 'course', id: null, label: null });
@@ -58,6 +84,7 @@
       deleted: !!r.deleted,
       stats: { messages: msgs.length, userMessages: msgs.filter(m => m.role === 'user').length, chars: msgs.reduce((a, m) => a + m.content.length, 0) },
       messages: r.deleted ? [] : msgs,
+      ...(branches.length ? { branches } : {}),
       ...(r.tutorState && !r.deleted ? { tutorState: r.tutorState } : {}),        // Socratic thread tracker: { threads[], lessons[], focus, learnerTurns }
       ...(r.meta ? { meta: r.meta } : {}),
     };
@@ -100,7 +127,7 @@
   const dirtyKey = acc => `noema1:${acc}:meta:convoDirty`;
   function markDirty(acc, id) { const d = Noema.jget(dirtyKey(acc), []); if (!d.includes(id)) { d.push(id); Noema.jset(dirtyKey(acc), d); } Noema.jset(`noema1:${acc}:meta:dirty`, Date.now()); }
   const api = {
-    SCHEMA, KINDS, newId, msgId, normalize, toMarkdown, KIND_NAME, MODE_NAME, fromApp,
+    SCHEMA, KINDS, newId, msgId, normalize, mergeNodes, toMarkdown, KIND_NAME, MODE_NAME, fromApp,
     onChange(f) { listeners.push(f); },
     async list(acc, { subject = null, kinds = null, includeDeleted = false } = {}) {
       const rows = (await store().entries('convos', acc + '|')).map(([, v]) => v);
@@ -109,7 +136,10 @@
     async get(acc, id) { return store().get('convos', key(acc, id)); },
     /** Save (insert/update). Background persistence (folder, cloud) is triggered via onChange listeners. */
     async put(acc, rec, { silent = false, keepUpdatedAt = false } = {}) {
-      const r = normalize(rec);
+      let r = normalize(rec);
+      // the turns the stored copy has and this one lacks (another device's branch, pulled meanwhile) stay as branches
+      const merged = mergeNodes(await store().get('convos', key(acc, r.id)), r);
+      if (merged) { r = normalize(merged); silent = false; keepUpdatedAt = false; }   // the union goes back to the cloud
       if (!keepUpdatedAt) r.updatedAt = iso();
       await store().put('convos', key(acc, r.id), r);
       if (!silent) { markDirty(acc, r.id); listeners.forEach(f => { try { f(acc, r); } catch (e) { } }); }

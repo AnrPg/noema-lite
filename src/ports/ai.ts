@@ -1,7 +1,7 @@
 /**
  * AI port: one chat model, whoever makes it (docs/ARCHITECTURE.md §4, docs/adr/006).
  *
- * A request is a system text, messages of typed parts (text, images, PDFs, tool calls and their results), optional tools
+ * A request is a system text, messages of typed parts (text, images, PDFs, sound and video, tool calls and their results), optional tools
  * (a name, a description, a JSON Schema of the input) and a tool choice. The answer is the same parts, the stop reason
  * and the tokens used. Streaming: `onDelta` gets each piece of text or tool input as it arrives. Cancellation: `signal`
  * (an aborted request is ai.aborted). Each vendor's adapter (Claude, Gemini) maps its messages, tools, stop reasons,
@@ -23,6 +23,8 @@ export type ContentPart =
   | { readonly type: 'image'; readonly mediaType: string; readonly data: string }
   /** A document (PDF), base64. */
   | { readonly type: 'document'; readonly mediaType: string; readonly data: string; readonly title?: string }
+  /** Sound or video, base64 (Gemini reads them; Claude cannot: its adapter sends a short note instead). */
+  | { readonly type: 'media'; readonly mediaType: string; readonly data: string; readonly title?: string }
   | { readonly type: 'tool_call'; readonly id: string; readonly name: string; readonly input: Json }
   | { readonly type: 'tool_result'; readonly callId: string; readonly name: string; readonly content: string; readonly isError?: boolean };
 

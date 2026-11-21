@@ -240,3 +240,102 @@ test('the one-shot jobs ask for JSON in the learner’s language and are kept as
   await tick();
   assert.deepEqual([...store.rows.values()].map(r => r['kind']).sort(), ['drill-grading', 'grading', 'question']);
 });
+
+test('✎ editing a message branches: the AI hears only the new branch, ‹ › brings the old one back, all of it is kept', async () => {
+  const ai = scriptedAi(r => 'answer to ' + JSON.stringify(r.messages.at(-1)?.content.at(-1)));
+  const { s, store } = session(ai);
+  s.openTutor(null, 'explain');
+  await s.send('first');
+  await s.send('second');
+  await s.edit(2, 'second, better');
+  const sent = ai.calls.at(-1)?.messages.map(m => (m.content[0]?.type === 'text' ? m.content[0].text : '')) ?? [];
+  assert.deepEqual(sent.length, 3, 'the old "second" and its answer are not in the context');
+  assert.equal(sent[2], 'second, better');
+  assert.deepEqual(s.version(2), [2, 2]);
+  assert.match(s.history().at(-1)?.text ?? '', /better/);
+  s.switchVersion(2, -1);
+  assert.equal(s.history()[2]?.text, 'second');
+  assert.match(s.history()[3]?.text ?? '', /"second"/);
+  await tick();
+  const rec = store.rows.values().next().value as unknown as { messages: { content: string }[]; branches: { parent: string }[] };
+  assert.equal(rec.messages[2]?.content, 'second', 'the active path is the record’s messages');
+  assert.equal(rec.branches.length, 2, 'the other version and its answer are kept as a branch');
+});
+
+test('↻ another answer, ■ stop keeps what came, and an edit while it writes drops the old reply', async () => {
+  let release: (() => void) | null = null;
+  let n = 0;
+  const ai: TutorAi = {
+    provider: 'gemini',
+    model: 'm',
+    chat: r =>
+      new Promise(res => {
+        if (!r.system) {
+          res(ok({ provider: 'gemini', model: 'm', content: [], text: 'Title', toolCalls: [], stop: 'end', usage: NO_USAGE }));
+          return;
+        } // naming the conversation
+        n++;
+        r.onDelta?.({ type: 'text', text: 'partial ' + String(n) });
+        const done = (): void => {
+          res(ok({ provider: 'gemini', model: 'm', content: [], text: 'full ' + String(n), toolCalls: [], stop: 'end', usage: NO_USAGE }));
+        };
+        if (n === 1) done();
+        else release = done;
+        r.signal?.addEventListener('abort', () => {
+          res(err(new NoemaError('ai.aborted', 'Stopped.')));
+        });
+      }),
+  };
+  const { s } = session(ai);
+  s.openTutor(null, 'explain');
+  await s.send('q');
+  assert.equal(s.history()[1]?.text, 'full 1');
+  const regen = s.regenerate(1);
+  await tick();
+  assert.equal(s.busy, true);
+  assert.equal(s.stream, 'partial 2');
+  s.stop();
+  await regen;
+  assert.equal(s.busy, false);
+  assert.equal(s.history().at(-1)?.text, 'partial 2', 'what came so far is the answer');
+  assert.equal(s.history().at(-1)?.meta?.['stopped'], true);
+  assert.deepEqual(s.version(1), [2, 2]);
+  const e = s.edit(0, 'q2');
+  await tick();
+  assert.equal(s.busy, true);
+  const again = s.edit(0, 'q3'); // edited again while it writes: the first edit's reply is dropped
+  await tick();
+  (release as (() => void) | null)?.();
+  await Promise.all([e, again]);
+  assert.deepEqual(
+    s.history().map(m => m.text),
+    ['q3', 'full 4'],
+  );
+  assert.equal(s.error, null);
+});
+
+test('files go to the AI with their message; a file not on this device is a note', async () => {
+  const ai = scriptedAi(() => 'seen');
+  const files = new Map<string, { name: string; mediaType: string; bytes: Uint8Array }>();
+  const { s } = session(ai, memoryStore(), {
+    attachments: {
+      put: (_a, f) => {
+        files.set('h' + String(files.size), f);
+        return Promise.resolve('h' + String(files.size - 1));
+      },
+      get: (_a, id) => Promise.resolve(files.get(id) ?? null),
+    },
+    fileReader: () => 'claude',
+  });
+  s.openTutor(null, 'explain');
+  const pic = await s.attach({ name: 'circuit.png', mediaType: 'image/png', bytes: new Uint8Array([1, 2, 3]) });
+  assert.ok(pic);
+  await s.send('what is this?', { attachments: [pic, { id: 'zz', name: 'lost.pdf', mediaType: 'application/pdf', size: 9, kind: 'pdf' }] });
+  const parts = ai.calls[0]?.messages[0]?.content ?? [];
+  assert.deepEqual(
+    parts.map(p => p.type),
+    ['image', 'text', 'text'],
+  );
+  assert.match(parts[1]?.type === 'text' ? parts[1].text : '', /lost\.pdf.*not on this device/);
+  assert.equal(s.history()[0]?.attachments?.length, 2);
+});

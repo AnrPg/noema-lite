@@ -9,6 +9,7 @@
  *   NoemaTutor.current()   the mounted tutor (src/composition/ui.ts; the browser suites look in through it)
  */
 import { claudeAI } from '../adapters/claude/index.ts';
+import { browserAttachmentStore, readFile } from '../adapters/browser/attachments.ts';
 import { pageConversationStore } from '../adapters/browser/conversations.ts';
 import { GEMINI_DEFAULT_MODEL, geminiAI } from '../adapters/gemini/index.ts';
 import { copyPromptAI } from '../adapters/local/copy-prompt.ts';
@@ -250,6 +251,8 @@ export function mountTutor(host: TutorPageHost, i18n: I18n): TutorUi {
       W().NoemaCore?.errors.report(e, { where: 'tutor.' + where, severity: 'warning' });
     },
     preloaded: host.preloaded,
+    ...(typeof indexedDB !== 'undefined' ? { attachments: browserAttachmentStore() } : {}),
+    fileReader: () => (settings().apiKey ? 'gemini' : claudeKey() ? 'claude' : 'copy'),
   });
   const jobs = new TutorJobs({ i18n, ai, persona: () => host.persona(), language }, session);
   const md = (t: string): HTMLElement =>
@@ -309,6 +312,7 @@ export function mountTutor(host: TutorPageHost, i18n: I18n): TutorUi {
     toast: (t, ms) => {
       host.toast(t, ms);
     },
+    readFile,
   };
 
   /* the drawer follows the session: open / closed, the panel drawn in it */

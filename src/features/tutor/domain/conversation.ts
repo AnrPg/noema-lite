@@ -21,12 +21,24 @@ export interface TurnMeta {
   noemaState?: Control;
   readonly [key: string]: unknown;
 }
+/** A file the learner added to a message (its bytes are in the AttachmentStore, by this id: its content hash). */
+export interface Attachment {
+  readonly id: string;
+  readonly name: string;
+  readonly mediaType: string;
+  readonly size: number;
+  readonly kind: AttachmentKind;
+}
+export type AttachmentKind = 'image' | 'pdf' | 'audio' | 'video' | 'text';
 export interface Turn {
   readonly id?: string;
   readonly role: 'user' | 'model';
   readonly text: string;
   readonly t: number;
   readonly hidden?: boolean;
+  /** off the active path only (Conversation.branches): the id of the turn before it, null at the start (./branches.ts) */
+  readonly parent?: string | null;
+  readonly attachments?: readonly Attachment[];
   meta?: TurnMeta;
 }
 /** where a conversation is about, as kept (a TutorCtx without the exercise's full text) */
@@ -43,9 +55,23 @@ export interface Conversation {
   title: string | null;
   titleSource?: string;
   titledLen: number;
+  /** the active path: what the learner sees, in order */
   msgs: Turn[];
+  /** every other version of a turn (edited messages, other answers) with its parent (./branches.ts) */
+  branches?: Turn[];
   tutorState?: ThreadState | null;
   meta?: Readonly<Record<string, unknown>>;
+}
+
+/** a message as the record keeps it */
+export interface MessageRecord {
+  readonly id?: string;
+  readonly role: string;
+  readonly content: string;
+  readonly createdAt?: string;
+  readonly parent?: string | null;
+  readonly attachments?: readonly Attachment[];
+  readonly meta?: TurnMeta;
 }
 
 /** The canonical record (engine/convos.js normalize() gives every field its default). */
@@ -71,13 +97,9 @@ export interface ConversationRecord {
   readonly updatedAt: string;
   readonly deleted?: boolean;
   readonly stats?: { readonly messages: number };
-  readonly messages: readonly {
-    readonly id?: string;
-    readonly role: string;
-    readonly content: string;
-    readonly createdAt?: string;
-    readonly meta?: TurnMeta;
-  }[];
+  readonly messages: readonly MessageRecord[];
+  /** the turns off the active path, each with its parent (./branches.ts) */
+  readonly branches?: readonly MessageRecord[];
   readonly tutorState?: ThreadState;
   readonly meta?: Readonly<Record<string, unknown>>;
 }
@@ -87,6 +109,36 @@ const parse = (s: string | undefined, or: number): number => {
   const n = s ? Date.parse(s) : NaN;
   return Number.isFinite(n) ? n : or;
 };
+
+const validAttachments = (a: unknown): Attachment[] =>
+  Array.isArray(a)
+    ? (a as (Attachment | null)[])
+        .filter((x): x is Attachment => !!x && typeof x.id === 'string' && typeof x.mediaType === 'string')
+        .slice(0, 10)
+    : [];
+function turnOf(m: MessageRecord, created: number, branch: boolean): Turn {
+  const att = validAttachments(m.attachments);
+  return {
+    ...(m.id ? { id: m.id } : {}),
+    role: m.role === 'user' ? 'user' : 'model',
+    text: m.content,
+    t: parse(m.createdAt, created),
+    ...(branch ? { parent: m.parent ?? null } : {}),
+    ...(att.length ? { attachments: att } : {}),
+    ...(m.meta ? { meta: m.meta } : {}),
+  };
+}
+function messageOf(m: Turn, created: number, branch: boolean): MessageRecord {
+  return {
+    ...(m.id ? { id: m.id } : {}),
+    role: m.role === 'user' ? 'user' : 'model',
+    content: m.text,
+    createdAt: new Date(m.t || created).toISOString(),
+    ...(branch ? { parent: m.parent ?? null } : {}),
+    ...(m.attachments?.length ? { attachments: m.attachments } : {}),
+    ...(m.meta ? { meta: m.meta } : {}),
+  };
+}
 
 /** canonical record → the tutor's shape */
 export function fromRecord(r: ConversationRecord): Conversation {
@@ -114,13 +166,8 @@ export function fromRecord(r: ConversationRecord): Conversation {
     title: r.title ?? null,
     ...(r.titleSource ? { titleSource: r.titleSource } : {}),
     titledLen: r.titleSource === 'user' ? USER_TITLED : typeof titled === 'number' ? titled : r.title ? r.messages.length : 0,
-    msgs: r.messages.map(m => ({
-      ...(m.id ? { id: m.id } : {}),
-      role: m.role === 'user' ? 'user' : 'model',
-      text: m.content,
-      t: parse(m.createdAt, created),
-      ...(m.meta ? { meta: m.meta } : {}),
-    })),
+    msgs: r.messages.map(m => turnOf(m, created, false)),
+    ...(r.branches?.length ? { branches: r.branches.filter(m => m.id).map(m => turnOf(m, created, true)) } : {}),
     tutorState: r.tutorState ?? null,
     provider: r.model?.provider ?? 'google',
     ...(r.meta ? { meta: r.meta } : {}),
@@ -153,15 +200,8 @@ export function toRecord(cv: Conversation, sectionOf: (exerciseId: string) => st
     model: { provider: cv.provider || 'google', name: cv.model || null },
     createdAt: new Date(cv.created).toISOString(),
     updatedAt: new Date(cv.updated || cv.created).toISOString(),
-    messages: cv.msgs
-      .filter(m => !m.hidden)
-      .map(m => ({
-        ...(m.id ? { id: m.id } : {}),
-        role: m.role === 'user' ? 'user' : 'model',
-        content: m.text,
-        createdAt: new Date(m.t || cv.created).toISOString(),
-        ...(m.meta ? { meta: m.meta } : {}),
-      })),
+    messages: cv.msgs.filter(m => !m.hidden).map(m => messageOf(m, cv.created, false)),
+    ...(cv.branches?.length ? { branches: cv.branches.filter(m => m.id && !m.hidden).map(m => messageOf(m, cv.created, true)) } : {}),
     ...(cv.tutorState ? { tutorState: cv.tutorState } : {}),
     ...(Object.keys(meta).length ? { meta } : {}),
   };
