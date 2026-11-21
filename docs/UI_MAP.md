@@ -45,7 +45,7 @@ test suites run that way. `tests/shell.js` checks the new homes.
 |---|---|
 | H1 ▶ Continue / Start chapter 1 | The primary button on the subject page; also Today's big Continue card (across subjects) |
 | H2 ✨ What's new | Button on the subject page when there is something new; subject ⋮ › What's new |
-| H3 daily-goal ring | Today |
+| H3 daily-goal ring | Today (gold past the goal: a glint, sparks and twinkles within 10 px of the ring and an inner lap for the extra XP, while it holds; still under reduced motion) |
 | H4 🔎 jump to a concept | ⋮ › Search this subject (subject, chapter, section) |
 | H5 ⚡ Lightning, H6 🔧 Debug drills, H7 🃏 Flashcards, H8 🔁 Mistakes gym, H9 🎲 Mixed, H10 🦉 tutor tile | **Practice ▾** next to Continue (with the "due" counts); Today › Review / Mistakes gym across subjects |
 | H11 chapter cards | Chapters as **cards** (default) or as a **list**: the Cards / List switch, remembered |
