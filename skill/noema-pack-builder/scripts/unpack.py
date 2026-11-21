@@ -58,6 +58,9 @@ for loc, t in (p.get('translations') or {}).items():   # a pack in several langu
     for c in tr_chapters(loc, t):
         c = {k: v for k, v in c.items() if not k.startswith('_')}
         os.makedirs(os.path.join(d, 'translations', loc), exist_ok=True)
+        if isinstance(c.get('map'), dict):   # its knowledge map in that language: translations/<locale>/map/chNN.json (make_pack.py reads it back)
+            os.makedirs(os.path.join(d, 'translations', loc, 'map'), exist_ok=True)
+            json.dump(c.pop('map'), open(os.path.join(d, 'translations', loc, 'map', c['id'] + '.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
         json.dump(c, open(os.path.join(d, 'translations', loc, c['id'] + '.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 EXT = {'image/svg+xml': '.svg', 'image/png': '.png', 'image/jpeg': '.jpg', 'image/webp': '.webp'}
 items = []

@@ -538,10 +538,37 @@ function checkSame(tr: Obj, src: Obj, E: (m: string) => void, W: (m: string) => 
         if (b && !eq(a.section, b.section)) E(`translation ${pyStr(i)}: section differs from the source`);
       }
   }
+  if (tr.map !== undefined && src.map !== undefined) checkSameMap(obj(tr.map), obj(src.map), E);
   if (list(tr.pitfalls).length !== list(src.pitfalls).length)
     E(`translation: ${list(tr.pitfalls).length} pitfalls, the source has ${list(src.pitfalls).length}`);
   if (list(tr.objectives).length !== list(src.objectives).length)
     W(`translation: ${list(tr.objectives).length} objectives, the source has ${list(src.objectives).length}`);
+}
+
+/** a translated knowledge map (translations/<locale>/map/chNN.json): the source map's ids and structure, only its words in the
+    language (points' text, learnables' goal, concepts' terms, symbols and def, known concepts' terms) */
+const MAP_SAME: Readonly<Record<string, readonly string[]>> = {
+  points: ['level', 'cats', 'taughtIn'],
+  learnables: ['kp'],
+  concepts: ['in', 'needs', 'units'],
+  known: ['from', 'units'],
+};
+function checkSameMap(tr: Obj, src: Obj, E: (m: string) => void): void {
+  for (const [k, keep] of Object.entries(MAP_SAME)) {
+    const a = objs(src[k]),
+      b = objs(tr[k]);
+    const ia = a.map(x => x.id ?? null),
+      ib = b.map(x => x.id ?? null);
+    if (!eq(ia, ib)) {
+      E(`translation: map.${k} ${pyRepr(ib)} != source ${pyRepr(ia)} (same ids, same order)`);
+      continue;
+    }
+    a.forEach((x, i) => {
+      const y = b[i] ?? {};
+      const d = keep.filter(f => !eq(x[f], y[f]));
+      if (d.length) E(`translation: map.${k} ${pyStr(x.id)} differs from the source in ${d.join(', ')} (only the words may change)`);
+    });
+  }
 }
 
 /** a locale of the subject; shaped: the contract has checked the code already (subject.i18n) */

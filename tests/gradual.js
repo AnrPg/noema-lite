@@ -101,6 +101,13 @@ ok(!bad(ch => { ch.map.concepts[2].units = ['mAh']; }).length, 'concept.undeclar
 ok(has(bad(ch => { ch.debug = [{ id: 'pb1', title: 'Dim lamp', askYourself: ['Is the LED in backwards?'] }]; }), 'concept.undeclared', /pb1: the acronym LED/), 'concept.undeclared: playbooks are scanned');
 ok(has(bad(ch => { ch.pitfalls = [{ title: 'Watts', text: 'A 5 W lamp gets hot.', fix: 'Check it.' }]; }), 'concept.undeclared', /pitfall 1: uses the unit W/), 'concept.undeclared: pitfalls are scanned');
 ok(has(bad(ch => { ch.sections[0].hook = 'Your USB charger counts it.'; }), 'concept.undeclared', /acronym USB/), 'concept.undeclared: section hooks are scanned');
+// tokens that only look like units (bug report 2026-11-21): a hex number, a part number, a hyphenated word; the rest via map.plainText
+ok(!bad(ch => { ch.sections[0].blocks.push({ t: 'p', text: 'The register at address 0x0C holds the charge count.' }); }).length, 'concept.undeclared: 0x0C is a hex number, not 0 coulombs');
+ok(!bad(ch => { ch.sections[0].blocks.push({ t: 'p', text: 'A board with 4 N-channel parts and 2 P-type layers holds charge.' }); }).length, 'concept.undeclared: 4 N-channel is not 4 newtons');
+ok(has(bad(ch => { ch.sections[0].blocks.push({ t: 'p', text: 'The cable of grade 5 W holds charge.' }); }), 'concept.undeclared', /“5 W” is not that unit .*list it in map\.plainText/), 'concept.undeclared: a token read as a unit names itself and map.plainText');
+ok(!bad(ch => { ch.sections[0].blocks.push({ t: 'p', text: 'The cable of grade 5 W holds charge, and so does the 0x1F register.' }); ch.map.plainText = ['5 W']; }).length, 'concept.undeclared: … not once it is listed in map.plainText');
+ok(has(bad(ch => { ch.sections[0].blocks.push({ t: 'p', text: 'The cable of grade 5 W, and a lamp takes 0.5 W.' }); ch.map.plainText = ['5 W']; }), 'concept.undeclared', /unit W/), 'map.plainText hides only what it lists (0.5 W is still a watt)');
+ok(!bad(ch => { ch.sections[0].blocks.push({ t: 'p', text: 'A 3S pack of cells holds charge.' }); ch.map.plainText = ['3S']; ch.map.concepts[0].units = ['C', 'S']; }).length, 'concept.order: 3S in map.plainText is not a use of a declared unit S');
 // inflected languages: a stem with *
 const el = copy(good); el.map.concepts[1].terms = ['ρεύμα*']; el.sections[0].blocks.push({ t: 'p', text: 'Η ένταση του ρεύματος θα έρθει αργότερα.' });
 ok(has(q0(el), 'concept.order', /ch01-s01 \(a paragraph, blocks\[\d+\]\): uses “ρεύμα\*”/), 'a stem (ρεύμα*) finds the inflected form (ρεύματος)');

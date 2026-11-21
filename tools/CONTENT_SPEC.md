@@ -540,7 +540,10 @@ Explore, shared/public packs and on the subject's home.
 playbooks, flashcards and pitfalls, the same answers** (option order, answer indexes, buckets, bug lines, picture regions,
 `targets`, `media`) — only the words change (titles, texts, questions, options, explanations, cards, cloze answers).
 Progress, spaced repetition and sources are keyed by the ids, so they are shared between the languages. A chapter without
-a translation is shown in the pack's language. Labels drawn on a picture come from `media/media.json` (one language): a
+a translation is shown in the pack's language. Its knowledge map in that language (the Info window: points' `text`,
+learnables' `goal`, concepts' `terms`, `symbols` and `def`, known concepts' `terms`) is `translations/<locale>/map/chNN.json`:
+the source map (`map/chNN.json`) with the same ids, order, `level`, `cats`, `taughtIn`, `kp`, `in`, `needs`, `from` and `units`,
+only the words translated; without it the chapter in that language shows the pack's own map. Labels drawn on a picture come from `media/media.json` (one language): a
 translated `img_drag` / `img_label` / `img_select` exercise may carry its own `regions` with translated labels.
 When a later patch adds items to a translated chapter, add them to every `translations/<locale>/chNN.json` too (the
 validator refuses a translation with missing ids). Add `subject.i18n.<locale>` too — required for every translation of a new

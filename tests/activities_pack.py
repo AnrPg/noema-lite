@@ -410,4 +410,23 @@ for bad_ in ('../escape.txt', '/abs.txt', 'a/../../escape.txt', 'C:/x.txt', 'a/D
     w2 = os.path.join(T, 'w-bad'); shutil.rmtree(w2, ignore_errors=True); os.makedirs(w2)
     r = run(os.path.join(S2, 'activity_new.py'), w2, 'x-bad', '--from', 'led-bench')
     check(r.returncode != 0 and 'not a plain relative path' in r.stdout + r.stderr and not os.path.exists(os.path.join(T, 'escape.txt')) and not os.path.exists(os.path.join(S2, 'activities_examples')), f'a bundle path {bad_!r} is refused before anything is written', r.stdout + r.stderr)
+# a translation's knowledge map (CONTENT_SPEC.md "Packs in several languages"): translations/<locale>/map/chNN.json travels with that
+# language's chapter (the Info window and the concept definitions in it), unpack.py writes it back; a moved concept is refused
+wm = os.path.join(T, 'w-map'); shutil.copytree(os.path.join(ROOT, 'tests', 'fixtures', 'demo-physics'), wm)
+c1 = rj(os.path.join(wm, 'chapters', 'ch01.json')); s1 = c1['sections'][0]['id']
+MAP = {'format': 'noema.map/v1', 'chapter': 'ch01', 'points': [{'id': 'p1', 'text': 'Speed is distance over time', 'level': 'core', 'cats': ['formula']}],
+       'learnables': [{'id': 'l1', 'kp': ['p1'], 'goal': 'Work out a speed'}], 'concepts': [{'id': 'speed', 'terms': ['speed'], 'in': s1, 'def': 'How far something goes each second.'}]}
+wj(os.path.join(wm, 'map', 'ch01.json'), MAP)
+FR = json.loads(json.dumps(MAP)); FR['points'][0]['text'] = 'La vitesse est la distance sur le temps'; FR['learnables'][0]['goal'] = 'Calculer une vitesse'
+FR['concepts'][0].update(terms=['vitesse'], **{'def': 'La distance parcourue chaque seconde.'})
+wj(os.path.join(wm, 'translations', 'fr', 'map', 'ch01.json'), FR)
+r = mk(wm, 'om1'); zm = pk('om1')
+trm = json.loads(zm.read('translations/fr.json')) if 'translations/fr.json' in zm.namelist() else {}
+frc = next((c_ for c_ in trm.get('chapters', []) if c_.get('id') == 'ch01'), {})
+check(r.returncode == 0 and (frc.get('map') or {}).get('concepts', [{}])[0].get('def') == 'La distance parcourue chaque seconde.', 'make_pack.py: the French chapter carries its own knowledge map (the concept definition in French)', r.stdout + r.stderr)
+r = run(os.path.join(S, 'unpack.py'), os.path.join(T, 'om1', 'demo-physics.noema.zip'), os.path.join(T, 'um1'))
+um = os.path.join(T, 'um1', 'demo-physics')
+check(r.returncode == 0 and rj(os.path.join(um, 'translations', 'fr', 'map', 'ch01.json')) == FR and 'map' not in rj(os.path.join(um, 'translations', 'fr', 'ch01.json')), 'unpack.py writes it back to translations/fr/map/ch01.json', r.stdout + r.stderr)
+FR['concepts'][0]['in'] = 'nowhere'; wj(os.path.join(wm, 'translations', 'fr', 'map', 'ch01.json'), FR)
+r = mk(wm, 'om2'); check(r.returncode != 0 and 'map.concepts speed differs from the source in in' in r.stdout + r.stderr, 'a translated map that moves a concept is refused (only the words may change)', r.stdout + r.stderr)
 print(f'\nactivities_pack: {ok} checks passed')

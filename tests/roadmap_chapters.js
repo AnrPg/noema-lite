@@ -56,6 +56,22 @@ const PORT = 54391, BASE = `http://localhost:${PORT}`;
   r = await tool('noema_set_roadmap_languages', { curriculum_id: cid, languages_json: JSON.stringify({ translations: ['en'] }) });
   ok(r.isError && /own language/.test(r.text), 'the Roadmap\'s own language is refused as a translation');
 
+  console.log('— a pack of this Roadmap is told only its languages, also before the app has them in its copy');
+  {
+    r = await tool('noema_set_roadmap_languages', { curriculum_id: cid, languages_json: JSON.stringify({ translations: ['el'] }) });
+    ok(/Languages: set for this Roadmap — full translations: el;/.test((await tool('noema_roadmap_map', { curriculum_id: cid })).text), 'noema_roadmap_map names the Roadmap\'s languages');
+    // the stored copy without them (the app wrote its own over it before it read the inbox): the inbox entry still has them
+    const row = rec(); delete row.languages; srv.state.kv[uid]['a:curriculum:' + cid] = { value: JSON.stringify(row), updated_at: new Date().toISOString() };
+    const fs = require('fs');
+    const pk = JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/pack.json'), 'utf8'));
+    let h = 0; for (const ch of cid + s2) h = (h * 31 + ch.charCodeAt(0)) >>> 0;   // graph.ts packId
+    const sid = `cur-${cid.slice(1, 7)}-${s2.replace(/_/g, '-').replace(/[^a-z0-9-]/g, '').replace(/-+/g, '-').replace(/^-|-$/g, '').slice(0, 38)}-${h.toString(36).slice(0, 4)}`;
+    pk.subject = { ...pk.subject, id: sid, owner: null, authoring: { ...pk.subject.authoring, rules: 2 } }; pk.builtAt = '2026-11-01T00:00:00Z'; delete pk.translations;
+    r = await tool('noema_save_pack', { pack_json: JSON.stringify(pk) });
+    const todo = r.text.split('\n').find(l => l.startsWith('🌐 Still to do')) || '';
+    ok(!r.isError && /full translations into el\b/.test(todo) && /en→el, el→en/.test(todo) && !/\b(ru|de|fr)\b/.test(todo), 'finish/save names only Greek and en↔el bridges, no ru, de, fr: ' + (todo || r.text.slice(0, 300)).slice(0, 240));
+  }
+
   console.log('— four plan answers in one call');
   const tasks = [0, 2, 4, 6].map(i => 'plan:' + more.slice(i, i + 2).join(','));
   r = await tool('noema_curriculum_submit', { curriculum_id: cid, answers_json: JSON.stringify(tasks.map(t => ({ task_id: t, result: AG.plans(t.slice(5).split(',')) }))) });

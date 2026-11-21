@@ -808,6 +808,11 @@
             }
           }
         },
+        "plainText": {
+          "description": "Q0: words and numbers of the chapter's text that only look like a unit after a number or an acronym (\"3S\" = three cells in series, \"183 C\" on a datasheet, \"0x0C\", a part number): the gradual-introduction checker reads the text without them (src/features/content/domain/gradual.ts).",
+          "type": "array",
+          "items": { "type": "string" }
+        },
         "sourceQuestions": {
           "type": "array",
           "items": {
