@@ -50,7 +50,7 @@
   },
   "roadmap.map.lib.new": "New Roadmap",
   "@roadmap.map.lib.new": {
-    "description": "Button in the Roadmaps library: start a new Roadmap."
+    "description": "The Roadmaps library's primary button, a menu (▾) of the ways to a new Roadmap: from a goal, from your sources, import."
   },
   "roadmap.map.lib.import": "Import a Roadmap",
   "@roadmap.map.lib.import": {
@@ -63,6 +63,22 @@
   "roadmap.map.lib.explore": "Explore Roadmaps",
   "@roadmap.map.lib.explore": {
     "description": "Button: browse public Roadmaps other learners share."
+  },
+  "roadmap.map.lib.fromGoal": "From a goal",
+  "@roadmap.map.lib.fromGoal": {
+    "description": "Item of the “New Roadmap ▾” menu: make a Roadmap from a goal the learner types."
+  },
+  "roadmap.map.lib.fromGoalSub": "Type what you want to learn; Claude lays out the steps",
+  "@roadmap.map.lib.fromGoalSub": {
+    "description": "Second line of the “From a goal” item."
+  },
+  "roadmap.map.lib.exploreShort": "Explore",
+  "@roadmap.map.lib.exploreShort": {
+    "description": "Short button label next to “New Roadmap ▾” where the Roadmaps open without a page menu (the classic screens): browse public Roadmaps other learners share (its tooltip says more). One word is enough."
+  },
+  "roadmap.map.lib.importSub": "From your Claude app, a file or pasted text",
+  "@roadmap.map.lib.importSub": {
+    "description": "Second line of the “Import a Roadmap” item in the “New Roadmap ▾” menu."
   },
   "roadmap.map.lib.eachStep": "Each step (node) becomes a subject with theory, exercises, flashcards, drills and the tutor.",
   "@roadmap.map.lib.eachStep": {
