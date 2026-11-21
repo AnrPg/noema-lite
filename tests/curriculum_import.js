@@ -194,6 +194,7 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
 
   console.log('— 📥 import the map with files');
   await p.click('.cm-mode:has-text("Roadmaps")'); await wait(300);
+  await p.locator('noema-roadmap-library .cm-new').click(); await wait(150);   // 📥 Import is a way in “New Roadmap ▾”
   await p.locator('noema-roadmap-library .cm-importbtn').click(); await wait(300);
   // ⓘ guides: every example is read by the real parser exactly as its “Read as” says; ▶ Try it loads it
   await p.click('.cg-step >> nth=0 >> .cg-tip summary'); await wait(150);
