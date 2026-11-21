@@ -43,6 +43,10 @@ export interface ConversationsHost {
   placeOf(subjectId: string, title: string | undefined): Place;
   /** continue in the tutor of its subject */
   resume(r: ConvoRow): void;
+  /** 💬→📖 use it to improve a lesson (absent: the page cannot) */
+  useInLesson?: ((r: ConvoRow) => void) | undefined;
+  /** the label of that button (in the lesson updates' catalog) */
+  useInLessonLabel?: (() => string) | undefined;
   /** the kind or mode of a record, in the learner's words */
   modeOf(r: ConvoRow): string;
   /** "from <app>" when another app wrote it, else null */
@@ -359,6 +363,20 @@ export class NoemaConversations extends LitElement {
               >
                 ${this.#L('convContinue')}
               </button>
+              ${
+                h.useInLesson
+                  ? html`<button
+                      class="btn ns-cvlesson"
+                      type="button"
+                      @click=${() => {
+                        this.close();
+                        h.useInLesson?.(r);
+                      }}
+                    >
+                      ${h.useInLessonLabel?.() ?? ''}
+                    </button>`
+                  : nothing
+              }
             </div>`
           : nothing
       }`;

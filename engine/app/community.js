@@ -146,6 +146,8 @@
     },
     keep(acc, u) { const k = KV.accountKey('packmeta:' + u.subject, acc), m = jget(k, null); if (m) KV.set(k, JSON.stringify({ ...m, publicSkip: u.mark })); this.list = this.list.filter(x => x.id !== u.id); },
   };
+  /** 💬→📖 the proposals for the learner's lessons that wait for them (src/composition/lesson-updates.ts) */
+  const lessonUpdates = acc => { try { return window.NoemaShell?.lessonUpdates?.bell?.(acc) || []; } catch (e) { NoemaCore.errors.report(e, { where: 'loader.notes.lessonup', severity: 'warning' }); return []; } };
   const Notes = {
     pending: [], remote: [], listeners: [], timer: null, acc: null,
     on(f) { this.listeners.push(f); f(this.pending); },
@@ -153,7 +155,7 @@
     drop(id) { this.remote = this.remote.filter(x => x.id !== id); this.pending = this.pending.filter(x => x.id !== id); this.emit(); },
     emit() { this.listeners.forEach(f => { try { f(this.pending); } catch (e) { NoemaCore.errors.report(e, { where: 'loader.notes.listener', severity: 'error' }); } }); },
     /** 🔔 = shares and invitations (from the cloud) + updates that wait for the learner (shared curricula, their steps, Explore subjects). */
-    local() { this.pending = [...this.remote, ...(window.NoemaCurShare?.updates?.(this.acc) || []), ...SubjUpdates.list, ...Notices.list(this.acc)]; this.emit(); return this.pending; },
+    local() { this.pending = [...this.remote, ...(window.NoemaCurShare?.updates?.(this.acc) || []), ...SubjUpdates.list, ...lessonUpdates(this.acc), ...Notices.list(this.acc)]; this.emit(); return this.pending; },
     async refresh() {
       if (!this.acc || !isCloudAcc(this.acc)) return this.pending;
       try {
@@ -177,6 +179,7 @@
       if (sh.kind === 'curupdate') { if (take) { await APP.reviewChanges?.(acc, sh.curriculum, { onDone: done }); return; } await NoemaCurShare.takeChanges(acc, sh.curriculum, []); return done(); }
       if (sh.kind === 'stepupdate') { if (take) await NoemaCurShare.download(acc, sh.curriculum, sh.node); else NoemaCurShare.keepStep(acc, sh.curriculum, sh.node); return done(); }
       if (sh.kind === 'subjupdate') { if (take) await SubjUpdates.apply(acc, sh); else SubjUpdates.keep(acc, sh); return done(); }
+      if (sh.kind === 'lessonupdate') { if (take) window.NoemaShell?.lessonUpdates?.review(sh.request); else await window.NoemaShell?.lessonUpdates?.decline(sh.request); return done(); }   // 💬→📖 Claude's changes to a lesson (docs/LESSON_UPDATES.md): Review opens them
     },
     async accept(sh) {
       if (sh.kind === 'curriculum') {   // 👥 join a shared curriculum: my own progress, the steps prepared together

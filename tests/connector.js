@@ -357,6 +357,51 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   ok((await tool('noema_get_pack_url', { subject_id: 'tr-physics', locale: 'de' })).isError, 'get_pack_url with a locale the pack has no translation into: refused');
   ok(/library\/subjects\/databricks\/pack\.json/.test((await tool('noema_get_pack_url', { subject_id: 'databricks' })).content[0].text), 'library packs are offered from the website');
 
+  console.log('— 💬→📖 a lesson improved from a chat (docs/LESSON_UPDATES.md): the request the app wrote, the brief, the gate, the proposal');
+  {
+    const fx = JSON.parse(require('child_process').execFileSync(process.execPath, ['--experimental-strip-types', '--no-warnings', '--input-type=module', '-e',
+      `import { base2, para, trBlocks, update } from ${JSON.stringify(path.join(ROOT, 'src/features/lesson-updates/application/lesson.fixture.ts'))};
+       const b = base2(); const blocks = [para('Picture the current as the number of people who pass a door each second: the more who pass, the larger the current, whatever the size of the crowd.')];
+       const slide = [para('Picture the voltage as the height of a slide: each coulomb that goes down it gets the same push, however many coulombs go down together in a minute.')];
+       const multi = { format: 'noema-lesson-update', v: 1, pack: 'circ-demo', summary: 'A picture for current, and one for voltage in its own lesson.',
+         parts: [{ chapter: 'ch02', ops: [{ op: 'blocks', section: 'ch02-s01', blocks: slide, i18n: trBlocks(slide) }] }, { chapter: 'ch01', ops: [{ op: 'blocks', section: 'ch01-s02', at: 1, blocks, i18n: trBlocks(blocks) }] }] };
+       console.log(JSON.stringify({ b, good: update([{ op: 'blocks', section: 'ch01-s02', at: 1, blocks, i18n: trBlocks(blocks) }]), bad: update([{ op: 'blocks', section: 'ch01-s02', blocks }]), multi }));`], { encoding: 'utf8' }));
+    const put = (k, v) => { srv.state.files[`${uid}/${k}`] = { data: Buffer.from(JSON.stringify(v)), type: 'application/json' }; };
+    put('packs/circ-demo.json', fx.b.pack); put('packs/circ-demo.tr.el.json', fx.b.translations.el);
+    const id = 'lu' + Date.now().toString(36) + '-test', at = new Date().toISOString();
+    const req = { v: 1, id, at, subject: { id: 'circ-demo', title: 'Circuits', language: 'en' }, chapter: { id: 'ch01', title: 'Charge and current' }, conversation: { id: 'cv1', title: 'Current vs charge', turns: 2 }, note: 'the door picture', locale: 'el', files: [], state: 'open' };
+    srv.state.kv[uid]['a:lessonreq:' + id] = { value: JSON.stringify(req), updated_at: at };
+    put(`updates/${id}/chat.json`, { format: 'noema-lesson-chat', v: 1, id, text: '**Me:**\nIs current the same as charge?\n\n**Owl:**\nNo: like people passing a door each second.', cut: 0 });
+    const list = (await tool('noema_lesson_update_task', {})).content[0].text;
+    ok(list.includes(id) && /Charge and current/.test(list), 'noema_lesson_update_task lists the waiting request');
+    const brief = (await tool('noema_lesson_update_task', { request_id: id })).content[0].text;
+    ok(/people passing a door/.test(brief) && /noema-lesson-update/.test(brief) && /ch01-s02/.test(brief) && /translated into — el\b/.test(brief) && /the door picture/.test(brief), 'the brief: the chat as the source, the chapter, its languages, the note, the format');
+    const bad = await tool('noema_lesson_update_submit', { request_id: id, update_json: JSON.stringify(fx.bad) });
+    ok(bad.isError && /no "el" translation/.test(bad.content[0].text) && !srv.state.kv[uid]['a:lessonup:' + id], 'an update without the Greek text is refused with its problems; no card');
+    const good = await tool('noema_lesson_update_submit', { request_id: id, update_json: JSON.stringify(fx.good) });
+    const card = srv.state.kv[uid]['a:lessonup:' + id], prop = srv.state.files[`${uid}/updates/${id}/proposal.json`];
+    ok(!good.isError && card && JSON.parse(card.value).rev === 1 && prop && JSON.parse(prop.data.toString()).format === 'noema-lesson-update', 'a good one: the proposal file and its card a:lessonup (rev 1): ' + good.content[0].text.slice(0, 120));
+    ok(JSON.parse(srv.state.kv[uid]['a:lessonreq:' + id].value).state === 'open', 'the connector never rewrites the learner\'s request (one writer per key)');
+    const again = await tool('noema_lesson_update_submit', { request_id: id, update_json: JSON.stringify(fx.good) });
+    ok(!again.isError && /already saved by an earlier call/.test(again.content[0].text) && JSON.parse(srv.state.kv[uid]['a:lessonup:' + id].value).rev === 1, 'the same update again: nothing written twice');
+    srv.state.kv[uid]['a:lessonreq:' + id] = { value: JSON.stringify({ ...req, state: 'declined' }), updated_at: at };
+    ok((await tool('noema_lesson_update_submit', { request_id: id, update_json: JSON.stringify(fx.good) })).isError, 'a request the learner declined takes no update');
+    // several lessons: one part per chapter, each where its topic is taught
+    const id2 = 'lu' + Date.now().toString(36) + '-twoparts';
+    srv.state.kv[uid]['a:lessonreq:' + id2] = { value: JSON.stringify({ ...req, id: id2 }), updated_at: at };
+    put(`updates/${id2}/chat.json`, { format: 'noema-lesson-chat', v: 1, id: id2, text: '**Me:**\nAnd voltage?\n\n**Owl:**\nLike the height of a slide.', cut: 0 });
+    const brief2 = (await tool('noema_lesson_update_task', { request_id: id2 })).content[0].text;
+    ok(/one part per chapter/.test(brief2) && /"id":"ch02"/.test(brief2), 'the brief carries the other chapters too, and asks for one part per chapter');
+    const two = await tool('noema_lesson_update_submit', { request_id: id2, update_json: JSON.stringify(fx.multi) });
+    const card2 = JSON.parse(srv.state.kv[uid]['a:lessonup:' + id2]?.value ?? 'null');
+    const prop2 = JSON.parse(srv.state.files[`${uid}/updates/${id2}/proposal.json`]?.data.toString() ?? 'null');
+    ok(!two.isError && /“Charge and current”, “Voltage”/.test(two.content[0].text), 'a proposal of two lessons passes: ' + two.content[0].text.slice(0, 140));
+    ok(card2?.chapters?.map(c => c.id).join() === 'ch01,ch02' && prop2?.parts?.map(p => p.chapter).join() === 'ch01,ch02', 'its card names both chapters, its parts in the order of the chapters');
+    const early = { ...fx.multi, parts: [{ chapter: 'ch01', ops: [{ op: 'blocks', section: 'ch01-s02', blocks: [{ t: 'p', text: 'The current in a wire grows with the voltage across it, so a higher voltage pushes more charge each second through the same lamp in the room.' }], i18n: { el: [{ t: 'p', text: 'The current in a wire grows with the voltage across it, so a higher voltage pushes more charge each second through the same lamp in the room.' }] } }] }, fx.multi.parts[0]] };
+    const q0 = await tool('noema_lesson_update_submit', { request_id: id2, update_json: JSON.stringify(early) });
+    ok(q0.isError && /\[part ch01\].*voltage.*ch02 introduces later/.test(q0.content[0].text), 'Q0 across the lessons: a part that uses what a later chapter teaches is refused');
+  }
+
   console.log('— 🪜 Roadmaps by level: levels proposed with the map, work of one level, a new arrangement for the learner to approve');
   { // a learner of its own: the Roadmaps stay out of the account whose picker the app side checks below
     const su2 = await (await fetch(BASE + '/auth/v1/signup', { method: 'POST', headers: { apikey: 'k', 'content-type': 'application/json' }, body: JSON.stringify({ email: 'levels-user@example.com', password: 'secret123' }) })).json();
