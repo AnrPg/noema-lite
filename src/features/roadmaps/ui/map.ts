@@ -21,7 +21,19 @@ import { shownNode } from '../domain/i18n.ts';
 import type { Roadmap } from '../domain/model.ts';
 import { RoadmapElement } from './element.ts';
 import type { NoemaRoadmapLevels } from './level-bar.ts';
-import { classicEdge, classicPlaces, columnSpan, mapColumns, NODE, related, TREASURE, treasureCurve, treasureLayout } from './layout.ts';
+import {
+  classicEdge,
+  classicPlaces,
+  columnSpan,
+  labelHeight,
+  mapColumns,
+  NODE,
+  related,
+  TMAP,
+  TREASURE,
+  treasureLayout,
+  type TreasureLayout,
+} from './layout.ts';
 import { marks, remoteOf, type Mark } from './marks.ts';
 import { ROLE_ICON, type NoemaRoadmapStep } from './step.ts';
 import { screen } from './styles.ts';
@@ -41,6 +53,7 @@ export class NoemaRoadmapMap extends RoadmapElement {
     legendInMenu: { type: Boolean, attribute: 'legend-in-menu' },
     selected: { state: true },
     zoom: { state: true },
+    room: { state: true },
   };
   static override styles = [
     base,
@@ -57,7 +70,7 @@ export class NoemaRoadmapMap extends RoadmapElement {
       /* the Roadmap's own words (its language, not the interface's) take the direction of their first letter */
       .cm-title strong,
       .cm-listnode .cm-t > b,
-      .cm-tlabel {
+      .cm-st .cm-t {
         unicode-bidi: plaintext;
       }
       .cm-top {
@@ -77,10 +90,34 @@ export class NoemaRoadmapMap extends RoadmapElement {
         font-family: var(--u-display);
         overflow-wrap: anywhere;
       }
+      /* Map / List · − + ⤢ · Next: one row when it fits (a phone of 360 px and up), the switch and the zoom together
+         otherwise */
       .cm-tools {
         display: flex;
         flex-wrap: wrap;
         gap: 6px;
+        align-items: center;
+      }
+      /* a phone: the same row, tighter — the switch's buttons narrower, Next as its ▶ alone (its name stays its label and
+         tooltip) */
+      @media (max-width: 400px) {
+        .cm-tools {
+          gap: 4px;
+        }
+        .seg.cm-viewseg button {
+          padding: 0 7px;
+        }
+        .cm-nextlbl {
+          display: none;
+        }
+      }
+      /* − + ⤢ as one quiet group, like the Map / List switch beside it */
+      .cm-zoomgrp {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid var(--u-line);
+        border-radius: 999px;
+        padding: 1px 2px;
       }
       .seg {
         display: inline-flex;
@@ -304,13 +341,15 @@ export class NoemaRoadmapMap extends RoadmapElement {
         font-size: 13px;
         color: var(--u-ink2);
       }
+      .cm-tcanvas {
+        margin-inline: auto;
+      }
       .cm-st {
         position: absolute;
-        width: 116px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 2px;
+        gap: 0;
         padding: 0;
         border: 0;
         background: none;
@@ -345,15 +384,38 @@ export class NoemaRoadmapMap extends RoadmapElement {
       .cm-st.dim {
         opacity: 0.4;
       }
+      /* the label: on the map's own paper, so a path that comes near never reads through it (the layout keeps the paths
+         off it: they stop at its lower edge) */
+      .cm-st .cm-lab {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-top: ${TMAP.LAB_GAP}px;
+        padding: ${TMAP.PAD / 2}px 4px;
+        border-radius: 8px;
+        background: color-mix(in srgb, var(--u-bg) 88%, transparent);
+      }
+      .cm-st .cm-cl {
+        display: flex;
+        gap: 4px;
+        justify-content: center;
+        height: ${TMAP.CODE}px;
+        line-height: ${TMAP.CODE}px;
+      }
       .cm-st .cm-code {
         font-size: 11px;
         color: var(--u-ink2);
       }
       .cm-st .cm-t {
         display: -webkit-box;
-        -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
+        width: 100%;
+        line-height: ${TMAP.LINE}px;
+        overflow-wrap: anywhere;
+        text-wrap: balance;
       }
       .cm-pip {
         font-style: normal;
@@ -365,16 +427,10 @@ export class NoemaRoadmapMap extends RoadmapElement {
         height: 34px;
       }
       .cm-hero.r {
-        inset-inline-start: 86px;
+        inset-inline-start: calc(50% + 26px);
       }
       .cm-hero.l {
-        inset-inline-end: 86px;
-      }
-      .cm-tlabel {
-        position: absolute;
-        text-align: center;
-        font-family: var(--u-display);
-        font-weight: 700;
+        inset-inline-end: calc(50% + 26px);
       }
       /* the list */
       .cm-list {
@@ -456,9 +512,19 @@ export class NoemaRoadmapMap extends RoadmapElement {
   declare legendInMenu: boolean;
   declare selected: string | null;
   declare zoom: number;
+  /** the treasure map's room across (px at zoom 1): the width it is laid out for (0: not measured yet) */
+  declare room: number;
   #off: (() => void) | null = null;
   #timer: ReturnType<typeof setTimeout> | null = null;
-  #fitted = false;
+  /** the treasure map follows its room (the page's width, the step panel opening); a zoom by hand stops that until Fit */
+  #auto = true;
+  /** the map has been scrolled to the learner's place once */
+  #placed = false;
+  #ro: ResizeObserver | null = null;
+  #observed: Element | null = null;
+  /** the last treasure layout (the Roadmap, its room and the shown language unchanged: the same drawing) */
+  #tl: { c: Roadmap; room: number; loc: string | null; G: TreasureLayout } | null = null;
+  #ctx: CanvasRenderingContext2D | null | undefined;
   /** the drawing the Map button goes back to from the list */
   #mapView: MapView = 'map';
 
@@ -471,6 +537,7 @@ export class NoemaRoadmapMap extends RoadmapElement {
     this.legendInMenu = false;
     this.selected = null;
     this.zoom = 1;
+    this.room = 0;
   }
 
   override connectedCallback(): void {
@@ -487,6 +554,12 @@ export class NoemaRoadmapMap extends RoadmapElement {
         this.renderRoot.querySelector<NoemaRoadmapLevels>('noema-roadmap-levels')?.refresh();
       }, 400);
     });
+    // the titles are measured in the page's font: once it has loaded, measured again
+    if ('fonts' in document)
+      void document.fonts.ready.then(() => {
+        this.#tl = null;
+        this.requestUpdate();
+      });
   }
 
   override disconnectedCallback(): void {
@@ -494,22 +567,51 @@ export class NoemaRoadmapMap extends RoadmapElement {
     this.#off?.();
     this.#off = null;
     if (this.#timer) clearTimeout(this.#timer);
+    this.#ro?.disconnect();
+    this.#ro = null;
+    this.#observed = null;
   }
 
   override willUpdate(changed: Map<string, unknown>): void {
     if (changed.has('focusStep') && this.focusStep) this.selected = this.focusStep;
-    if (changed.has('view')) this.#fitted = false;
+    if (changed.has('view') && this.view === 'treasure') this.#auto = true;
   }
 
   protected override updated(): void {
-    // the treasure map fits the width once (the learner zooms after)
-    if (this.view !== 'treasure' || this.#fitted) return;
-    const sc = this.renderRoot.querySelector<HTMLElement>('.cm-scroll'),
-      w = Number(this.renderRoot.querySelector<HTMLElement>('.cm-canvas')?.dataset['w'] ?? 0);
-    if (!sc?.clientWidth || !w) return;
-    this.#fitted = true;
-    const z = Math.max(0.45, Math.min(1.25, (sc.clientWidth - 24) / w));
-    if (Math.abs(z - this.zoom) > 0.02) this.zoom = z;
+    const sc = this.renderRoot.querySelector<HTMLElement>('.cm-scroll');
+    if (sc && sc !== this.#observed && typeof ResizeObserver === 'function') {
+      this.#ro ??= new ResizeObserver(() => {
+        if (this.view === 'treasure' && this.#auto) this.requestUpdate();
+      });
+      if (this.#observed) this.#ro.unobserve(this.#observed);
+      this.#ro.observe(sc);
+      this.#observed = sc;
+    }
+    this.#follow(sc);
+  }
+
+  /** The treasure map across its room: laid out for the width it has (the labels as wide as it allows), at zoom 1; only a
+      map that cannot be narrower than its room (a phone) is zoomed out to it, never below 0.8 so the titles stay readable (it pans beyond). */
+  #follow(sc: HTMLElement | null): void {
+    if (this.view !== 'treasure' || !this.#auto || !sc?.clientWidth) return;
+    const room = sc.clientWidth;
+    if (Math.abs(room - this.room) > 4) {
+      this.room = room;
+      return;
+    }
+    const w = Number(this.renderRoot.querySelector<HTMLElement>('.cm-canvas')?.dataset['w'] ?? 0);
+    if (!w) return;
+    const z = w > room ? Math.max(0.8, room / w) : 1;
+    if (Math.abs(z - this.zoom) > 0.01) {
+      this.zoom = z;
+      return;
+    }
+    // a map wider than its room (a phone) opens on the learner's next station (or its middle), not on its left edge
+    if (this.#placed || this.selected || sc.scrollWidth <= sc.clientWidth + 1) return;
+    this.#placed = true;
+    const b = this.renderRoot.querySelector<HTMLElement>('.cm-st.cm-nextup');
+    const x = b ? (parseFloat(b.style.left) + parseFloat(b.style.width) / 2) * this.zoom : sc.scrollWidth / 2;
+    sc.scrollLeft = Math.max(0, x - sc.clientWidth / 2);
   }
 
   /** Select a step (and show it beside the map); null: nothing selected. */
@@ -548,17 +650,72 @@ export class NoemaRoadmapMap extends RoadmapElement {
   }
 
   #zoomTo(z: number): void {
+    this.#auto = false;
     this.zoom = Math.max(0.35, Math.min(1.6, z));
   }
 
+  /** Fit: the treasure map laid out again across the whole width it has; the classic map: all of it in view. */
   #fit(): void {
     const sc = this.renderRoot.querySelector<HTMLElement>('.cm-scroll'),
       cv = this.renderRoot.querySelector<HTMLElement>('.cm-canvas');
     if (!sc || !cv) return;
+    if (this.view === 'treasure') {
+      this.#auto = true;
+      this.room = 0;
+      return;
+    }
     const r = sc.getBoundingClientRect(),
       w = Number(cv.dataset['w'] ?? 1) || 1,
       h = Number(cv.dataset['h'] ?? 1) || 1;
-    this.#zoomTo(this.view === 'treasure' ? Math.min(1, r.width / w) : Math.min(r.width / w, r.height / h));
+    this.#zoomTo(Math.min(r.width / w, r.height / h));
+  }
+
+  /** How many lines a title takes in a label this wide: measured in the page's font (the label's own wrapping: whole words,
+      a word longer than the line broken); null without a canvas (the layout estimates). */
+  #lineCounter(): ((title: string, width: number) => number) | null {
+    if (this.#ctx === undefined)
+      try {
+        this.#ctx = document.createElement('canvas').getContext('2d');
+      } catch {
+        this.#ctx = null;
+      }
+    const ctx = this.#ctx;
+    if (!ctx) return null;
+    ctx.font = `12px ${getComputedStyle(this).fontFamily || 'sans-serif'}`;
+    return (title, width) => {
+      const max = width - 8 - 1; // the label's padding, and a pixel of rounding
+      let lines = 1,
+        line = 0;
+      const space = ctx.measureText(' ').width;
+      for (const word of title.split(/\s+/).filter(Boolean)) {
+        const w = ctx.measureText(word).width;
+        if (line && line + space + w <= max) {
+          line += space + w;
+          continue;
+        }
+        if (line) lines++;
+        // a word wider than the line: broken over as many lines as it needs
+        const extra = Math.max(0, Math.ceil(w / max) - 1);
+        lines += extra;
+        line = extra ? w - extra * max : w;
+      }
+      return lines;
+    };
+  }
+
+  #treasureLayout(c: Roadmap): TreasureLayout {
+    const loc = this.shownLocale(c),
+      room = this.room;
+    const t = this.#tl;
+    if (t && t.c === c && t.room === room && t.loc === loc) return t.G;
+    const count = this.#lineCounter(),
+      title = (id: string): string => shownNode(c, id, loc)?.title ?? '';
+    const G = treasureLayout(c, {
+      ...(room ? { width: room } : {}),
+      ...(count ? { lines: (id: string, w: number): number => count(title(id), w) } : {}),
+    });
+    this.#tl = { c, room, loc, G };
+    return G;
   }
 
   #dialog(sel: string): NoemaDialog | null {
@@ -793,8 +950,8 @@ export class NoemaRoadmapMap extends RoadmapElement {
   /* ---- the treasure map ---- */
 
   #treasure(c: Roadmap, st: Record<string, StepStatus>): TemplateResult {
-    const G = treasureLayout(c),
-      { X, Y, W, H, E, layers, code } = G,
+    const G = this.#treasureLayout(c),
+      { X, Y, W, H, E, D, layers, code, lw, lines } = G,
       z = this.zoom,
       sel = this.selected,
       rel = related(c, sel),
@@ -802,13 +959,13 @@ export class NoemaRoadmapMap extends RoadmapElement {
       art = this.data.art,
       other = this.t('roadmap.map.st.anotherMember'),
       f1 = (v: number): number => +v.toFixed(1);
-    const paths = E.map(ch => {
+    const paths = E.map((ch, k) => {
       const a = ch[0] ?? '',
         b = ch[ch.length - 1] ?? '',
         s = st[a],
         on = !!rel && (a === sel || b === sel);
       const cls = ['cm-e', s?.mastered ? 'ok' : s?.open ? 'op' : 'lk', on ? 'hl' : rel ? 'dim' : ''].filter(Boolean).join(' ');
-      return svg`<path class=${cls} d=${treasureCurve(ch, X, Y)}></path>`;
+      return svg`<path class=${cls} d=${D[k] ?? ''}></path>`;
     });
     const flags = Object.keys(c.nodes)
       .filter(id => st[id]?.mastered && X[id] !== undefined)
@@ -816,8 +973,8 @@ export class NoemaRoadmapMap extends RoadmapElement {
     const tx = f1(X[TREASURE] ?? W / 2),
       ty = Y(TREASURE);
     const bands = G.bands.map(b => {
-      const top = Y(layers[b.to]?.[0] ?? '') - 62,
-        bottom = Y(layers[b.from]?.[0] ?? '') + 62;
+      const top = Y(layers[b.to]?.[0] ?? '') - G.above(b.to) - 18,
+        bottom = Y(layers[b.from]?.[0] ?? '') + G.below(b.from) + 8;
       const label = b.level ? this.levelLabel(c, b.level) : this.t('roadmap.map.band.noLevel');
       return html`<div class="cm-tband" data-level=${b.level} style="top:${top}px;height:${bottom - top}px;width:${W - 24}px">
         <span>${label}</span>
@@ -860,21 +1017,33 @@ export class NoemaRoadmapMap extends RoadmapElement {
       return html`<button
         class=${cls}
         data-id=${id}
-        style="left:${f1(x - 58)}px;top:${Y(id) - 22}px"
+        style="left:${f1(x - lw / 2)}px;top:${Y(id) - TMAP.DOT}px;width:${lw}px"
         title=${n.title}
         aria-label=${label}
         @click=${(): void => {
           this.select(id);
         }}
       >
-        <span class="cm-dot">${inside}</span><b class="cm-code">${code[id]}</b> <span class="cm-t">${n.title}</span>
-        <span class="cm-badges">${mk.map(m => html`<i class="cm-pip" data-k=${m.k} title=${this.#markTitle(m)}>${m.emoji}</i>`)}</span>
+        <span class="cm-dot">${inside}</span>
+        <span class="cm-lab" style="height:${labelHeight(lines[id] ?? 1)}px">
+          <span class="cm-cl"
+            ><b class="cm-code">${code[id]}</b
+            >${mk.map(m => html`<i class="cm-pip" data-k=${m.k} title=${this.#markTitle(m)}>${m.emoji}</i>`)}</span
+          >
+          <span class="cm-t" style="-webkit-line-clamp:${lines[id] ?? 1}">${n.title}</span>
+        </span>
         ${hero}
       </button>`;
     });
-    const goal = this.roadmapTitle(c).trim(),
-      gw = Math.min(W - 130, 300);
-    return html`<div class="cm-canvas" data-w=${W} data-h=${H} style="width:${W * z}px;height:${H * z}px">
+    // the Roadmap's name is the page's heading already: on the map, only the treasure's tooltip says it
+    const goal = this.roadmapTitle(c).trim();
+    return html`<div
+      class="cm-canvas cm-tcanvas"
+      data-w=${W}
+      data-h=${H}
+      data-crossings=${G.crossings}
+      style="width:${f1(W * z)}px;height:${f1(H * z)}px"
+    >
       <div class="cm-inner cm-vert cm-tmap" style="width:${W}px;height:${H}px;transform:scale(${z})">
         ${bands}
         <svg class="cm-tsvg" width=${W} height=${H} viewBox="0 0 ${W} ${H}" aria-hidden="true">
@@ -896,7 +1065,8 @@ export class NoemaRoadmapMap extends RoadmapElement {
           </g>
           <text x="22" y=${H - 20} fill="var(--u-ink2)" font-weight="700">${this.t('roadmap.map.tmap.start')}</text>
           ${paths}
-          <g transform="translate(${tx} ${ty})">
+          <g class="cm-treasure" transform="translate(${tx} ${ty})">
+            <title>${this.t('roadmap.map.tmap.treasure', { goal })}</title>
             <path d="M-11 -11 L11 11 M11 -11 L-11 11" stroke="var(--u-bad-ink)" stroke-width="5" stroke-linecap="round"></path>
             <g transform="translate(16 -34)">
               <rect x="0" y="6" width="40" height="26" rx="4" fill="var(--u-warn)" stroke="var(--u-warn-ink)" stroke-width="1.5"></rect>
@@ -905,9 +1075,6 @@ export class NoemaRoadmapMap extends RoadmapElement {
           </g>
           ${flags}
         </svg>
-        <div class="cm-tlabel" style="left:${f1(Math.max(20, Math.min(W - 20 - gw, tx - gw / 2)))}px;bottom:${H - ty + 40}px;width:${gw}px">
-          ${this.t('roadmap.map.tmap.treasure', { goal })}
-        </div>
         ${stations}
       </div>
     </div>`;
@@ -1026,74 +1193,74 @@ export class NoemaRoadmapMap extends RoadmapElement {
     return html`
       <div class="cm-top">
         <div class="cm-title"><strong>${this.roadmapTitle(c)}</strong><span class="tiny cm-sum">${sum}</span></div>
-        <div class="seg cm-viewseg" role="radiogroup" aria-label=${this.t('roadmap.map.view.aria')}>
-          <button
-            role="radio"
-            class="cm-vbtn"
-            data-list="false"
-            aria-checked=${String(this.view !== 'list')}
-            @click=${(): void => {
-              setView(mapLike);
-            }}
-          >
-            ${this.t('roadmap.map.view.map')}
-          </button>
-          <button
-            role="radio"
-            class="cm-vbtn"
-            data-list="true"
-            aria-checked=${String(this.view === 'list')}
-            @click=${(): void => {
-              setView('list');
-            }}
-          >
-            ${this.t('roadmap.map.view.list')}
-          </button>
-        </div>
         <div class="cm-tools">
+          <div class="seg cm-viewseg" role="radiogroup" aria-label=${this.t('roadmap.map.view.aria')}>
+            <button
+              role="radio"
+              class="cm-vbtn"
+              data-list="false"
+              aria-checked=${String(this.view !== 'list')}
+              @click=${(): void => {
+                setView(mapLike);
+              }}
+            >
+              ${this.t('roadmap.map.view.map')}
+            </button>
+            <button
+              role="radio"
+              class="cm-vbtn"
+              data-list="true"
+              aria-checked=${String(this.view === 'list')}
+              @click=${(): void => {
+                setView('list');
+              }}
+            >
+              ${this.t('roadmap.map.view.list')}
+            </button>
+          </div>
           ${
             this.view === 'list'
               ? nothing
-              : html`<noema-button
+              : html`<div class="cm-zoomgrp">
+                  <noema-icon-button
                     class="cm-zoom"
+                    icon="minus"
                     size="sm"
-                    variant="secondary"
-                    aria-label=${this.t('roadmap.map.map.zoomOut')}
-                    title=${this.t('roadmap.map.map.zoomOut')}
+                    label=${this.t('roadmap.map.map.zoomOut')}
                     @click=${(): void => {
                       this.#zoomTo(this.zoom / 1.2);
                     }}
-                    >−</noema-button
-                  >
-                  <noema-button
+                  ></noema-icon-button>
+                  <noema-icon-button
                     class="cm-zoom"
+                    icon="plus"
                     size="sm"
-                    variant="secondary"
-                    aria-label=${this.t('roadmap.map.map.zoomIn')}
-                    title=${this.t('roadmap.map.map.zoomIn')}
+                    label=${this.t('roadmap.map.map.zoomIn')}
                     @click=${(): void => {
                       this.#zoomTo(this.zoom * 1.2);
                     }}
-                    >+</noema-button
-                  >
-                  <noema-button
-                    size="sm"
-                    variant="secondary"
+                  ></noema-icon-button>
+                  <noema-icon-button
                     class="cm-fit"
-                    title=${this.t('roadmap.map.map.whole')}
+                    icon="fit"
+                    size="sm"
+                    label=${this.t('roadmap.map.map.fit')}
                     @click=${(): void => {
                       this.#fit();
                     }}
-                    >⤢ ${this.t('roadmap.map.map.fit')}</noema-button
-                  >`
+                  ></noema-icon-button>
+                </div>`
           }
           <noema-button
             size="sm"
             class="cm-nextbtn"
+            aria-label=${this.t('roadmap.map.map.nextUp')}
+            title=${this.t('roadmap.map.map.nextUp')}
             @click=${(): void => {
               this.#dialog('.cm-nextdlg')?.show();
             }}
-            >▶ ${this.t('roadmap.map.map.nextUp')}</noema-button
+            ><span aria-hidden="true">▶</span
+            ><span class="cm-nextlbl" aria-hidden="true"> ${this.t('roadmap.map.map.nextUp')}</span></noema-button
           >
           ${
             this.legendInMenu
