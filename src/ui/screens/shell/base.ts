@@ -71,6 +71,10 @@ export class ShellElement extends NoemaElement {
   protected ring(pct: number, size: number, stroke: number): TemplateResult {
     return html`<span class="ns-ringsvg">${unsafeHTML(ringSvg(pct, size, stroke))}</span>`;
   }
+  /** the day's goal ring (Today): the accent until the goal, gold past it (goalRingSvg) */
+  protected goalRing(xp: number, goal: number): TemplateResult {
+    return html`<span class="ns-ringsvg">${unsafeHTML(goalRingSvg(xp, goal))}</span>`;
+  }
 }
 
 export { html, nothing };
@@ -84,4 +88,89 @@ export function ringSvg(pct: number, size: number, stroke: number): string {
     off = C * (1 - Math.max(0, Math.min(1, pct || 0)));
   const c = String(size / 2);
   return `<svg viewBox="0 0 ${String(size)} ${String(size)}" width="${String(size)}" height="${String(size)}" aria-hidden="true"><circle cx="${c}" cy="${c}" r="${String(r)}" fill="none" stroke="var(--line)" stroke-width="${String(stroke)}"/><circle class="ns-arc" cx="${c}" cy="${c}" r="${String(r)}" fill="none" stroke="var(--acc)" stroke-width="${String(stroke)}" stroke-linecap="round" style="--C:${String(C)};stroke-dasharray:${String(C)};stroke-dashoffset:${String(off)}"/></svg>`;
+}
+
+/** the day's goal ring, 64 px with a 7 px stroke, drawn in an 84 px box so its sparks have 10 px around it (never more: the
+    .ns-goal box is 64 px and the svg overflows it by 10 px on each side). Below the goal: the accent arc, as ringSvg. At or
+    past it: the ring in gold (--gold … from the tokens, so it reads on the character's background in light and dark), and,
+    for as long as that holds, a glint that keeps travelling round it, three sparks circling just outside it, small stars
+    twinkling on its rim one after another, and a thin inner lap that fills with the XP above the goal (one more lap = twice
+    the goal) with a star at its tip. The motion is CSS (engine/src/95_shell.css): none under prefers-reduced-motion. */
+export function goalRingSvg(xp: number, goal: number): string {
+  const S = 64,
+    W = 7,
+    VB = S + 20,
+    c = VB / 2,
+    R = (S - W) / 2,
+    C = 2 * Math.PI * R,
+    g = goal > 0 ? goal : 1,
+    over = xp >= g,
+    off = C * (1 - Math.max(0, Math.min(1, xp / g || 0)));
+  const n = (v: number): string => String(Math.round(v * 100) / 100);
+  const circle = (r: number, attrs: string): string => `<circle cx="${n(c)}" cy="${n(c)}" r="${n(r)}" fill="none" ${attrs}/>`;
+  /* a point at deg degrees from the start of the arc (the svg is turned -90°, so 0° is the top of the ring) */
+  const at = (deg: number, r: number): [number, number] => [
+    c + r * Math.cos((deg * Math.PI) / 180),
+    c + r * Math.sin((deg * Math.PI) / 180),
+  ];
+  const star = (x: number, y: number, s: number, cls: string, delay: number): string =>
+    `<path class="${cls}" style="animation-delay:${n(delay)}s" fill="var(--gold-hi)" d="M${n(x)} ${n(y - s)}Q${n(x)} ${n(y)} ${n(x + s)} ${n(y)}Q${n(x)} ${n(y)} ${n(x)} ${n(y + s)}Q${n(x)} ${n(y)} ${n(x - s)} ${n(y)}Q${n(x)} ${n(y)} ${n(x)} ${n(y - s)}Z"/>`;
+  const box = `<svg viewBox="0 0 ${n(VB)} ${n(VB)}" width="${n(VB)}" height="${n(VB)}" aria-hidden="true">`;
+  if (!over)
+    return (
+      box +
+      circle(R, `stroke="var(--line)" stroke-width="${n(W)}"`) +
+      circle(
+        R,
+        `class="ns-arc" stroke="var(--acc)" stroke-width="${n(W)}" stroke-linecap="round" style="--C:${n(C)};stroke-dasharray:${n(C)};stroke-dashoffset:${n(off)}"`,
+      ) +
+      '</svg>'
+    );
+  const extra = Math.min(1, (xp - g) / g),
+    ri = R - W / 2 - 2.6,
+    Ci = 2 * Math.PI * ri,
+    ro = R + W / 2 + 4,
+    rs = R + W / 2 + 3;
+  const [tx, ty] = at(360 * extra, R);
+  return (
+    box +
+    '<defs><linearGradient id="ns-gold" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="var(--gold-hi)"/><stop offset=".55" stop-color="var(--gold)"/></linearGradient></defs>' +
+    circle(R, `stroke="var(--gold-track)" stroke-width="${n(W)}"`) +
+    circle(
+      R,
+      `class="ns-arc" stroke="url(#ns-gold)" stroke-width="${n(W)}" stroke-linecap="round" style="--C:${n(C)};stroke-dasharray:${n(C)};stroke-dashoffset:0"`,
+    ) +
+    circle(
+      R,
+      `class="ns-glint" stroke="var(--gold-hi)" stroke-width="${n(W - 3)}" stroke-linecap="round" style="--C:${n(C)};stroke-dasharray:${n(C * 0.09)} ${n(C * 0.91)}"`,
+    ) +
+    circle(ri, `stroke="var(--gold-track)" stroke-width="2"`) +
+    (extra > 0
+      ? circle(
+          ri,
+          `class="ns-lap" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" style="stroke-dasharray:${n(Ci)};stroke-dashoffset:${n(Ci * (1 - extra))}"`,
+        )
+      : '') +
+    `<g class="ns-orbit">${[0, 130, 250]
+      .map(d => {
+        const [x, y] = at(d, ro);
+        return `<circle cx="${n(x)}" cy="${n(y)}" r="1.4" fill="var(--gold)"/>`;
+      })
+      .join('')}</g>` +
+    (
+      [
+        [38, 2.9, 0],
+        [150, 2.3, 0.8],
+        [232, 3.1, 1.6],
+        [310, 2.2, 2.4],
+      ] as const
+    )
+      .map(([d, s, dl]) => {
+        const [x, y] = at(d - 90, rs);
+        return star(x, y, s, 'ns-twinkle', dl);
+      })
+      .join('') +
+    star(tx, ty, 3.2, 'ns-tip', 0) +
+    '</svg>'
+  );
 }
