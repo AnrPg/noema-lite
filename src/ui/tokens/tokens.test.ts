@@ -23,6 +23,8 @@ import {
   contrast,
   contrastFailures,
   derived,
+  goldFor,
+  GRAPHIC_MIN,
   fillFor,
   mixSrgb,
   surface,
@@ -68,6 +70,30 @@ test('every text token reads at 4.5:1 on each surface it is used on, for every c
     for (const scheme of ['light', 'dark'] as const)
       for (const f of contrastFailures(CHARACTERS[id][scheme])) bad.push(`${id} ${scheme}: ${f}`);
   assert.deepEqual(bad, []);
+});
+
+test("the goal ring's gold reads at 3:1 (and as text at 4.5:1) on bg and paper, for every character and the base set, in light and dark", () => {
+  const bad: string[] = [];
+  const check = (who: string, bg: string, paper: string, ink: string, dark: boolean): void => {
+    const g = goldFor(bg, paper, ink, dark);
+    for (const [name, s] of [
+      ['bg', bg],
+      ['paper', paper],
+    ] as const) {
+      if (contrast(g.gold, s) < GRAPHIC_MIN) bad.push(`${who}: gold on ${name} ${contrast(g.gold, s).toFixed(2)}`);
+      if (contrast(g.goldText, s) < 4.5) bad.push(`${who}: goldText on ${name} ${contrast(g.goldText, s).toFixed(2)}`);
+    }
+  };
+  for (const id of CHARACTER_IDS)
+    for (const scheme of ['light', 'dark'] as const) {
+      const p = CHARACTERS[id][scheme];
+      check(`${id} ${scheme}`, p.bg, p.paper, p.ink, scheme === 'dark');
+    }
+  const d = { ...BASE.colour.light, ...BASE.colour.dark };
+  check('base light', BASE.colour.light.bg, BASE.colour.light.card, BASE.colour.light.ink, false);
+  check('base dark', d.bg, d.card, d.ink, true);
+  assert.deepEqual(bad, []);
+  assert.ok(tokensCss().includes('--gold:'));
 });
 
 test('the base set: its inks, its accent inks and the text on its accents read at 4.5:1 on its surfaces, in light and dark', () => {
