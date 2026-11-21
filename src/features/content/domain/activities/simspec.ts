@@ -1299,8 +1299,10 @@ export function createSimSpec(env: CheckEnv) {
               const k = (v - lo) / (p.step as number);
               return Math.abs(k - Math.round(k)) > 1e-6;
             };
-            if (off(df)) E.push(`${w}.default ${String(df)} is not min + a whole number of steps (${String(p.step)}): the control would move it`);
-            if (off(hi)) E.push(`${w}.max ${String(hi)} is not min + a whole number of steps (${String(p.step)}): the control could not reach it`);
+            if (off(df))
+              E.push(`${w}.default ${String(df)} is not min + a whole number of steps (${String(p.step)}): the control would move it`);
+            if (off(hi))
+              E.push(`${w}.max ${String(hi)} is not min + a whole number of steps (${String(p.step)}): the control could not reach it`);
           }
           if (p.scale != null && !['lin', 'log'].includes(s(p.scale))) E.push(`${w}.scale is lin or log`);
           else if (p.scale === 'log' && lo <= 0) E.push(`${w}: a log scale needs min > 0`);

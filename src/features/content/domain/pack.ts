@@ -162,7 +162,10 @@ export function checkPack(p: unknown, expectId: unknown, opts: PackCheckOptions,
       .map(([k, n]) => `${k} ×${String(n)}`)
       .join(', ');
     const why: string[] = [];
-    if (sp.kinds < V.min) why.push(`${String(sp.kinds)} kind${sp.kinds === 1 ? '' : 's'} of engine, at least ${String(V.min)} (the floor; aim for ${String(V.aim)} or more)`);
+    if (sp.kinds < V.min)
+      why.push(
+        `${String(sp.kinds)} kind${sp.kinds === 1 ? '' : 's'} of engine, at least ${String(V.min)} (the floor; aim for ${String(V.aim)} or more)`,
+      );
     if (sp.top && sp.top[1] > V.maxShare) why.push(`${sp.top[0]} has ${pc(sp.top[1])} of the uses, at most ${pc(V.maxShare)}`);
     if (sp.effective < V.minEffective)
       why.push(`the uses spread over ${sp.effective.toFixed(1)} kinds in effect, at least ${String(V.minEffective)}`);

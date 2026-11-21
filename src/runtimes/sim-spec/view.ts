@@ -132,9 +132,7 @@ export function simView(
   {
     // a derived value that uses the engine's scalar outputs (or such a value) is computed after the engine ("late"; the checker
     // allows it only on a spec without parts, whose plan orders its own values)
-    const outs = new Set(
-      'parts' in spec ? [] : (spec.outputs ?? []).filter(o => o.kind === 'scalar').map(o => o.id),
-    );
+    const outs = new Set('parts' in spec ? [] : (spec.outputs ?? []).filter(o => o.kind === 'scalar').map(o => o.id));
     for (const [i, d] of derived.entries()) {
       const vars = (spec.derived?.[i]?.expr ?? '').match(/(?<![\w.])[A-Za-z_]\w*/g) ?? [];
       d.late = vars.some(v => outs.has(v) || derived.some(x => x.late && x.id === v));

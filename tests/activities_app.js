@@ -639,6 +639,7 @@ async function circuit(p, ctx, E) {
   const gsel = await p.evaluate(() => { const g = document.querySelector('#T [data-bench="ground"]'); return { shown: !g.closest('.sim-p').hidden, n: g.options.length, mode: document.querySelector('#T [data-bench="mode"]').closest('.sim-p').hidden }; });
   await p.selectOption('#T [data-bench="ground"]', '1'); await measure({ i: 'scope', a: 'TP3' });
   await measure({ i: 'bode', a: 'TP3' });
+  await until(() => p.evaluate(() => !!document.querySelector('#T .sim-face svg path.sim-line')));   // the face draws its plot on the next frame
   const L2 = await logs(), bode = await p.evaluate(() => { const f = document.querySelector('#T .sim-face'); return { svg: !!f.querySelector('svg'), line: (f.querySelector('path.sim-line')?.getAttribute('d') || '').split('L').length, cap: f.querySelector('figcaption')?.textContent || '' }; });
   const li = await p.evaluate(() => [...document.querySelectorAll('#T .sim-log li')].map(l => l.textContent));
   ok(gsel.shown && gsel.n === 2 && gsel.mode, `the scope offers its two ground leads (the voltmeter's modes hidden) ${JSON.stringify(gsel)}`);
