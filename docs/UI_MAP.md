@@ -180,3 +180,13 @@ Every screen fits its width down to 320px phones, and nothing scrolls sideways (
 onto a second line, code, diagrams and tables wrap inside the width, long formulas break at their operators. Below 400px with six
 tabs only the open tab shows its name (the others keep it as their tip); below 420px the tutor is its face only. The Roadmap map and
 the PDF viewer are the only things that pan, as pictures do.
+In the tutor's chat a display formula is drawn as a \displaystyle formula in the line, so it breaks after its = and + ; one that is
+still too wide (one huge fraction) is drawn smaller until it fits — never a sideways scroll — and the tutor is told to write long
+formulas as short steps or aligned lines (src/features/tutor/domain/prompts.ts). Formulas are taken out of the text before the
+Markdown runs (src/features/study/ui/text.ts protectMath), so its _ * \\ | never break them.
+
+### The tutor's chat
+The reader stays where they read: a new turn brings the learner's message to the top and the answer grows below it without
+moving the page; ↓ (round, over the end of the talk) brings back the latest; ■ replaces ➤ while it writes. Under each message,
+faint line-icon tools with their words in the tooltip: ✎ edit (the learner's), ⧉ copy and ↻ answer again (the tutor's), ‹ 2/3 ›
+when a message has versions (docs/CONVERSATIONS.md "Branches"); 📎 left of the box adds files ("Attachments").

@@ -348,6 +348,140 @@
   "@engine.tutor.send": {
     "description": "Tooltip / screen-reader label of the ➤ send button of the tutor chat."
   },
+  "engine.tutor.edit": "Edit",
+  "@engine.tutor.edit": {
+    "description": "Tooltip / label of the ✎ button under the learner's own message in the tutor chat: change the message; the tutor answers again and the old version stays as a branch."
+  },
+  "engine.tutor.editCancel": "Cancel",
+  "@engine.tutor.editCancel": {
+    "description": "Button next to Send while the learner edits one of their earlier messages in the tutor chat: keep the message as it was."
+  },
+  "engine.tutor.regenerate": "Answer again",
+  "@engine.tutor.regenerate": {
+    "description": "Tooltip of the ↻ button under one of the tutor's answers: ask for a new answer to the same message (the old one stays, reachable with ‹ ›)."
+  },
+  "engine.tutor.retry": "Ask again",
+  "@engine.tutor.retry": {
+    "description": "Button / tooltip (↻) on the learner's last message when it has no answer (it was stopped or failed): send it to the tutor again."
+  },
+  "engine.tutor.copyReply": "Copy",
+  "@engine.tutor.copyReply": {
+    "description": "Tooltip of the copy button under one of the tutor's answers: copy its text."
+  },
+  "engine.tutor.copied": "Copied",
+  "@engine.tutor.copied": {
+    "description": "Short toast after the learner copied a tutor answer."
+  },
+  "engine.tutor.prevVersion": "Previous version",
+  "@engine.tutor.prevVersion": {
+    "description": "Tooltip of ‹ in the ‹ 2/3 › switcher under a message that was edited or answered again: show the earlier version and the conversation that followed it."
+  },
+  "engine.tutor.nextVersion": "Next version",
+  "@engine.tutor.nextVersion": {
+    "description": "Tooltip of › in the ‹ 2/3 › switcher under a message that was edited or answered again: show the later version."
+  },
+  "engine.tutor.versionOf": "Version {n} of {total}",
+  "@engine.tutor.versionOf": {
+    "description": "Screen-reader label of the ‹ 2/3 › switcher under a message. n = the version shown, total = how many versions there are.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "total": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.tutor.stop": "Stop",
+  "@engine.tutor.stop": {
+    "description": "Tooltip / label of the ■ button that replaces Send while the tutor writes its answer: stop writing (what came so far is kept)."
+  },
+  "engine.tutor.stopped": "Stopped",
+  "@engine.tutor.stopped": {
+    "description": "Small faint note under a tutor answer the learner stopped before it was finished."
+  },
+  "engine.tutor.jumpLatest": "Jump to the latest",
+  "@engine.tutor.jumpLatest": {
+    "description": "Tooltip / label of the round ↓ button over the tutor chat, shown when the learner has scrolled up: scroll to the end of the conversation."
+  },
+  "engine.tutor.attach": "Add a file",
+  "@engine.tutor.attach": {
+    "description": "Tooltip / label of the 📎 button next to the tutor chat's text box: add pictures, PDFs, text files (and, with Gemini, sound or video) to the message."
+  },
+  "engine.tutor.removeFile": "Remove {name}",
+  "@engine.tutor.removeFile": {
+    "description": "Tooltip / label of ✕ on a file added to a message that is not sent yet. name = the file's name.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "notes.pdf"
+      }
+    }
+  },
+  "engine.tutor.adding": "Adding files…",
+  "@engine.tutor.adding": {
+    "description": "Status line while the files the learner chose are being prepared for the message."
+  },
+  "engine.tutor.fileMissing": "This file is not on this device (it was added on another one)",
+  "@engine.tutor.fileMissing": {
+    "description": "Tooltip of a file in an earlier message of the tutor chat whose bytes are only on the device it was added on."
+  },
+  "engine.tutor.file_type": "{name}: this kind of file can’t be sent to the tutor",
+  "@engine.tutor.file_type": {
+    "description": "Toast: the learner chose a file of a kind no AI here reads. name = the file's name.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "notes.pdf"
+      }
+    }
+  },
+  "engine.tutor.file_reader": "{name}: the AI you use now can’t read this kind of file",
+  "@engine.tutor.file_reader": {
+    "description": "Toast: the AI chosen in the settings cannot read this kind of file (e.g. sound or video with Claude). name = the file's name.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "notes.pdf"
+      }
+    }
+  },
+  "engine.tutor.file_size": "{name} is too big (at most {mb} MB)",
+  "@engine.tutor.file_size": {
+    "description": "Toast: a file is over the size limit. name = the file's name, mb = the limit in megabytes.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "notes.pdf"
+      },
+      "mb": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.tutor.file_count": "At most {n} files per message",
+  "@engine.tutor.file_count": {
+    "description": "Toast: the learner tried to add more files than one message can carry. n = the limit.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.tutor.file_failed": "{name} could not be added",
+  "@engine.tutor.file_failed": {
+    "description": "Toast: a file could not be read or kept. name = the file's name.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "notes.pdf"
+      }
+    }
+  },
   "engine.tutor.savedLesson": "<b>Saved to your lessons:</b> {lesson}",
   "@engine.tutor.savedLesson": {
     "description": "Chip under a tutor answer (after 📌): a lesson was saved. Keep the <b>…</b> tags around the label. lesson = the lesson’s text.",

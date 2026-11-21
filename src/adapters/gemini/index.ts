@@ -112,6 +112,7 @@ function toPart(p: ContentPart): Part {
       return { text: p.text };
     case 'image':
     case 'document':
+    case 'media':
       return { inlineData: { mimeType: p.mediaType, data: p.data } };
     case 'tool_call':
       return { functionCall: { name: p.name, args: p.input } };
