@@ -269,3 +269,12 @@ test('the Markdown export starts with the lessons and never shows the hidden sta
   assert.match(md, /^### Heading$/m, 'a message heading goes below the speakers');
   assert.equal(visibleText('Hi<noema-state>{"x":1}</noema-state>'), 'Hi');
 });
+
+test('modeSystem: the learner profile and the persona prior each appear once', () => {
+  const p = { ...PERSONA, prior: 'They already know algebra.' };
+  for (const m of ['socratic', 'explain', 'hint', 'quiz', 'interview', 'debug'] as const) {
+    const sys = modeSystem(m, p, SUBJECT);
+    assert.equal(sys.split('They already know algebra.').length - 1, 1, m);
+    assert.equal(sys.split(SUBJECT.learner).length - 1, 1, m);
+  }
+});

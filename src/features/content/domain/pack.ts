@@ -4,6 +4,7 @@
 import { checkBalance } from './balance.ts';
 import { checkExercise, shapeOf } from './exercise.ts';
 import { checkQuality } from './quality.ts';
+import { engineSpread, engineUses } from './activities/registry.ts';
 import { QUALITY } from './rules.ts';
 import { checkI18n, type Counted } from './translation.ts';
 import { isObj, list, obj, objs, s, type Report } from './util.ts';
@@ -149,6 +150,32 @@ export function checkPack(p: unknown, expectId: unknown, opts: PackCheckOptions,
   } else {
     const per = opts.balance ?? (auth.minPerKind as number | null | undefined);
     if (per !== 0) for (const c of chapters) for (const i of checkBalance(c, sj, { min: per ?? undefined })) (per ? E : W).push(i.msg);
+  }
+  // pack.engines: heterogeneous activities and simulations in every pack (each Roadmap node)
+  if (qual) {
+    const V = QUALITY.engines,
+      uses = engineUses(p),
+      sp = engineSpread(uses);
+    const pc = (x: number): string => String(Math.round(x * 100)) + ' %';
+    const mix = Object.entries(uses)
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+      .map(([k, n]) => `${k} ×${String(n)}`)
+      .join(', ');
+    const why: string[] = [];
+    if (sp.kinds < V.min) why.push(`${String(sp.kinds)} kind${sp.kinds === 1 ? '' : 's'} of engine, at least ${String(V.min)}`);
+    if (sp.top && sp.top[1] > V.maxShare) why.push(`${sp.top[0]} has ${pc(sp.top[1])} of the uses, at most ${pc(V.maxShare)}`);
+    if (sp.effective < V.minEffective)
+      why.push(`the uses spread over ${sp.effective.toFixed(1)} kinds in effect, at least ${String(V.minEffective)}`);
+    if (why.length) {
+      const built = !p.builtAt || s(p.builtAt) >= V.since;
+      const hard =
+        V.level === 'error' &&
+        ((opts.requireQuality === true && built) ||
+          ((auth.by === 'claude' || auth.by === 'gemini') && !!p.builtAt && s(p.builtAt) >= V.since));
+      (hard ? E : W).push(
+        `[${V.id}] the activities and simulations are not varied enough (${mix || 'none'}): ${why.join('; ')}. Read the full list of engines (docs/INTERACTIVE_LIBRARY.md, docs/library/, docs/INTERACTIVE_ENGINES.md; the audit names the engines that fit each chapter) and give each idea where trying teaches the engine that fits it best, or ask for a missing one with noema_request_engine`,
+      );
+    }
   }
   checkI18n(p, chapters, E, W);
   const A = activities(p);

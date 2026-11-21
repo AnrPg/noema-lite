@@ -43,7 +43,7 @@ function learnerProfile() {
   let learner = '';
   try { learner = JSON.parse(Noema.kv.get(Noema.kv.accountKey('settings')) || '{}').learner || ''; } catch (e) { }   // no settings yet: the default profile
   learner = learner || ACCOUNT.learner || `The learner (${ACCOUNT.name || 'the student'}) learns best when challenged, tested and given tightly structured, co-located information.`;
-  return `${learner} ${TUTOR.prior || ''}`.trim();
+  return learner;   // the persona's prior is added once, by the prompts (src/features/tutor/domain/prompts.ts learnerOf)
 }
 /* i18n-ignore-end */
 /** a part of the whole pack (before the source filter): its chapter, or the exercise itself */

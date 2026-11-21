@@ -15,7 +15,27 @@ Russian). For a WebAssembly module (`wasm-module@1`, `docs/INTERACTIVE_WASM.md`)
 Make one only when **trying** teaches something that reading and pictures cannot: a relation between quantities
 (move one, watch another), a process over time, a system with feedback, a search for a setting that works, a fault to find
 by probing. Not for: a fact, a definition, a static diagram (use a figure), a quiz (use the exercise types). One or two
-well-made activities per chapter at most; most chapters need none.
+well-made activities per chapter is a good size; a chapter with no idea where trying teaches has none.
+
+## Variety in every pack — the full list first, the best engine each time (rule `pack.engines`, CONTENT_SPEC Q9)
+
+Every pack — every Roadmap node on its own — uses a **heterogeneous mix of engines**, each chosen because it models its idea best.
+A quota met with token uses is not the goal: an author who builds everything on one familiar engine and adds four others once each
+is refused.
+
+1. **Explore the full list before planning**: all the engines of this app are `formula@1`, `ode@1`, `des@1`, `field@1`,
+   `agents@1`, `prob@1`, `graph@1`, `geom@1`, `logic@1`, `genetics@1`, `seq@1`, `med@1`, `clinic@1`, `anatomy@1`, `timeline@1`,
+   `music@1`, `map@1`, `text@1`, `craft@1`, `rhetoric@1`, `philo@1`, `law@1` (the library, `docs/INTERACTIVE_LIBRARY.md` and each
+   chapter of `docs/library/`), `circuit-mna@1` (`docs/INTERACTIVE_CIRCUIT.md`), `thermal@1`, `pid@1`, `rf@1`, `twin@1`
+   (`docs/INTERACTIVE_ENGINES.md`), `wasm@1` (`docs/INTERACTIVE_WASM.md`), and the runtimes with no engine of their own: mini-apps
+   (`html-app@1`, which can also call library engines), Python (`py-module@1`), H5P (`h5p@1`), outside pages (`external-embed@1`).
+   The deep audit (audit.py, `noema_quality_audit`) names the library engines that fit each chapter.
+2. **Give each idea the engine whose model is that idea** (see "Which engine for which learning goal" below), never the familiar
+   one by habit and never `formula@1` when a specific engine models the idea. Plan the pack's activities across its chapters first.
+3. **Spread the uses**: each interactive block and each `sim` exercise is one use of every kind of engine its activity runs on.
+   A pack needs ≥ 5 kinds, no kind over 35 % of the uses and ≥ 4 kinds in effect (1 / Σ share²). The checker (make_pack.py, the
+   upload, `noema_check_pack`, the audit) prints the mix and what is missing.
+4. When none fits an idea, ask for an engine (`noema_request_engine`) and use the closest real fit meanwhile.
 
 ## First: the engine library
 
