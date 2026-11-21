@@ -486,6 +486,17 @@ Nothing is lost:
   first — each level's steps in columns of their own (on the treasure map: layers), a step without a level beside its latest
   prerequisite. Since a prerequisite never sits above the step that needs it (§11), every link still runs forwards. A
   Roadmap without a ladder keeps the three parts (prerequisites · the goal · applications).
+* **The treasure map** (`layout.ts` `treasureLayout`, drawn by `map.ts`): laid out for the width it has (`width`: the
+  labels get up to 220 px, the stations are spread across the room, the page's width and the step panel followed as they
+  change; only a map that cannot be narrower than its room — a phone — is zoomed out, never below 0.8, and pans beyond).
+  **Fit** lays it out again across the whole width. Each title is measured in the page's font (`lines`) and shown whole
+  (up to 5 lines; its tooltip is the full title); each layer is as tall as its longest title. A path leaves a station at
+  the top of its dot and reaches the next at the bottom of its label, a long link runs in its own lane past the layers it
+  skips, so no path crosses a title or a code. The order inside each layer cuts crossings (barycentre and median sweeps,
+  swaps of neighbours, a few seeded fresh starts within a fixed work budget: the same drawing every time, a 200-step map in
+  ~0.1 s); a step with more links up than down moves up next to the steps it opens (never out of its level band). The
+  Roadmap's name is the page's heading, so the map shows it only as the treasure's tooltip. Browser test:
+  `tests/roadmap_map.js` (a real 20-step Roadmap, `tests/fixtures/roadmap_gadgets.json`).
 * Every screen reads the Roadmap through one data port (`data.ts` `RoadmapsData`; today `src/composition/roadmaps-ui.ts`
   over the engine's globals). Unit tests: `src/features/roadmaps/ui/test/` (happy-dom); in a browser
   `tests/roadmap_levels.js` (the bar, the moment, both tests, approve and decline, 320 px, axe, the keyboard).

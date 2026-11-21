@@ -1,0 +1,29 @@
+{
+  "_about": "The Roadmap cg4tmvvv8 'Build your own gadgets' as it stood on 2026-11-21 (20 steps, 29 links), with its Greek step titles: the map layout suite (tests/roadmap_map.js) draws it.",
+  "id": "gadgets",
+  "title": "Φτιάξε τα δικά σου gadgets: ηλεκτρονικά, μικροελεγκτές, ενσωματωμένα συστήματα και IoT",
+  "goal": "Φτιάξε τα δικά σου gadgets",
+  "language": "el",
+  "steps": [
+    ["circuits_from_first_principles", "Κυκλώματα από τις πρώτες αρχές", "foundation", []],
+    ["capacitors_inductors_ac_and_filters", "Πυκνωτές, πηνία, εναλλασσόμενο ρεύμα και φίλτρα", "foundation", ["circuits_from_first_principles"]],
+    ["real_components_and_analog_switching", "Πραγματικά εξαρτήματα και αναλογική μεταγωγή", "intro", ["capacitors_inductors_ac_and_filters"]],
+    ["wireless_physics_and_link_design", "Φυσική των ασύρματων και σχεδίαση ζεύξης", "foundation", ["capacitors_inductors_ac_and_filters"]],
+    ["power_batteries_protection_and_noise", "Τροφοδοσία, μπαταρίες, προστασία και θόρυβος", "aspect", ["real_components_and_analog_switching"]],
+    ["digital_logic_and_microcontroller_ar", "Ψηφιακή λογική και αρχιτεκτονική μικροελεγκτών", "intro", ["real_components_and_analog_switching"]],
+    ["sensing_actuation_sampling_and_contr", "Αισθητήρες, ενεργοποιητές, δειγματοληψία και έλεγχος", "aspect", ["digital_logic_and_microcontroller_ar"]],
+    ["embedded_programming_and_rtos", "Προγραμματισμός ενσωματωμένων και RTOS", "aspect", ["digital_logic_and_microcontroller_ar"]],
+    ["wired_buses", "Ενσύρματοι δίαυλοι", "subtopic", ["embedded_programming_and_rtos"]],
+    ["bluetooth_i_classic_vs_ble_gatt_and_", "Bluetooth I: Classic έναντι BLE, GATT και ασφάλεια", "subtopic", ["embedded_programming_and_rtos", "wireless_physics_and_link_design"]],
+    ["other_radios_and_choosing_one", "Άλλοι ασύρματοι πομποδέκτες και πώς διαλέγεις", "related", ["embedded_programming_and_rtos", "wireless_physics_and_link_design"]],
+    ["raspberry_pi_and_linux_for_gadgets", "Raspberry Pi και Linux για gadgets", "related", ["wired_buses"]],
+    ["debugging_i_method_power_clocks_sign", "Αποσφαλμάτωση I: μέθοδος, τροφοδοσία, ρολόγια, σήματα και δίαυλοι", "application", ["power_batteries_protection_and_noise", "wired_buses"]],
+    ["bluetooth_ii_profiles_and_use_cases", "Bluetooth II: προφίλ και περιπτώσεις χρήσης", "application", ["bluetooth_i_classic_vs_ble_gatt_and_"]],
+    ["iot_networking_cloud_and_security", "Δικτύωση IoT, cloud και ασφάλεια", "application", ["raspberry_pi_and_linux_for_gadgets", "other_radios_and_choosing_one"]],
+    ["troubleshooting_and_repair_of_any_de", "Εντοπισμός βλαβών και επισκευή οποιασδήποτε συσκευής", "application", ["sensing_actuation_sampling_and_contr", "debugging_i_method_power_clocks_sign"]],
+    ["debugging_ii_firmware_protocol_radio", "Αποσφαλμάτωση II: firmware, πρωτόκολλο, ραδιόφωνο και δίκτυο", "application", ["iot_networking_cloud_and_security", "debugging_i_method_power_clocks_sign"]],
+    ["from_idea_to_concept", "Από την ιδέα στη σύλληψη", "synthesis", ["sensing_actuation_sampling_and_contr", "iot_networking_cloud_and_security"]],
+    ["from_concept_to_product_with_open_so", "Από την ιδέα στο προϊόν, με εργαλεία ανοιχτού κώδικα", "synthesis", ["debugging_i_method_power_clocks_sign", "from_idea_to_concept"]],
+    ["capstone_home_automation_system_from", "Capstone: σύστημα οικιακού αυτοματισμού από την ιδέα ως τη μικρή παρτίδα", "synthesis", ["debugging_ii_firmware_protocol_radio", "troubleshooting_and_repair_of_any_de", "from_concept_to_product_with_open_so"]]
+  ]
+}

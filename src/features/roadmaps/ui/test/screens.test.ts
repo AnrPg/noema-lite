@@ -4,6 +4,7 @@
    what they show, what they ask of the data port, the events they fire. In a real browser: tests/curriculum*.js. */
 import '../../../../ui/test/dom.ts';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { afterEach, describe, test } from 'node:test';
 import { defineUi } from '../../../../ui/index.ts';
 import type { Roadmap } from '../../domain/model.ts';
@@ -17,6 +18,7 @@ import {
   publicMatches,
   treasureLayout,
 } from '../index.ts';
+import { labelHeight, TMAP } from '../layout.ts';
 import type { NoemaRoadmapFromSources } from '../from-sources.ts';
 import type { NoemaRoadmapMap } from '../map.ts';
 import { cleanup, fakeData, host } from './fixtures.ts';
@@ -110,6 +112,44 @@ describe('where the steps go', () => {
       t.E.some(ch => ch[0] === 'd' && ch[ch.length - 1] === '⚑treasure'),
       'the last step leads to the treasure',
     );
+  });
+  test('the treasure map across its room: wider labels, the room filled, paths kept off the labels, the same drawing every time', () => {
+    // a real Roadmap: 20 steps, 29 links (tests/fixtures/roadmap_gadgets.json)
+    const F = JSON.parse(readFileSync(new URL('../../../../../tests/fixtures/roadmap_gadgets.json', import.meta.url), 'utf8')) as {
+      steps: [string, string, string, string[]][];
+    };
+    const c: Roadmap = { ...course(), nodes: {}, edges: [] };
+    for (const [id, title, role, pre] of F.steps) {
+      c.nodes[id] = { id, title, role, part: 'core' };
+      for (const p of pre) c.edges.push({ from: p, to: id, why: '' });
+    }
+    const narrow = treasureLayout(c),
+      wide = treasureLayout(c, { width: 1400 });
+    assert.ok(wide.lw > narrow.lw, 'more room, wider labels');
+    assert.equal(wide.W, 1400, 'the map is as wide as its room');
+    assert.ok(narrow.W < 1400, 'without a room: as narrow as it can be');
+    assert.ok(wide.crossings <= 5, `few crossings (${wide.crossings})`);
+    assert.deepEqual(treasureLayout(c, { width: 1400 }).X, wide.X, 'the same Roadmap, the same drawing');
+    assert.equal(wide.layers[0]?.length, 1, 'no empty layer at the bottom: the first step starts the map');
+    // every path, sampled along its straight pieces and its curves' end points, stays out of every label box
+    for (const G of [narrow, wide]) {
+      const boxes = Object.keys(c.nodes).map(id => {
+        const x = G.X[id] ?? 0,
+          top = G.Y(id) + TMAP.DOT + TMAP.LAB_GAP;
+        return { id, x0: x - G.lw / 2, x1: x + G.lw / 2, y0: top, y1: top + labelHeight(G.lines[id] ?? 1) };
+      });
+      G.D.forEach((d, k) => {
+        const pts = [...d.matchAll(/(-?[\d.]+) (-?[\d.]+)/g)].map(m => [Number(m[1]), Number(m[2])] as const);
+        for (const [x, y] of pts)
+          for (const b of boxes)
+            assert.ok(
+              !(x > b.x0 + 1 && x < b.x1 - 1 && y > b.y0 + 1 && y < b.y1 - 1),
+              `link ${G.E[k]?.join('→')} touches the label of ${b.id}`,
+            );
+      });
+    }
+    const lines = treasureLayout(c, { width: 1400, lines: () => 4 });
+    assert.ok(lines.H > wide.H, 'longer titles, taller layers');
   });
 });
 
