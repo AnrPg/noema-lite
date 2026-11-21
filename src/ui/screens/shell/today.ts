@@ -130,8 +130,8 @@ export class NoemaToday extends ShellElement {
           <p class="tiny">${m.date}</p>
           <h1>${this.L(hello)}, ${m.name}</h1>
         </div>
-        <div class="ns-goal" title=${this.L('goalTitle', { xp: m.xp, goal: m.goal })}>
-          ${this.ring(m.xp / m.goal, 64, 7)}
+        <div class="ns-goal${m.xp >= m.goal ? ' gold' : ''}" title=${this.L('goalTitle', { xp: m.xp, goal: m.goal })}>
+          ${this.goalRing(m.xp, m.goal)}
           <div class="c"><b>${m.xp}</b><span class="tiny">/${m.goal}</span></div>
         </div>
       </div>

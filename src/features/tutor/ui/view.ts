@@ -8,6 +8,7 @@ import { LitElement } from 'lit';
 import type { Unsubscribe } from '../../../ports/common.ts';
 import type { I18n, MessageParams } from '../../../ports/i18n.ts';
 import type { TutorSession } from '../application/tutor.ts';
+import type { StoredFile } from '../../../ports/attachments.ts';
 import type { Conversation } from '../domain/conversation.ts';
 
 /** an item of the frame's ⋮ menus (src/composition/shell/dom.ts MenuEntry) */
@@ -49,6 +50,8 @@ export interface TutorView {
   useInLesson?: ((cv: Conversation) => void) | undefined;
   copy(text: string): Promise<boolean>;
   toast(text: string, ms?: number): void;
+  /** a file the learner chose, ready to keep (a big picture made smaller) */
+  readFile(f: File): Promise<StoredFile>;
 }
 
 /** The base of the tutor's elements: light DOM, drawn again whenever the session changes. */

@@ -10,8 +10,11 @@ import { NoemaError } from '../../../kernel/errors.ts';
 import type { AsyncResult } from '../../../kernel/result.ts';
 import { aiErrorKind, type AiProviderId, type ChatRequest, type ChatResponse } from '../../../ports/ai.ts';
 import type { Unsubscribe } from '../../../ports/common.ts';
+import type { AttachmentStore, StoredFile } from '../../../ports/attachments.ts';
 import type { ConversationStore, StoredConversation } from '../../../ports/conversations.ts';
 import type { I18n } from '../../../ports/i18n.ts';
+import { kindOf, overBudget, partOf, type FileReader } from '../domain/attachments.ts';
+import { branchOff, ensureIds, replayThreadState, switchTo, versions } from '../domain/branches.ts';
 import {
   cleanTitle,
   convoMarkdown,
@@ -26,6 +29,7 @@ import {
   USER_TITLED,
   wantsTitle,
   type Conversation,
+  type Attachment,
   type ConversationRecord,
   type CtxRecord,
   type Turn,
@@ -93,12 +97,17 @@ export interface TutorDeps {
   report(e: unknown, where: string): void;
   /** the records of this subject read before the page started */
   readonly preloaded: readonly StoredConversation[];
+  /** where the files of the messages are kept (none: files cannot be added) */
+  readonly attachments?: AttachmentStore;
+  /** the AI that will read the files of the next turn ('copy' without a key) */
+  fileReader?(): FileReader;
 }
 
 /** A turn that failed: its words, and what can help (a key, or copying the prompt). */
 export interface TurnError {
   readonly text: string;
-  /** the learner's message that did not go: still shown above the error (it is not kept in the conversation) */
+  /** the learner's message that did not go: still shown above the error (it is not kept in the conversation); '' when it is
+      kept (an edited message, another answer): then the learner can ask again */
   readonly sent: string;
   readonly needsKey: boolean;
   readonly prompt: string | null;
@@ -125,14 +134,21 @@ export class TutorSession {
   /** the reply as it streams in (visible text), null when no turn is running */
   stream: string | null = null;
   error: TurnError | null = null;
-  /** the conversation of each context|mode */
+  /** the conversation of each context|mode: its active path */
   readonly hist: Record<string, Turn[]> = {};
+  /** the turns off that path (edited messages, other answers): ../domain/branches.ts */
+  readonly brs: Record<string, Turn[]> = {};
   tstate: Record<string, ThreadState> = {};
   readonly intents: Record<string, string> = {};
   readonly byKey: Record<string, Conversation> = {};
   list: Conversation[];
   readonly titling = new Set<string>();
   readonly #listeners = new Set<() => void>();
+  /** the turn running now: a reply that comes back after it was stopped or replaced is dropped */
+  #turn = 0;
+  #abort: AbortController | null = null;
+  #ids = 0;
+  readonly #files = new Map<string, Promise<StoredFile | null>>();
 
   readonly #d: TutorDeps;
   constructor(d: TutorDeps) {
@@ -154,6 +170,9 @@ export class TutorSession {
   }
   history(key = this.key()): Turn[] {
     return this.hist[key] ?? [];
+  }
+  branches(key = this.key()): Turn[] {
+    return (this.brs[key] ??= []);
   }
   threads(key = this.key()): ThreadState | null {
     return this.tstate[key] ?? null;
@@ -217,7 +236,9 @@ export class TutorSession {
   }
   /** ↺ a new conversation on the same context and mode */
   fresh(key = this.key()): void {
+    if (key === this.key()) this.#abandon();
     this.hist[key] = [];
+    this.brs[key] = [];
     Reflect.deleteProperty(this.tstate, key);
     this.error = null;
     this.changed();
@@ -304,23 +325,192 @@ export class TutorSession {
   #threadState(key: string): ThreadState {
     return (this.tstate[key] ??= newThreadState());
   }
-  async send(text: string, o: { readonly directive?: Directive; readonly intent?: string } = {}): Promise<void> {
+  #newTurnId(): string {
+    const t = this.#d.now();
+    return 'm_' + t.toString(36).padStart(10, '0') + (++this.#ids).toString(36) + Math.random().toString(36).slice(2, 6);
+  }
+  async send(
+    text: string,
+    o: { readonly directive?: Directive; readonly intent?: string; readonly attachments?: readonly Attachment[] } = {},
+  ): Promise<void> {
     if (this.busy) return;
+    const files = o.attachments ?? [];
+    if (!text.trim() && !files.length) return;
     const key = this.key();
     const hist = (this.hist[key] ??= []);
-    const threaded = usesThreads(this.mode);
-    const ts = threaded ? this.#threadState(key) : null;
+    const ts = usesThreads(this.mode) ? this.#threadState(key) : null;
     const directive = ts ? noteLearnerTurn(ts, text, o.directive) : (o.directive ?? null);
     const intent = this.#intentOf(key, o.intent);
     const meta = { ...(directive ? { directive } : {}), ...(intent && !hist.length ? { intent } : {}) };
-    hist.push({ role: 'user', text, t: this.#d.now(), ...(Object.keys(meta).length ? { meta } : {}) });
+    hist.push({
+      id: this.#newTurnId(),
+      role: 'user',
+      text,
+      t: this.#d.now(),
+      ...(files.length ? { attachments: files } : {}),
+      ...(Object.keys(meta).length ? { meta } : {}),
+    });
+    await this.#reply(key, directive, intent, true);
+  }
+
+  /**
+   * ✎ The learner changed their message i: the old one and everything after it become a branch (‹ 1/2 › brings it back),
+   * the new one is answered. A reply still being written is stopped first.
+   */
+  async edit(i: number, text: string, attachments?: readonly Attachment[]): Promise<void> {
+    const key = this.key(),
+      hist = this.history(key),
+      m = hist[i];
+    const files = attachments ?? m?.attachments ?? [];
+    if (m?.role !== 'user' || (!text.trim() && !files.length)) return;
+    if (text === m.text && files.map(a => a.id).join() === (m.attachments ?? []).map(a => a.id).join()) return;
+    this.#abandon();
+    const intent = this.#intentOf(key, undefined);
+    this.#branch(key, i);
+    let directive: Directive | null = null;
+    const ts = usesThreads(this.mode) ? replayThreadState(hist).state : null;
+    if (ts) {
+      this.tstate[key] = ts;
+      const d = m.meta?.directive;
+      directive = noteLearnerTurn(ts, text, d === 'tellme' || d === 'wrapup' ? d : null);
+    }
+    const meta = { ...(directive ? { directive } : {}), ...(intent && !hist.length ? { intent } : {}) };
+    hist.push({
+      id: this.#newTurnId(),
+      role: 'user',
+      text,
+      t: this.#d.now(),
+      ...(files.length ? { attachments: files } : {}),
+      ...(Object.keys(meta).length ? { meta } : {}),
+    });
+    await this.#reply(key, directive, intent, false);
+  }
+  /** ↻ Another answer to the turn i (a reply: it becomes a branch; the learner's last message without a reply: answered now). */
+  async regenerate(i: number): Promise<void> {
+    const key = this.key(),
+      hist = this.history(key),
+      m = hist[i];
+    if (!m || (m.role === 'user' && i !== hist.length - 1)) return;
+    this.#abandon();
+    if (m.role !== 'user') this.#branch(key, i);
+    if (hist.at(-1)?.role !== 'user') return;
+    let directive: Directive | null = null;
+    if (usesThreads(this.mode)) {
+      const r = replayThreadState(hist);
+      this.tstate[key] = r.state;
+      directive = r.directive;
+    } else {
+      const d = hist.at(-1)?.meta?.directive;
+      directive = d === 'tellme' || d === 'wrapup' ? d : null;
+    }
+    await this.#reply(key, directive, this.#intentOf(key, undefined), false);
+  }
+  /** ‹ › Shows another version of the turn i (and the conversation that followed it). */
+  switchVersion(i: number, step: number): void {
+    if (this.busy) return;
+    const key = this.key(),
+      hist = this.history(key),
+      br = this.branches(key);
+    const { list, index } = versions(hist, br, i);
+    const to = list[index + step];
+    if (!to?.id || !switchTo(hist, br, to.id)) return;
+    if (usesThreads(this.mode)) this.tstate[key] = replayThreadState(hist).state;
+    this.error = null;
+    this.persist(key);
+    this.changed();
+  }
+  /** the versions of the turn i: [which one (from 1), how many] */
+  version(i: number): readonly [number, number] {
+    const { list, index } = versions(this.history(), this.branches(), i);
+    return [index + 1, list.length];
+  }
+  /** ■ Stops the reply being written: what came so far is kept as the reply (the learner can ask again: ↻). */
+  stop(): void {
+    if (!this.busy) return;
+    const key = this.key(),
+      hist = this.history(key),
+      partial = this.stream && this.stream !== '…' ? this.stream : '';
+    this.#abandon();
+    if (partial && hist.at(-1)?.role === 'user') {
+      hist.push({ id: this.#newTurnId(), role: 'model', text: partial, t: this.#d.now(), meta: { stopped: true } });
+      if (usesThreads(this.mode)) this.tstate[key] = replayThreadState(hist).state;
+    }
+    this.persist(key);
+    this.changed();
+  }
+  /** the turn running now is dropped (its answer, when it comes, is ignored) */
+  #abandon(): void {
+    if (!this.busy) return;
+    this.#turn++;
+    this.#abort?.abort();
+    this.#abort = null;
+    this.busy = false;
+    this.stream = null;
+  }
+  #branch(key: string, i: number): void {
+    const hist = this.history(key),
+      br = this.branches(key);
+    ensureIds(hist, br, () => this.#newTurnId());
+    branchOff(hist, br, i);
+    this.error = null;
+  }
+
+  /** Keeps a file for a message (the store dedupes it by its content) → what the message keeps of it; null: it cannot be added. */
+  async attach(file: StoredFile): Promise<Attachment | null> {
+    const kind = kindOf(file.mediaType, file.name),
+      store = this.#d.attachments;
+    if (!kind || !store) return null;
+    const id = await store.put(this.#d.account().id, file);
+    this.#files.set(id, Promise.resolve(file));
+    return { id, name: file.name, mediaType: file.mediaType, size: file.bytes.length, kind };
+  }
+  /** a message's file (null: not on this device) */
+  file(id: string): Promise<StoredFile | null> {
+    let p = this.#files.get(id);
+    if (!p) {
+      const store = this.#d.attachments;
+      p = store ? store.get(this.#d.account().id, id).catch(() => null) : Promise.resolve(null);
+      this.#files.set(id, p);
+    }
+    return p;
+  }
+  /** the AI that reads the files of the next turn */
+  fileReader(): FileReader {
+    return this.#d.fileReader?.() ?? 'copy';
+  }
+  /** the path as messages for the AI: each turn's files (within the budget), then its words */
+  async #messages(hist: readonly Turn[], provider: TutorAi['provider']): Promise<ChatRequest['messages']> {
+    const reader: FileReader = provider === 'copy' ? 'copy' : provider;
+    const over = overBudget(hist, reader);
+    return Promise.all(
+      hist.map(async m => {
+        const files = await Promise.all(
+          (m.attachments ?? []).map(async a => partOf(a, (await this.file(a.id))?.bytes ?? null, reader, over.has(a.id))),
+        );
+        const words = m.text.trim() ? [{ type: 'text' as const, text: m.text }] : [];
+        return {
+          role: m.role === 'user' ? ('user' as const) : ('assistant' as const),
+          content: [...files, ...(words.length || files.length ? words : [{ type: 'text' as const, text: '…' }])],
+        };
+      }),
+    );
+  }
+
+  /** answers the last message of the path (a turn of its own: stopping, editing or another turn drops it) */
+  async #reply(key: string, directive: Directive | null, intent: string | null, takeBackOnError: boolean): Promise<void> {
+    const hist = this.history(key),
+      mode = this.mode;
+    const ts = usesThreads(mode) ? this.#threadState(key) : null;
+    const turn = ++this.#turn,
+      abort = new AbortController();
+    this.#abort = abort;
     this.error = null;
     this.persist(key);
     this.busy = true;
     this.stream = '';
     this.changed();
     const system = turnSystem({
-      mode: this.mode,
+      mode,
       persona: this.#d.persona(),
       subject: this.#d.subject(),
       intent,
@@ -330,24 +520,29 @@ export class TutorSession {
       directive,
     });
     let ai: TutorAi | null = null;
+    const live = (): boolean => turn === this.#turn;
     try {
       ai = await this.#d.ai();
+      const messages = await this.#messages(hist, ai.provider);
+      if (!live()) return;
       let full = '';
       const r = await ai.chat({
         system,
-        messages: hist.map(m => ({ role: m.role === 'user' ? 'user' : 'assistant', content: [{ type: 'text', text: m.text }] })),
+        messages,
         temperature: 0.7,
+        signal: abort.signal,
         onDelta: dl => {
-          if (dl.type !== 'text') return;
+          if (dl.type !== 'text' || !live()) return;
           full += dl.text;
           this.stream = splitControl(full).clean || '…';
           this.changed();
         },
       });
+      if (!live()) return; // stopped, edited or replaced meanwhile: that already set the conversation straight
       if (!r.ok) throw r.error;
       const answer = r.value.text || full;
       const { clean, control } = splitControl(answer);
-      const msg: Turn = { role: 'model', text: clean || answer, t: this.#d.now() };
+      const msg: Turn = { id: this.#newTurnId(), role: 'model', text: clean || answer, t: this.#d.now() };
       if (ts) {
         const got: Lesson[] = applyControl(ts, control, hist.length, clean);
         if (control) msg.meta = { noemaState: control };
@@ -358,7 +553,9 @@ export class TutorSession {
       this.#maybeTitle(key);
       this.#d.touchStreak();
     } catch (e) {
-      const lost = hist.pop();
+      if (!live()) return;
+      const lost = takeBackOnError ? hist.pop() : undefined;
+      if (lost && ts) this.tstate[key] = replayThreadState(hist).state; // the message that did not go does not count
       this.persist(key);
       const ne = e instanceof NoemaError ? e : null;
       const kind = ne ? aiErrorKind(ne) : 'other';
@@ -369,9 +566,12 @@ export class TutorSession {
         prompt: ai?.fallbackPrompt?.() ?? null,
       };
     } finally {
-      this.busy = false;
-      this.stream = null;
-      this.changed();
+      if (live()) {
+        this.busy = false;
+        this.stream = null;
+        this.#abort = null;
+        this.changed();
+      }
     }
   }
 
@@ -416,6 +616,8 @@ export class TutorSession {
     cv.provider = v.provider;
     const ts = this.tstate[key];
     if (ts) cv.tutorState = ts;
+    const br = this.brs[key];
+    if (br?.length) cv.branches = br;
     this.save(cv);
   }
   /** saves one conversation now (in the background: never blocks the screen) */
@@ -527,7 +729,9 @@ export class TutorSession {
     // another app's mode (e.g. Meletee's feynman) continues as a plain explanation; the record keeps its mode
     this.mode = isMode(cv.mode) ? cv.mode : !isTutor(cv.kind) || cv.mode ? 'explain' : 'socratic';
     const key = this.key();
+    if (key === this.key() && this.hist[key] !== cv.msgs) this.#abandon();
     this.hist[key] = cv.msgs;
+    this.brs[key] = cv.branches ??= [];
     this.byKey[key] = cv;
     if (cv.tutorState) this.tstate[key] = cv.tutorState;
     else if (this.mode === 'socratic' && cv.msgs.some(m => m.meta?.noemaState))
@@ -580,6 +784,7 @@ export class TutorSession {
       if (this.byKey[k] === cv) {
         Reflect.deleteProperty(this.byKey, k);
         Reflect.deleteProperty(this.hist, k);
+        Reflect.deleteProperty(this.brs, k);
       }
   }
 

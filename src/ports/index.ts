@@ -12,3 +12,4 @@ export type * from './telemetry.ts';
 export * from './notifier.ts';
 export type * from './lifecycle.ts';
 export type * from './viewer.ts';
+export type * from './attachments.ts';

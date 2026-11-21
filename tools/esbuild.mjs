@@ -90,7 +90,7 @@ export const ENTRIES = [
   { name: 'community', in: 'src/composition/community-piece.ts', kind: 'lazy', out: 'community.js', budgetKB: 640 },   // the community screens (Lit and the UI kit with them): loaded when one is first opened (src/composition/community-app.ts)
   { name: 'runtimes', in: 'src/composition/runtimes.ts', kind: 'lazy', out: 'runtimes.js', budgetKB: 512 },   // the activity runtimes' code (src/runtimes): loaded when an activity first needs one (ACT.runtime)
   { name: 'contracts', in: 'src/composition/contracts.ts', kind: 'lazy', out: 'contracts.js', budgetKB: 1792 },   // the compiled data contracts and the content checks: loaded after the first screen, before a subject opens (src/contracts/lazy.ts)
-  { name: 'study', in: 'src/composition/study-pages.ts', kind: 'lazy', out: 'study.js', budgetKB: 320 },   // the study area's pages (src/features/study/ui): loaded before the first subject opens (src/composition/study-ui.ts)
+  { name: 'study', in: 'src/composition/study-pages.ts', kind: 'lazy', out: 'study.js', budgetKB: 340 },   // the study area's pages (src/features/study/ui): loaded before the first subject opens (src/composition/study-ui.ts); 340 since the tutor chat's branches, files and formulas (2026-11-21)
   { name: 'author', in: 'src/composition/author.ts', kind: 'lazy', out: 'author.js', budgetKB: 160 },   // the activity author (#/author): its forms, checks and files; loaded on the first visit (src/composition/shell/author-page.ts)
   { name: 'pwa', in: 'src/composition/pwa.ts', kind: 'page', out: 'pwa.js', budgetKB: 16 },
   { name: 'worker', in: 'src/composition/worker.ts', kind: 'worker', out: 'worker.js', budgetKB: 600 },

@@ -6,6 +6,8 @@ export { CHARACTERS, CHARACTER_IDS, type CharacterId } from './characters.ts';
 export { BRIDGE, FILLS, baseCss, charactersCss, tokensCss } from './css.ts';
 export {
   ACC_TEXT_ON,
+  GOLD_SEED,
+  GRAPHIC_MIN,
   ON_DARK,
   ON_LIGHT,
   TEXT_MIN,
@@ -14,6 +16,7 @@ export {
   contrastFailures,
   derived,
   fillFor,
+  goldFor,
   luminance,
   mixSrgb,
   surface,

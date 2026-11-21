@@ -14,6 +14,8 @@ import { base } from '../core/styles.ts';
 export const ICONS = {
   back: 'M19 12H5M11 18l-6-6 6-6',
   forward: 'M9 6l6 6-6 6',
+  /** the previous one of a few (‹ 2/3 ›) */
+  prev: 'M15 6l-6 6 6 6',
   down: 'M6 9l6 6 6-6',
   up: 'M6 15l6-6 6 6',
   more: 'M12 5.5v.01M12 12v.01M12 18.5v.01',
@@ -63,6 +65,9 @@ export const ICONS = {
   link: 'M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1',
   crown: 'M4 18h16M5 15l-1-9 5 4 3-6 3 6 5-4-1 9z',
   doc: 'M6 3h8l4 4v14H6zM14 3v4h4M9 13h6M9 17h6',
+  attach: 'M20 11.5l-8.2 8.2a5 5 0 0 1-7.1-7.1l8.6-8.6a3.4 3.4 0 0 1 4.8 4.8l-8.4 8.4a1.7 1.7 0 0 1-2.4-2.4l7.8-7.8',
+  stop: 'M7 7h10v10H7z',
+  regenerate: 'M20 11a8 8 0 0 0-14.3-4.9L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.9L20 16M20 20v-4h-4',
   copy: 'M10 8h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2zM16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2',
   target:
     'M12 4.5a7.5 7.5 0 1 1 0 15a7.5 7.5 0 0 1 0-15zM12 9.8a2.2 2.2 0 1 1 0 4.4a2.2 2.2 0 0 1 0-4.4zM12 1.5v4M12 18.5v4M1.5 12h4M18.5 12h4',
@@ -73,7 +78,7 @@ export type IconName = keyof typeof ICONS;
 export const ICON_NAMES = Object.keys(ICONS) as IconName[];
 
 /** the icons that point along the line of text (mirrored right to left) */
-const DIRECTIONAL: ReadonlySet<IconName> = new Set<IconName>(['back', 'forward', 'undo', 'redo']);
+const DIRECTIONAL: ReadonlySet<IconName> = new Set<IconName>(['back', 'forward', 'prev', 'undo', 'redo']);
 
 export const isIconName = (x: unknown): x is IconName => typeof x === 'string' && Object.hasOwn(ICONS, x);
 

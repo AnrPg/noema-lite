@@ -67,6 +67,8 @@ function toBlock(p: ContentPart): Block {
         source: { type: 'base64', media_type: p.mediaType, data: p.data },
         ...(p.title ? { title: p.title } : {}),
       };
+    case 'media': // the Messages API reads no sound or video
+      return { type: 'text', text: `[${p.title ?? 'file'} (${p.mediaType}): this model cannot read sound or video]` }; // i18n-ignore (words for the AI)
     case 'tool_call':
       return { type: 'tool_use', id: p.id, name: p.name, input: p.input };
     case 'tool_result':

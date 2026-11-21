@@ -55,6 +55,7 @@ run search_catalog node "$ROOT/tests/search_catalog.js"   # the search catalogue
 run search node "$ROOT/tests/search.js" "$T"     # search, stable addresses, collections, the practice round
 run e2e node "$ROOT/tests/e2e.js" "$T"
 run socratic node "$ROOT/tests/socratic.js" "$T"
+run tutor_chat node "$ROOT/tests/tutor_chat.js" "$T"   # the tutor chat: no auto-scroll while it writes, ↓ latest, ■ stop, ✎ edit → branches ‹ 2/3 ›, ↻, files to the AI, formulas fitted (no sideways scroll)
 run visual node "$ROOT/tests/visual.js" "$T"
 run thinking_types node "$ROOT/tests/thinking_types.js" "$T"   # flaw, case, predict, tree, inquiry, debate; how sure, ⚑, source chip, facades
 run reports node "$ROOT/tests/reports.js" "$T"         # ⚑ problem reports: the button, the locator, the admins' page, the connector tools (docs/REPORTS.md)
