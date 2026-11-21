@@ -68,5 +68,10 @@
   "lu.n.sections": "{n, plural, one {# neuen Abschnitt} other {# neue Abschnitte}}",
   "lu.n.blocks": "{n, plural, one {# Theorieblock} other {# Theorieblöcke}}",
   "lu.n.exercises": "{n, plural, one {# Übung} other {# Übungen}}",
-  "lu.n.cards": "{n, plural, one {# Karte} other {# Karten}}"
+  "lu.n.cards": "{n, plural, one {# Karte} other {# Karten}}",
+  "lu.appliedMany": "{n, plural, one {# Lektion hat jetzt die Änderungen} other {# Lektionen haben jetzt die Änderungen}}",
+  "lu.undoneMany": "{n, plural, one {# Lektion ist wieder wie vorher} other {# Lektionen sind wieder wie vorher}}",
+  "lu.review.titleMany": "{n, plural, one {Änderungen an # Lektion} other {Änderungen an # Lektionen}}",
+  "lu.review.inLessons": "in {list}",
+  "lu.bell.readyMany": "{n, plural, one {Die Änderungen von Claude an # Lektion sind bereit} other {Die Änderungen von Claude an # Lektionen sind bereit}}"
 }

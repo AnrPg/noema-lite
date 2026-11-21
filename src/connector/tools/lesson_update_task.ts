@@ -1,5 +1,5 @@
 /* noema_lesson_update_task — 💬→📖 a chat the learner sent to improve a lesson: the list of those waiting, or one with its
-   brief (the chat as the source, its attachments, the chapter as it is, the rules and the answer's format). */
+   brief (the chat as the source, its attachments, the chapters as they are, the rules and the answer's format). */
 import { argStr, fail, text, type Tool } from '../tool.ts';
 import { chatOf, lessonBase, own, request, requests } from '../services/lessons.ts';
 import { briefFor, chapterOf, filePath, localesOf } from '../../features/lesson-updates/domain/index.ts';
@@ -8,7 +8,7 @@ export const tool: Tool = {
   definition: {
     name: 'noema_lesson_update_task',
     description:
-      'A chat with the tutor that the learner sent to improve a lesson ("Use this chat in a lesson" in the app): without request_id, the requests that wait (newest first); with it, the brief — the chat (the version the learner kept) as the SOURCE, links to its attachments, the chapter as it is, the rules (Q0 and Q1–Q9 for the chapter with the addition, every text in each language of the pack) and the format of the answer. Write an ADDITIVE update of that chapter and send it with noema_lesson_update_submit; the learner reviews and approves it in the app.',
+      'A chat with the tutor that the learner sent to improve a lesson ("Use this chat in a lesson" in the app): without request_id, the requests that wait (newest first); with it, the brief — the chat (the version the learner kept) as the SOURCE, links to its attachments, the chapter it is about and the other chapters of the subject as they are, the rules (Q0 and Q1–Q9 for each chapter with its addition, every text in each language of the pack) and the format of the answer. Write an ADDITIVE update — one part per chapter that gets something: each piece in the lesson whose topic it is — and send it with noema_lesson_update_submit; the learner reviews and approves it in the app.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -45,8 +45,7 @@ export const tool: Tool = {
       return fail(
         `The subject “${req.subject.title}” (${req.subject.id}) is not one of the learner's own packs in the account: only their own subjects can be improved.`,
       );
-    const ch = chapterOf(lb.base.pack, req.chapter.id);
-    if (!ch) return fail(`The subject has no chapter ${req.chapter.id} any more.`);
+    if (!chapterOf(lb.base.pack, req.chapter.id)) return fail(`The subject has no chapter ${req.chapter.id} any more.`);
     const chat = await chatOf(ctx, id);
     if (chat === null)
       return fail(
@@ -56,7 +55,7 @@ export const tool: Tool = {
       req.files.map(async f => ({ ...f, ...(f.path ? { url: await ctx.storage.downloadUrl(own(ctx, filePath(id, f.id)), 7200) } : {}) })),
     );
     return text(
-      briefFor({ req, chat, chapter: ch, locales: localesOf(lb.base, req.chapter.id), files, via: 'connector' }) +
+      briefFor({ req, chat, pack: lb.base.pack, locales: localesOf(lb.base, req.chapter.id), files, via: 'connector' }) +
         (files.some(f => f.url)
           ? '\n\n(The links to the attachments are valid for 2 hours: download them with curl in your sandbox.)'
           : ''),

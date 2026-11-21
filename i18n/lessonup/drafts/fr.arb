@@ -68,5 +68,10 @@
   "lu.n.sections": "{n, plural, one {# nouvelle section} many {# nouvelles sections} other {# nouvelles sections}}",
   "lu.n.blocks": "{n, plural, one {# bloc de théorie} many {# blocs de théorie} other {# blocs de théorie}}",
   "lu.n.exercises": "{n, plural, one {# exercice} many {# exercices} other {# exercices}}",
-  "lu.n.cards": "{n, plural, one {# carte} many {# cartes} other {# cartes}}"
+  "lu.n.cards": "{n, plural, one {# carte} many {# cartes} other {# cartes}}",
+  "lu.appliedMany": "{n, plural, one {# leçon contient maintenant les changements} many {# leçons contiennent maintenant les changements} other {# leçons contiennent maintenant les changements}}",
+  "lu.undoneMany": "{n, plural, one {# leçon est revenue comme avant} many {# leçons sont revenues comme avant} other {# leçons sont revenues comme avant}}",
+  "lu.review.titleMany": "{n, plural, one {Changements dans # leçon} many {Changements dans # leçons} other {Changements dans # leçons}}",
+  "lu.review.inLessons": "dans {list}",
+  "lu.bell.readyMany": "{n, plural, one {Les changements de Claude dans # leçon sont prêts} many {Les changements de Claude dans # leçons sont prêts} other {Les changements de Claude dans # leçons sont prêts}}"
 }

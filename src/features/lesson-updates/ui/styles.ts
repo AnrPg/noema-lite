@@ -115,6 +115,17 @@ export const LU_CSS = css`
     margin: 6px 0 0;
     font-size: 1rem;
   }
+  .lu .lu-chgroup {
+    display: grid;
+    gap: 8px;
+    min-width: 0;
+  }
+  .lu .lu-chtitle {
+    margin: 10px 0 0;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--lu-line);
+    font-size: 1rem;
+  }
   .lu .lu-sec {
     display: grid;
     gap: 6px;

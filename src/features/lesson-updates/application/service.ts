@@ -7,7 +7,7 @@
      pending   the proposals that wait for the learner (the 🔔 bell)
      open      one request with its proposal, ready for the review
      paste     an answer pasted back from a Claude chat: the same gate as the connector's (prepare), before the review
-     preview   the diff and what the checks say, with the learner's picks
+     preview   the diff of every chapter it changes and what the checks say, with the learner's picks
      approve   the gate again on the lesson as it is now, a copy of the lesson as it was (for undo), then the lesson saved
                the usual way (the pack with its translations, the bridges) — nothing is saved unless every check passes
      decline · undo
@@ -15,7 +15,8 @@
    Rows have one writer each (docs/SYNC.md): the app writes the request, the connector the proposal's card. */
 import { err, ok, type Result } from '../../../kernel/result.ts';
 import {
-  applyAll,
+  applyProposal,
+  asProposal,
   beforePath,
   briefFor,
   chapterDiff,
@@ -23,25 +24,25 @@ import {
   chatFiles,
   chatMarkdown,
   chatPath,
-  effectivePicks,
   filePath,
   FILE_MAX,
   FILES_MAX,
   localesOf,
   newRequestId,
-  prepare,
+  prepareProposal,
   proposalPath,
+  proposalPicks,
   PROP_PREFIX,
   REQ_PREFIX,
-  verify,
+  verifyProposal,
   type Base,
   type ChapterDiff,
   type ChatFile,
   type ChatRecord,
   type Checks,
   type LessonRequest,
-  type LessonUpdate,
   type Picks,
+  type Proposal,
   type ProposalCard,
   type Result as Applied,
 } from '../domain/index.ts';
@@ -94,10 +95,17 @@ type Async<T> = Promise<Result<T, LessonFail>>;
 export interface Review {
   readonly req: LessonRequest;
   readonly card: ProposalCard | null;
-  readonly update: LessonUpdate | null;
+  readonly update: Proposal | null;
+}
+/** one changed chapter of a preview, before and after */
+export interface ChapterChange {
+  readonly id: string;
+  readonly title: string;
+  readonly diff: ChapterDiff;
 }
 export interface Preview {
-  readonly diff: ChapterDiff;
+  /** every chapter it changes, in the order of the chapters */
+  readonly chapters: readonly ChapterChange[];
   /** the language the diff is in (the learner's when the pack has it, else the pack's) */
   readonly locale: string;
   readonly errors: readonly string[];
@@ -210,13 +218,12 @@ export function createLessonUpdates(p: LessonPorts) {
           `Please improve my noema-lite lesson “${req.chapter.title}” (${req.subject.title}) from my chat with the tutor “${req.conversation.title}”: call noema_lesson_update_task with request_id "${req.id}" and follow it.`,
         );
       const b = await p.lesson(req.subject.id);
-      const ch = b ? chapterOf(b.pack, req.chapter.id) : null;
-      if (!b || !ch) return err(fail('no_chapter'));
+      if (!b || !chapterOf(b.pack, req.chapter.id)) return err(fail('no_chapter'));
       const acc = p.account();
       const text = acc?.cloud
         ? s((parse(await p.download(chatPath(id)).catch(() => null)) as Obj | null)?.['text'] ?? '')
         : s(await p.kept('chat:' + id));
-      return ok(briefFor({ req, chat: text, chapter: ch, locales: localesOf(b, req.chapter.id), files: req.files, via: 'copy' }));
+      return ok(briefFor({ req, chat: text, pack: b.pack, locales: localesOf(b, req.chapter.id), files: req.files, via: 'copy' }));
     },
 
     /** One request and its proposal (the connector's), for the review. */
@@ -224,16 +231,12 @@ export function createLessonUpdates(p: LessonPorts) {
       const req = reqOf(id);
       if (!req) return err(fail('not_found'));
       const card = cardOf(id);
-      let update: LessonUpdate | null = null;
-      if (card) {
-        const v = parse(await p.download(proposalPath(id)).catch(() => null));
-        if (isObj(v) && v.format === 'noema-lesson-update') update = v as unknown as LessonUpdate;
-      }
+      const update = card ? asProposal(parse(await p.download(proposalPath(id)).catch(() => null))) : null;
       return ok({ req, card, update });
     },
 
     /** An answer pasted back from a Claude chat → the update to review, or every problem (to paste back to Claude). */
-    async paste(id: string, text: string): Async<{ update: LessonUpdate; fixed: readonly string[] }> {
+    async paste(id: string, text: string): Async<{ update: Proposal; fixed: readonly string[] }> {
       const req = reqOf(id);
       if (!req) return err(fail('not_found'));
       const m = /```(?:json[c]?)?\s*([\s\S]*?)```/.exec(text);
@@ -246,23 +249,31 @@ export function createLessonUpdates(p: LessonPorts) {
       if (isObj(raw)) raw = { ...raw, request: id };
       const b = await p.lesson(req.subject.id);
       if (!b) return err(fail('not_own'));
-      const r = prepare(await p.checks(), b, raw);
-      if (!r.update) return err(fail('invalid', r.problems.slice(0, 40).join('\n')));
-      return ok({ update: r.update, fixed: r.fixed });
+      const r = prepareProposal(await p.checks(), b, raw);
+      if (!r.proposal) return err(fail('invalid', r.problems.slice(0, 40).join('\n')));
+      return ok({ update: r.proposal, fixed: r.fixed });
     },
 
-    /** The chapter before and after with these picks, in the language the learner reads, and what the checks say. */
-    async preview(u: LessonUpdate, picks: Picks, locale: string): Async<Preview> {
+    /** Every chapter it changes before and after with these picks, in the language the learner reads, and what the checks say. */
+    async preview(u: Proposal, picks: Picks, locale: string): Async<Preview> {
       const b = await p.lesson(u.pack);
       if (!b) return err(fail('not_own'));
-      const v = verify(await p.checks(), b, u, picks);
+      const v = verifyProposal(await p.checks(), b, u, picks);
       const shown = Object.keys(b.translations).find(l => l === locale || l.split('-')[0] === locale.split('-')[0]) ?? null;
-      const r = applyAll(b, u, picks);
-      const before = shown ? objs(b.translations[shown]?.['chapters']).find(c => c.id === u.chapter) : chapterOf(b.pack, u.chapter);
-      const after = shown ? objs(r.translations[shown]?.['chapters']).find(c => c.id === u.chapter) : chapterOf(r.pack, u.chapter);
-      if (!before || !after) return err(fail('no_chapter'));
+      const r = applyProposal(b, u, picks);
+      const chaptersOf = (pack: Obj, tr: Readonly<Record<string, Obj>>): Obj[] =>
+        shown ? objs(tr[shown]?.['chapters']) : objs(pack['chapters']);
+      const before = chaptersOf(b.pack, b.translations),
+        after = chaptersOf(r.pack, r.translations);
+      const chapters: ChapterChange[] = [];
+      for (const part of u.parts) {
+        const x = before.find(c => c.id === part.chapter),
+          y = after.find(c => c.id === part.chapter);
+        if (!x || !y) return err(fail('no_chapter'));
+        chapters.push({ id: part.chapter, title: s(y['title'] ?? part.chapter), diff: chapterDiff(x, y) });
+      }
       return ok({
-        diff: chapterDiff(before, after),
+        chapters,
         locale: shown ?? s(b.pack['subject'] && (b.pack['subject'] as Obj)['language']),
         errors: v.errors,
         changed: v.changed,
@@ -270,13 +281,13 @@ export function createLessonUpdates(p: LessonPorts) {
     },
 
     /** Apply it: the gate on the lesson as it is now, a copy of the lesson as it was, then the lesson saved. */
-    async approve(id: string, u: LessonUpdate, picks: Picks): Async<LessonRequest> {
+    async approve(id: string, u: Proposal, picks: Picks): Async<LessonRequest> {
       const req = reqOf(id);
       if (!req) return err(fail('not_found'));
       if (req.state !== 'open' && req.state !== 'proposed') return err(fail('closed'));
       const b = await p.lesson(u.pack);
       if (!b) return err(fail('not_own'));
-      const v = verify(await p.checks(), b, u, picks);
+      const v = verifyProposal(await p.checks(), b, u, picks);
       if (v.changed) return err(fail('changed'));
       if (v.errors.length) return err(fail('invalid', v.errors.slice(0, 20).join('\n')));
       const acc = p.account();
@@ -290,13 +301,13 @@ export function createLessonUpdates(p: LessonPorts) {
       });
       await p.keep('before:' + id, before);
       if (acc?.cloud) await p.upload(beforePath(id), before, 'application/json');
-      const r = applyAll(b, u, picks);
+      const r = applyProposal(b, u, picks);
       const version = versionAfter(b.pack['version'], id);
       await p.save(u.pack, r, version);
       const next: LessonRequest = {
         ...req,
         state: 'applied',
-        picks: effectivePicks(u, picks),
+        picks: proposalPicks(u, picks),
         appliedAt: new Date(p.now()).toISOString(),
         version,
       };

@@ -127,7 +127,8 @@ test('paste → preview → approve → undo: the lesson changes only on approve
   assert.ok(pv.ok);
   assert.equal(pv.value.locale, 'el', 'in the language the learner reads');
   assert.deepEqual(pv.value.errors, []);
-  assert.equal(pv.value.diff.added.blocks, 1);
+  assert.equal(pv.value.chapters.length, 1);
+  assert.equal(pv.value.chapters[0]?.diff.added.blocks, 1);
   const a = await svc.approve(req.id, p.value.update, {});
   assert.ok(a.ok, a.ok ? '' : a.error.detail);
   assert.equal(a.value.state, 'applied');

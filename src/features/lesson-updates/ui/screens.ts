@@ -16,8 +16,8 @@ import type { I18n, MessageParams } from '../../../ports/i18n.ts';
 import type { NoemaDialog } from '../../../ui/kit/dialog.ts';
 import { adopt } from '../../community/ui/styles.ts';
 import { list, s, type Obj } from '../../content/domain/util.ts';
-import type { ChatRecord, LessonRequest, LessonUpdate } from '../domain/index.ts';
-import type { LessonFail, LessonUpdates, OwnSubject, Preview } from '../application/service.ts';
+import { choicesOf, type ChatRecord, type LessonRequest, type Proposal } from '../domain/index.ts';
+import type { ChapterChange, LessonFail, LessonUpdates, OwnSubject, Preview } from '../application/service.ts';
 import { LU_CSS } from './styles.ts';
 
 export interface LessonUiDeps {
@@ -267,7 +267,7 @@ export async function openReview(deps: LessonUiDeps, id: string): Promise<void> 
     return;
   }
   const { req } = opened.value;
-  let update: LessonUpdate | null = opened.value.update;
+  let update: Proposal | null = opened.value.update;
   let picks: Record<string, string> = { ...(req.picks ?? {}) };
   let state = req.state;
   let preview: Preview | null = null;
@@ -276,6 +276,19 @@ export async function openReview(deps: LessonUiDeps, id: string): Promise<void> 
   let detail = '';
   let pasted = '';
 
+  /** the lessons it changes, for the title and the toasts: one by its title, several by their number */
+  const lessons = (): { one: string | null; n: number } => {
+    const ps = update?.parts ?? [];
+    return ps.length > 1 ? { one: null, n: ps.length } : { one: preview?.chapters[0]?.title ?? req.chapter.title, n: 1 };
+  };
+  const say = (k: 'applied' | 'undone' | 'declined'): string => {
+    const l = lessons();
+    return l.one === null && k !== 'declined' ? T(deps, k + 'Many', { n: l.n }) : T(deps, k, { chapter: l.one ?? req.chapter.title });
+  };
+  const retitle = (d: Dlg): void => {
+    const l = lessons();
+    d.el.heading = l.one === null ? T(deps, 'review.titleMany', { n: l.n }) : T(deps, 'review.title', { chapter: l.one });
+  };
   const refresh = async (d: Dlg): Promise<void> => {
     if (!update) return;
     busy = 'preview';
@@ -284,6 +297,7 @@ export async function openReview(deps: LessonUiDeps, id: string): Promise<void> 
     busy = '';
     if (r.ok) {
       preview = r.value;
+      retitle(d);
       error = r.value.changed ? T(deps, 'err.changed') : r.value.errors.length ? T(deps, 'err.invalid') : '';
       detail = r.value.errors.join('\n');
     } else {
@@ -311,7 +325,7 @@ export async function openReview(deps: LessonUiDeps, id: string): Promise<void> 
       return;
     }
     state = r.value.state;
-    deps.notify(T(deps, what === 'approve' ? 'applied' : what === 'undo' ? 'undone' : 'declined', { chapter: req.chapter.title }));
+    deps.notify(say(what === 'approve' ? 'applied' : what === 'undo' ? 'undone' : 'declined'));
     if (what !== 'decline') deps.refresh(req.subject.id);
     if (what === 'decline') d.close('decline');
     else d.redraw();
@@ -406,10 +420,22 @@ export async function openReview(deps: LessonUiDeps, id: string): Promise<void> 
             : nothing
         }`;
     const u = update;
-    const titleOf = new Map((preview?.diff.sections ?? []).map(x => [x.id, x.title]));
-    const name = (sid: string): string => titleOf.get(sid) || sid;
     const open = state === 'open' || state === 'proposed';
-    const counts = preview?.diff.added;
+    const changes: readonly ChapterChange[] = preview?.chapters ?? [];
+    const many = u.parts.length > 1;
+    const sum = (f: (x: ChapterChange) => number): number => changes.reduce((a, x) => a + f(x), 0);
+    const counts = preview
+      ? {
+          sections: sum(x => x.diff.added.sections),
+          blocks: sum(x => x.diff.added.blocks),
+          exercises: sum(x => x.diff.added.exercises),
+          cards: sum(x => x.diff.added.flashcards + x.diff.added.pitfalls),
+          removed: sum(x => x.diff.removed),
+        }
+      : null;
+    /** a section's title in the learner's language (the preview's), else its id */
+    const name = (ch: string, sid: string): string => changes.find(c => c.id === ch)?.diff.sections.find(x => x.id === sid)?.title || sid;
+    const notes = u.parts.flatMap(p => (p.notes ?? []).map(n => ({ ch: p.chapter, n })));
     return html`<div class="lu-body">
         ${head}
         <div class="lu-summary">${deps.md(u.summary)}</div>
@@ -423,24 +449,26 @@ export async function openReview(deps: LessonUiDeps, id: string): Promise<void> 
                         ['sections', counts.sections],
                         ['blocks', counts.blocks],
                         ['exercises', counts.exercises],
-                        ['cards', counts.flashcards + counts.pitfalls],
+                        ['cards', counts.cards],
                       ] as const
                     )
                       .filter(([, n]) => n > 0)
                       .map(([k, n]) => T(deps, 'n.' + k, { n })),
                   ),
-                })}${preview && preview.diff.removed ? ' · ' + T(deps, 'review.replaced', { n: preview.diff.removed }) : ''}
+                })}${counts.removed ? ' · ' + T(deps, 'review.replaced', { n: counts.removed }) : ''}${
+                  many ? ' · ' + T(deps, 'review.inLessons', { list: deps.i18n.format.list(changes.map(c => c.title)) }) : ''
+                }
               </p>`
             : nothing
         }
         ${
-          u.notes?.length
+          notes.length
             ? html`<ul class="lu-notes">
-                ${(u.notes ?? []).map(n => html`<li>${T(deps, 'review.placed', { from: name(n.from), to: name(n.to) })}</li>`)}
+                ${notes.map(({ ch, n }) => html`<li>${T(deps, 'review.placed', { from: name(ch, n.from), to: name(ch, n.to) })}</li>`)}
               </ul>`
             : nothing
         }
-        ${(u.choices ?? []).map(
+        ${choicesOf(u).map(
           c =>
             html`<fieldset class="lu-choice" data-choice=${c.id} ?disabled=${!open}>
               <legend>${c.question}</legend>
@@ -468,32 +496,38 @@ export async function openReview(deps: LessonUiDeps, id: string): Promise<void> 
         <h3 class="lu-h">${T(deps, 'review.changes')}</h3>
         ${
           preview
-            ? preview.diff.sections
-                .filter(x => x.state !== 'same')
-                .map(
-                  x =>
-                    html`<section class=${'lu-sec ' + x.state} data-sec=${x.id}>
-                      <h4>
-                        ${x.title}${x.state === 'new' ? html` <span class="lu-tag add">${T(deps, 'review.newSection')}</span>` : nothing}
-                      </h4>
-                      ${collapse(x.blocks).map(g =>
-                        g.kind === 'same'
-                          ? html`<p class="lu-same">${T(deps, 'review.same', { n: g.n })}</p>`
-                          : html`<div
-                              class=${'lu-blk ' + g.mark}
-                              aria-label=${T(deps, g.mark === 'added' ? 'review.added' : 'review.removed')}
-                            >
-                              ${blockView(deps, g.block)}
-                            </div>`,
+            ? changes.map(
+                c =>
+                  html`<div class="lu-chgroup" data-chapter=${c.id}>
+                    ${many ? html`<h3 class="lu-chtitle">${c.title}</h3>` : nothing}
+                    ${c.diff.sections
+                      .filter(x => x.state !== 'same')
+                      .map(
+                        x =>
+                          html`<section class=${'lu-sec ' + x.state} data-sec=${x.id}>
+                            <h4>
+                              ${x.title}${x.state === 'new' ? html` <span class="lu-tag add">${T(deps, 'review.newSection')}</span>` : nothing}
+                            </h4>
+                            ${collapse(x.blocks).map(g =>
+                              g.kind === 'same'
+                                ? html`<p class="lu-same">${T(deps, 'review.same', { n: g.n })}</p>`
+                                : html`<div
+                                    class=${'lu-blk ' + g.mark}
+                                    aria-label=${T(deps, g.mark === 'added' ? 'review.added' : 'review.removed')}
+                                  >
+                                    ${blockView(deps, g.block)}
+                                  </div>`,
+                            )}
+                            ${x.items.map(
+                              it =>
+                                html`<div class="lu-blk added lu-item">
+                                  <span class="lu-tag">${T(deps, 'kind.' + it.kind)}</span>${itemView(deps, it.kind, it.item)}
+                                </div>`,
+                            )}
+                          </section>`,
                       )}
-                      ${x.items.map(
-                        it =>
-                          html`<div class="lu-blk added lu-item">
-                            <span class="lu-tag">${T(deps, 'kind.' + it.kind)}</span>${itemView(deps, it.kind, it.item)}
-                          </div>`,
-                      )}
-                    </section>`,
-                )
+                  </div>`,
+              )
             : html`<p class="lu-muted" role="status">${T(deps, 'review.checking')}</p>`
         }
         ${state === 'applied' ? html`<p class="lu-ok" role="status">${T(deps, 'review.isApplied')}</p>` : nothing}
@@ -538,6 +572,7 @@ export async function openReview(deps: LessonUiDeps, id: string): Promise<void> 
       }`;
   });
   if (update) await refresh(d);
+  else retitle(d);
 }
 
 /** runs of unchanged blocks become one line ("3 blocks as they are"); one unchanged block around a change stays */

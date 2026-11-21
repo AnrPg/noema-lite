@@ -239,6 +239,16 @@ export interface Prepared {
   readonly fixed: readonly string[];
 }
 
+/** what to do about an error, for Claude: a piece is moved where it belongs, never dropped */
+function hint(e: string): string {
+  const later = /which (ch\d{2}) introduces later/.exec(e)?.[1];
+  if (later)
+    return ` — this piece belongs in ${later}: move it into a part for chapter ${later} (after the section that introduces what it uses; one part per chapter in "parts"), do not drop it`;
+  return /focus|new concepts/i.test(e)
+    ? ' — a section already full: put the addition in a new section, or make it a choice of kind "full" (a new section · replace the weaker text)'
+    : '';
+}
+
 /** The update as it came (JSON) against the lesson as it is → the update the learner reviews, or every problem. */
 export function prepare(checks: Checks, b: Base, raw: unknown): Prepared {
   const chapter = isObj(raw) ? s(raw.chapter) : '';
@@ -328,10 +338,7 @@ export function prepare(checks: Checks, b: Base, raw: unknown): Prepared {
   if (errs.length)
     return {
       update: null,
-      problems: errs.map(
-        e =>
-          `with the recommended options: ${e}${/focus|new concepts/i.test(e) ? ' — a section already full: put the addition in a new section, or make it a choice of kind "full" (a new section · replace the weaker text)' : ''}`,
-      ),
+      problems: errs.map(e => `with the recommended options: ${e}${hint(e)}`),
       fixed,
     };
   // 3. every other option, the rest recommended

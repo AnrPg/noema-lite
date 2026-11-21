@@ -65,16 +65,24 @@ export function lessonUpdatesDoor(win: Win, page: PieceHost, script: string | un
     return out.sort((x, y) => y.card.at.localeCompare(x.card.at));
   };
 
+  /** the 🔔 line of a proposal: its one lesson by title, several by their number */
+  const ready = (req: LessonRequest, card: ProposalCard | null): string => {
+    const ch = card?.chapters ?? [];
+    return ch.length > 1
+      ? i18n.t('lu.bell.readyMany', { n: ch.length })
+      : i18n.t('lu.bell.ready', { chapter: ch[0]?.title ?? card?.chapterTitle ?? req.chapter.title });
+  };
+
   /* a proposal that arrives (the sync brings its card) joins the bell, and is said once */
   const told = new Set<string>();
   const announce = (keys: readonly string[]): void => {
     const a = acc();
     if (!a || !keys.some(k => k.includes(PROP_PREFIX))) return;
     call(obj(N()?.['notes']), 'local');
-    for (const { req } of pending(a))
+    for (const { req, card } of pending(a))
       if (!told.has(req.id)) {
         told.add(req.id);
-        call(N(), 'notice', '📖 ' + i18n.t('lu.bell.ready', { chapter: req.chapter.title }));
+        call(N(), 'notice', '📖 ' + ready(req, card));
       }
   };
   for (const ev of ['noema:pulled', 'noema:remote'])
@@ -117,8 +125,8 @@ export function lessonUpdatesDoor(win: Win, page: PieceHost, script: string | un
         id: 'lu:' + req.id,
         kind: 'lessonupdate',
         request: req.id,
-        title: req.chapter.title,
-        text: i18n.t('lu.bell.ready', { chapter: req.chapter.title }),
+        title: card.chapterTitle ?? req.chapter.title,
+        text: ready(req, card),
         sub: card.summary
           ? card.summary.slice(0, 160)
           : i18n.t('lu.bell.from', { chat: req.conversation.title || i18n.t('lu.review.chat') }),

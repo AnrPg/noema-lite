@@ -431,10 +431,12 @@ by them). Add new chapters (next `chNN`) or `patches/*.json` with `appendBlocks`
 
 ## Improving a lesson from a chat with the tutor (a request `lu…`)
 The learner pressed *Use this chat in a lesson* in the app and pasted a message naming a request. With the connector:
-`noema_lesson_update_task(request_id)` gives the chat (the turns the learner saw, their files), the chapter as it is, every
-language of the pack and the format `noema-lesson-update`; answer with `noema_lesson_update_submit(request_id, update_json)`.
-Without the connector the message itself is the whole brief: answer with ONLY the JSON, in one code block. The update is
-ADDITIVE and touches ONE chapter: clearer explanations, examples, the misconceptions the learner hit, new exercises
+`noema_lesson_update_task(request_id)` gives the chat (the turns the learner saw, their files), the chapter it is about and
+the other chapters as they are, every language of the pack and the format `noema-lesson-update`; answer with
+`noema_lesson_update_submit(request_id, update_json)`. Without the connector the message itself is the whole brief: answer
+with ONLY the JSON, in one code block. The update is ADDITIVE and puts each piece in the chapter whose topic it is (one
+entry of `parts` per chapter that gets something; usually the chapter of the chat, but what it says about a later or
+earlier topic goes there, and never uses what a later chapter teaches): clearer explanations, examples, the misconceptions the learner hit, new exercises
 (`lr`, `think`, `cite: {"src": "chat:<request id>"}`), cards, pitfalls and the knowledge-map entries they need, every text
 in the pack's language and in each of its translations (same structure), bridge entries for new words. Every rule of the
 pack still holds (Q0 first: a term is never used before the section that teaches it; one focus per section, ≤ 3 new

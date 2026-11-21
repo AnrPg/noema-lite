@@ -68,5 +68,10 @@
   "lu.n.sections": "{n, plural, one {# новый раздел} few {# новых раздела} many {# новых разделов} other {# нового раздела}}",
   "lu.n.blocks": "{n, plural, one {# блок теории} few {# блока теории} many {# блоков теории} other {# блока теории}}",
   "lu.n.exercises": "{n, plural, one {# упражнение} few {# упражнения} many {# упражнений} other {# упражнения}}",
-  "lu.n.cards": "{n, plural, one {# карточку} few {# карточки} many {# карточек} other {# карточки}}"
+  "lu.n.cards": "{n, plural, one {# карточку} few {# карточки} many {# карточек} other {# карточки}}",
+  "lu.appliedMany": "{n, plural, one {# урок теперь с изменениями} few {# урока теперь с изменениями} many {# уроков теперь с изменениями} other {# урока теперь с изменениями}}",
+  "lu.undoneMany": "{n, plural, one {# урок снова как раньше} few {# урока снова как раньше} many {# уроков снова как раньше} other {# урока снова как раньше}}",
+  "lu.review.titleMany": "{n, plural, one {Изменения в # уроке} few {Изменения в # уроках} many {Изменения в # уроках} other {Изменения в # уроках}}",
+  "lu.review.inLessons": "в уроках: {list}",
+  "lu.bell.readyMany": "{n, plural, one {Изменения Claude в # уроке готовы} few {Изменения Claude в # уроках готовы} many {Изменения Claude в # уроках готовы} other {Изменения Claude в # уроках готовы}}"
 }

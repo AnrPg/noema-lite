@@ -360,9 +360,12 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   console.log('— 💬→📖 a lesson improved from a chat (docs/LESSON_UPDATES.md): the request the app wrote, the brief, the gate, the proposal');
   {
     const fx = JSON.parse(require('child_process').execFileSync(process.execPath, ['--experimental-strip-types', '--no-warnings', '--input-type=module', '-e',
-      `import { base, para, trBlocks, update } from ${JSON.stringify(path.join(ROOT, 'src/features/lesson-updates/application/lesson.fixture.ts'))};
-       const b = base(); const blocks = [para('Picture the current as the number of people who pass a door each second: the more who pass, the larger the current, whatever the size of the crowd.')];
-       console.log(JSON.stringify({ b, good: update([{ op: 'blocks', section: 'ch01-s02', at: 1, blocks, i18n: trBlocks(blocks) }]), bad: update([{ op: 'blocks', section: 'ch01-s02', blocks }]) }));`], { encoding: 'utf8' }));
+      `import { base2, para, trBlocks, update } from ${JSON.stringify(path.join(ROOT, 'src/features/lesson-updates/application/lesson.fixture.ts'))};
+       const b = base2(); const blocks = [para('Picture the current as the number of people who pass a door each second: the more who pass, the larger the current, whatever the size of the crowd.')];
+       const slide = [para('Picture the voltage as the height of a slide: each coulomb that goes down it gets the same push, however many coulombs go down together in a minute.')];
+       const multi = { format: 'noema-lesson-update', v: 1, pack: 'circ-demo', summary: 'A picture for current, and one for voltage in its own lesson.',
+         parts: [{ chapter: 'ch02', ops: [{ op: 'blocks', section: 'ch02-s01', blocks: slide, i18n: trBlocks(slide) }] }, { chapter: 'ch01', ops: [{ op: 'blocks', section: 'ch01-s02', at: 1, blocks, i18n: trBlocks(blocks) }] }] };
+       console.log(JSON.stringify({ b, good: update([{ op: 'blocks', section: 'ch01-s02', at: 1, blocks, i18n: trBlocks(blocks) }]), bad: update([{ op: 'blocks', section: 'ch01-s02', blocks }]), multi }));`], { encoding: 'utf8' }));
     const put = (k, v) => { srv.state.files[`${uid}/${k}`] = { data: Buffer.from(JSON.stringify(v)), type: 'application/json' }; };
     put('packs/circ-demo.json', fx.b.pack); put('packs/circ-demo.tr.el.json', fx.b.translations.el);
     const id = 'lu' + Date.now().toString(36) + '-test', at = new Date().toISOString();
@@ -383,6 +386,20 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
     ok(!again.isError && /already saved by an earlier call/.test(again.content[0].text) && JSON.parse(srv.state.kv[uid]['a:lessonup:' + id].value).rev === 1, 'the same update again: nothing written twice');
     srv.state.kv[uid]['a:lessonreq:' + id] = { value: JSON.stringify({ ...req, state: 'declined' }), updated_at: at };
     ok((await tool('noema_lesson_update_submit', { request_id: id, update_json: JSON.stringify(fx.good) })).isError, 'a request the learner declined takes no update');
+    // several lessons: one part per chapter, each where its topic is taught
+    const id2 = 'lu' + Date.now().toString(36) + '-twoparts';
+    srv.state.kv[uid]['a:lessonreq:' + id2] = { value: JSON.stringify({ ...req, id: id2 }), updated_at: at };
+    put(`updates/${id2}/chat.json`, { format: 'noema-lesson-chat', v: 1, id: id2, text: '**Me:**\nAnd voltage?\n\n**Owl:**\nLike the height of a slide.', cut: 0 });
+    const brief2 = (await tool('noema_lesson_update_task', { request_id: id2 })).content[0].text;
+    ok(/one part per chapter/.test(brief2) && /"id":"ch02"/.test(brief2), 'the brief carries the other chapters too, and asks for one part per chapter');
+    const two = await tool('noema_lesson_update_submit', { request_id: id2, update_json: JSON.stringify(fx.multi) });
+    const card2 = JSON.parse(srv.state.kv[uid]['a:lessonup:' + id2]?.value ?? 'null');
+    const prop2 = JSON.parse(srv.state.files[`${uid}/updates/${id2}/proposal.json`]?.data.toString() ?? 'null');
+    ok(!two.isError && /“Charge and current”, “Voltage”/.test(two.content[0].text), 'a proposal of two lessons passes: ' + two.content[0].text.slice(0, 140));
+    ok(card2?.chapters?.map(c => c.id).join() === 'ch01,ch02' && prop2?.parts?.map(p => p.chapter).join() === 'ch01,ch02', 'its card names both chapters, its parts in the order of the chapters');
+    const early = { ...fx.multi, parts: [{ chapter: 'ch01', ops: [{ op: 'blocks', section: 'ch01-s02', blocks: [{ t: 'p', text: 'The current in a wire grows with the voltage across it, so a higher voltage pushes more charge each second through the same lamp in the room.' }], i18n: { el: [{ t: 'p', text: 'The current in a wire grows with the voltage across it, so a higher voltage pushes more charge each second through the same lamp in the room.' }] } }] }, fx.multi.parts[0]] };
+    const q0 = await tool('noema_lesson_update_submit', { request_id: id2, update_json: JSON.stringify(early) });
+    ok(q0.isError && /\[part ch01\].*voltage.*ch02 introduces later/.test(q0.content[0].text), 'Q0 across the lessons: a part that uses what a later chapter teaches is refused');
   }
 
   console.log('— 🪜 Roadmaps by level: levels proposed with the map, work of one level, a new arrangement for the learner to approve');

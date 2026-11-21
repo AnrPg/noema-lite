@@ -175,6 +175,8 @@ export interface ProposalCard {
   readonly pack: string;
   readonly chapter: string;
   readonly chapterTitle?: string;
+  /** every chapter it changes, in order (a proposal of several lessons); chapter/chapterTitle: the first */
+  readonly chapters?: readonly { readonly id: string; readonly title: string }[];
   readonly summary: string;
   readonly counts: { readonly additions: number; readonly choices: number; readonly notes: number };
   /** a new proposal for the same request (Claude prepared it again) has a higher rev */

@@ -7,6 +7,7 @@
      D. a pasted answer that breaks a rule of the lesson (a term before it is taught, with nowhere better) is refused with
         the problems to copy for Claude, and Approve stays off
      E. the tutor's ⋮ has the item, the Conversations window the button (both open the same send window)
+     F. an answer for two lessons: the review shows each lesson's changes under its title; Approve changes both
    Usage: node tests/lesson_updates.js [repo-dir] */
 const { chromium } = require(process.env.PW || 'playwright');
 const { appUrl } = require('./serve');
@@ -19,13 +20,16 @@ const until = async (fn, ms = 15000, step = 200) => { const t = Date.now(); whil
 
 // the lesson of the unit tests, as a pack with its Greek translation inline (what Noema.importPack takes)
 const fx = JSON.parse(execFileSync(process.execPath, ['--experimental-strip-types', '--no-warnings', '--input-type=module', '-e',
-  `import { base, para, trBlocks, update } from ${JSON.stringify(path.join(ROOT, 'src/features/lesson-updates/application/lesson.fixture.ts'))};
-   const b = base(); const blocks = [para('Picture the current as the number of people who pass a door each second: the more who pass, the larger the current, whatever the size of the crowd.')];
+  `import { base2, para, trBlocks, update } from ${JSON.stringify(path.join(ROOT, 'src/features/lesson-updates/application/lesson.fixture.ts'))};
+   const b = base2(); const blocks = [para('Picture the current as the number of people who pass a door each second: the more who pass, the larger the current, whatever the size of the crowd.')];
+   const slide = [para('Picture the voltage as the height of a slide: each coulomb that goes down it gets the same push, however many coulombs go down together in a minute.')];
    const early = [para('A battery label in ampere-hours tells how long the current can last: that is why the ampere-hour matters before anything else here.')];
    console.log(JSON.stringify({ pack: { ...b.pack, translations: { el: { chapters: b.translations.el.chapters } } },
      good: update([{ op: 'blocks', section: 'ch01-s02', at: 1, blocks, i18n: trBlocks(blocks) }]),
      early: update([{ op: 'blocks', section: 'ch01-s01', at: 1, blocks: early, i18n: trBlocks(early) }]),
-     bad: update([{ op: 'blocks', section: 'ch01-s02', blocks }]) }));`], { encoding: 'utf8' }));
+     bad: update([{ op: 'blocks', section: 'ch01-s02', blocks }]),
+     multi: { format: 'noema-lesson-update', v: 1, pack: 'circ-demo', summary: 'A picture for current, and one for voltage in its own lesson.',
+       parts: [{ chapter: 'ch02', ops: [{ op: 'blocks', section: 'ch02-s01', blocks: slide, i18n: trBlocks(slide) }] }, { chapter: 'ch01', ops: [{ op: 'blocks', section: 'ch01-s02', at: 1, blocks, i18n: trBlocks(blocks) }] }] } }));`], { encoding: 'utf8' }));
 const record = {
   id: 'cv-door', title: 'Current vs charge', mode: 'explain',
   context: { type: 'section', id: 'ch01-s02', label: 'Charge on the move', chapterId: 'ch01', sectionId: 'ch01-s02' },
@@ -140,6 +144,24 @@ const answerBox = d => d.locator('.lu-answer textarea');
   await btn.click();
   ok(await until(() => send.isVisible()), 'it opens the send window');
   ok(await until(async () => (await send.locator('.lu-chapter').evaluate(e => e.value)) === 'ch01'), '… on the lesson the chat is about');
+  await page.keyboard.press('Escape'); await wait(300);
+
+  console.log('F. one answer, two lessons');
+  await pasteNew('```json\n' + JSON.stringify(fx.multi) + '\n```');
+  ok(await until(() => rev.locator('.lu-chgroup').count().then(n => n === 2), 30000), 'the review shows two lessons');
+  ok((await rev.locator('.lu-chtitle').allTextContents()).map(x => x.trim()).join(' | ') === 'Φορτίο και ρεύμα | Τάση' || (await rev.locator('.lu-chtitle').allTextContents()).map(x => x.trim()).join(' | ') === 'Charge and current | Voltage',
+    'each under its title, in the order of the lessons: ' + (await rev.locator('.lu-chtitle').allTextContents()).join(' | '));
+  ok(/2 lessons/.test(await rev.evaluate(e => e.heading)), 'the title says how many: ' + (await rev.evaluate(e => e.heading)));
+  ok(/in .*Voltage/.test(await rev.locator('.lu-counts').textContent()), 'the "Adds" line names them: ' + (await rev.locator('.lu-counts').textContent()).trim());
+  ok(await rev.locator('[data-chapter="ch02"] section[data-sec="ch02-s01"] .lu-blk.added').count() === 1, 'the voltage picture in its own lesson');
+  await page.screenshot({ path: SHOTS + '/lu_two_lessons.png', fullPage: true });
+  ok(await until(async () => !(await rev.locator('.lu-approve').evaluate(e => e.disabled))), 'Approve is on');
+  await rev.locator('.lu-approve').click();
+  ok(await until(() => rev.locator('.lu-undo').isVisible(), 30000), 'applied');
+  const both = (await storedPack(page)).chapters;
+  ok(/people who pass a door/.test(JSON.stringify(both[0])) && /height of a slide/.test(JSON.stringify(both[1])), 'both lessons have their piece');
+  await rev.locator('.lu-undo').click();
+  ok(await until(async () => !/height of a slide|people who pass a door/.test(JSON.stringify((await storedPack(page)).chapters)), 20000), 'Undo puts both back');
   await page.keyboard.press('Escape'); await wait(300);
 
   ok(E.length === 0, 'no page errors: ' + E.slice(0, 3).join(' | '));

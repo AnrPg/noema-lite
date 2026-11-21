@@ -275,5 +275,25 @@
   "lu.n.cards": "{n, plural, one {# card} other {# cards}}",
   "@lu.n.cards": {
     "description": "Count in the “Adds …” line (flashcards and traps)."
+  },
+  "lu.appliedMany": "{n, plural, one {# lesson now has the changes} other {# lessons now have the changes}}",
+  "@lu.appliedMany": {
+    "description": "Toast: several lessons now have the changes. {n} = how many."
+  },
+  "lu.undoneMany": "{n, plural, one {# lesson is back as it was} other {# lessons are back as they were}}",
+  "@lu.undoneMany": {
+    "description": "Toast: several lessons are back as they were. {n} = how many."
+  },
+  "lu.review.titleMany": "{n, plural, one {Changes to # lesson} other {Changes to # lessons}}",
+  "@lu.review.titleMany": {
+    "description": "Title of the review window when the update changes several lessons. {n} = how many."
+  },
+  "lu.review.inLessons": "in {list}",
+  "@lu.review.inLessons": {
+    "description": "In the “Adds …” line when several lessons change; {list} = their titles, e.g. “Charge and current and Voltage”."
+  },
+  "lu.bell.readyMany": "{n, plural, one {Claude’s changes to # lesson are ready for you} other {Claude’s changes to # lessons are ready for you}}",
+  "@lu.bell.readyMany": {
+    "description": "🔔 row and news: Claude's changes to several lessons wait for review. {n} = how many."
   }
 }

@@ -262,7 +262,14 @@ test('the chat as a source: the active path, hidden turns left out, the newest k
     files: chatFiles(rec),
     state: 'open',
   };
-  const t = briefFor({ req, chat: all.text, chapter: chapter, locales: ['el'], files: req.files, via: 'connector' });
+  const t = briefFor({
+    req,
+    chat: all.text,
+    pack: { ...base().pack, chapters: [chapter] },
+    locales: ['el'],
+    files: req.files,
+    via: 'connector',
+  });
   assert.match(t, /noema_lesson_update_submit with request_id "lumfx3k2a1-abcd"/);
   assert.match(t, /sections from ch01-s04 up, exercises from ch01-e003 up/);
   assert.match(t, /in their language \(el\)/);

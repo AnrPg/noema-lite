@@ -68,5 +68,10 @@
   "lu.n.sections": "{n, plural, one {# νέα ενότητα} other {# νέες ενότητες}}",
   "lu.n.blocks": "{n, plural, one {# κομμάτι θεωρίας} other {# κομμάτια θεωρίας}}",
   "lu.n.exercises": "{n, plural, one {# άσκηση} other {# ασκήσεις}}",
-  "lu.n.cards": "{n, plural, one {# κάρτα} other {# κάρτες}}"
+  "lu.n.cards": "{n, plural, one {# κάρτα} other {# κάρτες}}",
+  "lu.appliedMany": "{n, plural, one {# μάθημα έχει πλέον τις αλλαγές} other {# μαθήματα έχουν πλέον τις αλλαγές}}",
+  "lu.undoneMany": "{n, plural, one {# μάθημα επανήλθε όπως ήταν} other {# μαθήματα επανήλθαν όπως ήταν}}",
+  "lu.review.titleMany": "{n, plural, one {Αλλαγές σε # μάθημα} other {Αλλαγές σε # μαθήματα}}",
+  "lu.review.inLessons": "στα {list}",
+  "lu.bell.readyMany": "{n, plural, one {Οι αλλαγές του Claude σε # μάθημα είναι έτοιμες} other {Οι αλλαγές του Claude σε # μαθήματα είναι έτοιμες}}"
 }

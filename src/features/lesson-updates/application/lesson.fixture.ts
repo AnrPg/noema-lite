@@ -147,3 +147,71 @@ export const update = (ops: unknown[], extra: Record<string, unknown> = {}): Rec
   ...extra,
 });
 export const trBlocks = (blocks: unknown[]) => ({ el: copy(blocks) });
+
+/** a second chapter, built on the first (voltage: the energy each coulomb of charge carries) */
+export const chapter2 = {
+  id: 'ch02',
+  title: 'Voltage',
+  sections: [
+    sec(
+      'ch02-s01',
+      'What voltage is',
+      'Voltage is the energy each coulomb of charge gets; its unit is the volt.',
+      '**Voltage** is the energy each coulomb of charge gets between two points: 1 **volt** (V) is 1 joule per coulomb.',
+      'voltage',
+    ),
+    sec(
+      'ch02-s02',
+      'Voltage and current together',
+      'Power is voltage times current: the energy each second.',
+      '**Power** is the energy delivered each second: voltage times current, counted in **watts** (W).',
+      'power',
+    ),
+  ],
+  exercises: [
+    {
+      id: 'ch02-e001',
+      type: 'calc',
+      section: 'ch02-s02',
+      difficulty: 2,
+      tags: ['calc'],
+      q: 'A lamp runs on 12 V and draws a current of 2 A. What power does it take?',
+      answer: 24,
+      unit: 'W',
+      explain: 'Power is voltage times current: 12 V × 2 A = 24 W. Adding the two instead of multiplying is the usual slip.',
+    },
+  ],
+  flashcards: [{ id: 'ch02-f001', q: 'What is 1 V?', a: '1 joule per coulomb', section: 'ch02-s01' }],
+  map: {
+    concepts: [
+      {
+        id: 'voltage',
+        terms: ['voltage', 'volt'],
+        units: ['V'],
+        in: 'ch02-s01',
+        def: 'The energy each coulomb gets between two points; 1 V = 1 J/C.',
+        needs: ['charge', 'energy'],
+      },
+      {
+        id: 'power',
+        terms: ['power', 'watt'],
+        units: ['W'],
+        in: 'ch02-s02',
+        def: 'The energy delivered each second; voltage times current.',
+        needs: ['voltage', 'current'],
+      },
+    ],
+    learnables: [{ id: 'L2', text: 'Find the power from voltage and current', kp: [] }],
+    known: [
+      { id: 'energy', terms: ['energy', 'joule'], units: ['J'], from: 'everyday' },
+      { id: 'charge', terms: ['charge', 'coulomb', 'current', 'ampere'], from: 'ch01' },
+    ],
+  },
+};
+/** the subject with both chapters, in English and Greek */
+export const base2 = (): Base => {
+  const b = base();
+  const p = { ...b.pack, chapters: [copy(chapter), copy(chapter2)], translations: { el: { file: true, chapters: 2 } } };
+  const el = b.translations['el'] as Obj;
+  return { pack: p, translations: { el: { ...el, chapters: [greek(chapter), { ...copy(chapter2), title: 'Τάση' }] } } };
+};

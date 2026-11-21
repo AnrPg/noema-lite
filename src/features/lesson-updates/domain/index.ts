@@ -4,3 +4,4 @@ export * from './apply.ts';
 export * from './evaluate.ts';
 export * from './diff.ts';
 export * from './brief.ts';
+export * from './proposal.ts';
