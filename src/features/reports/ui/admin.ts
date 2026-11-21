@@ -287,7 +287,7 @@ export class NoemaReportAdmin extends CommunityScreen<ReportDeps> {
       </table>
       <details class="nr-details">
         <summary>${this.#T('all')}</summary>
-        <pre>${JSON.stringify(L, null, 1)}</pre>
+        <pre class="noema-i18n-skip" translate="no">${JSON.stringify(L, null, 1)}</pre>
       </details>
       <h2>${this.#T('answer')}</h2>
       <div class="nr-form">

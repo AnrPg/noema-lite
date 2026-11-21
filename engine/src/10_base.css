@@ -1,7 +1,7 @@
 /* the tokens (colours, fonts, radius, shadow …) are engine/tokens.css, generated from src/ui/tokens/ (tools/tokens.mjs) */
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:clip}   /* clip, not hidden: hidden would make <body> a scroll box and the sticky top bar would scroll away with the page */
 button{font-family:inherit;font-size:inherit;color:inherit;cursor:pointer;border:none;background:none}
 input,textarea,select{font-family:inherit;font-size:inherit;color:var(--ink)}
 a{color:inherit}
