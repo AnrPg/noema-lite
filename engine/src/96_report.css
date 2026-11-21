@@ -1,13 +1,12 @@
-/* ⚑ problem reports (docs/REPORTS.md): the frame's button at the foot of the side bar. The dialog, 🎯 and the admins' page are src/features/reports/ui. */
-.ns-railreport{display:none}
-@media (min-width:760px){
-  .ns-railreport{display:grid;place-items:center;position:fixed;inset-inline-start:32px;bottom:96px;z-index:31;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--paper);color:var(--ink3);cursor:pointer;transition:color .15s,background .15s}
-  .ns-railreport:hover,.ns-railreport:focus-visible{color:var(--t1i,var(--acc));background:var(--acc-soft);border-color:transparent}
-  .ns-railreport .ns-svg{display:grid;place-items:center} .ns-railreport svg{width:19px;height:19px}
-  .ns-railreport .ns-dot{display:none;position:absolute;top:1px;inset-inline-end:1px;width:9px;height:9px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 2px var(--paper)}
-  .ns-railreport.has-dot .ns-dot{display:block}
-  .ns-reportitem{display:none!important}   /* on wide screens the button is in the side bar */
-}
+/* ⚑ problem reports (docs/REPORTS.md): the frame's button, the same on every screen: at the foot of the side bar from 760 px wide, on phones
+   a small round button at the bottom left, above the tabs (across from the tutor). The dialog, 🎯 and the admins' page are src/features/reports/ui. */
+.ns-railreport{display:grid;place-items:center;position:fixed;inset-inline-start:12px;bottom:calc(66px + 12px + env(safe-area-inset-bottom,0px));z-index:25;width:36px;height:36px;padding:0;border-radius:50%;border:1px solid var(--line);background:var(--paper);color:var(--ink3);cursor:pointer;box-shadow:0 6px 16px -10px rgba(0,0,0,.3);transition:color .15s,background .15s,opacity .25s,transform .25s}
+.ns-railreport:hover,.ns-railreport:focus-visible{color:var(--t1i,var(--acc));background:var(--acc-soft);border-color:transparent}
+.ns-railreport .ns-svg{display:grid;place-items:center} .ns-railreport svg{width:19px;height:19px}
+.ns-railreport .ns-dot{display:none;position:absolute;top:1px;inset-inline-end:1px;width:9px;height:9px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 2px var(--paper)}
+.ns-railreport.has-dot .ns-dot{display:block}
+@media (max-width:759px){body.celeon .ns-railreport{opacity:0;transform:translateY(14px) scale(.8);pointer-events:none}}
+@media (max-width:420px){.ns-railreport{inset-inline-start:8px;bottom:calc(66px + 10px + env(safe-area-inset-bottom,0px));width:32px;height:32px} .ns-railreport svg{width:17px;height:17px}}
+@media (min-width:760px){.ns-railreport{inset-inline-start:32px;bottom:96px;z-index:31;box-shadow:none}}
 @media (min-width:760px) and (max-height:700px){.ns-railreport{bottom:22px;inset-inline-start:72px;width:30px;height:30px}}
 body.nr-shooting .ns-railreport{visibility:hidden}
-

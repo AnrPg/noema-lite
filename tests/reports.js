@@ -4,7 +4,7 @@
    In the browser: the button at the foot of the side bar (a line icon, no emoji), the dialog with a screenshot of the
    window as it is (also scrolled), a kind is required, 🎯 pointing at an exercise's question → the report names the
    exercise, its field and the pack version; a block of the theory read in a French translation → the translation file
-   and the text in the pack's own language; an interface word → its catalog key; on a phone the item is in Me ▾; an
+   and the text in the pack's own language; an interface word → its catalog key; on a phone the same button sits at the bottom left; an
    account that is not an admin cannot see the reports page; the admin sees them (with a count in Me ▾), opens one
    (screenshot, the place, the brief for Claude), answers it; Claude reads the same report through the connector.
    Usage: node tests/reports.js <prepared-repo-dir> */
@@ -124,9 +124,12 @@ function unit() {
 
     console.log('— on a phone, and who sees the reports');
     await p.setViewportSize({ width: 390, height: 800 }); await wait(300);
-    ok(!(await p.locator('#ns-report').isVisible()), 'on a phone the rail (and its button) is not there');
+    const phoneBtn = await p.locator('#ns-report').boundingBox(), phoneTabs = await p.locator('.ns-tabs').boundingBox();
+    ok(await p.locator('#ns-report').isVisible() && phoneBtn.x < 40 && phoneBtn.y + phoneBtn.height <= phoneTabs.y && await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'on a phone the same button sits at the bottom left, above the tabs');
+    await p.click('#ns-report'); ok(await until(() => p.locator('.nr-modal').count()), 'on a phone it opens the same dialog');
+    await p.keyboard.press('Escape'); await wait(300);
     await p.click('#ns-topme'); await wait(300);
-    ok(await p.locator('.ns-mepop .ns-reportitem').isVisible() && !(await p.locator('.ns-mepop button:has-text("Problem reports")').count()), 'Me ▾ has Report a problem; no Problem reports for someone who is not an admin');
+    ok(!(await p.locator('.ns-mepop button:has-text("Report a problem")').count()) && !(await p.locator('.ns-mepop button:has-text("Problem reports")').count()), 'Me ▾ has no Report a problem (the button is on the screen); no Problem reports for someone who is not an admin');
     await p.keyboard.press('Escape'); await p.setViewportSize({ width: 1280, height: 900 });
     await p.goto(BASE + '/#/admin/reports'); await wait(1200);
     ok(await until(() => p.locator('.nr-admin .nc-panel').count()) && !(await p.locator('.nr-item').count()) && await p.evaluate(() => document.querySelector('.nr-admin').innerText === NoemaI18n.t('report.notAdmin')), 'the reports page refuses an account that is not an admin');

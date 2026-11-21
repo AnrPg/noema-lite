@@ -1,6 +1,6 @@
 /**
  * The frame every screen lives in (docs/UI_MAP.md): on phones a top bar that slides away while reading and bottom tabs;
- * on wider screens a left rail with "Me" and ⚑ at its foot. The top bar: ← back, where you are (crumbs), the page's own
+ * on wider screens a left rail with "Me" and ⚑ at its foot (on phones ⚑ is a small round button at the bottom left). The top bar: ← back, where you are (crumbs), the page's own
  * actions and its ⋮, 🔎, 🔔 and Me. The character's still landscape behind, its face as the brand, the tutor's button
  * (with its name) in the corner.
  *
