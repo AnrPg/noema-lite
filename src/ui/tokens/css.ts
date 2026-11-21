@@ -7,11 +7,11 @@
    Derived colours (contrast.ts): --acc-text, the accent as TEXT (links, a word in the accent: the accent itself where it
    reads at 4.5:1 on bg, paper, bg2 and acc-soft, else mixed with the ink until it does) — not --acc-ink, the text ON the
    accent; --<c|violet|ok|warn|bad|info>-fill and -on, a colour as a fill and the text on it (fillFor; a character: its tint
-   ink under its paper). */
+   ink under its paper); --gold, --gold-hi, --gold-track, --gold-text: the day's goal ring once it is passed (goldFor). */
 import { BASE } from './base.ts';
 import { chaptersCss } from './chapters.ts';
 import { CHARACTERS, CHARACTER_IDS } from './characters.ts';
-import { derived, fillFor } from './contrast.ts';
+import { derived, fillFor, goldFor } from './contrast.ts';
 import { PALETTE_KEYS, type BaseColours, type CharacterTokens, type Palette } from './types.ts';
 
 const kebab = (k: string): string => k.replace(/[A-Z]/g, c => '-' + c.toLowerCase());
@@ -32,11 +32,15 @@ function baseColours(c: Partial<BaseColours>): [string, string][] {
   }
   return out;
 }
+/** the gold of the goal ring (goldFor) as declarations */
+const goldDecl = (bg: string, paper: string, ink: string, dark: boolean): [string, string][] =>
+  Object.entries(goldFor(bg, paper, ink, dark)).map(([k, v]) => [kebab(k), v]);
 /** the base set: light on :root, dark on :root[data-theme="dark"] and, unless the app says light, when the system is dark */
 export function baseCss(): string {
   const b = BASE;
   const light = decl([
     ...baseColours(b.colour.light),
+    ...goldDecl(b.colour.light.bg, b.colour.light.card, b.colour.light.ink, false),
     ['shadow', b.shadow.light],
     ['r', b.radius.r],
     ['r-sm', b.radius.rSm],
@@ -48,7 +52,8 @@ export function baseCss(): string {
     ['spring', b.motion.spring],
     ...Object.entries(b.z).map(([k, v]): [string, number] => ['z-' + k, v]),
   ]);
-  const dark = decl([...baseColours(b.colour.dark), ['shadow', b.shadow.dark]]);
+  const d = { ...b.colour.light, ...b.colour.dark };
+  const dark = decl([...baseColours(b.colour.dark), ...goldDecl(d.bg, d.card, d.ink, true), ['shadow', b.shadow.dark]]);
   return `:root{${light}}\n:root[data-theme="dark"]{${dark}}\n@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){${dark}}}\n`;
 }
 
@@ -62,6 +67,7 @@ function characterVars(t: CharacterTokens, dark: boolean): string {
   return PALETTE_KEYS.map(k => `--${kebab(k)}:${p[k]}`)
     .concat([
       `--acc-text:${derived(p).accText}`,
+      ...goldDecl(p.bg, p.paper, p.ink, dark).map(([k, v]) => `--${k}:${v}`),
       `--display:${display}`,
       `--font:${q(y.body)},${sys}`,
       `--dw:${y.displayWeight}`,

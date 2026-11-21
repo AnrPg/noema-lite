@@ -49,7 +49,7 @@ export const MODE_WORDS: Readonly<Record<ModeId, string>> = {
 /* i18n-ignore-start */ // prompts for the AI
 const learnerOf = (p: Persona, s: PromptSubject): string => `${s.learner} ${p.prior}`.trim();
 const format = (p: Persona, s: PromptSubject): string =>
-  `markdown allowed (**bold**, \`code\`, short lists, fenced code${s.math ? ', LaTeX math with $…$ inline and $$…$$ display' : ''}). ${p.examples} At most one emoji. Never invent facts about ${p.domain}; if you go beyond the COURSE NOTES, say "(beyond the notes)".`;
+  `markdown allowed (**bold**, \`code\`, short lists, fenced code${s.math ? ', LaTeX math with $…$ inline and $$…$$ display — the chat is a narrow panel that never scrolls sideways, so keep each display formula short: split a long one into steps or lines (\\begin{aligned} … \\\\ … \\end{aligned}, a line per = ), put words under a brace in the text instead, and keep \\text{…} labels to a few words' : ''}). ${p.examples} At most one emoji. Never invent facts about ${p.domain}; if you go beyond the COURSE NOTES, say "(beyond the notes)".`;
 const style = (p: Persona, s: PromptSubject): string => `Formatting: short turns (max ~120 words unless asked), ${format(p, s)}`;
 /** for the free, in-depth explanations: the same rules without the short-turn cap */
 const styleFree = (p: Persona, s: PromptSubject): string => `Formatting: ${format(p, s)}`;

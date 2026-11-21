@@ -109,6 +109,28 @@ export function derived(p: Palette): { readonly accText: string } {
   };
 }
 
+/** WCAG 2.x 1.4.11: a graphic (the gold ring, its sparks) needs 3:1 against what it sits on */
+export const GRAPHIC_MIN = 3;
+/** the gold of the day's goal ring once the goal is passed: a warm gold that reads on this scheme's background */
+export const GOLD_SEED = { light: '#c49a2c', dark: '#e6c165' } as const;
+/** the gold colours of a scheme (css.ts writes them as --gold, --gold-hi, --gold-track, --gold-text): the seed mixed with the
+    ink (1 % steps) until it reaches 3:1 on bg and paper; its highlight (towards a pale cream), its soft track (into the
+    background) and the gold as text (4.5:1 on bg and paper). Every character and both schemes: tokens.test.ts. */
+export function goldFor(
+  bg: string,
+  paper: string,
+  ink: string,
+  dark: boolean,
+): { gold: string; goldHi: string; goldTrack: string; goldText: string } {
+  const gold = textOn(dark ? GOLD_SEED.dark : GOLD_SEED.light, ink, [bg, paper], GRAPHIC_MIN);
+  return {
+    gold,
+    goldHi: mixSrgb(gold, dark ? '#fffaeb' : '#fff3c9', dark ? 0.45 : 0.4),
+    goldTrack: mixSrgb(gold, bg, dark ? 0.26 : 0.24),
+    goldText: textOn(gold, ink, [bg, paper]),
+  };
+}
+
 /** the pairs of a palette below the minimum: "ink3 on bg 2.60" (its derived accent as text included) */
 export function contrastFailures(p: Palette, min = TEXT_MIN): string[] {
   const out: string[] = [];

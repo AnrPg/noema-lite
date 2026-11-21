@@ -181,6 +181,7 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
 
     console.log('— the wizard: the AI reads the material and proposes');
     await p.click('.cm-mode:has-text("Roadmaps")'); await wait(300);
+    await p.locator('noema-roadmap-library .cm-new').click(); await wait(150);   // “New Roadmap ▾” › From your sources
     await p.locator('noema-roadmap-library .cm-srcbtn').click(); await wait(300);
     ok(await p.locator('.cm-srcbox h1').innerText() === 'From your sources', 'From your sources opens from 🧭 Roadmaps');
     await p.setInputFiles('.cm-src .cg-drop input[type=file]', FILES); await wait(200);

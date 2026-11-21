@@ -42,6 +42,7 @@ export interface PageGlobals {
     toast?(text: string, ms?: number): void;
   };
   marked?: { parse(s: string, o: unknown): string };
+  katex?: { renderToString(tex: string, o: unknown): string };
   DOMPurify?: { sanitize(html: string, o: unknown): string; addHook(name: string, f: (n: Element) => void): void };
 }
 export interface ShellApi {
@@ -64,9 +65,31 @@ export interface ShellApi {
 
 export const W = (): PageGlobals => globalThis as unknown as PageGlobals;
 
-/** the page's markdown libraries (engine/vendor: marked + DOMPurify) with the app's rules: links open apart, no pictures or styles */
 let hooked = false;
-function libs(): { parse(s: string): string; sanitize(h: string): string } | null {
+/**
+ * A formula of the tutor's text, drawn by KaTeX (when the page has it; null: shown as written). A display formula is drawn
+ * as a \displaystyle formula in the line, so a long one breaks after its = and + to fit a narrow drawer instead of running
+ * out of it (docs/UI_MAP.md "Small screens"); only the environments that need the display mode (align, \tag …) keep it.
+ * strict: 'ignore' — Greek, Cyrillic … inside \text{} are fine.
+ */
+export function drawMath(tex: string, display: boolean): string | null {
+  const k = W().katex;
+  if (!k) return null;
+  const own = display && /\\begin\{(align|equation|gather|multline|eqnarray|flalign)\*?\}|\\tag\b/.test(tex);
+  try {
+    return k.renderToString(display && !own ? '\\displaystyle ' + tex : tex, {
+      displayMode: own,
+      throwOnError: false,
+      strict: 'ignore',
+      trust: false,
+      output: 'htmlAndMathml',
+    });
+  } catch {
+    return null;
+  }
+}
+/** the page's markdown libraries (engine/vendor: marked + DOMPurify) with the app's rules: links open apart, no pictures or styles */
+function libs(): { parse(s: string): string; sanitize(h: string): string; math(tex: string, display: boolean): string | null } | null {
   const { marked, DOMPurify } = W();
   if (!marked || !DOMPurify) return null;
   if (!hooked) {
@@ -81,6 +104,7 @@ function libs(): { parse(s: string): string; sanitize(h: string): string } | nul
   return {
     parse: s => marked.parse(s, { gfm: true, breaks: true, async: false }),
     sanitize: h => DOMPurify.sanitize(h, { FORBID_TAGS: ['img', 'style', 'iframe', 'form'], FORBID_ATTR: ['style'] }),
+    math: drawMath,
   };
 }
 export function mdElement(text: string, i18n: I18n, toast: (t: string) => void): HTMLElement {

@@ -356,7 +356,7 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   console.log('G. Greek, wide screens');
   await page.evaluate(() => { NoemaThemes.putSettings({ lang: 'el' }); }); await page.goto(url + '#/learn'); await page.reload(); await wait(1500);
   ok((await texts(page, '.ns-tab .lb')).join(',') === 'Σήμερα,Γνώσεις,Ανακάλυψη,Θησαυροφυλάκιο,Πρόοδος', 'Greek tabs: ' + (await texts(page, '.ns-tab .lb')).join(','));
-  ok((await texts(page, '.ns-view h1'))[0] === 'Γνώσεις' && (await page.$eval('noema-roadmap-library .cm-new', b => b.textContent)).includes('Οδικός χάρτης'), 'Roadmap = Οδικός χάρτης: ' + (await page.$eval('noema-roadmap-library .cm-new', b => b.textContent)));
+  ok((await texts(page, '.ns-view h1'))[0] === 'Γνώσεις' && (await page.$eval('noema-roadmap-library .cm-new', b => b.label)).includes('Οδικός χάρτης'), 'Roadmap = Οδικός χάρτης: ' + (await page.$eval('noema-roadmap-library .cm-new', b => b.label)));
   ok(await page.evaluate(() => [NoemaThemes.tutor('owl').n, NoemaThemes.tutor('candy').n, NoemaThemes.tutor('hedge').n, NoemaShell.L('askTutor')].join('|')) === 'Γλαυκούλα|Χάνσελ και Γκρέτελ|Αγκαθούλης|Ρώτα τον Κόβαλτ', 'the tutor’s Greek names, in the right form');
   await page.evaluate(() => NoemaThemes.putSettings({ lang: undefined }));
   await page.setViewportSize({ width: 1280, height: 860 }); await page.goto(url + '#/'); await page.reload(); await wait(1200);

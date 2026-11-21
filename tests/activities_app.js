@@ -453,6 +453,20 @@ async function simSpec(p, ctx, E) {
   ok(/339\s*Hz/.test(paused) && /796\s*Hz/.test((await ro())[0]), `paused: no new results (${paused}); resumed: computed (${(await ro())[0]})`);
   ok(await p.evaluate(() => ACT.LIVE.length <= 2), 'the live limit counts sim-spec activities too (at most 2 on a wide screen)');
 
+  console.log('— full screen: an app taller than the screen scrolls, never cut off (the two plots of rc-lowpass)');
+  for (const [w, hh] of [[1280, 700], [320, 640]]) {
+    await p.setViewportSize({ width: w, height: hh }); await wait(300);
+    await p.locator(SEL).first().scrollIntoViewIfNeeded(); await wait(200);
+    await p.locator(SEL + ' .act-bar button').nth(1).click(); await wait(600);   // ⛶ Full screen
+    const fs0 = await p.evaluate(s => { const r = document.fullscreenElement, box = r?.querySelector('.act-box'); return r && r.matches(s) && { taller: box.scrollHeight > box.clientHeight + 20, inScreen: box.getBoundingClientRect().bottom <= innerHeight + 1, noSide: r.scrollWidth <= r.clientWidth + 1 }; }, SEL);
+    const c = await p.evaluate(() => { const b = document.fullscreenElement.querySelector('.act-box').getBoundingClientRect(); return [b.x + b.width / 2, b.y + b.height / 2]; });
+    await p.mouse.move(c[0], c[1]); for (let i = 0; i < 12; i++) { await p.mouse.wheel(0, 400); await wait(50); } await wait(300);
+    const seen = await p.evaluate(() => { const r = document.fullscreenElement, box = r.querySelector('.act-box').getBoundingClientRect(), last = [...r.querySelectorAll('.sim-plot')].at(-1).getBoundingClientRect(); return last.bottom <= box.bottom + 1 && last.top >= box.top - 1; });
+    ok(fs0 && fs0.taller && fs0.inScreen && fs0.noSide && seen, `${w} px full screen: the box stays on the screen, the wheel scrolls it and the second plot comes fully into view ${JSON.stringify({ fs0, seen })}`);
+    await p.evaluate(() => document.exitFullscreen()); await wait(400);
+  }
+  await p.setViewportSize({ width: 1280, height: 900 }); await wait(300);
+
   console.log('— sim-spec@1: small screens and dark mode');
   for (const w of [360, 320]) {
     await p.setViewportSize({ width: w, height: 800 }); await wait(400);

@@ -147,6 +147,7 @@ export class NoemaMenu extends NoemaElement {
     kind: { type: String },
     icon: { type: String },
     align: { type: String },
+    variant: { type: String, reflect: true },
     open: { type: Boolean, reflect: true },
   };
   static override styles = [
@@ -177,6 +178,19 @@ export class NoemaMenu extends NoemaElement {
         background: var(--u-acc-soft);
         color: var(--u-ink);
       }
+      /* the page's one primary action, when it has several ways (a text button: + New Roadmap ▾) */
+      .trigger.button.primary {
+        background: var(--u-acc);
+        border-color: var(--u-acc);
+        color: var(--u-acc-ink);
+        gap: 8px;
+      }
+      .trigger.button.primary:hover,
+      .trigger.button.primary[aria-expanded='true'] {
+        background: var(--u-acc);
+        color: var(--u-acc-ink);
+        box-shadow: 0 0 0 3px var(--u-acc-soft);
+      }
       .panel {
         padding: 4px 0;
       }
@@ -188,6 +202,8 @@ export class NoemaMenu extends NoemaElement {
   declare icon: string;
   /** which edge of the button the panel lines up with (default: the end, as a ⋮ at the end of a bar) */
   declare align: 'start' | 'end';
+  /** a text button (kind="button") as the page's primary action: filled with the accent, its icon (if any) before the words */
+  declare variant: 'secondary' | 'primary';
   declare open: boolean;
   readonly #id = uid('menu');
   #active = -1;
@@ -202,6 +218,7 @@ export class NoemaMenu extends NoemaElement {
     this.kind = 'icon';
     this.icon = 'more';
     this.align = 'end';
+    this.variant = 'secondary';
     this.open = false;
     // clicks and hovers on the items (light children) are caught on the host: the item is in their path either way
     this.addEventListener('click', this.#onItemClick);
@@ -373,8 +390,9 @@ export class NoemaMenu extends NoemaElement {
 
   override render(): TemplateResult {
     const isIcon = this.kind !== 'button';
+    const lead = !isIcon && this.icon !== 'more' && isIconName(this.icon) ? icon(this.icon) : nothing;
     return html`<button
-        class="ctl trigger ${isIcon ? 'icon' : 'button'}"
+        class="ctl trigger ${isIcon ? 'icon' : 'button'} ${this.variant === 'primary' ? 'primary' : ''}"
         id="${this.#id}-btn"
         type="button"
         aria-haspopup="menu"
@@ -385,7 +403,7 @@ export class NoemaMenu extends NoemaElement {
         @keydown=${this.#onTriggerKey}
         @click=${this.#onTriggerClick}
       >
-        ${isIcon ? (isIconName(this.icon) ? icon(this.icon) : nothing) : html`<span>${this.label}</span>${icon('down')}`}
+        ${isIcon ? (isIconName(this.icon) ? icon(this.icon) : nothing) : html`${lead}<span>${this.label}</span>${icon('down')}`}
       </button>
       <div
         class="panel"

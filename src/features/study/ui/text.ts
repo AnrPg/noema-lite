@@ -82,13 +82,58 @@ export function codeBlockHtml(code: string, lang: string | undefined, copyLabel:
 export interface MarkdownLibs {
   parse(markdown: string): string;
   sanitize(html: string): string;
+  /** TeX → safe HTML (KaTeX when the page has it); null: shown as written */
+  math?(tex: string, display: boolean): string | null;
+}
+
+/** A formula taken out of a text before the markdown runs: its TeX, display or inline, and what it was written as. */
+export interface MathPart {
+  readonly tex: string;
+  readonly display: boolean;
+  readonly raw: string;
+}
+const MATH_TOKEN = (i: number): string => `NOEMAMATH${String(i)}Z`;
+/**
+ * Takes the formulas out of a markdown text, so the markdown never reads their _ * \ | as its own (a \underbrace{…}_{…}
+ * turned into italics, a \\ into a line break). Code spans and code blocks are left alone; $…$ is a formula only when it
+ * looks like one ($5 and $10 is money). → the text with a token for each formula, and the formulas.
+ */
+export function protectMath(s: string): { text: string; math: MathPart[] } {
+  const math: MathPart[] = [];
+  const re =
+    /(```[\s\S]*?(?:```|$)|~~~[\s\S]*?(?:~~~|$)|`[^`\n]*`)|\$\$([\s\S]+?)\$\$|\\\[([\s\S]+?)\\\]|\\\(([\s\S]+?)\\\)|(?<![\\$\w])\$(?![\s$])((?:\\.|[^$\\\n])+?)(?<![\s\\])\$(?![\w$])/g;
+  const text = s.replace(re, (all: string, code?: string, dd?: string, db?: string, ip?: string, id?: string) => {
+    if (code !== undefined) return all;
+    const display = dd !== undefined || db !== undefined;
+    const tex = (dd ?? db ?? ip ?? id ?? '').trim();
+    if (!tex) return all;
+    math.push({ tex, display, raw: all });
+    const t = MATH_TOKEN(math.length - 1);
+    return display ? `\n\n${t}\n\n` : t;
+  });
+  return { text, math };
+}
+/** puts the formulas back into the HTML the markdown made: drawn (libs.math) or as written (escaped) */
+export function restoreMath(html: string, math: readonly MathPart[], draw?: (tex: string, display: boolean) => string | null): string {
+  if (!math.length) return html;
+  const one = (i: number): string => {
+    const m = math[i];
+    if (!m) return '';
+    const drawn = draw?.(m.tex, m.display) ?? null;
+    if (!m.display) return drawn ? `<span class="mathin">${drawn}</span>` : esc(m.raw);
+    return `<div class="mathblock">${drawn ?? esc(m.raw)}</div>`;
+  };
+  return html
+    .replace(/<p>\s*NOEMAMATH(\d+)Z\s*<\/p>/g, (_, i: string) => one(Number(i)))
+    .replace(/NOEMAMATH(\d+)Z/g, (_, i: string) => one(Number(i)));
 }
 
 /** The tutor's markdown → safe HTML (code blocks with the app's colours, tables in a scroll box). */
 export function markdown(text: Text, copyLabel: string, libs: MarkdownLibs | null): string {
-  const s = String(text ?? '');
+  const { text: s, math } = protectMath(String(text ?? ''));
   if (libs) {
-    const html = libs.sanitize(libs.parse(s));
+    const draw = libs.math?.bind(libs);
+    const html = restoreMath(libs.sanitize(libs.parse(s)), math, draw);
     return `<div class="mdx">${html
       .replace(/<pre><code(?: class="language-([\w+-]+)")?>([\s\S]*?)<\/code><\/pre>/g, (_, lang: string | undefined, body: string) => {
         const code = unescapeHtml(body).replace(/\n$/, '');
@@ -97,7 +142,7 @@ export function markdown(text: Text, copyLabel: string, libs: MarkdownLibs | nul
       .replace(/<table>/g, '<div class="tablewrap"><table>')
       .replace(/<\/table>/g, '</table></div>')}</div>`;
   }
-  return markdownLite(s, copyLabel);
+  return restoreMath(markdownLite(s, copyLabel), math);
 }
 
 const unescapeHtml = (s: string): string =>

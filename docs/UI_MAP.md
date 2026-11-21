@@ -45,7 +45,7 @@ test suites run that way. `tests/shell.js` checks the new homes.
 |---|---|
 | H1 ▶ Continue / Start chapter 1 | The primary button on the subject page; also Today's big Continue card (across subjects) |
 | H2 ✨ What's new | Button on the subject page when there is something new; subject ⋮ › What's new |
-| H3 daily-goal ring | Today |
+| H3 daily-goal ring | Today (gold past the goal: a glint, sparks and twinkles within 10 px of the ring and an inner lap for the extra XP, while it holds; still under reduced motion) |
 | H4 🔎 jump to a concept | ⋮ › Search this subject (subject, chapter, section) |
 | H5 ⚡ Lightning, H6 🔧 Debug drills, H7 🃏 Flashcards, H8 🔁 Mistakes gym, H9 🎲 Mixed, H10 🦉 tutor tile | **Practice ▾** next to Continue (with the "due" counts); Today › Review / Mistakes gym across subjects |
 | H11 chapter cards | Chapters as **cards** (default) or as a **list**: the Cards / List switch, remembered |
@@ -180,3 +180,15 @@ Every screen fits its width down to 320px phones, and nothing scrolls sideways (
 onto a second line, code, diagrams and tables wrap inside the width, long formulas break at their operators. Below 400px with six
 tabs only the open tab shows its name (the others keep it as their tip); below 420px the tutor is its face only. The Roadmap map and
 the PDF viewer are the only things that pan, as pictures do.
+In the tutor's chat a display formula is drawn as a \displaystyle formula in the line, so it breaks after its = and + ; one that is
+still too wide (one huge fraction) is drawn smaller until it fits — never a sideways scroll — and the tutor is told to write long
+formulas as short steps or aligned lines (src/features/tutor/domain/prompts.ts). Formulas are taken out of the text before the
+Markdown runs (src/features/study/ui/text.ts protectMath), so its _ * \\ | never break them.
+
+### The tutor's chat
+The reader stays where they read: a new turn brings the learner's message to the top and the answer grows below it without
+moving the page; ↓ (round, over the end of the talk) brings back the latest; ■ replaces ➤ while it writes. Under each message,
+faint line-icon tools with their words in the tooltip: ✎ edit (the learner's), ⧉ copy and ↻ answer again (the tutor's), ‹ 2/3 ›
+when a message has versions (docs/CONVERSATIONS.md "Branches"); 📎 left of the box adds files ("Attachments"). The bar over
+the talk (the question worked on, 💡 Tell me, 🎓 Wrap up) folds to one thin line with ⌃ (kept on this device) and opens with ⌄;
+folded, it shows by itself for 4 s after each of the tutor's answers (longer while the pointer is on it).

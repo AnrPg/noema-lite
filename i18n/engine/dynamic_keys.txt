@@ -15,3 +15,4 @@ engine.ex.conf_*
 engine.ex.report_*
 engine.act.bench.inst.*
 engine.author.*   # the activity author: T(key) adds the prefix; field labels f.<schema title>, p.<netlist field>, h.*, v.<schema keyword>
+engine.tutor.file_*

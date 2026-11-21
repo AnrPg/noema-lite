@@ -13,7 +13,10 @@
 .act-skip:focus { position: static; display: inline-block; margin-bottom: 4px; }
 .act-sr, .act-after { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .act:fullscreen { background: var(--bg); padding: 12px; display: flex; flex-direction: column; }
-.act:fullscreen .act-box { flex: 1; height: auto !important; }
+/* full screen: the box takes the screen below nothing but the bar; an app taller than the screen (a sim-spec with two plots, an H5P
+   quiz) scrolls inside the box, never cut off. A frame keeps filling the box (100 %), its own page scrolls itself */
+.act:fullscreen .act-box { flex: 1 1 auto; min-height: 0; height: auto !important; aspect-ratio: auto !important; overflow: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+.act:fullscreen .act-bar { flex: 0 0 auto; }
 .act-hints .fb { margin-top: 6px; }
 /* ---- sim-spec@1 (src/runtimes/sim-spec): the app's own controls and plots, no frame; fits 320 px, tokens for light and dark ---- */
 .sim { padding: 12px; display: grid; gap: 12px; min-width: 0; color: var(--ink); }
