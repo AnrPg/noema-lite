@@ -154,6 +154,14 @@
           "type": "string",
           "minLength": 8
         },
+        "i18n": {
+          "type": "object",
+          "description": "the picture's words in other languages of the pack: { \"<locale>\": { \"alt\": …, \"caption\": … } }, shown when the chapters are shown in that translation",
+          "additionalProperties": {
+            "type": "object",
+            "properties": { "alt": { "type": "string", "minLength": 8 }, "caption": { "type": "string" } }
+          }
+        },
         "caption": {
           "type": "string"
         },

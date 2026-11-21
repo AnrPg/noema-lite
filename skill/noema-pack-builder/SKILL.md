@@ -138,7 +138,7 @@ with pictures has every picture exercise type that fits it ≥ 3 times (step 4).
    rhetoric, philo or law, a diagnosis → clinic or med…), never the familiar one out of habit and never `formula@1` when a specific
    engine models the idea. Plan the pack's activities across its chapters before writing.
 3. **Spread the uses**: each interactive block and each `sim` exercise is one use of every kind of engine its activity runs on;
-   ≥ 5 kinds, no kind over 35 % of the uses, the uses spread over ≥ 4 kinds in effect (1 / Σ share²). One engine almost everywhere
+   ≥ 5 kinds (the floor, not the target: aim for 8 or more, one per idea whose best engine differs), no kind over 35 % of the uses, the uses spread over ≥ 4 kinds in effect (1 / Σ share²). One engine almost everywhere
    plus four token uses is refused. A kind is a `sim-spec@1` engine, an engine a mini-app or a part uses, `wasm-module@1`, or a
    runtime with no engine of its own (a mini-app without engines, `py-module@1`, `h5p@1`, `external-embed@1`).
 4. No engine fits an idea → `noema_request_engine`.

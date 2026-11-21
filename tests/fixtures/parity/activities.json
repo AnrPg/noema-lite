@@ -1,6 +1,6 @@
 {
  "packs": {
-  "in": "b3f38a47c5c0141d6b95564768e607de0fc0b7bd1a2528952429a75251d8f3be",
+  "in": "1686eca40713cadcbce4c45be4c6e4e2ec876654c509c684e63e53922e196ec5",
   "out": {
    "good": [
     0,
@@ -200,6 +200,16 @@
     0,
     null
    ],
+   "spec: a default off the step grid": [
+    1,
+    0,
+    null
+   ],
+   "spec: a max off the step grid": [
+    1,
+    0,
+    null
+   ],
    "spec: a later derived value used early": [
     1,
     0,
@@ -387,6 +397,11 @@
    ],
    "circuit: a bad stat": [
     2,
+    0,
+    null
+   ],
+   "circuit: a derived value from an output": [
+    0,
     0,
     null
    ],
@@ -580,8 +595,8 @@
     0,
     null
    ],
-   "circuit: power without at or stat": [
-    1,
+   "circuit: a DC power (no at or stat, no transient)": [
+    0,
     0,
     null
    ],
@@ -1395,7 +1410,7 @@
   }
  },
  "p6": {
-  "in": "b3f38a47c5c0141d6b95564768e607de0fc0b7bd1a2528952429a75251d8f3be",
+  "in": "1686eca40713cadcbce4c45be4c6e4e2ec876654c509c684e63e53922e196ec5",
   "out": [
    [
     [],
@@ -1563,17 +1578,17 @@
   ]
  },
  "spec": {
-  "in": "b3f38a47c5c0141d6b95564768e607de0fc0b7bd1a2528952429a75251d8f3be",
+  "in": "1686eca40713cadcbce4c45be4c6e4e2ec876654c509c684e63e53922e196ec5",
   "out": [
    [],
    [
     "spec: format must be \"noema.sim-spec/v1\""
    ],
    [
-    "spec: unknown field 'code'"
+    "spec: unknown field \"code\""
    ],
    [
-    "spec: unknown engine 'warp@9' (this version knows agents@1, anatomy@1, circuit-mna@1, clinic@1, craft@1, des@1, field@1, formula@1, genetics@1, geom@1, graph@1, law@1, logic@1, map@1, med@1, music@1, ode@1, philo@1, pid@1, prob@1, rf@1, rhetoric@1, seq@1, text@1, thermal@1, timeline@1, twin@1, wasm@1)"
+    "spec: unknown engine \"warp@9\" (this version knows agents@1, anatomy@1, circuit-mna@1, clinic@1, craft@1, des@1, field@1, formula@1, genetics@1, geom@1, graph@1, law@1, logic@1, map@1, med@1, music@1, ode@1, philo@1, pid@1, prob@1, rf@1, rhetoric@1, seq@1, text@1, thermal@1, timeline@1, twin@1, wasm@1)"
    ],
    [
     "spec: model configures another engine; formula@1 has none"
@@ -1610,7 +1625,7 @@
     "spec.derived[0].expr: unknown variable 'R' in “R * C”"
    ],
    [
-    "spec.plots[0].x.var: 'true' must be a new name for the x axis (not one of the spec's names)",
+    "spec.plots[0].x.var: \"true\" must be a new name for the x axis (not one of the spec's names)",
     "spec.plots[0].series[0].expr: unknown variable 'f' in “-10 * log10(1 + (f / fc)^2)”"
    ],
    [
@@ -1624,6 +1639,12 @@
    ],
    [
     "spec.readouts[0].expr: '.' (property access) is not allowed in “R.constructor”"
+   ],
+   [
+    "spec.params[0].default 4705 is not min + a whole number of steps (10): the control would move it"
+   ],
+   [
+    "spec.params[0].max 10005 is not min + a whole number of steps (10): the control could not reach it"
    ],
    [
     "spec.derived[0].expr: unknown variable 'fc' in “fc * 2”"
@@ -1646,12 +1667,12 @@
     "spec.plots[0].points is a whole number 2–2000"
    ],
    [
-    "spec.plots[0].x.var: 'R' must be a new name for the x axis (not one of the spec's names)",
+    "spec.plots[0].x.var: \"R\" must be a new name for the x axis (not one of the spec's names)",
     "spec.plots[0].series[0].expr: unknown variable 'f' in “-10 * log10(1 + (f / fc)^2)”"
    ],
    [
     "spec.plots[0].x.series must name a series output of the engine",
-    "spec.plots[0].series[0].y must name a series output of the engine"
+    "spec.plots[0].series[0].y must name a series output of the engine (or expr: an expression of x.var)"
    ],
    [
     "spec.plots[1].x.max: unknown variable 'taux' in “5 * taux”"
@@ -1712,7 +1733,7 @@
     "spec.derived[42].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”"
    ],
    [
-    "spec: unknown engine 'warp@9' (this version knows agents@1, anatomy@1, circuit-mna@1, clinic@1, craft@1, des@1, field@1, formula@1, genetics@1, geom@1, graph@1, law@1, logic@1, map@1, med@1, music@1, ode@1, philo@1, pid@1, prob@1, rf@1, rhetoric@1, seq@1, text@1, thermal@1, timeline@1, twin@1, wasm@1)"
+    "spec: unknown engine \"warp@9\" (this version knows agents@1, anatomy@1, circuit-mna@1, clinic@1, craft@1, des@1, field@1, formula@1, genetics@1, geom@1, graph@1, law@1, logic@1, map@1, med@1, music@1, ode@1, philo@1, pid@1, prob@1, rf@1, rhetoric@1, seq@1, text@1, thermal@1, timeline@1, twin@1, wasm@1)"
    ],
    [],
    [],
@@ -1724,7 +1745,7 @@
     "spec.model.netlist.elements[2].value: needs a positive number"
    ],
    [
-    "spec.model: unknown field 'spice'"
+    "spec.model: unknown field \"spice\""
    ],
    [
     "spec.model.bindings[0].element is not a part of the netlist"
@@ -1748,6 +1769,7 @@
     "spec.outputs[0].stat is one of final, min, max, mean, pp, rms",
     "spec.outputs[0] needs model.transient {tEnd, dt?}"
    ],
+   [],
    [],
    [
     "spec.readouts[0].expr: unknown variable 'diagnosis' in “diagnosis”"
@@ -1812,7 +1834,7 @@
     "spec.bench.diagnosis.options must be a list of 2–12 options {label, fault?}"
    ],
    [
-    "spec.bench: unknown field 'answer'"
+    "spec.bench: unknown field \"answer\""
    ],
    [],
    [],
@@ -1854,9 +1876,7 @@
     "spec.outputs[0].power is not a part of the netlist (the part whose power is read)",
     "spec.outputs[0] needs model.transient {tEnd, dt?}"
    ],
-   [
-    "spec.outputs[0]: a power is read over the transient: give at or stat"
-   ],
+   [],
    [
     "spec.outputs[0].probe must be a reading {kind: V | I | R, a, b? | element, pin?, mode?, zin?, tEnd?, dt?, tStart?} on a scalar output"
    ],
@@ -2826,7 +2846,7 @@
   ]
  },
  "h5p.registry": {
-  "in": "b3f38a47c5c0141d6b95564768e607de0fc0b7bd1a2528952429a75251d8f3be",
+  "in": "1686eca40713cadcbce4c45be4c6e4e2ec876654c509c684e63e53922e196ec5",
   "out": {
    "h5p good": [],
    "h5p good in el and ru": [],

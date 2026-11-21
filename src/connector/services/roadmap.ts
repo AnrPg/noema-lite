@@ -16,7 +16,7 @@ import {
   type RoadmapLanguages,
 } from '../../features/roadmaps/domain/index.ts';
 import type { Roadmap } from '../../features/roadmaps/domain/model.ts';
-import { findStep } from './curricula.ts';
+import { curState, findInboxStep, stepOfPack } from './curricula.ts';
 
 export interface RoadmapTodo {
   loc: string;
@@ -115,7 +115,7 @@ export function roadmapMapText(E: EngineApi, c: Curriculum): string {
     L = c.levels?.length
       ? `\n\nLevels (lowest first): ${ladderLine(R)}${c.levelTest ? ' · a level test before moving up' : ''}. A chapter at another level than its step shows it in [ ]. To rearrange by level (move, split or merge steps): noema_restructure_levels${pend ? ` — a proposal of ${pend.at.slice(0, 10)} waits for the learner's decision` : ''}.`
       : `\n\nNo levels. To give it levels (grades, semesters, years, difficulty): noema_restructure_levels.`;
-  return `The Roadmap “${c.title || c.goal}” (curriculum_id ${c.id}) · ${c.language || 'en'} · ${rows.length} steps, ${c.edges.length} links${c.shared && !c.shared.ended ? (c.shared.role === 'member' ? ` · 👥 shared by ${c.shared.ownerName || 'its owner'} (read only: the owner adds parts)` : ' · 👥 shared by the learner') : ''}\n\nSteps in study order — "@id" is each step's permanent connection point:\n${rows.join('\n')}\n\nParts:\n${P}\n\nTo grow it (noema_extend_roadmap): new steps get their own refs (n1, n2…); "prerequisites": ["@id"] = what a new step builds on, "before": ["@id"] = a step above that is not prepared yet and must come after the new one. Link to a step that already teaches a topic; never add it again. A missing link between two steps that are on the map already (prepared ones too): noema_link_roadmap_steps.${L}`;
+  return `The Roadmap “${c.title || c.goal}” (curriculum_id ${c.id}) · ${c.language || 'en'} · ${rows.length} steps, ${c.edges.length} links${c.shared && !c.shared.ended ? (c.shared.role === 'member' ? ` · 👥 shared by ${c.shared.ownerName || 'its owner'} (read only: the owner adds parts)` : ' · 👥 shared by the learner') : ''}\n\nSteps in study order — "@id" is each step's permanent connection point:\n${rows.join('\n')}\n\nParts:\n${P}\n\nTo grow it (noema_extend_roadmap): new steps get their own refs (n1, n2…); "prerequisites": ["@id"] = what a new step builds on, "before": ["@id"] = a step above that is not prepared yet and must come after the new one. Link to a step that already teaches a topic; never add it again. A missing link between two steps that are on the map already (prepared ones too): noema_link_roadmap_steps.${L}\n\nLanguages: ${languagesLine(E, c)}.`;
 }
 
 /* ---------- 📑 chapters added to a step, 🌐 the Roadmap's languages (docs/CURRICULUM.md §2c, §10b) ---------- */
@@ -174,8 +174,13 @@ export async function writeLanguages(ctx: ToolContext, c: Curriculum, v: Roadmap
 export async function scopeOfPack(ctx: ToolContext, p: Pack, c: Curriculum | null = null): Promise<unknown> {
   const own = (p.subject.authoring as { languages?: unknown } | undefined)?.languages;
   if (own) return own;
-  const cur = c ?? (await findStep(ctx, p.subject.id).catch(() => null))?.c ?? null;
-  return cur ? languagesOf(cur as unknown as Roadmap) : null;
+  const cur =
+    c ?? ((await stepOfPack(ctx, p.subject.id).catch(() => null)) ?? (await findInboxStep(ctx, p.subject.id).catch(() => null)))?.c ?? null;
+  if (!cur) return null;
+  // the Roadmap as the learner's app will have it: noema_set_roadmap_languages also leaves its languages in the inbox, and the
+  // stored copy may not have them yet (bug 2026-11-21: an en + el Roadmap was told to make ru, de, fr and their bridges)
+  const now = await curState(ctx, cur, ctx.uid).catch(() => cur);
+  return languagesOf(now as unknown as Roadmap) ?? languagesOf(cur as unknown as Roadmap);
 }
 
 /** The Roadmap's languages as a line for Claude. */

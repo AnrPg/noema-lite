@@ -31,6 +31,7 @@ library/subjects/<subject-id>/media/
       "url": "https://…", "retrieved": "2026-10-06",   // REQUIRED for origin "web": the page it came from
       "lowResOk": "reason",                    // optional: allow a raster < 800 px (small flat diagram)
       "alt": "Frontal section of the heart with the four chambers and the great vessels",   // REQUIRED, describes the picture
+      "i18n": { "el": { "alt": "Μετωπιαία τομή της καρδιάς με τις τέσσερις κοιλότητες και τα μεγάλα αγγεία" } },   // optional: alt / caption per language of the pack (shown with that translation)
       "caption": "Blood enters the right atrium…",  // optional, shown under figures
       "credit": "Drawn by noema-lite",            // REQUIRED: who made it
       "license": "own",                          // REQUIRED: own | CC0 | CC BY 4.0 | … (only reuse what the license allows)

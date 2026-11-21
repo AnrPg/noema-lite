@@ -52,7 +52,10 @@ const termRe = (t: string): RegExp | null => {
   const tail = stem ? '\\p{L}*' : caps ? 's?' : '(?:s|es)?';
   return new RegExp(`(?<!${L})${core}${tail}(?!${L})`, caps ? 'u' : 'iu');
 };
-const unitRe = (u: string): RegExp => new RegExp(`\\d[\\d.,]*\\s{0,3}${PREFIX}${esc(u)}(?![\\p{L}\\p{N}])`, 'u');
+/** a unit after a number: the number starts a token (not the 0C of 0x0C, the 2 of R2), the unit ends one and is not a word's
+    first letter before a hyphen (4 N-channel, 2 P-type) */
+const unitRe = (u: string): RegExp =>
+  new RegExp(`(?<![\\p{L}\\p{N}_.])\\d[\\d.,]*\\s{0,3}${PREFIX}${esc(u)}(?![\\p{L}\\p{N}]|-\\p{L})`, 'u');
 const symRe = (x: string): RegExp => new RegExp(`(?<![A-Za-z\\\\])${esc(x)}(?![A-Za-z])`, 'u');
 const strsOf = (v: unknown): string[] => list(v).filter((x): x is string => isStr(x));
 
@@ -178,13 +181,44 @@ function lexicon(c: GradualContext): Entry[] {
   return [...own, ...known, ...other(c.before, 'earlier'), ...other(c.after, 'later')];
 }
 
+/** map.plainText: words and numbers of the chapter that only look like a unit or an acronym (3S = three cells in series, 183 C
+    on a solder datasheet, 0x0C): the Q0 rules read the text without them */
+function scrubbed(c: GradualContext): GradualContext {
+  const words = strsOf(c.map.plainText)
+    .map(w => w.trim())
+    .filter(Boolean)
+    .sort((a, b) => b.length - a.length);
+  if (!words.length) return c;
+  const re = new RegExp(
+    `(?<![\\p{L}\\p{N}_]|\\d[.,])(?:${words.map(w => esc(w).replace(/\s+/g, '\\s+')).join('|')})(?![\\p{L}\\p{N}])`,
+    'gu',
+  );
+  const clean = (x: unknown, key = ''): unknown =>
+    typeof x === 'string'
+      ? key === 'id' || key === 'section' || key === 'in'
+        ? x
+        : x.replace(re, ' ')
+      : Array.isArray(x)
+        ? x.map(v => clean(v, key))
+        : isObj(x)
+          ? Object.fromEntries(Object.entries(x).map(([k, v]) => [k, clean(v, k)]))
+          : x;
+  const map = c.map;
+  return {
+    ...c,
+    chapter: { ...(clean(c.chapter) as Obj), map },
+    sections: c.sections.map(x => clean(x) as Obj),
+    exercises: c.exercises.map(x => clean(x) as Obj),
+  };
+}
+
 const rule = (
   check: QualityCheck,
   body: (c: GradualContext, add: (msg: string) => void, chk: QualityCheck) => void,
 ): Spec<GradualContext> =>
   spec(check.id, c => {
     const out: RuleIssue[] = [];
-    body(c, message => out.push({ rule: check.id, at: c.cid, message }), check);
+    body(scrubbed(c), message => out.push({ rule: check.id, at: c.cid, message }), check);
     return out;
   });
 
@@ -348,7 +382,7 @@ export const conceptUndeclared = (chk: QualityCheck): Spec<GradualContext> =>
       if (hit && !told.has(u.sym)) {
         told.add(u.sym);
         add(
-          `${hit[0]}: uses the unit ${u.sym} (${u.name}, ${u.what}), but no concept of map.concepts or map.known lists it in units; introduce ${u.what} and its unit before it is used`,
+          `${hit[0]}: uses the unit ${u.sym} (${u.name}, ${u.what}), but no concept of map.concepts or map.known lists it in units; introduce ${u.what} and its unit before it is used (when “${(unitRe(u.sym).exec(delatex(hit[1]))?.[0] ?? u.sym).trim()}” is not that unit — 3S for three cells in series, a part number —, list it in map.plainText)`,
         );
       }
     }
@@ -362,7 +396,9 @@ export const conceptUndeclared = (chk: QualityCheck): Spec<GradualContext> =>
         if (seen.has(a) || stop.has(a) || /^[IVXLCDM]+$/.test(a) || unitTok.test(a)) continue;
         seen.add(a);
         if (!covers(a) && !lex.some(en => en.symbols.includes(a)))
-          add(`${where}: the acronym ${a} is not in map.concepts or map.known (expand it where it is introduced)`);
+          add(
+            `${where}: the acronym ${a} is not in map.concepts or map.known (expand it where it is introduced; when it is not an acronym — a hex number, a part number —, list it in map.plainText)`,
+          );
       }
   });
 

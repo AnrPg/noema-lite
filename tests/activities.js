@@ -126,6 +126,8 @@ const scases = {
   'spec: unknown variable': p => { sp(p).derived[0].expr = 'R * L'; },
   'spec: not the language': p => { sp(p).readouts[0].expr = 'Math.sqrt(R)'; },
   'spec: property access': p => { sp(p).readouts[0].expr = 'R.constructor'; },
+  'spec: a default off the step grid': p => { sp(p).params[0].default = 4705; },
+  'spec: a max off the step grid': p => { sp(p).params[0].max = 10005; },
   'spec: a later derived value used early': p => { sp(p).derived[0].expr = 'fc * 2'; },
   'spec: bad choice': p => { sp(p).params.push({ id: 'm', kind: 'choice', label: 'gain', options: [{ value: 1, label: 'gain' }, { value: 1, label: 'time' }], default: 3 }); },
   'spec: a good choice and toggle': p => { sp(p).params.push({ id: 'm', kind: 'choice', label: 'gain', options: [{ value: 1, label: 'gain' }, { value: 2, label: 'time' }], default: 2 }, { id: 'sh', kind: 'toggle', label: 'time', default: true }); },
@@ -177,6 +179,7 @@ const ccases = {
   'circuit: bad noise': p => { md(p).noise = { rel: 2 }; },
   'circuit: an output on no node': p => { sp(p).outputs = [{ id: 'v', kind: 'scalar', node: 'zz' }]; },
   'circuit: a bad stat': p => { sp(p).outputs = [{ id: 'v', kind: 'scalar', node: 'a', stat: 'median' }]; },
+  'circuit: a derived value from an output': p => { sp(p).outputs = [{ id: 'va', kind: 'scalar', node: 'a' }]; sp(p).derived = [...(sp(p).derived || []), { id: 'va2', expr: 'va * 2' }]; sp(p).readouts = [{ label: 'tp3', expr: 'va2', unit: 'V' }]; },
   'circuit: a good scalar output in a readout': p => { sp(p).outputs = [{ id: 'va', kind: 'scalar', node: 'a' }]; sp(p).readouts = [{ label: 'tp3', expr: 'va', unit: 'V' }]; },
   'circuit: a bench name in a readout': p => { sp(p).readouts = [{ label: 'tp3', expr: 'diagnosis' }]; },
   'circuit: a bench on formula@1': p => { sp(p).engine = 'formula@1'; delete sp(p).model; p.requires = p.requires.filter(x => x !== 'engine:circuit-mna@1'); },
@@ -311,7 +314,7 @@ Object.assign(ccases, {
   'circuit: an ac output on no node': p => { md(p).ac = { source: 'V1', fStart: 1, fStop: 1e6 }; sp(p).outputs = [{ id: 'g', kind: 'series', ac: 'db', node: 'zz' }]; },
   'circuit: ref on a node output': p => { sp(p).outputs = [{ id: 'v', kind: 'scalar', node: 'a', ref: 's' }]; },
   'circuit: power of no part': p => { sp(p).outputs = [{ id: 'pd', kind: 'scalar', power: 'D9', stat: 'mean' }]; },
-  'circuit: power without at or stat': p => { md(p).transient = { tEnd: 0.01 }; sp(p).outputs = [{ id: 'pd', kind: 'scalar', power: 'D1' }]; },
+  'circuit: a DC power (no at or stat, no transient)': p => { delete md(p).transient; sp(p).outputs = [{ id: 'pd', kind: 'scalar', power: 'D1' }]; },
   'circuit: a probe in a bad mode': p => { sp(p).outputs = [{ id: 'vm', kind: 'scalar', probe: { kind: 'V', a: 'a', mode: 'peak' } }]; },
   'circuit: an ohmmeter with zin': p => { sp(p).outputs = [{ id: 'r', kind: 'scalar', probe: { kind: 'R', a: 'a', zin: 1e6 } }]; },
   'circuit: modes on the ohmmeter': p => { bn(p).instruments[2].modes = ['dc']; },
@@ -462,7 +465,7 @@ const packs = [...Object.entries(cases).map(([k, f]) => { const p = base(); f(p)
   ...Object.entries(wcases).map(([k, f]) => { const p = wbase(); f(p); return [k, p]; }), ...Object.entries(ecases).map(([k, f]) => { const p = ebase(); f(p); return [k, p]; }),
   ...Object.entries(p6cases).flatMap(([aid, cs]) => Object.entries(cs).map(([k, f]) => { const p = p6base(aid)(); f(p); return [k, p]; })),
   ...Object.entries(hcases).map(([k, f]) => { const p = hbase(); f(p); return [k, p]; })];
-const GOOD = new Set(['h5p good', 'h5p good in el and ru', 'good', 'spec good', 'spec: a good choice and toggle', 'circuit good', 'circuit: rc-transient (no bench)', 'circuit: a good scalar output in a readout', 'circuit: a scope and a logic analyser', 'circuit: task.fault a list', 'circuit: a check on the diagnosis index', 'circuit: good ac, power and instrument extras',
+const GOOD = new Set(['h5p good', 'h5p good in el and ru', 'good', 'spec good', 'spec: a good choice and toggle', 'circuit good', 'circuit: rc-transient (no bench)', 'circuit: a good scalar output in a readout', 'circuit: a scope and a logic analyser', 'circuit: task.fault a list', 'circuit: a check on the diagnosis index', 'circuit: good ac, power and instrument extras', 'circuit: a DC power (no at or stat, no transient)', 'circuit: a derived value from an output',
   'wasm good', 'wasm: through a sim-spec@1 spec (engine wasm@1)', 'embed good', ...P6GOOD,
   'py good', 'py: graded "reported" (noema.result)', 'py: a task param for Python only', 'py: scipy declared and imported', 'py: an allow-listed extra with requiresNetwork', 'py: while True (a warning)']);
 const jsAll = Object.fromEntries(packs.map(([k, p]) => { const r = P.checkActivities(p, Object.keys(p.translations || {})); return [k, [r.errors.length, r.warnings.length, k.startsWith('py') ? r.errors : null]]; }));

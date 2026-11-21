@@ -29,8 +29,10 @@
 .sim-row { display: flex; align-items: center; gap: 8px; min-width: 0; }
 .sim-row input[type=range] { flex: 1 1 auto; min-width: 0; width: 100%; min-height: 36px; margin: 0; accent-color: var(--c); }
 .sim-num, .sim-sel { min-height: 36px; box-sizing: border-box; border: 1px solid var(--line); border-radius: var(--r-sm, 8px); background: var(--bg); color: var(--ink); font: inherit; font-size: 14px; padding: 4px 6px; }
-.sim-num { flex: 0 0 auto; width: 6.5em; font-family: var(--mono); }
-.sim-sel { max-width: 100%; }
+.sim-num { flex: 0 0 auto; width: 9ch; min-width: 6.5em; font-family: var(--mono); }   /* 8 digits and a sign fit */
+.sim-unit { flex: 0 0 auto; font-size: 13px; color: var(--ink2); }
+/* a dropdown is as wide as its column, never its longest option: a long option is cut with … instead of spilling into the next control */
+.sim-sel { width: 100%; max-width: 100%; min-width: 0; text-overflow: ellipsis; }
 .sim-tog { display: flex; align-items: center; gap: 8px; min-height: 36px; font-size: 14px; }
 .sim-tog input { width: 20px; height: 20px; margin: 0; accent-color: var(--c); }
 .sim-ro { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 8px; margin: 0; }

@@ -103,7 +103,19 @@ const NEEDHTTP = PYOK && items.some(a => a.runtime === 'py-module@1');
 const playerPath = [path.join(srcDir, 'h5p', 'player.js'), path.join(srcDir, '..', 'vendor', 'h5p', '3.8.2', 'player.js')].find(f => fs.existsSync(f));
 const H5POK = WASMOK && !!playerPath;
 const OWN = (() => { try { return rj(path.join(SDIR, 'subject.json')).language || 'en'; } catch (e) { return 'en'; } })();
-// the host words of sim-spec@1 (the app shows them in the learner's language; here English is enough)
+// the host words of sim-spec@1 in the language of each run, as the app shows them: activity_host/host_words.json in the skill
+// (built from i18n/engine: every UI language, Claude's drafts where no reviewed word exists), the catalogs themselves in the
+// repository; English (below) where neither has the word
+const HOSTW = (() => {
+  const f = path.join(srcDir, 'host_words.json');
+  if (fs.existsSync(f)) try { return JSON.parse(fs.readFileSync(f, 'utf8')); } catch (e) { /* the English words */ }
+  const dir = path.join(srcDir, '..', '..', 'i18n', 'engine'), out = {};
+  const msgs = g => { try { return Object.fromEntries(Object.entries(JSON.parse(fs.readFileSync(g, 'utf8'))).filter(([k]) => /^engine\.(act\.|common\.size)/.test(k))); } catch (e) { return {}; } };
+  if (fs.existsSync(dir)) for (const g of fs.readdirSync(path.join(dir, 'drafts')).filter(x => x.endsWith('.arb'))) { const loc = g.slice(0, -4); out[loc] = { ...msgs(path.join(dir, 'drafts', g)), ...msgs(path.join(dir, g)) }; }
+  return out;
+})();
+const wordsFor = loc => { const l = String(loc || 'en'); const t = HOSTW[l] || HOSTW[l.split('-')[0]] || Object.entries(HOSTW).find(([k]) => k.split('-')[0] === l.split('-')[0])?.[1] || {}; return { ...HOSTWORDS, ...t }; };
+// the English host words (the app's i18n/engine/en.arb)
 const HOSTWORDS = { 'engine.act.sim.reset': 'Reset the values', 'engine.act.sim.noConverge': 'These values did not settle: the parts of the model kept changing each other, so some results are not shown. Try other settings.', 'engine.act.sim.partFailed': 'One part of this simulation could not compute its results for these settings.', 'engine.act.sim.computing': 'Computing…', 'engine.act.sim.results': 'Results', 'engine.act.sim.plot': 'Plot of {y} against {x}',
   'engine.act.bench.instrument': 'Instrument', 'engine.act.bench.inst.V': 'Multimeter: voltage', 'engine.act.bench.inst.I': 'Multimeter: current', 'engine.act.bench.inst.R': 'Multimeter: resistance',
   'engine.act.bench.inst.scope': 'Oscilloscope', 'engine.act.bench.inst.logic': 'Logic analyser', 'engine.act.bench.red': 'Red lead (+)', 'engine.act.bench.black': 'Black lead (−)', 'engine.act.bench.probe': 'Probe on',
@@ -121,7 +133,7 @@ var RT = {}, EN = { 'formula@1': { id: 'formula@1', check: function () { return 
 var ACT = { ITEMS: {}, PARTS: ${inl(JSON.stringify(PARTSLIB))}, registerRuntime: function (d) { RT[d.id] = d; }, runtime: function (id) { return RT[id] || null; }, loadedRuntime: function (id) { return RT[id] || null; }, registerEngine: function (d) { EN[d.id] = d; }, engine: function (id) { return EN[id] || (window.NoemaCore && NoemaCore.engines.engine(id)) || null; }, engines: function () { return Object.keys(EN).concat(window.NoemaCore ? NoemaCore.engines.ids() : []); }, enabled: function (id) { return !!RT[id] && (!RT[id].available || RT[id].available()); },
  };
 function nf(n) { return String(n); } function fmtBytes(n) { return n > 1e6 ? (n / 1e6).toFixed(1) + ' MB' : n > 1e3 ? Math.round(n / 1e3) + ' KB' : n + ' B'; } function tip(t) { return document.createTextNode(''); }
-var WORDS = ${JSON.stringify(HOSTWORDS)};
+var WORDS = ${JSON.stringify(HOSTWORDS)};   // the language of each run replaces them (start: wordsFor)
 function tE(k, v) { return String(WORDS[k] || k).replace(/\\{(\\w+)\\}/g, function (_, n) { return v && v[n] != null ? v[n] : ''; }); }
 function h(tag, attrs, ...kids) { const el = document.createElement(tag); for (const [k, v] of Object.entries(attrs || {})) { if (v == null || v === false) continue; if (k === 'class') el.className = v; else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v); else if (k.startsWith('on')) el.addEventListener(k.slice(2), v); else el.setAttribute(k, v === true ? '' : v); } for (const kid of kids.flat()) if (kid != null && kid !== false) el.append(kid.nodeType ? kid : document.createTextNode(String(kid))); return el; }
 ${ACTP}
@@ -185,7 +197,7 @@ function mount(act, init, modules) {
   const start = async (p, a, o = {}) => {
     const init = { activityId: a.id, exerciseId: o.exerciseId || null, attemptId: 'test', seed: o.seed ?? 12345, task: o.task || {}, locale: o.locale, strings: a.strings[o.locale] || {},
       theme: THEMES[o.theme || 'light'], state: o.state || null, stateVersion: a.stateVersion || 1, capabilities: a.capabilities || [], limits: { msgBytes: 65536, stateBytes: 262144, eventsPerSec: 50 } };
-    await p.evaluate(([act, init, th, mods]) => { window.setTheme(th); return window.run(act, init, mods); }, [a, init, THEMES[o.theme || 'light'], MODULES]);
+    await p.evaluate(([act, init, th, mods, w]) => { window.WORDS = w; window.setTheme(th); return window.run(act, init, mods); }, [a, init, THEMES[o.theme || 'light'], MODULES, wordsFor(o.locale)]);
     const t0 = Date.now(); while (Date.now() - t0 < 8000) { const L = await p.evaluate(() => window.LOG); if (L.some(m => m.type === 'ready' || m.type === 'fail')) break; await p.waitForTimeout(100); }
     if (a.runtime === 'py-module@1') await pyValues(p);   // Python loads (first use: the whole runtime) and computes the first outputs
     await p.waitForTimeout(o.settle ?? 400);

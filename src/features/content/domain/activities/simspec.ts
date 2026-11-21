@@ -29,6 +29,7 @@ import {
   MODES,
   NAME_RE,
   NUM_FORMATS,
+  SI_PREFIXES,
   OUT_KEYS,
   P6,
   P6_TIMED,
@@ -444,7 +445,6 @@ export function createSimSpec(env: CheckEnv) {
         st = 'stat' in o;
       if ((at || st) && !(o.kind === 'scalar' && (sk === 'node' || sk === 'branch' || sk === 'power')))
         E.push(`${w}: at and stat belong to a scalar output of a node, a branch or a power`);
-      if (sk === 'power' && o.kind === 'scalar' && !at && !st) E.push(`${w}: a power is read over the transient: give at or stat`);
       if (at && st) E.push(`${w}: at or stat, not both`);
       if (at) numOrExpr(o.at, names, w + '.at', E, false);
       if (st && !inA(STATS, o.stat)) E.push(`${w}.stat is one of ${STATS.join(', ')}`);
@@ -1252,8 +1252,12 @@ export function createSimSpec(env: CheckEnv) {
       if (o.unit != null && !(typeof o.unit === 'string' && o.unit.length <= L.unit))
         E.push(`${where}.unit must be a text of at most ${L.unit} characters`);
       if (o.format != null && !inA(NUM_FORMATS, o.format)) E.push(`${where}.format is one of ${NUM_FORMATS.join(', ')}`);
-      if (o.digits != null && !(Number.isInteger(o.digits) && (o.digits as number) >= 1 && (o.digits as number) <= L.digits))
-        E.push(`${where}.digits is a whole number 1–${L.digits}`);
+      // digits: significant digits (auto, si), decimals (fixed, plain: 0 = a whole number)
+      const d0 = o.format === 'fixed' || o.format === 'plain' ? 0 : 1;
+      if (o.digits != null && !(Number.isInteger(o.digits) && (o.digits as number) >= d0 && (o.digits as number) <= L.digits))
+        E.push(`${where}.digits is a whole number ${String(d0)}–${L.digits}${d0 ? ' (0 decimals: format fixed or plain)' : ''}`);
+      if (o.prefix != null && !inA(SI_PREFIXES, o.prefix))
+        E.push(`${where}.prefix is an SI prefix, one of ${SI_PREFIXES.join(' ')} (u = µ), the value shown in it (m with unit A: 1 mA)`);
     };
     key(spec.title, 'spec.title');
     key(spec.intro, 'spec.intro');
@@ -1289,6 +1293,17 @@ export function createSimSpec(env: CheckEnv) {
           }
           if (p.step != null && !(isNum(p.step) && p.step > 0)) E.push(`${w}.step must be a number > 0`);
           if (!(isNum(df) && lo <= df && df <= hi)) E.push(`${w}.default must be a number from min to max`);
+          else if (isNum(p.step) && p.step > 0) {
+            // the control moves in steps from min: a default or a max off that grid would be moved silently (12 with step 5 → 10)
+            const off = (v: number): boolean => {
+              const k = (v - lo) / (p.step as number);
+              return Math.abs(k - Math.round(k)) > 1e-6;
+            };
+            if (off(df))
+              E.push(`${w}.default ${String(df)} is not min + a whole number of steps (${String(p.step)}): the control would move it`);
+            if (off(hi))
+              E.push(`${w}.max ${String(hi)} is not min + a whole number of steps (${String(p.step)}): the control could not reach it`);
+          }
           if (p.scale != null && !['lin', 'log'].includes(s(p.scale))) E.push(`${w}.scale is lin or log`);
           else if (p.scale === 'log' && lo <= 0) E.push(`${w}: a log scale needs min > 0`);
           numfmt(p, w);
@@ -1320,6 +1335,15 @@ export function createSimSpec(env: CheckEnv) {
     const ds = spec.derived;
     if (ds != null && !(Array.isArray(ds) && ds.length <= L.derived))
       E.push(`spec.derived must be a list of at most ${L.derived} {id, expr}`);
+    // a derived value may use the engine's scalar outputs (a power from a current the engine computed): it is computed after the
+    // engine (a "late" value), so the engine's own inputs never name it
+    const outScalars =
+      !PT && eng !== DEFAULT_ENGINE
+        ? list(spec.outputs)
+            .filter(o => isObj(o) && o.kind === 'scalar' && typeof o.id === 'string')
+            .map(o => s((o as Obj).id))
+        : [];
+    const late = new Set<string>();
     list(ds)
       .slice(0, L.derived)
       .forEach((d, i) => {
@@ -1328,10 +1352,13 @@ export function createSimSpec(env: CheckEnv) {
           E.push(`${w} must be an object {id, expr}`);
           return;
         }
-        expr(d.expr, PI ? [...names, ...PI.scalars] : [...names], w + '.expr');
-        if (name(d.id, w + '.id')) names.push(s(d.id));
+        expr(d.expr, PI ? [...names, ...PI.scalars] : [...names, ...outScalars], w + '.expr');
+        if (name(d.id, w + '.id')) {
+          names.push(s(d.id));
+          if (freeVars(d.expr).some(v => outScalars.includes(v) || late.has(v))) late.add(s(d.id));
+        }
       });
-    const inNames = [...names];
+    const inNames = names.filter(n => !late.has(n));
     const os = spec.outputs,
       series: string[] = [],
       scenes: string[] = [],
@@ -1422,6 +1449,17 @@ export function createSimSpec(env: CheckEnv) {
             else if (!isNum(v)) E.push(`${w}.${ax}.${b} must be a number or an expression`);
           }
           if (isNum(o.min) && isNum(o.max) && !(o.min < o.max)) E.push(`${w}.${ax}: min must be below max`);
+          const tk = o.ticks;
+          if (tk != null) {
+            if (!isObj(tk)) E.push(`${w}.${ax}.ticks must be {step?, integer?, count?}`);
+            else {
+              unknownKeys(tk, ['step', 'integer', 'count'], `${w}.${ax}.ticks`, E);
+              if (tk.step != null && !(isNum(tk.step) && tk.step > 0)) E.push(`${w}.${ax}.ticks.step must be a number > 0`);
+              if (tk.integer != null && typeof tk.integer !== 'boolean') E.push(`${w}.${ax}.ticks.integer is true or false`);
+              if (tk.count != null && !(Number.isInteger(tk.count) && (tk.count as number) >= 2 && (tk.count as number) <= 12))
+                E.push(`${w}.${ax}.ticks.count is a whole number 2–12`);
+            }
+          }
           if (o.scale === 'log' && isNum(o.min) && o.min <= 0) E.push(`${w}.${ax}: a log scale needs min > 0`);
         }
         const local = [...names];
@@ -1434,7 +1472,15 @@ export function createSimSpec(env: CheckEnv) {
           const pts = p.points;
           if (pts != null && !(Number.isInteger(pts) && (pts as number) >= 2 && (pts as number) <= L.points))
             E.push(`${w}.points is a whole number 2–${L.points}`);
-        } else if (!inA(series, x.series)) E.push(`${w}.x.series must name a series output of the engine`);
+        } else {
+          if (!inA(series, x.series)) E.push(`${w}.x.series must name a series output of the engine`);
+          // expression lines on a series plot: x.var names x in them
+          if (x.var != null) {
+            if (badName(x.var) || seen.has(s(x.var)))
+              E.push(`${w}.x.var: ${qv(x.var)} must be a new name for the x axis (not one of the spec's names)`);
+            else local.push(s(x.var));
+          }
+        }
         let ss: unknown[] = list(p.series).slice();
         if (!(Array.isArray(p.series) && ss.length >= 1 && ss.length <= L.series)) {
           E.push(`${w}.series must be a list of 1–${L.series} lines`);
@@ -1449,7 +1495,10 @@ export function createSimSpec(env: CheckEnv) {
           key(sr.label, ws + '.label');
           if (sr.style != null && !inA(LINE_STYLES, sr.style)) E.push(`${ws}.style is one of ${LINE_STYLES.join(', ')}`);
           if (p.kind === 'function') expr(sr.expr, local, ws + '.expr');
-          else if (!inA(series, sr.y)) E.push(`${ws}.y must name a series output of the engine`);
+          else if (sr.expr != null) {
+            if (sr.y != null) E.push(`${ws}: a line is a series (y) or an expression (expr), not both`);
+            else expr(sr.expr, local, ws + '.expr');
+          } else if (!inA(series, sr.y)) E.push(`${ws}.y must name a series output of the engine (or expr: an expression of x.var)`);
         });
         let mk: unknown = p.marks;
         if (mk != null && !(Array.isArray(mk) && mk.length <= L.marks)) {
@@ -1464,6 +1513,8 @@ export function createSimSpec(env: CheckEnv) {
           }
           key(m.label, wm + '.label');
           expr(m.expr, names, wm + '.expr');
+          if (m.legend != null && typeof m.legend !== 'boolean')
+            E.push(`${wm}.legend is true or false (true: in the legend, not on the plot)`);
         });
       });
     if (eng === CIRCUIT) checkCircuit(spec, inNames, E);

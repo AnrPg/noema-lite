@@ -124,7 +124,7 @@ test('pack.engines: a heterogeneous mix of engines in every pack, counted per us
   const pack = (used: string[], o: Record<string, unknown> = {}) => ({
     builtAt: '2026-11-22T00:00:00Z',
     subject: { id: 'x', authoring: { rules: 3, by: 'claude' } },
-    activities: { items },
+    activities: { items: Object.entries(items).map(([id, a]) => ({ id, ...(a as object) })) }, // a list, as make_pack.py writes it
     chapters: [
       {
         id: 'ch01',
@@ -148,12 +148,18 @@ test('pack.engines: a heterogeneous mix of engines in every pack, counted per us
     'h5p@1': 1,
   });
   assert.deepEqual(engineKinds(pack(['f', 'o'])), ['formula@1', 'ode@1']);
-  assert.deepEqual(issues(pack(['f', 'o', 'app', 'py', 'h5p'])), { E: [], W: [] });
+  // an object keyed by id (what a runtime keeps) is counted the same
+  assert.deepEqual(engineKinds({ ...pack(['f', 'o']), activities: { items } }), ['formula@1', 'ode@1']);
+  // six kinds pass, but 5 is the floor, not the target: a warning asks for 8 or more
+  const six = issues(pack(['f', 'o', 'app', 'py', 'h5p']));
+  assert.equal(six.E.length, 0);
+  assert.equal(six.W.length, 1);
+  assert.match(six.W[0] ?? '', /6 kinds of engine .*5 is the floor, not the target — aim for 8 or more/);
   assert.deepEqual(issues(pack(['f', 'f', 'o', 'o', 'app', 'py', 'h5p', 'g', 't'])), { E: [], W: [] });
   // too few kinds
   const few = issues(pack(['f', 'o', 'h5p']));
   assert.equal(few.E.length, 1);
-  assert.match(few.E[0] ?? '', /3 kinds of engine, at least 5/);
+  assert.match(few.E[0] ?? '', /3 kinds of engine, at least 5 \(the floor; aim for 8 or more\)/);
   // five kinds, but one engine nearly everywhere and the other four as token uses: refused
   const one = issues(pack([...Array<string>(16).fill('o'), 'f', 'app', 'py']));
   assert.equal(one.E.length, 1);

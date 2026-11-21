@@ -102,8 +102,10 @@ export interface Quality {
   readonly engines: {
     readonly id: string;
     readonly level: 'error' | 'warn';
-    /** at least this many kinds of engine */
+    /** at least this many kinds of engine: the floor, never the target */
     readonly min: number;
+    /** the target: packs aim for at least this many kinds, more where the ideas have engines that fit (below it, a warning) */
+    readonly aim: number;
     /** no kind of engine has more than this share of the uses (each interactive block and sim exercise is one use) */
     readonly maxShare: number;
     /** the uses spread over at least this many kinds in effect (1 / Σ share², the inverse Simpson index) */
@@ -537,7 +539,7 @@ export const QUALITY: Quality = {
     "The connector (noema_finish_upload, noema_save_pack) refuses a pack built since 'since' (pack.builtAt, or no builtAt at all) that has no subject.authoring.rules >= 2, so a pack cannot skip the checks by leaving the field out. Older packs keep working unchanged.",
     'autoUnfit: a value that cannot fit the chapter needs no reason in unfit — the code types without subject.features.code, calc without .math, picture types when the chapter has no picture (pictures only where they teach, docs/VISUAL.md §5).',
     'optIn: a value a chapter uses only where it teaches (sim, an interactive activity: docs/INTERACTIVE.md) needs no reason in unfit when it is left out; once listed in fits it counts like any other value, with its own minimum (fit.types minPerKind).',
-    'pack.engines (user rule 2026-11-21): every pack, so every Roadmap node, uses a heterogeneous mix of engines in its activities and simulations, each chosen as the best fit after reading the full list: at least engines.min kinds, no kind over engines.maxShare of the uses, an effective number of kinds >= engines.minEffective (the check is engines.what; activities/registry.ts engineUses and engineSpread). It is an error for packs built since engines.since through the connector or made by Claude or Gemini, a warning for older packs and learner-made ones. It overrides the opt-in of sim for the pack as a whole: a chapter still lists sim in fits.types only where an activity teaches.',
+    'pack.engines (user rule 2026-11-21): every pack, so every Roadmap node, uses a heterogeneous mix of engines in its activities and simulations, each chosen as the best fit after reading the full list: at least engines.min kinds (the floor; engines.aim is the target, below it a warning), no kind over engines.maxShare of the uses, an effective number of kinds >= engines.minEffective (the check is engines.what; activities/registry.ts engineUses and engineSpread). It is an error for packs built since engines.since through the connector or made by Claude or Gemini, a warning for older packs and learner-made ones. It overrides the opt-in of sim for the pack as a whole: a chapter still lists sim in fits.types only where an activity teaches.',
     'Counts are never checked: about 2 versions per learnable is the core set; there is no upper limit (docs/PIPELINES.md §4, a mild suggestion only).',
   ],
   since: '2026-10-22T00:00:00Z',
@@ -546,10 +548,11 @@ export const QUALITY: Quality = {
     id: 'pack.engines',
     level: 'error',
     min: 5,
+    aim: 8,
     maxShare: 0.35,
     minEffective: 4,
     since: '2026-11-21T13:00:00Z',
-    what: 'heterogeneous activities and simulations in every pack (each Roadmap node): first read the FULL list of engines (docs/INTERACTIVE_LIBRARY.md and every chapter of docs/library/, the P6 engines of docs/INTERACTIVE_ENGINES.md, the circuit engine, Python, H5P, mini-apps; the audit lists the engines that fit each chapter) and for each idea where trying teaches choose the engine that fits it BEST — never the familiar one by habit. Each interactive block and each sim exercise is one use of every kind of engine its activity runs on; the pack needs >= 5 kinds, no kind with more than 35 % of the uses, and the uses spread over >= 4 kinds in effect (1 / sum of squared shares), so no engine dominates and none is a token use. A kind is an engine of a sim-spec@1 activity (formula@1, circuit-mna@1, thermal@1, pid@1, rf@1, twin@1, each engine of the library), an engine a mini-app (html-app@1 "engines") or a part uses, wasm-module@1, or a runtime with no engine of its own (a mini-app without engines, py-module@1, h5p@1, external-embed@1). When no engine fits an idea, ask for one with noema_request_engine',
+    what: 'heterogeneous activities and simulations in every pack (each Roadmap node): first read the FULL list of engines (docs/INTERACTIVE_LIBRARY.md and every chapter of docs/library/, the P6 engines of docs/INTERACTIVE_ENGINES.md, the circuit engine, Python, H5P, mini-apps; the audit lists the engines that fit each chapter) and for each idea where trying teaches choose the engine that fits it BEST — never the familiar one by habit. Each interactive block and each sim exercise is one use of every kind of engine its activity runs on; the pack needs >= 5 kinds — a FLOOR, never the target: aim for 8 or more, as many kinds as the pack has ideas whose best engine differs (fewer than 8 is warned) — no kind with more than 35 % of the uses, and the uses spread over >= 4 kinds in effect (1 / sum of squared shares), so no engine dominates and none is a token use. A kind is an engine of a sim-spec@1 activity (formula@1, circuit-mna@1, thermal@1, pid@1, rf@1, twin@1, each engine of the library), an engine a mini-app (html-app@1 "engines") or a part uses, wasm-module@1, or a runtime with no engine of its own (a mini-app without engines, py-module@1, h5p@1, external-embed@1). When no engine fits an idea, ask for one with noema_request_engine',
   },
 };
 

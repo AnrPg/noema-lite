@@ -13,6 +13,7 @@ export interface Param {
   readonly unit?: string;
   readonly format?: string;
   readonly digits?: number;
+  readonly prefix?: string;
   readonly default?: unknown;
   readonly options: readonly { readonly value: unknown; readonly label?: string }[];
 }
@@ -22,6 +23,7 @@ export interface Readout {
   readonly unit?: string;
   readonly format?: string;
   readonly digits?: number;
+  readonly prefix?: string;
 }
 export interface Plot {
   readonly kind?: string;
@@ -32,7 +34,7 @@ export interface Plot {
   readonly x: Axis;
   readonly y?: Axis;
   readonly series?: readonly { readonly expr?: string; readonly y?: string; readonly label?: string; readonly style?: string }[];
-  readonly marks?: readonly { readonly axis?: string; readonly expr: string; readonly label?: string }[];
+  readonly marks?: readonly { readonly axis?: string; readonly expr: string; readonly label?: string; readonly legend?: boolean }[];
 }
 export interface Output {
   readonly id: string;

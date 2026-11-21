@@ -38,7 +38,12 @@
           "required": ["media", "text"],
           "properties": {
             "media": { "title": "fallbackMedia", "type": "string", "minLength": 1 },
-            "text": { "title": "fallbackText", "type": "string", "minLength": 40, "x-noema": "longtext" }
+            "text": { "title": "fallbackText", "type": "string", "minLength": 40, "x-noema": "longtext" },
+            "i18n": {
+              "type": "object",
+              "description": "the fallback text in other languages of the pack: { \"<locale>\": { \"text\": … } }, shown when the chapters are shown in that translation",
+              "additionalProperties": { "type": "object", "properties": { "text": { "type": "string", "minLength": 40 } } }
+            }
           }
         },
         "origin": { "title": "origin", "type": "string" },

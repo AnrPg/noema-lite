@@ -2095,14 +2095,22 @@ function makeSim(ck: ReturnType<typeof compile>, noise: Noise | null) {
     const { x, ctx } = dcX(mode),
       nodes: Record<string, number> = {},
       branches: Record<string, number> = {},
-      pins: Record<string, number[]> = {};
+      pins: Record<string, number[]> = {},
+      power: Record<string, number> = {};
     for (const nm of ck.outNames) nodes[nm] = vx(x, ck.resolveName(nm)!)!;
     for (const e of ck.real) {
       const pc = pinCurrents(e, x, ctx);
       pins[e.id] = pc;
       branches[e.id] = mainCurrent(e, pc)!;
+      // the power the part takes at the operating point (Σ pin voltage × current into the pin; a source that delivers: < 0), as the
+      // transient reads it: no transient run is needed for a DC power
+      let q = 0;
+      e.pins.forEach((pi, j) => {
+        q += vx(x, pi) * pc[j]!;
+      });
+      power[e.id] = q;
     }
-    return { nodes, branches, pins };
+    return { nodes, branches, pins, power };
   }
 
   let tranCache = null as {

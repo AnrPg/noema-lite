@@ -76,7 +76,7 @@
     return (pack.chapters || []).map(c => {
       const t = tr.get(c.id); if (!t || ids(t, 'sections') !== ids(c, 'sections')) return c;
       const fill = k => { const have = new Set((t[k] || []).map(x => x.id)); return [...(t[k] || []), ...(c[k] || []).filter(x => x.id && !have.has(x.id))]; };
-      return { ...t, src: c.src ?? t.src, exercises: fill('exercises'), flashcards: fill('flashcards'), debug: fill('debug'), pitfalls: t.pitfalls || c.pitfalls || [] };
+      return { ...t, src: c.src ?? t.src, map: t.map || c.map, exercises: fill('exercises'), flashcards: fill('flashcards'), debug: fill('debug'), pitfalls: t.pitfalls || c.pitfalls || [] };   // a translation without its own map keeps the pack's (the Info window)
     });
   }
   /* A translation can live in its own file (noema-translation, docs/i18n.md §10): the pack then says

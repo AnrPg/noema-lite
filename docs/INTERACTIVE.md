@@ -78,7 +78,8 @@ pid-tune, lora-link or sensor-node from the other references of `tools/activitie
     "engines": ["graph@1"],                  // html-app@1 only, optional: the engines of the library the mini-app uses (§8.1)
     "fallback": {                            // REQUIRED: what the learner sees when the activity cannot run
       "media": "alias-lab-still",            //   a still picture of the pack (needs no exercises of its own)
-      "text": "A 7 Hz sine sampled 10 times a second: …"   // >= 40 characters: what it shows and teaches
+      "text": "A 7 Hz sine sampled 10 times a second: …",  // >= 40 characters: what it shows and teaches
+      "i18n": { "el": { "text": "Ένα ημίτονο 7 Hz με 10 δείγματα το δευτερόλεπτο: …" } }   // optional: the text in each language of the pack
     },
     "origin": "own", "credit": "…", "license": "own"
   }] }
@@ -306,16 +307,29 @@ setting" tasks; use `html-app@1` only for what a spec cannot say (a drawing to d
 - **Names** (`id`, `x.var`): a letter or `_`, then letters, digits, `_` (≤ 32); unique in the spec; not `pi`, `e` or a reserved word.
 - **Controls**: `slider` (a range with a number box beside it; `scale: "log"` for quantities over decades, then `min > 0`),
   `number` (a number box), `toggle` (true/false; counts as 1/0 in arithmetic), `choice` (2–12 options with number values).
-  `min < max`, `min <= default <= max`, `step > 0` (optional). `unit` (≤ 16 characters) stays as written in every language.
-- **Numbers on screen**: `format` `"si"` (prefixes p n µ m k M G T: 1.59 kHz, 470 µs), `"fixed"` (`digits` decimals), `"auto"`
-  (default: `digits` significant digits, default 4); always in the learner's decimal mark. A boolean shows ✓ / ✗.
+  `min < max`, `min <= default <= max`, `step > 0` (optional; the control moves from `min` in whole steps, so `default` and `max`
+must be `min` + a whole number of steps: a default of 12 with step 5 from 0 is refused, never moved to 10 silently). `unit` (≤ 16 characters) stays as written, unless it is also a key
+  of the string tables: then each language shows its own word (`"unit": "days"` with `days` in strings.el.json → ημέρες) — in the
+  controls, readouts and axes. A dropdown (`choice`) is as wide as its column; a longer option is cut with … in the closed box.
+- **Numbers on screen**: `format` `"si"` (prefixes p n µ m k M G T: 1.59 kHz, 470 µs), `"fixed"` (`digits` decimals, 0 too),
+  `"plain"` (the number as it is, up to `digits` decimals, 0 too; never a prefix or scientific notation), `"auto"` (default:
+  `digits` significant digits, default 4; whole numbers keep every digit; scientific only from 10⁹ or below 10⁻⁴); always in the
+  learner's decimal mark, with a thousands separator only from five digits (10 000, never 2 024). `prefix` (`p n u m k M G T`,
+  `u` = µ) shows a value in that prefix: `"unit": "A", "prefix": "m"` shows 0.001 as 1 mA — in the readout, on the axis and in a
+  control's number box (which then takes 1 for 1 mA). Number boxes use the learner's decimal mark too (0,5 in Greek) and read
+  either mark back. A boolean shows ✓ / ✗.
 - **Expressions**: the language of `docs/INTERACTIVE_SIMEXPR.md` (numbers, `+ - * / % ^`, comparisons, `&& || !`, `c ? a : b`, the
   math functions; no loops, no strings, ≤ 2000 characters / 2000 nodes). A value that cannot be computed (a division by 0, `log` of
   a negative number) shows as — and leaves a gap in a plot; nothing breaks.
 - **Plots**: `function` — `y = f(x)` for each line, over `x.min … x.max` (numbers or expressions such as `"5 * tau"`), linear or log;
   `y.min` / `y.max` optional (else from the data). `series` — the time series an engine computes: `x: {series: "<output>"}` and
-  lines `{y: "<output>"}`. Axis labels are keys (`label`) plus a `unit`; lines get the theme's colours and dash patterns, a legend
-  when they are labelled, and the plot an accessible description.
+  lines `{y: "<output>"}`, or expression lines `{expr}` of `x.var` beside them (a set point, a limit, a model: `x: {series: "t",
+  var: "t"}`, `{expr: "1 - exp(-t / tau)"}`). Axis labels are keys (`label`) plus a `unit`; lines get the theme's colours and dash
+  patterns, a legend when they are labelled, and the plot an accessible description. **Ticks**: `ticks: {step, integer, count}` on
+  an axis (every `step`; `integer: true` only whole numbers, for counts; about `count` of them, 2–12). A log axis prints SI prefixes
+  only on an SI unit (1 kHz); on days, %, items… plain numbers (1, 10, 100). The left margin fits the longest y tick. **Marks**
+  (guide lines): each label is placed where it does not cover another one; `legend: true` names the line in the legend instead
+  (its own colour and dash), for marks close together.
 - Every key named in the spec (`title`, `intro`, `label` of controls, options, readouts, axes, lines, marks) must be in **every**
   string table. The whole spec is at most 64 KB.
 
@@ -376,7 +390,9 @@ ACT.registerEngine({ id: 'name@1',
 
 A spec for such an engine names it (`"engine": "name@1"`), configures it in `model` (an object the engine checks) and declares what
 it computes: `"outputs": [{"id": "t", "kind": "series"}, {"id": "vEnd", "kind": "scalar"}]`. `run(inputs)` gets the consts, params
-and derived values; scalar outputs join the names of readouts, marks and checks, series feed `series` plots. Formulas run inline
+and derived values; scalar outputs join the names of readouts, marks, checks **and derived values**: a derived value that uses an
+engine's scalar output (`"P": "V * I"` with `I` from the circuit) is computed after the engine and is not one of its inputs (an
+input never names it); series feed `series` plots. Formulas run inline
 (each evaluation is bounded); an engine whose runs can take longer than ~50 ms gives `workerSource`, and a run that takes more
 than 5 s stops the activity (Restart). Runs are queued: only the latest inputs are computed (a slider dragged fast skips the
 ones in between), measurements are answered in order, and the checks grader never reads the results of older inputs. `prepare`

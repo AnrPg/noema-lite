@@ -97,6 +97,11 @@ const ACT = (() => {
   const asset = p => (window.NOEMA_ENGINE_BASE || (ME.includes('/engine/') ? ME.slice(0, ME.lastIndexOf('/engine/') + 8) : 'engine/')) + String(p).replace(/^\/+/, '');
   /* i18n-ignore-end */
 
+  /** The fallback text of an activity in the language the content is shown in (fallback.i18n.<locale>.text), else its own. */
+  function fbText(a) {
+    const f = a?.fallback || {}, loc = SUBJ.sourceLanguage ? SUBJ.language : null, L = loc && f.i18n && f.i18n[loc];
+    return (L && typeof L.text === 'string' && L.text.trim()) ? L.text : (f.text || '');
+  }
   /** The strings of an activity in the language the pack is shown in (then the pack's own, then English, then any). */
   function strings(a) {
     const all = a?.strings && typeof a.strings === 'object' ? a.strings : {};
@@ -222,7 +227,8 @@ const ACT = (() => {
       box.innerHTML = ''; box.classList.add('act-fallback'); box.style.height = '';
       const f = a?.fallback || {};
       if (f.media && MEDIA[f.media] && STUDY) box.append(STUDY.figure({ t: 'figure', media: f.media, explore: false }));   // the study area's figure (src/features/study/ui/exercise/visual.ts)
-      if (f.text) box.append(h('p', { class: 'act-fbtext', html: fmt(f.text) }));
+      const ft = fbText(a);
+      if (ft) box.append(h('p', { class: 'act-fbtext', html: fmt(ft) }));
       if (why) note.textContent = why;
     };
     const setBar = (...btns) => { bar.innerHTML = ''; bar.append(...btns.filter(Boolean)); };

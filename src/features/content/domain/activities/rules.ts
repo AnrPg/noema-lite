@@ -179,7 +179,9 @@ export const SPEC_LIM = {
 } as const;
 export const NAME_RE = /^[A-Za-z_][A-Za-z0-9_]{0,31}$/;
 export const PARAM_KINDS = ['slider', 'number', 'toggle', 'choice'] as const;
-export const NUM_FORMATS = ['auto', 'si', 'fixed'] as const;
+export const NUM_FORMATS = ['auto', 'si', 'fixed', 'plain'] as const;
+/** the SI prefixes a value may be shown in (param, readout, axis: prefix "m" with unit "A" shows 0.001 as 1 mA; u = µ) */
+export const SI_PREFIXES = ['p', 'n', 'u', 'µ', 'm', 'k', 'M', 'G', 'T'] as const;
 /* parts: several engines in one spec (docs/INTERACTIVE.md §12.8) */
 export const PARTS_LIM = { parts: 8, inputs: 24, outputs: 48, loops: 4, iter: 50, macro: 5000, points: 2000 } as const;
 export const PART_KEYS = ['id', 'engine', 'model', 'outputs', 'inputs', 'use', 'with'] as const;

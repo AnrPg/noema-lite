@@ -78,6 +78,7 @@
         "fetch": { "const": "app" },
         "url": { "type": "string" },
         "alt": { "type": "string" },
+        "i18n": { "type": "object", "description": "the picture's alt and caption per locale (noema.visual.v1 mediaItem.i18n)" },
         "origin": { "type": "string" },
         "regions": { "type": "array", "items": { "$ref": "noema.visual.v1.schema.json#/$defs/region" } }
       },

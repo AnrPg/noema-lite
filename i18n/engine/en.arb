@@ -5138,6 +5138,54 @@
   "@engine.author.f.numFormat.fixed": {
     "description": "Label of a form field of the activity author: the option “fixed” of the select “Number format”. Short."
   },
+  "engine.author.f.numFormat.plain": "Plain number",
+  "@engine.author.f.numFormat.plain": {
+    "description": "Label of a form field of the activity author: the option “plain” of the select “Number format” (the number as it is, no SI prefix, no scientific notation). Short."
+  },
+  "engine.author.f.prefix": "Shown in",
+  "@engine.author.f.prefix": {
+    "description": "Label of a form field of the activity author (the field “prefix” of a simulation: the SI prefix a value is shown in, e.g. milli so 0.001 A shows as 1 mA). Short."
+  },
+  "engine.author.f.prefix.p": "pico (p)",
+  "@engine.author.f.prefix.p": {
+    "description": "Label of a form field of the activity author: the option “p” of the select “Shown in” (an SI prefix with its symbol). Short."
+  },
+  "engine.author.f.prefix.n": "nano (n)",
+  "@engine.author.f.prefix.n": {
+    "description": "Label of a form field of the activity author: the option “n” of the select “Shown in” (an SI prefix with its symbol). Short."
+  },
+  "engine.author.f.prefix.u": "micro (µ)",
+  "@engine.author.f.prefix.u": {
+    "description": "Label of a form field of the activity author: the option “u” of the select “Shown in” (an SI prefix with its symbol). Short."
+  },
+  "engine.author.f.prefix.m": "milli (m)",
+  "@engine.author.f.prefix.m": {
+    "description": "Label of a form field of the activity author: the option “m” of the select “Shown in” (an SI prefix with its symbol). Short."
+  },
+  "engine.author.f.prefix.k": "kilo (k)",
+  "@engine.author.f.prefix.k": {
+    "description": "Label of a form field of the activity author: the option “k” of the select “Shown in” (an SI prefix with its symbol). Short."
+  },
+  "engine.author.f.prefix.M": "mega (M)",
+  "@engine.author.f.prefix.M": {
+    "description": "Label of a form field of the activity author: the option “M” of the select “Shown in” (an SI prefix with its symbol). Short."
+  },
+  "engine.author.f.prefix.G": "giga (G)",
+  "@engine.author.f.prefix.G": {
+    "description": "Label of a form field of the activity author: the option “G” of the select “Shown in” (an SI prefix with its symbol). Short."
+  },
+  "engine.author.f.prefix.T": "tera (T)",
+  "@engine.author.f.prefix.T": {
+    "description": "Label of a form field of the activity author: the option “T” of the select “Shown in” (an SI prefix with its symbol). Short."
+  },
+  "engine.author.f.ticks": "Ticks",
+  "@engine.author.f.ticks": {
+    "description": "Label of a form field of the activity author (the field “ticks” of a plot axis: the step, whole numbers only, how many tick marks). Short."
+  },
+  "engine.author.f.legend": "In the legend",
+  "@engine.author.f.legend": {
+    "description": "Label of a form field of the activity author (the field “legend” of a guide line on a plot: shown in the legend instead of a label on the plot). Short."
+  },
   "engine.author.f.digits": "Digits",
   "@engine.author.f.digits": {
     "description": "Label of a form field of the activity author (the field “digits” of a simulation or of an activity’s entry). Short."

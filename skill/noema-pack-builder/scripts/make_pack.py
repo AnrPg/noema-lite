@@ -64,6 +64,14 @@ if int(auth.get('rules', 0)) >= 2:
             if os.path.exists(f):
                 try: c[k] = json.load(open(f, encoding='utf-8'))
                 except Exception as e: errs.append(f'ERROR {sub}/{c["id"]}.json: invalid JSON ({e})')
+    # a translation's knowledge map (the Info window, concept definitions): translations/<locale>/map/chNN.json, same ids as
+    # map/chNN.json with only the words in that language; without it the chapter in that language shows the source map
+    for loc, chs in translations.items():
+        for tc in chs:
+            f = os.path.join(sdir, 'translations', loc, 'map', str(tc.get('id')) + '.json')
+            if os.path.exists(f):
+                try: tc['map'] = json.load(open(f, encoding='utf-8'))
+                except Exception as e: errs.append(f'ERROR translations/{loc}/map/{tc.get("id")}.json: invalid JSON ({e})')
     # Q0 (gradual introduction) reads the concepts of the other chapters: no concept a later chapter introduces is used early
     slim = [{'id': c['id'], 'map': {'concepts': (c.get('map') or {}).get('concepts') or []}} for c in chapters]
     pos = {c['id']: i for i, c in enumerate(chapters)}
