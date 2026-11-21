@@ -51,6 +51,7 @@ run subject_switch node "$ROOT/tests/subject_switch.js" "$T"   # opening another
 run notices node "$ROOT/tests/notices.js" "$T"   # news (a step ready, a new part…): at most 2 toasts at once, the rest in the 🔔 until cleared
 run device_storage node "$ROOT/tests/device_storage.js" "$T"   # an account larger than localStorage (5 MB): kept in IndexedDB, nothing lost, no storage-full warning (src/adapters/browser/kv-mirror.ts)
 run roadmap_levels node "$ROOT/tests/roadmap_levels.js" "$T"   # 🪜 the levels of a Roadmap (src/features/roadmaps/ui): the ladder, the level-reached moment, the level test, Claude’s proposed arrangement; 320 px, axe, keyboard, RTL
+run roadmap_map node "$ROOT/tests/roadmap_map.js" "$T"   # 🗺️ the treasure map of a real 20-step Roadmap (Greek): across the whole width, Fit, no path through a label, whole titles, few crossings, no repeated title; 320 px
 run search_catalog node "$ROOT/tests/search_catalog.js"   # the search catalogue (docs/SEARCH.md)
 run search node "$ROOT/tests/search.js" "$T"     # search, stable addresses, collections, the practice round
 run e2e node "$ROOT/tests/e2e.js" "$T"

@@ -4014,7 +4014,7 @@
   },
   "roadmap.map.tmap.treasure": "The treasure: {goal}",
   "@roadmap.map.tmap.treasure": {
-    "description": "On the treasure map: the label above the treasure at the top. goal = the Roadmap's goal.",
+    "description": "On the treasure map: the tooltip of the treasure at the top (the Roadmap's name is the page's heading, so it is not written on the map). goal = the Roadmap's goal.",
     "placeholders": {
       "goal": {
         "type": "String",
