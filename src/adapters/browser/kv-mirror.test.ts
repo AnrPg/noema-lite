@@ -441,20 +441,24 @@ test('an edit after a failed move of an older version’s key is journaled, and 
 test('a delete while IndexedDB is away waits for it: the key does not come back when it returns', async () => {
   const idb = fakeIndexedDB(),
     ls = fakeWebStorage(Infinity);
-  const s = setup({ idb, ls });
+  // the delete comes after the write: a clock that moves on (in the same millisecond two tabs' revisions tie, and the random
+  // tab id decides, as for any truly simultaneous writes)
+  let t = Date.now();
+  const now = (): number => (t += 5);
+  const s = setup({ idb, ls, now });
   await s.kv.ready();
   s.kv.set('noema1:acc:a:k', 'v');
   await s.kv.flushed();
-  const away = setup({ idb: null, ls });
+  const away = setup({ idb: null, ls, now });
   await away.kv.ready();
   assert.equal(away.kv.backing(), 'localStorage');
   away.kv.delete('noema1:acc:a:k');
-  const back = setup({ idb, ls });
+  const back = setup({ idb, ls, now });
   await back.kv.ready();
   assert.equal(value(back.kv.get('noema1:acc:a:k')), null);
   await back.kv.flushed();
   assert.equal(journaled(ls, 'noema1:acc:a:k'), undefined, 'acknowledged by IndexedDB: the tombstone left');
-  const again = setup({ idb, ls });
+  const again = setup({ idb, ls, now });
   await again.kv.ready();
   assert.equal(value(again.kv.get('noema1:acc:a:k')), null);
 });
