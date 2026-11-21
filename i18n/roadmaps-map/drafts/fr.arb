@@ -16,6 +16,8 @@
   "roadmap.map.lib.import": "Importer un parcours",
   "roadmap.map.lib.exploreTip": "Des parcours que d’autres partagent — rejoins-en un et préparez ses étapes ensemble",
   "roadmap.map.lib.explore": "Explorer les parcours",
+  "roadmap.map.lib.fromGoal": "À partir d’un objectif",
+  "roadmap.map.lib.fromGoalSub": "Écris ce que tu veux apprendre ; Claude trace les étapes",
   "roadmap.map.lib.exploreShort": "Explorer",
   "roadmap.map.lib.importSub": "Depuis ton application Claude, un fichier ou un texte collé",
   "roadmap.map.lib.eachStep": "Chaque étape (nœud) devient une matière avec théorie, exercices, cartes mémoire, entraînements et le tuteur.",

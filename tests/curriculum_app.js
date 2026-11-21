@@ -60,7 +60,7 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
 
   /* ---------- A. a new curriculum built by the Claude app ---------- */
   console.log('— A. a new curriculum, built by the learner’s Claude app');
-  await p.click('.cm-mode:has-text("Roadmaps")'); await p.locator('noema-roadmap-library .cm-new').click(); await wait(300);
+  await p.click('.cm-mode:has-text("Roadmaps")'); await p.locator('noema-roadmap-library .cm-new').click(); await wait(150); await p.locator('noema-roadmap-library .cm-newgoal').click(); await wait(300);
   ok(await p.locator('.cm-provider').inputValue() === 'claudeapp' && await p.locator('.cm-appinfo').isVisible() && !(await p.locator('.cm-keys').isVisible()), 'cloud account: “💬 Claude app — with your Claude plan (recommended, usually cheaper)” is preselected; no key needed');
   ok(/usually cheaper/i.test(await p.locator('.cm-provider option[value=claudeapp]').innerText()) && /no extra cost beyond your plan/i.test(await p.locator('.cm-appinfo').innerText()), 'the choice says why: no cost beyond the Claude plan, the saving grows with the curriculum');
   await p.fill('textarea[placeholder^="e.g. “Bayesian"]', 'Bayesian inference'); await p.selectOption('label:has-text("Depth") select', 'standard');
@@ -239,7 +239,7 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
   /* ---------- C. an imported map with the learner's PDF ---------- */
   console.log('— C. an imported map with a PDF, planned and prepared by the Claude app');
   await p.click('.cm-ovtop button:has-text("Roadmaps")'); await wait(300);
-  await p.click('noema-roadmap-library .cm-waysmenu'); await wait(150);   // 📥 Import lives in the ⋮ next to Explore
+  await p.click('noema-roadmap-library .cm-new'); await wait(150);   // 📥 Import is a way in “New Roadmap ▾”
   await p.click('noema-roadmap-library .cm-importbtn'); await wait(300);
   await p.fill('.cm-maptext', '# Cell biology\nBasics → Membranes → Transport\n📎 Files\nMembranes: membranes.pdf pp. 2-3'); await wait(600);
   await p.setInputFiles('.cm-import .cg-drop input[type=file]', [path.join(TF, 'membranes.pdf')]); await wait(800);
@@ -292,7 +292,7 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
   /* ---------- D. without the connector ---------- */
   console.log('— D. by hand: copy a task, paste the answer; a step bundle and its package; re-plan with a wish; one step of an API curriculum');
   await p.click('.cm-ovtop button:has-text("Roadmaps")'); await wait(300);
-  await p.click('noema-roadmap-library .cm-new'); await wait(300);
+  await p.click('noema-roadmap-library .cm-new'); await wait(150); await p.click('noema-roadmap-library .cm-newgoal'); await wait(300);
   await p.fill('textarea[placeholder^="e.g. “Bayesian"]', 'Bayesian inference again'); await p.selectOption('label:has-text("Depth") select', 'standard');
   await p.click('.cg-go'); await wait(600);
   await p.click('.cm-manual summary'); await p.screenshot({ path: SHOTS + '/ca5_manual.png', fullPage: true }); await p.click('.cm-copytask'); const task = await clip();

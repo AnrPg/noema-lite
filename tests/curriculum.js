@@ -106,7 +106,7 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Noem
   ok(await p.locator('.cm-mode').count() === 1 + (await p.evaluate(() => (window.NOEMA_REGISTRY.languages || []).length ? 1 : 0)) && await p.locator('details.pick-shelf').count() === 1, 'the subject picker leads with 🧭 Curricula (and 🌍 Languages when there are language courses); the other subjects wait on the 📚 Shelf');
   await p.click('.cm-mode:has-text("Roadmaps")'); await wait(300);
   ok(/No Roadmap yet/.test(await p.locator('noema-roadmap-library .empty').innerText()), 'the library starts empty');
-  await p.click('noema-roadmap-library .cm-new'); await wait(300);
+  await p.click('noema-roadmap-library .cm-new'); await wait(150); await p.click('noema-roadmap-library .cm-newgoal'); await wait(300);
   await p.click('.cg-go'); await wait(150);
   ok(/goal topic/.test(await p.locator('.cg-kstat.bad').last().innerText()), 'Build without a goal → a friendly pointer');
   ok(await p.locator('.cm-provider').inputValue() === 'claudeapp' && await p.locator('.cm-appinfo').isVisible(), 'a cloud account: the Claude app (your Claude plan) is preselected and explained');
@@ -242,7 +242,7 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Noem
   console.log('— the Gemini path (free key, pack generated in the browser)');
   const V = await signUp(browser, 'finn@example.com', 'Finn'); const q = V.p;
   await q.evaluate(() => { const k = `noema1:${Noema.account.id}:a:settings`; const s = JSON.parse(NoemaCore.storage.kv.get(k) || '{}'); s.apiKey = 'AIza-test-key'; NoemaCore.storage.kv.set(k, JSON.stringify(s)); });
-  await q.click('.cm-mode:has-text("Roadmaps")'); await q.locator('noema-roadmap-library .cm-new').click(); await wait(300);
+  await q.click('.cm-mode:has-text("Roadmaps")'); await q.locator('noema-roadmap-library .cm-new').click(); await wait(150); await q.locator('noema-roadmap-library .cm-newgoal').click(); await wait(300);
   await q.selectOption('.cm-provider', 'auto');
   ok(/✅ Gemini/.test(await q.locator('.cm-keys').first().innerText()) && /➖ Claude/.test(await q.locator('.cm-keys').first().innerText()), 'without a Claude key the Gemini key is used');
   await q.fill('textarea[placeholder^="e.g. “Bayesian"]', 'Bayesian inference'); await q.selectOption('label:has-text("Depth") select', 'standard'); await q.selectOption('label:has-text("Prepare ahead") select', '1');

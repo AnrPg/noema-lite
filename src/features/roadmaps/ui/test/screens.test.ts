@@ -292,11 +292,13 @@ describe('the library', () => {
     assert.match(text(lib), /Shelf \(3\)/);
     const got = events('roadmap-open', 'roadmap-new', 'roadmap-from-sources', 'roadmap-explore', 'roadmap-import');
     find('.cm-card', lib)?.click();
-    click('.cm-new', lib);
-    click('.cm-srcbtn', lib);
+    // “New Roadmap ▾”: from a goal, from your sources, import (its items), then Explore (only without a page ⋮)
+    const ways = find('.cm-new', lib) as HTMLElement & { label: string };
+    assert.equal(ways.label, 'New Roadmap');
+    for (const v of ['roadmap-new', 'roadmap-from-sources', 'roadmap-import']) assert.ok(find(`noema-menu-item[value="${v}"]`, lib), v);
+    for (const v of ['roadmap-new', 'roadmap-from-sources']) ways.dispatchEvent(new CustomEvent('noema-select', { detail: { value: v } }));
     click('.cm-explorebtn', lib);
-    // 📥 Import: an item of the ⋮ next to Explore
-    find('.cm-waysmenu', lib)?.dispatchEvent(new CustomEvent('noema-select', { detail: { value: 'import' } }));
+    ways.dispatchEvent(new CustomEvent('noema-select', { detail: { value: 'roadmap-import' } }));
     assert.deepEqual(
       got.map(e => e.type),
       ['roadmap-open', 'roadmap-new', 'roadmap-from-sources', 'roadmap-explore', 'roadmap-import'],
