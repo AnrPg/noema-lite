@@ -35,7 +35,8 @@ The reference activities: `rc-transient` and `led-bench` (`tools/activities_exam
   2000 points; `scalar` — a `node` or `branch` at the DC operating point, or of the transient `at` a time (a number or expression)
   or as a `stat` (`final`, `min`, `max`, `mean`, `pp`, `rms`); or a `probe` (`{kind: V | I | R, a, b? | element, pin?}`, an
   instrument reading; an ohmmeter's `OL` is ∞; also `mode`, `zin` and a window `tEnd`, `dt`, `tStart`, §9.5). `power: "<part>"` is
-  the power a part takes (W, v·i summed over its pins; negative = it delivers), a series or a scalar `at` / `stat` of the transient.
+  the power a part takes (W, v·i summed over its pins; negative = it delivers): a scalar at the DC operating point (no `at` or
+  `stat`, no transient needed), or a series or a scalar `at` / `stat` of the transient.
   `ac` reads the AC analysis (§9.6): a series `ac: "f"` (the frequency axis), `"db"`, `"phase"`, `"mag"` of a `node` (against
   `ref`, default ground); a scalar `ac: "db" | "phase" | "mag"` `at` a frequency, or a landmark `ac: "dcDb" | "peakDb" | "fPeak" |
   "f3db" | "fLow3db" | "fUnity" | "pm"` of a `node`. Scalars join the names of readouts, marks and checks; series feed `series`

@@ -202,8 +202,19 @@
       ]
     },
     "unit": { "title": "unit", "type": "string", "maxLength": 16 },
-    "format": { "title": "numFormat", "enum": ["auto", "si", "fixed"] },
-    "digits": { "title": "digits", "type": "integer", "minimum": 1, "maximum": 8 },
+    "format": { "title": "numFormat", "enum": ["auto", "si", "fixed", "plain"] },
+    "prefix": {
+      "title": "prefix",
+      "enum": ["p", "n", "u", "m", "k", "M", "G", "T"],
+      "description": "the SI prefix the value is shown in (m with unit A: 0.001 is shown as 1 mA)"
+    },
+    "digits": {
+      "title": "digits",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8,
+      "description": "significant digits (auto, si: at least 1), decimals (fixed, plain: 0 = a whole number)"
+    },
     "scale": { "title": "scale", "enum": ["lin", "log"] },
     "benchId": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,31}$" },
     "param": {
@@ -249,7 +260,8 @@
         "scale": { "$ref": "#/$defs/scale" },
         "unit": { "$ref": "#/$defs/unit" },
         "format": { "$ref": "#/$defs/format" },
-        "digits": { "$ref": "#/$defs/digits" }
+        "digits": { "$ref": "#/$defs/digits" },
+        "prefix": { "$ref": "#/$defs/prefix" }
       }
     },
     "derived": {
@@ -265,7 +277,8 @@
         "expr": { "title": "expr", "$ref": "#/$defs/expr" },
         "unit": { "$ref": "#/$defs/unit" },
         "format": { "$ref": "#/$defs/format" },
-        "digits": { "$ref": "#/$defs/digits" }
+        "digits": { "$ref": "#/$defs/digits" },
+        "prefix": { "$ref": "#/$defs/prefix" }
       }
     },
     "axis": {
@@ -277,7 +290,18 @@
         "max": { "title": "max", "$ref": "#/$defs/numOrExpr" },
         "scale": { "$ref": "#/$defs/scale" },
         "format": { "$ref": "#/$defs/format" },
-        "digits": { "$ref": "#/$defs/digits" }
+        "digits": { "$ref": "#/$defs/digits" },
+        "prefix": { "$ref": "#/$defs/prefix" },
+        "ticks": {
+          "title": "ticks",
+          "type": "object",
+          "description": "the ticks of the axis: step (every step), integer (only whole numbers: counts), count (about this many)",
+          "properties": {
+            "step": { "type": "number", "exclusiveMinimum": 0 },
+            "integer": { "type": "boolean" },
+            "count": { "type": "integer", "minimum": 2, "maximum": 12 }
+          }
+        }
       }
     },
     "mark": {
@@ -286,7 +310,12 @@
       "properties": {
         "axis": { "title": "axis", "enum": ["x", "y"] },
         "expr": { "title": "expr", "$ref": "#/$defs/expr" },
-        "label": { "title": "label", "$ref": "#/$defs/key" }
+        "label": { "title": "label", "$ref": "#/$defs/key" },
+        "legend": {
+          "title": "legend",
+          "type": "boolean",
+          "description": "true: the line is named in the plot's legend (its own colour and dash) instead of a label on the plot"
+        }
       }
     },
     "plot": {
@@ -331,7 +360,10 @@
               "title": "xAxis",
               "allOf": [{ "$ref": "#/$defs/axis" }],
               "required": ["series"],
-              "properties": { "series": { "title": "xSeries", "type": "string", "x-noema": "series" } }
+              "properties": {
+                "series": { "title": "xSeries", "type": "string", "x-noema": "series" },
+                "var": { "title": "xVar", "$ref": "#/$defs/name", "description": "the name of x in the expression lines of this plot" }
+              }
             },
             "y": { "title": "yAxis", "$ref": "#/$defs/axis" },
             "series": {
@@ -341,9 +373,14 @@
               "maxItems": 6,
               "items": {
                 "type": "object",
-                "required": ["y"],
+                "anyOf": [{ "required": ["y"] }, { "required": ["expr"] }],
                 "properties": {
                   "y": { "title": "ySeries", "type": "string", "x-noema": "series" },
+                  "expr": {
+                    "title": "expr",
+                    "$ref": "#/$defs/expr",
+                    "description": "an expression line (of x.var): a set point, a limit, a model beside the series"
+                  },
                   "label": { "title": "label", "$ref": "#/$defs/key" }
                 }
               }

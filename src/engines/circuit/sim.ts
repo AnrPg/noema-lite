@@ -195,7 +195,7 @@ function circuitSimEngine(C: CircuitApi) {
               const tw = o.at !== undefined || o.stat !== undefined;
               if (!tw) {
                 const d = DC();
-                r[o.id] = o.node !== undefined ? d.nodes[o.node] : d.branches[o.branch!];
+                r[o.id] = o.power !== undefined ? d.power[o.power] : o.node !== undefined ? d.nodes[o.node] : d.branches[o.branch!];
                 continue;
               }
               const T = TR(),

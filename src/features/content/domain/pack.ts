@@ -162,7 +162,7 @@ export function checkPack(p: unknown, expectId: unknown, opts: PackCheckOptions,
       .map(([k, n]) => `${k} ×${String(n)}`)
       .join(', ');
     const why: string[] = [];
-    if (sp.kinds < V.min) why.push(`${String(sp.kinds)} kind${sp.kinds === 1 ? '' : 's'} of engine, at least ${String(V.min)}`);
+    if (sp.kinds < V.min) why.push(`${String(sp.kinds)} kind${sp.kinds === 1 ? '' : 's'} of engine, at least ${String(V.min)} (the floor; aim for ${String(V.aim)} or more)`);
     if (sp.top && sp.top[1] > V.maxShare) why.push(`${sp.top[0]} has ${pc(sp.top[1])} of the uses, at most ${pc(V.maxShare)}`);
     if (sp.effective < V.minEffective)
       why.push(`the uses spread over ${sp.effective.toFixed(1)} kinds in effect, at least ${String(V.minEffective)}`);
@@ -175,7 +175,10 @@ export function checkPack(p: unknown, expectId: unknown, opts: PackCheckOptions,
       (hard ? E : W).push(
         `[${V.id}] the activities and simulations are not varied enough (${mix || 'none'}): ${why.join('; ')}. Read the full list of engines (docs/INTERACTIVE_LIBRARY.md, docs/library/, docs/INTERACTIVE_ENGINES.md; the audit names the engines that fit each chapter) and give each idea where trying teaches the engine that fits it best, or ask for a missing one with noema_request_engine`,
       );
-    }
+    } else if (sp.kinds < V.aim)
+      W.push(
+        `[${V.id}] ${String(sp.kinds)} kinds of engine (${mix}): ${String(V.min)} is the floor, not the target — aim for ${String(V.aim)} or more. Look again at the ideas still taught by a kind used elsewhere (the audit names the engines that fit each chapter) and give each the engine whose model is that idea`,
+      );
   }
   checkI18n(p, chapters, E, W);
   const A = activities(p);

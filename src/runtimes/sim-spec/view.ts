@@ -10,7 +10,7 @@ import type { Compiled, Env, EngineOpts, SimEngine } from '../compute.ts';
 import { h } from '../dom.ts';
 import type { MountContext, RuntimeHost, RuntimePort } from '../types.ts';
 import { makeBench, type BenchView } from './bench.ts';
-import { fmtNum, isNum } from './format.ts';
+import { boxNum, fmtNum, isNum, parseBoxNum, prefixFactor } from './format.ts';
 import { partsEngine, partsRunner, withParts, MAX_POINTS, type PartsResult } from './parts.ts';
 import { COLORS, DASH, drawPlot, drawScene, playSound, type PlotData } from './plot.ts';
 import { engineRunner, type Done } from './runner.ts';
@@ -121,12 +121,25 @@ export function simView(
   const T = isObj(init.strings) ? init.strings : {},
     locale = typeof init.locale === 'string' && init.locale ? init.locale : 'en';
   const tt = (k: unknown): string => (typeof k === 'string' && k && Object.prototype.hasOwnProperty.call(T, k) ? String(T[k]) : '');
+  /** a unit in the learner's language: a unit that is a key of the activity's strings is translated there (days → ημέρες) */
+  const tu = (u: unknown): string => (typeof u === 'string' ? tt(u) || u : '');
   const C = (s: string): Compiled => cmp.compile(s);
   const consts: Env = { ...(spec.consts ?? {}) };
   for (const [k, v] of Object.entries(isObj(init.task) ? init.task : {}))
     if (Object.prototype.hasOwnProperty.call(consts, k) && isNum(v)) consts[k] = v;
   const params = spec.params,
-    derived = (spec.derived ?? []).map(d => ({ id: d.id, f: C(d.expr) }));
+    derived = (spec.derived ?? []).map(d => ({ id: d.id, f: C(d.expr), late: false }));
+  {
+    // a derived value that uses the engine's scalar outputs (or such a value) is computed after the engine ("late"; the checker
+    // allows it only on a spec without parts, whose plan orders its own values)
+    const outs = new Set(
+      'parts' in spec ? [] : (spec.outputs ?? []).filter(o => o.kind === 'scalar').map(o => o.id),
+    );
+    for (const [i, d] of derived.entries()) {
+      const vars = (spec.derived?.[i]?.expr ?? '').match(/(?<![\w.])[A-Za-z_]\w*/g) ?? [];
+      d.late = vars.some(v => outs.has(v) || derived.some(x => x.late && x.id === v));
+    }
+  }
   const readouts = (spec.readouts ?? []).map(r => ({ ...r, f: C(r.expr) }));
   const lim = (v: unknown): Compiled => (typeof v === 'string' ? C(v) : () => v);
   interface PlotState {
@@ -136,7 +149,7 @@ export function simView(
     readonly ymin: Compiled | null;
     readonly ymax: Compiled | null;
     readonly lines: readonly { readonly f: Compiled | null; readonly y?: string; readonly style?: string; readonly label?: string }[];
-    readonly marks: readonly { readonly f: Compiled; readonly axis?: string; readonly label?: string }[];
+    readonly marks: readonly { readonly f: Compiled; readonly axis?: string; readonly label?: string; readonly legend?: boolean }[];
     aria?: string;
     xLabel?: string;
     yLabel?: string;
@@ -152,7 +165,8 @@ export function simView(
           xmax: p.x.max != null ? lim(p.x.max) : null,
           ymin: p.y?.min != null ? lim(p.y.min) : null,
           ymax: p.y?.max != null ? lim(p.y.max) : null,
-          lines: (p.series ?? []).map(s => ({ ...s, f: p.kind === 'function' ? C(String(s.expr)) : null })),
+          // a series plot may draw expression lines too ({expr} of x.var at each x of the series: a set point, a limit, a model)
+          lines: (p.series ?? []).map(s => ({ ...s, f: p.kind === 'function' || typeof s.expr === 'string' ? C(String(s.expr)) : null })),
           marks: (p.marks ?? []).map(m => ({ ...m, f: C(m.expr) })),
         },
   );
@@ -210,7 +224,16 @@ export function simView(
     p.scale === 'log' ? Math.round((1000 * Math.log(num(p.id) / p.min)) / Math.log(p.max / p.min)) : num(p.id);
   const fromPos = (p: Param, x: number): number => (p.scale === 'log' ? p.min * Math.pow(p.max / p.min, x / 1000) : x);
   const showVal = (p: Param): string =>
-    fmtNum(vals[p.id], { unit: p.unit, format: p.format ?? (p.scale === 'log' ? 'si' : 'auto'), digits: p.digits }, locale);
+    fmtNum(
+      vals[p.id],
+      { unit: tu(p.unit), format: p.format ?? (p.scale === 'log' && !p.prefix ? 'si' : 'auto'), digits: p.digits, prefix: p.prefix },
+      locale,
+    );
+  // the number box shows the value in the param's prefix (1 for 1 mA, not 0.001) with the learner's decimal mark
+  const boxF = (p: Param): number => prefixFactor(p.prefix) ?? 1;
+  const boxUnit = (p: Param): string => (prefixFactor(p.prefix) ? (p.prefix === 'u' ? 'µ' : String(p.prefix)) : '') + tu(p.unit);
+  const boxVal = (p: Param): string => boxNum(+(num(p.id) / boxF(p)).toPrecision(12), locale);
+  const readBox = (p: Param, el: HTMLInputElement): number => parseBoxNum(el.value, locale) * boxF(p);
   for (const p of params) {
     const id = uid + p.id,
       lab = tt(p.label);
@@ -218,14 +241,13 @@ export function simView(
       const o = h('output', { for: id }),
         numEl = h('input', {
           class: 'sim-num',
-          type: 'number',
+          type: 'text',
           'data-param': p.id,
           inputmode: 'decimal',
-          min: p.min,
-          max: p.max,
-          step: p.step || 'any',
-          'aria-label': lab + (p.unit ? ' (' + p.unit + ')' : ''),
-          value: vals[p.id],
+          autocomplete: 'off',
+          spellcheck: 'false',
+          'aria-label': lab + (boxUnit(p) ? ' (' + boxUnit(p) + ')' : ''),
+          value: boxVal(p),
         });
       const rng =
         p.kind === 'slider'
@@ -252,11 +274,11 @@ export function simView(
         set(fromPos(p, +rng.value), true);
       });
       numEl.addEventListener('input', () => {
-        const v = parseFloat(numEl.value);
+        const v = readBox(p, numEl);
         if (isNum(v) && v >= p.min && v <= p.max) set(v, false);
       });
       numEl.addEventListener('change', () => {
-        const v = parseFloat(numEl.value);
+        const v = readBox(p, numEl);
         if (isNum(v)) set(Math.min(p.max, Math.max(p.min, v)), true);
         else paint(p);
       });
@@ -266,7 +288,13 @@ export function simView(
           'div',
           { class: 'sim-p' },
           h('label', { for: id, class: 'sim-lab' }, h('span', {}, lab), o),
-          h('div', { class: 'sim-row' }, rng, numEl),
+          h(
+            'div',
+            { class: 'sim-row' },
+            rng,
+            numEl,
+            prefixFactor(p.prefix) && p.unit ? h('span', { class: 'sim-unit', 'aria-hidden': 'true' }, boxUnit(p)) : null,
+          ),
         ),
       );
     } else if (p.kind === 'toggle') {
@@ -296,7 +324,7 @@ export function simView(
     if (!c) return;
     if (c.o && c.num) {
       c.o.textContent = showVal(p);
-      if (document.activeElement !== c.num) c.num.value = String(vals[p.id]);
+      if (document.activeElement !== c.num) c.num.value = boxVal(p);
       if (c.rng) {
         c.rng.value = String(pos(p));
         c.rng.setAttribute('aria-valuetext', showVal(p));
@@ -368,8 +396,9 @@ export function simView(
       root.append(fig);
       return fig;
     }
-    const axisLab = (a: Plot['x'] | undefined): string =>
-      a?.label ? tt(a.label) + (a.unit ? ' (' + a.unit + ')' : '') : a?.unit ? a.unit : '';
+    const axUnit = (a: Plot['x'] | undefined): string =>
+      a?.unit ? (prefixFactor(a.prefix) ? (a.prefix === 'u' ? 'µ' : String(a.prefix)) : '') + tu(a.unit) : '';
+    const axisLab = (a: Plot['x'] | undefined): string => (a?.label ? tt(a.label) + (axUnit(a) ? ' (' + axUnit(a) + ')' : '') : axUnit(a));
     P.xLabel = axisLab(p.x);
     P.yLabel = axisLab(p.y);
     P.aria = (p.title ? tt(p.title) + '. ' : '') + tE('engine.act.sim.plot', { y: P.yLabel || '—', x: P.xLabel || '—' });
@@ -377,8 +406,9 @@ export function simView(
     const holder = h('div', { class: 'sim-svg' });
     P.holder = holder;
     fig.append(holder);
-    const named = P.lines.filter(l => l.label);
-    if (named.length)
+    const named = P.lines.filter(l => l.label),
+      legMarks = P.marks.filter(m => m.legend && m.label);
+    if (named.length || legMarks.length)
       fig.append(
         h(
           'div',
@@ -396,6 +426,16 @@ export function simView(
                 )
               : null,
           ),
+          P.marks.map((m, k) => {
+            if (!m.legend || !m.label) return null;
+            const j = P.lines.length + k;
+            return h(
+              'span',
+              {},
+              h('i', { class: 'sim-sw', style: { borderTopColor: COLORS[j % COLORS.length], borderTopStyle: 'dashed' } }),
+              tt(m.label),
+            );
+          }),
         ),
       );
     root.append(fig);
@@ -432,7 +472,7 @@ export function simView(
   function base(): Env {
     const e: Env = { ...consts };
     for (const p of params) e[p.id] = vals[p.id];
-    for (const d of derived) e[d.id] = ev(d.f, e);
+    for (const d of derived) e[d.id] = d.late ? NaN : ev(d.f, e);
     return e;
   }
   // a fault-finding bench (§12.7): instruments, the measurement log, the diagnosis
@@ -567,6 +607,7 @@ export function simView(
       }
       outputs = cleanOutputs(o);
       for (const d of declared) if (d.kind === 'scalar') e[d.id] = outputs[d.id];
+      for (const d of derived) if (d.late) e[d.id] = ev(d.f, e); // the values computed from the engine's outputs
       env = e;
       if (my === rev) {
         doneRev = my;
@@ -579,7 +620,7 @@ export function simView(
   function render(): void {
     readouts.forEach((r, i) => {
       const el = roEls[i];
-      if (el) el.textContent = fmtNum(ev(r.f, env), r, locale);
+      if (el) el.textContent = fmtNum(ev(r.f, env), { ...r, unit: tu(r.unit) }, locale);
     });
     plots.forEach((P, i) => {
       const fig = figs[i],
@@ -594,7 +635,7 @@ export function simView(
         data: PlotData = {
           xs: [],
           lines: [],
-          marks: P.marks.map(m => ({ axis: m.axis, v: ev(m.f, env), label: m.label ? tt(m.label) : '' })),
+          marks: P.marks.map(m => ({ axis: m.axis, v: ev(m.f, env), label: m.label ? tt(m.label) : '', legend: !!m.legend })),
           xr: [0, 1],
           yr: [P.ymin ? ev(P.ymin, env) : null, P.ymax ? ev(P.ymax, env) : null],
         };
@@ -626,7 +667,20 @@ export function simView(
             if (v > hi) hi = v;
           }
         data.xr = [P.xmin ? ev(P.xmin, env) : isFinite(lo) ? lo : 0, P.xmax ? ev(P.xmax, env) : isFinite(hi) ? hi : 1];
+        const e2: Env = { ...env },
+          xv = typeof p.x.var === 'string' ? p.x.var : '';
         data.lines = P.lines.map(l => {
+          if (l.f) {
+            const f = l.f;
+            return {
+              style: l.style,
+              ys: data.xs.map(x => {
+                if (xv) e2[xv] = x;
+                const v = ev(f, e2);
+                return typeof v === 'boolean' ? +v : v;
+              }),
+            };
+          }
           const ys = outputs[String(l.y)];
           return { style: l.style, ys: Array.isArray(ys) ? (ys as unknown[]) : [] };
         });

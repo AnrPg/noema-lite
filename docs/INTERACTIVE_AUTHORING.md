@@ -33,7 +33,7 @@ is refused.
 2. **Give each idea the engine whose model is that idea** (see "Which engine for which learning goal" below), never the familiar
    one by habit and never `formula@1` when a specific engine models the idea. Plan the pack's activities across its chapters first.
 3. **Spread the uses**: each interactive block and each `sim` exercise is one use of every kind of engine its activity runs on.
-   A pack needs ≥ 5 kinds, no kind over 35 % of the uses and ≥ 4 kinds in effect (1 / Σ share²). The checker (make_pack.py, the
+   A pack needs ≥ 5 kinds (the floor, never the target: aim for 8 or more; fewer is warned), no kind over 35 % of the uses and ≥ 4 kinds in effect (1 / Σ share²). The checker (make_pack.py, the
    upload, `noema_check_pack`, the audit) prints the mix and what is missing.
 4. When none fits an idea, ask for an engine (`noema_request_engine`) and use the closest real fit meanwhile.
 

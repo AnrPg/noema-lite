@@ -468,6 +468,17 @@ def build_lang_skill(out_zip):
     print('skill →', os.path.relpath(out_zip, ROOT))
 SKILL_MAX_FILES = 200   # claude.ai › Settings › Skills refuses a bigger zip
 
+def host_words():
+    """The words the activity runtimes take from the app (engine.act.*, engine.common.size*) in every UI language: the reviewed
+    catalog i18n/engine/<locale>.arb over Claude's drafts (i18n/engine/drafts/<locale>.arb) — for the skill's activity harness."""
+    d = os.path.join(ROOT, 'i18n', 'engine')
+    pick = lambda f: {k: v for k, v in json.load(open(f, encoding='utf-8')).items() if re.match(r'engine\.(act\.|common\.size)', k)} if os.path.exists(f) else {}
+    out = {'en': pick(os.path.join(d, 'en.arb'))}
+    for f in sorted(glob.glob(os.path.join(d, 'drafts', '*.arb'))):
+        loc = os.path.basename(f)[:-4]
+        out[loc] = {**pick(f), **pick(os.path.join(d, loc + '.arb'))}
+    return out
+
 def build_skill(out_zip):
     """The Claude skill (skill/noema-pack-builder) + the shared tools and the content contract, as one zip."""
     src = os.path.join(ROOT, 'skill', 'noema-pack-builder')
@@ -489,6 +500,7 @@ def build_skill(out_zip):
         z.writestr('noema-pack-builder/scripts/activities_examples.json', json.dumps({'format': 'noema.files/v1', 'files': ex}))
         z.writestr('noema-pack-builder/scripts/activity_host/noema-core.js', bundle_text('harness'))   # NoemaCore of the harness (build/harness.js): the data contracts, the engine library and the typed runtimes (src/runtimes: sim-spec@1, html-app@1, wasm-module@1, py-module@1)
         for f in ('32_activities.js', '32_activities.css'): z.write(os.path.join(ENGINE, 'src', f), f'noema-pack-builder/scripts/activity_host/{f}')
+        z.writestr('noema-pack-builder/scripts/activity_host/host_words.json', json.dumps(host_words(), ensure_ascii=False))   # the harness shows the runtimes' words in each language, as the app does
         h5pv = os.path.join(ENGINE, 'vendor', 'h5p', '3.8.2')   # h5p@1: the app's own H5P player for the harness, with its licences and readable source (GPL-3.0)
         for f in ['player.js', 'LICENSE', 'LICENSE-NOTICE.txt'] + sorted(os.path.relpath(g, h5pv).replace(os.sep, '/') for g in glob.glob(os.path.join(h5pv, 'source', '**', '*'), recursive=True) if os.path.isfile(g)):
             z.write(os.path.join(h5pv, f), 'noema-pack-builder/scripts/activity_host/h5p/' + f)

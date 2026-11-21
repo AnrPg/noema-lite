@@ -80,7 +80,7 @@ measures scored 0–100, each with its numbers and what to add: **depth** (teach
 think-first blocks, focus), **gradual** (the concept ladder and its Q0 issues), **retention** (exercises per learnable in more
 than one type, flashcards, pitfalls, self-explanation), **interactivity** (activities, simulations, picture exercises — and the
 engines of the library that fit the chapter, or `noema_request_engine`; every pack — every Roadmap node — must use a heterogeneous
-mix of engines, each the best fit for its idea after reading the full list: ≥ 5 kinds, none over 35 % of the uses, ≥ 4 kinds
+mix of engines, each the best fit for its idea after reading the full list: ≥ 5 kinds (the floor; aim for 8 or more), none over 35 % of the uses, ≥ 4 kinds
 in effect; rule `pack.engines`, Q9 of CONTENT_SPEC.md), **variety** (exercise types, kinds of thinking,
 paradigms, focus tags, block kinds). Then the judgement questions only a reader can answer (correctness, from zero, one idea
 per page, why before how, examples, misconceptions, pictures that teach, exercises that need thinking, retention, engagement),

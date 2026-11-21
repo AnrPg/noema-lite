@@ -1,7 +1,7 @@
 /* The plots of sim-spec@1: SVG drawn by the app, coloured by the theme's tokens; the engine library's drawings (scene) and sounds
    (docs/INTERACTIVE_LIBRARY.md §1.4). */
 import { svg } from '../dom.ts';
-import { fmtNum, isNum } from './format.ts';
+import { fmtNum, isNum, siUnit } from './format.ts';
 
 export const COLORS = ['var(--c)', 'var(--bad)', 'var(--ok)', 'var(--warn)', 'var(--info)', 'var(--ink2)'];
 export const DASH = ['', '7 4', '2 3', '9 3 2 3', '4 4', '1 2']; // a second cue besides the colour
@@ -40,7 +40,10 @@ export interface Axis {
   readonly unit?: string;
   readonly format?: string;
   readonly digits?: number;
+  readonly prefix?: string;
   readonly scale?: string;
+  /** the ticks: {step} every step, {integer: true} only whole numbers (counts), {count} about this many */
+  readonly ticks?: { readonly step?: number; readonly integer?: boolean; readonly count?: number };
   readonly var?: string;
   readonly series?: string;
   readonly min?: unknown;
@@ -60,7 +63,7 @@ export interface PlotDef {
 export interface PlotData {
   xs: readonly unknown[];
   lines: { ys: readonly unknown[]; style?: unknown; label?: unknown }[];
-  marks: { axis: unknown; v: unknown; label: string }[];
+  marks: { axis: unknown; v: unknown; label: string; legend?: boolean }[];
   xr: readonly [unknown, unknown];
   yr: readonly [unknown, unknown];
 }
@@ -79,8 +82,8 @@ export function drawPlot(fig: Element, p: PlotDef, data: PlotData, ctx: PlotCtx)
     ya: Axis = p.y ?? {},
     xlog = xa.scale === 'log',
     ylog = ya.scale === 'log';
-  const ml = W < 360 ? 44 : 54,
-    mr = 12,
+  let ml = W < 360 ? 44 : 54;
+  const mr = 12,
     mt = 10,
     mb = 40;
   const x0 = Number(data.xr[0]);
@@ -121,6 +124,33 @@ export function drawPlot(fig: Element, p: PlotDef, data: PlotData, ctx: PlotCtx)
     X1 = x1,
     Y0 = y0,
     Y1 = y1;
+  // tick labels: SI prefixes carry the unit on an SI unit (1 kHz, 200 µs); a plain number does not (the axis label has it); a
+  // log axis of days, items or % prints plain numbers (1, 10, 100), never 100 m or 1 k
+  const tick = (a: Axis, lg: boolean): ((v: number) => string) => {
+    const fm = a.format ?? (lg ? (siUnit(a.unit) && !a.prefix ? 'si' : 'plain') : 'auto');
+    return v => fmtNum(v, { format: fm, digits: a.digits ?? 3, unit: fm === 'si' ? a.unit : '', prefix: a.prefix }, ctx.locale);
+  };
+  const fx = tick(xa, xlog),
+    fy = tick(ya, ylog);
+  const ticksOf = (a: Axis, lg: boolean, lo: number, hi: number, n: number): number[] => {
+    const tk = a.ticks ?? {};
+    const want = typeof tk.count === 'number' && tk.count >= 2 ? Math.min(12, Math.round(tk.count)) : n;
+    let out: number[];
+    if (lg) out = logTicks(lo, hi, want);
+    else if (typeof tk.step === 'number' && tk.step > 0 && (hi - lo) / tk.step <= 50) {
+      out = [];
+      for (let v = Math.ceil(lo / tk.step - 1e-9) * tk.step; v <= hi + tk.step * 1e-9; v += tk.step) out.push(+v.toPrecision(12));
+    } else out = niceTicks(lo, hi, want);
+    if (tk.integer) {
+      out = out.filter(v => Math.abs(v - Math.round(v)) < 1e-9);
+      if (out.length < 2 && hi - lo >= 1)
+        out = niceTicks(Math.ceil(lo), Math.floor(hi), Math.min(want, Math.floor(hi) - Math.ceil(lo))).filter(v => Number.isInteger(v));
+    }
+    return out;
+  };
+  const yt = ticksOf(ya, ylog, Y0, Y1, 5);
+  // the left margin fits the longest y tick (a four-digit tick never runs into the y title): about 6.2 px a character at 11 px
+  ml = Math.max(ml, Math.min(Math.floor(W * 0.3), 22 + Math.ceil(Math.max(0, ...yt.map(v => fy(v).length)) * 6.2)));
   const X = (v: number): number => ml + ((tx(v) - tx(X0)) / (tx(X1) - tx(X0))) * (W - ml - mr),
     Y = (v: number): number => mt + (1 - (ty(v) - ty(Y0)) / (ty(Y1) - ty(Y0))) * (H - mt - mb);
   const s = svg('svg', {
@@ -138,24 +168,17 @@ export function drawPlot(fig: Element, p: PlotDef, data: PlotData, ctx: PlotCtx)
   defs.append(cp);
   s.append(defs);
   s.append(svg('rect', { x: ml, y: mt, width: W - ml - mr, height: H - mt - mb, fill: 'none', style: 'stroke:var(--line)' }));
-  // tick labels: SI prefixes carry the unit (1 kHz, 200 µs); a plain number does not (the axis label has it)
-  const tick = (a: Axis, lg: boolean): ((v: number) => string) => {
-    const fm = a.format ?? (lg ? 'si' : 'auto');
-    return v => fmtNum(v, { format: fm, digits: a.digits || 3, unit: fm === 'si' ? a.unit : '' }, ctx.locale);
-  };
-  const nt = Math.max(2, Math.floor((W - ml - mr) / 70)),
-    fx = tick(xa, xlog),
-    fy = tick(ya, ylog);
+  const nt = Math.max(2, Math.floor((W - ml - mr) / 70));
   const txt = (x: number, y: number, t: string, anchor: string, cls?: string): SVGElement => {
     const e = svg('text', { x, y, 'text-anchor': anchor, class: cls ?? 'sim-tick' });
     e.textContent = t;
     return e;
   };
-  for (const v of xlog ? logTicks(X0, X1, nt) : niceTicks(X0, X1, nt)) {
+  for (const v of ticksOf(xa, xlog, X0, X1, nt)) {
     const px = X(v);
     s.append(svg('line', { x1: px, x2: px, y1: mt, y2: H - mb, class: 'sim-grid' }), txt(px, H - mb + 14, fx(v), 'middle'));
   }
-  for (const v of ylog ? logTicks(Y0, Y1, 5) : niceTicks(Y0, Y1, 5)) {
+  for (const v of yt) {
     const py = Y(v);
     s.append(svg('line', { x1: ml, x2: W - mr, y1: py, y2: py, class: 'sim-grid' }), txt(ml - 5, py + 4, fy(v), 'end'));
   }
@@ -229,20 +252,49 @@ export function drawPlot(fig: Element, p: PlotDef, data: PlotData, ctx: PlotCtx)
       }),
     );
   });
-  for (const m of data.marks) {
-    if (!isNum(m.v)) continue;
+  // guide lines: each label where it does not cover another one (nearby lines get their labels in steps); a mark shown in
+  // the legend (legend: true) draws only its line, in its own colour and dash
+  const placed: { x0: number; x1: number; y0: number; y1: number }[] = [];
+  const free = (b: { x0: number; x1: number; y0: number; y1: number }): boolean =>
+    !placed.some(q => b.x0 < q.x1 + 3 && q.x0 < b.x1 + 3 && b.y0 < q.y1 + 1 && q.y0 < b.y1 + 1);
+  const LH = 13,
+    CW = 6.2;
+  data.marks.forEach((m, k) => {
+    if (!isNum(m.v)) return;
+    const style = m.legend ? `stroke:${at(COLORS, (data.lines.length + k) % COLORS.length, '')}` : null,
+      dash = m.legend ? at(DASH, (data.lines.length + k) % DASH.length, '') || '6 3' : null;
+    const lw = m.label.length * CW;
     if (m.axis === 'x') {
-      if ((xlog && m.v <= 0) || m.v < X0 || m.v > X1) continue;
+      if ((xlog && m.v <= 0) || m.v < X0 || m.v > X1) return;
       const px = X(m.v);
-      g.append(svg('line', { x1: px, x2: px, y1: mt, y2: H - mb, class: 'sim-mark' }));
-      if (m.label) g.append(txt(px + 4, mt + 12, m.label, 'start', 'sim-markl'));
+      g.append(svg('line', { x1: px, x2: px, y1: mt, y2: H - mb, class: 'sim-mark', style, 'stroke-dasharray': dash }));
+      if (!m.label || m.legend) return;
+      const right = px + 4 + lw <= W - mr;
+      for (let row = 0; row < 8; row++) {
+        const y = mt + 12 + row * LH,
+          b = right ? { x0: px + 4, x1: px + 4 + lw, y0: y - 10, y1: y + 2 } : { x0: px - 4 - lw, x1: px - 4, y0: y - 10, y1: y + 2 };
+        if (row < 7 && (!free(b) || y > H - mb - 4)) continue;
+        placed.push(b);
+        g.append(txt(right ? px + 4 : px - 4, y, m.label, right ? 'start' : 'end', 'sim-markl'));
+        break;
+      }
     } else {
-      if ((ylog && m.v <= 0) || m.v < Y0 || m.v > Y1) continue;
+      if ((ylog && m.v <= 0) || m.v < Y0 || m.v > Y1) return;
       const py = Y(m.v);
-      g.append(svg('line', { x1: ml, x2: W - mr, y1: py, y2: py, class: 'sim-mark' }));
-      if (m.label) g.append(txt(W - mr - 4, py - 4, m.label, 'end', 'sim-markl'));
+      g.append(svg('line', { x1: ml, x2: W - mr, y1: py, y2: py, class: 'sim-mark', style, 'stroke-dasharray': dash }));
+      if (!m.label || m.legend) return;
+      for (let step = 0; step < 8; step++) {
+        const xr = W - mr - 4 - step * (lw + 10),
+          above = py - 4 - 10 >= mt,
+          y = above ? py - 4 : py + 12,
+          b = { x0: xr - lw, x1: xr, y0: y - 10, y1: y + 2 };
+        if (step < 7 && (!free(b) || b.x0 < ml)) continue;
+        placed.push(b);
+        g.append(txt(xr, y, m.label, 'end', 'sim-markl'));
+        break;
+      }
     }
-  }
+  });
   s.append(g);
   return s;
 }
