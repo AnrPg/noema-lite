@@ -22,6 +22,9 @@ export const ICONS = {
   close: 'M6 6l12 12M18 6L6 18',
   check: 'M5 12.5l4.5 4.5L19 7',
   plus: 'M12 5v14M5 12h14',
+  minus: 'M5 12h14',
+  /** fit: four corners pointing out (the whole of something in view) */
+  fit: 'M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5',
   search: 'M11 4a7 7 0 1 1 0 14a7 7 0 0 1 0-14zM20 20l-4-4',
   bell: 'M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15zM10 20.5a2 2 0 0 0 4 0',
   info: 'M12 3a9 9 0 1 1 0 18a9 9 0 0 1 0-18zM12 11v6M12 7.5v.01',
