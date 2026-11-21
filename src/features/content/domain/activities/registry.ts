@@ -115,11 +115,20 @@ function kindsOf(a: unknown, parts: unknown): string[] {
   }
   return [rt];
 }
+/** itemsById(activities.items) → {id: item}: the pack format is a list of items each with its id (make_pack.py, docs/INTERACTIVE.md);
+    an object keyed by id (what a runtime keeps, ACT.ITEMS) is accepted too, its key standing in for a missing id */
+function itemsById(v: unknown): Record<string, Obj> {
+  const out: Record<string, Obj> = {};
+  if (Array.isArray(v)) {
+    for (const x of objs(v)) if (typeof x.id === 'string' && !has(out, x.id)) out[x.id] = x;
+  } else if (isObj(v)) for (const [k, x] of Object.entries(v)) if (isObj(x)) out[typeof x.id === 'string' ? x.id : k] = x;
+  return out;
+}
 /** engineUses(pack) → {kind: uses}: every interactive block and every sim exercise is one use of each kind of engine its activity
     runs on (QUALITY.engines, pack.engines); activities nothing uses do not count */
 export function engineUses(p: unknown): Record<string, number> {
   const reg = isObj(p) ? p.activities : null,
-    items = isObj(reg) && isObj(reg.items) ? reg.items : {},
+    items = itemsById(isObj(reg) ? reg.items : null),
     parts = isObj(reg) && isObj(reg.parts) ? reg.parts : null;
   const out: Record<string, number> = {};
   const use = (id: unknown): void => {

@@ -124,7 +124,7 @@ test('pack.engines: a heterogeneous mix of engines in every pack, counted per us
   const pack = (used: string[], o: Record<string, unknown> = {}) => ({
     builtAt: '2026-11-22T00:00:00Z',
     subject: { id: 'x', authoring: { rules: 3, by: 'claude' } },
-    activities: { items },
+    activities: { items: Object.entries(items).map(([id, a]) => ({ id, ...(a as object) })) }, // a list, as make_pack.py writes it
     chapters: [
       {
         id: 'ch01',
@@ -148,6 +148,8 @@ test('pack.engines: a heterogeneous mix of engines in every pack, counted per us
     'h5p@1': 1,
   });
   assert.deepEqual(engineKinds(pack(['f', 'o'])), ['formula@1', 'ode@1']);
+  // an object keyed by id (what a runtime keeps) is counted the same
+  assert.deepEqual(engineKinds({ ...pack(['f', 'o']), activities: { items } }), ['formula@1', 'ode@1']);
   assert.deepEqual(issues(pack(['f', 'o', 'app', 'py', 'h5p'])), { E: [], W: [] });
   assert.deepEqual(issues(pack(['f', 'f', 'o', 'o', 'app', 'py', 'h5p', 'g', 't'])), { E: [], W: [] });
   // too few kinds

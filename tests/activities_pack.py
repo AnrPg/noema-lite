@@ -193,6 +193,20 @@ zl = pk('o1')
 check('activities/planets-quiz/item.h5p' in zl.namelist() and zl.read('activities/planets-quiz/item.h5p') == H5B and zl.getinfo('activities/planets-quiz/item.h5p').compress_type == zipfile.ZIP_STORED,
       'h5p@1: the .h5p file travels beside the pack in the .noema.zip, byte for byte (stored)')
 check('🧩 activities/planets-quiz/item.h5p' in r.stdout and not os.path.exists(os.path.join(sd, 'build', 'planets-quiz.h5p')), 'make_pack.py names the H5P file beside the pack', r.stdout)
+# rule pack.engines counts the engines of a pack as make_pack.py writes it: pack.activities.items is a LIST (bug 2026-11-21: the
+# counter read it as an object keyed by id and found "0 kinds (none)" in every toolkit-built pack)
+sys.path.insert(0, S); import noema_core as core
+def eng_msgs(pk_):   # the [pack.engines] messages of a pack checked as one Claude built today
+    q = {**pk_, 'builtAt': '2026-11-22T00:00:00Z', 'subject': {**pk_['subject'], 'authoring': {**(pk_['subject'].get('authoring') or {}), 'by': 'claude'}}}
+    r_ = core.batch([('pack.check', q, None, {'requireQuality': True})])[0]
+    return [m for m in r_['errors'] + r_['warnings'] if '[pack.engines]' in m]
+check(isinstance(p['activities']['items'], list) and eng_msgs(p) == [], 'pack.engines: a toolkit-built pack (items as a list) with a varied mix of engines passes the rule', str(eng_msgs(p)))
+two = json.loads(json.dumps(p)); keep = {'rc-lowpass', 'led-bench'}
+for c_ in two['chapters']:
+    for sec in c_['sections']: sec['blocks'] = [b_ for b_ in sec['blocks'] if b_.get('t') != 'interactive' or b_.get('activity') in keep]
+    c_['exercises'] = [x_ for x_ in c_['exercises'] if x_.get('type') != 'sim' or x_.get('activity') in keep]
+m2 = eng_msgs(two)
+check(len(m2) == 1 and '2 kinds of engine' in m2[0] and 'formula@1' in m2[0] and 'circuit-mna@1' in m2[0], 'pack.engines: formula@1 + circuit-mna@1 only → "2 kinds", each named (not "0 kinds (none)")', str(m2))
 if os.environ.get('NOEMA_ACT_PACK'):   # run_e2e.sh: tests/activities_app.js imports this pack into the app (and the .noema.zip, which carries the .h5p)
     shutil.copy(os.path.join(sd, 'build', 'demo-physics.json'), os.environ['NOEMA_ACT_PACK'])
     shutil.copy(os.path.join(T, 'o1', 'demo-physics.noema.zip'), os.environ['NOEMA_ACT_PACK'] + '.noema.zip')
