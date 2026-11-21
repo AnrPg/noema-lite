@@ -95,6 +95,59 @@ export function needRequires(itemsIn: unknown, lib?: unknown): string[] {
     .map(e => 'engine:' + e);
   return ['activities/v1', ...rts, ...engs];
 }
+/** the kinds of engine of one activity (QUALITY.engines): an engine (a sim-spec@1 engine, formula@1 included, the engines of its
+    parts, the engines a mini-app lists, wasm-module@1's) or a runtime with no engine of its own (a mini-app without engines,
+    py-module@1, h5p@1, external-embed@1) */
+function kindsOf(a: unknown, parts: unknown): string[] {
+  if (!isObj(a) || typeof a.runtime !== 'string') return [];
+  const rt = a.runtime;
+  if (rt === 'sim-spec@1')
+    return [
+      ...new Set([
+        isObj(a.spec) && typeof a.spec.engine === 'string' ? a.spec.engine : DEFAULT_ENGINE,
+        ...partEngines(a, parts).filter((e): e is string => typeof e === 'string'),
+      ]),
+    ];
+  if (rt === WASM) return [WASM_ENGINE];
+  if (rt === 'html-app@1') {
+    const es = appEngines(a);
+    return es.length ? [...new Set(es)] : [rt];
+  }
+  return [rt];
+}
+/** engineUses(pack) → {kind: uses}: every interactive block and every sim exercise is one use of each kind of engine its activity
+    runs on (QUALITY.engines, pack.engines); activities nothing uses do not count */
+export function engineUses(p: unknown): Record<string, number> {
+  const reg = isObj(p) ? p.activities : null,
+    items = isObj(reg) && isObj(reg.items) ? reg.items : {},
+    parts = isObj(reg) && isObj(reg.parts) ? reg.parts : null;
+  const out: Record<string, number> = {};
+  const use = (id: unknown): void => {
+    if (typeof id !== 'string' || !has(items, id)) return;
+    for (const k of kindsOf(items[id], parts)) out[k] = (out[k] ?? 0) + 1;
+  };
+  for (const c of objs(isObj(p) ? p.chapters : null)) {
+    for (const sec of objs(c.sections)) for (const b of objs(sec.blocks)) if (b.t === 'interactive') use(b.activity);
+    for (const e of objs(c.exercises)) if (e.type === 'sim') use(e.activity);
+  }
+  return out;
+}
+/** engineKinds(pack) → the kinds of engine its activities and simulations use, sorted */
+export const engineKinds = (p: unknown): string[] => Object.keys(engineUses(p)).sort();
+/** how evenly the uses spread over the kinds: the kinds, the largest share and the effective number of kinds
+    (1 / Σ share², the inverse Simpson index: 5 kinds used equally → 5; one kind with 99 % of the uses → about 1) */
+export function engineSpread(uses: Readonly<Record<string, number>>): {
+  kinds: number;
+  total: number;
+  top: [string, number] | null;
+  effective: number;
+} {
+  const es = Object.entries(uses).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  const total = es.reduce((t, [, n]) => t + n, 0);
+  const effective = total ? total ** 2 / es.reduce((t, [, n]) => t + n * n, 0) : 0; // 1 / Σ share², in whole numbers
+  const first = es[0];
+  return { kinds: es.length, total, top: first ? [first[0], total ? first[1] / total : 0] : null, effective };
+}
 /** enginesNamed(pack) → the ids of the engines of the library a pack names (its activities and their parts, pack.requires): what a
     caller loads (NoemaCore.engines.load) before it checks the pack, so that each engine's own checks run */
 export function enginesNamed(p: unknown): string[] {

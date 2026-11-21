@@ -27,7 +27,7 @@ learner opens each source file at the pages the chapters cite.
 **The contract is in `references/`. Read both files before writing any content:**
 - `references/CONTENT_SPEC.md` — subject, chapters, sections, blocks, exercises, playbooks, quantities, pedagogy.
 - `references/VISUAL.md` — pictures, regions, the 7 picture-exercise types, figures, picture sourcing & licences.
-- `references/INTERACTIVE.md` — interactive activities (optional): mini-apps and declarative simulations (sim-spec@1, §12) in the theory and graded `sim` exercises; `references/INTERACTIVE_AUTHORING.md` is how to make one that teaches (and which runtime to pick); `references/INTERACTIVE_LIBRARY.md` the engine library — the canonical way a sim-spec@1 activity computes: general engines for every field (formula, ode, prob, logic, graph, geom, genetics, seq, med, clinic, anatomy, timeline, music, map, text, craft; each one's chapter in `references/LIBRARY_ENGINES.md`, one section per engine), the free way when none fits, and `noema_request_engine` to ask for a new one; `references/INTERACTIVE_SIMEXPR.md` the expression language of a spec's formulas and checks; `references/INTERACTIVE_CIRCUIT.md` the circuit engine (`circuit-mna@1`: a netlist, sliders bound to its parts, scope traces; §9 the full physics: AC/Bode analysis, op-amp bandwidth and slew, device capacitances, Zeners, transmission lines, a voltage-controlled switch, floating inputs that pick up hum, real meters with modes and input resistance, scope ground leads — so these effects are simulated, not only described) and the fault-finding bench (hidden faults, instruments, probe points, a diagnosis); `references/INTERACTIVE_PYTHON.md` Python activities (`py-module@1`: `main.py` with `step(inputs, state)` + a spec; numpy, scipy; the API, the cost, the limits); `references/INTERACTIVE_H5P.md` H5P packages (`h5p@1`: an ordinary `.h5p` file, its translations, the rules it must pass); `references/INTERACTIVE_ENGINES.md` the heat (`thermal@1`), control-loop (`pid@1`), radio (`rf@1`) and IoT-node twin (`twin@1`, with benches; §5.5 temperature, clock drift, channel collisions) engines; `references/INTERACTIVE_WASM.md` a precompiled WebAssembly module as a spec's engine (`wasm-module@1`, rarely); `references/INTERACTIVE_EMBED.md` an allow-listed outside page (PhET, GeoGebra, Desmos; `external-embed@1`, explore only, opt-in, licence limits); `references/INTERACTIVE_XAPI.md` the learner's xAPI export (nothing to author).
+- `references/INTERACTIVE.md` — interactive activities (every pack uses a heterogeneous mix of engines, each the best fit for its idea, rule `pack.engines`): mini-apps and declarative simulations (sim-spec@1, §12) in the theory and graded `sim` exercises; `references/INTERACTIVE_AUTHORING.md` is how to make one that teaches (and which runtime to pick); `references/INTERACTIVE_LIBRARY.md` the engine library — the canonical way a sim-spec@1 activity computes: general engines for every field (formula, ode, prob, logic, graph, geom, genetics, seq, med, clinic, anatomy, timeline, music, map, text, craft; each one's chapter in `references/LIBRARY_ENGINES.md`, one section per engine), the free way when none fits, and `noema_request_engine` to ask for a new one; `references/INTERACTIVE_SIMEXPR.md` the expression language of a spec's formulas and checks; `references/INTERACTIVE_CIRCUIT.md` the circuit engine (`circuit-mna@1`: a netlist, sliders bound to its parts, scope traces; §9 the full physics: AC/Bode analysis, op-amp bandwidth and slew, device capacitances, Zeners, transmission lines, a voltage-controlled switch, floating inputs that pick up hum, real meters with modes and input resistance, scope ground leads — so these effects are simulated, not only described) and the fault-finding bench (hidden faults, instruments, probe points, a diagnosis); `references/INTERACTIVE_PYTHON.md` Python activities (`py-module@1`: `main.py` with `step(inputs, state)` + a spec; numpy, scipy; the API, the cost, the limits); `references/INTERACTIVE_H5P.md` H5P packages (`h5p@1`: an ordinary `.h5p` file, its translations, the rules it must pass); `references/INTERACTIVE_ENGINES.md` the heat (`thermal@1`), control-loop (`pid@1`), radio (`rf@1`) and IoT-node twin (`twin@1`, with benches; §5.5 temperature, clock drift, channel collisions) engines; `references/INTERACTIVE_WASM.md` a precompiled WebAssembly module as a spec's engine (`wasm-module@1`, rarely); `references/INTERACTIVE_EMBED.md` an allow-listed outside page (PhET, GeoGebra, Desmos; `external-embed@1`, explore only, opt-in, licence limits); `references/INTERACTIVE_XAPI.md` the learner's xAPI export (nothing to author).
 
 Scripts live in `scripts/` next to this file (Python 3, standard library + Pillow; for PDFs any of poppler, PyMuPDF, or pypdf + pypdfium2).
 
@@ -127,9 +127,24 @@ count. Look in all three places below, keep only the valuable ones:
 **Every picture gets ≥ 3 exercises of ≥ 2 visual types** + a `figure` block, explained in detail right after it (Q7b), in the section that teaches it; a chapter
 with pictures has every picture exercise type that fits it ≥ 3 times (step 4). A chapter without a picture that teaches has none.
 
-## 3a. Interactive activities — only where trying teaches (flow step `activities`; INTERACTIVE.md)
-Optional, and most chapters need none. Make one when the learner learns by **trying**: a relation to explore (move one quantity,
-watch another), a process over time, a setting to find, a fault to probe. Never for a fact or a static diagram.
+## 3a. Interactive activities — a heterogeneous mix of engines in every pack, each the best fit, each where trying teaches (flow step `activities`; INTERACTIVE.md)
+**Every pack — every Roadmap node on its own — uses a heterogeneous mix of engines, each chosen as the best fit for its idea**
+(rule `pack.engines`, Q9 of CONTENT_SPEC.md; make_pack.py and every upload refuse a pack that fails it):
+1. **First read the FULL list of engines** — references/INTERACTIVE_LIBRARY.md and every section of references/LIBRARY_ENGINES.md,
+   INTERACTIVE_CIRCUIT.md, INTERACTIVE_ENGINES.md (thermal, pid, rf, twin), INTERACTIVE_PYTHON.md, INTERACTIVE_H5P.md, mini-apps,
+   WASM, outside pages — and `python3 scripts/audit.py work/<id>`, which names the library engines that fit each chapter.
+2. **For each idea where trying teaches, pick the engine that models that idea best** (a process over time → ode or des, chance →
+   prob, a network → graph, a shape → geom, inheritance → genetics, events in time → timeline, a place → map, an argument → logic,
+   rhetoric, philo or law, a diagnosis → clinic or med…), never the familiar one out of habit and never `formula@1` when a specific
+   engine models the idea. Plan the pack's activities across its chapters before writing.
+3. **Spread the uses**: each interactive block and each `sim` exercise is one use of every kind of engine its activity runs on;
+   ≥ 5 kinds, no kind over 35 % of the uses, the uses spread over ≥ 4 kinds in effect (1 / Σ share²). One engine almost everywhere
+   plus four token uses is refused. A kind is a `sim-spec@1` engine, an engine a mini-app or a part uses, `wasm-module@1`, or a
+   runtime with no engine of its own (a mini-app without engines, `py-module@1`, `h5p@1`, `external-embed@1`).
+4. No engine fits an idea → `noema_request_engine`.
+
+Each one goes where the learner learns by **trying**: a relation to explore (move one quantity, watch another), a process over time,
+a setting to find, a fault to probe, a decision to simulate. Never for a fact or a static diagram.
 ```bash
 python3 scripts/activity_new.py work/<id> <activity-id> --runtime sim-spec@1   # a declarative simulation (rc-lowpass): spec.json, strings, tests.json, a fallback picture — prefer this
 python3 scripts/activity_new.py work/<id> <activity-id> --from rc-transient     # a circuit (circuit-mna@1): a netlist, R and C on sliders, a scope trace
@@ -165,7 +180,7 @@ original is not packaged next to its parts). In each chapter write `"sources": [
 timestamps (the app shows them as chips and opens the file at that page), and keep `sourcePages` as one
 short human line built from the same parts joined by " · ".
 
-## 3c. Knowledge map — before writing each chapter (CONTENT_SPEC "Quality rules Q0–Q8")
+## 3c. Knowledge map — before writing each chapter (CONTENT_SPEC "Quality rules Q0–Q9")
 For every chapter, before any theory or exercise, write `work/<id>/map/chNN.json` (format in CONTENT_SPEC):
 0. **The concept ladder (Q0) first.** `concepts`: every concept the chapter introduces, in the order it will teach them,
    each with `terms` (every word, unit and symbol the learner will meet: `["current", "ampere"]`, `units: ["A"]`,
