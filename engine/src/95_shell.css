@@ -28,6 +28,14 @@ body.ns-reading .ns-land,body.ns-mapmode .ns-land{opacity:.35}
 /* ---------- top bar ---------- */
 .ns-top{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;height:56px;display:flex;align-items:center;gap:6px;padding-inline:12px 16px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);transition:transform .25s ease}
 .ns-top.hide{transform:translateY(-110%)}
+/* phones: the tabs slide away with the top bar while scrolling down (frame.ts), and what floats above them follows */
+.ns-tabs{transition:transform .25s ease}
+@media (max-width:759px){
+  body.ns-barshid .ns-tabs{transform:translateY(110%)}
+  .ns-fab,.ns-say{transition:opacity .25s,transform .25s,bottom .25s ease}
+  body.ns-barshid .ns-fab{bottom:calc(12px + env(safe-area-inset-bottom,0px))}
+  body.ns-barshid .ns-say{bottom:calc(70px + env(safe-area-inset-bottom,0px))}
+}
 .ns-crumbs{display:flex;align-items:center;gap:6px;min-width:0;flex:1;font-size:.92rem;color:var(--ink2);white-space:nowrap;overflow:hidden;padding-inline-start:4px}
 .ns-crumbs button{overflow:hidden;text-overflow:ellipsis;min-width:0;flex:0 1 auto;color:var(--ink2)}
 .ns-crumbs button:hover{color:var(--ink)}

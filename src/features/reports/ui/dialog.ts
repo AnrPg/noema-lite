@@ -176,7 +176,7 @@ export async function openReport(d: ReportDeps): Promise<void> {
             </div>
             <details class="nr-details">
               <summary>${T('details')}</summary>
-              <pre>${details}</pre>
+              <pre class="noema-i18n-skip" translate="no">${details}</pre>
             </details>
             ${local ? html`<p class="nr-signin">${T('signIn')}</p>` : html`<p class="nc-muted nr-privacy">${T('privacy')}</p>`}
             <p class="nr-err" role="alert">${error}</p>

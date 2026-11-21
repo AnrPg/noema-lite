@@ -8,10 +8,6 @@
   "@report.buttonTip": {
     "description": "Tooltip of the ⚑ button in the side bar."
   },
-  "report.menuSub": "A screenshot and where you are, for the team",
-  "@report.menuSub": {
-    "description": "Second line of “Report a problem” in the Me ▾ menu. Short."
-  },
   "report.adminTitle": "Problem reports",
   "@report.adminTitle": {
     "description": "Title of the admins’ page that lists what people reported (and its Me ▾ menu item)."

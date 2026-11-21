@@ -34,7 +34,7 @@ import { guardDom, h, type MenuEntry } from './shell/dom.ts';
 import { createHost, type Host, type HostCore, type Recent } from './shell/host.ts';
 import { P, jsonOf, putJson, type Account } from './shell/kv.ts';
 import { phase2, settingsCopy } from './shell/learning.ts';
-import { community, legacy, type AreaBoot, type NoemaAreas, type SubjectMeta } from './shell/legacy.ts';
+import { legacy, type AreaBoot, type NoemaAreas, type SubjectMeta } from './shell/legacy.ts';
 import { createThemes, type Themes } from './shell/themes.ts';
 import { legacyRoadmapsData } from './roadmaps-ui.ts';
 import { runtimeLocales, type I18nRuntimeLocales } from './ui-kit-root.ts';
@@ -794,17 +794,6 @@ export function createApp(win: Window = window): App {
       { label: L('settings'), sub: L('settingsSub'), icon: 'gear', href: '#/me' },
       { label: L('help'), sub: L('helpSub'), icon: 'help', href: '#/help' },
       { label: L('mySubjects'), sub: L('subjectsSub'), icon: 'book', href: '#/subjects' },
-      community()
-        ? {
-            label: RL('button'),
-            sub: RL('menuSub'),
-            icon: 'report',
-            cls: 'ns-reportitem',
-            run: () => {
-              void community()?.report.open();
-            },
-          }
-        : null,
       shell.reports.admin
         ? {
             label: RL('adminTitle'),

@@ -8,7 +8,7 @@
 import type { NoemaCoreBridge as CoreBridge } from '../bridge.ts';
 import { TRAIL_KEEP, arrive, backFrom, type TrailStep } from '../../features/shell/domain/trail.ts';
 import { CHARACTER_GROUPS, isCharacter } from '../../features/shell/domain/characters.ts';
-import { EMPTY_FRAME, type FrameModel, type FrameTab, type NoemaShellFrame } from '../../ui/screens/shell/frame.ts';
+import { EMPTY_FRAME, RAIL_PX, type FrameModel, type FrameTab, type NoemaShellFrame } from '../../ui/screens/shell/frame.ts';
 import { ENGINE_ROUTES, placeOf } from '../../ui/screens/shell/routes.ts';
 import { studyFrame, type StudyFramePage } from './study-frame.ts';
 import type { ShellArt, ShellContext, TutorVars } from '../../ui/screens/shell/base.ts';
@@ -256,11 +256,42 @@ export function createHost(core: HostCore) {
     const a = core.account();
     setModel({ me: { emoji: a?.emoji || (a?.name || '?').trim()[0]?.toUpperCase() || '?', name: a?.name ?? '' } });
   }
+  let mq: MediaQueryList | null = null;
+  const phoneMq = (): MediaQueryList => {
+    if (!mq) {
+      mq = matchMedia(`(max-width: ${String(RAIL_PX - 1)}px)`);
+      mq.addEventListener('change', () => {
+        chrome(chromeNow);
+      });
+    }
+    return mq;
+  };
   function chrome(c: Chrome = {}): void {
     chromeNow = c;
+    // on phones every page's ⋮ starts with "Report a problem" (from 760 px wide it is the side bar's button; 96_report.css):
+    // only drawn on a phone, so a wide screen has no hidden ⋮; crossing 760 px draws the bar again (phoneMq below)
+    const own = !!c.menu && (typeof c.menu === 'function' || c.menu.length > 0);
+    const report = !!community() && phoneMq().matches;
+    const items = (): readonly MenuEntry[] => {
+      const base = typeof c.menu === 'function' ? c.menu() : (c.menu ?? []);
+      if (!report) return base;
+      const item: MenuEntry = {
+        label: RL('button'),
+        icon: 'report',
+        cls: 'ns-reportitem',
+        run: () => {
+          void community()?.report.open();
+        },
+      };
+      return base.some(x => x && x !== '-') ? [item, '-', ...base] : [item];
+    };
     const menu =
-      c.menu && (typeof c.menu === 'function' || c.menu.length)
-        ? menuButton(kit, c.menu, { label: c.menuLabel ?? L('more'), dot: !!c.menuDot })
+      own || report
+        ? menuButton(kit, items, {
+            label: c.menuLabel ?? L('more'),
+            dot: !!c.menuDot,
+            cls: 'ns-iconbtn' + (own ? '' : ' ns-reportonly'),
+          })
         : null;
     parts.acts.replaceChildren(...[...(c.acts ?? []), menu].filter((x): x is Node => !!x)); // menu: a list, or a function that makes it when opened
     setModel({

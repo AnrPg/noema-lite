@@ -2,7 +2,6 @@
   "@@locale": "fr",
   "report.button": "Signaler un problème",
   "report.buttonTip": "Signaler un problème sur cet écran : une capture et l’endroit exact où vous êtes partent vers l’équipe de l’application",
-  "report.menuSub": "Une capture et l’endroit, pour l’équipe",
   "report.adminTitle": "Problèmes signalés",
   "report.adminSub": "Ce que les gens ont signalé, à examiner et corriger",
   "report.title": "Signaler un problème",
