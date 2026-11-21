@@ -2535,6 +2535,8 @@
   "engine.author.f.lib.wpmLo": "Наименьший темп (слов в минуту)",
   "engine.author.f.benchPart": "Измеряемая часть",
   "engine.author.f.lib.eq": "Равновесие (номер)",
+  "engine.thr.hideBar": "Свернуть эту панель",
+  "engine.thr.showBar": "Развернуть эту панель",
   "engine.tutor.edit": "Изменить",
   "engine.tutor.editCancel": "Отмена",
   "engine.tutor.regenerate": "Ответить заново",

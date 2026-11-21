@@ -529,6 +529,13 @@ body.ns-on .drawer .composer textarea{min-height:48px;border-radius:var(--br,14p
 body.ns-on .drawer .composer .send{width:56px;height:48px}
 /* the tutor's conversation: tools under each message (faint until hovered), ‹ 2/3 › versions, editing in place, files,
    ↓ to the latest, ■ stop — line icons with their words in the tooltip (docs/CONVERSATIONS.md "Branches", "Attachments") */
+.drawer .threadbar .tb-fold{flex:none;display:grid;place-items:center;width:28px;height:28px;margin-inline-start:auto;border:0;border-radius:8px;background:none;color:var(--ink3);cursor:pointer;padding:0}
+.drawer .threadbar .tb-fold svg.i{width:16px;height:16px}
+@media (hover:hover){.drawer .threadbar .tb-fold:hover{background:color-mix(in srgb,var(--ink) 8%,transparent);color:var(--ink)}}
+.threadbar.folded{padding-block:3px}
+.threadbar.peek{animation:slideIn .25s}
+@media (prefers-reduced-motion:reduce){.threadbar.peek{animation:none}}
+.threadbar.folded .tb-txt{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink2)}
 .drawer .msgs{overflow-anchor:none;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 14px);mask-image:linear-gradient(to bottom,transparent 0,#000 14px)}
 /* the "For: …" chip: the whole topic in two lines at most (all of it on hover) */
 .ns-forchip{white-space:normal;overflow:visible;align-items:flex-start;line-height:1.35}

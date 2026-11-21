@@ -2535,6 +2535,8 @@
   "engine.author.f.lib.wpmLo": "Débit minimal (mots par minute)",
   "engine.author.f.benchPart": "Partie mesurée",
   "engine.author.f.lib.eq": "Équilibre (indice)",
+  "engine.thr.hideBar": "Replier cette barre",
+  "engine.thr.showBar": "Déplier cette barre",
   "engine.tutor.edit": "Modifier",
   "engine.tutor.editCancel": "Annuler",
   "engine.tutor.regenerate": "Répondre à nouveau",

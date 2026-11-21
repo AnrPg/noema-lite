@@ -752,12 +752,71 @@ export class NoemaTutorPanel extends TutorElement {
 }
 
 /** The thread tracker over the conversation: what the learner works on, the attempts, the lessons, 💡 tell me, 🎓 wrap up. */
+/** the learner folded the bar away (this device: a convenience, kept in the browser) */
+const FOLD_KEY = 'noema-tutor:threadbarFolded';
+/** how long a folded bar shows after an answer */
+const PEEK_MS = 4000;
+const readFold = (): boolean => {
+  try {
+    return localStorage.getItem(FOLD_KEY) === '1';
+  } catch {
+    return false;
+  }
+};
+
 export class NoemaTutorThreads extends TutorElement {
-  static override properties = { ...TutorElement.properties, expanded: { state: true } };
+  static override properties = {
+    ...TutorElement.properties,
+    expanded: { state: true },
+    folded: { state: true },
+    peek: { state: true },
+  };
   declare expanded: boolean;
+  /** folded to one thin line (the talk gets the room); ⌄ opens it again */
+  declare folded: boolean;
   constructor() {
     super();
     this.expanded = false;
+    this.folded = readFold();
+    this.peek = false;
+  }
+  #fold(on: boolean): void {
+    this.folded = on;
+    this.peek = false;
+    try {
+      localStorage.setItem(FOLD_KEY, on ? '1' : '0');
+    } catch {
+      return; // no storage here: folded for this page only
+    }
+  }
+  /** folded, it opens for a few seconds after each of the tutor's answers (Tell me, Wrap up), then folds again */
+  declare peek: boolean;
+  #lastReply: string | null | undefined = undefined;
+  #peekTimer: ReturnType<typeof setTimeout> | null = null;
+  #hover = false;
+  #lastKey = '';
+  protected override willUpdate(): void {
+    super.willUpdate();
+    const s = this.view?.session;
+    if (!s) return;
+    const key = s.key(),
+      last = s.busy ? this.#lastReply : (s.history().findLast(m => m.role === 'model')?.id ?? null);
+    // a new answer in the same conversation (not another conversation opened)
+    if (key === this.#lastKey && this.#lastReply !== undefined && last && last !== this.#lastReply && this.folded) this.#startPeek();
+    this.#lastKey = key;
+    this.#lastReply = last;
+  }
+  #startPeek(): void {
+    this.peek = true;
+    if (this.#peekTimer) clearTimeout(this.#peekTimer);
+    this.#peekTimer = setTimeout(() => {
+      this.#peekTimer = null;
+      if (!this.#hover) this.peek = false;
+    }, PEEK_MS);
+  }
+  override disconnectedCallback(): void {
+    super.disconnectedCallback();
+    if (this.#peekTimer) clearTimeout(this.#peekTimer);
   }
   override connectedCallback(): void {
     super.connectedCallback();
@@ -851,8 +910,42 @@ export class NoemaTutorThreads extends TutorElement {
         );
       tree = html`<div class="tb-tree">${nodes}</div>`;
     }
-    return html`<div class=${'threadbar' + (this.expanded ? ' open' : '')}>
-      <div class="tb-row">${row}</div>
+    const foldBtn = (on: boolean): TemplateResult => {
+      const label = this.t(on ? 'engine.thr.hideBar' : 'engine.thr.showBar');
+      return html`<button
+        class="iconbtn tb-fold"
+        type="button"
+        title=${label}
+        aria-label=${label}
+        aria-expanded=${on ? 'true' : 'false'}
+        @click=${() => {
+          this.#fold(on);
+        }}
+      >
+        ${icon(on ? 'up' : 'down')}
+      </button>`;
+    };
+    if (this.folded && !this.peek)
+      return html`<div class="threadbar folded">
+        <div class="tb-row">
+          <span class="tb-ic" aria-hidden="true">${socr && ts ? (open.length ? '🧵' : '✅') : '🎯'}</span>
+          <div class="grow tb-txt tiny">
+            ${focus ? focus.question : ts?.lessons.length ? this.t('engine.thr.lessons', { n: ts.lessons.length }) : this.t('engine.thr.takeaways')}
+          </div>
+          ${foldBtn(false)}
+        </div>
+      </div>`;
+    return html`<div
+      class=${'threadbar' + (this.expanded ? ' open' : '') + (this.peek ? ' peek' : '')}
+      @pointerenter=${() => {
+        this.#hover = true;
+      }}
+      @pointerleave=${() => {
+        this.#hover = false;
+        if (this.peek && !this.#peekTimer) this.peek = false;
+      }}
+    >
+      <div class="tb-row">${row}${this.folded ? foldBtn(false) : foldBtn(true)}</div>
       ${
         tell || wrap
           ? html`<div class="tb-actions">

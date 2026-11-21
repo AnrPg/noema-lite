@@ -2740,6 +2740,14 @@
       }
     }
   },
+  "engine.thr.hideBar": "Fold this bar",
+  "@engine.thr.hideBar": {
+    "description": "Tooltip of the small ⌃ button on the tutor's bar (the question being worked on, 💡 Tell me, 🎓 Wrap up): fold the bar to one thin line, so the conversation gets more room."
+  },
+  "engine.thr.showBar": "Open this bar",
+  "@engine.thr.showBar": {
+    "description": "Tooltip of the small ⌄ button on the folded tutor's bar: open it again (the question being worked on, 💡 Tell me, 🎓 Wrap up)."
+  },
   "engine.thr.showAll": "Show all threads",
   "@engine.thr.showAll": {
     "description": "Tooltip of the ▾ button that shows every question (thread) of the conversation."

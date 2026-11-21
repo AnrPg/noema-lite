@@ -189,4 +189,6 @@ Markdown runs (src/features/study/ui/text.ts protectMath), so its _ * \\ | never
 The reader stays where they read: a new turn brings the learner's message to the top and the answer grows below it without
 moving the page; ↓ (round, over the end of the talk) brings back the latest; ■ replaces ➤ while it writes. Under each message,
 faint line-icon tools with their words in the tooltip: ✎ edit (the learner's), ⧉ copy and ↻ answer again (the tutor's), ‹ 2/3 ›
-when a message has versions (docs/CONVERSATIONS.md "Branches"); 📎 left of the box adds files ("Attachments").
+when a message has versions (docs/CONVERSATIONS.md "Branches"); 📎 left of the box adds files ("Attachments"). The bar over
+the talk (the question worked on, 💡 Tell me, 🎓 Wrap up) folds to one thin line with ⌃ (kept on this device) and opens with ⌄;
+folded, it shows by itself for 4 s after each of the tutor's answers (longer while the pointer is on it).

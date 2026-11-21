@@ -2535,6 +2535,8 @@
   "engine.author.f.lib.wpmLo": "Ελάχιστες λέξεις ανά λεπτό",
   "engine.author.f.benchPart": "Μέρος που μετράται",
   "engine.author.f.lib.eq": "Ισορροπία (δείκτης)",
+  "engine.thr.hideBar": "Δίπλωσε αυτή τη μπάρα",
+  "engine.thr.showBar": "Άνοιξε αυτή τη μπάρα",
   "engine.tutor.edit": "Επεξεργασία",
   "engine.tutor.editCancel": "Άκυρο",
   "engine.tutor.regenerate": "Απάντησε ξανά",

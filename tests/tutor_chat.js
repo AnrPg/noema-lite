@@ -139,6 +139,24 @@ const MATH = 'The power is $p(t) = V_p I_p \\cos(\\omega t)\\cos(\\omega t - \\p
     await type('and a second question'); await idle();
     ok(await p.evaluate(() => window.__reqs.at(-1).contents[0].parts.some(x => x.inlineData?.mimeType === 'image/png')), 'the file goes with its message on later turns too');
 
+    /* 5b. the bar over the talk folds away, shows for 4 s after each answer, and opens again */
+    await p.click('.drawer .threadbar .tb-fold[aria-label="Fold this bar"]'); await wait(200);
+    const h1 = await p.$eval('.drawer .threadbar', e => e.offsetHeight);
+    ok(await p.$('.drawer .threadbar.folded') && h1 < 50, `the bar folds to one thin line (${h1} px)`);
+    await p.screenshot({ path: `/tmp/noema_shots/chat_${tag}_4_folded.png` });
+    await type('a quick one'); await idle();
+    ok(await p.$('.drawer .threadbar.peek .tb-actions'), '… and opens by itself after the answer');
+    await p.mouse.move(5, 5); await wait(4300);
+    ok(await p.$('.drawer .threadbar.folded'), '… then folds again after 4 s');
+    await p.reload(); await p.waitForFunction(() => window.NoemaTutor?.current?.()?.session, null, { timeout: 30000 }); await wait(500);
+    await p.addStyleTag({ path: path.join(ROOT, 'engine/vendor/katex/katex.min.css') });
+    await p.addScriptTag({ path: path.join(ROOT, 'engine/vendor/katex/katex.min.js') });
+    await p.evaluate(() => { __tut().openTutor({ kind: 'section', id: 'ch05-s04' }, 'explain'); }); await wait(300);
+    await type('after a reload'); await idle(); await wait(4300);
+    ok(await p.$('.drawer .threadbar.folded'), 'folded stays folded after a reload (this device)');
+    await p.click('.drawer .threadbar .tb-fold[aria-label="Open this bar"]'); await wait(200);
+    ok(!(await p.$('.drawer .threadbar.folded')) && await p.$('.drawer .threadbar .tb-actions'), '⌄ opens it again');
+
     /* 7. formulas */
     await p.evaluate(() => { __tut().fresh(); }); await wait(200);
     await type('show me the formula'); await idle(); await wait(300);

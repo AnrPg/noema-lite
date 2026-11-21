@@ -1772,6 +1772,8 @@
   "engine.author.f.lib.wpmLo": "Niedrigste Wörter pro Minute",
   "engine.author.f.benchPart": "Gemessener Teil",
   "engine.author.f.lib.eq": "Gleichgewicht (Index)",
+  "engine.thr.hideBar": "Diese Leiste einklappen",
+  "engine.thr.showBar": "Diese Leiste aufklappen",
   "engine.tutor.edit": "Bearbeiten",
   "engine.tutor.editCancel": "Abbrechen",
   "engine.tutor.regenerate": "Neu antworten",
