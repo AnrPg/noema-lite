@@ -748,7 +748,6 @@
   "roadmap.map.band.level": "Επίπεδο · {level}",
   "roadmap.map.band.noLevel": "Χωρίς επίπεδο",
   "roadmap.map.map.summary": "{m, number} από {n, number} κατακτημένα",
-  "roadmap.map.map.whole": "Δες όλο τον χάρτη",
   "roadmap.map.pnl.edit": "Επεξεργασία αυτού του βήματος",
   "roadmap.map.pnl.sources": "Πηγές αυτού του βήματος",
   "roadmap.map.pnl.readTheory": "Διάβασε τη θεωρία",

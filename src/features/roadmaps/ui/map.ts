@@ -90,10 +90,34 @@ export class NoemaRoadmapMap extends RoadmapElement {
         font-family: var(--u-display);
         overflow-wrap: anywhere;
       }
+      /* Map / List · − + ⤢ · Next: one row when it fits (a phone of 360 px and up), the switch and the zoom together
+         otherwise */
       .cm-tools {
         display: flex;
         flex-wrap: wrap;
         gap: 6px;
+        align-items: center;
+      }
+      /* a phone: the same row, tighter — the switch's buttons narrower, Next as its ▶ alone (its name stays its label and
+         tooltip) */
+      @media (max-width: 400px) {
+        .cm-tools {
+          gap: 4px;
+        }
+        .seg.cm-viewseg button {
+          padding: 0 7px;
+        }
+        .cm-nextlbl {
+          display: none;
+        }
+      }
+      /* − + ⤢ as one quiet group, like the Map / List switch beside it */
+      .cm-zoomgrp {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid var(--u-line);
+        border-radius: 999px;
+        padding: 1px 2px;
       }
       .seg {
         display: inline-flex;
@@ -1169,74 +1193,74 @@ export class NoemaRoadmapMap extends RoadmapElement {
     return html`
       <div class="cm-top">
         <div class="cm-title"><strong>${this.roadmapTitle(c)}</strong><span class="tiny cm-sum">${sum}</span></div>
-        <div class="seg cm-viewseg" role="radiogroup" aria-label=${this.t('roadmap.map.view.aria')}>
-          <button
-            role="radio"
-            class="cm-vbtn"
-            data-list="false"
-            aria-checked=${String(this.view !== 'list')}
-            @click=${(): void => {
-              setView(mapLike);
-            }}
-          >
-            ${this.t('roadmap.map.view.map')}
-          </button>
-          <button
-            role="radio"
-            class="cm-vbtn"
-            data-list="true"
-            aria-checked=${String(this.view === 'list')}
-            @click=${(): void => {
-              setView('list');
-            }}
-          >
-            ${this.t('roadmap.map.view.list')}
-          </button>
-        </div>
         <div class="cm-tools">
+          <div class="seg cm-viewseg" role="radiogroup" aria-label=${this.t('roadmap.map.view.aria')}>
+            <button
+              role="radio"
+              class="cm-vbtn"
+              data-list="false"
+              aria-checked=${String(this.view !== 'list')}
+              @click=${(): void => {
+                setView(mapLike);
+              }}
+            >
+              ${this.t('roadmap.map.view.map')}
+            </button>
+            <button
+              role="radio"
+              class="cm-vbtn"
+              data-list="true"
+              aria-checked=${String(this.view === 'list')}
+              @click=${(): void => {
+                setView('list');
+              }}
+            >
+              ${this.t('roadmap.map.view.list')}
+            </button>
+          </div>
           ${
             this.view === 'list'
               ? nothing
-              : html`<noema-button
+              : html`<div class="cm-zoomgrp">
+                  <noema-icon-button
                     class="cm-zoom"
+                    icon="minus"
                     size="sm"
-                    variant="secondary"
-                    aria-label=${this.t('roadmap.map.map.zoomOut')}
-                    title=${this.t('roadmap.map.map.zoomOut')}
+                    label=${this.t('roadmap.map.map.zoomOut')}
                     @click=${(): void => {
                       this.#zoomTo(this.zoom / 1.2);
                     }}
-                    >−</noema-button
-                  >
-                  <noema-button
+                  ></noema-icon-button>
+                  <noema-icon-button
                     class="cm-zoom"
+                    icon="plus"
                     size="sm"
-                    variant="secondary"
-                    aria-label=${this.t('roadmap.map.map.zoomIn')}
-                    title=${this.t('roadmap.map.map.zoomIn')}
+                    label=${this.t('roadmap.map.map.zoomIn')}
                     @click=${(): void => {
                       this.#zoomTo(this.zoom * 1.2);
                     }}
-                    >+</noema-button
-                  >
-                  <noema-button
-                    size="sm"
-                    variant="secondary"
+                  ></noema-icon-button>
+                  <noema-icon-button
                     class="cm-fit"
-                    title=${this.t('roadmap.map.map.whole')}
+                    icon="fit"
+                    size="sm"
+                    label=${this.t('roadmap.map.map.fit')}
                     @click=${(): void => {
                       this.#fit();
                     }}
-                    >⤢ ${this.t('roadmap.map.map.fit')}</noema-button
-                  >`
+                  ></noema-icon-button>
+                </div>`
           }
           <noema-button
             size="sm"
             class="cm-nextbtn"
+            aria-label=${this.t('roadmap.map.map.nextUp')}
+            title=${this.t('roadmap.map.map.nextUp')}
             @click=${(): void => {
               this.#dialog('.cm-nextdlg')?.show();
             }}
-            >▶ ${this.t('roadmap.map.map.nextUp')}</noema-button
+            ><span aria-hidden="true">▶</span
+            ><span class="cm-nextlbl" aria-hidden="true"> ${this.t('roadmap.map.map.nextUp')}</span></noema-button
           >
           ${
             this.legendInMenu

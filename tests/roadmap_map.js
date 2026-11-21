@@ -5,7 +5,7 @@
      C. the titles are whole (no clipped text; each station's tooltip is its full title)
      D. few crossings (at most the fixture's known minimum)
      E. the Roadmap's title is not repeated on the map
-     F. 320 px: the page itself never scrolls sideways (only the map pans), the labels are clear of the paths
+     F. 320 px: the page itself never scrolls sideways (only the map pans), the labels are clear of the paths, the tools in one row
    Usage: node tests/roadmap_map.js [<prepared-repo-dir>]   (SHOTS=<folder> for the screenshots) */
 const { chromium } = require(process.env.PW || 'playwright');
 const { appUrl } = require('./serve');
@@ -113,6 +113,8 @@ const hits = G => {
     const { page, ctx, E } = await run({ width: 320, height: 640 }, 'phone');
     const G = await geometry(page);
     ok(G.pageScroll <= 0, 'the page never scrolls sideways (only the map pans)');
+    const row = await page.evaluate(() => { const deep = (r, s) => r.querySelector(s) || [...r.querySelectorAll('*')].map(e => e.shadowRoot && deep(e.shadowRoot, s)).find(Boolean); const t = deep(document, 'noema-roadmap-map').shadowRoot.querySelector('.cm-tools'); const ys = [...t.children].map(c => { const r = c.getBoundingClientRect(); return r.top + r.height / 2; }); return Math.max(...ys) - Math.min(...ys) < 4 ? 1 : 2; });
+    ok(row === 1, 'Map / List, − + Fit and Next in one row');
     const h = hits(G);
     ok(!h.length, 'no path runs through a label' + (h.length ? ': ' + h.join(', ') : ''));
     ok(!G.labels.filter(l => l.clipped).length, 'every title is whole');

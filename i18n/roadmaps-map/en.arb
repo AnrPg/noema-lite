@@ -2762,7 +2762,7 @@
   },
   "roadmap.map.map.fit": "Fit",
   "@roadmap.map.map.fit": {
-    "description": "Button of the map: show the whole map. Very short."
+    "description": "Button of the map (an icon; this is its name and tooltip): lay the map out again across the whole width. Very short."
   },
   "roadmap.map.map.nextUp": "Next up",
   "@roadmap.map.map.nextUp": {
@@ -4069,10 +4069,6 @@
         "example": 12
       }
     }
-  },
-  "roadmap.map.map.whole": "See the whole map",
-  "@roadmap.map.map.whole": {
-    "description": "Tooltip of the button that zooms the map out so all of it fits."
   },
   "roadmap.map.pnl.edit": "Edit this step",
   "@roadmap.map.pnl.edit": {
