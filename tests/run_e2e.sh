@@ -70,6 +70,7 @@ run validate_pack_i18n python3 "$ROOT/tests/validate_pack_i18n.py"   # packs in 
 run revise_patch python3 "$ROOT/tests/revise_patch.py"   # patches that rewrite an exercise, card or block in place, keeping its id (CONTENT_SPEC "Additive updates")
 run package_sources bash -c 'cd "$1" && python3 tests/package_sources.py' _ "$T"
 run connector node "$ROOT/tests/connector.js" "$T"
+run lesson_updates node "$ROOT/tests/lesson_updates.js" "$T"   # 💬→📖 a chat used to improve a lesson: send, review (diff, moved, refused), approve, undo, the 🔔 row, Me › Conversations (docs/LESSON_UPDATES.md)
 run pack_update node "$ROOT/tests/pack_update.js" "$T"   # a new version of a subject from Claude reaches the device; a failed download says so
 run visual_pack node "$ROOT/tests/visual_pack.js" "$T"
 run sharing node "$ROOT/tests/sharing.js" "$T"

@@ -116,6 +116,22 @@ export class NoemaShareRow extends CommunityElement {
           }}
         ></noema-icon-button>
       </div>`;
+    if (it.kind === 'lessonupdate')
+      // 💬→📖 Claude's changes to one of my lessons: the words are the lesson updates' (src/composition/lesson-updates.ts)
+      return html`<div class="nx-req nx-update nx-lessonup" data-request=${it.request ?? ''}>
+        <div class="nc-grow">${it.text ?? ''}${it.sub ? html`<div class="nc-tiny nc-muted">${it.sub}</div>` : nothing}</div>
+        <div class="nx-reqacts">
+          <noema-button class="nx-take" size="sm" variant="primary" @click=${(e: Event) => void this.#act(e, () => notes.update(it, true))}
+            >${this.#T('upd.review')}</noema-button
+          >
+          <noema-icon-button
+            class="nx-dismiss"
+            icon="close"
+            label=${this.t('lu.review.decline')}
+            @click=${(e: Event) => void this.#act(e, () => notes.update(it, false))}
+          ></noema-icon-button>
+        </div>
+      </div>`;
     if (it.kind && UPDATES.has(it.kind)) {
       const k = it.kind;
       const text =

@@ -46,6 +46,8 @@ export interface TutorView {
   history(): void;
   exportOne(cv: Conversation | null): void;
   exportAll(): void;
+  /** 💬→📖 the conversation as a source for one of the learner's lessons (absent: the page cannot) */
+  useInLesson?: ((cv: Conversation) => void) | undefined;
   copy(text: string): Promise<boolean>;
   toast(text: string, ms?: number): void;
   /** a file the learner chose, ready to keep (a big picture made smaller) */
