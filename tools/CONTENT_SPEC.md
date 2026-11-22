@@ -110,7 +110,9 @@ which `start_subject.py` writes). The learner meets every idea for the first tim
    `map.known` every concept it uses without introducing it, with where the learner met it (`from`: `chNN` an earlier
    chapter, `@<step id>` an earlier Roadmap step, or `everyday`). The checker reads the whole text against this list: a
    word, a unit after a number (A, mAh, V, W, J, Ω, Hz, dB…) or an acronym that is in neither list, or that shows up before
-   its section, is an error. Plan the chapter as a ladder: list its concepts in teaching order first, then the sections
+   its section, is an error. `map.plainText` lists the words and numbers of the chapter that only look like a unit or an
+   acronym (`3S` for three cells in series, `183 C` as a part's label, `0x0C`, a model number): the checker reads them as
+   plain text. Plan the chapter as a ladder: list its concepts in teaching order first, then the sections
    (one idea each), then the exercises of each section from what that section and the earlier ones taught.
 - ✗ The real case: section 1 of "Charge, voltage and current" defined charge in one sentence, converted ampere-hours to
   coulombs, showed a table of charge, current, voltage, power and energy, and its exercises asked about amperes, volts and
@@ -543,7 +545,7 @@ Progress, spaced repetition and sources are keyed by the ids, so they are shared
 a translation is shown in the pack's language. Its knowledge map in that language (the Info window: points' `text`,
 learnables' `goal`, concepts' `terms`, `symbols` and `def`, known concepts' `terms`) is `translations/<locale>/map/chNN.json`:
 the source map (`map/chNN.json`) with the same ids, order, `level`, `cats`, `taughtIn`, `kp`, `in`, `needs`, `from` and `units`,
-only the words translated; without it the chapter in that language shows the pack's own map. A picture's `alt` and `caption` in each language go in `media/media.json` → `i18n: {"<locale>": {"alt", "caption"}}`, an
+only the words translated; without it the chapter in that language shows the pack's own map. A picture's `alt` and `caption` in each language go in `media/media.json` → `i18n: {"<locale>": {"alt", "caption", "file"}}` (`file`: the same picture with the words drawn inside it — labels, a legend, an SVG figure's text — in that language, `media/<id>.<locale>.svg`, the same shape so its regions fit; the app shows it with that language's chapters), an
 activity's fallback text in `activities.json` → `fallback.i18n: {"<locale>": {"text"}}`, and a unit of a simulation that is a key of
 its strings is shown in each language's word. Labels drawn on a picture come from `media/media.json` (one language): a
 translated `img_drag` / `img_label` / `img_select` exercise may carry its own `regions` with translated labels.

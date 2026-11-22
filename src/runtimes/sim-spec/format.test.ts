@@ -34,3 +34,10 @@ test('number boxes: the learner’s decimal mark, read back whichever mark they 
   assert.equal(parseBoxNum('−2e-3', 'en'), -0.002);
   assert.ok(Number.isNaN(parseBoxNum('abc', 'en')));
 });
+
+test('Greek (and every locale whose thousands separator is a point): a narrow space, never a point that reads as a decimal', () => {
+  assert.equal(fmtNum(12500, { unit: 'rpm' }, 'el'), '12 500 rpm');
+  assert.equal(fmtNum(2435, { unit: 'MHz' }, 'el'), '2435 MHz');
+  assert.equal(fmtNum(2101.5, { format: 'fixed', digits: 1 }, 'de'), '2101,5');
+  assert.equal(fmtNum(12500, {}, 'en'), '12,500');
+});

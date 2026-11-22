@@ -264,18 +264,23 @@ export function createSimSpec(env: CheckEnv) {
     }
     return c.nodes.has(x) || isGnd(x);
   }
-  function probeOk(c: Circuit, p: unknown): boolean {
+  function probeOk(c: Circuit, p: unknown, names?: readonly string[]): boolean {
     if (!isObj(p)) return false;
     const meter = p.kind === 'V' || p.kind === 'I';
     if (p.mode !== undefined && !(meter && inA(MODES, p.mode))) return false;
     if (p.zin !== undefined && !(p.kind === 'V' && isNum(p.zin) && p.zin >= 0)) return false;
+    // the averaging window: numbers, or expressions of the spec (a control may set it; checked by the run)
     for (const k of ['tEnd', 'dt', 'tStart']) {
       const v = p[k];
-      if (v !== undefined && !(meter && isNum(v) && (k === 'tStart' ? v >= 0 : v > 0))) return false;
+      if (v === undefined) continue;
+      if (!meter) return false;
+      if (typeof v === 'string') {
+        if (!names || exprProblem(v, names, k)) return false;
+      } else if (!(isNum(v) && (k === 'tStart' ? v >= 0 : v > 0))) return false;
     }
     if (
       (p.dt !== undefined || p.tStart !== undefined) &&
-      (p.tEnd === undefined || (p.tStart !== undefined && !((p.tStart as number) < (p.tEnd as number))))
+      (p.tEnd === undefined || (isNum(p.tStart) && isNum(p.tEnd) && !(p.tStart < p.tEnd)))
     )
       return false;
     if (p.kind === 'V' || p.kind === 'R') return endpointOk(c, p.a) && (p.b === undefined || endpointOk(c, p.b));
@@ -345,17 +350,17 @@ export function createSimSpec(env: CheckEnv) {
           const okp =
             typeof prop === 'string' &&
             (e.type === 'R' || e.type === 'C' || e.type === 'L'
-              ? prop === 'value'
+              ? prop === 'value' || (prop === 'ic' && e.type !== 'R')
               : e.type === 'SW'
-                ? prop === 'on'
+                ? prop === 'on' || (prop.startsWith('params.') && (ck.bindableParams?.(e.type) ?? []).includes(prop.slice(7)))
                 : e.type === 'V' || e.type === 'I'
                   ? prop === 'value'
                     ? wave === null || wave === 'dc'
                     : wave !== null && has(WAVES, wave) && (WAVES[wave] ?? []).some(f => wave + '.' + f === prop)
-                  : false);
+                  : prop.startsWith('params.') && (ck.bindableParams?.(String(e.type)) ?? []).includes(prop.slice(7)));
           if (!okp)
             E.push(
-              `${w}.prop cannot be set on this part (value of R, C, L and a DC source; on of a switch; pulse.v2, sine.freq, pwm.duty … of a source with that waveform)`,
+              `${w}.prop cannot be set on this part (value of R, C, L and a DC source; ic, the starting voltage of C or current of L; on of a switch; params.<name> of a device: ${String(e.type)} has ${(ck.bindableParams?.(String(e.type)) ?? []).join(', ') || 'none'}; pulse.v2, sine.freq, pwm.duty … of a source with that waveform)`,
             );
         }
         const mm = exprProblem(b.expr, names, w + '.expr');
@@ -437,7 +442,7 @@ export function createSimSpec(env: CheckEnv) {
       if (sk === 'branch' && !(typeof o.branch === 'string' && c.els.has(o.branch))) E.push(`${w}.branch is not a part of the netlist`);
       if (sk === 'power' && !(typeof o.power === 'string' && c.els.has(o.power)))
         E.push(`${w}.power is not a part of the netlist (the part whose power is read)`);
-      if (sk === 'probe' && !(o.kind === 'scalar' && probeOk(c, o.probe)))
+      if (sk === 'probe' && !(o.kind === 'scalar' && probeOk(c, o.probe, names)))
         E.push(
           `${w}.probe must be a reading {kind: V | I | R, a, b? | element, pin?, mode?, zin?, tEnd?, dt?, tStart?} on a scalar output`,
         );

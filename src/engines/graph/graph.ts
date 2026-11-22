@@ -28,6 +28,8 @@ interface EdgeSpec {
   readonly w?: Numx;
   readonly cap?: Numx;
   readonly id?: string;
+  /** the edge is there while this is true (a number ≠ 0 or an expression: a toggle of the spec switches a link) */
+  readonly on?: Numx;
 }
 interface GraphSpec {
   readonly directed?: boolean;
@@ -86,6 +88,10 @@ interface OutputSpec {
   readonly node?: string;
   readonly code?: string;
   readonly labels?: string;
+  /** edge labels: true (the default) shows a weight or an algorithm's value on each edge; false shows none */
+  readonly edgeLabels?: boolean;
+  /** the size of the arrowheads (a directed graph), 0.5–3 × the default */
+  readonly arrow?: number;
 }
 /** a checked spec of graph@1 */
 type GraphRunSpec = Spec & { readonly model: Model; readonly outputs?: readonly (OutputSpec | null)[] };
@@ -313,7 +319,7 @@ const HEUR = ['zero', 'euclid', 'manhattan', 'octile', 'chebyshev'];
 const ORDERS = ['given', 'largest-first', 'smallest-last', 'dsatur', 'exact'];
 const MODES = ['shortest', 'longest', 'min', 'max', 'path', 'cycle', 'exact', 'heuristic', 'hubs', 'authorities'];
 const NODE_T: Table = { id: 'id!', x: 'numx', y: 'numx', label: 'key' };
-const EDGE_T: Table = { u: 'ref!', v: 'ref!', w: 'numx', cap: 'numx', id: 'id' };
+const EDGE_T: Table = { u: 'ref!', v: 'ref!', w: 'numx', cap: 'numx', id: 'id', on: 'numx' };
 const GRAPH_T: Table = {
   directed: 'bool',
   nodes: { $req: true, $list: { $obj: NODE_T }, max: MAX_N },
@@ -617,7 +623,7 @@ function checkSpec(spec: unknown): Problem[] {
     ['scalar', 'series', 'scene'],
     (o, at: string) => {
       for (const k of Object.keys(o))
-        if (!['id', 'kind', 'of', 'node', 'code', 'labels'].includes(k)) W('unknown-field', at + '.' + k, 'ignored');
+        if (!['id', 'kind', 'of', 'node', 'code', 'labels', 'edgeLabels', 'arrow'].includes(k)) W('unknown-field', at + '.' + k, 'ignored');
       const list = o.kind === 'scalar' ? SCALARS : o.kind === 'series' ? SERIES : ['drawing'];
       if (!list.includes(o.of)) {
         E('output', at + '.of', `${o.kind} outputs of ${ID}: ${list.join(', ')}`);
@@ -636,7 +642,14 @@ function checkSpec(spec: unknown): Problem[] {
       } else if (o.code !== undefined) W('unknown-field', at + '.code', 'ignored');
       if (o.kind === 'scene') {
         if (o.labels !== undefined && !LABELS.includes(o.labels as string)) E('enum', at + '.labels', 'one of ' + LABELS.join(', '));
-      } else if (o.labels !== undefined) W('unknown-field', at + '.labels', 'ignored');
+        if (o.edgeLabels !== undefined && typeof o.edgeLabels !== 'boolean') E('value', at + '.edgeLabels', 'true or false');
+        if (o.arrow !== undefined && !(typeof o.arrow === 'number' && o.arrow >= 0.5 && o.arrow <= 3))
+          E('value', at + '.arrow', 'a number from 0.5 to 3 (the arrowhead size)');
+      } else {
+        if (o.labels !== undefined) W('unknown-field', at + '.labels', 'ignored');
+        if (o.edgeLabels !== undefined) W('unknown-field', at + '.edgeLabels', 'ignored');
+        if (o.arrow !== undefined) W('unknown-field', at + '.arrow', 'ignored');
+      }
     },
     E,
     W,
@@ -3803,7 +3816,8 @@ function drawing(G: Graph, S: State, o: OutputSpec, viewIn: View | null, weighte
     sc = C.scene(view),
     W = view[1]! - view[0]!,
     rr = 0.035 * W,
-    labels = o.labels || 'both';
+    labels = o.labels || 'both',
+    as = typeof o.arrow === 'number' && o.arrow >= 0.5 && o.arrow <= 3 ? o.arrow : 1;
   const pairs = new Map<string, number>(),
     cur = new Set(S.ce);
   for (const e of G.E) {
@@ -3819,7 +3833,10 @@ function drawing(G: Graph, S: State, o: OutputSpec, viewIn: View | null, weighte
     }
     const opt: { c: string; w: number; dash?: boolean } = { c, w };
     if (dash) opt.dash = true;
-    const lab = !Number.isNaN(S.ev[e.i]!) ? S.ev[e.i]! : weighted ? e.w : NaN;
+    // a value on the edge only where it says something: a weighted graph's weights, an algorithm's own value (a flow, a
+    // distance), never a plain 1 on every link of an unweighted graph; edgeLabels: false shows none
+    const ev = S.ev[e.i]!,
+      lab = o.edgeLabels === false ? NaN : !Number.isNaN(ev) && (weighted || ev !== e.w) ? ev : weighted ? e.w : NaN;
     if (e.u === e.v) {
       sc.circ(x1 + rr * 1.2, y1 + rr * 1.2, rr, { c, dash: !!dash });
       continue;
@@ -3832,13 +3849,13 @@ function drawing(G: Graph, S: State, o: OutputSpec, viewIn: View | null, weighte
       L = sqrt(dx * dx + dy * dy) || 1,
       ux = dx / L,
       uy = dy / L;
-    const sh = G.directed ? rr * 1.1 : 0,
+    const sh = G.directed ? rr * 1.1 * as : 0,
       ax = x1 + ux * sh * 0.2,
       ay = y1 + uy * sh * 0.2,
       bx = x2 - ux * sh,
       by = y2 - uy * sh;
     if (k === 0 && !(G.directed && pairs.has(`${Math.max(e.u, e.v)}>${Math.min(e.u, e.v)}`))) {
-      sc.seg(ax, ay, bx, by, Object.assign(opt, G.directed ? { arrow: true } : {}));
+      sc.seg(ax, ay, bx, by, G.directed ? { ...opt, arrow: true, ...(as !== 1 ? { arrowSize: as } : {}) } : opt);
       if (!Number.isNaN(lab))
         sc.txt((x1 + x2) / 2 - uy * rr * 0.9, (y1 + y2) / 2 + ux * rr * 0.9, { v: lab, c: c === 'muted' ? 'base' : c });
     } else {
@@ -3851,7 +3868,13 @@ function drawing(G: Graph, S: State, o: OutputSpec, viewIn: View | null, weighte
         const ex = x2 - mx,
           ey = y2 - my,
           l2 = sqrt(ex * ex + ey * ey) || 1;
-        sc.seg(mx, my, x2 - (ex / l2) * sh, y2 - (ey / l2) * sh, { c, w, arrow: true, dash: !!dash });
+        sc.seg(mx, my, x2 - (ex / l2) * sh, y2 - (ey / l2) * sh, {
+          c,
+          w,
+          arrow: true,
+          dash: !!dash,
+          ...(as !== 1 ? { arrowSize: as } : {}),
+        });
       } else sc.poly([x1, y1, mx, my, x2, y2], Object.assign({ closed: false }, opt));
       if (!Number.isNaN(lab)) sc.txt(mx - uy * rr * 0.6, my + ux * rr * 0.6, { v: lab, c: c === 'muted' ? 'base' : c });
     }
@@ -3898,12 +3921,18 @@ function build(spec: GraphRunSpec, env: Env, seed: number, D: DiagSink): Graph {
     ids = m.graph.nodes.map(nd => nd.id);
     directed = m.graph.directed === true;
     const idx = new Map(ids.map((s, i) => [s, i]));
-    edges = (m.graph.edges || []).map(ed => {
-      const w = ed.w === undefined ? 1 : C.cx(ed.w)(env),
-        cap = ed.cap === undefined ? (ed.w === undefined ? 1 : w) : C.cx(ed.cap)(env);
-      if (Number.isNaN(w) || Number.isNaN(cap)) D.add('nan-weight');
-      return { u: idx.get(ed.u)!, v: idx.get(ed.v)!, w, cap, id: ed.id };
-    });
+    edges = (m.graph.edges || [])
+      .filter(ed => {
+        if (ed.on === undefined) return true;
+        const v = C.cx(ed.on)(env);
+        return v !== 0 && !Number.isNaN(v);
+      })
+      .map(ed => {
+        const w = ed.w === undefined ? 1 : C.cx(ed.w)(env),
+          cap = ed.cap === undefined ? (ed.w === undefined ? 1 : w) : C.cx(ed.cap)(env);
+        if (Number.isNaN(w) || Number.isNaN(cap)) D.add('nan-weight');
+        return { u: idx.get(ed.u)!, v: idx.get(ed.v)!, w, cap, id: ed.id };
+      });
   } else {
     g = m.generate!;
     const r = generate(g, env, seed, D);
@@ -4183,7 +4212,7 @@ const API = Object.freeze({
   table: {
     model: MODEL_T,
     outputs: { scalar: SCALARS, series: SERIES, scene: ['drawing'] },
-    fields: { node: 'ref', code: 'enum:' + CODES.join('|'), labels: 'enum:' + LABELS.join('|') },
+    fields: { node: 'ref', code: 'enum:' + CODES.join('|'), labels: 'enum:' + LABELS.join('|'), edgeLabels: 'bool', arrow: 'numx' },
   }, // the form of the activity author (src/engines/kernel/schema.ts)
   id: ID,
   checkSpec,

@@ -172,7 +172,7 @@
      {
       "code": "value",
       "path": "schedule.txEvery",
-      "msg": "needs an integer from 1 to 10000",
+      "msg": "needs an integer from 1 to 100000000",
       "level": "error"
      },
      {

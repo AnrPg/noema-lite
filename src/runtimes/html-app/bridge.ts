@@ -186,7 +186,7 @@ export function engineBridge(host: BridgeHost, act: Obj, seed0: unknown, reply: 
           s.busy = null;
           s.timeouts++;
           if (s.timeouts >= ENG.timeouts) allowed.delete(id);
-          if (b) no(b.rid, why === 'runaway' ? 'timeout' : 'failed', why === 'runaway' ? 'the engine took longer than 5 s' : null);
+          if (b) no(b.rid, why === 'runaway' ? 'timeout' : 'failed', why === 'runaway' ? 'the engine took longer than 12 s' : null);
           startNext(id, s);
         });
         if (!s.runner.inWorker()) {
@@ -359,7 +359,7 @@ export function engineBridge(host: BridgeHost, act: Obj, seed0: unknown, reply: 
         sims.runner = null;
         sims.key = null;
         sims.busy = null;
-        if (b) no(b.rid, why === 'runaway' ? 'timeout' : 'failed', why === 'runaway' ? 'the parts took longer than 5 s' : null);
+        if (b) no(b.rid, why === 'runaway' ? 'timeout' : 'failed', why === 'runaway' ? 'the parts took longer than 12 s' : null);
         const n = sims.next;
         sims.next = null;
         if (n) simStart(n);

@@ -261,7 +261,7 @@ benches (a device with one hidden fault: the learner reads the battery, the curr
 
 ### 5.1 The model
 
-- **Firmware** — wake every `period`; sense for `sense` s; every `txEvery`-th wake transmit (TX for the airtime); with `ack`,
+- **Firmware** — wake every `period`; sense for `sense` s; every `txEvery`-th wake (1–10⁸) transmit (TX for the airtime); with `ack`,
   listen `rxWindow` s and retry up to `retries` times; sleep the rest. A wake that cannot finish before the next is an `overrun`.
 - **Battery** — charge drawn `∫(I + I_sd)dt` (mAh); SoC = soc0 − drawn/capacity; open-circuit voltage from a per-cell curve (li-ion
   4.2→3.0 V, lifepo4 3.6→2.5, alkaline 1.55→0.9, nimh 1.4→1.0, or `custom`) × cells; loaded voltage = V_oc − I·rInt;

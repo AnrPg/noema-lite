@@ -38,6 +38,8 @@ interface Model {
 type Inp = Inputs & {
   readonly $bind?: readonly (readonly [string, string, number | boolean])[];
   readonly $tran?: { readonly tEnd: number; readonly dt: number } | null;
+  /** the averaging windows of meter outputs whose times are expressions, by output id */
+  readonly $win?: Readonly<Record<string, Readonly<Record<string, number>>>>;
   readonly $at?: Readonly<Record<string, number>>;
   readonly $ac?: AcOpts | null;
 };
@@ -96,6 +98,10 @@ function circuitSimEngine(C: CircuitApi) {
   function setProp(el: NetEl, prop: string, v: number | boolean) {
     if (prop === 'on') el.on = typeof v === 'boolean' ? v : v !== 0 && v === v;
     else if (prop === 'value') el.value = v;
+    else if (prop === 'ic')
+      el.ic = +v; // the starting voltage of a capacitor, the starting current of an inductor
+    else if (prop.startsWith('params.'))
+      (el as { params?: Record<string, unknown> }).params = { ...(el.params || {}), [prop.slice(7)]: +v };
     else {
       const [w, f] = prop.split('.'),
         ev = el.value as Record<string, Record<string, unknown> | undefined>;
@@ -188,7 +194,8 @@ function circuitSimEngine(C: CircuitApi) {
                 continue;
               }
               if (o.probe) {
-                const m = s.measure(o.probe) as { readonly value?: unknown };
+                const w = inp.$win ? inp.$win[o.id] : undefined,
+                  m = s.measure(w ? { ...o.probe, ...w } : o.probe) as { readonly value?: unknown };
                 r[o.id] = typeof m.value === 'number' ? m.value : Infinity;
                 continue;
               } // (an ohmmeter over its range: ∞)
@@ -333,7 +340,7 @@ function circuitSimEngine(C: CircuitApi) {
             }
             if (o.kind !== 'series' && o.at === undefined && o.stat === undefined) {
               const d = ST!.dc || (ST!.dc = ST!.s.dc());
-              r[o.id] = o.node !== undefined ? d.nodes[o.node] : d.branches[o.branch!];
+              r[o.id] = o.power !== undefined ? d.power[o.power] : o.node !== undefined ? d.nodes[o.node] : d.branches[o.branch!];
               continue;
             }
             const H = c.hist(kindOf(o), nameOf(o)!);
@@ -387,6 +394,15 @@ const engine = Object.freeze({
     const ats = ((spec.outputs || []) as readonly Out[])
       .filter(o => o.at !== undefined)
       .map((o): [string, (env: Inputs) => unknown] => [o.id, f(o.at)]);
+    // a meter output's averaging window (tEnd, dt, tStart) may be an expression of the spec (a control sets it)
+    const wins = ((spec.outputs || []) as readonly Out[])
+      .filter(o => o.probe && ['tEnd', 'dt', 'tStart'].some(k => typeof (o.probe as Record<string, unknown>)[k] === 'string'))
+      .map((o): [string, [string, (env: Inputs) => unknown][]] => [
+        o.id,
+        ['tEnd', 'dt', 'tStart']
+          .filter(k => (o.probe as Record<string, unknown>)[k] !== undefined)
+          .map(k => [k, f((o.probe as Record<string, unknown>)[k])]),
+      ]);
     const acm = m.ac || null,
       acf = acm ? { fStart: f(acm.fStart), fStop: f(acm.fStop) } : null;
     const ev = (g: (env: Inputs) => unknown, env: Inputs) => {
@@ -402,6 +418,7 @@ const engine = Object.freeze({
       $bind: binds.map(([id, prop, g]) => [id, prop, ev(g, env)]),
       $tran: tEnd ? { tEnd: ev(tEnd, env), dt: dt ? ev(dt, env) : 0 } : null,
       $at: Object.fromEntries(ats.map(([id, g]) => [id, ev(g, env)])),
+      $win: Object.fromEntries(wins.map(([id, ks]) => [id, Object.fromEntries(ks.map(([k, g]) => [k, ev(g, env)]))])),
       $ac: acm
         ? {
             source: acm.source,

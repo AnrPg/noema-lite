@@ -473,7 +473,15 @@ const TABLE: Table = {
   power: { $obj: { sleep: 'nonneg', active: 'nonneg', sense: 'nonneg', tx: 'nonneg', rx: 'nonneg' } },
   schedule: {
     req: true,
-    $obj: { period: 'pos!', sense: 'nonneg', txEvery: 'int:1:10000', ack: 'bool', rxWindow: 'nonneg', retries: 'int:0:8', boot: 'nonneg' },
+    $obj: {
+      period: 'pos!',
+      sense: 'nonneg',
+      txEvery: 'int:1:100000000',
+      ack: 'bool',
+      rxWindow: 'nonneg',
+      retries: 'int:0:8',
+      boot: 'nonneg',
+    },
   },
   sensors: {
     $list: { id: 'id!', base: 'fin', amp: 'fin', cycle: 'pos', noise: 'nonneg', drift: 'fin', current: 'nonneg', tempco: 'fin' },

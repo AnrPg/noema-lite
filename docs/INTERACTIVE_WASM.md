@@ -58,7 +58,7 @@ spec that names a module), `engine:wasm@1`.
   `spec.outputs` entry has a place. Scalars join the names of readouts, marks and checks; series feed `series` plots.
 * The renderer, its plots, readouts and the checks grader are the sim runtime's, unchanged. Every run is in the sim runtime's
   blob worker (the engine gives `workerSource`); `create` on the page refuses (code `worker`): a module never runs on the
-  page's own thread. **Budget: the sim runtime's 5 s per run** — over it the worker is terminated, `runaway`, Restart.
+  page's own thread. **Budget: the sim runtime's 12 s per run** — over it the worker is terminated, `runaway`, Restart.
 
 ## 3. The host ABI
 

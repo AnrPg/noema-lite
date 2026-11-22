@@ -336,5 +336,15 @@ const KA = { generate: { kind: 'karate' } };
     ok(inRange && (c.expect.passed == null || passed === c.expect.passed), `dijkstra-steps: ${c.name}`);
   }
 }
+{ // edges switched by a control, unweighted links without a "1", arrowheads sized (2026-11-22)
+  const m = { graph: { directed: true, nodes: [{ id: 'a' }, { id: 'b' }, { id: 'c' }], edges: [{ u: 'a', v: 'b' }, { u: 'b', v: 'c', on: 'k > 0' }] }, run: { alg: 'bfs', source: 'a' } };
+  const off = R(m, [SC], { k: 0 }), on = R(m, [SC], { k: 1 });
+  const segs = r => r.out.net.items.filter(it => it.k === 'seg').length;
+  ok(segs(on) === segs(off) + 1, `edge on 'k > 0': ${segs(off)} links at k = 0, ${segs(on)} at k = 1`);
+  const txt = r => r.out.net.items.filter(it => it.k === 'txt' && it.s === undefined).map(it => String(it.v));
+  ok(txt(on).length === 3, `unweighted links print no weight (only the 3 BFS levels: ${txt(on)})`);
+  const big = R(m, [{ ...SC, arrow: 2 }], { k: 1 });
+  ok(big.out.net.items.some(it => it.k === 'seg' && it.arrowSize === 2), 'arrow: 2 → arrowSize 2 on the directed links');
+}
 console.log(`\n${n - fails}/${n} passed`);
 process.exit(fails ? 1 : 0);

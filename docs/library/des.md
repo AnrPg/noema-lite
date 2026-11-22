@@ -86,7 +86,7 @@ comes out impossible (a negative mean, a probability above 1, a server count out
 | `servers` (numx, 1–64, default 1) | the number of servers; it may be a param (`"servers": "doctors"`) |
 | `service` / `serviceBy: {class: dist}` | the service time, or one per class (the others fall back to `service`) |
 | `discipline` | `fifo` (default), `lifo`, `priority` (by class `prio`, FIFO within), `spt` (shortest service time first, the time known on arrival) |
-| `capacity` (0–100 000) | the waiting room. An arrival that finds it full is **lost** (M/M/c/K with K = servers + capacity). |
+| `capacity` (0–100 000; a number or an expression, so a control may set it) | the waiting room. An arrival that finds it full is **lost** (M/M/c/K with K = servers + capacity). |
 | `preempt` (with `priority`) | `none` (default), `resume` (the interrupted job goes on with what was left), `restart` (the same time again), `resample` (a new time). The interrupted job goes back to the front of its class. |
 | `balk: {length, p}` | an arrival that finds `length` or more waiting leaves with probability p (default 1) |
 | `renege` | a patience distribution. A waiting entity whose patience runs out leaves (abandons). |

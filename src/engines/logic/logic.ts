@@ -4352,7 +4352,7 @@ function graphScene(nodes: readonly GNode[], edges: readonly GLink[], view: View
     const dx = xs[v]! - xs[u]!,
       dy = ys[v]! - ys[u]!,
       L = Math.hypot(dx, dy) || 1,
-      k = 0.28 / L,
+      k = 0.4 / L, // from box edge to box edge
       off = e.both ? 0.08 : 0;
     sc.seg(
       xs[u]! + dx * k - (dy * off) / L,
@@ -4363,7 +4363,13 @@ function graphScene(nodes: readonly GNode[], edges: readonly GLink[], view: View
     );
   }
   nodes.forEach((nd, i) => {
-    sc.pt(xs[i]!, ys[i]!, { r: 7, c: nd.c || 'base', ...(nd.key ? { key: nd.key } : { s: short(nd.s!) }) });
+    // a world / state / argument: a box with its name inside (the role from its truth)
+    const x = xs[i]!,
+      y = ys[i]!,
+      bw = 0.3;
+    sc.poly([x - bw, y - bw, x + bw, y - bw, x + bw, y + bw, x - bw, y + bw], { c: nd.c || 'base', fill: true });
+    sc.poly([x - bw, y - bw, x + bw, y - bw, x + bw, y + bw, x - bw, y + bw], { c: nd.c || 'base' });
+    sc.txt(x, y - 0.08, { c: nd.c || 'base', ...(nd.key ? { key: nd.key } : { s: short(nd.s!) }) });
     if (nd.sub) sc.txt(xs[i]!, ys[i]! - 0.45, { s: short(nd.sub), c: 'muted' });
   });
   return sc.done();
@@ -4483,23 +4489,36 @@ function run(spec: LogicSpec, env?: Env | null) {
   return { out, diag: D.list, scalars: S, series: SE, trace };
 }
 const tick = (b: unknown) => (b ? 'ok' : 'bad');
-const sceneTable = (heads: readonly string[], rows: readonly ((string | number)[] & { roles?: string[] })[], D: DiagSink) => {
-  // a truth table: one column per atom and formula, rows from TT…T; at most ~1900 cells
+const sceneTable = (
+  heads: readonly string[],
+  rows: readonly ((string | number)[] & { roles?: string[] })[],
+  D: DiagSink,
+  o?: { readonly view?: View | undefined; readonly cur?: number },
+) => {
+  // a truth table: one column per atom and formula, each as wide as its header (a long formula never runs into the next column),
+  // rows from TT…T; the row of the current setting in a box; at most ~1900 cells
   const nc = heads.length,
     maxRows = Math.max(1, Math.floor(1900 / Math.max(nc, 1)) - 1),
     nr = Math.min(rows.length, maxRows);
   if (rows.length > nr) D.add('scene-truncated');
-  const w = 2.2,
-    sc = C.scene([-0.5, nc * w, -(nr + 0.8), 1]);
-  heads.forEach((h, j) => {
-    sc.txt(j * w + w / 2, 0.2, { s: short(h), c: 'info' });
+  const hs = heads.map(h => short(h)),
+    ws = hs.map(h => Math.max(1.4, 0.62 * h.length + 0.6)),
+    x0s = ws.map((_, j) => ws.slice(0, j).reduce((a, b) => a + b, 0)),
+    W = ws.reduce((a, b) => a + b, 0);
+  const sc = C.scene(o?.view ?? [-0.5, W + 0.3, -(nr + 0.8), 1]);
+  hs.forEach((h, j) => {
+    sc.txt(x0s[j]! + ws[j]! / 2, 0.2, { s: h, c: 'info' });
   });
-  sc.seg(-0.3, -0.4, nc * w - 0.2, -0.4, { c: 'muted' });
+  sc.seg(-0.3, -0.4, W - 0.2, -0.4, { c: 'muted' });
+  for (let j = 1; j < nc; j++) sc.seg(x0s[j]!, 0.8, x0s[j]!, -(nr + 0.5), { c: 'muted', w: 0.5 });
+  const cur = o?.cur;
+  if (cur != null && cur >= 0 && cur < nr)
+    sc.poly([-0.3, -(cur + 0.6), W - 0.2, -(cur + 0.6), W - 0.2, -(cur + 1.4), -0.3, -(cur + 1.4)], { c: 'hi', fill: true });
   for (let i = 0; i < nr; i++)
     rows[i]!.forEach((v, j) => {
-      sc.txt(j * w + w / 2, -(i + 1), {
+      sc.txt(x0s[j]! + ws[j]! / 2, -(i + 1) - 0.25, {
         s: typeof v === 'string' ? v : v === 1 ? 'T' : v === 0 ? 'F' : String(v),
-        c: rows[i]!.roles ? rows[i]!.roles![j]! : 'base',
+        c: i === cur ? 'hi' : rows[i]!.roles ? rows[i]!.roles![j]! : 'base',
       });
     });
   return sc.done();
@@ -4526,7 +4545,8 @@ const TASK: Readonly<Record<string, (c: TaskCtx) => void>> = {
       r.roles = atoms.map(() => 'base').concat([tick(col[i]!)]);
       return r;
     });
-    R.scene = sceneTable(atoms.concat([show(list[0]!)]), rows, D);
+    const cur = atoms.every(a => a in boolAssign) ? tt.rows.findIndex(v => atoms.every(a => !!v[a] === boolAssign[a])) : -1;
+    R.scene = sceneTable(atoms.concat([show(list[0]!)]), rows, D, { view: m.view, cur });
   },
   equivalent({ D, S, SE, R, fs }) {
     const [a, b] = fs;

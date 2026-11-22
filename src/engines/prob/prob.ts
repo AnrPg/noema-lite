@@ -1388,14 +1388,46 @@ function discrete(d: DiscIn) {
     return searchInt(k => D.sf(k) <= t, start(-qnorm(pu)), D.lo, D.hi);
   };
   if (!D.sample) {
-    // inversion by a walk from the mode: coherent in u (common random numbers), O(σ) per draw
+    // inversion: coherent in u (common random numbers). The bulk of the law (all but 1e-10 in each tail, up to 2·10⁵ values) is
+    // tabulated once, and a draw is a binary search in that table, O(log σ); a draw in a far tail walks from the mode, O(σ)
     let init: { m: number; pm: number; Fm: number } | null = null;
+    let tab: { k0: number; F: Float64Array } | null = null,
+      tabTried = false;
+    const table = () => {
+      tabTried = true;
+      const k0 = D.q(1e-10),
+        k1 = D.isf(1e-10);
+      if (!(fin(k0) && fin(k1) && k1 >= k0 && k1 - k0 <= 2e5)) return;
+      const F = new Float64Array(k1 - k0 + 1);
+      let c = D.cdf(k0),
+        pk = exp(d.lpmf(k0));
+      F[0] = c;
+      for (let i = 1; i < F.length; i++) {
+        pk = pk > 0 ? pk * d.up(k0 + i - 1) : exp(d.lpmf(k0 + i));
+        c += pk;
+        F[i] = c;
+      }
+      tab = { k0, F };
+    };
     D.sample = r => {
       if (!init) {
         const m0 = clampI(D.mode0, D.lo, D.hi);
         init = { m: m0, pm: exp(d.lpmf(m0)), Fm: D.cdf(m0) };
       }
+      if (!tabTried) table();
       const u = r();
+      if (tab && u > tab.F[0]! && u <= tab.F[tab.F.length - 1]!) {
+        const F = tab.F;
+        let a = 0,
+          b = F.length - 1; // the smallest i with F[i] ≥ u (F[a] < u ≤ F[b])
+        while (b - a > 1) {
+          const c = (a + b) >> 1;
+          if (F[c]! >= u) b = c;
+          else a = c;
+        }
+        BUDGET -= 1;
+        return tab.k0 + b;
+      }
       let k = init.m,
         F = init.Fm,
         pk = init.pm,
