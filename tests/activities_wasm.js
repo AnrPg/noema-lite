@@ -9,7 +9,7 @@
         the seeded noema_random, the capped log, a capped memory grow; neutralise() removes the network globals.
    Browser part (unless --node): a stub host page like activity_harness.js builds (ACTP from 32_activities.js, the sim runtime, the
      typed runtimes of build/harness.js made for it by NoemaCore.attachRuntimes) served over http, plus a beacon server: the oscillator through the sim-spec renderer (values and plot), the runtime
-     wasm-module@1 with its own spec, runaway (engine: 5 s; NoemaWasm.load: budget 300 ms) and Restart, a forbidden import refused
+     wasm-module@1 with its own spec, runaway (engine: 12 s; NoemaWasm.load: budget 300 ms) and Restart, a forbidden import refused
      (the page check and the worker's own), the memory limits, 0 requests from the worker (fetch, XHR, WebSocket, EventSource,
      importScripts, Worker, sendBeacon). With --app <built repo dir>: the same oscillator, runaway + Restart and the refused import in
      the real app (index.html over http, like tests/activities_app.js).
@@ -231,9 +231,9 @@ window.run = async function (id, task) {
       return new Promise(r => { w.onmessage = e => { w.terminate(); r(e.data.t + ':' + e.data.code); }; w.postMessage({ t: 'w:load', id: 1, bytes: b, abi: { step: 'step', init: 'init', maxPages: 16, scratch: 1024 }, seed: 1 }); setTimeout(() => r('timeout'), 5000); }); });
     ok(L2 === 'w:err:import', "past the page check, the worker's own check refuses it before instantiation: " + L2);
 
-    // runaway: the engine (the sim runtime's 5 s) and NoemaWasm.load (its budget), then Restart
+    // runaway: the engine (the sim runtime's 12 s) and NoemaWasm.load (its budget), then Restart
     const t0 = Date.now(); await p.evaluate(() => run('osc-spin'));
-    ok(await until(() => p.evaluate(() => LOG.some(m => m.type === 'fail' && m.why === 'runaway')), 9000), `the endless step through the engine: runaway after ${((Date.now() - t0) / 1000).toFixed(1)} s`);
+    ok(await until(() => p.evaluate(() => LOG.some(m => m.type === 'fail' && m.why === 'runaway')), 20000), `the endless step through the engine: runaway after ${((Date.now() - t0) / 1000).toFixed(1)} s`);
     ok(await p.evaluate(() => { const t = performance.now(); return new Promise(r => setTimeout(() => r(performance.now() - t < 400), 50)); }), 'the page stayed responsive');
     await p.evaluate(() => run('osc-sim')); await started();
     ok(await values() && (await p.evaluate(() => H.values().E)) === ref.E, 'Restart (a new mount): the oscillator runs again');
