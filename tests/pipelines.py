@@ -140,6 +140,14 @@ try:
        and all(t["sha256"] == hashlib.sha256(open(os.path.join(d, "build", f"{pk['subject']['id']}.tr.{l}.json"), "rb").read()).hexdigest() for l, t in pk["translations"].items()) and t_el["format"] == "noema-translation" and t_el["version"] == pk["version"] and t_el["chapters"][0]["id"] == "ch01",
        "make_pack.py: each translation in its own file (build/<id>.tr.<locale>.json), the pack only names them")
     ok(t_el.get("subject", {}).get("title") == "Νόμος του Coulomb" and pk["subject"]["i18n"]["ru"]["title"] == "Закон Кулона", "the translation file carries the subject's name in its language (subject.i18n.<locale>)")
+    # make_pack's "still to do" follows the pack's Roadmap languages (subject.authoring.languages; limits report 2026-11-22, item 7)
+    d4 = os.path.join(tempfile.mkdtemp(prefix="langs-"), "demo-coulomb"); shutil.copytree(d, d4); shutil.rmtree(os.path.join(d4, "translations", "ru"))
+    mk = lambda: subprocess.run([sys.executable, os.path.join(sk, "make_pack.py"), d4, os.path.join(d4, "build")], capture_output=True, text=True).stdout
+    todo = [l for l in mk().splitlines() if "still to do" in l]
+    ok(todo and "translations ru" in todo[0], "make_pack.py without Roadmap languages: still to do lists the default ones (ru)" + ("" if todo else "\n" + mk()[-600:]))
+    sj4 = json.load(open(os.path.join(d4, "subject.json"), encoding="utf-8")); sj4["authoring"]["languages"] = {"translations": ["el", "de", "fr"], "bridges": []}
+    json.dump(sj4, open(os.path.join(d4, "subject.json"), "w", encoding="utf-8"), ensure_ascii=False)
+    out4 = mk(); ok("still to do" not in out4 and "✗" not in out4, "make_pack.py: an en + el, de, fr Roadmap without bridges asks for no ru and no bridges" + ("" if "still to do" not in out4 else "\n" + out4[-600:]))
     # one bridge file per pair: built one after another (their uploads may all wait for the end), none overwrites another
     outs = []; d3 = os.path.join(tempfile.mkdtemp(prefix="pairs-"), "demo-coulomb"); shutil.copytree(d, d3)
     for extra in ([], ["--from", "el"], ["--from", "ru"]):

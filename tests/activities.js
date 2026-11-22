@@ -752,6 +752,17 @@ ok(/bundle_h5p\(metas, sel\)/.test(bld) && /engine\/vendor\/h5p\/3\.8\.2\/player
 
 ok(/["']?enum["']?: \[\s*["']workflow["'],\s*["']content["'],\s*["']visual["'],\s*["']interactive["']/.test(srv) && /interactive: D\.interactive/.test(srv) && /docs\['interactive'\] = rd\('docs\/INTERACTIVE\.md'\)/.test(bld), 'noema_authoring_guide serves part "interactive" (and in "all")');
 for (const f of ['activity_new.py', 'activity_lint.py', 'activity_test.py', 'activity_preview.py', 'activity_harness.js']) ok(fs.existsSync(path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', f)), 'the skill has ' + f);
+{ // activity_test (the harness): a case that sets a control off its grid fails, naming the control, the value and the snapped one
+  // (limits report 2026-11-22, item 5: an off-grid test value was moved silently and the case checked another input)
+  const src = fs.readFileSync(path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', 'activity_harness.js'), 'utf8'), a0 = src.indexOf('const snapOf = ');
+  const snapOf = new Function(src.slice(a0, src.indexOf('\n};\n', a0) + 3) + '\nreturn snapOf;')();
+  const sp = { params: [{ id: 'n', kind: 'slider', min: 0, max: 20, step: 5, default: 10 }, { id: 'i', kind: 'slider', min: 0, max: 0.05, step: 0.005, prefix: 'm', default: 0.01 }, { id: 'f', kind: 'number', min: 1, max: 9, default: 2 }, { id: 'on', kind: 'toggle', default: false }] };
+  const m = snapOf(sp, 'n', 12);
+  ok(m && /control "n" was set to 12/.test(m) && /steps of 5 from 0/.test(m) && /runs with 10/.test(m), 'activity_test: an off-grid test value fails the case and says what the control runs with: ' + m);
+  ok(snapOf(sp, 'n', 15) === null && snapOf(sp, 'n', '15') === null && snapOf(sp, 'f', 3.7) === null && snapOf(sp, 'on', true) === null && snapOf(sp, 'x', 3) === null, 'activity_test: values on the grid, a free number, a toggle, an unknown id pass');
+  ok(/stays within 0…20: it runs with 20/.test(snapOf(sp, 'n', 25) || ''), 'activity_test: a value beyond max is reported too');
+  ok(snapOf(sp, 'i', 20) === null && /set to 22.*steps of 5 from 0.*runs with 20/.test(snapOf(sp, 'i', 22) || ''), 'activity_test: a control with a prefix is read in its prefix (20 = 20 mA, on the grid; 22 is not)');
+}
 ok(/'noema_core\.py'/.test(bld) && /activity_host/.test(bld) && /'32_activities\.js', '32_activities\.css'/.test(bld) && /py-module@1/.test(bld) && /activity_host\/noema-core\.js', bundle_text\('harness'\)/.test(bld) && /activities_examples/.test(bld), 'the skill zip carries noema_core.py (the content checks through noema-tools.cjs), the runtimes for the harness (html-app, sim-spec), NoemaCore of the harness (noema-core.js: the contracts, the engine library and the content checks) and the reference activities');
 ok(NoemaCore.engines.has('circuit-mna@1') && /'INTERACTIVE_SIMEXPR\.md', 'INTERACTIVE_CIRCUIT\.md'[,)]/.test(bld), 'the circuit engine for the harness (in noema-core.js) and the scripts (in noema-tools.cjs); the guide part "interactive" includes the circuit engine');
 ok(['thermal@1', 'pid@1', 'rf@1', 'twin@1'].every(id => NoemaCore.engines.has(id)) && /'INTERACTIVE_CIRCUIT\.md', 'INTERACTIVE_ENGINES\.md'(?:, 'INTERACTIVE_[A-Z0-9]+\.md')*\)(?: \+ INTERACTIVE_P6)? if/.test(bld)

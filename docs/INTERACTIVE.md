@@ -313,7 +313,8 @@ must be `min` + a whole number of steps: a default of 12 with step 5 from 0 is r
   controls, readouts and axes. A dropdown (`choice`) is as wide as its column; a longer option is cut with … in the closed box.
 - **Numbers on screen**: `format` `"si"` (prefixes p n µ m k M G T: 1.59 kHz, 470 µs), `"fixed"` (`digits` decimals, 0 too),
   `"plain"` (the number as it is, up to `digits` decimals, 0 too; never a prefix or scientific notation), `"auto"` (default:
-  `digits` significant digits, default 4; whole numbers keep every digit; scientific only from 10⁹ or below 10⁻⁴); always in the
+  `digits` significant digits, default 4; whole numbers keep every digit; scientific only from 10⁹ or below 10⁻⁴); `digits` is a
+  whole number from 0 to 12 (at least 1 for `auto` and `si`; it was 1–8 before 2026-11); always in the
   learner's decimal mark, with a thousands separator only from five digits (10 000, never 2 024). `prefix` (`p n u m k M G T`,
   `u` = µ) shows a value in that prefix: `"unit": "A", "prefix": "m"` shows 0.001 as 1 mA — in the readout, on the axis and in a
   control's number box (which then takes 1 for 1 mA). Number boxes use the learner's decimal mark too (0,5 in Greek) and read
@@ -394,7 +395,11 @@ and derived values; scalar outputs join the names of readouts, marks, checks **a
 engine's scalar output (`"P": "V * I"` with `I` from the circuit) is computed after the engine and is not one of its inputs (an
 input never names it); series feed `series` plots. Formulas run inline
 (each evaluation is bounded); an engine whose runs can take longer than ~50 ms gives `workerSource`, and a run that takes more
-than 12 s stops the activity (Restart). Runs are queued: only the latest inputs are computed (a slider dragged fast skips the
+than 12 s stops the activity (Restart). The 12 s are **per run** (one set of inputs: a slider move, Reset, a measurement; a
+`parts` graph has them for the whole graph), never per activity: a page left open for an hour is fine. Over them the Worker is
+ended and the whole activity gives way to its fallback (its picture and text) with "stopped" and Restart, so no readout or plot
+keeps the numbers of an older run. A run that finishes but gives no number for an output (missing, NaN, ±∞) shows "—" in that
+readout, and its plot leaves that point out. Runs are queued: only the latest inputs are computed (a slider dragged fast skips the
 ones in between), measurements are answered in order, and the checks grader never reads the results of older inputs. `prepare`
 lets an engine evaluate the spec's own expressions (with the app's NoemaExpr, `compile`) before the inputs go to the worker. The
 validators know the same list of engines as the app (`ENGINES` of the content checks, `src/features/content/domain/activities/rules.ts`); `make_pack.py`

@@ -63,6 +63,31 @@ ok(L.id === 'logic@1' && Object.isFrozen(L) && L.engine.id === 'logic@1' && L.en
     'truth tables: De Morgan and Peirce\'s law are tautologies (Enderton 2001 §1.2), p → q has 3 models of 4');
   const tt = R({ task: 'truth-table', formula: 'p & q', assign: [{ atom: 'p', value: 'k' }, { atom: 'q', value: 1 }] }, [O('v', 'value'), S('c', 'column'), O('r', 'rows'), SC], { k: 1 });
   ok(tt.out.v === 1 && tt.out.c.join('') === '1000' && tt.out.r === 4 && tt.out.pic.items.length === 3 + 3 + 1 + 12 && tt.out.pic.items.filter(i => i.k === 'txt' && i.c === 'hi').length === 3 && tt.out.pic.items.some(i => i.k === 'poly' && i.c === 'hi'), 'truth table rows from TT first (column 1000), the value under the sliders, the grid scene with column lines and the current row (p = q = T) boxed');
+  // the gadgets' table (limits report 2026-11-22, item 1): multi-letter atoms and a long formula; every text has its size and room
+  // in scene units, the columns never overlap, a long formula wraps over lines; model.view replaces the frame of every scene
+  {
+    const big = R({ task: 'truth-table', atoms: ['enc', 'cccd', 'layout', 'bonded'], formula: 'enc & cccd & (layout | bonded)' }, [SC]).out.pic;
+    const heads = big.items.filter(i => i.k === 'txt' && i.c === 'info');
+    const cols = heads.map(i => [i.x - i.fit / 2, i.x + i.fit / 2]).sort((a, b) => a[0] - b[0]).filter((c, i, a) => i === 0 || c[0] !== a[i - 1][0]);
+    ok(heads.every(i => i.size > 0 && i.fit > 0 && i.fit >= 0.62 * [...i.s].length - 0.1) && cols.every((c, i) => i === 0 || c[0] >= cols[i - 1][1]) && heads.filter(i => i.s === 'cccd' || i.s === 'layout').length === 2,
+      'truth table: multi-letter atoms (enc, cccd, layout, bonded) get columns as wide as their names, each heading sized to its column (size, fit), none overlapping');
+    const fh = heads.filter(i => /[∧∨]/.test(i.s));
+    ok(fh.length === 2 && fh.every(i => [...i.s].length <= 20) && fh.map(i => i.s).join(' ') === 'enc ∧ cccd ∧ (layout ∨ bonded)' && big.view[3] > 1.5,
+      'truth table: a long formula wraps over two lines of the heading (the view grows upwards for them) instead of running off the table: ' + fh.map(i => i.s).join(' / '));
+    const lf = '(alpha & beta & gamma) | (delta & epsilon & zeta) | (alpha & delta) | (beta & epsilon) | (gamma & zeta)', long = R({ task: 'truth-table', formula: lf }, [SC]).out.pic;
+    const lh = long.items.filter(i => i.k === 'txt' && i.c === 'info' && /[∧∨]/.test(i.s));
+    ok(lh.length <= 4 && lh.length >= 3 && lh.map(i => i.s).join(' ') === L.show(L.parse(lf).ast),
+      'truth table: a very long formula wraps over at most 4 heading lines and nothing of it is cut (the renderer scales the letters with fit)');
+    const vw = [-1, 30, -20, 4];
+    ok(['truth-table', 'equivalent'].every(task => JSON.stringify(R({ task, formula: 'p', formulas: ['p', 'q'], view: vw }, [SC]).out.pic.view) === JSON.stringify(vw)) &&
+      JSON.stringify(R({ task: 'entails', premises: ['p'], goal: 'p', view: vw }, [SC]).out.pic.view) === JSON.stringify(vw) &&
+      JSON.stringify(R({ task: 'ltl', formula: 'G p', trace: [{ holds: ['p'] }], loop: 0, view: vw }, [SC]).out.pic.view) === JSON.stringify(vw),
+      'model.view is honoured by every task with a scene (truth tables, equivalence, entailment, LTL, …)');
+    const st = R({ task: 'ctl', worlds: [{ id: 's0', label: 'idle', holds: ['a0'] }, { id: 's1', holds: ['a0', 'b0'] }], edges: [{ u: 's0', v: 's1' }, { u: 's1', v: 's0' }], formula: 'EF b0' }, [SC]).out.pic;
+    const tx = st.items.filter(i => i.k === 'txt');
+    ok(tx.some(i => i.key === 'idle') && !tx.some(i => i.s === 'a0') && tx.some(i => i.s === 's1') && tx.some(i => i.s === 'a0,b0' && i.c === 'muted'),
+      'ctl scene: a state with a label shows only its label (no raw atom ids over the box); one without shows its id and its atoms below the box (each translated by the renderer)');
+  }
   ok(V({ task: 'equivalent', formulas: ['p -> q', '~q -> ~p'] }, 'equivalent') === 1 && V({ task: 'equivalent', formulas: ['p -> q', 'q -> p'] }, 'countermodels') === 2, 'equivalence: contraposition yes; converse no (2 countermodels)');
   ok(V({ task: 'entails', premises: ['p -> q', 'p'], goal: 'q' }, 'entails') === 1 && V({ task: 'entails', premises: ['p -> q', 'q'], goal: 'p' }, 'countermodels') === 1 && V({ task: 'entails', premises: ['p', '~p'], goal: 'q' }, 'consistent') === 0,
     'entailment: modus ponens; affirming the consequent has 1 countermodel; inconsistent premises');

@@ -75,6 +75,28 @@ export interface PlotCtx {
   readonly yLabel?: string;
 }
 
+/** the x range of a series plot: the declared x.min / x.max where the spec gives them (evaluated), else the data's own range —
+    so a run that stops early (a heater cut off at 200 °C) never shortens a plot whose x.max is declared */
+export function seriesXRange(xmin: unknown, xmax: unknown, xs: readonly unknown[]): [number, number] {
+  let lo = Infinity,
+    hi = -Infinity;
+  for (const v of xs)
+    if (isNum(v)) {
+      if (v < lo) lo = v;
+      if (v > hi) hi = v;
+    }
+  return [isNum(xmin) ? xmin : isFinite(lo) ? lo : 0, isNum(xmax) ? xmax : isFinite(hi) ? hi : 1];
+}
+/** the xs an expression line (a limit, a theory curve) is drawn at on a series plot: 200 points over the whole x range, not
+    only where the run has data; a log axis spaced logarithmically */
+export function spanGrid(xr: readonly [number, number], xs: readonly unknown[], log: boolean): readonly unknown[] {
+  const [xa, xb] = xr,
+    lg = log && xa > 0 && xb > 0;
+  return isNum(xa) && isNum(xb) && xb > xa
+    ? Array.from({ length: 200 }, (_, k) => (lg ? xa * Math.pow(xb / xa, k / 199) : xa + ((xb - xa) * k) / 199))
+    : xs;
+}
+
 /** draw one plot into fig: data = { xs:[…], lines:[{ys, label}], marks:[{axis, v, label}] } */
 export function drawPlot(fig: Element, p: PlotDef, data: PlotData, ctx: PlotCtx): SVGElement {
   const W = Math.max(220, Math.floor(fig.clientWidth || 320)),
@@ -341,6 +363,8 @@ export function drawPlot(fig: Element, p: PlotDef, data: PlotData, ctx: PlotCtx)
 
 const ROLE = (r: unknown): string =>
   typeof r === 'string' && ['base', 'muted', 'hi', 'ok', 'bad', 'warn', 'info'].includes(r) ? r : 'base';
+/** a category colour of the scenes' palette (cat 0–7: a task, a class of customers — engine/src/32_activities.css .sim-k*) */
+const CAT = (k: unknown): string => (isNum(k) && k >= 0 ? ' sim-k' + String(Math.floor(k) % 8) : '');
 export interface SceneCtx {
   readonly locale: string;
   readonly aria: string;
@@ -359,7 +383,8 @@ export function drawScene(fig: Element, p: PlotDef, sc: unknown, ctx: SceneCtx):
     v2 = at(v, 2, -1),
     v3 = at(v, 3, 1);
   const aspect = (v3 - v2) / (v1 - v0);
-  const H = p.height || Math.round(Math.max(180, Math.min(520, W * aspect)));
+  // a set height is the most the drawing takes: a wide drawing (a truth table at 360 px) never sits in a tall empty box
+  const H = p.height ? Math.min(p.height, Math.max(120, Math.round(W * aspect))) : Math.round(Math.max(180, Math.min(520, W * aspect)));
   const k = Math.min(W / (v1 - v0), H / (v3 - v2)),
     ox = (W - k * (v1 - v0)) / 2,
     oy = (H - k * (v3 - v2)) / 2;
@@ -409,12 +434,38 @@ export function drawScene(fig: Element, p: PlotDef, sc: unknown, ctx: SceneCtx):
       : isNum(it.v)
         ? fmtNum(it.v, { digits: it.digits || 3 }, ctx.locale)
         : typeof it.s === 'string'
-          ? (ctx.tt(it.s) || it.s).slice(0, 64) // a name that is a key of the string tables (an atom a0, a state) is shown in the learner's language
+          ? // a name that is a key of the string tables (an atom a0, a state) is shown in the learner's language; so is each
+            // name of a list without spaces (the atoms that hold in a world: "a0,b0" → "ready, sending")
+            (
+              ctx.tt(it.s) ||
+              (/^[^\s,]+(?:,[^\s,]+)+$/.test(it.s)
+                ? it.s
+                    .split(',')
+                    .map(x => ctx.tt(x) || x)
+                    .join(', ')
+                : it.s)
+            ).slice(0, 64)
           : '';
+  // the letters: 12 px, or smaller where the item gives its size (size: the letter height in scene units) or its room (fit:
+  // the widest it may be, in scene units) — a truth table's headings and cells shrink with the table instead of overlapping
+  const FS = 12;
+  const fontOf = (it: Obj, t: string): number => {
+    let fs = FS;
+    if (isNum(it.size) && it.size > 0) fs = Math.min(fs, it.size * k);
+    if (isNum(it.fit) && it.fit > 0) fs = Math.min(fs, (it.fit * k) / (Math.max(1, Array.from(t).length) * 0.6));
+    return Math.max(5, fs);
+  };
   const label = (x: number, y: number, it: Obj, anchor?: string): void => {
     const t = word(it);
     if (!t) return;
-    const e = svg('text', { x: x.toFixed(1), y: y.toFixed(1), 'text-anchor': anchor ?? 'middle', class: 'sim-sl sim-r-' + ROLE(it.c) });
+    const fs = fontOf(it, t);
+    const e = svg('text', {
+      x: x.toFixed(1),
+      y: y.toFixed(1),
+      'text-anchor': anchor ?? 'middle',
+      class: 'sim-sl sim-r-' + ROLE(it.c) + CAT(it.cat),
+      style: fs < FS ? `font-size:${fs.toFixed(1)}px;stroke-width:${(fs / 4).toFixed(1)}px` : null,
+    });
     e.textContent = t;
     s.append(e);
   };
@@ -424,7 +475,7 @@ export function drawScene(fig: Element, p: PlotDef, sc: unknown, ctx: SceneCtx):
   const N = (v: unknown): number => v as number;
   for (const it of items.slice().sort((a, b) => rank(a) - rank(b))) {
     if (!isObj(it)) continue;
-    const cls = 'sim-r-' + ROLE(it.c),
+    const cls = 'sim-r-' + ROLE(it.c) + CAT(it.cat),
       dash = it.dash ? '5 4' : null;
     if (it.k === 'pt' && isNum(it.x) && isNum(it.y)) {
       s.append(

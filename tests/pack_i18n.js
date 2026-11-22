@@ -1,7 +1,8 @@
 /* Subject packs in several languages (docs/i18n.md §10, tools/CONTENT_SPEC.md "Packs in several languages"), Playwright + Chromium.
    The demo-physics fixture offers its metadata in el and fr (subject.i18n) and its chapter in fr (translations/fr/ch01.json):
      A. classic picker: en → the English title, no language tag; el → the Greek title + an “EN” tag (the content stays English);
-        fr → the French title and the French chapter (same ids, the tutor answers in French); ru → English title + tag
+        fr → the French title and the French chapter (same ids, the tutor answers in French), its picture's French words and
+        drawing (media i18n.fr) and its French knowledge map (translations/fr/map); ru → English title + tag
      B. the new frame in el: the Shelf, Explore and the subject's home show the Greek title with the tag
      C. the pack itself: format v3, translations travel with the pack, the content checks accept it and refuses a broken translation
    Usage: node tests/pack_i18n.js <prepared-repo-dir> */
@@ -49,6 +50,9 @@ const EL = 'Φυσική (δοκιμή)', FR = 'Physique (démo)';
   ok(st.title === FR && st.lang === 'fr' && st.src === 'en' && st.ch === 'Énergie' && st.sec === 'Énergie cinétique' && !st.tag, 'fr: the chapter is the French translation, the content language is fr: ' + JSON.stringify({ ch: st.ch, lang: st.lang }));
   ok(st.opt === 'Une centrale électrique' && st.ans === 0 && st.ids.includes('ch01-e111') && st.chSrc === 's1', 'fr: same exercise ids and answers (progress is shared), the source mapping is kept');
   ok(st.dom === 'physique' && st.name === 'Ada', 'fr: the tutor fields of subject.i18n.fr apply, the others stay');
+  const md = await page.evaluate(() => ({ alt: MEDIA['ek-graph']?.alt, cap: MEDIA['ek-graph']?.caption, svg: atob((MEDIA['ek-graph']?.data || '').split(',')[1] || ''), other: MEDIA['power-station']?.alt, map: COURSE[0].map?.points?.[0]?.text }));
+  ok(/^Graphique de l'énergie/.test(md.alt || '') && /^Vitesse doublée/.test(md.cap || '') && /Une balle de 2 kg/.test(md.svg) && /^Block diagram/.test(md.other || ''), 'fr: a picture takes media i18n.fr alt, caption and its French drawing (media/ek-graph.fr.svg); a picture without i18n.fr keeps its own words');
+  ok(/^L'énergie cinétique/.test(md.map || ''), 'fr: the chapter carries its French knowledge map (translations/fr/map/ch01.json, the Info window): ' + JSON.stringify(md.map));
   await as('en');
   await page.click('.noema-chip:has-text("Demo Physics")'); await wait(1500);
   ok(await page.evaluate(() => COURSE[0].title === 'Energy' && SUBJ.language === 'en'), 'back in en: the English chapter (the UI language picks the version; the pack is unchanged)');

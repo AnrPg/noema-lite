@@ -2818,17 +2818,20 @@ function create(netlist: unknown, opts?: CreateOpts | null) {
       }
     };
     const nz = (v: unknown, d: number) => (v === undefined ? d : num(v));
-    function windowOf(s: Sim): { tEnd: number; dt: number; tStart: number } | null {
+    // the window: the probe's own (tEnd, dt?, tStart?) is time since the board was switched on (t = 0⁻, like the scope: the mean
+    // over [5τ, 6τ] of an RC charge is that of the charge); the automatic one (a board with time-varying sources) starts near the
+    // steady state (the averaged operating point), 50 periods of the slowest source, the last 20 averaged
+    function windowOf(s: Sim): { tEnd: number; dt: number; tStart: number; fromAvg: boolean } | null {
       if (probe.tEnd !== undefined) {
         const te = num(probe.tEnd),
-          w = { tEnd: te, dt: nz(probe.dt, te / 2000), tStart: nz(probe.tStart, te / 2) };
+          w = { tEnd: te, dt: nz(probe.dt, te / 2000), tStart: nz(probe.tStart, te / 2), fromAvg: false };
         if (!(w.tStart >= 0 && w.tStart < w.tEnd)) throw fail('probe');
         return w;
       }
       if (!s.ck.varying) return null;
       let P = 0;
       for (const e of s.ck.sources) if (e.per! > P) P = e.per!;
-      return P > 0 ? { tEnd: 50 * P, dt: P / 200, tStart: 30 * P } : null;
+      return P > 0 ? { tEnd: 50 * P, dt: P / 200, tStart: 30 * P, fromAvg: true } : null;
     }
     function meter(s: Sim, dcVal: () => number, series: (r: NonNullable<ReturnType<Sim['runTransient']>>) => ArrayLike<number>) {
       // → the reading in the probe's mode
@@ -2840,7 +2843,7 @@ function create(netlist: unknown, opts?: CreateOpts | null) {
         return mode === 'dc' ? v : mode === 'rms' ? Math.abs(v) : 0;
       }
       return shifted(s, () => {
-        const r = s.runTransient({ tEnd: w.tEnd, dt: w.dt, maxSteps: probe.maxSteps, fromAvg: true }),
+        const r = s.runTransient({ tEnd: w.tEnd, dt: w.dt, maxSteps: probe.maxSteps, fromAvg: w.fromAvg, uic: probe.uic }),
           v = series(r);
         let s0 = 0;
         while (s0 < r.steps && r.T[s0]! < w.tStart - 1e-9 * w.dt) s0++;

@@ -59,8 +59,9 @@ that matches the facts, so `value` is NaN and the flag `empty` is set. Its exerc
   `exprs(spec)` lists them as `[source, path, []]`.
 - **Formulas** are texts in the language of §2. They are never NoemaExpr expressions. `checkSpec` parses each one in the task's
   language and reports parse errors with their path.
-- **Keys.** `keys(spec)` lists the `label` keys of worlds and arguments. In a scene, a world or an argument with a label shows the
-  key's text; without one it shows its own id as `s`.
+- **Keys.** `keys(spec)` lists the `label` keys of worlds and arguments. In a scene, a world, a state or an argument with a label
+  shows only the key's text (translated); without one it shows its own id as `s`, and a world or state also the atoms that hold there
+  below its box (`a0,b0`: each atom that is a key of the string tables is shown translated).
 - **Outputs**: `{id, kind, of, code?}`. `of` must be something the task computes (§4); `flag` takes a `code` of §5.
 - **Runtime.** `run(spec, env, {seed})` returns `{out, diag, scalars, series, trace}`. The adapter
   `engine.create(spec).run(inputs)` gives the declared outputs by id. Booleans come out as 1 or 0, and what cannot be computed
@@ -103,7 +104,7 @@ that matches the facts, so `value` is NaN and the flag `empty` is set. Its exerc
 | `goal` | literal | aspic | the conclusion asked about (credulous, skeptical, accepted) |
 | `supports` `{u, v, on?}`, `support` `general` (default) · `deductive` · `necessary` | | bipolar | the support relation and how it is read (§3.12); `args`, `attacks`, `semantics`, `arg`, `ext` as for af |
 | `step` | numx | traces | how far the trace is shown (default: all); for epistemic, the number of announcements applied; for norms, the number of trace steps checked |
-| `view` | 4 numbers | scenes | the scene's view |
+| `view` | 4 numbers `[x0, x1, y0, y1]` | every task with a scene | replaces the scene's own frame (truth tables, graphs, traces, timelines…) |
 
 ### 1.2 Checker codes (`checkSpec`)
 
@@ -143,7 +144,7 @@ that matches the facts, so `value` is NaN and the flag `empty` is set. Its exerc
 Precedence, loosest first: `↔` (left), `→` (right), `∨ ⊕`, `∧`, `U R W` (right), then the unary operators. Atoms (and predicates,
 functions, variables) are `[A-Za-z_][A-Za-z0-9_]*`. The words of the table cannot be atoms. Within a language, its operator letters
 are not atoms either: `O P F` in deontic, `X F G U R W` in ltl, `A E` with a path in ctl, `K_x B_x C E D` in epistemic. `show(ast)`
-prints a formula back in Unicode with as few parentheses as possible; the scenes use it for their `s` texts (cut at 64 characters).
+prints a formula back in Unicode with as few parentheses as possible; the scenes use it for their `s` texts (cut at 64 characters; a table heading at 200, wrapped).
 
 ### 2.2 Parse errors
 
@@ -455,7 +456,10 @@ attacks bad, complex ones warn, supports ok.
 | bipolar | extensions credulous skeptical accepted inCount attacks direct supported secondary mediated extended safe closed steps frame | labels |
 
 Every task has the scene `drawing`. A task with a trace and no picture of its own shows the trace as text lines (y = −i, `anchor:
-start`), up to `frame`. The roles are: `hi` for a decision or the selected world, `ok` for true, fulfilled or in, `bad` for false,
+start`), up to `frame`. A table (truth tables, equivalence, entailment, many-valued) gives each column the width of its heading;
+a heading longer than ~20 characters (a long formula) wraps at its spaces over up to 4 lines, and every heading and cell carries
+its `size` and `fit`, so the letters shrink with the table at 360 px instead of overlapping or being cut. Atom names of any length
+work (`enc`, `cccd`, `layout`). The roles are: `hi` for a decision or the selected world, `ok` for true, fulfilled or in, `bad` for false,
 violated, a clash or out, `warn` for undecided or pending, and `muted` for the rest.
 
 ## 5. Runtime codes (`flag`)

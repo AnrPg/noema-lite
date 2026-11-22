@@ -64,14 +64,7 @@ if int(auth.get('rules', 0)) >= 2:
             if os.path.exists(f):
                 try: c[k] = json.load(open(f, encoding='utf-8'))
                 except Exception as e: errs.append(f'ERROR {sub}/{c["id"]}.json: invalid JSON ({e})')
-    # a translation's knowledge map (the Info window, concept definitions): translations/<locale>/map/chNN.json, same ids as
-    # map/chNN.json with only the words in that language; without it the chapter in that language shows the source map
-    for loc, chs in translations.items():
-        for tc in chs:
-            f = os.path.join(sdir, 'translations', loc, 'map', str(tc.get('id')) + '.json')
-            if os.path.exists(f):
-                try: tc['map'] = json.load(open(f, encoding='utf-8'))
-                except Exception as e: errs.append(f'ERROR translations/{loc}/map/{tc.get("id")}.json: invalid JSON ({e})')
+    # a translation's knowledge map (translations/<locale>/map/chNN.json) is read by load_translations (noema_lib.py)
     # the same level as the server (noema_finish_upload): an unpacked chapter is checked as strictly as a new one, so no pack passes here and fails there
     # Q0 (gradual introduction) reads the concepts of the other chapters: no concept a later chapter introduces is used early
     slim = [{'id': c['id'], 'map': {'concepts': (c.get('map') or {}).get('concepts') or []}} for c in chapters]
@@ -137,7 +130,8 @@ for rel, b in h5p_files.items(): print(f'   🧩 {rel} ({mb(len(b))}): an H5P ac
 print(f'  pack alone (for the connector upload): {jout}')
 for loc in trfiles: print(f'  translation {loc}: ' + os.path.join(sdir, 'build', f"{meta['id']}.tr.{loc}.json"))
 if int((meta.get('authoring') or {}).get('rules', 0)) >= 2:   # the languages every new pack gets (CONTENT_SPEC.md; pipeline steps translate + bridges)
-    want_t, _want_b, pairs = noema_core.required_locales(meta.get('language')); own = (meta.get('language') or 'en').split('-')[0].lower()
+    # the languages of its Roadmap when subject.json names them (authoring.languages, docs/CURRICULUM.md §10b), else the pack rules' default
+    want_t, _want_b, pairs = noema_core.required_locales(meta.get('language'), (meta.get('authoring') or {}).get('languages')); own = (meta.get('language') or 'en').split('-')[0].lower()
     bdir = lambda src: os.path.join(sdir, 'bridges', *([] if src == own else ['from-' + src]))   # a translation's bridges: bridges/from-<locale>/
     miss_t = [l for l in want_t if l not in translations]
     miss_n = [l for l in want_t if not (((meta.get('i18n') or {}).get(l) or {}).get('title'))]   # the subject's name in each translation (subject.json "i18n")

@@ -9,6 +9,7 @@
    and the questions a program cannot answer, which the agent answers by reading (judgement).
    Used by the connector (noema_quality_audit) and the toolkit (audit.py), the same code. */
 import { teachingWords } from './gradual.ts';
+import { ENGINE_PURPOSE } from './engine_purpose.ts';
 import { QUALITY } from './rules.ts';
 import { isObj, isStr, list, obj, objs, s, type Obj } from './util.ts';
 
@@ -168,7 +169,7 @@ export function auditChapter(
           hints.length
             ? `an activity or simulation where trying teaches (one per ~3 sections), from the engine library: ${hints
                 .slice(0, 3)
-                .map(h => `${h.id} (${h.hits.slice(0, 3).join(', ')})`)
+                .map(h => `${h.id}${ENGINE_PURPOSE[h.id] ? ` — ${ENGINE_PURPOSE[h.id]}` : ''} (fits: ${h.hits.slice(0, 3).join(', ')})`)
                 .join('; ')} — or noema_request_engine when none fits`
             : 'an activity or simulation where trying teaches (one per ~3 sections): the engine library (docs/INTERACTIVE_LIBRARY.md), H5P, a mini-app — or noema_request_engine when none fits',
         ]

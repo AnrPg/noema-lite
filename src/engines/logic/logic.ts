@@ -4329,11 +4329,11 @@ const num = (v: unknown, env: Env, d: number) => {
 };
 const on = (v: unknown, env: Env) => v === undefined || num(v, env, 1) > 0.5;
 /** a scene of text lines (a proof, a trace, a normal form): line i at y = −i; roles per line */
-function textScene(lines: readonly Line[], D: DiagSink): SceneData {
+function textScene(lines: readonly Line[], D: DiagSink, view?: View): SceneData {
   const n = Math.min(lines.length, C.MAX_SCENE - 1);
   if (lines.length > n) D.add('scene-truncated');
-  const sc = C.scene([0, 40, -(Math.max(n, 1) + 0.5), 0.5]);
-  for (let i = 0; i < n; i++) sc.txt(0.5, -i, { s: short(lines[i]!.s), c: lines[i]!.c || 'base', anchor: 'start' });
+  const sc = C.scene(view ?? [0, 40, -(Math.max(n, 1) + 0.5), 0.5]);
+  for (let i = 0; i < n; i++) sc.txt(0.5, -i, { s: short(lines[i]!.s), c: lines[i]!.c || 'base', anchor: 'start', size: 0.8, fit: 39 });
   return sc.done();
 }
 /** a scene of a graph: worlds / states / arguments as points (role from truth), relations as arrows, ids and atoms as `s` */
@@ -4370,7 +4370,7 @@ function graphScene(nodes: readonly GNode[], edges: readonly GLink[], view: View
     sc.poly([x - bw, y - bw, x + bw, y - bw, x + bw, y + bw, x - bw, y + bw], { c: nd.c || 'base', fill: true });
     sc.poly([x - bw, y - bw, x + bw, y - bw, x + bw, y + bw, x - bw, y + bw], { c: nd.c || 'base' });
     sc.txt(x, y - 0.08, { c: nd.c || 'base', ...(nd.key ? { key: nd.key } : { s: short(nd.s!) }) });
-    if (nd.sub) sc.txt(xs[i]!, ys[i]! - 0.45, { s: short(nd.sub), c: 'muted' });
+    if (nd.sub) sc.txt(xs[i]!, ys[i]! - 0.62, { s: short(nd.sub), c: 'muted' });
   });
   return sc.done();
 }
@@ -4413,7 +4413,9 @@ function modelNodes(M: KModel, truth: Uint8Array | null, sel: number, wlist: rea
       x: w && isNum(w.x) ? w.x : undefined,
       y: w && isNum(w.y) ? w.y : undefined,
       c: i === sel ? 'hi' : truth ? (truth[i] ? 'ok' : 'bad') : 'base',
-      sub: hold,
+      // a world / state with a label shows only its (translated) label; without one, its id and the atoms that hold there
+      // (each atom a key of the string tables: "a0,b0" → "ready, sending")
+      sub: w && w.label ? '' : hold,
     };
   });
 }
@@ -4467,7 +4469,7 @@ function run(spec: LogicSpec, env?: Env | null) {
     });
   if (R.scene === null && trace.length) {
     const k = frameOf(m, env, total);
-    R.scene = textScene(trace.slice(0, Math.max(k, 0)), D);
+    R.scene = textScene(trace.slice(0, Math.max(k, 0)), D, m.view);
   }
   if (S.steps === undefined) S.steps = total;
   if (S.frame === undefined) S.frame = frameOf(m, env, total);
@@ -4489,28 +4491,52 @@ function run(spec: LogicSpec, env?: Env | null) {
   return { out, diag: D.list, scalars: S, series: SE, trace };
 }
 const tick = (b: unknown) => (b ? 'ok' : 'bad');
+/** a heading as at most 4 lines of ~20 characters (longer ones for a very long formula), broken at spaces: a long formula wraps
+    instead of running off the table, and nothing of it is cut */
+const headLines = (h: string): string[] => {
+  const words = h.split(' '),
+    max = Math.max(20, Math.ceil(Array.from(h).length / 4) + 4),
+    out: string[] = [];
+  let cur = '';
+  for (const w of words) {
+    if (cur && Array.from(cur + ' ' + w).length > max) {
+      out.push(cur);
+      cur = w;
+    } else cur = cur ? cur + ' ' + w : w;
+  }
+  if (cur) out.push(cur);
+  return out.length > 4 ? [...out.slice(0, 3), out.slice(3).join(' ')] : out;
+};
 const sceneTable = (
   heads: readonly string[],
   rows: readonly ((string | number)[] & { roles?: string[] })[],
   D: DiagSink,
   o?: { readonly view?: View | undefined; readonly cur?: number },
 ) => {
-  // a truth table: one column per atom and formula, each as wide as its header (a long formula never runs into the next column),
-  // rows from TT…T; the row of the current setting in a box; at most ~1900 cells
+  // a truth table: one column per atom and formula, each as wide as its header (a long formula wraps over up to 4 lines and
+  // never runs into the next column), rows from TT…T; the row of the current setting in a box; at most ~1900 cells. Every
+  // text carries its size and width in scene units (size, fit): the renderer scales the letters with the table, so headings
+  // of any length never overlap at 360 px
   const nc = heads.length,
     maxRows = Math.max(1, Math.floor(1900 / Math.max(nc, 1)) - 1),
     nr = Math.min(rows.length, maxRows);
   if (rows.length > nr) D.add('scene-truncated');
-  const hs = heads.map(h => short(h)),
-    ws = hs.map(h => Math.max(1.4, 0.62 * h.length + 0.6)),
+  const hs = heads.map(h => headLines(Array.from(h).length > 200 ? Array.from(h).slice(0, 199).join('') + '…' : h)),
+    nl = Math.max(1, ...hs.map(l => l.length)),
+    LH = 0.9,
+    ws = hs.map(l => Math.max(1.4, 0.62 * Math.max(...l.map(x => Array.from(x).length)) + 0.6)),
     x0s = ws.map((_, j) => ws.slice(0, j).reduce((a, b) => a + b, 0)),
-    W = ws.reduce((a, b) => a + b, 0);
-  const sc = C.scene(o?.view ?? [-0.5, W + 0.3, -(nr + 0.8), 1]);
-  hs.forEach((h, j) => {
-    sc.txt(x0s[j]! + ws[j]! / 2, 0.2, { s: h, c: 'info' });
+    W = ws.reduce((a, b) => a + b, 0),
+    top = 1 + (nl - 1) * LH;
+  const sc = C.scene(o?.view ?? [-0.5, W + 0.3, -(nr + 0.8), top]);
+  hs.forEach((l, j) => {
+    // the lines of a heading sit on the separator: the last one just above it
+    l.forEach((x, i) => {
+      sc.txt(x0s[j]! + ws[j]! / 2, 0.2 + (l.length - 1 - i) * LH, { s: x, c: 'info', size: 0.8, fit: ws[j]! - 0.3 });
+    });
   });
   sc.seg(-0.3, -0.4, W - 0.2, -0.4, { c: 'muted' });
-  for (let j = 1; j < nc; j++) sc.seg(x0s[j]!, 0.8, x0s[j]!, -(nr + 0.5), { c: 'muted', w: 0.5 });
+  for (let j = 1; j < nc; j++) sc.seg(x0s[j]!, top - 0.2, x0s[j]!, -(nr + 0.5), { c: 'muted', w: 0.5 });
   const cur = o?.cur;
   if (cur != null && cur >= 0 && cur < nr)
     sc.poly([-0.3, -(cur + 0.6), W - 0.2, -(cur + 0.6), W - 0.2, -(cur + 1.4), -0.3, -(cur + 1.4)], { c: 'hi', fill: true });
@@ -4519,6 +4545,8 @@ const sceneTable = (
       sc.txt(x0s[j]! + ws[j]! / 2, -(i + 1) - 0.25, {
         s: typeof v === 'string' ? v : v === 1 ? 'T' : v === 0 ? 'F' : String(v),
         c: i === cur ? 'hi' : rows[i]!.roles ? rows[i]!.roles![j]! : 'base',
+        size: 0.75,
+        fit: ws[j]! - 0.2,
       });
     });
   return sc.done();
@@ -4548,7 +4576,7 @@ const TASK: Readonly<Record<string, (c: TaskCtx) => void>> = {
     const cur = atoms.every(a => a in boolAssign) ? tt.rows.findIndex(v => atoms.every(a => !!v[a] === boolAssign[a])) : -1;
     R.scene = sceneTable(atoms.concat([show(list[0]!)]), rows, D, { view: m.view, cur });
   },
-  equivalent({ D, S, SE, R, fs }) {
+  equivalent({ m, D, S, SE, R, fs }) {
     const [a, b] = fs;
     if (!a || !b) return;
     const tt = truthTable([a, b]),
@@ -4562,9 +4590,9 @@ const TASK: Readonly<Record<string, (c: TaskCtx) => void>> = {
       r.roles = tt.atoms.map(() => 'base').concat(diff[i] ? ['bad', 'bad'] : ['ok', 'ok']);
       return r;
     });
-    R.scene = sceneTable(tt.atoms.concat([show(a), show(b)]), rows, D);
+    R.scene = sceneTable(tt.atoms.concat([show(a), show(b)]), rows, D, { view: m.view });
   },
-  entails({ D, S, R, prem, goal }) {
+  entails({ m, D, S, R, prem, goal }) {
     if (!goal || prem.some(p => !p)) return;
     const tt = truthTable(prem.concat([goal]) as Fm[]);
     let cm = 0,
@@ -4588,7 +4616,7 @@ const TASK: Readonly<Record<string, (c: TaskCtx) => void>> = {
     S.countermodels = cm;
     S.entails = cm === 0;
     S.consistent = cons > 0;
-    R.scene = sceneTable(tt.atoms.concat((prem as Fm[]).map(show), [show(goal)]), rows, D);
+    R.scene = sceneTable(tt.atoms.concat((prem as Fm[]).map(show), [show(goal)]), rows, D, { view: m.view });
   },
   'normal-form'({ m, D, S, F0, setTrace }) {
     if (!F0) return;
@@ -4806,7 +4834,7 @@ const TASK: Readonly<Record<string, (c: TaskCtx) => void>> = {
     S.min = mn;
     S.max = mx;
     SE.column = col;
-    R.scene = sceneTable(atoms.concat([show(F0)]), rows, D);
+    R.scene = sceneTable(atoms.concat([show(F0)]), rows, D, { view: m.view });
   },
   'fol-eval'({ m, D, S, F0, setTrace }) {
     if (!F0) return;
@@ -4902,7 +4930,7 @@ const TASK: Readonly<Record<string, (c: TaskCtx) => void>> = {
     S.valid = b.valid;
     S.validTraditional = t.valid;
     // the Venn diagram of the premises: ∅ in a region every model leaves empty, × where every model puts something
-    const sc = C.scene([-3.2, 3.2, -3, 3]),
+    const sc = C.scene(m.view ?? [-3.2, 3.2, -3, 3]),
       cx: Readonly<Record<'S' | 'P' | 'M', readonly [number, number]>> = { S: [-0.9, 0.6], P: [0.9, 0.6], M: [0, -0.9] };
     for (const t3 of ['S', 'P', 'M'] as const) {
       sc.circ(cx[t3][0], cx[t3][1], 1.6, { c: 'base' });
@@ -5060,7 +5088,7 @@ const TASK: Readonly<Record<string, (c: TaskCtx) => void>> = {
     S.value = !!v[pos];
     S.count = v.reduce((a, b) => a + b, 0);
     SE.truth = Array.from(v);
-    const sc = C.scene([-0.8, Math.max(n, 2) * 1.2, -1.6, 1.4]),
+    const sc = C.scene(m.view ?? [-0.8, Math.max(n, 2) * 1.2, -1.6, 1.4]),
       N = Math.min(n, 600);
     if (n > N) D.add('scene-truncated');
     for (let i = 0; i < N; i++) {
@@ -5177,7 +5205,7 @@ const TASK: Readonly<Record<string, (c: TaskCtx) => void>> = {
     // a timeline: one row per norm, a mark at each step where it was fulfilled (ok) or violated (bad)
     const ids = norms.map(x => x.id),
       N = Math.max(tr.length, 1),
-      sc = C.scene([-3, N + 1, -(ids.length + 0.5), 1.2]);
+      sc = C.scene(m.view ?? [-3, N + 1, -(ids.length + 0.5), 1.2]);
     ids.forEach((id, j) => {
       sc.txt(-1.5, -j, { s: short(id), c: 'info' });
       sc.seg(0, -j, N, -j, { c: 'muted' });

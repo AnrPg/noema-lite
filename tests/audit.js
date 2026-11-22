@@ -21,6 +21,14 @@ ok(c.measures.gradual.score === 0 && /concept ladder/.test(c.measures.gradual.to
 ok(c.measures.depth.score < 50 && c.measures.depth.facts.some(f => /^ch01-s01: 141 words/.test(f)) && c.measures.depth.todo.some(t => /^ch01-s01: \d+ more words of teaching on its one idea/.test(t)), 'depth: section 1 has 141 words; how many more each section needs');
 ok(c.engines.some(h => h.id === 'circuit-mna@1') && c.measures.interactivity.todo.some(t => /circuit-mna@1/.test(t) && /noema_request_engine/.test(t)), 'interactivity: a circuits chapter without a simulation is told which engine fits (circuit-mna@1), or to request one');
 ok(!c.engines.some(h => h.id === 'genetics@1'), 'the engines named clearly fit (no stray word match)');
+ok(c.measures.interactivity.todo.some(t => /circuit-mna@1 — [A-Z][^(]{10,} \(fits: /.test(t)), 'each engine named comes with what it is for, then the words that made it fit: ' + c.measures.interactivity.todo.find(t => /circuit-mna@1/.test(t)));
+{ // the purpose of every catalogue entry is the engine catalogue's engine.engines.<slug>.what (the #/engines page), word for word
+  const arb = JSON.parse(require('fs').readFileSync(path.join(__dirname, '..', 'i18n', 'engine', 'en.arb'), 'utf8'));
+  const cat = require('./engines.cjs').lib.catalog.CATALOG, src = require('fs').readFileSync(path.join(__dirname, '..', 'src', 'features', 'content', 'domain', 'engine_purpose.ts'), 'utf8');
+  const what = new Function('return ' + src.slice(src.indexOf('Object.freeze({') + 14, src.lastIndexOf('})') + 1))();   // a plain object literal
+  const off = cat.filter(e => what[e.id] !== arb[`engine.engines.${e.slug}.what`]).map(e => e.id);
+  ok(cat.length > 20 && !off.length && Object.keys(what).length === cat.length, `every catalogue engine has its one-line purpose (engine_purpose.ts), the same as engine.engines.<slug>.what (${cat.length} engines${off.length ? '; differ: ' + off : ''})`);
+}
 ok(['depth', 'gradual', 'retention', 'interactivity', 'variety'].every(k => typeof c.measures[k].score === 'number' && c.measures[k].score >= 0 && c.measures[k].score <= 100), 'five measures per chapter, each 0–100 with its facts and what to add');
 ok(a.judgement.length >= 8 && a.judgement.some(q => /newcomer/.test(q)) && a.judgement.some(q => /Correct/.test(q)), 'the judgement questions a program cannot answer, for the agent to answer by reading');
 const r = P.auditReport(a);

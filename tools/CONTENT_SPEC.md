@@ -112,7 +112,11 @@ which `start_subject.py` writes). The learner meets every idea for the first tim
    word, a unit after a number (A, mAh, V, W, J, Ω, Hz, dB…) or an acronym that is in neither list, or that shows up before
    its section, is an error. `map.plainText` lists the words and numbers of the chapter that only look like a unit or an
    acronym (`3S` for three cells in series, `183 C` as a part's label, `0x0C`, a model number): the checker reads them as
-   plain text. Plan the chapter as a ladder: list its concepts in teaching order first, then the sections
+   plain text. Some look-alikes it reads as plain text by itself: hex numbers (`0x0C`), cell-pack notation (`3S`, `2S`,
+   `4S2P`), a number before `C` in a sentence about temperature (`183 C` next to solder, reflow, temperature, ambient…
+   reads as `183 °C`), `N` as a count or a variable (`5 N times`, `2 N + 1`); and a one-letter unit that is also an
+   everyday letter (C, N, F, H, S) only counts as an undeclared unit in a chapter that names it (coulomb, newton…). Where a
+   concept declares the unit, every real use before its section is still an error. Plan the chapter as a ladder: list its concepts in teaching order first, then the sections
    (one idea each), then the exercises of each section from what that section and the earlier ones taught.
 - ✗ The real case: section 1 of "Charge, voltage and current" defined charge in one sentence, converted ampere-hours to
   coulombs, showed a table of charge, current, voltage, power and energy, and its exercises asked about amperes, volts and

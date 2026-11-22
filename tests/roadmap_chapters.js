@@ -70,6 +70,13 @@ const PORT = 54391, BASE = `http://localhost:${PORT}`;
     r = await tool('noema_save_pack', { pack_json: JSON.stringify(pk) });
     const todo = r.text.split('\n').find(l => l.startsWith('🌐 Still to do')) || '';
     ok(!r.isError && /full translations into el\b/.test(todo) && /en→el, el→en/.test(todo) && !/\b(ru|de|fr)\b/.test(todo), 'finish/save names only Greek and en↔el bridges, no ru, de, fr: ' + (todo || r.text.slice(0, 300)).slice(0, 240));
+    // bridges: [] — the Roadmap asks for no 文A bridges: "still to do" names the Greek translation only (limits report 2026-11-22, item 7)
+    r = await tool('noema_set_roadmap_languages', { curriculum_id: cid, languages_json: JSON.stringify({ translations: ['el'], bridges: [] }) });
+    ok(!r.isError && /full translations: el; 文A bridges: none/.test(r.text), 'set without bridges: ' + r.text.split('\n')[0].slice(0, 160));
+    r = await tool('noema_save_pack', { pack_json: JSON.stringify({ ...pk, subject: { ...pk.subject, description: 'again, after the languages changed' } }) });   // (another pack: the same one would be a replay)
+    const todo2 = r.text.split('\n').find(l => l.startsWith('🌐 Still to do')) || '';
+    ok(!r.isError && /full translations into el\b/.test(todo2) && !/文A/.test(todo2), 'finish/save follows the bridge setting: no bridges asked for: ' + (todo2 || r.text.slice(0, 300)).slice(0, 240));
+    r = await tool('noema_set_roadmap_languages', { curriculum_id: cid, languages_json: JSON.stringify({ translations: ['el'] }) });
   }
 
   console.log('— four plan answers in one call');

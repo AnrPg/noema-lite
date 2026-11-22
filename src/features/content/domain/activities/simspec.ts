@@ -1426,8 +1426,8 @@ export function createSimSpec(env: CheckEnv) {
         if (p.kind === 'scene' || p.kind === 'sound') {
           unknownKeys(p, ['kind', 'title', 'of', 'height'], w, E);
           if (!inA(p.kind === 'scene' ? scenes : sounds, p.of)) E.push(`${w}.of must name a ${p.kind} output of the engine`);
-          if (p.height != null && !(Number.isInteger(p.height) && (p.height as number) >= 120 && (p.height as number) <= 900))
-            E.push(`${w}.height is a whole number 120–900 (px)`);
+          if (p.height != null && !(Number.isInteger(p.height) && (p.height as number) >= 120 && (p.height as number) <= 2000))
+            E.push(`${w}.height is a whole number 120–2000 (px)`);
           return;
         }
         const x = isObj(p.x) ? p.x : null,

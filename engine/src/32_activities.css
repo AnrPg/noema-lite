@@ -93,6 +93,16 @@
 .sim-scene { display: block; max-width: 100%; height: auto; }
 .sim-scene .sim-r-base { --r: var(--ink2); } .sim-scene .sim-r-muted { --r: var(--ink3); } .sim-scene .sim-r-hi { --r: var(--c); }
 .sim-scene .sim-r-ok { --r: var(--ok); } .sim-scene .sim-r-bad { --r: var(--bad); } .sim-scene .sim-r-warn { --r: var(--warn); } .sim-scene .sim-r-info { --r: var(--info); }
+/* the categories of a scene (cat 0–7: tasks, classes of customers): eight colours apart from each other and from every
+   character's accent, the same in the chart and its legend; lighter in dark mode (Okabe–Ito, colour-blind safe) */
+.sim-scene .sim-k0 { --r: #0072b2; } .sim-scene .sim-k1 { --r: #d55e00; } .sim-scene .sim-k2 { --r: #009e73; } .sim-scene .sim-k3 { --r: #cc79a7; }
+.sim-scene .sim-k4 { --r: #b07800; } .sim-scene .sim-k5 { --r: #3a8fc4; } .sim-scene .sim-k6 { --r: #7a5c2e; } .sim-scene .sim-k7 { --r: #6a3d9a; }
+:root[data-theme="dark"] .sim-scene .sim-k0 { --r: #5ab0f0; } :root[data-theme="dark"] .sim-scene .sim-k1 { --r: #ff8a4c; } :root[data-theme="dark"] .sim-scene .sim-k2 { --r: #3ccb9f; } :root[data-theme="dark"] .sim-scene .sim-k3 { --r: #e79cc6; }
+:root[data-theme="dark"] .sim-scene .sim-k4 { --r: #f5b83d; } :root[data-theme="dark"] .sim-scene .sim-k5 { --r: #8fd0f5; } :root[data-theme="dark"] .sim-scene .sim-k6 { --r: #c9a76a; } :root[data-theme="dark"] .sim-scene .sim-k7 { --r: #b190e0; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .sim-scene .sim-k0 { --r: #5ab0f0; } :root:not([data-theme="light"]) .sim-scene .sim-k1 { --r: #ff8a4c; } :root:not([data-theme="light"]) .sim-scene .sim-k2 { --r: #3ccb9f; } :root:not([data-theme="light"]) .sim-scene .sim-k3 { --r: #e79cc6; }
+  :root:not([data-theme="light"]) .sim-scene .sim-k4 { --r: #f5b83d; } :root:not([data-theme="light"]) .sim-scene .sim-k5 { --r: #8fd0f5; } :root:not([data-theme="light"]) .sim-scene .sim-k6 { --r: #c9a76a; } :root:not([data-theme="light"]) .sim-scene .sim-k7 { --r: #b190e0; }
+}
 .sim-scene .sim-pt { fill: var(--r); stroke: var(--bg, #fff); stroke-width: 1.2; }
 .sim-scene .sim-seg { stroke: var(--r); stroke-linecap: round; }
 .sim-scene .sim-circ, .sim-scene .sim-poly { fill: none; stroke: var(--r); stroke-width: 1.6; }

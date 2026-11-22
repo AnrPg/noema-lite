@@ -108,6 +108,21 @@ ok(has(bad(ch => { ch.sections[0].blocks.push({ t: 'p', text: 'The cable of grad
 ok(!bad(ch => { ch.sections[0].blocks.push({ t: 'p', text: 'The cable of grade 5 W holds charge, and so does the 0x1F register.' }); ch.map.plainText = ['5 W']; }).length, 'concept.undeclared: … not once it is listed in map.plainText');
 ok(has(bad(ch => { ch.sections[0].blocks.push({ t: 'p', text: 'The cable of grade 5 W, and a lamp takes 0.5 W.' }); ch.map.plainText = ['5 W']; }), 'concept.undeclared', /unit W/), 'map.plainText hides only what it lists (0.5 W is still a watt)');
 ok(!bad(ch => { ch.sections[0].blocks.push({ t: 'p', text: 'A 3S pack of cells holds charge.' }); ch.map.plainText = ['3S']; ch.map.concepts[0].units = ['C', 'S']; }).length, 'concept.order: 3S in map.plainText is not a use of a declared unit S');
+// look-alikes the checker reads as plain text by itself, without map.plainText (limits report 2026-11-22, item 4)
+const plainOk = (text, f) => bad(ch => { ch.sections[0].blocks.push({ t: 'p', text }); if (f) f(ch); });
+const iss4 = [
+  ['A 3S1P pack, a 2S pack and a 4S2P pack each hold charge.', ch => { ch.map.concepts[0].units = ['C', 'S']; }, 'cell-pack notation (3S1P, 2S, 4S2P) where a concept declares S'],
+  ['The loop runs 5 N times, and the last row is 2 N + 1.', null, 'N as a count or a variable after a number'],
+  ['The chip is soldered at 183 C, the reflow peak of the paste.', null, '183 C beside solder and reflow is a temperature, even where charge (C) is a concept'],
+  ['The register at 0x0C and the one at 0x1F hold the charge count.', null, 'hex numbers'],
+  ['Pick the 5 N strongest cells: they hold charge.', null, 'a lone 5 N in a chapter that never names newtons'],
+].map(([text, f, what]) => [what, plainOk(text, f)]);
+for (const [what, iss] of iss4) ok(!iss.length, 'look-alikes without map.plainText: ' + what + (iss.length ? '\n   ' + iss.map(i => i.msg).join('\n   ') : ''));
+ok(has(plainOk('A 7200 C charge is moved before section 2: a real use.', ch => { ch.sections[0].blocks.push({ t: 'p', text: 'Later, 2 A moves it.' }); }), 'concept.order', /current/), 'look-alikes: a real unit use (2 A) is still seen');
+const ch02force = { id: 'ch02', map: { concepts: [{ id: 'force', terms: ['force', 'newton'], units: ['N'], in: 'ch02-s01', def: 'A push or a pull, counted in newtons.' }] } };
+ok(has(q0((() => { const ch = copy(good); ch.sections[0].blocks.push({ t: 'p', text: 'Push the cart with 5 N and it starts to roll.' }); return ch; })(), SJ, { before: [], after: [ch02force] }), 'concept.order', /“force” \(force\), which ch02 introduces later/), 'look-alikes: 5 N in a pack that teaches newtons later is still flagged');
+ok(has(plainOk('The 2 kg cart is pushed with 5 N; a newton is a push.'), 'concept.undeclared', /unit N \(newton, force\)/), 'look-alikes: 5 N is a newton where the chapter names newtons and no concept lists them');
+ok(!plainOk('The thermistor reads 25 C, and the temperature of the junction is 85 C.', ch => { ch.map.concepts.push({ id: 'temp', terms: ['temperature', 'thermistor', 'junction'], units: ['°C'], in: 'ch01-s01', def: 'How hot something is, in degrees Celsius.' }); }).some(i => /coulomb|“charge”/.test(i.msg)), 'look-alikes: 25 C beside temperature is read as °C (a temperature concept), never as coulombs');
 // inflected languages: a stem with *
 const el = copy(good); el.map.concepts[1].terms = ['ρεύμα*']; el.sections[0].blocks.push({ t: 'p', text: 'Η ένταση του ρεύματος θα έρθει αργότερα.' });
 ok(has(q0(el), 'concept.order', /ch01-s01 \(a paragraph, blocks\[\d+\]\): uses “ρεύμα\*”/), 'a stem (ρεύμα*) finds the inflected form (ρεύματος)');

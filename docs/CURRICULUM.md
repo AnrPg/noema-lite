@@ -380,10 +380,12 @@ coverage item of the planned chapter, in order. **Everything the step's panel sh
 
 By default every pack gets the pack rules' languages (full translations en, el, ru, de, fr; 文A bridges for every pair). A Roadmap
 may name its own: `noema_set_roadmap_languages` stores `c.languages = { translations: ["el"], bridges?: ["en>el", "el>en"], at }`
-(bridges left out: every pair among the Roadmap's language and its translations; the later copy wins in `mergePlans`; inbox entry
-`kind: "languages"`). Then the Roadmap's "still untranslated" lists, `noema_finish_upload` / `noema_save_translation`'s
+(bridges left out: every pair among the Roadmap's language and its translations — an en + el Roadmap then **requires** the 文A
+bridges en→el and el→en of every pack, and "still to do" lists them until they are saved; `"bridges": []` asks for none, a list
+asks for exactly those; the later copy wins in `mergePlans`; inbox entry `kind: "languages"`). Then the Roadmap's "still untranslated" lists, `noema_finish_upload` / `noema_save_translation`'s
 "still to do", the step task and the pipeline checks ask only for those: the step task tells Claude to put
-`"authoring": { "languages": … }` into subject.json, and `tools/pipeline.py` (translations) and `tools/bridge.py require` read it
+`"authoring": { "languages": … }` into subject.json, and `tools/pipeline.py` (translations), `make_pack.py`'s "still to do" and
+`tools/bridge.py require` read it (without it they ask for the default languages: ru, de, fr and their bridges)
 (`requiredLocales(own, scope)`, one source in `src/features/content/domain/translation.ts`).
 
 ## 11. 🪜 Levels (grade, semester, year, difficulty)

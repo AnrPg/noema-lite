@@ -302,6 +302,29 @@ const pwmRc = { nodes: ['p', 'out'], elements: [{ id: 'V1', type: 'V', n: ['p', 
   ok(!s2.cut && Math.abs(s2.t1 - 5e-3) < 1e-9 && s2.traces.p.edges.length === s2.traces.p.stats.edges, 'logic adapter: a short capture keeps every edge and its whole window');
 }
 
+{ // limits report 2026-11-22, item 3: a meter window from expressions (tStart "5*tau", tEnd "6*tau") averages exactly that window
+  // of an RC charge; a fast pulse edge gives no spike over the set level; params.<name> and ic are bindable
+  const def = ENGINES.mod('circuit-mna@1').engine, X = ENGINES.kernel('expr');
+  const R = 1000, Cv = 1e-6, tau = R * Cv, V0 = 5;
+  const nl = { nodes: ['in', 'out'], elements: [{ id: 'V1', type: 'V', n: ['in', 'gnd'], value: { pulse: { v1: 0, v2: V0, rise: 1e-9 } } }, { id: 'R1', type: 'R', n: ['in', 'out'], value: R }, { id: 'C1', type: 'C', n: ['out', 'gnd'], value: Cv }] };   // a step at t = 0 (a pulse from 0, docs §3.3)
+  const spec = { model: { netlist: nl }, outputs: [{ id: 'm', kind: 'scalar', probe: { kind: 'V', a: 'out', zin: 0, mode: 'dc', tStart: '5*tau', tEnd: '6*tau', dt: 'tau/2000' } }] };
+  const prep = def.prepare(spec, src => X.compile(src));
+  const got = def.create(spec, { seed: 1, faults: [] }).run(prep({ tau })).m;
+  const exact = V0 * (1 - (Math.exp(-5) - Math.exp(-6)));   // (1/τ)∫_{5τ}^{6τ} V0(1 − e^(−t/τ)) dt
+  ok(Math.abs(got - exact) / exact < 2e-4, `meter window from expressions: mean over [5τ, 6τ] of an RC charge ${got.toFixed(5)} V (exact ${exact.toFixed(5)} V)`);
+  const got2 = def.create(spec, { seed: 1, faults: [] }).run(prep({ tau: tau / 2 })).m, exact2 = V0 * (1 - (Math.exp(-2.5) - Math.exp(-3)) / 0.5);   // tau = τ/2: the window is [2.5τ, 3τ] of the real circuit
+  ok(Math.abs(got2 - exact2) / exact2 < 2e-4 && Math.abs(got2 - got) > 1e-3, `… and it follows the expression (tau halved: ${got2.toFixed(5)} V, exact ${exact2.toFixed(5)} V)`);
+  // a pulse 0 → 3.3 V, rise / fall 2 ns, width 5 ns, into an RC much faster than the step (no ringing: the node follows the source)
+  const pl = { nodes: ['p', 'o'], elements: [{ id: 'V1', type: 'V', n: ['p', 'gnd'], value: { pulse: { v1: 0, v2: 3.3, delay: 10e-9, rise: 2e-9, fall: 2e-9, width: 5e-9, period: 100e-9 } } },
+    { id: 'R1', type: 'R', n: ['p', 'o'], value: 10 }, { id: 'C1', type: 'C', n: ['o', 'gnd'], value: 1e-12 }] };
+  for (const dt of [0.1e-9, 1e-9, 4e-9]) {
+    const tr = C.create(pl).transient({ tEnd: 300e-9, dt }), mx = Math.max(...tr.nodes.o), mn = Math.min(...tr.nodes.o);
+    ok(mx <= 3.3 * 1.002 && mn >= -3.3 * 0.002, `pulse (2 ns edges, 5 ns wide) at a step of ${dt * 1e9} ns: no spike over the level (max ${mx.toFixed(4)} V, min ${mn.toFixed(4)} V)`);
+  }
+  ok(['Vth', 'k', 'lambda'].every(k => C.bindableParams('NMOS').includes(k)) && C.bindableParams('R').length === 0,
+    `bindable parameters per type (documented in docs/INTERACTIVE_CIRCUIT.md): NMOS ${C.bindableParams('NMOS').join(', ')}`);
+}
+
 console.log(`\naccuracy: RC ${pct(acc.rc)} · RL ${pct(acc.rl)} · RLC f ${pct(acc.rlcF)}, α ${pct(acc.rlcA)} · low-pass ${acc.lp.toFixed(4)} dB · PWM avg ${pct(acc.pwm)} · 20000-step RC ${acc.ms.toFixed(1)} ms`);
 console.log(`${n - fails}/${n} passed`);
 process.exit(fails ? 1 : 0);
