@@ -2,6 +2,25 @@
 import { argStr, fail, text, type Tool } from '../tool.ts';
 import { siteFile } from '../env.ts';
 import { ID_RE, LOCALE_RE, message } from '../util.ts';
+import { curState, stepOfPack } from '../services/curricula.ts';
+import { languagesOf } from '../../features/roadmaps/domain/index.ts';
+import type { Roadmap } from '../../features/roadmaps/domain/model.ts';
+import type { ToolContext } from '../tool.ts';
+
+/** 🌐 the pack teaches a Roadmap step: the Roadmap's languages, for unpack.py --languages (subject.json authoring.languages), so
+    the pipeline and make_pack.py ask only for those — or, with none set, that the default (all five) holds */
+async function languagesNote(ctx: ToolContext, sid: string): Promise<string> {
+  const st = await stepOfPack(ctx, sid).catch(() => null);
+  if (!st) return '';
+  const c = await curState(ctx, st.c, ctx.uid).catch(() => st.c);
+  const v = languagesOf(c as unknown as Roadmap) ?? languagesOf(st.c as unknown as Roadmap),
+    T = `“${c.title || c.goal}”`,
+    own = (c.language || 'en').split('-')[0];
+  if (!v)
+    return `\n🌐 It teaches the step “${c.nodes[st.nid]?.title ?? st.nid}” of ${T}, which has no languages set: the default holds, so the pack gets full translations into English, Greek, Russian, German and French (those that are not ${own}) and every 文A pair. If the learner wants ${T} in ${own} only, set it once with noema_set_roadmap_languages {"translations": []} and unpack with --languages '{"translations": []}'.`;
+  const j = JSON.stringify({ translations: v.translations, ...(v.bridges ? { bridges: v.bridges } : {}) });
+  return `\n🌐 It teaches the step “${c.nodes[st.nid]?.title ?? st.nid}” of ${T}, whose languages are ${v.translations.length ? `${own} + ${v.translations.join(', ')}` : `${own} only`}: python3 scripts/unpack.py ${sid}.json work --repair --languages '${j}' (subject.json "authoring": { "languages": ${j} }), so the pipeline and make_pack.py ask only for those.`;
+}
 
 export const tool: Tool = {
   definition: {
@@ -44,7 +63,7 @@ export const tool: Tool = {
       );
     }
     return text(
-      `Download (valid 1 h): ${url}\ncurl -sSL -o ${file} "<that URL>"${loc ? `\n(Beside the pack's ${sid}.json, tools/bridge.py … ${sid}.json --from ${loc} reads it.)` : ''}`,
+      `Download (valid 1 h): ${url}\ncurl -sSL -o ${file} "<that URL>"${loc ? `\n(Beside the pack's ${sid}.json, tools/bridge.py … ${sid}.json --from ${loc} reads it.)` : await languagesNote(ctx, sid)}`,
     );
   },
 };

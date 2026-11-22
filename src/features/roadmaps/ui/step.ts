@@ -588,8 +588,13 @@ export class NoemaRoadmapStep extends RoadmapElement {
     ];
   }
 
-  #chapters(n: Step): TemplateResult {
+  #chapters(n: Step, own?: Step): TemplateResult {
     const chs = n.chapters ?? [];
+    // a prepared step: the title its pack gives the chapter (chapters.ts matchChapters), where the plan's own words are shown
+    const shown = (ch: NonNullable<Step['chapters']>[number], i: number): string => {
+      const pt = (ch.pack as { title?: unknown } | undefined)?.title;
+      return typeof pt === 'string' && pt.trim() && ch.title === own?.chapters?.[i]?.title ? pt : ch.title;
+    };
     const toggle = (i: number): void => {
       this.open = this.open === i ? -1 : i;
     };
@@ -610,7 +615,7 @@ export class NoemaRoadmapStep extends RoadmapElement {
               }
             }}
           >
-            <strong>${ch.title}</strong>
+            <strong>${shown(ch, i)}</strong>
             ${
               this.open === i
                 ? html`<div class="cm-chd tiny">
@@ -773,7 +778,7 @@ export class NoemaRoadmapStep extends RoadmapElement {
         n.chapters?.length
           ? html`<div class="lbl">📖 ${this.t('roadmap.map.pnl.nChapters', { n: n.chapters.length })}</div>
               <p class="tiny">${this.t('roadmap.map.pnl.chaptersTip')}</p>
-              ${this.#chapters(n)}`
+              ${this.#chapters(n, c.nodes[this.step])}`
           : nothing
       }
       ${

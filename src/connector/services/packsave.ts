@@ -28,9 +28,8 @@ import {
   withTranslations,
   type Known,
 } from './packfiles.ts';
-import { chapterList, roadmapTodoText, scopeOfPack, writeChapters } from './roadmap.ts';
-import { packExtras, type UploadChapter } from '../../features/roadmaps/domain/index.ts';
-import type { Step } from '../../features/roadmaps/domain/model.ts';
+import { lineUpChapters, roadmapTodoText, scopeOfPack } from './roadmap.ts';
+import { type UploadChapter } from '../../features/roadmaps/domain/index.ts';
 import { sagaKey } from './sagas.ts';
 import { nameOf } from './supabase.ts';
 
@@ -188,16 +187,12 @@ export async function completePack(
           if (sharedOn(ctx, step.c))
             more += await s.step('publish', async () => publishStep(ctx, step, await withTranslations(ctx, sid, p), need.length));
           let st = await curState(ctx, step.c, ctx.uid);
-          // 📑 the pack teaches chapters its step's plan lacks (the learner asked for more while it was built): the step gains them
+          // 📑 the pack lined up with its step's plan (by ref, title, close title, then place — chapters.ts alignPackChapters):
+          // each planned chapter learns which chapter of the pack teaches it, and the step gains the chapters the pack teaches beyond it
           more += await s.step('chapters', async () => {
             const n = st.nodes[step.nid];
             if (!n?.chapters?.length) return '';
-            const extra = packExtras(n as unknown as Step, (p.chapters ?? []) as UploadChapter[]);
-            if (extra === null)
-              return `\n⚠️ The pack's ${(p.chapters ?? []).length} chapters do not line up with the step's ${n.chapters.length} planned ones by title, so no chapter was added to the step: its panel lists the plan. Add each chapter the pack has and the plan lacks with noema_add_roadmap_chapters (step "${step.nid}"; the plan: ${n.chapters.map(ch => `${ch.ref} “${String(ch.title)}”`).join(', ')}).`;
-            if (!extra.length) return '';
-            await writeChapters(ctx, st, step.nid, extra, Date.now().toString(36).padStart(9, '0') + '-ch' + key.slice(-6), 'upload');
-            return `\n📑 The step gained ${extra.length} chapter(s) the pack teaches beyond its plan: ${extra.map(x => `${x.ref} “${x.title}”`).join(', ')}. Its chapters now:\n${chapterList(st, step.nid)}`;
+            return lineUpChapters(ctx, st, step.nid, (p.chapters ?? []) as UploadChapter[], key.slice(-6), 'upload');
           });
           st = await curState(ctx, step.c, ctx.uid);
           const left = CJ.work(st).steps.length;

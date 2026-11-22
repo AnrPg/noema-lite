@@ -30,6 +30,8 @@ export interface ChaptersEntry {
   kind: 'chapters';
   nid: string;
   chapters: ChapterAdd[];
+  /** the step's pack lined up with its plan (matchChapters) */
+  match?: { ref: string; id: string; title: string }[];
   at: string;
   via?: string;
   why?: string;
@@ -175,11 +177,18 @@ export function addChapters(c: Roadmap, nid: string, add: readonly ChapterAdd[],
 }
 
 /** The entry that carries chapters added to a step (the inbox, and the direct write into the Roadmap). */
-export const chaptersEntry = (nid: string, add: readonly ChapterAdd[], now: number, why = ''): ChaptersEntry => ({
+export const chaptersEntry = (
+  nid: string,
+  add: readonly ChapterAdd[],
+  now: number,
+  why = '',
+  match: readonly { ref: string; id: string; title: string }[] = [],
+): ChaptersEntry => ({
   v: 1,
   kind: 'chapters',
   nid,
   chapters: clone([...add]),
+  ...(match.length ? { match: clone([...match]) } : {}),
   at: new Date(now).toISOString(),
   via: 'claude-app',
   ...(why ? { why } : {}),
@@ -187,6 +196,7 @@ export const chaptersEntry = (nid: string, add: readonly ChapterAdd[], now: numb
 /** Can the entry still be applied to this copy? [] when it can, ['applied'] when every chapter is there, else the problems. */
 export function chaptersProblems(c: Roadmap, e: Partial<ChaptersEntry>): string[] {
   if (typeof e.nid !== 'string' || !Array.isArray(e.chapters)) return ['not a list of chapters for a step'];
+  if (!e.chapters.length && Array.isArray(e.match)) return c.nodes[e.nid]?.chapters?.length ? [] : ['no planned chapters to line up'];
   const r = checkAddChapters(c, e.nid, e.chapters);
   if (r.errors.length) return r.errors;
   return r.fresh.length ? [] : ['applied'];
@@ -212,8 +222,21 @@ export function mergeAddedChapters(n: Step, o: Pick<Step, 'chapters' | 'chapters
     const k = typeof prev === 'string' ? list.findIndex(x => x.ref === prev) : -1;
     list.splice(prev === null ? 0 : k >= 0 ? k + 1 : list.length, 0, ch);
   }
+  // the pack lined up with the plan on the other copy (matchChapters): the later lining up wins
+  let lined = false;
+  for (const x of o.chapters) {
+    const p = x.pack as { at?: string } | undefined,
+      ch = list.find(y => y.ref === x.ref);
+    if (ch && p && ms(p.at) > ms((ch.pack as { at?: string } | undefined)?.at)) {
+      ch.pack = clone(x.pack);
+      lined = true;
+    }
+  }
   const same = list.length === mine.length && list.every((ch, i) => ch.ref === mine[i]?.ref);
-  if (same) return false;
+  if (same) {
+    if (lined) n.chapters = list;
+    return lined;
+  }
   n.chapters = list;
   n.chaptersAt = stampAfter(0, n.chaptersAt, o.chaptersAt);
   return true;
@@ -224,63 +247,149 @@ export function mergeAddedChapters(n: Step, o: Pick<Step, 'chapters' | 'chapters
 /** A pack's chapters as an upload reads them. */
 export interface UploadChapter {
   id?: string;
+  ref?: string;
   title?: string;
   objectives?: unknown;
   sections?: { title?: unknown }[];
 }
-/** The pack's chapters that the step's plan does not have (matched by title, in order) → the chapters to add, each placed
-    after the planned chapter the pack puts before it; null when the plan and the pack cannot be lined up (titles changed
-    too much — then the caller warns instead of guessing). */
+/** How a pack's chapters line up with its step's planned chapters (an upload, or noema_add_roadmap_chapters from_pack):
+    pairs — each planned chapter and the pack's chapter that teaches it (same: the same title); extra — the pack's chapters the
+    plan lacks, each placed after the planned chapter the pack puts before it; unplanned — planned refs no chapter of the pack
+    lines up with; unpaired — the pack's chapters left over when the plan cannot be lined up whole. Matched in order: first by
+    ref (a pack chapter's ref or id that is a planned ref) or the same title, then by close titles (most of the words), then by
+    place (the same number of chapters between two matches, or the same number of chapters in all) — so one changed title never
+    drops the step's chapter list. */
+export interface PackAlignment {
+  pairs: { ref: string; index: number; id: string; title: string; same: boolean }[];
+  extra: ChapterAdd[];
+  unplanned: string[];
+  unpaired: number[];
+}
+const words = (t: unknown): Set<string> =>
+  new Set(
+    (typeof t === 'string' ? t : '')
+      .toLowerCase()
+      .normalize('NFKD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .split(/[^\p{L}\p{N}]+/u)
+      .filter(w => w.length >= 3),
+  );
+/** two titles share most of their words (Jaccard >= 0.5) */
+export const closeTitle = (a: unknown, b: unknown): boolean => {
+  const A = words(a),
+    B = words(b);
+  if (!A.size || !B.size) return false;
+  let both = 0;
+  for (const w of A) if (B.has(w)) both++;
+  return both / (A.size + B.size - both) >= 0.5;
+};
+export function alignPackChapters(plan: readonly PlannedChapter[], chapters: readonly UploadChapter[]): PackAlignment {
+  const m = new Array<number>(chapters.length).fill(-1); // pack index → plan index
+  const refOf = (pc: UploadChapter): string => (typeof pc.ref === 'string' ? pc.ref : typeof pc.id === 'string' ? pc.id : '');
+  // a monotone pass over the gaps that are still open: each pack chapter to the first open plan chapter after the last match
+  const pass = (ok: (ch: PlannedChapter, pc: UploadChapter) => boolean): void => {
+    let j = 0;
+    chapters.forEach((pc, i) => {
+      if (m[i] !== -1) {
+        j = (m[i] ?? 0) + 1;
+        return;
+      }
+      const next = m.slice(i + 1).find(x => x !== -1) ?? plan.length; // never past the next match: the order holds
+      for (let k = j; k < next; k++)
+        if (!m.includes(k) && ok(plan[k] as PlannedChapter, pc)) {
+          m[i] = k;
+          j = k + 1;
+          return;
+        }
+    });
+  };
+  pass((ch, pc) => !!refOf(pc) && refOf(pc) === ch.ref);
+  pass((ch, pc) => sameTitle(ch.title, pc.title));
+  pass((ch, pc) => closeTitle(ch.title, pc.title));
+  // by place: between two matches (and before the first, after the last) the same number of chapters on both sides
+  let pi = -1,
+    ki = -1;
+  for (let i = 0; i <= chapters.length; i++) {
+    if (i < chapters.length && m[i] === -1) continue;
+    const k = i < chapters.length ? (m[i] as number) : plan.length;
+    const packGap = Array.from({ length: i - pi - 1 }, (_, x) => pi + 1 + x),
+      planGap = Array.from({ length: k - ki - 1 }, (_, x) => ki + 1 + x);
+    if (packGap.length && packGap.length === planGap.length) packGap.forEach((x, y) => (m[x] = planGap[y] as number));
+    pi = i;
+    ki = k;
+  }
+  const pairs = chapters
+    .map((pc, i) => ({ pc, i, k: m[i] as number }))
+    .filter(x => x.k >= 0)
+    .map(({ pc, i, k }) => ({
+      ref: plan[k]?.ref ?? '',
+      index: i,
+      id: typeof pc.id === 'string' ? pc.id : `chapter ${i + 1}`,
+      title: typeof pc.title === 'string' ? pc.title.trim() : '',
+      same: sameTitle(plan[k]?.title, pc.title),
+    }));
+  const paired = new Set(pairs.map(x => x.ref));
+  const unplanned = plan.filter(ch => !paired.has(ch.ref)).map(ch => ch.ref);
+  const unpaired = chapters.map((_, i) => i).filter(i => m[i] === -1);
+  const extra: ChapterAdd[] = [];
+  if (!unplanned.length && unpaired.length) {
+    const refs = new Set(plan.map(ch => ch.ref));
+    let prev: string | null = null;
+    chapters.forEach((pc, i) => {
+      if (m[i] !== -1) {
+        prev = plan[m[i] as number]?.ref ?? prev;
+        return;
+      }
+      const title = (typeof pc.title === 'string' ? pc.title.trim() : '') || (pc.id ?? `chapter ${i + 1}`);
+      let ref =
+        title
+          .toLowerCase()
+          .normalize('NFKD')
+          .replace(/[̀-ͯ]/g, '')
+          .replace(/[^a-z0-9]+/g, '_')
+          .replace(/^_+|_+$/g, '')
+          .slice(0, 40) || `ch${i + 1}`;
+      if (!/^[a-z]/.test(ref)) ref = 'ch_' + ref;
+      for (let k = 2; refs.has(ref); k++) ref = `${ref.replace(/_\d+$/, '')}_${k}`;
+      refs.add(ref);
+      const goals = Array.isArray(pc.objectives) ? pc.objectives.filter((x): x is string => typeof x === 'string' && !!x.trim()) : [];
+      const coverage = (pc.sections ?? []).map(x => (typeof x.title === 'string' ? x.title.trim() : '')).filter(Boolean);
+      extra.push({
+        ref,
+        title,
+        ...(goals.length ? { goals } : {}),
+        ...(coverage.length ? { coverage } : {}),
+        ...(prev ? { after: prev } : { position: 'start' as const }),
+      });
+      prev = ref;
+    });
+  }
+  return { pairs, extra, unplanned, unpaired };
+}
+/** The pack's chapters that the step's plan does not have → the chapters to add (alignPackChapters); null when the plan and
+    the pack cannot be lined up whole (then the caller warns instead of guessing). */
 export function packExtras(n: Step, chapters: readonly UploadChapter[]): ChapterAdd[] | null {
   const plan = n.chapters ?? [];
   if (!plan.length) return [];
-  if (chapters.length <= plan.length) {
-    // no more chapters than the plan: fine when each is a planned one; a chapter the plan lacks means they do not line up
-    return chapters.every(pc => plan.some(ch => sameTitle(ch.title, pc.title))) ? [] : null;
+  const a = alignPackChapters(plan, chapters);
+  return a.unplanned.length ? null : a.extra;
+}
+
+/** 📑 which chapter of the step's pack teaches each planned chapter (ch.pack: its id and title as the pack has them; at: when it
+    was lined up — the later wins in mergePlans). The panel shows the pack's title where the plan's own words are shown. */
+export function matchChapters(c: Roadmap, nid: string, match: readonly { ref: string; id: string; title: string }[], at: string): string[] {
+  const n = c.nodes[nid],
+    done: string[] = [];
+  if (!n?.chapters) return done;
+  for (const x of match) {
+    const ch = n.chapters.find(y => y.ref === x.ref),
+      was = ch?.pack as { id?: string; title?: string; at?: string } | undefined;
+    if (!ch || (was && ms(was.at) >= ms(at)) || (was?.id === x.id && was.title === x.title)) continue;
+    ch.pack = { id: x.id, title: x.title, at };
+    done.push(x.ref);
   }
-  const match = new Map<number, string>(); // pack index → plan ref
-  let j = 0;
-  chapters.forEach((pc, i) => {
-    const k = plan.findIndex((ch, x) => x >= j && sameTitle(ch.title, pc.title));
-    if (k >= 0) {
-      match.set(i, plan[k]?.ref ?? '');
-      j = k + 1;
-    }
-  });
-  if (match.size !== plan.length) return null; // every planned chapter must be found in the pack, in order
-  const refs = new Set(plan.map(ch => ch.ref)),
-    out: ChapterAdd[] = [];
-  let prev: string | null = null;
-  chapters.forEach((pc, i) => {
-    const m = match.get(i);
-    if (m !== undefined) {
-      prev = m;
-      return;
-    }
-    const title = (typeof pc.title === 'string' ? pc.title.trim() : '') || (pc.id ?? `chapter ${i + 1}`);
-    let ref =
-      title
-        .toLowerCase()
-        .normalize('NFKD')
-        .replace(/[̀-ͯ]/g, '')
-        .replace(/[^a-z0-9]+/g, '_')
-        .replace(/^_+|_+$/g, '')
-        .slice(0, 40) || `ch${i + 1}`;
-    if (!/^[a-z]/.test(ref)) ref = 'ch_' + ref;
-    for (let k = 2; refs.has(ref); k++) ref = `${ref.replace(/_\d+$/, '')}_${k}`;
-    refs.add(ref);
-    const goals = Array.isArray(pc.objectives) ? pc.objectives.filter((x): x is string => typeof x === 'string' && !!x.trim()) : [];
-    const coverage = (pc.sections ?? []).map(s => (typeof s.title === 'string' ? s.title.trim() : '')).filter(Boolean);
-    out.push({
-      ref,
-      title,
-      ...(goals.length ? { goals } : {}),
-      ...(coverage.length ? { coverage } : {}),
-      ...(prev ? { after: prev } : { position: 'start' as const }),
-    });
-    prev = ref;
-  });
-  return out;
+  if (done.length) n.chaptersAt = stampAfter(ms(at), n.chaptersAt);
+  return done;
 }
 
 /* ---------- 🌐 the languages of a Roadmap ---------- */

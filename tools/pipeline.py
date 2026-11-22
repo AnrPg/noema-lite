@@ -196,9 +196,16 @@ def local_check(kind, d, run):
         tail = (r.stdout + r.stderr).strip().splitlines()[-25:]
         return r.returncode == 0, tail
     if kind == "translations":   # a full translation of every chapter into en, el, ru, de, fr minus the pack's language (the pack rules' languages), or only its Roadmap's (subject.authoring.languages)
-        s = rj(os.path.join(d, "subject.json")) or {}; need = noema_core.required_locales(s.get("language", "en"), (s.get("authoring") or {}).get("languages"))[0]
+        s = rj(os.path.join(d, "subject.json")) or {}; scope = (s.get("authoring") or {}).get("languages"); own = (s.get("language") or "en").split("-")[0].lower()
+        need = noema_core.required_locales(s.get("language", "en"), scope)[0]
         chs = sorted(chapters_of(d, "chapters")); ok = bool(chs)
         if not chs: return False, ["no chapters yet"]
+        if not need: return True, [f"not needed: the languages of this pack's Roadmap are only its own ({own}) — subject.json authoring.languages"]
+        if scope is None and not os.path.isdir(os.path.join(d, "translations")):   # said once, plainly: the default is every language
+            L.append(f"subject.json names no languages (authoring.languages), so the pack rules' default holds: every pack is translated into {', '.join(need)} "
+                     f"(CONTENT_SPEC.md). If its Roadmap is meant to stay in {own} only, set that once — noema_set_roadmap_languages "
+                     f"{{\"translations\": []}} — and put \"authoring\": {{\"languages\": {{\"translations\": []}}}} into subject.json "
+                     f"(unpack.py --languages '{{\"translations\": []}}' does it); translate and bridges then pass as not needed")
         for loc in need:
             miss = [c for c in chs if not os.path.exists(os.path.join(d, "translations", loc, c + ".json"))]
             ok = ok and not miss

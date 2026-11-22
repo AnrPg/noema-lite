@@ -21,8 +21,8 @@ if not a: print(__doc__); sys.exit(1)
 sdir = os.path.abspath(a[0])
 out_dir = a[1] if len(a) > 1 else ('/mnt/user-data/outputs' if os.path.isdir('/mnt/user-data/outputs') else '.')
 meta, sources, chapters, report = load_subject(sdir)
-media, mrep = load_media(sdir)
 acts, arep = load_activities(sdir)   # None when the subject has no activities/ folder
+media, mrep = load_media(sdir, stills=fallback_media(acts))
 translations = load_translations(sdir, chapters)   # optional: translations/<locale>/chNN.json (CONTENT_SPEC.md "Packs in several languages")
 base_ids, base_chapters = (), ()
 try:

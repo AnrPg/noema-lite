@@ -4,7 +4,16 @@ import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { test } from 'node:test';
 import type { Roadmap, Step } from './model.ts';
-import { addChapters, checkAddChapters, checkLanguages, mergeAddedChapters, packExtras, setLanguages } from './chapters.ts';
+import {
+  addChapters,
+  alignPackChapters,
+  checkAddChapters,
+  checkLanguages,
+  matchChapters,
+  mergeAddedChapters,
+  packExtras,
+  setLanguages,
+} from './chapters.ts';
 import { mergePlans } from './plans.ts';
 import { checkI18n, setI18n, shownNode } from './i18n.ts';
 import { merged } from './inbox.ts';
@@ -120,13 +129,21 @@ test('an upload with more chapters than the plan: the extras, placed after the c
       ['Advanced device beha', 'mosfet_switching'],
     ],
   );
-  assert.equal(
+  assert.deepEqual(
     packExtras(
       n,
       pack.map(p => ({ ...p, title: 'Renamed ' + p.title })),
+    )?.map(a => a.after),
+    ['real_r_c_l', 'mosfet_switching'],
+    'titles that changed a little: lined up by their words',
+  );
+  assert.equal(
+    packExtras(
+      n,
+      pack.map((p, i) => ({ ...p, title: `Part ${String(i + 1)}` })),
     ),
     null,
-    'titles that do not line up: no guess',
+    'more chapters than the plan and no title in common: no guess',
   );
   assert.deepEqual(
     packExtras(
@@ -173,17 +190,76 @@ test('review cases: one title twice in a request, insertion order across copies,
   vn.plannedAt = new Date(NOW).toISOString();
   mergePlans(u, v);
   assert.deepEqual(refs(u, F.step3.id), ['p1', 'late']);
-  // a pack with as many chapters, one of them not in the plan: not lined up (the upload warns)
+  // a pack with as many chapters, one title changed (the R3 case): lined up by place, nothing to add, the changed one reported
   const n = roadmap().nodes[F.step3.id] as Step;
   const titles = (n.chapters ?? []).map(ch => ch.title);
   titles[2] = 'Something else entirely';
-  assert.equal(
+  assert.deepEqual(
     packExtras(
       n,
       titles.map(title => ({ title })),
     ),
-    null,
+    [],
   );
+  const al = alignPackChapters(
+    n.chapters ?? [],
+    titles.map((title, i) => ({ id: `ch${String(i + 1).padStart(2, '0')}`, title })),
+  );
+  assert.equal(al.pairs.length, titles.length, 'every planned chapter lined up');
+  assert.deepEqual(
+    al.pairs.filter(x => !x.same).map(x => [x.ref, x.id, x.title]),
+    [[n.chapters?.[2]?.ref, 'ch03', 'Something else entirely']],
+  );
+});
+
+test('lining a pack up with its plan: ref, title, close title, then place', () => {
+  const plan = ['Leading strand', 'Lagging strand and Okazaki fragments', 'Helicase', 'Primase', 'Review questions R3'].map((title, i) => ({
+    ref: `r${String(i + 1)}`,
+    title,
+  }));
+  // R6: no title matches, the same number of chapters → each by its place
+  const r6 = alignPackChapters(
+    plan,
+    ['Α', 'Β', 'Γ', 'Δ', 'Ε'].map((title, i) => ({ id: `ch0${String(i + 1)}`, title })),
+  );
+  assert.deepEqual(
+    r6.pairs.map(x => [x.ref, x.id]),
+    plan.map((ch, i) => [ch.ref, `ch0${String(i + 1)}`]),
+  );
+  assert.deepEqual([r6.unplanned, r6.extra], [[], []]);
+  // a ref wins over the order of titles; a chapter the plan lacks between two matches is an extra placed after the first
+  const x = alignPackChapters(plan, [
+    { id: 'ch01', title: 'Leading strand' },
+    { id: 'ch02', title: 'Lagging strand, Okazaki fragments' },
+    { id: 'ch03', title: 'Topoisomerases' },
+    { id: 'ch04', title: 'DNA helicase', ref: 'r3' },
+    { id: 'ch05', title: 'Primase' },
+    { id: 'ch06', title: 'Final test R3' },
+  ]);
+  assert.deepEqual(
+    x.pairs.map(p => [p.ref, p.id, p.same]),
+    [
+      ['r1', 'ch01', true],
+      ['r2', 'ch02', false],
+      ['r3', 'ch04', false],
+      ['r4', 'ch05', true],
+      ['r5', 'ch06', false],
+    ],
+  );
+  assert.deepEqual(
+    x.extra.map(e => [e.title, e.after]),
+    [['Topoisomerases', 'r2']],
+  );
+  // the line-up is recorded on the planned chapters; a later one wins, an older one changes nothing
+  const c = { nodes: { s: { id: 's', title: 'S', chapters: plan.map(ch => ({ ...ch })) } }, edges: [] } as unknown as Roadmap;
+  const m = x.pairs.map(p => ({ ref: p.ref, id: p.id, title: p.title }));
+  assert.equal(matchChapters(c, 's', m, '2026-11-22T10:00:00.000Z').length, 5);
+  assert.deepEqual(c.nodes.s?.chapters?.[1]?.pack, {
+    id: 'ch02',
+    title: 'Lagging strand, Okazaki fragments',
+    at: '2026-11-22T10:00:00.000Z',
+  });
+  assert.equal(matchChapters(c, 's', m, '2026-11-22T09:00:00.000Z').length, 0);
 });
 
 test('a delayed languages entry never overrides newer languages', () => {

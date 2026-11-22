@@ -284,8 +284,10 @@ def image_size(path):
     except Exception: return None
     return None
 
-def load_media(sdir, embed=True):
-    """Return ({id: item}, report). Items carry mime, w, h and (embed=True) a data: URI."""
+def load_media(sdir, embed=True, stills=()):
+    """Return ({id: item}, report). Items carry mime, w, h and (embed=True) a data: URI.
+    stills: the ids of the activities' still pictures (fallback_media): one registered with origin "own" (a license value,
+    not an origin) is read as "drawn", with a warning."""
     reg = rj(os.path.join(sdir, 'media', 'media.json'), {'format': 'noema.media/v1', 'items': []})
     out, report = {}, []
     if reg.get('format') != 'noema.media/v1': report.append('ERROR media.json: format must be "noema.media/v1"')
@@ -315,7 +317,14 @@ def load_media(sdir, embed=True):
         if not wh: report.append(f'ERROR media {mid}: cannot detect the image size — add "w" and "h"'); continue
         # provenance + quality (docs/VISUAL.md §6)
         origin = it.get('origin') or ('drawn' if ext == '.svg' else None)
-        if origin not in ORIGINS: report.append(f'ERROR media {mid}: "origin" must be one of {sorted(ORIGINS)}')
+        if origin == 'own' and mid in stills:
+            report.append(f'WARN media {mid}: origin "own" is read as "drawn" (an activity\'s still picture you made: origin "drawn", or "plot" '
+                          f'for a graph as activity_new.py writes it; "own" is a value of license) — write "origin": "drawn" in media/media.json')
+            origin = 'drawn'
+        if origin not in ORIGINS:
+            hint = (' — "own" is a value of license ("license": "own"), not of origin: a picture you made is origin "drawn" (a diagram) or "plot" (a graph, '
+                    'what activity_new.py writes for an activity\'s still)' if origin == 'own' else '')
+            report.append(f'ERROR media {mid}: "origin" is {origin!r}; it must be one of ' + ', '.join(f'{k} ({v})' for k, v in sorted(ORIGINS.items())) + hint)
         if origin == 'web':
             for k in ('url', 'retrieved'):
                 if not str(it.get(k, '')).strip(): report.append(f'ERROR media {mid}: web picture needs "{k}" (always record where it came from)')

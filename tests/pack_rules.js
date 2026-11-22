@@ -106,7 +106,9 @@ ok(rules('a pointer in the theory (Greek)', c => { c.sections[0].blocks[0].text 
 ok(rules('a short explanation', c => { c.exercises[2].explain = 'Because.'; }).join() === 'explain.depth', 'explain.depth: >= 2 sentences, >= 80 characters');
 ok(rules('an option without why', c => { c.exercises[0].why = c.exercises[0].why.slice(1); }).join() === 'mcq.why', 'mcq.why: every option has its why');
 ok(rules('the answer in the question', c => { c.exercises[0].q = 'Is a short one the right answer?'; }).join() === 'trivial.answer', 'trivial.answer: the right option written in the question');
-ok(same('the longest option', mut(c => { c.exercises[0].options[0] = 'a very much longer right option that gives it away'; })).every(i => i[1] === 'trivial.longest' && i[0] === 'warn'), 'trivial.longest is a warning only');
+// (its source question cited by another exercise: a source's own exercise is never flagged, below)
+ok(same('the longest option', mut(c => { c.exercises[0].options[0] = 'a very much longer right option that gives it away'; c.exercises[2].cite.sq = c.exercises[0].cite.sq; delete c.exercises[0].cite.sq; })).every(i => i[1] === 'trivial.longest' && i[0] === 'warn'), 'trivial.longest is a warning only');
+ok(!P.checkQuality(mut(c => { c.exercises[0].options[0] = 'a very much longer right option that gives it away'; }), {}).some(i => i.rule === 'trivial.longest'), 'trivial.longest: a source exercise (cite.sq) keeps its options as the source wrote them, never flagged');
 ok(rules('no cite', c => { delete c.exercises[5].cite; }).join() === 'cite.present', 'cite.present: every exercise keeps its provenance in cite');
 ok(rules('a source question nobody cites', c => { delete c.exercises[0].cite.sq; }).join() === 'source.questions', 'source.questions: every question of the sources has an exercise');
 ok(rules('a source question without answerFrom', c => { delete c.map.sourceQuestions[1].answerFrom; }).join() === 'source.questions', 'source.questions: every source question says where its answer comes from (source / claude)');

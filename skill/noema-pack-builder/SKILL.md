@@ -311,6 +311,15 @@ everything waiting goes up together at the end (below).
   each stale step names exactly the entities that changed — redo only those (their translations in every language, their
   blind re-solve in `review/chNN.json`; the checks insist), the rest passes as it is. Then `make_pack.py` and upload again
   (same id). `noema_check_pack` shows every issue at once if you want it; it is optional, the upload checks anyway.
+- **The hosts** your sandbox must reach: the learner's storage `awlvbxlpvjkhkreumfln.supabase.co` (every download and upload
+  link) and `noema-lite.netlify.app` (the connector, library packs, pictures) — docs/CLAUDE_CONNECTOR.md "Network". A
+  reconnect of the connector loses nothing: load its tools again and repeat the last call (every save is safe to repeat).
+  `noema_finish_upload` on a big pack may answer "passed every check … call again": call it again, it saves at once.
+- **Repairing a downloaded pack:** `noema_get_pack_url` names the languages of the pack's Roadmap; pass them to
+  `unpack.py … --repair --languages '<json>'` (a Roadmap in its own language only: `'{"translations": []}'`) so translate
+  and bridges ask only for those. `--repair` gives every flashcard without an id a stable one and lists the fields today's
+  schema requires that are missing. `noema_roadmap_map` with `known_for: "<step>"` gives the concepts earlier steps taught,
+  for subject.json `"authoring": {"known": [...]}` — their acronyms and terms then need no `map.known` entry in every chapter.
 - **Fallback — if the network blocks the upload** (the `curl` is refused, 403, a timeout, no connection): **do not stop.**
   `python3 scripts/pipeline.py defer work/<id> upload --note "curl: 403 from the storage"` and go on with the rest of the
   flow — translations and bridges never need the pack uploaded first; in a Roadmap, the next step too (the step whose upload

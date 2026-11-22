@@ -49,4 +49,32 @@ ok(strictErr.length > 0 && !P.checkPack(pack({ authoring: { rules: 3, by: 'claud
 const lr = copy(lad); lr.map.learnables = [{ id: 'ch01-l99', kp: [], goal: 'g' }];
 ok(P.auditPack(pack({ authoring: { rules: 3 } }, lr)).chapters[0].measures.retention.todo.some(t => /fewer than 2 exercise types.*ch01-l99/.test(t)), 'retention: a learnable with no exercise at all counts as practised in fewer than 2 types');
 ok(P.auditPack({}).chapters.length === 0 && P.auditPack(null).verdict === 'poor', 'not a pack → nothing to praise');
+// one validator (DNA upgrade handoff 2026-11-22, item 1): what make_pack.py and pipeline.py check … write refuse is an audit error
+{
+  const ch = copy(F.chapter);
+  ch.map = { concepts: copy(F.concepts), known: copy(F.known) };
+  ch.flashcards = [{ q: 'What is charge?', a: 'A property of matter.', section: ch.sections[0].id }];
+  const e0 = ch.exercises[0];
+  ch.exercises.push({ ...copy(e0), id: 'ch01-e900', type: 'spotbug', q: 'Which line is wrong?', lines: ['a = 1', 'b = 2', 'c = a +'], bugs: [2] });
+  delete ch.exercises[ch.exercises.length - 1].options; delete ch.exercises[ch.exercises.length - 1].answer;
+  ch.exercises.push({ ...copy(e0), id: 'ch01-e901', tags: ['sequence'] });
+  const au = P.auditPack(pack({ authoring: { rules: 3, by: 'claude' } }, ch));
+  ok(au.errors.some(e => /^ch01: flashcard needs an id like ch01-f001/.test(e)), 'audit: a flashcard without its id is a rule error (as make_pack.py refuses it)');
+  ok(au.errors.some(e => /ch01-e900: .*fix/.test(e)), 'audit: a spotbug without its fix is a rule error');
+  ok(au.errors.some(e => /ch01-e901: tags\[0\]: must be one of/.test(e)), 'audit: an unknown exercise tag ("sequence") is a rule error');
+  ok(new Set(au.errors).size === au.errors.length, 'audit: each message once (the pack check and the chapter check share the quality rules)');
+}
+// an activity's still picture needs no exercises; a source exercise keeps its options (no longest-option warning)
+{
+  const p = pack({ authoring: { rules: 3, by: 'claude' } }, copy(F.chapter));
+  p.media = { 'act-still': { w: 800, h: 400, alt: 'the still', data: 'data:image/svg+xml,<svg/>' } };
+  p.activities = { format: 'noema.activities/v1', items: [{ id: 'act', runtime: 'sim-spec@1', fallback: { media: 'act-still', text: 'x' } }] };
+  ok(!P.checkPack(p).warnings.some(w => /picture act-still has 0 exercises/.test(w)), 'an activity still picture is not asked for exercises');
+  const q = P.checkQuality({ id: 'ch01', sections: [{ id: 'ch01-s01' }], exercises: [
+    { id: 'ch01-e001', section: 'ch01-s01', type: 'mcq', q: 'Pick one.', options: ['a', 'b', 'the right answer is a much longer option than the rest'], answer: 2, cite: { src: 's1', sq: 'q1' } },
+    { id: 'ch01-e002', section: 'ch01-s01', type: 'mcq', q: 'Pick one.', options: ['a', 'b', 'the right answer is a much longer option than the rest'], answer: 2, cite: { src: 's1' } },
+  ], map: {} }, { authoring: { rules: 3 } });
+  const longest = q.filter(i => i.rule === 'trivial.longest').map(i => i.msg);
+  ok(longest.length === 1 && /ch01-e002/.test(longest[0]), 'trivial.longest: skipped for a source exercise (cite.sq), kept for the rest');
+}
 console.log(`\n${n} checks passed`);

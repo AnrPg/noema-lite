@@ -200,6 +200,22 @@ try:
     r = subprocess.run([sys.executable, os.path.join(sk, "audit.py"), rd], capture_output=True, text=True)
     ok(r.stdout.startswith("Quality audit: ") and "## depth" in r.stdout and "## interactivity" in r.stdout and "# Judgement" in r.stdout and r.returncode in (0, 1),
        "audit.py (as the skill ships it): the deep audit of a subject folder — today's rules and the five measures per chapter" + ("" if r.stdout.startswith("Quality") else "\n" + r.stdout + r.stderr))
+    # DNA upgrade handoff (2026-11-22): a downloaded pack whose cards lack ids, in a Roadmap of its own language only
+    got = json.load(open(os.path.join(work, "got.json"))); cards = got["chapters"][0]["flashcards"]
+    for f_ in cards[:2]: f_.pop("id", None)
+    json.dump(got, open(os.path.join(work, "got2.json"), "w"))
+    for l in ("el", "ru", "de", "fr"): shutil.copy(os.path.join(work, f"demo-coulomb.tr.{l}.json"), os.path.join(work, f"got2.tr.{l}.json"))
+    rep2 = os.path.join(work, "repair2")
+    r = subprocess.run([sys.executable, os.path.join(sk, "unpack.py"), os.path.join(work, "got2.json"), rep2, "--repair", "--languages", '{"translations": []}'], capture_output=True, text=True); rd2 = os.path.join(rep2, "demo-coulomb")
+    c2 = json.load(open(os.path.join(rd2, "chapters", "ch01.json")))
+    k2 = len(cards[:2])
+    ok(r.returncode == 0 and k2 >= 1 and [x["id"] for x in c2["flashcards"][:k2]] == [f"ch01-f{i + 1:03d}" for i in range(k2)] and f"{k2} flashcard(s) had no valid id" in r.stdout
+       and len({x["id"] for x in c2["flashcards"]}) == len(c2["flashcards"]),
+       "unpack.py --repair: cards without an id get a stable one by their place (ch01-f001…), every id unique" + ("" if r.returncode == 0 else "\n" + r.stdout + r.stderr))
+    ok(json.load(open(os.path.join(rd2, "subject.json")))["authoring"]["languages"] == {"translations": []}, "unpack.py --languages: the Roadmap's languages go into subject.json authoring.languages")
+    P("start", "4", rd2); [P("check", rd2, x) for x in ("start_subject", "map", "pictures", "activities", "write", "blind_solve", "review")]; r = P("check", rd2, "translate")
+    ok(r.returncode == 0 and "not needed" in r.stdout, "translate: not needed in a Roadmap of the pack's own language only" + ("" if r.returncode == 0 else "\n" + r.stdout))
+    ok(json.load(open(os.path.join(ROOT, "tools", "pipelines", "steps.json")))["steps"]["checks"]["needs"] == ["review"], "checks needs only the review: it (and the upload) can be recorded while translations are made")
 finally:
     shutil.rmtree(work, ignore_errors=True)
 print(f"\n{n} checks passed")

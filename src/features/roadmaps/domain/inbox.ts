@@ -12,7 +12,7 @@ import { hasEdge, order, topo } from './graph.ts';
 import { GRAPH, isApp, needsPlan, prepared, queued } from './work.ts';
 import { checkI18n, setI18n } from './i18n.ts';
 import { checkRestructure, type RestructurePlan } from './restructure.ts';
-import { addChapters, chaptersProblems, checkLanguages, setLanguages, type ChaptersEntry } from './chapters.ts';
+import { addChapters, chaptersProblems, checkLanguages, matchChapters, setLanguages, type ChaptersEntry } from './chapters.ts';
 
 export const IN = 'a:curin:';
 export const KINDS = ['step', 'assign', 'i18n', 'extend', 'link', 'restructure', 'chapters', 'languages'] as const;
@@ -252,7 +252,9 @@ export function merged(c: Roadmap, rows: readonly KvRow[], hooks: MergeHooks): R
     }
     if (e.kind === 'chapters') {
       const x = e as unknown as ChaptersEntry;
-      if (!chaptersProblems(cc, x).length) addChapters(cc, x.nid, x.chapters, Date.parse(x.at) || hooks.now);
+      if (x.chapters.length && !chaptersProblems(cc, { nid: x.nid, chapters: x.chapters }).length)
+        addChapters(cc, x.nid, x.chapters, Date.parse(x.at) || hooks.now);
+      if (Array.isArray(x.match) && typeof x.at === 'string') matchChapters(cc, x.nid, x.match, x.at); // (a repeat changes nothing)
       continue;
     }
     if (e.kind === 'languages') {

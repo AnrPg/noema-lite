@@ -212,6 +212,28 @@ never writes anything twice:
 * Claims keep their rules: a step handed out waits 72 h for its upload, a claim that ran out is taken over by a
   compare-and-swap (never two runs on one step). Finished sagas are dropped after a week.
 
+### Network: the hosts a sandbox must reach
+Claude's sandbox (claude.ai, Claude Code on the web, a cloud environment) runs the `curl` commands the connector hands it, so its
+network policy must allow these hosts — allow them up front, or every download and upload is refused (403 / no connection):
+
+| Host | Used by |
+|---|---|
+| `awlvbxlpvjkhkreumfln.supabase.co` (the `supabaseUrl` of `config.js`) | `noema_get_pack_url` (a signed download link of the learner's private storage), `noema_start_upload`, `noema_start_source_upload`, the source-file, translation and `.h5p` upload links of `noema_finish_upload`, `noema_save_translation`, `noema_lang_package_start` |
+| `noema-lite.netlify.app` (the `siteUrl`) | the connector itself (`/mcp`), `noema_get_pack_url` of a library pack, `noema_get_toolkit` (the skill zip), `noema_image_fetch` (`/api/img`) |
+
+The connector reaches only these two (plus the image hosts `noema_image_search` names). Pictures from the web (`noema_image_fetch`)
+go through `/api/img`, so the sandbox needs no other host for them.
+
+### Long sessions: reconnects and slow calls
+* **A reconnect** (the connector's tools disappear mid-task, then come back): nothing is lost. Load the tools again (in Claude
+  Code: ToolSearch `noema`) and repeat the last call — every writing tool is a saga (above) or a compare-and-swap, so a call that
+  was cut off is resumed or replayed, never done twice; work in progress lives in the sandbox (`work/<id>`, `run.json`), not in
+  the connection.
+* **A big pack** (900–1700 exercises): `noema_finish_upload` keeps the result of its checks for 2 h per pack content
+  (`checks/<id>.json` in the learner's storage). When the checks alone take more than 25 s it answers *"passed every check …
+  call again"* instead of saving in the same call, so the gateway never times out after a save (the 502 of 2026-11); the next
+  call reuses the check and saves. A 502 or a timeout from any tool: call it again — it answers what the first call did.
+
 ### Entry tables
 The 👁 source files of a subject and the 文A bridges are rows of their own — `noema_source_files` (one per source file per
 subject) and `noema_bridges` (one per pack × pair), cloud/supabase.sql §17 — instead of one JSON map in `noema_kv`

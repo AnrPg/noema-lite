@@ -27,6 +27,8 @@ export interface QualityContext {
   /** the pack's chapters before / after this one (pack.ts checks the whole pack); null when one chapter is checked alone */
   readonly before: readonly Obj[] | null;
   readonly after: readonly Obj[] | null;
+  /** subject.authoring.known: what earlier Roadmap steps taught (gradual.ts) */
+  readonly inherited: readonly Obj[];
 }
 /** where a chapter sits in its pack (Q0 reads the concepts of the other chapters) */
 export interface QualityPlace {
@@ -110,6 +112,7 @@ export function qualityContext(chapter: unknown, subject: unknown, place?: Quali
     sourceQuestions: new Map(objs(map.sourceQuestions).map(q => [q.id, q])),
     before: place?.before ? objs(place.before) : null,
     after: place?.after ? objs(place.after) : null,
+    inherited: objs(obj(obj(subject).authoring).known),
   };
 }
 
@@ -290,6 +293,8 @@ export const trivialLongest = exRule('trivial.longest', ({ e }, add) => {
   const ai = rightIndex(e),
     opts = list(e.options);
   if (ai == null || e.type !== 'mcq') return;
+  // an exercise of the learner's sources (cite.sq) keeps its options: only light edits are allowed (Q6), so the warning is noise
+  if (isObj(e.cite) && e.cite.sq != null) return;
   const others = opts.filter((_, i) => i !== ai).map(o => String(o).length);
   if (others.length && String(opts[ai]).length >= num(C('trivial.longest').ratio, 1e9) * Math.max(...others))
     add(`${s(e.id)}: the right option is by far the longest`);
