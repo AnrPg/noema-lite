@@ -187,11 +187,9 @@
   },
   "checks": {
    "title": "Every check (make_pack.py)",
-   "what": "python3 scripts/make_pack.py work/<id>: the quality rules (CONTENT_SPEC.md Q1–Q8) on every chapter, every translation against its chapter. Never deliver a pack that fails.",
+   "what": "python3 scripts/make_pack.py work/<id>: the quality rules (CONTENT_SPEC.md Q1–Q8) on every chapter, every translation against its chapter. Never deliver a pack that fails. It needs only the review: it may run (and the upload after it) while the translations and bridges are still being made — each translation added later makes it stale, so it runs again on the finished pack; status stays open until translate and bridges are done too.",
    "needs": [
-    "review",
-    "translate",
-    "bridges"
+    "review"
    ],
    "produces": [
     "build/{id}.json"

@@ -187,7 +187,14 @@ export function checkPack(p: unknown, expectId: unknown, opts: PackCheckOptions,
   const A = activities(p);
   E.push(...A.errors);
   W.push(...A.warnings);
-  for (const mid of Object.keys(media)) if ((used[mid] ?? 0) < 3) W.push(`picture ${mid} has ${used[mid] ?? 0} exercises (aim for >= 3)`);
+  // an activity's still picture (its fallback) stands in for the activity and is never exercised
+  const stills = new Set(
+    objs(obj(p.activities).items)
+      .map(a => obj(a.fallback).media)
+      .filter((x): x is string => typeof x === 'string'),
+  );
+  for (const mid of Object.keys(media))
+    if ((used[mid] ?? 0) < 3 && !stills.has(mid)) W.push(`picture ${mid} has ${used[mid] ?? 0} exercises (aim for >= 3)`);
   return {
     errors: E,
     warnings: W,

@@ -20,6 +20,68 @@ export { NO_ENGINES } from '../domain/env.ts';
 
 const isObjLike = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
 
+/** the pack's rules plus the authoring check of each chapter and translated chapter, with the options make_pack.py gives it
+    (Claude's quality level, the pack's features, the other chapters for Q0, the pictures and activities, minVisual) —
+    each message once, prefixed with its chapter */
+function withChapterChecks(
+  p: Record<string, unknown>,
+  rules: { errors: string[]; warnings: string[] },
+  check: (c: unknown, o: Omit<ChapterOptions, 'checkBlock' | 'checkSim'>) => { errors: readonly string[]; warnings: readonly string[] },
+): { errors: string[]; warnings: string[] } {
+  const o = (v: unknown): Record<string, unknown> => (isObjLike(v) ? v : {});
+  const sj = o(p.subject),
+    auth = o(sj.authoring),
+    chapters = (Array.isArray(p.chapters) ? p.chapters : []).filter(isObjLike);
+  const features = Object.entries(o(sj.features))
+    .filter(([, v]) => !!v)
+    .map(([k]) => k);
+  const media = Object.fromEntries(
+    Object.entries(o(p.media)).map(([k, v]) => [k, { w: o(v).w, h: o(v).h, regions: o(v).regions }]),
+  ) as Record<string, unknown>;
+  const items = Array.isArray(o(p.activities).items) ? (o(p.activities).items as unknown[]).filter(isObjLike) : null;
+  const activities = items
+    ? (Object.fromEntries(
+        items.map(a => [String(a.id), Object.fromEntries(Object.entries(a).filter(([k]) => k !== 'html' && k !== 'python'))]),
+      ) as ChapterOptions['activities'])
+    : undefined;
+  const slim = chapters.map(c => ({ id: c.id, map: { concepts: Array.isArray(o(c.map).concepts) ? o(c.map).concepts : [] } }));
+  const base = {
+    media,
+    minVisual: Number(auth.minVisualPerChapter ?? 3) || 0,
+    ...(activities ? { activities } : {}),
+    ...(auth.known !== undefined ? { known: auth.known } : {}),
+  };
+  const E = new Set(rules.errors),
+    W = new Set(rules.warnings);
+  const add = (cid: string, r: { errors: readonly string[]; warnings: readonly string[] }, warnTagged: boolean): void => {
+    for (const m of r.errors) E.add(m.startsWith(cid + ': ') ? m : `${cid}: ${m}`);
+    for (const m of r.warnings) if (!warnTagged || m.startsWith('[')) W.add(m.startsWith(cid + ': ') ? m : `${cid}: ${m}`);
+  };
+  chapters.forEach((c, i) => {
+    const cid = typeof c.id === 'string' ? c.id : `chapter ${String(i + 1)}`;
+    add(
+      cid,
+      check(c, {
+        ...base,
+        quality: 'error',
+        features,
+        rules: Math.max(QUALITY.gradual.rules, Number(auth.rules) || 0),
+        before: slim.slice(0, i),
+        after: slim.slice(i + 1),
+      }),
+      true,
+    );
+  });
+  const byId = new Map(chapters.map(c => [c.id, c]));
+  for (const [loc, t] of Object.entries(o(p.translations)))
+    for (const c of (Array.isArray(o(t).chapters) ? (o(t).chapters as unknown[]) : []).filter(isObjLike)) {
+      const src = byId.get(c.id);
+      if (src) add(`translations/${loc}/${String(c.id)}`, check(c, { ...base, source: src }), true);
+    }
+  // the quality issues checkPack found already come back from the chapter check: each message once
+  return { ...rules, errors: [...E], warnings: [...W] };
+}
+
 export function createContentChecks(env: CheckEnv) {
   const act = createActivityChecks(env);
   return {
@@ -36,7 +98,12 @@ export function createContentChecks(env: CheckEnv) {
         q.subject = { ...sj, authoring: { ...auth, rules: Math.max(QUALITY.gradual.rules, Number(auth.rules) || 0), by: 'claude' } };
         delete q.builtAt;
       }
-      const rules = checkPack(q, undefined, { requireQuality: true, strict: true }, x => act.checkActivities(x)); // strict: every chapter and exercise contract too (an ungradable exercise is never 'high')
+      const pack = checkPack(q, undefined, { requireQuality: true, strict: true }, x => act.checkActivities(x)); // strict: every chapter and exercise contract too (an ungradable exercise is never 'high')
+      // one validator: the authoring check of every chapter (make_pack.py, pipeline.py check … write, validate.py) is part of
+      // the audit, so anything those refuse is a rule error here too (card ids, a spotbug's fix, tags, model-answer keywords…)
+      const rules = isObjLike(q)
+        ? withChapterChecks(q, pack, (c, o) => checkChapter(c, { ...o, checkBlock: act.checkBlockAct, checkSim: act.checkSim }))
+        : pack;
       return auditPack(q, rules, env.suggest ?? null);
     },
     auditReport,

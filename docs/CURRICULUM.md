@@ -87,9 +87,15 @@ compare-and-swap write) and as an inbox entry `kind: "chapters"`; each added cha
 `mergePlans` brings a chapter one copy added and the other lacks into it, even on a prepared step (a plan made later than the
 chapter was added replaces it). `noema_save_roadmap_translation` accepts the added chapters at once.
 
-An upload reconciles by itself (`services/packsave.ts`): when a pack has chapters its step's plan lacks, matched by title in order
-(`packExtras`), the step gains them (goals from the chapter's objectives, coverage from its sections titles) and the result names
-them; when the titles do not line up, nothing is guessed — the result warns and points at `noema_add_roadmap_chapters`.
+An upload reconciles by itself (`services/roadmap.ts` `lineUpChapters`, `alignPackChapters`): the pack's chapters are lined up
+with the step's planned ones in order — first by ref (a chapter's `ref` or `id` that is a planned ref) or the same title, then by
+close titles (most of their words), then by place (the same number of chapters between two matches, or in all) — so one changed
+title never drops the step's chapter list. Each planned chapter records the pack's chapter that teaches it (`ch.pack = { id, title,
+at }`, the later wins in `mergePlans`; inbox entry `kind: "chapters"` with `match`), and the step panel shows the pack's title where
+the plan's own words are shown; the receipt names every title that differs. When the whole plan lines up, the step gains the
+chapters the pack has beyond it (goals from the chapter's objectives, coverage from its sections' titles); a planned chapter no
+chapter of the pack lines up with is named, the rest is still lined up. `noema_add_roadmap_chapters { "from_pack": true }` lines a
+prepared step up again with its pack (after the titles changed).
 
 ## 3. Mastery and unlocking
 

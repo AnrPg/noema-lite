@@ -4,6 +4,8 @@ import type { ToolContext } from '../tool.ts';
 import { str } from '../util.ts';
 import {
   addChapters,
+  alignPackChapters,
+  matchChapters,
   chaptersEntry,
   checkAddChapters,
   ladderLine,
@@ -14,8 +16,9 @@ import {
   stampAfter,
   type ChapterAdd,
   type RoadmapLanguages,
+  type UploadChapter,
 } from '../../features/roadmaps/domain/index.ts';
-import type { Roadmap } from '../../features/roadmaps/domain/model.ts';
+import type { PlannedChapter, Roadmap } from '../../features/roadmaps/domain/model.ts';
 import { curState, findInboxStep, stepOfPack } from './curricula.ts';
 
 export interface RoadmapTodo {
@@ -136,22 +139,60 @@ export async function writeChapters(
   add: readonly ChapterAdd[],
   seq: string,
   why = '',
+  match: readonly { ref: string; id: string; title: string }[] = [],
 ): Promise<boolean> {
   const CJ = ctx.engine.curJobs,
     now = Date.now(),
-    entry = chaptersEntry(nid, add, now, why);
+    entry = chaptersEntry(nid, add, now, why, match);
   const direct = await ctx.kv
     .update<Curriculum | null>('a:curriculum:' + c.id, cur => {
       if (!cur || cur.id !== c.id || !cur.nodes[nid]) return null; // a step still in the inbox (a new part): the entry brings it
-      const r = checkAddChapters(cur as unknown as Roadmap, nid, add);
-      if (r.errors.length || !r.fresh.length) return null;
-      addChapters(cur as unknown as Roadmap, nid, r.fresh, now);
-      return cur;
+      const r = add.length ? checkAddChapters(cur as unknown as Roadmap, nid, add) : { errors: [], fresh: [] };
+      if (r.fresh.length && !r.errors.length) addChapters(cur as unknown as Roadmap, nid, r.fresh, now);
+      const lined = match.length ? matchChapters(cur as unknown as Roadmap, nid, match, entry.at).length : 0;
+      return (r.fresh.length && !r.errors.length) || lined ? cur : null;
     })
     .catch(() => false);
   await ctx.kv.put(CJ.inboxKey(c.id, seq), entry);
-  addChapters(c as unknown as Roadmap, nid, add, now); // the caller's view, for its receipt
+  if (add.length) addChapters(c as unknown as Roadmap, nid, add, now); // the caller's view, for its receipt
+  if (match.length) matchChapters(c as unknown as Roadmap, nid, match, entry.at);
   return direct;
+}
+
+/** 📑 Line the step's pack up with its planned chapters (alignPackChapters): each planned chapter records which chapter of the
+    pack teaches it (the panel then shows the pack's title), the chapters the pack has beyond the plan are added, and every
+    title that differs is reported — one changed title never drops the step's chapter list. → the receipt for Claude */
+export async function lineUpChapters(
+  ctx: ToolContext,
+  c: Curriculum,
+  nid: string,
+  chapters: readonly UploadChapter[],
+  tag: string,
+  why: string,
+): Promise<string> {
+  const n = c.nodes[nid];
+  const plan = n?.chapters ?? [];
+  if (!plan.length) return '';
+  const a = alignPackChapters(plan as unknown as readonly PlannedChapter[], chapters);
+  const match = a.pairs.map(x => ({ ref: x.ref, id: x.id, title: x.title }));
+  const seq = Date.now().toString(36).padStart(9, '0') + '-ch' + tag;
+  if (match.length || a.extra.length) await writeChapters(ctx, c, nid, a.extra, seq, why, match);
+  const title = (ref: string): string => plan.find(ch => ch.ref === ref)?.title ?? ref;
+  const renamed = a.pairs.filter(x => !x.same);
+  const out: string[] = [];
+  if (match.length)
+    out.push(
+      `\n📑 The step's ${plan.length} planned chapter(s) are lined up with the pack's ${chapters.length}: ${a.pairs.length} matched${renamed.length ? `, ${renamed.length} under the pack's own title (the panel shows it): ${renamed.map(x => `${x.ref} “${title(x.ref)}” → ${x.id} “${x.title}”`).join('; ')}` : ''}.`,
+    );
+  if (a.extra.length)
+    out.push(
+      `\n📑 The step gained ${a.extra.length} chapter(s) the pack teaches beyond its plan: ${a.extra.map(x => `${x.ref} “${x.title}”`).join(', ')}. Its chapters now:\n${chapterList(c, nid)}`,
+    );
+  if (a.unplanned.length)
+    out.push(
+      `\n⚠️ ${a.unplanned.length} planned chapter(s) line up with no chapter of the pack: ${a.unplanned.map(r => `${r} “${title(r)}”`).join(', ')}${a.unpaired.length ? `; the pack's chapters left over: ${a.unpaired.map(i => `${String(chapters[i]?.id ?? i + 1)} “${chapters[i]?.title ?? ''}”`).join(', ')}` : ''}. The rest is lined up. Add a chapter the plan lacks with noema_add_roadmap_chapters, or line them up again after a change with noema_add_roadmap_chapters { "from_pack": true }.`,
+    );
+  return out.join('');
 }
 
 /** Set the Roadmap's languages: straight into it and as an inbox entry (like writeChapters). */

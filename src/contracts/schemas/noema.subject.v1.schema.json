@@ -43,6 +43,21 @@
         "minPerKind": { "type": "integer", "minimum": 0 },
         "rules": { "type": "integer", "minimum": 0 },
         "by": { "type": "string" },
+        "known": {
+          "description": "Q0: what the earlier Roadmap steps this pack builds on taught (their concept maps: noema_roadmap_map with known_for), read as known in every chapter — each { id, terms, units, symbols, from: \"@<step id>\" }.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "from"],
+            "properties": {
+              "id": { "type": "string" },
+              "terms": { "type": "array", "items": { "type": "string" } },
+              "units": { "type": "array", "items": { "type": "string" } },
+              "symbols": { "type": "array", "items": { "type": "string" } },
+              "from": { "type": "string", "pattern": "^@\\S+$" }
+            }
+          }
+        },
         "languages": {
           "description": "🌐 The languages this pack gets instead of the pack rules' default — its Roadmap's (docs/CURRICULUM.md §10b): full translations and 文A pairs \"source>native\" (left out: every pair among the pack's language and its translations).",
           "type": "object",

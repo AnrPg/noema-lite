@@ -126,4 +126,44 @@ ok(!plainOk('The thermistor reads 25 C, and the temperature of the junction is 8
 // inflected languages: a stem with *
 const el = copy(good); el.map.concepts[1].terms = ['ρεύμα*']; el.sections[0].blocks.push({ t: 'p', text: 'Η ένταση του ρεύματος θα έρθει αργότερα.' });
 ok(has(q0(el), 'concept.order', /ch01-s01 \(a paragraph, blocks\[\d+\]\): uses “ρεύμα\*”/), 'a stem (ρεύμα*) finds the inflected form (ρεύματος)');
+// DNA upgrade handoff (2026-11-22, item 4): word forms, forward mentions, look-alike units, what earlier Roadmap steps taught
+{
+  // Greek words match in every form, the accent moved too, with no stem; a multi-word term only as the whole phrase
+  const greek = (terms, text) => {
+    const g = copy(good), last = g.sections[g.sections.length - 1];
+    g.map.concepts.push({ id: 'snap', terms, in: last.id, def: 'Ένα στιγμιότυπο της δομής του μορίου σε μια στιγμή.' });
+    last.blocks.push({ t: 'p', text: `**${terms[0]}**: ένα στιγμιότυπο της δομής του μορίου, όπως το βλέπουμε σε μια στιγμή.` });
+    g.sections[0].blocks.push({ t: 'p', text });
+    return q0(g).filter(i => i.rule === 'concept.order' && /snap/.test(i.msg));
+  };
+  ok(!greek(['δομικό στιγμιότυπο'], 'Τα στιγμιότυπα της κάμερας δείχνουν τη συσκευή.').length, 'a bare everyday word (στιγμιότυπα) is not the multi-word term “δομικό στιγμιότυπο”');
+  ok(greek(['δομικό στιγμιότυπο'], 'Τα δομικά στιγμιότυπα θα έρθουν αργότερα.').some(i => /uses “δομικό στιγμιότυπο” \(snap\) — the text says “δομικά στιγμιότυπα”/.test(i.msg)), 'the whole term in another case and number (δομικά στιγμιότυπα) is still an early use, quoted as written');
+  ok(greek(['στιγμιότυπο'], 'Η σειρά των στιγμιοτύπων αλλάζει.').some(i => /the text says “στιγμιοτύπων”/.test(i.msg)), 'a Greek term without * finds the genitive plural with its accent moved (στιγμιοτύπων)');
+  // a forward reference: only named in a section before the one that teaches it (map.mentions)
+  const later = { id: 'ch02', map: { concepts: [{ id: 'fork', terms: ['replication fork'], in: 'ch02-s01', def: 'The Y where the two strands are opened and copied.' }] } };
+  const m = copy(good); m.sections[0].blocks.push({ t: 'p', text: 'From charge we will one day reach the replication fork, a story for later.' });
+  ok(has(q0(m, SJ, { before: [], after: [later] }), 'concept.order', /uses “replication fork” \(fork\), which ch02 introduces later/), 'a later chapter’s term named in passing is an error without a mention');
+  m.map.mentions = [{ id: 'fork', in: 'ch01-s01', why: 'named only as where the course goes; ch02 teaches it' }];
+  ok(!q0(m, SJ, { before: [], after: [later] }).some(i => /replication fork/.test(i.msg)), 'map.mentions: a forward reference named in that section only is allowed');
+  const m2 = copy(m); m2.exercises[0].q = (m2.exercises[0].q || '') + ' Think of the replication fork.';
+  ok(has(q0(m2, SJ, { before: [], after: [later] }), 'concept.order', /replication fork/), 'map.mentions: an exercise still may not use it');
+  const m3 = copy(m); m3.sections[1].blocks.push({ t: 'p', text: 'The replication fork again.' });
+  ok(has(q0(m3, SJ, { before: [], after: [later] }), 'concept.order', /replication fork/), 'map.mentions: only the section it names — another page still may not');
+  const m4 = copy(m); m4.sections[0].blocks.push({ t: 'p', text: 'A **replication fork** is where the strands open.' });
+  ok(has(q0(m4, SJ, { before: [], after: [later] }), 'concept.map', /defines “replication fork” .* not a mention/), 'map.mentions: defining it in bold is introducing it, not a mention');
+  const m5 = copy(m); m5.map.mentions = [{ id: 'fork', in: 'ch01-s01', why: 'x' }];
+  ok(has(q0(m5, SJ, { before: [], after: [later] }), 'concept.map', /why — one line/), 'map.mentions: needs its why');
+  // 10 A: a one-letter unit is a unit only where the chapter names it (ten adenines in a chapter that never names amperes)
+  const noAmp = (text) => { const ch = JSON.parse(JSON.stringify(good).replace(/amperes?|amps?\b/gi, 'flow units')); ch.map.concepts[1].units = []; ch.sections[0].blocks.push({ t: 'p', text }); return q0(ch).filter(i => /unit A|“10 A”/.test(i.msg)); };
+  ok(!noAmp('A poly(A) tail of 10 A follows the gene.').length, 'look-alikes: 10 A (ten adenines) in a chapter that never names amperes');
+  ok(noAmp('The wire carries 10 A; an ampere is a flow.').some(i => /unit A \(ampere/.test(i.msg)), 'look-alikes: 10 A where the chapter names the ampere is still a unit');
+  ok(noAmp('Το καλώδιο άγει 10 A· το αμπέρ είναι μονάδα.').some(i => /unit A \(ampere/.test(i.msg)), 'look-alikes: … named in Greek (αμπέρ) too');
+  ok(has(plainOk('A poly(A) tail of 10 A follows the gene.'), 'concept.order', /current/), 'look-alikes: where a concept declares the ampere, 10 A before its section is still an early use');
+  // what earlier Roadmap steps taught: subject.authoring.known, read as known in every chapter
+  const k = copy(good); k.sections[0].blocks.push({ t: 'p', text: 'The PCNA clamp of the last step holds charge.' });
+  ok(has(q0(k), 'concept.undeclared', /acronym PCNA/), 'an acronym an earlier step taught still needs declaring without authoring.known');
+  const SJK = { ...SJ, authoring: { ...SJ.authoring, known: [{ id: 'clamp', terms: ['PCNA'], from: '@dna-basics' }] } };
+  ok(!q0(k, SJK).some(i => /PCNA/.test(i.msg)), 'subject.authoring.known (noema_roadmap_map known_for): the acronym is known in every chapter');
+  ok(has(q0(k, { ...SJ, authoring: { ...SJ.authoring, known: [{ id: 'clamp', terms: ['PCNA'], from: 'ch00' }] } }), 'concept.undeclared', /acronym PCNA/), 'authoring.known counts only entries from an earlier step (@id)');
+}
 console.log(`\n${n} checks passed`);

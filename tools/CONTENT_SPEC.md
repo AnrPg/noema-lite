@@ -115,8 +115,18 @@ which `start_subject.py` writes). The learner meets every idea for the first tim
    plain text. Some look-alikes it reads as plain text by itself: hex numbers (`0x0C`), cell-pack notation (`3S`, `2S`,
    `4S2P`), a number before `C` in a sentence about temperature (`183 C` next to solder, reflow, temperature, ambient…
    reads as `183 °C`), `N` as a count or a variable (`5 N times`, `2 N + 1`); and a one-letter unit that is also an
-   everyday letter (C, N, F, H, S) only counts as an undeclared unit in a chapter that names it (coulomb, newton…). Where a
-   concept declares the unit, every real use before its section is still an error. Plan the chapter as a ladder: list its concepts in teaching order first, then the sections
+   everyday letter (A, C, N, F, H, S — `10 A` may be ten adenines) only counts as an undeclared unit in a chapter that names
+   it (ampere, coulomb, newton… in English, Greek or Russian). Where a concept declares the unit, every real use before its
+   section is still an error. **Words are matched whole, in every form:** a Greek word of a term matches in every case and
+   number and with its accent moved (`στιγμιότυπο` finds `στιγμιοτύπων`), without a `*` — so write the term as the learner
+   reads it; a multi-word term matches only as the whole phrase (`δομικό στιγμιότυπο` is not found in a bare `στιγμιότυπα`).
+   Keep a stem (`*`) for what the endings do not cover. **A forward reference** — a later concept a section only names, without
+   teaching it ("…the fork, which ch13 explains") — goes into `map.mentions`: `{ "id": "<the concept>", "in": "<the section
+   that names it>", "why": "named only, taught in ch13" }`. Only that section's theory may then name it (never in bold or a
+   `terms` block: that would be introducing it, and is an error); its exercises, cards and every other page still may not.
+   Never rename a correct term to get past the checker. **What earlier Roadmap steps taught** (their acronyms and terms: DNA,
+   PCNA, nt…) goes once into subject.json `"authoring": {"known": [...]}` — `noema_roadmap_map` with `known_for` gives the list —
+   and every chapter reads it as known. Plan the chapter as a ladder: list its concepts in teaching order first, then the sections
    (one idea each), then the exercises of each section from what that section and the earlier ones taught.
 - ✗ The real case: section 1 of "Charge, voltage and current" defined charge in one sentence, converted ampere-hours to
   coulombs, showed a table of charge, current, voltage, power and energy, and its exercises asked about amperes, volts and
@@ -301,6 +311,7 @@ some learnable's `kp`.
 - `concepts` / `known` (Q0): every concept the chapter introduces, in teaching order (`terms` = every word, unit and symbol
   the learner meets; `in` = its section; `def`; `needs`), and every one it uses without introducing it (`from`: `chNN`,
   `@<step id>` or `everyday`). Written with the points, before the sections; the checker reads every text against it.
+  `mentions` (Q0): a later concept a section only names (a forward reference), with `in` and `why` (Q0 rule 4).
 - `sequenceWhy` (Q5c): for every picture with an `img_sequence`, why tracing the order on it teaches something the
   picture does not already show (rarely true for a diagram with arrows).
 - Steps: (0) list the concepts in teaching order, each after what it needs (Q0); (1) list every point of the pages; (2) one pass per category; (3) list the source questions; (4) group the points

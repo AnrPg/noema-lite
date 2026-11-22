@@ -101,6 +101,8 @@ export interface ChapterOptions extends ChapterContext {
   /** the pack's other chapters (at least {id, map}), before and after this one: Q0 reads their concepts */
   readonly before?: readonly unknown[];
   readonly after?: readonly unknown[];
+  /** subject.authoring.known: what earlier Roadmap steps taught (Q0 reads it as known in every chapter) */
+  readonly known?: unknown;
 }
 export interface ChapterReport extends Report {
   readonly summary: {
@@ -423,7 +425,10 @@ export function checkChapter(chIn: unknown, o: ChapterOptions = {}): ChapterRepo
   } else if (nfig && nvis < 3) W(`only ${nvis} visual exercises on the chapter's pictures (docs/VISUAL.md asks for >= 3)`);
   const features = o.features ?? [];
   if (o.quality) {
-    const subject = { features: Object.fromEntries(features.map(f => [f, true])), authoring: { rules: o.rules ?? 0 } };
+    const subject = {
+      features: Object.fromEntries(features.map(f => [f, true])),
+      authoring: { rules: o.rules ?? 0, ...(o.known !== undefined ? { known: o.known } : {}) },
+    };
     const place = o.before || o.after ? { before: o.before ?? [], after: o.after ?? [] } : undefined;
     for (const i of checkQuality(ch, subject, place)) {
       const m = i.msg.startsWith(cid + ': ') ? i.msg.slice(cid.length + 2) : i.msg;

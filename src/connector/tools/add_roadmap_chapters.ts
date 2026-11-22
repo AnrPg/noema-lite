@@ -3,9 +3,9 @@
 import { argStr, fail, text, type Tool } from '../tool.ts';
 import { curState, pickCurriculum } from '../services/curricula.ts';
 import { BUSY, REPLAYED } from '../services/packsave.ts';
-import { chapterList, writeChapters } from '../services/roadmap.ts';
+import { chapterList, lineUpChapters, writeChapters } from '../services/roadmap.ts';
 import { sagaKey } from '../services/sagas.ts';
-import { checkAddChapters, findStep } from '../../features/roadmaps/domain/index.ts';
+import { checkAddChapters, findStep, type UploadChapter } from '../../features/roadmaps/domain/index.ts';
 import type { Roadmap } from '../../features/roadmaps/domain/model.ts';
 import { sha256Hex, str } from '../util.ts';
 
@@ -13,7 +13,7 @@ export const tool: Tool = {
   definition: {
     name: 'noema_add_roadmap_chapters',
     description:
-      "Add chapters to a step of a Roadmap at any time — also to a PREPARED step whose pack ended up with more chapters than its plan (the learner asked for extra material while it was built). Each chapter gets its ref, title, teaching goals, coverage and its place (after or before a chapter ref of the step, or position start / end). Only the step's chapter list grows: nothing is removed or reordered, and the pack, the prepared state, the links, the learner's progress and the other steps never change. The same request again changes nothing (a chapter already there with the same ref and title is reported, not added twice); a ref the step already uses for another chapter, a place that names no chapter of the step, an empty title or the same title twice are refused with the reason. Returns the step's chapters as they now are, to check. Then translate the new chapters with noema_save_roadmap_translation (it accepts them at once). First call noema_roadmap_map for the step's \"@id\" and its chapter refs.",
+      "Add chapters to a step of a Roadmap at any time — also to a PREPARED step whose pack ended up with more chapters than its plan (the learner asked for extra material while it was built). Each chapter gets its ref, title, teaching goals, coverage and its place (after or before a chapter ref of the step, or position start / end). Only the step's chapter list grows: nothing is removed or reordered, and the pack, the prepared state, the links, the learner's progress and the other steps never change. The same request again changes nothing (a chapter already there with the same ref and title is reported, not added twice); a ref the step already uses for another chapter, a place that names no chapter of the step, an empty title or the same title twice are refused with the reason. Returns the step's chapters as they now are, to check. Then translate the new chapters with noema_save_roadmap_translation (it accepts them at once). First call noema_roadmap_map for the step's \"@id\" and its chapter refs. With { \"from_pack\": true } it lines a PREPARED step's planned chapters up again with its pack's chapters (after an upload warned that they did not line up, or after chapter titles changed).",
     inputSchema: {
       type: 'object',
       required: ['step', 'chapters_json'],
@@ -29,7 +29,7 @@ export const tool: Tool = {
         chapters_json: {
           type: 'string',
           description:
-            'ONE JSON object: { "chapters": [{ "ref": "transformers", "title": "…", "goals": ["…" teaching goals], "coverage": ["…" what it must cover], "after": "<chapter ref>" (or "before": "<chapter ref>", or "position": "start" | "end"; default end) }], "why": "one line: why the step gains them (optional)" } — a place may name a chapter added before it in the same list',
+            'ONE JSON object: { "chapters": [{ "ref": "transformers", "title": "…", "goals": ["…" teaching goals], "coverage": ["…" what it must cover], "after": "<chapter ref>" (or "before": "<chapter ref>", or "position": "start" | "end"; default end) }], "why": "one line: why the step gains them (optional)" } — a place may name a chapter added before it in the same list. Or { "from_pack": true }: line the step\'s planned chapters up again with the chapters of its prepared pack (by ref, title, close title, then place, as noema_finish_upload does) — each planned chapter shows the pack\'s own title, and the chapters the pack has beyond the plan are added',
         },
       },
     },
@@ -56,6 +56,31 @@ export const tool: Tool = {
       return fail(`No step “${argStr(args, 'step')}” on “${c.title || c.goal}” — noema_roadmap_map lists the steps and their "@id"s.`);
     const n = c.nodes[nid],
       T = `“${n?.title ?? nid}” (@${nid})`;
+    if ((body as { from_pack?: unknown }).from_pack === true) {
+      // line the step's planned chapters up again with the chapters of its pack (as an upload does): nothing else changes
+      const pid = n?.pack?.id;
+      const raw2 = typeof pid === 'string' ? await ctx.storage.text(`${ctx.uid}/packs/${pid}.json`).catch(() => null) : null;
+      let pack: { chapters?: UploadChapter[] } | null = null;
+      try {
+        pack = raw2 ? (JSON.parse(raw2) as { chapters?: UploadChapter[] }) : null;
+      } catch {
+        pack = null;
+      }
+      if (!pack || !Array.isArray(pack.chapters))
+        return fail(
+          `${T} has no pack to line up with${typeof pid === 'string' ? ` (no readable pack "${pid}")` : ''}: prepare it first (noema_finish_upload with its step).`,
+        );
+      if (!n?.chapters?.length) return fail(`${T} has no planned chapters to line up (noema_curriculum_task plans them).`);
+      const key = sagaKey('chapters', c.id, nid, 'pack', (await sha256Hex(raw2 ?? '')).slice(0, 32));
+      const out = await ctx.sagas.run<string>('chapters', key, async s =>
+        s.step('line-up', async () => {
+          const line = await lineUpChapters(ctx, c, nid, pack.chapters ?? [], key.slice(-6), 'from_pack');
+          return `✅ ${T} lined up with its pack “${String(pid)}”.${line || ' Nothing to change.'}\nIts chapters now:\n${chapterList(await curState(ctx, pk.c, ctx.uid), nid)}`;
+        }),
+      );
+      if (out.status === 'done') return text(out.value + (out.replayed ? REPLAYED : ''));
+      return fail(BUSY(`The chapters of ${T}`));
+    }
     const r = checkAddChapters(c as unknown as Roadmap, nid, body.chapters);
     if (r.errors.length)
       return fail(

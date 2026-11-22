@@ -393,12 +393,16 @@
       }
     },
     "noema_roadmap_map": {
-      "description": "An existing Roadmap as it stands (with what is still waiting in its inbox): every step in study order with its id — the \"@id\" that is its permanent connection point — title, summary, role, prerequisites, state (prepared, queued, planned, needs a plan), part, and the chapters it teaches; then its parts. Read it before noema_extend_roadmap (to join the new part to the right steps, and not to add again what the map already teaches) and before writing a new step's knowledge map (points already taught earlier on the map go to taughtIn).",
+      "description": "An existing Roadmap as it stands (with what is still waiting in its inbox): every step in study order with its id — the \"@id\" that is its permanent connection point — title, summary, role, prerequisites, state (prepared, queued, planned, needs a plan), part, and the chapters it teaches; then its parts. Read it before noema_extend_roadmap (to join the new part to the right steps, and not to add again what the map already teaches) and before writing a new step's knowledge map (points already taught earlier on the map go to taughtIn). With known_for: also the concepts the prepared steps before that step taught, ready for subject.json \"authoring\": { \"known\": [...] } (Q0 reads them as known).",
       "type": "object",
       "properties": {
         "curriculum_id": {
           "type": "string",
           "description": "from noema_curricula (may be omitted when the learner has one Roadmap)"
+        },
+        "known_for": {
+          "type": "string",
+          "description": "optional: a step (\"@id\", id or title) — also list the concepts (terms, units, symbols, acronyms) the prepared steps before it taught, as the \"authoring\": { \"known\": [...] } of its subject.json (Q0 then reads them as known in every chapter)"
         }
       }
     },
@@ -441,7 +445,7 @@
       }
     },
     "noema_add_roadmap_chapters": {
-      "description": "Add chapters to a step of a Roadmap at any time — also to a PREPARED step whose pack ended up with more chapters than its plan (the learner asked for extra material while it was built). Each chapter gets its ref, title, teaching goals, coverage and its place (after or before a chapter ref of the step, or position start / end). Only the step's chapter list grows: nothing is removed or reordered, and the pack, the prepared state, the links, the learner's progress and the other steps never change. The same request again changes nothing (a chapter already there with the same ref and title is reported, not added twice); a ref the step already uses for another chapter, a place that names no chapter of the step, an empty title or the same title twice are refused with the reason. Returns the step's chapters as they now are, to check. Then translate the new chapters with noema_save_roadmap_translation (it accepts them at once). First call noema_roadmap_map for the step's \"@id\" and its chapter refs.",
+      "description": "Add chapters to a step of a Roadmap at any time — also to a PREPARED step whose pack ended up with more chapters than its plan (the learner asked for extra material while it was built). Each chapter gets its ref, title, teaching goals, coverage and its place (after or before a chapter ref of the step, or position start / end). Only the step's chapter list grows: nothing is removed or reordered, and the pack, the prepared state, the links, the learner's progress and the other steps never change. The same request again changes nothing (a chapter already there with the same ref and title is reported, not added twice); a ref the step already uses for another chapter, a place that names no chapter of the step, an empty title or the same title twice are refused with the reason. Returns the step's chapters as they now are, to check. Then translate the new chapters with noema_save_roadmap_translation (it accepts them at once). First call noema_roadmap_map for the step's \"@id\" and its chapter refs. With { \"from_pack\": true } it lines a PREPARED step's planned chapters up again with its pack's chapters (after an upload warned that they did not line up, or after chapter titles changed).",
       "type": "object",
       "required": ["step", "chapters_json"],
       "properties": {
@@ -455,7 +459,7 @@
         },
         "chapters_json": {
           "type": "string",
-          "description": "ONE JSON object: { \"chapters\": [{ \"ref\": \"transformers\", \"title\": \"…\", \"goals\": [\"…\" teaching goals], \"coverage\": [\"…\" what it must cover], \"after\": \"<chapter ref>\" (or \"before\": \"<chapter ref>\", or \"position\": \"start\" | \"end\"; default end) }], \"why\": \"one line: why the step gains them (optional)\" } — a place may name a chapter added before it in the same list"
+          "description": "ONE JSON object: { \"chapters\": [{ \"ref\": \"transformers\", \"title\": \"…\", \"goals\": [\"…\" teaching goals], \"coverage\": [\"…\" what it must cover], \"after\": \"<chapter ref>\" (or \"before\": \"<chapter ref>\", or \"position\": \"start\" | \"end\"; default end) }], \"why\": \"one line: why the step gains them (optional)\" } — a place may name a chapter added before it in the same list. Or { \"from_pack\": true }: line the step's planned chapters up again with the chapters of its prepared pack (by ref, title, close title, then place, as noema_finish_upload does) — each planned chapter shows the pack's own title, and the chapters the pack has beyond the plan are added"
         }
       }
     },

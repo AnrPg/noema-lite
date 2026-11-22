@@ -68,7 +68,11 @@ chapter and names the only files to edit.
 1. The work folder is still there: edit only the named entities in `chapters/chNN.json`, `map/chNN.json` (concepts, known),
    `translations/<locale>/chNN.json`. It is gone (another session), or the pack is already saved: get it back with
    `noema_get_pack_url` → curl → `python3 scripts/unpack.py PACK.json work --repair` (chapters, `map/`, `review/`,
-   `translations/` as files; no chapter is a base, so every rule holds again).
+   `translations/` as files; no chapter is a base, so every rule holds again). `--repair` gives every flashcard without a
+   valid id a stable `chNN-fNNN` by its place (the app moves its progress to it) and lists the fields today's schema requires
+   that are missing; `--languages '<json>'` writes the Roadmap's languages, which `noema_get_pack_url` names, into subject.json.
+   **One validator:** `audit.py` / `noema_quality_audit` run the same chapter check as `make_pack.py` and `pipeline.py check …
+   write`, so whatever those refuse is already a rule error of the audit.
 2. `pipeline.py status` / `next`: only the steps touched by the fix are stale, each with the entities that changed; the rest
    passes at once when checked (a repaired folder: `pipeline.py start 4 DIR`, then each check).
 3. `make_pack.py`, then the upload with the same subject id.
@@ -185,7 +189,7 @@ The chapter's **knowledge map** `map/chNN.json` comes first (format in `tools/CO
 | source.questions, cite.present | every source question has an exercise citing it (`cite.sq`); every exercise keeps its origin in `cite` |
 | self.contained | no text points at the source's structure ("Q2", "page 5", "the source says") |
 | explain.depth, mcq.why | explanations ≥ 2 sentences; a why for every option |
-| trivial.answer, trivial.longest (warning) | the answer is not in the question, nor by far the longest option |
+| trivial.answer, trivial.longest (warning) | the answer is not in the question, nor by far the longest option (the longest-option warning skips exercises of the sources, `cite.sq`, which keep their options) |
 | review.done | the blind re-solve and the rubric are done |
 | example.restated (warning) | no exercise points at a lesson's example ("the example above"); it writes the example out and asks a question that needs thinking (CONTENT_SPEC Q5b) |
 | figure.explained (warning) | every `figure` / `diagram` is explained in detail right after it: what it shows, how to read it, what it teaches (Q7b) |

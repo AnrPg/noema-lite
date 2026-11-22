@@ -808,6 +808,15 @@
             }
           }
         },
+        "mentions": {
+          "description": "Q0: a concept taught later (a later section of this chapter, or a later chapter) that a section only NAMES — a forward reference, not taught there: { id: the concept, in: the section that names it, why }. Only that section's theory may name it (never in bold or a terms block: that would introduce it); its exercises, cards and every other page still may not use it (src/features/content/domain/gradual.ts).",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "in", "why"],
+            "properties": { "id": { "type": "string" }, "in": { "type": "string" }, "why": { "type": "string" } }
+          }
+        },
         "plainText": {
           "description": "Q0: words and numbers of the chapter's text that only look like a unit after a number or an acronym (\"3S\" = three cells in series, \"183 C\" on a datasheet, \"0x0C\", a part number): the gradual-introduction checker reads the text without them (src/features/content/domain/gradual.ts).",
           "type": "array",

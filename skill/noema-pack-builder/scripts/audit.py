@@ -13,7 +13,7 @@ for _s in (sys.stdout, sys.stderr):
     except Exception: pass
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import noema_core
-from noema_lib import load_subject, load_media, load_activities, load_translations, pack_i18n
+from noema_lib import load_subject, load_media, load_activities, load_translations, pack_i18n, fallback_media
 
 def from_dir(d):
     meta, sources, chapters, _ = load_subject(d)
@@ -21,8 +21,8 @@ def from_dir(d):
         for k in ('map', 'review'):
             f = os.path.join(d, k, c['id'] + '.json')
             if os.path.exists(f): c[k] = json.load(open(f, encoding='utf-8'))
-    media, _ = load_media(d)   # embedded, as make_pack.py packs them (a local picture needs its data)
     acts, _ = load_activities(d)
+    media, _ = load_media(d, stills=fallback_media(acts))   # embedded, as make_pack.py packs them (a local picture needs its data)
     p = {'format': 'noema-pack', 'v': 3, 'subject': meta, 'sources': sources, 'chapters': chapters, 'media': media}
     if acts and acts.get('items'):   # the registry as make_pack.py writes it: its parts and what it requires
         p['activities'] = {'format': 'noema.activities/v1', 'items': acts['items'], **({'parts': acts['parts']} if acts.get('parts') else {})}

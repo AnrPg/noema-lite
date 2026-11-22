@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 """Turn an existing pack back into a subject folder: to REPAIR it (--repair) or for additive updates.
-  python3 unpack.py PACK.noema.zip|PACK.json WORKDIR [--repair]
+  python3 unpack.py PACK.noema.zip|PACK.json WORKDIR [--repair] [--languages JSON]
       → WORKDIR/<id>/ (subject.json, sources.json, chapters/, map/, review/, media/, activities/, sources/, translations/)
 --repair: a pack the upload refused, or one whose work folder is gone (noema_get_pack_url → curl): every chapter is yours to
 fix in place and is held to every rule again. Fix only what the errors name (chapters/chNN.json, map/chNN.json …), then
 pipeline.py start + check (each step passes at once where nothing is wrong; status names what changed), make_pack.py, upload.
+It gives every flashcard without a valid id a stable one (<chapter>-fNNN by its place; the app moves its progress) and lists
+the fields the current schema requires that are missing (the chapter check of make_pack.py).
+--languages JSON: the languages of the pack's Roadmap as noema_get_pack_url gives them ('{"translations": []}' for a Roadmap in its
+own language only) → subject.json authoring.languages, so the pipeline and make_pack.py ask only for those.
 A .noema.zip package also gives back the original source files (sources/). From a plain .json the files are not there:
 the learner already has them, so make_pack.py keeps those sources as they are.
 Existing chapters become the base files: never renumber or delete their ids — add new chapters (next chNN)
@@ -15,6 +19,12 @@ for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux 
     except Exception: pass
 a = sys.argv[1:]
 repair = '--repair' in a; a = [x for x in a if x != '--repair']
+langs = None   # --languages JSON: the Roadmap's languages (noema_get_pack_url names them) → subject.json authoring.languages
+if '--languages' in a:
+    i = a.index('--languages'); raw = a[i + 1] if i + 1 < len(a) else ''; a = a[:i] + a[i + 2:]
+    try: langs = json.loads(raw)
+    except Exception: sys.exit('--languages: ONE JSON object such as \'{"translations": []}\' (the Roadmap\'s languages, as noema_get_pack_url gives them)')
+    if not isinstance(langs, dict) or not isinstance(langs.get('translations'), list): sys.exit('--languages: {"translations": [...], "bridges": [...] (optional)}')
 if len(a) < 2: print(__doc__); sys.exit(1)
 import zipfile
 bundle = None
@@ -28,6 +38,7 @@ sid = p['subject']['id']; d = os.path.join(a[1], sid)
 for sub in ('chapters', 'patches', 'media', 'sources', 'coverage', 'map', 'review'): os.makedirs(os.path.join(d, sub), exist_ok=True)
 subj = {k: v for k, v in p['subject'].items() if k not in ('owner',)}
 subj.setdefault('authoring', {'minVisualPerChapter': 3, 'minExercisesPerPicture': 3})
+if langs is not None: subj['authoring']['languages'] = langs
 json.dump(subj, open(os.path.join(d, 'subject.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 SRC = p.get('sources') or {'sources': [], 'chapters': {}, 'patches': {}}
 restored, kept = [], []
@@ -42,8 +53,28 @@ json.dump(SRC, open(os.path.join(d, 'sources.json'), 'w', encoding='utf-8'), ens
 # the chapters of an additive update are its base (make_pack.py keeps their checks as warnings); a repair has no base: every
 # chapter is checked as new
 json.dump({'from': os.path.basename(a[0]), 'sourcesWithFiles': kept, 'chapters': [] if repair else [c['id'] for c in p['chapters']], 'repair': repair}, open(os.path.join(d, '.unpacked.json'), 'w', encoding='utf-8'))
+CARD = re.compile(r'^ch\d\d-f\d{3}$')
+def card_ids(cid, cards):
+    """--repair: every flashcard gets a stable id <chapter>-fNNN (progress is keyed by it): a card that has a valid one keeps it;
+    the others get the number of their place (the first card f001…), or the next free one — the same ids on every download of
+    the same pack, so the app moves each card's progress from its place (chNN#k) to its id. → [(place, id)] given"""
+    have = {f.get('id') for f in cards if isinstance(f, dict) and isinstance(f.get('id'), str) and f['id'].startswith(cid + '-f') and CARD.match(f['id'])}
+    seen, out = set(), []
+    nxt = lambda: next(n for n in range(1, 10000) if f'{cid}-f{n:03d}' not in have | seen)
+    for k, f in enumerate(cards):
+        if not isinstance(f, dict): continue
+        fid = f.get('id')
+        if isinstance(fid, str) and fid in have and fid not in seen: seen.add(fid); continue
+        want = f'{cid}-f{k + 1:03d}'
+        new = want if want not in have and want not in seen else f'{cid}-f{nxt():03d}'
+        f['id'] = new; seen.add(new); out.append((k, new))
+    return out
+fixed_cards = {}
 for c in p['chapters']:
     c = {k: v for k, v in c.items() if not k.startswith('_')}
+    if repair and isinstance(c.get('flashcards'), list) and re.fullmatch(r'ch\d\d', str(c.get('id') or '')):
+        given = card_ids(c['id'], c['flashcards'])
+        if given: fixed_cards[c['id']] = given
     for k in ('map', 'review'):   # the knowledge map and the review go back to their own files (map/chNN.json, review/chNN.json; make_pack.py reads them with the quality rules, rules >= 2)
         if isinstance(c.get(k), dict) and int((subj.get('authoring') or {}).get('rules', 0) or 0) >= 2: json.dump(c.pop(k), open(os.path.join(d, k, c['id'] + '.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     json.dump(c, open(os.path.join(d, 'chapters', c['id'] + '.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
@@ -57,6 +88,9 @@ def tr_chapters(loc, t):   # inline, or in its own file: translations/<locale>.j
 for loc, t in (p.get('translations') or {}).items():   # a pack in several languages: translations/<locale>/chNN.json
     for c in tr_chapters(loc, t):
         c = {k: v for k, v in c.items() if not k.startswith('_')}
+        for k, fid in fixed_cards.get(c.get('id'), []):   # the translation's card at the same place gets the same id
+            cards = c.get('flashcards') if isinstance(c.get('flashcards'), list) else []
+            if k < len(cards) and isinstance(cards[k], dict): cards[k]['id'] = fid
         os.makedirs(os.path.join(d, 'translations', loc), exist_ok=True)
         if isinstance(c.get('map'), dict):   # its knowledge map in that language: translations/<locale>/map/chNN.json (make_pack.py reads it back)
             os.makedirs(os.path.join(d, 'translations', loc, 'map'), exist_ok=True)
@@ -127,6 +161,25 @@ if acts:
         if re.fullmatch(r'[a-z0-9][a-z0-9-]{0,60}', str(pn)) and isinstance(pd, dict):
             os.makedirs(os.path.join(d, 'activities', '_parts'), exist_ok=True); json.dump(pd, open(os.path.join(d, 'activities', '_parts', pn + '.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 if repair:
+    if fixed_cards:
+        print(f'repair: {sum(len(v) for v in fixed_cards.values())} flashcard(s) had no valid id — given <chapter>-fNNN by their place '
+              f'({", ".join(f"{c}: {len(v)}" for c, v in fixed_cards.items())}); the app moves their progress to the new ids')
+    # what today's rules still refuse: the same chapter check as make_pack.py and the audit (fields a fix needs a person for:
+    # a spotbug's fix, a model answer's keywords, an unknown tag…) — listed by kind, so nothing waits until make_pack.py
+    try:
+        HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
+        import noema_core
+        chs = [json.load(open(os.path.join(d, 'chapters', c['id'] + '.json'), encoding='utf-8')) for c in p['chapters']]
+        res = noema_core.batch([('chapter.check', c, {}) for c in chs])
+        from collections import Counter
+        kinds = Counter(); first = {}
+        for c, r in zip(chs, res):
+            for e in r['errors']:
+                k = re.sub(r"\b(ch\d\d-[a-z]\d{3}|ch\d\d-s\d\d|\d+)\b", '#', e)[:90]; kinds[k] += 1; first.setdefault(k, f"{c['id']}: {e}")
+        if kinds:
+            print(f'repair: {sum(kinds.values())} field(s) the current schema requires are missing or wrong — fix them first (python3 audit.py {d} lists every rule):')
+            for k, n in kinds.most_common(12): print(f'  {n}× {first[k]}')
+    except Exception as e: print(f'(the schema check could not run here: {e} — python3 audit.py {d} lists it)')
     print(f'repair: fix only what the errors name, in place (chapters/chNN.json, map/chNN.json, translations/<locale>/chNN.json …); then\n'
           f'  python3 pipeline.py start 4 {d}   (once) and python3 pipeline.py next {d} → check each step (the parts that are right pass at once)\n'
           f'  python3 make_pack.py {d} <out> → upload again (noema_start_upload → curl → noema_finish_upload, same subject id)')
