@@ -1751,7 +1751,7 @@
     "spec.model.bindings[0].element is not a part of the netlist"
    ],
    [
-    "spec.model.bindings[0].prop cannot be set on this part (value of R, C, L and a DC source; on of a switch; pulse.v2, sine.freq, pwm.duty … of a source with that waveform)"
+    "spec.model.bindings[0].prop cannot be set on this part (value of R, C, L and a DC source; ic, the starting voltage of C or current of L; on of a switch; params.<name> of a device: SW has Ron, Roff; pulse.v2, sine.freq, pwm.duty … of a source with that waveform)"
    ],
    [
     "spec.model.bindings[0].expr: unknown variable 'nope' in “closed && nope”"

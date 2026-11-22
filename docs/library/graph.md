@@ -52,7 +52,7 @@ The values `dx`, `dt`, `hops` are those of the whole run; the step changes only 
 - **Numbers.** Node coordinates, weights and capacities, `generate.p`, and `run.step`, `hweight`, `alpha`, `beta` are **numx**:
   a number, or an expression over the spec's names. `exprs(spec)` lists them as `[source, path, []]` (the engine has no local
   names). `keys(spec)` lists the nodes' `label` keys (a node's label is a key of the activity's string tables, never text).
-- **Outputs**: `{id, kind, of, node?, code?, labels?}`. `of` must be something the engine computes (§4) and `kind` its kind.
+- **Outputs**: `{id, kind, of, node?, code?, labels?, edgeLabels?, arrow?}` (a scene: `edgeLabels: false` prints no value on the edges — an unweighted graph never prints 1 on every link anyway; `arrow` 0.5–3 scales the arrowheads). `of` must be something the engine computes (§4) and `kind` its kind.
 - **Runtime.** `run(spec, env, {seed})` returns `{out, diag, graph, frames, result}`. The adapter `engine.create(spec).run(inputs)`
   gives the declared outputs by id. A run never throws; what cannot be computed is NaN (or +∞ for a distance that does not exist).
 
@@ -62,7 +62,7 @@ The values `dx`, `dt`, `hops` are those of the whole run; the step changes only 
 |---|---|---|
 | `graph` | object | `{directed?, nodes, edges?}`: written out (one of `graph`, `generate`) |
 | `graph.nodes[]` | `{id, x?, y?, label?}` | ≤ 2000; `id` is the node's name (letters, digits, `_ - .`), x and y numx (both or neither), `label` a string key |
-| `graph.edges[]` | `{u, v, w?, cap?, id?}` | ≤ 20 000; `w` the weight (1), `cap` the capacity (= w); parallel edges and self-loops are allowed and reported |
+| `graph.edges[]` | `{u, v, w?, cap?, id?, on?}` | ≤ 20 000; `w` the weight (1), `cap` the capacity (= w); `on` a number or an expression: the edge is there while it is true (a toggle switches a link); parallel edges and self-loops are allowed and reported |
 | `generate` | object | `{kind, …}`: §3 (one of `graph`, `generate`) |
 | `layout` | `auto` \| `given` \| `circle` \| `grid` \| `spring` \| `layered` \| `bipartite` \| `random` | where the nodes are drawn (`auto`: the coordinates if given, else by generator) |
 | `run` | object | `{alg, …}`: the algorithm (§2); without it only the properties and the drawing |

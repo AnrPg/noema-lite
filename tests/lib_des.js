@@ -259,5 +259,12 @@ const MM1 = SPEC({ tEnd: 2000, warmup: 200, reps: 10, sources: [{ id: 'a', to: '
   }
 }
 
+{ // a queue's size from a control (2026-11-22): capacity 'k' with k = 4 is the M/M/1/5 above; a size out of range is bad-dist
+  const sp = k => ({ ...SPEC({ tEnd: 3000, warmup: 100, reps: 10, sources: [{ id: 'a', to: 'q', arrival: exp(1) }], stations: [{ id: 'q', capacity: 'k', service: exp(0.9) }] }, [{ id: 'pa', kind: 'scalar', of: 'pAbandon', station: 'q' }, { id: 'ok', kind: 'scalar', of: 'ok' }]), params: [{ id: 'k', kind: 'slider', min: -5, max: 10, default: 4 }] });
+  const a = D.run(sp(4), { k: 4 }, { seed: 1 }), b = D.run({ ...SPEC({ tEnd: 3000, warmup: 100, reps: 10, sources: [{ id: 'a', to: 'q', arrival: exp(1) }], stations: [{ id: 'q', capacity: 4, service: exp(0.9) }] }, [{ id: 'pa', kind: 'scalar', of: 'pAbandon', station: 'q' }]) }, {}, { seed: 1 });
+  ok(a.out.pa === b.out.pa && a.out.pa > 0, `capacity 'k' (k = 4) gives the same P(lost) as capacity 4: ${f3(a.out.pa)}`);
+  const c = D.run(sp(-5), { k: -5 }, { seed: 1 });
+  ok(c.codes.some(d => d.code === 'bad-dist'), 'capacity k = −5: bad-dist');
+}
 console.log(`\n${n - fails}/${n} passed`);
 process.exit(fails ? 1 : 0);

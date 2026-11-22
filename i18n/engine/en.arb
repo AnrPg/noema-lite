@@ -6790,6 +6790,10 @@
   "@engine.author.f.lib.arg": {
     "description": "Label of the field “arg” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
   },
+  "engine.author.f.lib.arrow": "Arrowhead size",
+  "@engine.author.f.lib.arrow": {
+    "description": "Label of the field “arrow” (arrowhead size, 0.5–3 times) of a library engine’s outputs in the activity author (engines: graph). Short."
+  },
   "engine.author.f.lib.atol": "Absolute tolerance",
   "@engine.author.f.lib.atol": {
     "description": "Label of the field “atol” of a library engine’s model or outputs in the activity author (engines: ode). Short."
@@ -7229,6 +7233,10 @@
   "engine.author.f.lib.ease": "Ease",
   "@engine.author.f.lib.ease": {
     "description": "Label of the field “ease” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.edgeLabels": "Edge labels",
+  "@engine.author.f.lib.edgeLabels": {
+    "description": "Label of the field “edgeLabels” (whether each link prints its weight) of a library engine’s outputs in the activity author (engines: graph). Short."
   },
   "engine.author.f.lib.edges": "Edges",
   "@engine.author.f.lib.edges": {

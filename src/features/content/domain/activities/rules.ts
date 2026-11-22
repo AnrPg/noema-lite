@@ -175,7 +175,7 @@ export const SPEC_LIM = {
   checks: 16,
   bytes: 64 * 1024,
   unit: 16,
-  digits: 8,
+  digits: 12,
 } as const;
 export const NAME_RE = /^[A-Za-z_][A-Za-z0-9_]{0,31}$/;
 export const PARAM_KINDS = ['slider', 'number', 'toggle', 'choice'] as const;

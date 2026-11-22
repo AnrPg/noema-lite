@@ -70,7 +70,16 @@ for mid, m in (p.get('media') or {}).items():
     mt = re.match(r'data:([^;,]+)(;base64)?,(.*)', m['data'], re.S)
     raw = base64.b64decode(mt.group(3)) if mt.group(2) else mt.group(3).encode()
     fn = mid + EXT.get(mt.group(1), '.bin'); open(os.path.join(d, 'media', fn), 'wb').write(raw)
-    items.append({k: v for k, v in m.items() if k not in ('data', 'mime', 'sha', 'w', 'h') or (k in ('w', 'h') and not fn.endswith('.svg'))} | {'id': mid, 'file': fn})
+    loc_i18n = {}
+    for loc, L in (m.get('i18n') or {}).items():   # the picture in another language: media/<id>.<locale>.<ext> (i18n.<locale>.file)
+        L = dict(L) if isinstance(L, dict) else {}
+        lm = re.match(r'data:([^;,]+)(;base64)?,(.*)', L.pop('data', '') or '', re.S); L.pop('sha', None)
+        if lm:
+            lfn = f'{mid}.{loc}' + EXT.get(lm.group(1), '.bin')
+            open(os.path.join(d, 'media', lfn), 'wb').write(base64.b64decode(lm.group(3)) if lm.group(2) else lm.group(3).encode())
+            L['file'] = lfn
+        loc_i18n[loc] = L
+    items.append({k: v for k, v in m.items() if k not in ('data', 'mime', 'sha', 'w', 'h') or (k in ('w', 'h') and not fn.endswith('.svg'))} | {'id': mid, 'file': fn} | ({'i18n': loc_i18n} if loc_i18n else {}))
 json.dump({'format': 'noema.media/v1', 'items': items}, open(os.path.join(d, 'media', 'media.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 acts = (p.get('activities') or {}).get('items') or []   # interactive activities (docs/INTERACTIVE.md): back to activities/activities.json + activities/<id>/
 if acts:

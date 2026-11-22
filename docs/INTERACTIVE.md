@@ -143,7 +143,7 @@ each translation). Numbers through `noema.fmt.number(n)`. Visible text in the HT
 - The loop guard: every `while`, `do`, `for` and `for … of` gets a time check; one turn of the event loop that runs longer
   than 1.5 s stops the activity (the app offers Restart). Animate with `requestAnimationFrame`, never a busy loop.
 - A watchdog pings every 2 s; three missed answers stop the activity. A frame that never says hello stops after 15 s.
-- Engines of the library (§8.1) run in the HOST's Worker, never in the frame: only those the registry entry lists, ≤ 5 s a run,
+- Engines of the library (§8.1) run in the HOST's Worker, never in the frame: only those the registry entry lists, ≤ 12 s a run,
   one run at a time per engine, ≤ 30 requests a second, outputs ≤ 512 KB.
 - Messages: at most 64 KB, each one checked; five bad messages stop the activity. A frame that navigates away is stopped.
 - At most 2 activities run at once (1 on a phone); one that leaves the screen pauses, and the oldest is parked (Start). One whose
@@ -217,11 +217,11 @@ const r = await graph.run({ model: { graph: { nodes: [{id: 'a'}, {id: 'b'}, {id:
 
 A refused or failed call rejects with an `Error` whose `code` says why (and `errors`, a list, for `spec`): `undeclared` (the entry
 does not list the engine), `unavailable` (this app cannot run it here), `spec` (not `{model, outputs}`, not plain data, or the model
-fails the engine's checks), `inputs`, `superseded` (a newer run replaced this one while it waited), `timeout` (over 5 s), `failed`,
+fails the engine's checks), `inputs`, `superseded` (a newer run replaced this one while it waited), `timeout` (over 12 s), `failed`,
 `too-big` (outputs over 512 KB), `rate` (over 30 requests a second). Never a crash: show your own message (from your strings).
 
 **How it runs.** The frame gets no Worker and no network (its policy is unchanged, §7): the app — the HOST — checks every request,
-runs the model in the engine's own Worker (the same runner as sim-spec@1: the same code as on a sim-spec page, the 5 s limit, the
+runs the model in the engine's own Worker (the same runner as sim-spec@1: the same code as on a sim-spec page, the 12 s limit, the
 Worker ended on a runaway) and sends back only the outputs the spec names. One Worker per mini-app and engine, made on the first
 run and reused (a different model goes to the same Worker); one run at a time and one waiting (the latest wins); after three
 timeouts the engine is off until the mini-app restarts; every Worker ends when the mini-app is unmounted. Only the engines of the
@@ -394,7 +394,7 @@ and derived values; scalar outputs join the names of readouts, marks, checks **a
 engine's scalar output (`"P": "V * I"` with `I` from the circuit) is computed after the engine and is not one of its inputs (an
 input never names it); series feed `series` plots. Formulas run inline
 (each evaluation is bounded); an engine whose runs can take longer than ~50 ms gives `workerSource`, and a run that takes more
-than 5 s stops the activity (Restart). Runs are queued: only the latest inputs are computed (a slider dragged fast skips the
+than 12 s stops the activity (Restart). Runs are queued: only the latest inputs are computed (a slider dragged fast skips the
 ones in between), measurements are answered in order, and the checks grader never reads the results of older inputs. `prepare`
 lets an engine evaluate the spec's own expressions (with the app's NoemaExpr, `compile`) before the inputs go to the worker. The
 validators know the same list of engines as the app (`ENGINES` of the content checks, `src/features/content/domain/activities/rules.ts`); `make_pack.py`
@@ -482,7 +482,7 @@ outputs, and says how they are coupled. A spec without `parts` behaves exactly a
 - **The bench** of a spec with parts is `spec.bench.part`: the id of a `circuit-mna@1` or `twin@1` part; its measurements use that
   part's latest inputs.
 - **Runtime** (`partsRunner`, src/runtimes/sim-spec/parts.ts): every part has its own engine instance and Worker; the latest inputs win (a
-  run under way stops at its next step); the whole graph has 5 s (else the activity stops: Restart). The checks grader reads the
+  run under way stops at its next step); the whole graph has 12 s (else the activity stops: Restart). The checks grader reads the
   values once the latest inputs are computed, as for one engine.
 - **Mini-apps**: `noema.sim(spec).run(inputs, {seed}?)` → `{outputs, values, codes}` runs `{consts?, derived?, parts, couple?}` with
   engines its registry entry lists (§8.1); `inputs` override the consts. Message `sim:run {spec, inputs?, seed?}`, answered by

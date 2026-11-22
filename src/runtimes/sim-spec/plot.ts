@@ -1,7 +1,7 @@
 /* The plots of sim-spec@1: SVG drawn by the app, coloured by the theme's tokens; the engine library's drawings (scene) and sounds
    (docs/INTERACTIVE_LIBRARY.md §1.4). */
 import { svg } from '../dom.ts';
-import { fmtNum, isNum, siUnit } from './format.ts';
+import { fmtNum, isNum, prefixFactor, siUnit } from './format.ts';
 
 export const COLORS = ['var(--c)', 'var(--bad)', 'var(--ok)', 'var(--warn)', 'var(--info)', 'var(--ink2)'];
 export const DASH = ['', '7 4', '2 3', '9 3 2 3', '4 4', '1 2']; // a second cue besides the colour
@@ -62,7 +62,8 @@ export interface PlotDef {
 }
 export interface PlotData {
   xs: readonly unknown[];
-  lines: { ys: readonly unknown[]; style?: unknown; label?: unknown }[];
+  /** a line's own xs (an expression line over the whole x range, beyond where a run stopped); else the plot's xs */
+  lines: { ys: readonly unknown[]; xs?: readonly unknown[]; style?: unknown; label?: unknown }[];
   marks: { axis: unknown; v: unknown; label: string; legend?: boolean }[];
   xr: readonly [unknown, unknown];
   yr: readonly [unknown, unknown];
@@ -126,12 +127,36 @@ export function drawPlot(fig: Element, p: PlotDef, data: PlotData, ctx: PlotCtx)
     Y1 = y1;
   // tick labels: SI prefixes carry the unit on an SI unit (1 kHz, 200 µs); a plain number does not (the axis label has it); a
   // log axis of days, items or % prints plain numbers (1, 10, 100), never 100 m or 1 k
-  const tick = (a: Axis, lg: boolean): ((v: number) => string) => {
+  // the digits of the labels are those the ticks need (100.5 next to 100 is never shown as 101), unless the axis sets them
+  const tick = (a: Axis, lg: boolean, vs: readonly number[]): ((v: number) => string) => {
     const fm = a.format ?? (lg ? (siUnit(a.unit) && !a.prefix ? 'si' : 'plain') : 'auto');
-    return v => fmtNum(v, { format: fm, digits: a.digits ?? 3, unit: fm === 'si' ? a.unit : '', prefix: a.prefix }, ctx.locale);
+    let dg = a.digits;
+    if (dg == null) {
+      const pf = prefixFactor(a.prefix) ?? 1;
+      if (
+        fm === 'fixed' ||
+        fm === 'plain' ||
+        (fm === 'auto' && vs.every(v => v === 0 || (Math.abs(v / pf) >= 1e-4 && Math.abs(v / pf) < 1e9)))
+      ) {
+        // decimals: the fewest that tell every tick apart exactly (0.25 → 2)
+        dg = 0;
+        while (dg < 6 && vs.some(v => Math.abs(v / pf - +(v / pf).toFixed(dg ?? 0)) > 1e-9 * Math.max(1, Math.abs(v / pf)))) dg++;
+        return v => fmtNum(v, { format: fm === 'fixed' ? 'fixed' : 'plain', digits: dg, unit: '', prefix: a.prefix }, ctx.locale);
+      }
+      // significant digits: enough for every tick (2.25 k → 3)
+      dg = 3;
+      const sig = (v: number): number => {
+        if (v === 0) return 1;
+        const s = Math.abs(v).toPrecision(12).replace(/e.*$/, '').replace('.', '').replace(/^0+/, '').replace(/0+$/, '');
+        return Math.max(1, s.length);
+      };
+      dg = Math.min(
+        6,
+        Math.max(dg, ...vs.map(v => sig(fm === 'si' ? v / Math.pow(1000, Math.floor(Math.log10(Math.abs(v) || 1) / 3)) : v))),
+      );
+    }
+    return v => fmtNum(v, { format: fm, digits: dg, unit: fm === 'si' ? a.unit : '', prefix: a.prefix }, ctx.locale);
   };
-  const fx = tick(xa, xlog),
-    fy = tick(ya, ylog);
   const ticksOf = (a: Axis, lg: boolean, lo: number, hi: number, n: number): number[] => {
     const tk = a.ticks ?? {};
     const want = typeof tk.count === 'number' && tk.count >= 2 ? Math.min(12, Math.round(tk.count)) : n;
@@ -148,7 +173,8 @@ export function drawPlot(fig: Element, p: PlotDef, data: PlotData, ctx: PlotCtx)
     }
     return out;
   };
-  const yt = ticksOf(ya, ylog, Y0, Y1, 5);
+  const yt = ticksOf(ya, ylog, Y0, Y1, 5),
+    fy = tick(ya, ylog, yt);
   // the left margin fits the longest y tick (a four-digit tick never runs into the y title): about 6.2 px a character at 11 px
   ml = Math.max(ml, Math.min(Math.floor(W * 0.3), 22 + Math.ceil(Math.max(0, ...yt.map(v => fy(v).length)) * 6.2)));
   const X = (v: number): number => ml + ((tx(v) - tx(X0)) / (tx(X1) - tx(X0))) * (W - ml - mr),
@@ -174,13 +200,26 @@ export function drawPlot(fig: Element, p: PlotDef, data: PlotData, ctx: PlotCtx)
     e.textContent = t;
     return e;
   };
-  for (const v of ticksOf(xa, xlog, X0, X1, nt)) {
-    const px = X(v);
-    s.append(svg('line', { x1: px, x2: px, y1: mt, y2: H - mb, class: 'sim-grid' }), txt(px, H - mb + 14, fx(v), 'middle'));
+  const xt = ticksOf(xa, xlog, X0, X1, nt),
+    fx = tick(xa, xlog, xt);
+  // a label at an edge stays inside the picture (anchored at its end), the first one starts at the y axis (never on the y ticks)
+  for (const [i, v] of xt.entries()) {
+    const px = X(v),
+      lab = fx(v),
+      w = lab.length * 6.2;
+    const anchor = px + w / 2 > W - 1 ? 'end' : i === 0 && px - w / 2 < ml + 1 ? 'start' : 'middle';
+    s.append(
+      svg('line', { x1: px, x2: px, y1: mt, y2: H - mb, class: 'sim-grid' }),
+      txt(anchor === 'end' ? Math.min(px, W - 1) : px, H - mb + 14, lab, anchor),
+    );
   }
   for (const v of yt) {
     const py = Y(v);
-    s.append(svg('line', { x1: ml, x2: W - mr, y1: py, y2: py, class: 'sim-grid' }), txt(ml - 5, py + 4, fy(v), 'end'));
+    // the bottom tick sits just above the x axis, clear of the x labels
+    s.append(
+      svg('line', { x1: ml, x2: W - mr, y1: py, y2: py, class: 'sim-grid' }),
+      txt(ml - 5, Math.min(py + 4, H - mb - 1), fy(v), 'end'),
+    );
   }
   if (ctx.xLabel) s.append(txt(ml + (W - ml - mr) / 2, H - 6, ctx.xLabel, 'middle', 'sim-axl'));
   if (ctx.yLabel) {
@@ -225,8 +264,9 @@ export function drawPlot(fig: Element, p: PlotDef, data: PlotData, ctx: PlotCtx)
     }
     let d = '',
       pen = false;
-    for (let i = 0; i < data.xs.length; i++) {
-      const x = data.xs[i],
+    const lx = l.xs ?? data.xs;
+    for (let i = 0; i < lx.length; i++) {
+      const x = lx[i],
         y = l.ys[i];
       if (!isNum(x) || !isNum(y) || (xlog && x <= 0) || (ylog && y <= 0)) {
         pen = false;
@@ -340,13 +380,36 @@ export function drawScene(fig: Element, p: PlotDef, sc: unknown, ctx: SceneCtx):
   mk.append(svg('path', { d: 'M0 0L10 5L0 10z', class: 'sim-arrowhead' }));
   defs.append(mk);
   s.append(defs);
+  // an arrowhead of another size (arrowSize 0.5–3 × the default): one marker per size
+  const sized = new Map<number, string>();
+  const markerOf = (z: unknown): string => {
+    const f = isNum(z) && z >= 0.5 && z <= 3 ? Math.round(z * 10) / 10 : 1;
+    if (f === 1) return mid;
+    let id = sized.get(f);
+    if (!id) {
+      id = mid + '-' + String(f * 10);
+      const m2 = svg('marker', {
+        id,
+        viewBox: '0 0 10 10',
+        refX: 9,
+        refY: 5,
+        markerWidth: 7 * f,
+        markerHeight: 7 * f,
+        orient: 'auto-start-reverse',
+      });
+      m2.append(svg('path', { d: 'M0 0L10 5L0 10z', class: 'sim-arrowhead' }));
+      defs.append(m2);
+      sized.set(f, id);
+    }
+    return id;
+  };
   const word = (it: Obj): string =>
     it.key != null
       ? ctx.tt(it.key)
       : isNum(it.v)
         ? fmtNum(it.v, { digits: it.digits || 3 }, ctx.locale)
         : typeof it.s === 'string'
-          ? it.s.slice(0, 64)
+          ? (ctx.tt(it.s) || it.s).slice(0, 64) // a name that is a key of the string tables (an atom a0, a state) is shown in the learner's language
           : '';
   const label = (x: number, y: number, it: Obj, anchor?: string): void => {
     const t = word(it);
@@ -383,7 +446,7 @@ export function drawScene(fig: Element, p: PlotDef, sc: unknown, ctx: SceneCtx):
           class: 'sim-seg ' + cls,
           'stroke-width': isNum(it.w) ? Math.max(0.5, Math.min(12, it.w)) : 2,
           'stroke-dasharray': dash,
-          'marker-end': it.arrow ? `url(#${mid})` : null,
+          'marker-end': it.arrow ? `url(#${markerOf(it.arrowSize)})` : null,
         }),
       );
       label((X(N(it.x1)) + X(N(it.x2))) / 2, (Y(N(it.y1)) + Y(N(it.y2))) / 2 - 5, it);

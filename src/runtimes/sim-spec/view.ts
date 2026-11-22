@@ -667,12 +667,22 @@ export function simView(
         data.xr = [P.xmin ? ev(P.xmin, env) : isFinite(lo) ? lo : 0, P.xmax ? ev(P.xmax, env) : isFinite(hi) ? hi : 1];
         const e2: Env = { ...env },
           xv = typeof p.x.var === 'string' ? p.x.var : '';
+        // an expression line spans the whole x range (to x.max), also where a run stopped early (a heater cut off at 200 °C)
+        const [xa, xb] = data.xr,
+          lgx = p.x.scale === 'log' && isNum(xa) && isNum(xb) && xa > 0 && xb > 0,
+          grid: readonly unknown[] =
+            isNum(xa) && isNum(xb) && xb > xa
+              ? Array.from({ length: 200 }, (_, k) => (lgx ? xa * Math.pow(xb / xa, k / 199) : xa + ((xb - xa) * k) / 199))
+              : data.xs;
+        const intLaw =
+          spec.engine === 'prob@1' && data.xs.length > 0 && data.xs.length <= 400 && data.xs.every(x => isNum(x) && Number.isInteger(x));
         data.lines = P.lines.map(l => {
           if (l.f) {
             const f = l.f;
             return {
               style: l.style,
-              ys: data.xs.map(x => {
+              xs: grid,
+              ys: grid.map(x => {
                 if (xv) e2[xv] = x;
                 const v = ev(f, e2);
                 return typeof v === 'boolean' ? +v : v;
@@ -680,7 +690,9 @@ export function simView(
             };
           }
           const ys = outputs[String(l.y)];
-          return { style: l.style, ys: Array.isArray(ys) ? (ys as unknown[]) : [] };
+          // a law over whole numbers (prob@1: binomial, Poisson…) is drawn as bars unless the spec names a style
+          const style = l.style ?? (intLaw ? 'bars' : undefined);
+          return { style, ys: Array.isArray(ys) ? (ys as unknown[]) : [] };
         });
       }
       P.last = data;

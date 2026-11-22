@@ -44,6 +44,8 @@ interface MRoute {
 /** the numbers of a station for a run */
 interface StP {
   servers: number;
+  /** the waiting room for this run (a number or an expression of the spec: a control may set it); Infinity: no limit */
+  capacity: number;
   service: PDist | null;
   serviceBy: (PDist | null)[];
   renege: PDist | null;
@@ -233,7 +235,7 @@ const SOURCE: Table = { id: 'id!', to: 'ref', shortest: { $list: 'ref', min: 2, 
 const ROUTE: Table = { to: 'ref', shortest: { $list: 'ref', min: 2, max: 8 }, p: 'numx', when: 'expr' };
 // prettier-ignore
 const STATION: Table = { id: 'id!', kind: 'enum:server|delay', servers: 'numx', service: D, serviceBy: { $map: D, max: 8 }, discipline: 'enum:fifo|lifo|priority|spt',
-  capacity: 'int:0:100000', preempt: 'enum:none|resume|restart|resample', balk: { $obj: { length: 'int:0:100000!', p: 'numx' } }, renege: D, jockey: 'bool',
+  capacity: 'numx', preempt: 'enum:none|resume|restart|resample', balk: { $obj: { length: 'int:0:100000!', p: 'numx' } }, renege: D, jockey: 'bool',
   shifts: { $obj: { period: 'numx!', plan: { $req: true, $list: { $obj: { from: 'numx!', to: 'numx!', servers: 'int:0:64!' } }, min: 1, max: 24 } } },
   breakdowns: { $obj: { ttf: { $req: true, $obj: DIST }, ttr: { $req: true, $obj: DIST }, policy: 'enum:resume|restart|resample' } },
   route: { $list: { $obj: ROUTE }, max: 16 }, key: 'key' };
@@ -615,7 +617,7 @@ function build(spec: Spec) {
     serversX: s.kind === 'delay' ? null : C.cx(s.servers == null ? 1 : s.servers),
     servers: s.kind === 'delay' ? Infinity : isNum(s.servers) ? s.servers : 1,
     disc: (s.discipline as string) || 'fifo',
-    capacity: Number.isInteger(s.capacity) ? (s.capacity as number) : Infinity,
+    capacityX: s.capacity == null || s.kind === 'delay' ? null : C.cx(s.capacity as number | string),
     preempt: (s.preempt as string) || 'none',
     service: compileDist(s.service),
     serviceBy: classes.map(c => (isObj(s.serviceBy) && s.serviceBy[c.id] ? compileDist(s.serviceBy[c.id]) : null)),
@@ -725,8 +727,18 @@ function evalParams(M: Model, env: Env, codes: Codes): Params | null {
         c = 1;
       }
     }
+    let cap = s.capacityX ? s.capacityX(env) : Infinity;
+    if (s.capacityX) {
+      if (fin(cap) && cap >= 0 && cap <= 100000) cap = Math.round(cap);
+      else {
+        codes.code('bad-dist', undefined, s.id + '.capacity');
+        ok = false;
+        cap = Infinity;
+      }
+    }
     const q: StP = {
       servers: c,
+      capacity: cap,
       service: dist(s.service, s.id + '.service'),
       serviceBy: s.serviceBy.map((d, k) => dist(d, `${s.id}.serviceBy.${k}`)),
       renege: dist(s.renege, s.id + '.renege'),
@@ -1166,7 +1178,7 @@ function replication(M: Model, P: Params, o: RepOpts): Live | RepRes {
           return;
         }
       }
-      if (X.nq >= X.s.capacity) {
+      if (X.nq >= X.q.capacity) {
         acc[L.st(j, 'lost')]!++;
         acc[L.sy('lost')]!++;
         LOG('lost', e, j);
@@ -1850,7 +1862,7 @@ function theory(M: Model, P: Params) {
       lam = lk.reduce((a, b) => a + b, 0);
     if (!(lam > 0))
       return { rho: 0, util: 0, pwait: 0, lq: 0, wq: 0, w: NaN, l: 0, cls: lk.map(() => ({ wq: 0, w: NaN, lq: 0, l: 0, pwait: 0 })) };
-    if (q.renege || s.balk || s.bd || q.shifts || (s.capacity < Infinity && !s.delay)) {
+    if (q.renege || s.balk || s.bd || q.shifts || (q.capacity < Infinity && !s.delay)) {
       if (!(q.renege || s.balk || s.bd || q.shifts)) {
         /* M/M/c/K below */
       } else {
@@ -1867,12 +1879,12 @@ function theory(M: Model, P: Params) {
     let r: ThR;
     if (s.delay)
       r = { rho: lam * mES, util: NaN, pwait: 0, lq: 0, wq: 0, w: mES, l: lam * mES }; // M/G/∞
-    else if (s.capacity < Infinity) {
+    else if (q.capacity < Infinity) {
       if (!allExp) {
         cd('theory-na');
         return null;
       }
-      r = mmck(lam, 1 / mES, q.servers, s.capacity);
+      r = mmck(lam, 1 / mES, q.servers, q.capacity);
     } else if (s.disc === 'priority' && nK > 1 && q.servers === 1) {
       const ord = M.classes.map((c, k) => k).sort((a, b) => M.classes[a]!.prio - M.classes[b]!.prio || a - b);
       const pr = mg1prio(
@@ -2136,7 +2148,7 @@ function run(
 }
 
 /* ---------- scenes ---------- */
-const ROLE_K = ['hi', 'info', 'warn', 'ok', 'bad', 'muted', 'base', 'hi'];
+const ROLE_K = ['hi', 'info', 'warn', 'ok', 'bad', 'base', 'muted']; // a class beyond the seventh is dashed: never two classes alike
 const label = (it: Rec, x: { readonly key?: unknown; readonly id: unknown }) =>
   x.key ? { ...it, key: x.key } : { ...it, s: String(x.id).slice(0, 64) };
 function layoutNet(M: Model) {
@@ -2236,20 +2248,36 @@ function ganttScene(M: Model, P: Params, run: RepRes | null, window: number) {
       for (let k = 0; k < min(n, 8); k++) lanes.push([j, k]);
     }
   });
+  // a legend of the classes (a colour each) below the time axis, when there is more than one
+  const cls = M.classes.length > 1 ? M.classes : [],
+    legRows = Math.ceil(cls.length / 3);
   const H = 4,
-    sc = C.scene([-22, W + 4, -(lanes.length + 1) * H, H]);
+    sc = C.scene([-22, W + 4, -(lanes.length + 1.6 + legRows * 1.2) * H, H]);
   lanes.forEach(([j, k], li) => {
     const y = -li * H;
     sc.seg(0, y, W, y, { c: 'muted', w: 1 });
-    sc.txt(-1, y, { s: `${M.stations[j]!.id}·${k + 1}`.slice(0, 64), anchor: 'end' });
+    sc.txt(-2, y - 0.6, { s: `${M.stations[j]!.id}·${k + 1}`.slice(0, 64), anchor: 'end' });
   });
+  const look = (k: number) => ({ c: ROLE_K[k % ROLE_K.length], ...(k >= ROLE_K.length ? { dash: true } : {}) });
   for (const g of run && run.gantt ? run.gantt : []) {
     const li = lanes.findIndex(l => l[0] === g[0] && l[1] === g[1]);
     if (li < 0 || g[2] > Wn) continue;
-    sc.seg((g[2] / Wn) * W, -li * H, (min(g[3], Wn) / Wn) * W, -li * H, { c: ROLE_K[g[4] % ROLE_K.length], w: 8 });
+    sc.seg((g[2] / Wn) * W, -li * H, (min(g[3], Wn) / Wn) * W, -li * H, { ...look(g[4]), w: 8 });
   }
+  // the time axis below the last lane, clear of the lane names; the first tick starts at 0, the last ends at the edge
+  const ty = -(lanes.length - 1) * H - H * 0.9;
   for (let i = 0; i <= 4; i++)
-    sc.txt((i * W) / 4, -lanes.length * H + 1, { v: Math.round(((Wn * i) / 4) * 100) / 100, anchor: 'middle', c: 'muted' });
+    sc.txt((i * W) / 4, ty, {
+      v: Math.round(((Wn * i) / 4) * 100) / 100,
+      anchor: i === 0 ? 'start' : i === 4 ? 'end' : 'middle',
+      c: 'muted',
+    });
+  cls.forEach((c, k) => {
+    const x = (k % 3) * (W / 3),
+      y = ty - H * (0.9 + 1.2 * Math.floor(k / 3));
+    sc.seg(x, y + 0.6, x + 6, y + 0.6, { ...look(k), w: 6 });
+    sc.txt(x + 8, y, { ...(c.key ? { key: c.key } : { s: c.id.slice(0, 64) }), anchor: 'start' });
+  });
   return sc.done();
 }
 function logScene(M: Model, run: RepRes | null) {

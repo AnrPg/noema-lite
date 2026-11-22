@@ -324,6 +324,21 @@ def load_media(sdir, embed=True):
         raw = open(f, 'rb').read()
         item['sha'] = hashlib.sha256(raw).hexdigest()[:16]
         if embed: item['data'] = f'data:{MIME[ext]};base64,' + base64.b64encode(raw).decode('ascii')
+        # the picture in another language (its words drawn inside: labels, a legend): i18n.<locale>.file, the same size, so
+        # its regions fit both; the app shows it with that language's chapters
+        for loc, L in list((it.get('i18n') or {}).items()):
+            if not (isinstance(L, dict) and L.get('file')): continue
+            lf = os.path.join(sdir, 'media', L['file']); lext = os.path.splitext(lf)[1].lower()
+            if not os.path.isfile(lf): report.append(f'ERROR media {mid}: i18n.{loc}.file {L["file"]} not found'); continue
+            if lext not in MIME: report.append(f'ERROR media {mid}: i18n.{loc}.file has an unsupported file type {lext}'); continue
+            lwh = image_size(lf)
+            if lwh and wh and (abs(lwh[0] / lwh[1] - wh[0] / wh[1]) > 0.01):
+                report.append(f'ERROR media {mid}: i18n.{loc}.file is {lwh[0]:g}×{lwh[1]:g}, not the shape of the picture ({wh[0]:g}×{wh[1]:g}): its regions would not fit'); continue
+            lraw = open(lf, 'rb').read()
+            L2 = {k: v for k, v in L.items() if k != 'file'}
+            L2['sha'] = hashlib.sha256(lraw).hexdigest()[:16]
+            if embed: L2['data'] = f'data:{MIME[lext]};base64,' + base64.b64encode(lraw).decode('ascii')
+            item['i18n'] = {**item['i18n'], loc: L2}
         out[mid] = item
     return out, report
 

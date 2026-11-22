@@ -15,6 +15,9 @@ an exact model the library does not have, anyone can **request a new engine** fr
 | free | `html-app@1`, `py-module@1` | anything else, written by the pack's author |
 | plugins | `circuit-mna@1`, `thermal@1`, `pid@1`, `rf@1`, `twin@1`, `wasm@1` | exact models of one field (benches with hidden faults) |
 
+> **Names that mislead.** `seq@1` is biological sequences (DNA, RNA, proteins) and `timeline@1` is dates across calendars.
+> Neither is for protocol timing, timing diagrams or ordered steps: use `formula@1`, `des@1`, `twin@1` or the free way.
+
 Each engine of the library has its own chapter in `docs/library/<name>.md` (the model, the outputs, the methods and their sources,
 the limits and edge cases, the reference values its tests assert).
 
@@ -211,7 +214,7 @@ in its own way.
 |---|---|---|
 | the API | `src/runtimes/html-app/bootstrap.ts` (the bootstrap) | `noema.engines()`, `noema.engine(id).check(spec)`, `.run(spec, inputs, {seed})` |
 | the host | `src/runtimes/html-app/bridge.ts` `engineBridge` | declared ∩ `NoemaCore.engines.catalog.LIBRARY` ∩ registered; every field checked; the engine's `check`; one run at a time + one waiting; ≤ 30 requests/s; outputs ≤ 512 KB; codes, never a crash |
-| the Worker | `src/runtimes/sim-spec/runner.ts` `engineRunner` (the sim runner; `respec` gives the same Worker another model) | one per mini-app and engine, lazy, reused, 5 s per run, ended on unmount |
+| the Worker | `src/runtimes/sim-spec/runner.ts` `engineRunner` (the sim runner; `respec` gives the same Worker another model) | one per mini-app and engine, lazy, reused, 12 s per run, ended on unmount |
 | the rules | `checkAppEngines` of the content checks (`src/features/content/domain/activities/registry.ts`); `needRequires` adds `engine:<id>` | |
 | the tests | `tests/activities.js` (the rules and their golden messages, the protocol, the bridge with a fake runner), `tests/activities_app.js` (in the app), `activity_test.py` | |
 | the reference | `tools/activities_examples/cheapest-route/` | a route game on `graph@1`: the learner picks roads, Dijkstra finds the cheapest route; keyboard, 320 px, five languages |

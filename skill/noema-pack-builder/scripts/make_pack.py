@@ -72,10 +72,11 @@ if int(auth.get('rules', 0)) >= 2:
             if os.path.exists(f):
                 try: tc['map'] = json.load(open(f, encoding='utf-8'))
                 except Exception as e: errs.append(f'ERROR translations/{loc}/map/{tc.get("id")}.json: invalid JSON ({e})')
+    # the same level as the server (noema_finish_upload): an unpacked chapter is checked as strictly as a new one, so no pack passes here and fails there
     # Q0 (gradual introduction) reads the concepts of the other chapters: no concept a later chapter introduces is used early
     slim = [{'id': c['id'], 'map': {'concepts': (c.get('map') or {}).get('concepts') or []}} for c in chapters]
     pos = {c['id']: i for i, c in enumerate(chapters)}
-    balance = lambda cid: {'quality': 'warn' if cid in base_chapters else level, 'features': feats, 'rules': int(auth.get('rules', 0)),
+    balance = lambda cid: {'quality': level, 'features': feats, 'rules': int(auth.get('rules', 0)),
                            'before': slim[:pos.get(cid, 0)], 'after': slim[pos.get(cid, 0) + 1:]}
 else:
     # older subjects: every exercise type, difficulty and focus tag >= minPerKind times per chapter (CONTENT_SPEC.md, the quantity rules);

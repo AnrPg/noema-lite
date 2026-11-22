@@ -41,8 +41,8 @@ is refused.
 
 A sim-spec@1 activity computes with an **engine of the library** whenever one fits (`docs/INTERACTIVE_LIBRARY.md`, decision
 2026-11-05): `formula@1` (any relation), `ode@1` (dynamical systems), `prob@1` (probability and statistics), `graph@1` (networks),
-`geom@1` (constructions), `genetics@1`, `seq@1`, `med@1` (physiology and pharmacology), `clinic@1` (clinical reasoning: virtual
-patients, differential diagnosis, decisions), `anatomy@1`, `timeline@1` (every calendar), `music@1`, `map@1`, `text@1`, `craft@1`.
+`geom@1` (constructions), `genetics@1`, `seq@1` (DNA, RNA, protein sequences; not protocol timing or ordered steps), `med@1` (physiology and pharmacology), `clinic@1` (clinical reasoning: virtual
+patients, differential diagnosis, decisions), `anatomy@1`, `timeline@1` (dates in every calendar, not protocol timing), `music@1`, `map@1`, `text@1`, `craft@1`.
 Each has its chapter in `docs/library/<name>.md` (its model, outputs, sources, limits and a reference activity). Search the
 catalogue with the subject's words (`NoemaCore.engines.catalog.suggest`, or the connector's `noema_request_engine` with `check_only`).
 Only when no engine fits: the free way below (html-app@1, py-module@1) — or, when the subject needs an exact model the library does

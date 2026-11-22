@@ -70,7 +70,12 @@ export function fmtNum(v: unknown, o: NumFormat | null | undefined, locale: stri
   const f = (n: number, opt: Intl.NumberFormatOptions): string => {
     try {
       // thousands separators only from five digits (10 000): a year, a count or a four-digit reading stays one word
-      return new Intl.NumberFormat(locale, { useGrouping: 'min2', ...opt }).format(n);
+      // where the thousands separator is a point (el, de, it, es…) it reads as a decimal point (2.435 MHz): a narrow space
+      // separates the thousands instead (12 500), as SI writes them
+      return new Intl.NumberFormat(locale, { useGrouping: 'min2', ...opt })
+        .formatToParts(n)
+        .map(p => (p.type === 'group' && p.value === '.' ? '\u202f' : p.value))
+        .join('');
     } catch {
       try {
         return new Intl.NumberFormat(locale, opt).format(n);

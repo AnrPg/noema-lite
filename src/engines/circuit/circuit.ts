@@ -254,6 +254,9 @@ interface TranRun {
   inds: El[];
   tls: El[];
   bp: number;
+  /** backward-Euler steps still to take after a source breakpoint (a step far longer than an edge would make the trapezoid ring:
+      a 1 ns edge in a 1 µs step showed 6 % over the pulse's level on an RC node) */
+  beLeft?: number;
   ctx: Ctx;
 }
 interface AcOpts {
@@ -510,6 +513,7 @@ const ROP = 1e6,
   C0 = 299792458; // the op-amp's internal pole: a 1 MΩ node, clamped softly near its rails; the speed of light
 const PICKUP = { hum: 50, amp: 1, noise: 0.3, bw: 500, wander: 0.3, r: 1e8 }; // what a node with no DC path picks up
 const MODES = ['dc', 'ac', 'rms', 'avg'];
+const BE_AFTER = 3; // backward-Euler steps after the one that holds a source breakpoint (SPICE also restarts at first order)
 const tbl = (ver: number) =>
   ver === 2
     ? { T: TYPES2, P: PARAMS2, D: DEFAULTS2, PR: PRESETS2, SP: SHORT_PINS2, DP: DRIFT_PARAM2 }
@@ -2208,8 +2212,10 @@ function makeSim(ck: ReturnType<typeof compile>, noise: Noise | null) {
       const s = R.s,
         t1 = (s + 1) * dt;
       ctx.t = t1;
-      ctx.be = s === 0 || R.bp <= t1 + tol;
-      if (R.bp <= t1 + tol) R.bp = nextBp(t1 + tol);
+      const hit = R.bp <= t1 + tol;
+      ctx.be = s === 0 || hit || (R.beLeft ?? 0) > 0;
+      R.beLeft = hit ? BE_AFTER : Math.max(0, (R.beLeft ?? 0) - 1);
+      if (hit) R.bp = nextBp(t1 + tol);
       ctx.gsh = 0;
       for (const e of tls) {
         // the waves that left the other end td ago
@@ -2316,8 +2322,10 @@ function makeSim(ck: ReturnType<typeof compile>, noise: Noise | null) {
       if (s !== lastS) {
         // once per grid step (a halved retry keeps the step's θ)
         lastS = s;
-        thS = s === 0 || R.bp <= g1 + tol ? 1 : 0.5;
-        if (R.bp <= g1 + tol) R.bp = nextBp(g1 + tol);
+        const hit = R.bp <= g1 + tol;
+        thS = s === 0 || hit || (R.beLeft ?? 0) > 0 ? 1 : 0.5;
+        R.beLeft = hit ? BE_AFTER : Math.max(0, (R.beLeft ?? 0) - 1);
+        if (hit) R.bp = nextBp(g1 + tol);
         for (const e of tls) {
           // the waves that left the other end td ago
           const tp = g1 - e.td!,
@@ -2989,6 +2997,11 @@ const API = Object.freeze({
   format: FORMAT,
   limits: Object.freeze({ nodes: MAX_NODES, elements: MAX_ELEMENTS, steps: MAX_STEPS, acPoints: 1000 }),
   FAULT_KINDS: Object.freeze(FAULT_KINDS.slice()),
+  /** the numeric parameters a binding may set on a part of each type (params.<name>: Vth of a MOSFET, betaF of a transistor…) */
+  bindableParams: (type: string): string[] =>
+    Object.entries((PARAMS2 as Record<string, Record<string, string>>)[type] ?? {})
+      .filter(([, k]) => k !== 'rails')
+      .map(([n]) => n),
   MODES: Object.freeze(MODES.slice()),
   check,
   checkFaults,

@@ -15,11 +15,12 @@ const go = hash => { location.hash = hash; };
 /* ---------- the study area's course: the engine's indexes follow it ---------- */
 let STUDY = null;   // Noema.app.study.mount() at boot (engine/app/study.js): { app, show(hash), segments, figure, figureText, exerciseText, inspect }
 /** the pack's pictures by id (the study area's media; 32_activities.js), in the language the content is shown in: a picture's
-    i18n.<locale> (alt, caption) replaces its words when the chapters are a translation (CONTENT_SPEC.md "Packs in several languages") */
+    i18n.<locale> (alt, caption, and data: the picture with its own words drawn in that language) replaces its words when the
+    chapters are a translation (CONTENT_SPEC.md "Packs in several languages") */
 const MEDIA = ((all, loc) => {
   if (!loc) return all;
   const out = {};
-  for (const [k, m] of Object.entries(all)) { const L = m && m.i18n && m.i18n[loc]; out[k] = L && typeof L === 'object' ? { ...m, ...Object.fromEntries(['alt', 'caption'].filter(f => typeof L[f] === 'string' && L[f].trim()).map(f => [f, L[f]])) } : m; }
+  for (const [k, m] of Object.entries(all)) { const L = m && m.i18n && m.i18n[loc]; out[k] = L && typeof L === 'object' ? { ...m, ...Object.fromEntries(['alt', 'caption', 'data'].filter(f => typeof L[f] === 'string' && L[f].trim() && (f !== 'data' || /^data:image\//.test(L[f]))).map(f => [f, L[f]])) } : m; }
   return out;
 })(Noema.pack?.media || {}, SUBJ.sourceLanguage ? SUBJ.language : null);
 const FULL_COURSE = COURSE.slice();   // the pack's chapters before the source filter (15_inbox.js, the tutor's host, 85_locate.js)

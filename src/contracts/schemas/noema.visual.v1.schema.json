@@ -156,10 +156,14 @@
         },
         "i18n": {
           "type": "object",
-          "description": "the picture's words in other languages of the pack: { \"<locale>\": { \"alt\": …, \"caption\": … } }, shown when the chapters are shown in that translation",
+          "description": "the picture's words in other languages of the pack: { \"<locale>\": { \"alt\": …, \"caption\": …, \"file\": … } }, shown when the chapters are shown in that translation; file: the same picture with its own words drawn in that language (labels, a legend), the same shape, so its regions fit both",
           "additionalProperties": {
             "type": "object",
-            "properties": { "alt": { "type": "string", "minLength": 8 }, "caption": { "type": "string" } }
+            "properties": {
+              "alt": { "type": "string", "minLength": 8 },
+              "caption": { "type": "string" },
+              "file": { "type": "string", "minLength": 1 }
+            }
           }
         },
         "caption": {

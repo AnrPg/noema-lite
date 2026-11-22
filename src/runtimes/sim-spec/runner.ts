@@ -1,11 +1,11 @@
 /* An engine instance behind one async interface (docs/INTERACTIVE.md §12.6): inline, or in a Worker when the engine has
    workerSource. run(inputs, done): the outputs (a newer run waiting replaces an older one: the latest inputs win);
-   measure(inputs, probe, done): one reading of a bench's instrument (queued, never dropped). One job at a time, each ≤ 5 s
+   measure(inputs, probe, done): one reading of a bench's instrument (queued, never dropped). One job at a time, each ≤ 12 s
    (else the Worker is ended and onFail('runaway')). respec(spec, opts): the same Worker takes another model (queued: the runs
    after it use it) — the mini-apps' engines (html-app@1). step(kind, …): a part's stepper (docs/INTERACTIVE_LIBRARY.md §1.6). */
 import type { EngineInstance, EngineOpts, SimEngine } from '../compute.ts';
 
-export const RUN_TIMEOUT = 5000;
+export const RUN_TIMEOUT = 12000; // (12 s: a long twin or circuit run at an extreme setting still finishes; the Worker keeps the page responsive)
 
 export type Done = (out: unknown) => void;
 export type StepKind = 'sinit' | 'step' | 'snap' | 'restore';

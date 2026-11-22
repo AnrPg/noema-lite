@@ -25,6 +25,8 @@ export interface EngineChecks {
   readonly keys?: (spec: Readonly<Record<string, unknown>>) => readonly (readonly [unknown, string])[];
   readonly check?: (model: unknown) => readonly EngineIssue[];
   readonly checkFaults?: (model: unknown, apply: readonly unknown[]) => readonly EngineIssue[];
+  /** the numeric parameters a binding may set on a part of a type (circuit-mna@1: params.Vth of a MOSFET…) */
+  readonly bindableParams?: (type: string) => readonly string[];
 }
 /** the checks of the activity runtimes that read binary packages (src/runtimes/wasm-module, src/runtimes/external-embed,
     src/runtimes/h5p: the runtimes themselves use them before they run an item) */

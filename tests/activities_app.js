@@ -305,7 +305,7 @@ async function wasmApp(p, ctx, E) {
     const m = document.querySelector('main'); m.innerHTML = ''; m.append(interactiveBlock({ t: 'interactive', activity: 'osc-spin' })); scrollTo(0, 0); });
   await startIfParked(p, 'main .act');
   const t0 = Date.now();
-  ok(await until(() => p.evaluate(() => !!document.querySelector('main .act-fallback') && !!document.querySelector('main .act-bar button')), 15000), `a step that never returns is stopped (the worker is terminated after the 5 s budget: ${((Date.now() - t0) / 1000).toFixed(1)} s), Restart is offered`);
+  ok(await until(() => p.evaluate(() => !!document.querySelector('main .act-fallback') && !!document.querySelector('main .act-bar button')), 25000), `a step that never returns is stopped (the worker is terminated after the 12 s budget: ${((Date.now() - t0) / 1000).toFixed(1)} s), Restart is offered`);
   ok(await p.evaluate(() => { const t = performance.now(); return new Promise(r => setTimeout(() => r(performance.now() - t < 500), 50)); }), 'the app stayed responsive (the module never ran on the page\'s thread)');
   ok(E.length === E0, 'no page errors ' + JSON.stringify(E.slice(E0, E0 + 3)));
 }
