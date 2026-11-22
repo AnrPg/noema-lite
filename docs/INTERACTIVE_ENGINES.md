@@ -263,6 +263,10 @@ benches (a device with one hidden fault: the learner reads the battery, the curr
 
 - **Firmware** — wake every `period`; sense for `sense` s; every `txEvery`-th wake (1–10⁸) transmit (TX for the airtime); with `ack`,
   listen `rxWindow` s and retry up to `retries` times; sleep the rest. A wake that cannot finish before the next is an `overrun`.
+  A large `txEvery` does not lift the **event budget**: the run is estimated at ⌈duration / period⌉ · (2 + (retries + 1) · (ack ? 2
+  : 1) / txEvery) events and refused (`budget`) above `sim.maxEvents` (default 10⁶, at most 5·10⁶): every wake is still 2 events
+  (wake, sleep) even when it sends nothing, so a ten-year run with a 1 s period is over the budget whatever `txEvery` is
+  (lengthen `period`, shorten `duration`, or raise `sim.maxEvents`).
 - **Battery** — charge drawn `∫(I + I_sd)dt` (mAh); SoC = soc0 − drawn/capacity; open-circuit voltage from a per-cell curve (li-ion
   4.2→3.0 V, lifepo4 3.6→2.5, alkaline 1.55→0.9, nimh 1.4→1.0, or `custom`) × cells; loaded voltage = V_oc − I·rInt;
   self-discharge a fraction of the capacity per month. Empty when SoC ≤ 0 or V_oc < cutoff.

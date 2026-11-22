@@ -257,7 +257,7 @@ function libPlots(s: JsonSchema) {
         properties: {
           kind: { const: 'scene' },
           of: { title: T('plotOf'), type: 'string', minLength: 1, 'x-noema': 'scene' },
-          height: { title: 'height', type: 'integer', minimum: 120, maximum: 900 },
+          height: { title: 'height', type: 'integer', minimum: 120, maximum: 2000 },
         },
       },
       {
@@ -266,7 +266,7 @@ function libPlots(s: JsonSchema) {
         properties: {
           kind: { const: 'sound' },
           of: { title: T('plotOf'), type: 'string', minLength: 1, 'x-noema': 'sound' },
-          height: { title: 'height', type: 'integer', minimum: 120, maximum: 900 },
+          height: { title: 'height', type: 'integer', minimum: 120, maximum: 2000 },
         },
       },
     ],

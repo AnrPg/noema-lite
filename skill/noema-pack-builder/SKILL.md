@@ -22,7 +22,7 @@ learner opens each source file at the pages the chapters cite.
 > Plan every chapter as a ladder: `map.concepts` in teaching order (terms, units, symbols, `in`, `def`, `needs`) and
 > `map.known` (what it uses from earlier chapters, earlier Roadmap steps `@id`, or everyday life) **before** the sections;
 > then one section per rung; then each section's exercises only from what it and the earlier ones taught.
-> `map.plainText` lists what only looks like a unit or an acronym (`3S` = three cells in series, `0x0C`, a part number).
+> `map.plainText` lists what only looks like a unit or an acronym (a part number, a model code); hex (`0x0C`), cell packs (`3S`, `4S2P`), `183 C` beside solder/temperature and `5 N times` are read as plain text without it.
 > `make_pack.py` reads every text against this list (`concept.*`, `theory.focus`, `theory.depth`) and refuses the pack.
 
 **The contract is in `references/`. Read both files before writing any content:**

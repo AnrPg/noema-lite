@@ -25,7 +25,7 @@ export const tool: Tool = {
         languages_json: {
           type: 'string',
           description:
-            'ONE JSON object: { "translations": ["el"] (languages besides the Roadmap\'s own), "bridges": ["en>el", "el>en"] (optional: the 文A pairs "language read>native"; left out = every pair among the Roadmap\'s language and its translations) }',
+            'ONE JSON object: { "translations": ["el"] (languages besides the Roadmap\'s own), "bridges": ["en>el", "el>en"] (optional: the 文A pairs "language read>native"; left out = every pair among the Roadmap\'s language and its translations, each then required of every pack; [] = no bridges) }',
         },
       },
     },

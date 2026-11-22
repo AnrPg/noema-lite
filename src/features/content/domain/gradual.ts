@@ -181,23 +181,45 @@ function lexicon(c: GradualContext): Entry[] {
   return [...own, ...known, ...other(c.before, 'earlier'), ...other(c.after, 'later')];
 }
 
+/** what only looks like a measurement, read the same way in every chapter (limits report 2026-11-22), so no unit pattern
+    sees it: a hex number (0x0C), cell-pack notation (3S, 4S2P, 2P), a temperature written without ° (183 C beside "solder",
+    "reflow", "temperature"… becomes 183 °C, which a concept of temperature with units ["°C"] still sees), N as a count or a
+    variable after a number (5 N times, 2 N + 1) */
+const HEX = /(?<![\p{L}\p{N}_])0x[0-9A-Fa-f]+(?![\p{L}\p{N}_])/gu;
+const CELLS = /(?<![\p{L}\p{N}_.,])\d+(?:S\d+P|S|P)(?![\p{L}\p{N}_])/gu;
+const TEMP_CUE =
+  /°|temperat|celsius|fahrenheit|degree|solder|reflow|melt|boil|freez|oven|thermal|thermistor|ambient|junction|overheat|θερμοκρασ|βαθμ|температур|градус|Temperatur|Grad\b|température|degré/iu;
+const TEMP = /(?<![\p{L}\p{N}_.])(\d[\d.,]*)\s{0,3}C(?![\p{L}\p{N}°])/gu;
+const COUNT_N =
+  /(?<![\p{L}\p{N}_.])(\d[\d.,]*)\s{0,3}N(?=\s*(?:[+\-−×*/=·^]|(?:times|items|cells|steps|bits|bytes|samples|points|nodes|elements|iterations|operations|comparisons|cycles|loops|rows|entries)\b))/gu;
+const COUNT_N_AFTER = /([+\-−×*/=·^(]\s*\d[\d.,]*)\s{0,3}N(?![\p{L}\p{N}])/gu;
+/** one-letter units that are also everyday letters (concept.undeclared reads them only where the unit is named) */
+const AMBIGUOUS = new Set(['C', 'N', 'F', 'H', 'S']);
+export const lookAlikes = (t: string): string =>
+  t
+    .replace(HEX, ' ')
+    .replace(CELLS, ' ')
+    .split(/(?<=[.!?;:\n])/u)
+    .map(x => (TEMP_CUE.test(x) ? x.replace(TEMP, '$1 °C') : x))
+    .join('')
+    .replace(COUNT_N, '$1·N')
+    .replace(COUNT_N_AFTER, '$1·N');
+
 /** map.plainText: words and numbers of the chapter that only look like a unit or an acronym (3S = three cells in series, 183 C
-    on a solder datasheet, 0x0C): the Q0 rules read the text without them */
+    on a solder datasheet, 0x0C): the Q0 rules read the text without them; and without the look-alikes above, always */
 function scrubbed(c: GradualContext): GradualContext {
   const words = strsOf(c.map.plainText)
     .map(w => w.trim())
     .filter(Boolean)
     .sort((a, b) => b.length - a.length);
-  if (!words.length) return c;
-  const re = new RegExp(
-    `(?<![\\p{L}\\p{N}_]|\\d[.,])(?:${words.map(w => esc(w).replace(/\s+/g, '\\s+')).join('|')})(?![\\p{L}\\p{N}])`,
-    'gu',
-  );
+  const re = words.length
+    ? new RegExp(`(?<![\\p{L}\\p{N}_]|\\d[.,])(?:${words.map(w => esc(w).replace(/\s+/g, '\\s+')).join('|')})(?![\\p{L}\\p{N}])`, 'gu')
+    : null;
   const clean = (x: unknown, key = ''): unknown =>
     typeof x === 'string'
       ? key === 'id' || key === 'section' || key === 'in'
         ? x
-        : x.replace(re, ' ')
+        : lookAlikes(re ? x.replace(re, ' ') : x)
       : Array.isArray(x)
         ? x.map(v => clean(v, key))
         : isObj(x)
@@ -376,8 +398,12 @@ export const conceptUndeclared = (chk: QualityCheck): Spec<GradualContext> =>
             if (isStr(it.term) && !covers(it.term)) add(`${s(x.id)}: the term “${it.term}” is not in map.concepts or map.known`);
     // units after a number
     const told = new Set<string>();
+    // a one-letter unit that is also a letter of everyday text (C a grade or a temperature, N a count, F, H) is read as that unit
+    // only in a chapter that names the unit (coulomb, newton…); where a concept declares it, concept.order still sees every use
+    const named = (u: { readonly name: string }): boolean => new RegExp(esc(u.name), 'iu').test(all.map(([, t]) => t).join('\n'));
     for (const u of units) {
       if (symCovered(u.sym)) continue;
+      if (AMBIGUOUS.has(u.sym) && !named(u)) continue;
       const hit = all.find(([, t]) => unitRe(u.sym).test(delatex(t)));
       if (hit && !told.has(u.sym)) {
         told.add(u.sym);

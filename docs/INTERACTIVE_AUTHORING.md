@@ -208,7 +208,10 @@ How it is built: `docs/activities-dev/authoring_ui.md`.
 ```
 `steps`: `{"set": selector, "value": …}` (an input gets the value and an `input` event), `{"click": selector}`,
 `{"wait": ms}`. `expect`: `passed` (the last reported result), `text` (selector → a part of its text), `state` (keys of the
-saved state).
+saved state). In a sim-spec@1 activity `set` names a control by its id, with the value as the number box shows it (in the
+control's `prefix`: 20 for 20 mA). A value off the control's grid (not `min` + a whole number of `step`s) or outside `min`…`max`
+fails the case, naming the control, the value given and the value the control would run with: the control moves such a value
+silently, so the case would check another input.
 
 For a sim-spec activity `set` names a **param** (`{"set": "R", "value": 1600}`), `passed` is the exercise's checks grader on the
 values after the steps, `values` checks computed values (`{"fc": [950, 1050]}`: a range, or an exact number), `state` the keys of

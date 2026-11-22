@@ -295,8 +295,10 @@ function cx(v: unknown): NumFn {
         {k: 'seg',  x1, y1, x2, y2, c?, arrow?, w?, dash?, key?, v?}   a segment / an arrow (w: width in px)
         {k: 'circ', x, y, r, c?, fill?, dash?}              a circle (r in model units)
         {k: 'poly', pts: [x, y, x, y, …], c?, fill?, closed?, dash?}
-        {k: 'txt',  x, y, key?, v?, c?} ]}                  a label at a place
-     c is a role, never a colour: base · muted · hi · ok · bad · warn · info (the theme maps it); y grows upwards. */
+        {k: 'txt',  x, y, key?, v?, s?, c?, anchor?, size?, fit?} ]}   a label at a place (size: letter height, fit: the widest
+                                                            it may be, both in model units; the letters shrink to them)
+     c is a role, never a colour: base · muted · hi · ok · bad · warn · info (the theme maps it); cat 0–7 on any item is a category
+     colour instead (one per task / class, the same in a chart and its legend); y grows upwards. */
 const ROLES = ['base', 'muted', 'hi', 'ok', 'bad', 'warn', 'info'];
 /** the view of a scene: [x0, x1, y0, y1] */
 export type View = number[];

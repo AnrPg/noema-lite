@@ -152,6 +152,13 @@ async function run(name) {
   ok(fb.img && fb.text.length > 5, 'an activity that is not in the pack: a notice, no frame');
   const off = await p.evaluate(() => { window.NOEMA_CONFIG.activities = { 'html-app@1': false }; const m = document.querySelector('main'); m.innerHTML = ''; m.append(interactiveBlock({ t: 'interactive', activity: 'alias-lab' })); const r = { img: !!m.querySelector('.act-fallback img'), text: m.querySelector('.act-fbtext')?.textContent || '', frame: !!m.querySelector('iframe') }; delete window.NOEMA_CONFIG.activities; return r; });
   ok(off.img && /3 Hz/.test(off.text) && !off.frame, 'runtime switched off: the fallback picture and text instead');
+  // the subject read in a translation (SUBJ.language fr, sourceLanguage en): the fallback's words come from fallback.i18n.fr.text
+  const offFr = await p.evaluate(() => { const a = ACT.ITEMS['alias-lab'], was = [a.fallback, SUBJ.language, SUBJ.sourceLanguage]; a.fallback = { ...a.fallback, i18n: { fr: { text: 'Le repliement à 3 Hz (texte français)' } } };
+    window.NOEMA_CONFIG.activities = { 'html-app@1': false }; SUBJ.language = 'fr'; SUBJ.sourceLanguage = 'en';
+    const m = document.querySelector('main'); m.innerHTML = ''; m.append(interactiveBlock({ t: 'interactive', activity: 'alias-lab' })); const fr = m.querySelector('.act-fbtext')?.textContent || '';
+    SUBJ.sourceLanguage = undefined; m.innerHTML = ''; m.append(interactiveBlock({ t: 'interactive', activity: 'alias-lab' })); const own = m.querySelector('.act-fbtext')?.textContent || '';
+    [a.fallback, SUBJ.language, SUBJ.sourceLanguage] = was; delete window.NOEMA_CONFIG.activities; return { fr, own }; });
+  ok(/texte français/.test(offFr.fr) && /3 Hz/.test(offFr.own) && !/texte français/.test(offFr.own), 'a translated subject shows fallback.i18n.<its language>.text; the pack in its own language keeps fallback.text ' + JSON.stringify(offFr));
   // a hostile twin: the same bundle with an endless loop after 1 s
   await p.evaluate(() => {
     const a = ACT.ITEMS['alias-lab'];

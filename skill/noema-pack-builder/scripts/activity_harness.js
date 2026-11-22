@@ -44,6 +44,18 @@ const s32 = rd('32_activities.js'), ACTP = s32.slice(s32.indexOf('const ACTP = '
 
 /* the subject's activities, read like make_pack.py does */
 const rj = p => JSON.parse(fs.readFileSync(p, 'utf8'));
+/* the value a sim-spec control really takes for a test's "set" (src/runtimes/sim-spec/view.ts snap): min + whole steps, inside
+   min…max. Off the grid → the message that fails the case (the expected values would be checked against another input) */
+const snapOf = (spec, id, v) => {
+  const pr = ((spec && spec.params) || []).find(x => x.id === id);
+  if (!pr || !(pr.kind === 'slider' || pr.kind === 'number') || typeof v !== 'number' && !(typeof v === 'string' && v.trim() !== '' && isFinite(+v))) return null;
+  const f = { p: 1e-12, n: 1e-9, u: 1e-6, 'µ': 1e-6, m: 1e-3, k: 1e3, M: 1e6, G: 1e9 }[pr.prefix] || 1;   // the box shows the value in the prefix (20 for 20 mA)
+  const x = +v * f; let y = x;
+  if (pr.step > 0) y = pr.min + Math.round((x - pr.min) / pr.step) * pr.step;
+  y = Math.min(pr.max, Math.max(pr.min, +y.toPrecision(12)));
+  const sh = z => +(z / f).toPrecision(12);   // as the test writes it (in the control's prefix)
+  return Math.abs(y - x) > 1e-9 * Math.max(1, Math.abs(x)) ? `control "${id}" was set to ${v}, but it ${x < pr.min || x > pr.max ? `stays within ${sh(pr.min)}…${sh(pr.max)}` : `moves in steps of ${sh(pr.step)} from ${sh(pr.min)}`}: it runs with ${sh(y)}, so the case checks another input (use a value on its grid)` : null;
+};
 const regPath = path.join(SDIR, 'activities', 'activities.json');
 if (!fs.existsSync(regPath)) { console.log('✗ no activities/activities.json in ' + SDIR); process.exit(1); }
 const allItems = (rj(regPath).items || []).map(a => {
@@ -228,8 +240,10 @@ function mount(act, init, modules) {
       const out = path.resolve(outArg || path.join(SDIR, 'build', 'preview', a.id)); fs.mkdirSync(out, { recursive: true });
       const loc = H5 ? OWN : a.strings.en ? 'en' : locs[0];
       for (const [name, width, theme] of [['light', 800, 'light'], ['dark', 800, 'dark'], ['phone-360', 360, 'light']]) {
-        const { p, ctx, errs } = await open(width, theme); await start(p, a, { locale: loc, theme, settle: 800 });
+        const { p, ctx, errs } = await open(width, theme); const { log } = await start(p, a, { locale: loc, theme, settle: 800 });
         await p.screenshot({ path: path.join(out, name + '.png'), fullPage: true });
+        const fail = (log || []).find(m => m.type === 'fail');   // a spec the runtime refused renders nothing: say why instead of a blank picture
+        if (fail) errs.push('the activity did not start: ' + (fail.why || 'refused') + ' (activity_lint.py says what to fix)');
         const over = await (SIM ? p.mainFrame() : p.frames().find(f => f.parentFrame() && f.parentFrame() !== p.mainFrame()))?.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1).catch(() => null);
         say(!errs.length, `${name}: ${path.join(out, name + '.png')}${errs.length ? '  errors: ' + errs.slice(0, 2).join(' | ') : ''}`);
         if (over) say(false, `${name}: the activity scrolls sideways (it must fit ${width} px)`);
@@ -268,8 +282,10 @@ function mount(act, init, modules) {
       if (c.exercise && !ex) { say(false, `case "${c.name}": exercise ${c.exercise} is not in chapters/`); continue; }
       const { p, ctx, errs } = await open();
       const { frame } = await start(p, a, { locale: c.locale || (H5 ? OWN : a.strings.en ? 'en' : locs[0]), exerciseId: c.exercise || null, task: { ...(ex?.task?.params || {}), ...(c.task || {}) }, seed: Number.isInteger(ex?.task?.seed) ? ex.task.seed : 12345 });
+      const snapped = [];   // a test value off a control's grid would be moved by the control: the case would check another input
       try {
         for (const s of c.steps || []) {
+          if (s.set && SIM) { const sv = snapOf(a.spec, s.set, s.value); if (sv) snapped.push(sv); }
           if (s.set && SIM) await p.evaluate(([id, v]) => { const e = document.querySelector(`#box [data-param="${id}"]`); if (!e) throw new Error('no param ' + id); if (e.type === 'checkbox') e.checked = !!v; else e.value = String(v); e.dispatchEvent(new Event('input', { bubbles: true })); e.dispatchEvent(new Event('change', { bubbles: true })); }, [s.set, s.value]);
           else if (s.set) await frame.evaluate(([sel, v]) => { const e = document.querySelector(sel); if (!e) throw new Error('no ' + sel); e.value = String(v); e.dispatchEvent(new Event('input', { bubbles: true })); e.dispatchEvent(new Event('change', { bubbles: true })); }, [s.set, s.value]);
           else if (s.measure && SIM) {   // a bench: choose the instrument and where it goes, then Measure; wait for the reading
@@ -290,7 +306,7 @@ function mount(act, init, modules) {
         if (SIM && ex && ex.grade && ex.grade.mode === 'checks') {   // the app's checks grader, on the values the runtime exposes
           res = await p.evaluate(([g, v]) => { let tot = 0, got = 0; for (const c of g.checks || []) { const w = c.weight > 0 ? c.weight : 1; let ok = false; try { const r = NoemaCore.engines.expr.evaluate(c.expr, v); ok = typeof r === 'boolean' ? r : (r !== 0 && r === r); } catch (e) { } tot += w; if (ok) got += w; } const share = tot ? got / tot : 0; return { payload: { passed: share >= (g.pass ?? 1) - 1e-9, score: share } }; }, [ex.grade, vals || {}]);
         }
-        const why = [];
+        const why = [...snapped];
         if ('passed' in (c.expect || {}) && (res ? res.payload.passed : null) !== c.expect.passed) why.push(`passed: expected ${c.expect.passed}, got ${res ? res.payload.passed : 'no result'}`);
         for (const [k, want] of Object.entries(c.expect?.values || {})) { const v = vals ? vals[k] : undefined, okv = Array.isArray(want) ? (v >= want[0] && v <= want[1]) : v === want; if (!okv) why.push(`${k} = ${v}, expected ${JSON.stringify(want)}`); }
         const stData = st ? (SIM ? st.payload.data && st.payload.data.values : st.payload.data) : null;

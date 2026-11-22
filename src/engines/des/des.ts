@@ -2258,7 +2258,9 @@ function ganttScene(M: Model, P: Params, run: RepRes | null, window: number) {
     sc.seg(0, y, W, y, { c: 'muted', w: 1 });
     sc.txt(-2, y - 0.6, { s: `${M.stations[j]!.id}·${k + 1}`.slice(0, 64), anchor: 'end' });
   });
-  const look = (k: number) => ({ c: ROLE_K[k % ROLE_K.length], ...(k >= ROLE_K.length ? { dash: true } : {}) });
+  // a class (a task, a kind of customer) gets its own colour of the scenes' palette (cat: 8 colours, the same in the chart and
+  // the legend, light and dark; the role stays for a renderer without it); a class beyond the eighth is dashed too
+  const look = (k: number) => ({ c: ROLE_K[k % ROLE_K.length], cat: k % 8, ...(k >= 8 ? { dash: true } : {}) });
   for (const g of run && run.gantt ? run.gantt : []) {
     const li = lanes.findIndex(l => l[0] === g[0] && l[1] === g[1]);
     if (li < 0 || g[2] > Wn) continue;

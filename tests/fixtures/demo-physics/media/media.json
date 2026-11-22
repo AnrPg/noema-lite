@@ -700,7 +700,14 @@
      "label": "v = 3 m/s → Eₖ = 9 J",
      "note": "½ · 2 · 3² = 9 J"
     }
-   ]
+   ],
+   "i18n": {
+    "fr": {
+     "alt": "Graphique de l'énergie cinétique (une parabole, v au carré) et de la quantité de mouvement (une droite, 2v) d'une balle de 2 kg pour des vitesses de 0 à 5 m/s, avec un point marqué à v = 3 m/s, 9 J.",
+     "caption": "Vitesse doublée → quatre fois plus d'énergie, mais seulement deux fois plus de quantité de mouvement.",
+     "file": "ek-graph.fr.svg"
+    }
+   }
   },
   {
    "id": "power-station",

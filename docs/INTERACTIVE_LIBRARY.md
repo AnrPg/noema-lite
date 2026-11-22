@@ -96,9 +96,15 @@ then checks every expression and key with the spec's names: the messages a pack'
 
 - **scene** `{view: [x0, x1, y0, y1], items: [...]}`, drawn to the same scale on both axes with y upwards: `pt {x, y, r?, c?, key?, v?, s?}`,
   `seg {x1, y1, x2, y2, c?, arrow?, w?, dash?, key?, v?, s?}`, `circ {x, y, r, c?, fill?, dash?}`, `poly {pts: [x, y, …], c?, fill?,
-  closed?, dash?}`, `txt {x, y, key? | v? | s?, c?, anchor?}`. `c` is a **role** (`base`, `muted`, `hi`, `ok`, `bad`, `warn`, `info`),
-  never a colour: the theme colours it (light, dark, every character). The label of an item is the key's text in the learner's
-  language (`key`), a number in the learner's format (`v`) or the model's own short text (`s`).
+  closed?, dash?}`, `txt {x, y, key? | v? | s?, c?, anchor?, size?, fit?}`. `c` is a **role** (`base`, `muted`, `hi`, `ok`, `bad`, `warn`, `info`),
+  never a colour: the theme colours it (light, dark, every character). `cat` (0–7, on any item) is a **category** colour instead, for
+  things that must each look different whatever the character's accent (the tasks of a scheduler, the classes of customers in des@1):
+  eight colours apart from each other, the same in a chart and its legend, lighter in dark mode. The label of an item is the key's
+  text in the learner's language (`key`), a number in the learner's format (`v`) or the model's own short text (`s`; a name that is a
+  key of the string tables is shown translated, and so is each name of a comma list without spaces, `a0,b0`). Letters are 12 px,
+  or smaller where a label gives its `size` (the letter height in scene units) or its room `fit` (the widest it may be, in scene
+  units): a truth table's headings and cells shrink with the table instead of overlapping. A plot's `height` (120–2000 px) is the
+  most the drawing takes: a wide drawing at 360 px is not left in a tall empty box.
 - **sound** `{notes: [{f Hz, t s, d s, g 0–1}], wave?: sine | triangle | square | sawtooth, partials?: [amplitudes]}` is played with
   WebAudio after the learner presses ▶ (never by itself); ≤ 512 notes, ≤ 60 s.
 - **line styles** on any line of a `function` or `series` plot: `style` `line` (default), `bars`, `steps`, `points`.

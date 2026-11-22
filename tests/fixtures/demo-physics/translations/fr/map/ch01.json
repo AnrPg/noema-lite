@@ -1,0 +1,10 @@
+{
+ "format": "noema.map/v1",
+ "chapter": "ch01",
+ "points": [
+  {
+   "id": "p1",
+   "text": "L'énergie cinétique croît avec le carré de la vitesse : Eₖ = ½·m·v²."
+  }
+ ]
+}

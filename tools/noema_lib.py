@@ -104,7 +104,9 @@ def fill_card_ids(c):
 def load_translations(sdir, chapters):
     """translations/<locale>/chNN.json → {locale: [chapters]}: each file is a whole chapter in that language with the SAME
     ids as the built chapter (base + patches). The source chapter's `src` (and every item's `src`) is copied over, so the
-    source filter and "what's new" work the same in every language; flashcards get their ids like the source's."""
+    source filter and "what's new" work the same in every language; flashcards get their ids like the source's.
+    A translation's knowledge map, translations/<locale>/map/chNN.json (same ids as map/chNN.json, only the words in that
+    language), goes into its chapter (chapter.map: the Info window, concept definitions); without it the app shows the source map."""
     out = {}
     base = {c['id']: c for c in chapters}
     for d in sorted(glob.glob(os.path.join(sdir, 'translations', '*'))):
@@ -118,6 +120,8 @@ def load_translations(sdir, chapters):
                     srcs = {x.get('id'): x['src'] for x in b.get(k, []) if x.get('id') and x.get('src') is not None}
                     for x in c.get(k, []):
                         if x.get('id') in srcs: x['src'] = srcs[x['id']]
+            mf = os.path.join(d, 'map', str(c.get('id')) + '.json')
+            if os.path.exists(mf): c['map'] = rj(mf)
             chs.append(c)
         if chs: out[os.path.basename(d)] = chs
     return out

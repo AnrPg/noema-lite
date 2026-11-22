@@ -12,7 +12,7 @@ import type { MountContext, RuntimeHost, RuntimePort } from '../types.ts';
 import { makeBench, type BenchView } from './bench.ts';
 import { boxNum, fmtNum, isNum, parseBoxNum, prefixFactor } from './format.ts';
 import { partsEngine, partsRunner, withParts, MAX_POINTS, type PartsResult } from './parts.ts';
-import { COLORS, DASH, drawPlot, drawScene, playSound, type PlotData } from './plot.ts';
+import { COLORS, DASH, drawPlot, drawScene, playSound, seriesXRange, spanGrid, type PlotData } from './plot.ts';
 import { engineRunner, type Done } from './runner.ts';
 import type { Param, Plot, Spec } from './spec.ts';
 
@@ -657,23 +657,12 @@ export function simView(
       } else {
         const xs0 = outputs[String(p.x.series)];
         data.xs = Array.isArray(xs0) ? (xs0 as unknown[]) : [];
-        let lo = Infinity,
-          hi = -Infinity;
-        for (const v of data.xs)
-          if (isNum(v)) {
-            if (v < lo) lo = v;
-            if (v > hi) hi = v;
-          }
-        data.xr = [P.xmin ? ev(P.xmin, env) : isFinite(lo) ? lo : 0, P.xmax ? ev(P.xmax, env) : isFinite(hi) ? hi : 1];
+        const xr = seriesXRange(P.xmin ? ev(P.xmin, env) : null, P.xmax ? ev(P.xmax, env) : null, data.xs);
+        data.xr = xr;
         const e2: Env = { ...env },
           xv = typeof p.x.var === 'string' ? p.x.var : '';
         // an expression line spans the whole x range (to x.max), also where a run stopped early (a heater cut off at 200 °C)
-        const [xa, xb] = data.xr,
-          lgx = p.x.scale === 'log' && isNum(xa) && isNum(xb) && xa > 0 && xb > 0,
-          grid: readonly unknown[] =
-            isNum(xa) && isNum(xb) && xb > xa
-              ? Array.from({ length: 200 }, (_, k) => (lgx ? xa * Math.pow(xb / xa, k / 199) : xa + ((xb - xa) * k) / 199))
-              : data.xs;
+        const grid = spanGrid(xr, data.xs, p.x.scale === 'log');
         const intLaw =
           spec.engine === 'prob@1' && data.xs.length > 0 && data.xs.length <= 400 && data.xs.every(x => isNum(x) && Number.isInteger(x));
         data.lines = P.lines.map(l => {

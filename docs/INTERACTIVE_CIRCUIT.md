@@ -27,14 +27,29 @@ The reference activities: `rc-transient` and `led-bench` (`tools/activities_exam
 - **model** (`{netlist, bindings?, transient?, noise?, ac?}`, nothing else): `netlist` is §3.1 (checked with `check()`: its errors refuse
   the spec, its warnings are warnings). `bindings` (≤ 24) set a part from the controls on every run: `{element, prop?, expr}` —
   `prop` defaults to `value` (R, C, L, a DC source); `on` for a switch (a toggle param); `pulse.v2`, `sine.freq`, `pwm.duty` … for
-  a source with that waveform. `expr` is an expression (`docs/INTERACTIVE_SIMEXPR.md`) of the consts, params and derived values —
+  a source with that waveform; `ic` for the starting voltage of a C or the starting current of an L; `params.<name>` for a
+  numeric parameter of a part model. The bindable parameters per type (`NoemaCircuit.bindableParams(type)`, the same list the checks
+  accept):
+
+  | type | `params.<name>` |
+  | --- | --- |
+  | `D` (and LEDs, Zeners, TVS: a `D` with a preset) | `Is`, `n`, `Cj`, `Bv`, `Ibv` |
+  | `NPN`, `PNP` | `Is`, `betaF`, `betaR`, `Cbe`, `Cbc` |
+  | `NMOS`, `PMOS` | `Vth`, `k`, `lambda`, `Cgs`, `Cgd`, `Cds`, `body` |
+  | `OPAMP` | `gain`, `headroom`, `gbw`, `slew`, `rout`, `vos`, `ib` |
+  | `SW` | `Ron`, `Roff` |
+  | `VSW` | `Ron`, `Roff`, `Von`, `Voff` |
+  | `TLINE` | `z0`, `td`, `len`, `vf` |
+
+  `R`, `C`, `L` and the sources have no `params`: bind their `value` (and `ic` for C and L). `expr` is an expression (`docs/INTERACTIVE_SIMEXPR.md`) of the consts, params and derived values —
   computed by the app on the main thread, so the engine (in its Worker) gets numbers only. `transient` (`tEnd`, `dt?`: numbers or
   expressions; ≤ 200 000 steps) is needed by series outputs and by `at` / `stat`. `noise` (`{rel, abs?}`) adds the seeded meter
   noise of §5. `ac` (`{source, fStart, fStop, points?}`) is the AC analysis of §9.6 (a Bode plot).
 - **outputs**: `series` — `time: true` (the time axis), a `node` or a `branch` (a part's current) of the transient, thinned to
   2000 points; `scalar` — a `node` or `branch` at the DC operating point, or of the transient `at` a time (a number or expression)
   or as a `stat` (`final`, `min`, `max`, `mean`, `pp`, `rms`); or a `probe` (`{kind: V | I | R, a, b? | element, pin?}`, an
-  instrument reading; an ohmmeter's `OL` is ∞; also `mode`, `zin` and a window `tEnd`, `dt`, `tStart`, §9.5). `power: "<part>"` is
+  instrument reading; an ohmmeter's `OL` is ∞; also `mode`, `zin` and a window `tEnd`, `dt`, `tStart` — numbers or expressions, e.g.
+  `"tStart": "5*tau", "tEnd": "6*tau"` with a derived `tau` — §9.5). `power: "<part>"` is
   the power a part takes (W, v·i summed over its pins; negative = it delivers): a scalar at the DC operating point (no `at` or
   `stat`, no transient needed), or a series or a scalar `at` / `stat` of the transient.
   `ac` reads the AC analysis (§9.6): a series `ac: "f"` (the frequency axis), `"db"`, `"phase"`, `"mag"` of a `node` (against
@@ -275,8 +290,10 @@ exempts one node. The ohmmeter never sees it.
 - **DMM** (`V`, `I` probes, bench instruments `V`, `I`): `zin` (V only; default 10 MΩ, `0` = ideal); `mode` `dc` (the true time
   average), `ac` (RMS of the AC part), `rms` (true RMS, AC+DC), `avg` (a cheap average-responding meter, calibrated for sines — wrong on
   PWM, the classic trap). On a board with time-varying sources the meter runs a transient over a window — automatic (50 periods of
-  the slowest source, the last 20 averaged, starting from the averaged operating point) or `tEnd`, `dt?`, `tStart?` — and averages
-  with trapezoids, so a diode or a MOSFET driven by PWM reads what a real meter reads.
+  the slowest source, the last 20 averaged, starting from the averaged operating point) or `tEnd`, `dt?` (default tEnd/2000),
+  `tStart?` (default tEnd/2) — and averages with trapezoids, so a diode or a MOSFET driven by PWM reads what a real meter reads.
+  A window of its own is time since the board was switched on (t = 0⁻, like the scope; `uic` as in §5), also on a board whose only
+  change is a step: the mean over `[5τ, 6τ]` of an RC charge from 0 to V₀ reads V₀(1 − (e⁻⁵ − e⁻⁶)) (tests/circuit.js).
 - **Scope** `zin` (default 10 MΩ), `cin` (default 12 pF when there is a lead), `lead` (the ground lead's inductance in H, ~1 nH per mm):
   a 15 cm clip lead (`1.5e-7`) rings on a fast edge, a spring tip (`2e-9`) does not.
 - **Logic analyser** `zin` (default none).

@@ -266,5 +266,15 @@ const MM1 = SPEC({ tEnd: 2000, warmup: 200, reps: 10, sources: [{ id: 'a', to: '
   const c = D.run(sp(-5), { k: -5 }, { seed: 1 });
   ok(c.codes.some(d => d.code === 'bad-dist'), 'capacity k = −5: bad-dist');
 }
+{ // the scheduler's chart (limits report 2026-11-22, item 2): three tasks on one CPU, each its own colour of the scenes' palette,
+  // the same in the bars and the legend (cat 0, 1, 2), never two alike whatever the character's accent
+  const G = D.run(SPEC({ tEnd: 60, reps: 1, classes: [{ id: 't1', prio: 0 }, { id: 't2', prio: 1 }, { id: 't3', prio: 2 }],
+    sources: [{ id: 'a', to: 'cpu', mix: { t1: 0.3, t2: 0.3, t3: 0.4 }, arrival: exp(1) }], stations: [{ id: 'cpu', service: exp(1.5) }] },
+  [{ id: 'g', kind: 'scene', of: 'gantt' }]), {}, { seed: 3 }).out.g;
+  const bars = G.items.filter(i => i.k === 'seg' && i.w === 8), legend = G.items.filter(i => i.k === 'seg' && i.w === 6);
+  const cats = new Set(bars.map(i => i.cat));
+  ok(cats.size === 3 && legend.map(i => i.cat).join() === '0,1,2' && [...cats].every(c => legend.some(l => l.cat === c)),
+    `scheduler gantt: three tasks, three colours (cat ${[...cats].sort().join(', ')}), the legend in the same ones`);
+}
 console.log(`\n${n - fails}/${n} passed`);
 process.exit(fails ? 1 : 0);
